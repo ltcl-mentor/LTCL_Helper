@@ -50,7 +50,7 @@
                 <div id="AWS">
                     @foreach($questions as $question)
                             @if($question->genre===0)
-                                <div><a href="/show/{{$question->id}}">{{$question->question}}</a></div>
+                                <div><a href="/show/{{$question->id}}" target="_blank">{{$question->question}}</a></div>
                                 <div>{{$question->comment}}</div>
                                 <div></div>
                             @endif

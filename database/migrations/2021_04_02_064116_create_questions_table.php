@@ -21,6 +21,7 @@ class CreateQuestionsTable extends Migration
             $table->longtext('question');
             $table->longtext('comment');
             $table->integer('check');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

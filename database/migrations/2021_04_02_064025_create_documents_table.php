@@ -17,6 +17,7 @@ class CreateDocumentsTable extends Migration
             $table->bigIncrements('id');
             $table->text('title');
             $table->text('link');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

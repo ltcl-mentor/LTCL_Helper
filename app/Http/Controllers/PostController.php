@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Question;
 use App\Document;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    //一般に公開される部分
     public function search(Question $question)
     {
         return view('search')->with(['questions' => $question->get()]);
@@ -19,18 +21,21 @@ class PostController extends Controller
         return view('show')->with(['question'=>$question,'documents'=>$documents]);
     }
     
+    //以下メンターのみが閲覧可能
     public function mentorTop()
     {
         return view('mentor');
     }
     
+    //質問の登録に関する部分
     public function questionIndex(Question $question)
     {
         $category[]=array();
         $genre[]=array();
         $category=['カリキュラム','成果物'];
         $genre=['AWS','HTML','CSS','JavaScript','PHP','Laravel','DB','Git&GitHub','環境構築','設計図','デプロイ','API'];
-        return view('Question.index')->with(['questions'=>$question->get(),'category'=>$category,'genre'=>$genre]);
+        $user_id=Auth::id();
+        return view('Question.index')->with(['questions'=>$question->get(),'category'=>$category,'genre'=>$genre,'user_id'=>$user_id]);
     }
     
     public function questionCreate()
@@ -40,9 +45,20 @@ class PostController extends Controller
     
     public function questionStore(Request $request, Question $question)
     {
-        $input=$request['post'];
-        $question->fill($input);
+        $validatedInput=$request->validate([
+            'post.category'=>'required',
+            'post.genre'=>'required',
+            'post.curriculum_number'=>'required|max:5',
+            'post.question'=>'required|string',
+            'post.comment'=>'required|string',
+        ],
+        [
+            'post.question.required'=>'質問内容の入力は必須です。',
+            'post.comment.required'=>'コメントの入力は必須です。保留の場合は保留と入力してください。',
+        ]);
+        $question->fill($validatedInput['post']);
         $question['check']=0;
+        $question['user_id']= Auth::id();
         $question->save();
         return redirect('/questions/index');
     }
@@ -58,9 +74,18 @@ class PostController extends Controller
     
     public function questionUpdate(Request $request, Question $question)
     {
-        $input=$request['post'];
-        $question->fill($input);
-        $question['check']=0;
+        $validatedInput=$request->validate([
+            'post.category'=>'required',
+            'post.genre'=>'required',
+            'post.curriculum_number'=>'required|max:5',
+            'post.question'=>'required|string',
+            'post.comment'=>'required|string',
+        ],
+        [
+            'post.question.required'=>'質問内容の入力は必須です。',
+            'post.comment.required'=>'コメントの入力は必須です。保留の場合は保留と入力してください。',
+        ]);
+        $question->fill($validatedInput['post']);
         $question->save();
         return redirect('/questions/index');
     }
@@ -72,7 +97,7 @@ class PostController extends Controller
         return redirect('/questions/index');
     }
     
-    
+    //記事の登録に関する部分
     public function documentIndex(Document $document)
     {
         return view('Document.index')->with(['documents'=>$document->get()]);
@@ -85,8 +110,17 @@ class PostController extends Controller
     
     public function documentStore(Request $request, Document $document)
     {
-        $input=$request['document'];
-        $document->fill($input)->save();
+        $validatedInput=$request->validate([
+            'post.title'=>'required|max:50',
+            'post.link'=>'required',
+        ],
+        [
+            'post.title.required'=>'記事のタイトルは必須です。',
+            'post.title.max'=>'記事のタイトルは字数制限50文字です。',
+            'post.link.required'=>'記事のリンクは必須です。',
+        ]);
+        $document['user_id']=Auth::id();
+        $document->fill($validatedInput['post'])->save();
         return redirect(route('link',['document'=>$document->id]));
     }
     
@@ -97,8 +131,16 @@ class PostController extends Controller
     
     public function documentUpdate(Request $request, Document $document)
     {
-        $input=$request['document'];
-        $document->fill($input)->save();
+        $validatedInput=$request->validate([
+            'post.title'=>'required|max:50',
+            'post.link'=>'required',
+        ],
+        [
+            'post.title.required'=>'記事のタイトルは必須です。',
+            'post.title.max'=>'記事のタイトルは字数制限50文字です。',
+            'post.link.required'=>'記事のリンクは必須です。',
+        ]);
+        $document->fill($validatedInput['post'])->save();
         return redirect('documents/index');
     }
     

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    protected $fillable=['category','genre','curriculum_number','question','comment','check'];
+    protected $fillable=['category','genre','curriculum_number','question','comment','check','user_id'];
     
     public function documents()
     {
