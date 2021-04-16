@@ -7,11 +7,12 @@
             記事タイトル：{{$document->title}}
         </div>
         <div class="link">
-            <a href="{{$document->link}}">記事を確認する</a>
+            <a href="{{$document->link}}" target="_blank">記事を確認する</a>
         </div>
     </div>
     <div class="questions">
         <h2>関連質問を選択する</h2>
+        <p>関連質問は後からでも変更可能です。</p>
         <form action="/storeLinks/{{$document->id}}" method="POST">
             @csrf
             @foreach($questions as $question)
@@ -19,7 +20,7 @@
                     <label><input type="checkbox" name="question_id[]" value="{{$question->id}}">{{$question->question}}</label>
                 </div>
             @endforeach
-            <button type="submit">確定する</button>
+            <button type="submit">確定</button>
         </form>
     </div>
 @endsection

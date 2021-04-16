@@ -46,7 +46,7 @@
                             <a href="/questions/{{$question->id}}/edit">編集する</a>
                         </div>
                         <div class="approval">
-                            @if($question->user_id===$user_id)
+                            @if($question->user_id=== Auth::user()->id)
                                 <p style="color:red">作成者以外からの承認が必要です。</p>
                             @else
                                 <a href="/questions/{{$question->id}}/check">承認する</a>

@@ -5,7 +5,8 @@
     <div class="documents">
         @foreach($documents as $document)
             <div class="document">
-                <h2><a href="{{$document->link}}">・{{$document->title}}</a></h2>
+                <h2>・{{$document->title}}</h2>
+                <!--詳細ページへのリンクをここに-->
             </div>
             <div class="edit">
                 <a href="/documents/{{$document->id}}/edit">編集する</a>

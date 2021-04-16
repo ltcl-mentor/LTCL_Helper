@@ -49,17 +49,16 @@
             <div id="resultBox">
                 <div id="AWS">
                     @foreach($questions as $question)
-                            @if($question->genre===0)
-                                <div><a href="/show/{{$question->id}}" target="_blank">{{$question->question}}</a></div>
-                                <div>{{$question->comment}}</div>
-                                <div></div>
-                            @endif
+                        @if($question->genre===0)
+                            <div><a href="/show/{{$question->id}}" target="_blank">{{$question->question}}</a></div>
+                            <div>{{$question->comment}}</div>
+                        @endif
                     @endforeach
                 </div>
                 <div id="HTML">
                     @foreach($questions as $question)
                         @if($question->genre===1)
-                            <div><a href="/show/{{$question->id}}">{{$question->question}}</a></div>
+                            <div><a href="/show/{{$question->id}}" target="_blank">{{$question->question}}</a></div>
                             <div>{{$question->comment}}</div>
                         @endif
                     @endforeach
@@ -67,7 +66,7 @@
                 <div id="CSS">
                     @foreach($questions as $question)
                         @if($question->genre===2)
-                            <div><a href="/show/{{$question->id}}">{{$question->question}}</a></div>
+                            <div><a href="/show/{{$question->id}}" target="_blank">{{$question->question}}</a></div>
                             <div>{{$question->comment}}</div>
                         @endif
                     @endforeach
@@ -75,7 +74,7 @@
                 <div id="JavaScript">
                     @foreach($questions as $question)
                         @if($question->genre===3)
-                            <div><a href="/show/{{$question->id}}">{{$question->question}}</a></div>
+                            <div><a href="/show/{{$question->id}}" target="_blank">{{$question->question}}</a></div>
                             <div>{{$question->comment}}</div>
                         @endif
                     @endforeach
@@ -83,7 +82,7 @@
                 <div id="PHP">
                     @foreach($questions as $question)
                         @if($question->genre===4)
-                            <div><a href="/show/{{$question->id}}">{{$question->question}}</a></div>
+                            <div><a href="/show/{{$question->id}}" target="_blank">{{$question->question}}</a></div>
                             <div>{{$question->comment}}</div>
                         @endif
                     @endforeach
@@ -91,7 +90,7 @@
                 <div id="Laravel">
                     @foreach($questions as $question)
                         @if($question->genre===5)
-                            <div><a href="/show/{{$question->id}}">{{$question->question}}</a></div>
+                            <div><a href="/show/{{$question->id}}" target="_blank">{{$question->question}}</a></div>
                             <div>{{$question->comment}}</div>
                         @endif
                     @endforeach
@@ -99,7 +98,7 @@
                 <div id="DB">
                     @foreach($questions as $question)
                         @if($question->genre===6)
-                            <div><a href="/show/{{$question->id}}">{{$question->question}}</a></div>
+                            <div><a href="/show/{{$question->id}}" target="_blank">{{$question->question}}</a></div>
                             <div>{{$question->comment}}</div>
                         @endif
                     @endforeach
@@ -107,7 +106,7 @@
                 <div id="Git&GitHub">
                     @foreach($questions as $question)
                         @if($question->genre===7)
-                            <div><a href="/show/{{$question->id}}">{{$question->question}}</a></div>
+                            <div><a href="/show/{{$question->id}}" target="_blank">{{$question->question}}</a></div>
                             <div>{{$question->comment}}</div>
                         @endif
                     @endforeach
@@ -115,7 +114,7 @@
                 <div id="environment">
                     @foreach($questions as $question)
                         @if($question->genre===8)
-                            <div><a href="/show/{{$question->id}}">{{$question->question}}</a></div>
+                            <div><a href="/show/{{$question->id}}" target="_blank">{{$question->question}}</a></div>
                             <div>{{$question->comment}}</div>
                         @endif
                     @endforeach
@@ -123,7 +122,7 @@
                 <div id="blueprint">
                     @foreach($questions as $question)
                         @if($question->genre===9)
-                            <div><a href="/show/{{$question->id}}">{{$question->question}}</a></div>
+                            <div><a href="/show/{{$question->id}}" target="_blank">{{$question->question}}</a></div>
                             <div>{{$question->comment}}</div>
                         @endif
                     @endforeach
@@ -131,7 +130,7 @@
                 <div id="deploy">
                     @foreach($questions as $question)
                         @if($question->genre===10)
-                            <div><a href="/show/{{$question->id}}">{{$question->question}}</a></div>
+                            <div><a href="/show/{{$question->id}}" target="_blank">{{$question->question}}</a></div>
                             <div>{{$question->comment}}</div>
                         @endif
                     @endforeach
@@ -139,7 +138,7 @@
                 <div id="API">
                     @foreach($questions as $question)
                         @if($question->genre===11)
-                            <div><a href="/show/{{$question->id}}">{{$question->question}}</a></div>
+                            <div><a href="/show/{{$question->id}}" target="_blank">{{$question->question}}</a></div>
                             <div>{{$question->comment}}</div>
                         @endif
                     @endforeach

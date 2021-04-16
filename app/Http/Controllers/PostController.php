@@ -34,8 +34,7 @@ class PostController extends Controller
         $genre[]=array();
         $category=['カリキュラム','成果物'];
         $genre=['AWS','HTML','CSS','JavaScript','PHP','Laravel','DB','Git&GitHub','環境構築','設計図','デプロイ','API'];
-        $user_id=Auth::id();
-        return view('Question.index')->with(['questions'=>$question->get(),'category'=>$category,'genre'=>$genre,'user_id'=>$user_id]);
+        return view('Question.index')->with(['questions'=>$question->get(),'category'=>$category,'genre'=>$genre]);
     }
     
     public function questionCreate()
@@ -100,7 +99,8 @@ class PostController extends Controller
     //記事の登録に関する部分
     public function documentIndex(Document $document)
     {
-        return view('Document.index')->with(['documents'=>$document->get()]);
+        $questions=$document->questions()->get();
+        return view('Document.index')->with(['documents'=>$document->get(),'questions'=>$questions]);
     }
     
     public function documentCreate()
