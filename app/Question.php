@@ -13,4 +13,8 @@ class Question extends Model
         return $this->belongsToMany('App\Document');
     }
     
+    public static function getCheckedParticalQuestion($category,$genre)
+    {
+        return self::where('check',1)->where('category',$category)->where('genre',$genre)->get();
+    }
 }

@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="{{asset('css/search.css')}}"
     </head>
     <body>
+        <div id="search"></div>
         <div class="firstBox">
             <h1>該当するカテゴリーを選択します。</h1>
             <div class="selectResult">
@@ -148,4 +149,5 @@
         <div class="empty"></div>
     </body>
     <script lang="ja" src="{{asset('js/search.js')}}"></script>
+    <script src="./js/app.js" ></script>
 </html>

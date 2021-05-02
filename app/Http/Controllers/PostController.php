@@ -12,13 +12,14 @@ class PostController extends Controller
     //一般に公開される部分
     public function search(Question $question)
     {
-        return view('search')->with(['questions' => $question->get()]);
+        return view('Search.search');
+        // ->with(['questions' => $question->where('check',1)->get()]);
     }
     
     public function show(Question $question)
     {
         $documents=$question->documents()->get();
-        return view('show')->with(['question'=>$question,'documents'=>$documents]);
+        return view('Search.show')->with(['question'=>$question,'documents'=>$documents]);
     }
     
     //以下メンターのみが閲覧可能
@@ -30,11 +31,16 @@ class PostController extends Controller
     //質問の登録に関する部分
     public function questionIndex(Question $question)
     {
-        $category[]=array();
-        $genre[]=array();
         $category=['カリキュラム','成果物'];
         $genre=['AWS','HTML','CSS','JavaScript','PHP','Laravel','DB','Git&GitHub','環境構築','設計図','デプロイ','API'];
-        return view('Question.index')->with(['questions'=>$question->get(),'category'=>$category,'genre'=>$genre]);
+        $unchecked_questions=$question->where('check',0)->get();
+        return view('Question.index')->with([
+            'checked_questions'=>$checked_questions,
+            'checked_AWS_questions'=>$checked_AWS_questions=Question::getCheckedParticalQuestion(0,0),
+            'unchecked_questions'=>$unchecked_questions,
+            'category'=>$category,
+            'genre'=>$genre,
+            ]);
     }
     
     public function questionCreate()
@@ -62,10 +68,17 @@ class PostController extends Controller
         return redirect('/questions/index');
     }
     
+    public function questionShow(Question $question)
+    {
+        $documents=$question->documents()->get();
+        return view('Question.show')->with([
+            'question'=>$question,
+            'documents'=>$documents,
+            ]);
+    }
+    
     public function questionEdit(Question $question)
     {
-        $category[]=array();
-        $genre[]=array();
         $category=['カリキュラム','成果物'];
         $genre=['AWS','HTML','CSS','JavaScript','PHP','Laravel','DB','Git&GitHub','環境構築','設計図','デプロイ','API'];
         return view('Question.edit')->with(['question'=>$question,'category'=>$category,'genre'=>$genre]);
@@ -100,7 +113,10 @@ class PostController extends Controller
     public function documentIndex(Document $document)
     {
         $questions=$document->questions()->get();
-        return view('Document.index')->with(['documents'=>$document->get(),'questions'=>$questions]);
+        return view('Document.index')->with([
+            'documents'=>$document->get(),
+            'questions'=>$questions,
+            ]);
     }
     
     public function documentCreate()
@@ -154,4 +170,5 @@ class PostController extends Controller
         $document->questions()->attach($request['question_id']);
         return redirect('/mentor');
     }
+        
 }

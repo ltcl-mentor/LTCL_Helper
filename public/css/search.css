@@ -1,72 +1,97 @@
-h1{
-    padding-left:5%;
-    width:95%;
-    border-bottom: solid 1px black;
+/*search.blade.php*/
+.title{
+    text-align: center;
+    padding:10px;
 }
 
-.categoryBox{
-    margin-left: 5%;
-    height:50px;
+
+
+/*ここからJavaScript*/
+input{
+    display:none;
 }
 
-.category{
-    width:50%;
-    float:left;
+.steps{
+    padding-top: 10px;
 }
 
-.firstBox{
-    border:solid 1px black ;
-    width:70%;
-    margin:0 auto;
-    margin-bottom:20px;
+.form_box{
+    border:solid 2px black;
 }
 
-.selectResult{
-    display: block;
-    margin: 0 auto;
+.category_box{
+    text-align: center;
 }
 
-.firstSelect{
+.category_button{
+    border:solid 1px blue;
+    border-radius: 5px; 
+    width:30%;
+    margin:20px 10%;
+    padding:10px 0;
+    font-weight: bold;
+}
+
+.category_button:hover{
+    background-color: rgb(190,255,255);
+}
+
+.category_result_box{
+    text-align: center;
+    padding:30px 0;
+}
+
+.category_result{
+    font-weight: bold;
     display: inline;
 }
 
-.secondBox{
-    border:solid 1px black ;
-    width:70%;
-    margin:0 auto;
-    margin-bottom:20px;
+.change_button{
+    margin-left: 20px;
 }
 
-.curriculumBox{
-    margin-left: 5%;
-    height:180px;
+/*.topic_box{*/
+/*    text-align: center;*/
+/*}*/
+
+.topic_button{
+    border:solid 1px green;
+    border-radius: 5px; 
+    width:20%;
+    margin:20px 6.5%;
+    padding:10px 0;
+    font-weight: bold;
+    text-align: center;
 }
 
-.curriculum{
-    width:50%;
-    height:30px;
-    padding-bottom: 10px;
-    float:left;
+.topic_button:hover{
+    background-color: rgb(190,255,190);
 }
 
-.portfolioBox{
-    margin-left: 5%;
-    height:100px;
+.second_questin_preview{
+    color:grey;
 }
 
-.portfolio{
-    width:50%;
-    height:30px;
-    padding-bottom: 10px;
-    float:left;
+.topic_result_box{
+    text-align: center;
+    padding:30px 0;
 }
 
-.thirdBox{
-    border:solid 1px black ;
-    width:70%;
-    margin:0 auto;
+.topic_result{
+    font-weight: bold;
+    display: inline;
 }
 
-.empty{
-    height:3000px;
+.search_button_box{
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.search_button{
+    background-color: rgb(190,190,255);
+}
+
+.result_box{
+    height:1000px;
+    border:solid 1px black;
 }
