@@ -57,16 +57,15 @@ class Topic extends React.Component {
                     <div className="second_questin_preview">
                         <h2 className="steps">STEP2 該当するトピックを選択します。</h2>
                         <div className="topic_box">
-                            <div className="topic_button">AWS</div>
-                            <div className="topic_button">HTML</div>
-                            <div className="topic_button">CSS</div>
-                            <div className="topic_button">JavaScript</div>
-                            <div className="topic_button">PHP</div>
-                            <div className="topic_button">Laravel</div>
-                            <div className="topic_button">DB</div>
-                            <div className="topic_button">Git&GitHub</div>
+                            <div className="topic_button_preview">AWS</div>
+                            <div className="topic_button_preview">HTML</div>
+                            <div className="topic_button_preview">CSS</div>
+                            <div className="topic_button_preview">JavaScript</div>
+                            <div className="topic_button_preview">PHP</div>
+                            <div className="topic_button_preview">Laravel</div>
+                            <div className="topic_button_preview">DB</div>
+                            <div className="topic_button_preview">Git&GitHub</div>
                         </div>
-                        <div>検索する</div>
                     </div>
                 );
             }

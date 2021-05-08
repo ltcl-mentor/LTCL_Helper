@@ -19,7 +19,14 @@ class PostController extends Controller
     public function show(Question $question)
     {
         $documents=$question->documents()->get();
-        return view('Search.show')->with(['question'=>$question,'documents'=>$documents]);
+        $category=['カリキュラム','成果物'];
+        $genre=['AWS','HTML','CSS','JavaScript','PHP','Laravel','DB','Git&GitHub','環境構築','設計図','デプロイ','API'];
+        return view('Search.show')->with([
+            'question'=>$question,
+            'documents'=>$documents,
+            'category'=>$category,
+            'genre'=>$genre,
+        ]);
     }
     
     //以下メンターのみが閲覧可能
@@ -34,6 +41,7 @@ class PostController extends Controller
         $category=['カリキュラム','成果物'];
         $genre=['AWS','HTML','CSS','JavaScript','PHP','Laravel','DB','Git&GitHub','環境構築','設計図','デプロイ','API'];
         $unchecked_questions=$question->where('check',0)->get();
+        $checked_questions=$question->where('check',1)->get();
         return view('Question.index')->with([
             'checked_questions'=>$checked_questions,
             'checked_AWS_questions'=>$checked_AWS_questions=Question::getCheckedParticalQuestion(0,0),

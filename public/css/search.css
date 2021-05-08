@@ -7,6 +7,8 @@
 
 
 /*ここからJavaScript*/
+
+/*検索フォーム*/
 input{
     display:none;
 }
@@ -72,6 +74,17 @@ input{
     color:grey;
 }
 
+.topic_button_preview{
+    border:solid 1px green;
+    border-radius: 5px; 
+    width:20%;
+    margin:20px 6.5%;
+    padding:10px 0;
+    font-weight: bold;
+    text-align: center;
+    display:inline-block;
+}
+
 .topic_result_box{
     text-align: center;
     padding:30px 0;
@@ -91,7 +104,84 @@ input{
     background-color: rgb(190,190,255);
 }
 
+/*フォームと結果の間の空白*/
+.empty{
+    height:600px;
+    
+}
+
+.space{
+    height: 80px;
+}
+
+.circle1{
+    width: 100px;
+    height: 100px;
+    margin:30px auto;
+    border:1px solid white;
+    border-radius: 50%;
+    background-color: rgb(190,190,255);
+    opacity:0.3;
+}
+
+.circle2{
+    width: 100px;
+    height: 100px;
+    margin:30px auto;
+    border:1px solid white;
+    border-radius: 50%;
+    background-color: rgb(190,190,255);
+    opacity:0.7;
+}
+
+.circle3{
+    width: 100px;
+    height: 100px;
+    margin:30px auto;
+    border:1px solid white;
+    border-radius: 50%;
+    background-color: rgb(190,190,255);
+}
+
+/*結果表示*/
 .result_box{
     height:1000px;
-    border:solid 1px black;
+    /*border:solid 1px black;*/
+    animation: fadeup 4s cubic-bezier(0.33, 1, 0.68, 1) 1 both;
 }
+ 
+@keyframes fadeup {
+  0% {
+    transform: translateY(60px);
+    opacity: 0;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.searchResultDocument{
+    font-size: 25px;
+    padding-left: 5%;
+}
+
+.question{
+    width: 90%;
+    margin:20px auto;
+    font-size: 30px;
+    border:1px solid black;
+    border-radius: 10px;
+    display:block;
+}
+
+.emptyMessage{
+    width: 90%;
+    margin:20px auto;
+    text-align: center;
+    font-size: 30px;
+}
+
