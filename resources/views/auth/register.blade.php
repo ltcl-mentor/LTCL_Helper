@@ -10,6 +10,13 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
+                        
+                        <dvi class="form-group rpw">
+                            <div class="col-md-6">
+                                <label><input type="radio" name="is_admin" value="" checked>一般</label>
+                                <label><input type="radio" name="is_admin" value="stuff">スタッフ</label>
+                            </div>
+                        </dvi>
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
