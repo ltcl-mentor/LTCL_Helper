@@ -1,18 +1,36 @@
 @extends('layouts.app')
 
-@section('content')    
-    <div>
-        <a href="/questions/create">質問の登録はこちら</a>
+@section('content')
+    <!--CSS-->
+    <link href="{{ asset('css/Mentor/mentor.css') }}" rel="stylesheet">
+    
+    <!--HTML-->
+    <div class="container">
+        <h1 class="mentor_question_title">質問</h1>
+        <div class="mentor_btns">
+            <a href="/questions/index"><button class="mentor_btn question_btns">一覧</button></a>
+            <a href="/questions/create"><button class="mentor_btn question_btns">新規登録</button></a>
+            <a href="/questions/approval"><button class="mentor_btn question_btns">承認確認</button></a>
+        </div>
+        
+        <h1 class="mentor_document_title">関連記事</h1>
+        <div class="mentor_btns">
+            <a href="/documents/index"><button class="mentor_btn document_btn">一覧</button></a>
+            <a href="/documents/create"><button class="mentor_btn document_btn">新規登録</button></a>
+        </div>
+        
+        <h1 class="mentor_document_title">記事と質問の紐付け</h1>
+        <div class="mentor_btns">
+            <a href="/relations/index"><button class="mentor_btn links_btn">一覧</button></a>
+        </div>
+        
+        <h1 class="mentor_list_title">名簿</h1>
+        <div class="mentor_btns">
+            <a href="/users/index"><button class="mentor_btn list_btn">一覧</button></a>
+            <a href="/register"><button class="mentor_btn list_btn">登録</button></a>
+        </div>
     </div>
-    <div>
-        <a href="/questions/index">承認済み・承認待ちの質問はこちら</a>
-    </div>
-    <div>
-        <a href="/documents/create">記事の登録はこちら</a>
-    </div>
-    <div>
-        <a href="/documents/index">登録済みの記事はこちら</a>
-    </div>
+    
 @endsection
 
 

@@ -9,13 +9,12 @@ class UsersTableSeeder extends Seeder
      *
      * @return void
      */
-    // public function run()
-    // {
-    //     DB::table('users')->insert([
-    //         'name' => Str::random(10),
-    //         'email' => Str::random(10).'@gmail.com',
-    //         'password' => '12345678å',
-    //         'is_admin' => 'stuff',
-    //     ]);
-    // }
+    public function run()
+    {
+        DB::table('users')->insert([
+            'name' => ENV('seederName'),
+            'password' => Hash::make(ENV('seederPassword')),
+            'is_admin' => 'staff',
+        ]);
+    }
 }

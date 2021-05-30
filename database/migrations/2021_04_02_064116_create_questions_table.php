@@ -16,7 +16,7 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('category');
-            $table->integer('genre');
+            $table->integer('topic');
             $table->string('curriculum_number',10);
             $table->longtext('question');
             $table->longtext('comment');

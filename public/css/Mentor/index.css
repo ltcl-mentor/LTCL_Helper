@@ -1,0 +1,51 @@
+/*共通で使用*/
+.content{
+    margin: 40px 0;
+}
+
+.title{
+    border-bottom: 1px solid black;
+    margin:20px 0 auto;
+}
+
+/*質問(Question)の一覧でのみ使用*/
+.question{
+    width:80%;
+    margin-left: 5%;
+    font-size: 25px;
+    margin-top: 10px;
+}
+
+/*質問のapprovalでのみ使用*/
+.button{
+    margin-left: 5%;
+}
+
+.message{
+    margin-left: 5%;
+    color: red;
+}
+
+
+/*記事(Document)の一覧でのみ使用*/
+.document{
+    width:80%;
+    margin-left: 5%;
+    font-size: 25px;
+    margin-top: 10px;
+}
+
+/*紐付け(Link)の一覧でのみ使用*/
+.cover{
+    text-align: center;
+}
+
+.curriculum{
+    margin-top: 30px;
+    color: rgb(100, 250, 100);
+}
+
+.portfolio{
+    margin-top: 30px;
+    color: rgb(100, 250, 250);
+}

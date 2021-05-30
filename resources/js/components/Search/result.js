@@ -13,7 +13,7 @@ class Result extends React.Component {
     render(){
         let results;
         if(this.props.isSearchButtonClicked){
-            results=(
+            results = (
                 <div className="box">
                     <div className="empty">
                         <div className="space"></div>
@@ -22,17 +22,17 @@ class Result extends React.Component {
                         <div className="circle3"></div>
                     </div>
                     <div className="result_box">
-                        <Questions category={this.props.category} topic={this.props.topic}/>
+                        <Questions category={ this.props.category } topic={ this.props.topic }/>
                     </div>
                 </div>
             );
         }else{
-            results=(<div className="box"></div>);
+            results = (<div className="box"></div>);
         }
         
         return (
             <div className="container">
-               {results} 
+               { results } 
             </div>
         );
     }

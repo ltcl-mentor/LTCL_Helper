@@ -1,18 +1,26 @@
 @extends('layouts.app')
 
 @section('content') 
-    <form action="/documents/store" method="post">
-        @csrf
-        <div class="title">
-            <h2>記事のタイトルを入力してください。</h2>
-            <input name="post[title]" type="text">
-            <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
-        </div>
-        <div class="link">
-            <h2>記事のリンクを入力してください。</h2>
-            <input name="post[link]" type="text">
-            <p class="link__error" style="color:red">{{ $errors->first('post.link') }}</p>
-        </div>
-        <input type="submit" value="登録">
-    </form>
+    <!--CSS-->
+    <link href="{{ asset('css/Mentor/Document/create.css') }}" rel="stylesheet">
+    
+    <!--HTML-->
+    <div class="container">
+        <form action="/documents/store" method="post">
+            @csrf
+            <div class="content">
+                <h2 class="title">記事のタイトルを入力してください。</h2>
+                <textarea name="post[title]" placeholder="制限字数は５０文字です"></textarea>
+                <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
+            </div>
+            <div class="content">
+                <h2 class="title">記事のリンクを入力してください。</h2>
+                <textarea name="post[link]" placeholder="URLを入力"></textarea>
+                <p class="link__error" style="color:red">{{ $errors->first('post.link') }}</p>
+            </div>
+            <div class="submit">
+                <button type="submit">登録する</button>
+            </div>
+        </form>
+    </div>
 @endsection

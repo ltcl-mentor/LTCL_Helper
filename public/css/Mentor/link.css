@@ -1,0 +1,55 @@
+.cover{
+    text-align: center;
+}
+
+.data{
+    margin-top: 30px;
+    color: rgb(100, 250, 100);
+}
+
+.relation{
+    margin-top: 30px;
+    color: rgb(100, 250, 250);
+}
+
+.table{
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.columns{
+    width: 100%;
+    border-bottom: 1px solid black;
+    padding-left: 5%;
+    font-weight: bold;
+}
+
+.parameters{
+    width: 80%;
+    margin: 0 auto;
+    padding: 10px 0 20px 0; 
+    font-size: 25px;
+}
+
+.detach{
+    margin-bottom: 30px;
+}
+
+.message{
+    font-size: 20px;
+    margin-left: 10%;
+    color: red;
+}
+
+.document, .question{
+    width:80%;
+    margin-left: 10%;
+    font-size: 23px;
+}
+
+.submit{
+    width: 100%;
+    margin: 50px 0;
+    text-align: center;
+}

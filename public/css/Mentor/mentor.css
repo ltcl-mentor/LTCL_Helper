@@ -1,0 +1,38 @@
+/*mentorのトップページ*/
+.mentor_question_title, .mentor_document_title, .mentor_list_title{
+    width:100%;
+    border-bottom: 1px solid black;
+    margin-top: 30px;
+}
+
+.mentor_btns{
+    width: 80%;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+
+.mentor_btn{
+    border:1px solid blue;
+    border-radius: 10px;
+    width: 120px;
+    height:60px;
+    display:inline-block;
+    margin: 20px;
+    text-align: center;
+}
+
+.question_btns{
+    background-color: rgba(150,255,150,0.7);
+}
+
+.document_btn{
+    background-color: rgba(255,150,150,0.7);
+}
+
+.list_btn{
+    background-color: rgba(150,150,255,0.7);
+}
+
+.links_btn{
+    background-color: rgba(255,255,150,0.7);
+}

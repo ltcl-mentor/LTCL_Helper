@@ -12,4 +12,9 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./components/Search');
+require('./components/Search/Search');
+require('./components/Mentor/Question/Approval/Approval');
+require('./components/Mentor/Question/Index/Index');
+require('./components/Mentor/Question/Create');
+require('./components/Mentor/Question/Edit');
+require('./components/Mentor/Relation/Index');

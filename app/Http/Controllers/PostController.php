@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Question;
 use App\Document;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -18,113 +19,51 @@ class PostController extends Controller
     
     public function show(Question $question)
     {
-        $documents=$question->documents()->get();
-        $category=['カリキュラム','成果物'];
-        $genre=['AWS','HTML','CSS','JavaScript','PHP','Laravel','DB','Git&GitHub','環境構築','設計図','デプロイ','API'];
+        $question->users()->attach(Auth::id());
+        $documents = $question->documents()->get();
+        $category = ['カリキュラム', '成果物'];
+        $topic = ['AWS', 'HTML', 'CSS', 'JavaScript', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'];
         return view('Search.show')->with([
-            'question'=>$question,
-            'documents'=>$documents,
-            'category'=>$category,
-            'genre'=>$genre,
+            'question' => $question,
+            'documents' => $documents,
+            'category' => $category,
+            'topic' => $topic,
         ]);
     }
     
-    //以下メンターのみが閲覧可能
+    public function history()
+    {
+        $user = Auth::user();
+        $questions = $user->questions()->get();
+        return view('Search.history')->with(['questions' => $questions]);
+    }
+    
+    //以下メンターのみがアクセス可能
     public function mentorTop()
     {
         return view('mentor');
     }
     
-    //質問の登録に関する部分
-    public function questionIndex(Question $question)
-    {
-        $category=['カリキュラム','成果物'];
-        $genre=['AWS','HTML','CSS','JavaScript','PHP','Laravel','DB','Git&GitHub','環境構築','設計図','デプロイ','API'];
-        $unchecked_questions=$question->where('check',0)->get();
-        $checked_questions=$question->where('check',1)->get();
-        return view('Question.index')->with([
-            'checked_questions'=>$checked_questions,
-            'checked_AWS_questions'=>$checked_AWS_questions=Question::getCheckedParticalQuestion(0,0),
-            'unchecked_questions'=>$unchecked_questions,
-            'category'=>$category,
-            'genre'=>$genre,
-            ]);
-    }
-    
-    public function questionCreate()
-    {
-        return view('Question.create');
-    }
-    
-    public function questionStore(Request $request, Question $question)
-    {
-        $validatedInput=$request->validate([
-            'post.category'=>'required',
-            'post.genre'=>'required',
-            'post.curriculum_number'=>'required|max:5',
-            'post.question'=>'required|string',
-            'post.comment'=>'required|string',
-        ],
-        [
-            'post.question.required'=>'質問内容の入力は必須です。',
-            'post.comment.required'=>'コメントの入力は必須です。保留の場合は保留と入力してください。',
-        ]);
-        $question->fill($validatedInput['post']);
-        $question['check']=0;
-        $question['user_id']= Auth::id();
-        $question->save();
-        return redirect('/questions/index');
-    }
-    
-    public function questionShow(Question $question)
-    {
-        $documents=$question->documents()->get();
-        return view('Question.show')->with([
-            'question'=>$question,
-            'documents'=>$documents,
-            ]);
-    }
-    
-    public function questionEdit(Question $question)
-    {
-        $category=['カリキュラム','成果物'];
-        $genre=['AWS','HTML','CSS','JavaScript','PHP','Laravel','DB','Git&GitHub','環境構築','設計図','デプロイ','API'];
-        return view('Question.edit')->with(['question'=>$question,'category'=>$category,'genre'=>$genre]);
-    }
-    
-    public function questionUpdate(Request $request, Question $question)
-    {
-        $validatedInput=$request->validate([
-            'post.category'=>'required',
-            'post.genre'=>'required',
-            'post.curriculum_number'=>'required|max:5',
-            'post.question'=>'required|string',
-            'post.comment'=>'required|string',
-        ],
-        [
-            'post.question.required'=>'質問内容の入力は必須です。',
-            'post.comment.required'=>'コメントの入力は必須です。保留の場合は保留と入力してください。',
-        ]);
-        $question->fill($validatedInput['post']);
-        $question->save();
-        return redirect('/questions/index');
-    }
-    
-    public function questionCheck(Question $question)
-    {
-        $question['check']=1;
-        $question->save();
-        return redirect('/questions/index');
-    }
     
     //記事の登録に関する部分
-    public function documentIndex(Document $document)
+    public function documentIndex(Document $document, User $user)
     {
-        $questions=$document->questions()->get();
+        $staffs = $user->where('is_admin', 'stuff')->get();
         return view('Document.index')->with([
-            'documents'=>$document->get(),
-            'questions'=>$questions,
-            ]);
+            'documents' => $document->get(),
+            'staffs' => $staffs,
+        ]);
+    }
+    
+    public function documentShow(Document $document, User $user)
+    {
+        $staff = $user->where('id', $document['user_id'])->get();
+        $questions = $document->questions()->get();
+        return view('Document.show')->with([
+            'document' => $document,
+            'staffName' => $staff[0]['name'],
+            'questions' => $questions,
+        ]);
     }
     
     public function documentCreate()
@@ -134,49 +73,54 @@ class PostController extends Controller
     
     public function documentStore(Request $request, Document $document)
     {
-        $validatedInput=$request->validate([
-            'post.title'=>'required|max:50',
-            'post.link'=>'required',
+        $validatedInput = $request->validate([
+            'post.title' => 'required|max:50',
+            'post.link' => 'required',
         ],
         [
-            'post.title.required'=>'記事のタイトルは必須です。',
-            'post.title.max'=>'記事のタイトルは字数制限50文字です。',
-            'post.link.required'=>'記事のリンクは必須です。',
+            'post.title.required' => '記事のタイトルは必須です。',
+            'post.title.max' => '記事のタイトルは字数制限50文字です。',
+            'post.link.required' => '記事のリンクは必須です。',
         ]);
-        $document['user_id']=Auth::id();
+        $document['user_id'] = Auth::id();
         $document->fill($validatedInput['post'])->save();
-        return redirect(route('link',['document'=>$document->id]));
+        return redirect('/documents/index');
     }
     
     public function documentEdit(Document $document)
     {
-        return view('Document.edit')->with(['document'=>$document]);
+        return view('Document.edit')->with(['document' => $document]);
     }
     
     public function documentUpdate(Request $request, Document $document)
     {
-        $validatedInput=$request->validate([
-            'post.title'=>'required|max:50',
-            'post.link'=>'required',
+        $validatedInput = $request->validate([
+            'post.title' => 'required|max:50',
+            'post.link' => 'required',
         ],
         [
-            'post.title.required'=>'記事のタイトルは必須です。',
-            'post.title.max'=>'記事のタイトルは字数制限50文字です。',
-            'post.link.required'=>'記事のリンクは必須です。',
+            'post.title.required' => '記事のタイトルは必須です。',
+            'post.title.max' => '記事のタイトルは字数制限50文字です。',
+            'post.link.required' => '記事のリンクは必須です。',
         ]);
         $document->fill($validatedInput['post'])->save();
         return redirect('documents/index');
     }
     
-    public function linkDocumentToQuestion(Document $document,Question $question)
+    public function userIndex(User $user)
     {
-        return view('Document.linkDocumentToQuestion')->with(['document'=>$document,'questions'=>$question->get()]);
+        // staffのスペルが違う
+        $staffs = $user->where('is_admin', 'stuff')->get();
+        $publics = $user->where('is_admin', null)->get();
+        return view('user')->with([
+            'staffs' => $staffs,
+            'publics' => $publics,
+        ]);
     }
     
-    public function storeLinks(Request $request,Document $document)
+    public function userDelete(User $user)
     {
-        $document->questions()->attach($request['question_id']);
-        return redirect('/mentor');
+        $user->delete();
+        return redirect('/users/index');
     }
-        
 }

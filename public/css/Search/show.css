@@ -1,0 +1,209 @@
+.box{
+    margin:0 auto;
+    width:80%;
+}
+
+.title{
+    text-align: center;
+    padding:10px;
+    margin: 50px 0;
+}
+
+/*質問の概要に関する部分*/
+.table{
+    border:1px solid black;
+    font-size: 0;     /*表示の時にできる隙間をなくすために親要素でfont-size:0、子要素でそれぞれおサイズを定義*/
+    box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.2);
+}
+
+.columns{
+    background-color: rgb(230,200,250);
+    border:1px solid black;
+    font-size: 25px;
+}
+
+.parameters{
+    border:1px solid black;
+    font-size: 25px;
+}
+
+.category_column{
+    width: 15%;
+    text-align: center;
+    display: inline-block;
+}
+
+.topic_column{
+    width:12%;
+    text-align: center;
+    display: inline-block;
+}    
+
+.curriculum_number_column{
+    width:23%;
+    text-align: center;
+    display: inline-block;
+}
+
+.category_parameter{
+    width:20%;
+    text-align: center;
+    display: inline-block;
+}
+
+.topic_parameter{
+    width:20%;
+    text-align: center;
+    display: inline-block;
+}
+
+.curriculum_number_parameter{
+    width: 10%;
+    text-align: center;
+    display: inline-block;
+}
+
+/*イラスト部分*/
+.question_illust{
+    position: relative;
+    min-height:250px;
+}
+
+.student_img{
+    position: absolute;
+    bottom: 0;
+    left:20px;
+    width:200px;
+    height:200px;
+}
+
+.question_balloon{
+    position: relative;
+    position: absolute;
+    bottom:30px;
+    left:230px;
+    display: inline-block;
+    margin: 1.5em 0 1.5em 15px;
+    padding: 7px 10px;
+    min-width: 120px;
+    max-width: 60%;
+    color: #555;
+    font-size: 16px;
+    background: #FFF;
+    border: solid 3px #555;
+    box-sizing: border-box;
+    border-radius: 10px;
+    /*white-space: pre-wrap;*/
+}
+
+.question_balloon:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -24px;
+    margin-top: -12px;
+    border: 12px solid transparent;
+    border-right: 12px solid #FFF;
+    z-index: 2;
+}
+
+.question_balloon:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -30px;
+    margin-top: -14px;
+    border: 14px solid transparent;
+    border-right: 14px solid #555;
+    z-index: 1;
+}
+
+.comment_illust{
+    position: relative;
+    min-height:250px;
+}
+
+.mentor_img{
+    position: absolute;
+    bottom: 0;
+    right:50px;
+    width:150px;
+    height:200px;
+}
+
+.comment_balloon {
+    position: relative;
+    position: absolute;
+    bottom:30px;
+    right:210px;
+    display: inline-block;
+    margin: 1.5em 15px 1.5em 0;
+    padding: 7px 10px;
+    min-width: 120px;
+    max-width: 60%;
+    color: #555;
+    font-size: 16px;
+    background: #FFF;
+    border: solid 3px #555;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.comment_balloon:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -24px;
+    margin-top: -12px;
+    border: 12px solid transparent;
+    border-left: 12px solid #FFF;
+    z-index: 2;
+}
+
+.comment_balloon:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -30px;
+    margin-top: -14px;
+    border: 14px solid transparent;
+    border-left: 14px solid #555;
+    z-index: 1;
+}
+
+
+/*記事の概要に関する部分*/
+.documents{
+    margin-top:100px;
+    min-height:400px;
+    text-align: center;   
+    /*後でレスポンシブデザインにする際に一定以上小さくなったら宙覆う寄せを解除するようにせっってい*/
+}
+
+.document{
+    border:1px solid black;
+    display:inline-block;
+    width:300px;
+    height:300px;
+    margin:10px 1.5%;
+    vertical-align: top;
+    box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.5);
+}
+
+.document_img{
+    height: 50%;
+    width: 100%;
+}
+
+.document_title{
+    font-size: 20px;
+    width:90%;
+    margin:0 auto;
+    text-align: center;
+}
+
+.noDocument{
+    text-align: center;
+    font-size: 30px;
+    margin-top: 20px;
+}
