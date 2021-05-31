@@ -21,7 +21,7 @@
         
         <h1 class="mentor_document_title">記事と質問の紐付け</h1>
         <div class="mentor_btns">
-            <a href="/relations/index"><button class="mentor_btn links_btn">一覧</button></a>
+            <a href="/links/index"><button class="mentor_btn links_btn">一覧</button></a>
         </div>
         
         <h1 class="mentor_list_title">名簿</h1>

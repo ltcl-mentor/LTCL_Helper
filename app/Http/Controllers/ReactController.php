@@ -51,8 +51,7 @@ class ReactController extends Controller
     // staff関連
     public function getAllStaffs()
     {
-        // staffのスペルが違う
-        return User::where('is_admin','stuff')->get();
+        return User::where('is_admin','staff')->get();
     }
     
     // ログインユーザー情報

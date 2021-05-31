@@ -6,7 +6,7 @@
     
     <!--HTML-->
     <div class="container">
-        <a href="relations/index">一覧へ戻る</a>
+        <a href="/links/index">一覧へ戻る</a>
         <div class="table">
             <div class="cover"><h1 class="data">質問の概要</h1></div>
             <h2 class="columns">質問</h2>

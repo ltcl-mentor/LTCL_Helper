@@ -46,7 +46,7 @@ class Documents extends React.Component {
                     <h1 className="title">{ staff.name }</h1>
                     { this.state.documents.map((document) => {
                         if(document.user_id === staff.id){
-                            return <div  className="question">・<a href={ `/relations/document/`+document.id }>{ document.title }</a></div>;
+                            return <div  className="question">・<a href={ `/links/document/`+document.id }>{ document.title }</a></div>;
                         }
                     })}
                 </div>

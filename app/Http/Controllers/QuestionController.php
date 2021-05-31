@@ -17,18 +17,14 @@ class QuestionController extends Controller
     
     public function show(Question $question, User $user)
     {
-        $documents = $question->documents()->get();
-        $category = ['カリキュラム', '成果物'];
-        $topic = ['AWS', 'HTML', 'CSS', 'JavaScript', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'];
-        $userName = $user->select('name')->find($question['user_id']);
-        $isChecked = $question['check'];
+        $author = $user->find($question['user_id']);
         return view('Question.show')->with([
             'question' => $question,
-            'documents' => $documents,
-            'category' => $category,
-            'topic' => $topic,
-            'userName' => $userName['name'],
-            'isChecked' => $isChecked,
+            'documents' => $question->documents()->get(),
+            'category' => Question::$category,
+            'topic' => Question::$topic,
+            'author_name' => $author->name,
+            'isChecked' => $question['check'],
         ]);
     }
     
@@ -59,12 +55,8 @@ class QuestionController extends Controller
     
     public function edit(Question $question)
     {
-        $category = ['カリキュラム', '成果物'];
-        $topic = ['AWS', 'HTML', 'CSS', 'JavaScript', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'];
         return view('Question.edit')->with([
-            'question' => $question,
-            'category' => $category,
-            'topic' => $topic,
+            'question_id' => $question->id,
         ]);
     }
     
@@ -94,18 +86,7 @@ class QuestionController extends Controller
     
     public function approval(Question $question)
     {
-        // 余計な処理多数→削除
-        $category = ['カリキュラム', '成果物'];
-        $topic = ['AWS', 'HTML', 'CSS', 'JavaScript', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'];
-        $unchecked_questions = $question->where('check',0)->get();
-        $checked_questions = $question->where('check',1)->get();
-        return view('Question.approval')->with([
-            'checked_questions' => $checked_questions,
-            'checked_AWS_questions' => $checked_AWS_questions=Question::getCheckedParticalQuestion(0,0),
-            'unchecked_questions' => $unchecked_questions,
-            'category' => $category,
-            'topic' => $topic,
-        ]);
+        return view('Question.approval');
     }
     
     public function check(Question $question)

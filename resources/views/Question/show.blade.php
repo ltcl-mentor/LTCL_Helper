@@ -26,7 +26,7 @@
             <div class="parameters word">{{ $question->curriculum_number }}</div>
         
             <h2 class="columns">作成者</h2>
-            <div class="parameters word">{{ $userName }}</div>
+            <div class="parameters word">{{ $author_name }}</div>
                 
             <h2 class="columns">承認状況</h2>
             @if($isChecked===1)

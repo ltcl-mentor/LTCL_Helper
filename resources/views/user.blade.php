@@ -54,9 +54,10 @@
                             <th>{{ $i }}</th>
                             <td>{{ $public->name }}</td>
                             <td>
-                                <form action="/user/{{ $public->id }}/delete" method="post">
+                                <form action="/user/{{ $public->id }}/delete" method="post" id="delete">
                                     @csrf
-                                    <input type="submit" value="削除する">
+                                    <input type="submit" value="削除する" onclick="delete(this)">
+                                    <!--<span >delete</span>-->
                                 </form>
                             </td>
                         </tr>
@@ -67,4 +68,14 @@
         </div>
     </div>
     
+    <script>
+        function delete(e){
+            'use strict';
+            if (confirm('削除するよ。')){
+                document.getElementById('delete').submit();
+            }else{
+                return false;
+            }
+        }
+    </script>
 @endsection

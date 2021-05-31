@@ -8,6 +8,10 @@
     margin:20px 0 auto;
 }
 
+.hidden{
+    display: none;
+}
+
 /*質問(Question)の一覧でのみ使用*/
 .question{
     width:80%;

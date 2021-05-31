@@ -49,11 +49,10 @@ class Unapproved extends React.Component {
             }); 
     }
     
-    // 処理の確認に関係なく送信が起きてしまうから意図通りの挙動になってない
-    confirmMessage(event) {
+    confirmMessage() {
         "use strict"; 
-        if (window.confirm('承認すると質問が全体に公開されます。\nよろしいですか？')){
-            document.forms.submit();
+        if (confirm('承認すると質問が全体に公開されます。\nよろしいですか？')){
+            document.getElementById('approve').submit();
         }else{
             window.alert('キャンセルしました');
             return false;
@@ -79,9 +78,10 @@ class Unapproved extends React.Component {
                                     <div>
                                         <div className="question">・<a href={ `/questions/`+question.id } target="_blank">{ question.question }</a></div>
                                         <div className="button">
-                                            <form action={ `/questions/`+question.id+`/check` } method="post">
+                                            <form action={ `/questions/`+question.id+`/check` } method="post" id="approve">
                                                 <input type="hidden" name="_token" value={ this.state.csrf_token }/>
-                                                <a onClick={() => { this.confirmMessage(event);return false; }}><button type="submit">承認</button></a>
+                                                <input type="submit" className="hidden"/>
+                                                <a onClick={() => { this.confirmMessage() }}>承認する</a>
                                             </form>
                                         </div>
                                     </div>

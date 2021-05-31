@@ -23,7 +23,7 @@
             <div class="parameters"><a href="{{ $document->link }}">{{ $document->link }}</a></div>
         
             <h2 class="columns">作成者</h2>
-            <div class="parameters word">{{ $staffName }}</div>
+            <div class="parameters word">{{ $author_name }}</div>
         </div>
         
         <div>

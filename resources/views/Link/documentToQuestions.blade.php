@@ -6,14 +6,14 @@
     
     <!--HTML-->
     <div class="container">
-        <a href="relations/index">一覧へ戻る</a>
+        <a href="/links/index">一覧へ戻る</a>
         <div class="table">
             <div class="cover"><h1 class="data">記事の概要</h1></div>
             <h2 class="columns">記事タイトル</h2>
             <div class="parameters">{{ $document->title }}</div>
-            <h2 class="columns">記事リンク</h2>
+            <h2 class="columns">記事URL</h2>
             <div class="parameters">
-                <a href={{ $document->link }} target="_blank">記事を確認する</a>
+                <a href={{ $document->link }} target="_blank">{{ $document->link }}</a>
             </div>
         </div>
         <div class="table">

@@ -10,7 +10,7 @@ class LinkController extends Controller
 {
     public function index()
     {
-        return view('Relation.index');
+        return view('Link.index');
     }
     
     // 記事1つに対して質問複数の紐付け
@@ -22,17 +22,10 @@ class LinkController extends Controller
         if(count($related_questions) === 0){
             $unrelated_questions = $question->get();
         }else{
-            // すでに紐付けが行われているデータのidを取得
-            $related_question_ids = $document->questions()->select('question_id')->get();
-            // 取得したidを配列に変換
-            foreach($related_question_ids as $related_question_id){
-                $related_ids_array[] = $related_question_id['question_id'];
-            }
-            // 紐付けがすでに行われているデータ以外(まだ紐付けのできていないデータ)を取得
-            $unrelated_questions = $question->whereNotIn('id', $related_ids_array)->get();
+            $unrelated_questions = $document->getRelatedQuestions();
         }
         
-        return view('Relation.documentToQuestions')->with([
+        return view('Link.documentToQuestions')->with([
             'document' => $document,
             'related_questions' => $related_questions,
             'unrelated_questions' => $unrelated_questions,
@@ -43,7 +36,7 @@ class LinkController extends Controller
     {
         $document->questions()->detach($request['detach_id']);
         $document->questions()->attach($request['attach_id']);
-        return redirect('/relations/index');
+        return redirect('/links/index');
     }
     
     
@@ -55,16 +48,10 @@ class LinkController extends Controller
         if(count($related_documents) === 0){
             $unrelated_documents = $document->get();
         }else{
-            $related_document_ids = $question->documents()->select('document_id')->get();
-            // 取得したidを配列に変換
-            foreach($related_document_ids as $related_document_id){
-                $related_ids_array[] = $related_document_id['document_id'];
-            }
-            // 紐付けがすでに行われているデータ以外(まだ紐付けのできていないデータ)を取得
-            $unrelated_documents = $document->whereNotIn('id', $related_ids_array)->get();
+            $unrelated_documents = $question->getRelatedDocuments();
         }
         
-        return view('Relation.questionToDocuments')->with([
+        return view('Link.questionToDocuments')->with([
             'question' => $question,
             'related_documents' => $related_documents,
             'unrelated_documents' => $unrelated_documents,
@@ -75,6 +62,6 @@ class LinkController extends Controller
     {
         $question->documents()->detach($request['detach_id']);
         $question->documents()->attach($request['attach_id']);
-        return redirect('/relations/index');
+        return redirect('/links/index');
     }
 }

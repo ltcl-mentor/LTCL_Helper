@@ -18,22 +18,28 @@ Auth::routes(['register' => false]);
 Route::group(['middleware' => ['auth']], function () {
     
     // ログイン済みユーザーのみアクセス可能
-    Route::get('/', 'PostController@search');
-    Route::get('/show/{question}', 'PostController@show');
-    Route::get('/history', 'PostController@history');
+    Route::get('/', 'HomeController@search');
+    Route::get('/show/{question}', 'HomeController@show');
+    // Route::get('/history', 'HomeController@history');
     
     
     Route::group(['middleware' => ['administrator']], function () {
         
         // 管理者権限を持っているユーザーのみがアクセス可能
-        Route::get('/mentor', 'PostController@mentorTop')->name('mentor');
+        Route::get('/mentor', 'HomeController@mentorTop')->name('mentor');
         
-        Route::get('/documents/create', 'PostController@documentCreate');
-        Route::get('/documents/index', 'PostController@documentIndex');
-        Route::get('/documents/{document}/edit', 'PostController@documentEdit');
-        Route::get('/documents/{document}', 'PostController@documentShow');
-        Route::post('/documents/{document}/update', 'PostController@documentUpdate');
-        Route::post('/documents/store', 'PostController@documentStore');
+        Route::get('/documents/create', 'DocumentController@create');
+        Route::get('/documents/index', 'DocumentController@index');
+        Route::get('/documents/{document}/edit', 'DocumentController@edit');
+        Route::get('/documents/{document}', 'DocumentController@show');
+        Route::post('/documents/{document}/update', 'DocumentController@update');
+        Route::post('/documents/store', 'DocumentController@store');
+        
+        Route::get('/links/index', 'LinkController@index');
+        Route::get('/links/document/{document}', 'LinkController@getDocumentToQuestions');
+        Route::get('/links/question/{question}', 'LinkController@getQuestionToDocuments');
+        Route::post('/links/document/{document}', 'LinkController@postDocumentToQuestions');
+        Route::post('/links/question/{question}', 'LinkController@postQuestionToDocuments');
         
         Route::get('/questions/create', 'QuestionController@create');
         Route::get('/questions/index', 'QuestionController@index');
@@ -59,14 +65,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
         Route::post('register', 'Auth\RegisterController@register');
         
-        Route::get('/relations/index', 'LinkController@index');
-        Route::get('/relations/document/{document}', 'LinkController@getDocumentToQuestions');
-        Route::get('/relations/question/{question}', 'LinkController@getQuestionToDocuments');
-        Route::post('/relations/document/{document}', 'LinkController@postDocumentToQuestions');
-        Route::post('/relations/question/{question}', 'LinkController@postQuestionToDocuments');
-        
-        Route::get('/users/index', 'PostController@userIndex');
-        Route::post('/user/{user}/delete', 'PostController@userDelete');
+        Route::get('/users/index', 'UserController@index');
+        Route::post('/user/{user}/delete', 'UserController@delete');
     }); 
 });    
     
