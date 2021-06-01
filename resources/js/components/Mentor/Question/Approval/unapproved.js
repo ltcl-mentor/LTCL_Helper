@@ -81,7 +81,7 @@ class Unapproved extends React.Component {
                                             <form action={ `/questions/`+question.id+`/check` } method="post" id="approve">
                                                 <input type="hidden" name="_token" value={ this.state.csrf_token }/>
                                                 <input type="submit" className="hidden"/>
-                                                <a onClick={() => { this.confirmMessage() }}>承認する</a>
+                                                <a onClick={() => { this.confirmMessage() }} className="postBtn">承認する</a>
                                             </form>
                                         </div>
                                     </div>

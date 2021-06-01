@@ -71376,6 +71376,18 @@ var Approved = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "confirmMessage",
+    value: function confirmMessage() {
+      "use strict";
+
+      if (confirm('承認を解除すると質問が公開されなくなります。\nよろしいですか？')) {
+        document.getElementById('unapprove').submit();
+      } else {
+        window.alert('キャンセルしました');
+        return false;
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -71396,14 +71408,21 @@ var Approved = /*#__PURE__*/function (_React$Component) {
               className: "button"
             }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
               action: "/questions/" + question.id + "/uncheck",
-              method: "post"
+              method: "post",
+              id: "unapprove"
             }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
               type: "hidden",
               name: "_token",
               value: _this3.state.csrf_token
-            }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-              type: "submit"
-            }, "\u627F\u8A8D\u89E3\u9664"))));
+            }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+              type: "submit",
+              className: "hidden"
+            }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+              onClick: function onClick() {
+                _this3.confirmMessage();
+              },
+              className: "postBtn"
+            }, "\u627F\u8A8D\u3092\u89E3\u9664\u3059\u308B"))));
           }
         }));
       });
@@ -71564,7 +71583,8 @@ var Unapproved = /*#__PURE__*/function (_React$Component) {
               }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
                 onClick: function onClick() {
                   _this3.confirmMessage();
-                }
+                },
+                className: "postBtn"
               }, "\u627F\u8A8D\u3059\u308B"))));
             }
           }

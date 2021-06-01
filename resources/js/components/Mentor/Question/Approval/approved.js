@@ -37,6 +37,16 @@ class Approved extends React.Component {
             }); 
     }
     
+    confirmMessage() {
+        "use strict"; 
+        if (confirm('承認を解除すると質問が公開されなくなります。\nよろしいですか？')){
+            document.getElementById('unapprove').submit();
+        }else{
+            window.alert('キャンセルしました');
+            return false;
+        }
+    }
+    
     render(){
         const list = this.state.staffs.map((staff) => {
             return (
@@ -50,9 +60,10 @@ class Approved extends React.Component {
                                         ・<a href={ `/questions/`+question.id } target="_blank">{ question.question }</a>
                                     </div>
                                     <div className="button">
-                                        <form action={ `/questions/`+question.id+`/uncheck` } method="post">
+                                        <form action={ `/questions/`+question.id+`/uncheck` } method="post"id="unapprove">
                                             <input type="hidden" name="_token" value={ this.state.csrf_token }/>
-                                            <button type="submit">承認解除</button>
+                                            <input type="submit" className="hidden"/>
+                                            <a onClick={() => { this.confirmMessage() }} className="postBtn">承認を解除する</a>
                                         </form>
                                     </div>
                                 </div>
