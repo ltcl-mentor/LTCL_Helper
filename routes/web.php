@@ -13,8 +13,10 @@
 
 // registerページのデフォルトルーティングを無効化
 // registerは下部で個別に定義
-Auth::routes();
-// ['register' => false]
+Auth::routes(['register' => false]);
+
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\RegisterController@register');
 
 Route::group(['middleware' => ['auth']], function () {
     
@@ -65,8 +67,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('react/id', 'ReactController@getUserId');
         Route::get('react/question/{question}', 'ReactController@getQuestion');
                 
-        Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-        Route::post('register', 'Auth\RegisterController@register');
+        
         
         Route::get('/users/index', 'UserController@index');
         Route::post('/user/{user}/delete', 'UserController@delete');
