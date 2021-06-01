@@ -13,7 +13,8 @@
 
 // registerページのデフォルトルーティングを無効化
 // registerは下部で個別に定義
-Auth::routes(['register' => false]);
+Auth::routes();
+// ['register' => false]
 
 Route::group(['middleware' => ['auth']], function () {
     
@@ -28,12 +29,14 @@ Route::group(['middleware' => ['auth']], function () {
         // 管理者権限を持っているユーザーのみがアクセス可能
         Route::get('/mentor', 'HomeController@mentorTop')->name('mentor');
         
-        Route::get('/documents/create', 'DocumentController@create');
-        Route::get('/documents/index', 'DocumentController@index');
-        Route::get('/documents/{document}/edit', 'DocumentController@edit');
-        Route::get('/documents/{document}', 'DocumentController@show');
-        Route::post('/documents/{document}/update', 'DocumentController@update');
-        Route::post('/documents/store', 'DocumentController@store');
+        // 参考記事
+        Route::get('/documents/index', 'DocumentController@index'); // 初期画面表示
+        Route::get('/documents/create', 'DocumentController@create'); // 新規作成画面表示
+        Route::post('/documents/store', 'DocumentController@store'); // 新規作成実行
+        Route::get('/documents/{document}', 'DocumentController@show'); // 詳細画面表示
+        Route::get('/documents/{document}/edit', 'DocumentController@edit'); // 編集画面表示
+        Route::post('/documents/{document}/update', 'DocumentController@update'); // 編集実行
+        
         
         Route::get('/links/index', 'LinkController@index');
         Route::get('/links/document/{document}', 'LinkController@getDocumentToQuestions');
