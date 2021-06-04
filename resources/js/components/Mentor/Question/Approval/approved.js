@@ -57,13 +57,13 @@ class Approved extends React.Component {
                             return (
                                 <div>
                                     <div className="question">
-                                        ・<a href={ `/questions/`+question.id } target="_blank">{ question.question }</a>
+                                        ・<a href={ `/questions/`+question.id }>{ question.question }</a>
                                     </div>
                                     <div className="button">
-                                        <form action={ `/questions/`+question.id+`/uncheck` } method="post"id="unapprove">
+                                        <form action={ `/questions/`+question.id+`/uncheck` } method="post" id="unapprove">
                                             <input type="hidden" name="_token" value={ this.state.csrf_token }/>
                                             <input type="submit" className="hidden"/>
-                                            <a onClick={() => { this.confirmMessage() }} className="postBtn">承認を解除する</a>
+                                            <a onClick={() => { this.confirmMessage() }} className="approveBtn">承認を解除する</a>
                                         </form>
                                     </div>
                                 </div>

@@ -31,7 +31,7 @@ class DocumentController extends Controller
     
     public function create()
     {
-        return view('Document.create');
+        return view('Document.create')->with(['where' => '記事新規登録']);
     }
     
     public function store(Request $request, Document $document)
@@ -68,5 +68,11 @@ class DocumentController extends Controller
         ]);
         $document->fill($validatedInput['post'])->save();
         return redirect('documents/index');
+    }
+    
+    public function delete(Document $document)
+    {
+        $document->delete();
+        return redirect('/documents/index');
     }
 }

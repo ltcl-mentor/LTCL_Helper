@@ -6,6 +6,9 @@
 
     <!--HTML-->
     <div class="container">
+        <div>
+            <a href="/mentor">管理ページ</a> > <a href="/documents/index">記事一覧</a> > <a href="/documents/{{ $document->id }}">記事詳細</a> > 記事編集
+        </div>
         <form action="/documents/{{ $document->id }}/update" method="post">
             @csrf
             <div class="content">

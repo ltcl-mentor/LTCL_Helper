@@ -6,7 +6,9 @@
     
     <!--HTML-->
     <div class="container">
-        <a href="/links/index">一覧へ戻る</a>
+        <div>
+            <a href="/mentor">管理ページ</a> > <a href="/links/index">紐付け一覧</a> > 記事から質問への紐付け
+        </div>
         <div class="table">
             <div class="cover"><h1 class="data">記事の概要</h1></div>
             <h2 class="columns">記事タイトル</h2>

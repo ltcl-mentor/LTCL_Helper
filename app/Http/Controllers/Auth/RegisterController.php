@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
@@ -23,6 +26,17 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+    
+    // 新規登録処理（デフォルトのものからログイン処理を削除、redirectを指定）
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        return $this->registered($request, $user)
+                        ?: redirect('/users/index');
+    }
 
     /**
      * Where to redirect users after registration.
@@ -68,10 +82,5 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'is_admin' => $data['is_admin'],
         ]);
-    }
-    
-    public function redirectPath()
-    {
-        return "https://www.yahoo.co.jp";
     }
 }

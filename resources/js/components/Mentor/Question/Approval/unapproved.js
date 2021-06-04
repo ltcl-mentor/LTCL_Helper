@@ -69,19 +69,19 @@ class Unapproved extends React.Component {
                             if( question.user_id === this.state.login_user_id ){
                                 return (
                                     <div>
-                                        <div className="question">・<a href={ `/questions/`+question.id } target="_blank">{ question.question }</a></div>
+                                        <div className="question">・<a href={ `/questions/`+question.id }>{ question.question }</a></div>
                                         <p className="message">作成者以外からの承認が必要です。</p>
                                     </div>
                                 );
                             }else{
                                 return (
                                     <div>
-                                        <div className="question">・<a href={ `/questions/`+question.id } target="_blank">{ question.question }</a></div>
+                                        <div className="question">・<a href={ `/questions/`+question.id }>{ question.question }</a></div>
                                         <div className="button">
                                             <form action={ `/questions/`+question.id+`/check` } method="post" id="approve">
                                                 <input type="hidden" name="_token" value={ this.state.csrf_token }/>
                                                 <input type="submit" className="hidden"/>
-                                                <a onClick={() => { this.confirmMessage() }} className="postBtn">承認する</a>
+                                                <a onClick={() => { this.confirmMessage() }} className="approveBtn">承認する</a>
                                             </form>
                                         </div>
                                     </div>

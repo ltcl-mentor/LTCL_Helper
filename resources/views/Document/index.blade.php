@@ -6,6 +6,7 @@
     
     <!--HTML-->
     <div class="container">
+        <div><a href="/mentor">管理ページ</a> > 記事一覧</div>
         @foreach($staffs as $staff)
             <div class="content">
                 <h1 class="title">{{ $staff->name }}</h1>

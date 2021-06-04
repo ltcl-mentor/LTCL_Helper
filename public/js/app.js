@@ -71402,8 +71402,7 @@ var Approved = /*#__PURE__*/function (_React$Component) {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "question"
             }, "\u30FB", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-              href: "/questions/" + question.id,
-              target: "_blank"
+              href: "/questions/" + question.id
             }, question.question)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "button"
             }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -71421,7 +71420,7 @@ var Approved = /*#__PURE__*/function (_React$Component) {
               onClick: function onClick() {
                 _this3.confirmMessage();
               },
-              className: "postBtn"
+              className: "approveBtn"
             }, "\u627F\u8A8D\u3092\u89E3\u9664\u3059\u308B"))));
           }
         }));
@@ -71556,8 +71555,7 @@ var Unapproved = /*#__PURE__*/function (_React$Component) {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
                 className: "question"
               }, "\u30FB", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-                href: "/questions/" + question.id,
-                target: "_blank"
+                href: "/questions/" + question.id
               }, question.question)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
                 className: "message"
               }, "\u4F5C\u6210\u8005\u4EE5\u5916\u304B\u3089\u306E\u627F\u8A8D\u304C\u5FC5\u8981\u3067\u3059\u3002"));
@@ -71565,8 +71563,7 @@ var Unapproved = /*#__PURE__*/function (_React$Component) {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
                 className: "question"
               }, "\u30FB", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-                href: "/questions/" + question.id,
-                target: "_blank"
+                href: "/questions/" + question.id
               }, question.question)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
                 className: "button"
               }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -71584,7 +71581,7 @@ var Unapproved = /*#__PURE__*/function (_React$Component) {
                 onClick: function onClick() {
                   _this3.confirmMessage();
                 },
-                className: "postBtn"
+                className: "approveBtn"
               }, "\u627F\u8A8D\u3059\u308B"))));
             }
           }

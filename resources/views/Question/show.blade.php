@@ -2,16 +2,20 @@
 
 @section('content')    
     <!--CSS-->
-    <link href="{{ asset('css/Mentor/Question/show.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/Mentor/show.css') }}" rel="stylesheet">
     
     <!--HTML-->
     <div class="container">
+        <div>
+            <a href="/mentor">管理ページ</a> > <a href="/questions/index">質問一覧</a> > 質問詳細
+        </div>
         <div class="title">
             <h1>質問詳細</h1>
             <a href="/questions/{{ $question->id }}/edit">編集する</a>
             <form action="/questions/{{ $question->id }}/delete" method="post">
                 @csrf
-                <input type="submit" value="削除する" class="submit">
+                <input type="submit" class="hidden">
+                <p onclick="deleteConfirm()" class="deleteBtn">削除する</p>
             </form>
         </div>
         

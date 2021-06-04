@@ -6,6 +6,7 @@
     
     <!--HTML-->
     <div class="container">
+        <div><a href="/mentor">管理ページ</a> > 記事新規登録</div>
         <form action="/documents/store" method="post">
             @csrf
             <div class="content">

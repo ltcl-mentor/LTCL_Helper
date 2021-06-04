@@ -6,6 +6,7 @@
     
     <!--HTML-->
     <div class="container">
+        <div><a href="/mentor">管理ページ</a> > ユーザー一覧</div>
         <div class="staffs">
             <h1>スタッフ</h1>
             <div class="count">（{{ count($staffs) }}名）</div>
@@ -24,9 +25,10 @@
                             <th>{{ $i }}</th>
                             <td>{{ $staff->name }}</td>
                             <td>
-                                <form action="/user/{{ $staff->id }}/delete" method="post">
+                                <form action="/user/{{ $staff->id }}/delete" method="post" id="delete">
                                     @csrf
-                                    <input type="submit" value="削除する">
+                                    <input type="submit" class="hidden">
+                                    <p onclick="deleteConfirm()" class="deleteBtn">削除する</p>
                                 </form>
                             </td>
                         </tr>
@@ -56,8 +58,8 @@
                             <td>
                                 <form action="/user/{{ $public->id }}/delete" method="post" id="delete">
                                     @csrf
-                                    <input type="submit" value="削除する" onclick="delete(this)">
-                                    <!--<span >delete</span>-->
+                                    <input type="submit" class="hidden">
+                                    <p onclick="deleteConfirm()" class="deleteBtn">削除する</p>
                                 </form>
                             </td>
                         </tr>
@@ -67,15 +69,4 @@
             </table>
         </div>
     </div>
-    
-    <script>
-        function delete(e){
-            'use strict';
-            if (confirm('削除するよ。')){
-                document.getElementById('delete').submit();
-            }else{
-                return false;
-            }
-        }
-    </script>
 @endsection

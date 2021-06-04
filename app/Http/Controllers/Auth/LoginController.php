@@ -21,6 +21,7 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
     
+    // 入力値の属性名をnameに変更
     public function username()
     {
         return 'name';
@@ -41,10 +42,5 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-    }
-    
-    public function redirectPath()
-    {
-        return "https://www.yahoo.co.jp";
     }
 }
