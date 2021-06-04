@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\QuestionRequest;
 use App\Question;
 use App\Document;
 use App\User;
@@ -33,20 +34,9 @@ class QuestionController extends Controller
         return view('Question.create');
     }
     
-    public function store(Request $request, Question $question)
+    public function store(QuestionRequest $request, Question $question)
     {
-        $validatedInput = $request->validate([
-            'post.category' => 'required',
-            'post.topic' => 'required',
-            'post.curriculum_number' => 'required|max:5',
-            'post.question' => 'required|string',
-            'post.comment' => 'required|string',
-        ],
-        [
-            'post.question.required' => '質問内容の入力は必須です。',
-            'post.comment.required' => 'コメントの入力は必須です。保留の場合は保留と入力してください。',
-        ]);
-        $question->fill($validatedInput['post']);
+        $question->fill($request['post']);
         $question['check'] = 0;
         $question['user_id'] = Auth::id();
         $question->save();
@@ -60,20 +50,9 @@ class QuestionController extends Controller
         ]);
     }
     
-    public function update(Request $request, Question $question)
+    public function update(QuestionRequest $request, Question $question)
     {
-        $validatedInput = $request->validate([
-            'post.category' => 'required',
-            'post.topic' => 'required',
-            'post.curriculum_number' => 'required|max:5',
-            'post.question' => 'required|string',
-            'post.comment' => 'required|string',
-        ],
-        [
-            'post.question.required' => '質問内容の入力は必須です。',
-            'post.comment.required' => 'コメントの入力は必須です。保留の場合は保留と入力してください。',
-        ]);
-        $question->fill($validatedInput['post']);
+        $question->fill($request['post']);
         $question->save();
         return redirect('/questions/'. $question->id);
     }

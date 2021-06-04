@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\DocumentRequest;
 use App\Question;
 use App\Document;
 use App\User;
@@ -34,19 +35,10 @@ class DocumentController extends Controller
         return view('Document.create')->with(['where' => '記事新規登録']);
     }
     
-    public function store(Request $request, Document $document)
+    public function store(DocumentRequest $request, Document $document)
     {
-        $validatedInput = $request->validate([
-            'post.title' => 'required|max:50',
-            'post.link' => 'required',
-        ],
-        [
-            'post.title.required' => '記事のタイトルは必須です。',
-            'post.title.max' => '記事のタイトルは字数制限50文字です。',
-            'post.link.required' => '記事のリンクは必須です。',
-        ]);
         $document['user_id'] = Auth::id();
-        $document->fill($validatedInput['post'])->save();
+        $document->fill($request['post'])->save();
         return redirect('/documents/index');
     }
     
@@ -55,18 +47,9 @@ class DocumentController extends Controller
         return view('Document.edit')->with(['document' => $document]);
     }
     
-    public function update(Request $request, Document $document)
+    public function update(DocumentRequest $request, Document $document)
     {
-        $validatedInput = $request->validate([
-            'post.title' => 'required|max:50',
-            'post.link' => 'required',
-        ],
-        [
-            'post.title.required' => '記事のタイトルは必須です。',
-            'post.title.max' => '記事のタイトルは字数制限50文字です。',
-            'post.link.required' => '記事のリンクは必須です。',
-        ]);
-        $document->fill($validatedInput['post'])->save();
+        $document->fill($request['post'])->save();
         return redirect('documents/index');
     }
     
