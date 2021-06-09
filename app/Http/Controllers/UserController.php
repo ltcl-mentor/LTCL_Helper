@@ -4,19 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Student;
 
 class UserController extends Controller
 {
-    public function index(User $user)
+    public function index(User $user, Student $student)
     {
-        return view('user')->with([
+        return view('User.index')->with([
             'staffs' => $user->where('is_admin', 'staff')->get(),
-            'publics' => $user->where('is_admin', null)->get(),
+            'students' => $student->orderBy('password', 'asc')->get(),
         ]);
     }
     
     public function delete(User $user)
     {
+        Student::where('user_id', $user->id)->delete();
         $user->delete();
         return redirect('/users/index');
     }

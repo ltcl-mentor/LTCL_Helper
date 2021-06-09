@@ -18,3 +18,4 @@ require('./components/Mentor/Question/Index/Index');
 require('./components/Mentor/Question/Create');
 require('./components/Mentor/Question/Edit');
 require('./components/Mentor/Link/Index');
+require('./components/Mentor/User/Public');

@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <div><a href="/mentor">管理ページ</a> > 管理者の登録</div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -10,16 +11,9 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-                        
-                        <dvi class="form-group rpw">
-                            <div class="col-md-6">
-                                <label><input type="radio" name="is_admin" value="" checked>一般</label>
-                                <label><input type="radio" name="is_admin" value="staff">スタッフ</label>
-                            </div>
-                        </dvi>
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ID') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -31,7 +25,6 @@
                                 @enderror
                             </div>
                         </div>
-
                     
 
                         <div class="form-group row">

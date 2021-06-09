@@ -14,7 +14,7 @@
                 <thead>
                     <tr>
                         <th>NO.</th>
-                        <th>ID</th>
+                        <th>名前</th>
                         <th>削除</th>
                     </tr>
                 </thead>
@@ -25,7 +25,7 @@
                             <th>{{ $i }}</th>
                             <td>{{ $staff->name }}</td>
                             <td>
-                                <form action="/user/{{ $staff->id }}/delete" method="post" id="delete">
+                                <form action="/users/{{ $staff->id }}/delete" method="post" id="delete">
                                     @csrf
                                     <input type="submit" class="hidden">
                                     <p onclick="deleteConfirm()" class="deleteBtn">削除する</p>
@@ -40,26 +40,28 @@
         </div>
         <div class="publics">
             <h1>一般</h1>
-            <div class="count">（{{ count($publics) }}名）</div>
+            <div class="count">（{{ count($students) }}名）</div>
             <table class="public">
                 <thead>
                     <tr>
                         <th>NO.</th>
-                        <th>ID</th>
+                        <th>名前</th>
+                        <th>パスワード</th>
                         <th>削除</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $i=1?>
-                    @foreach($publics as $public)
+                    @foreach($students as $student)
                         <tr>
                             <th>{{ $i }}</th>
-                            <td>{{ $public->name }}</td>
+                            <td>{{ $student->name }}</td>
+                            <td>{{ $student->password }}</td>
                             <td>
-                                <form action="/user/{{ $public->id }}/delete" method="post" id="delete">
+                                <form action="/users/{{ $student->id }}/delete" method="post" id="delete_{{ $student->id }}">
                                     @csrf
                                     <input type="submit" class="hidden">
-                                    <p onclick="deleteConfirm()" class="deleteBtn">削除する</p>
+                                    <p onclick="indexDeleteConfirm({{ $student->id }})" class="deleteBtn">削除する</p>
                                 </form>
                             </td>
                         </tr>

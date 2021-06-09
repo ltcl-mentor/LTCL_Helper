@@ -27,7 +27,8 @@
         <h1 class="mentor_list_title">名簿</h1>
         <div class="mentor_btns">
             <a href="/users/index"><button class="mentor_btn list_btn">一覧</button></a>
-            <a href="/register"><button class="mentor_btn list_btn">登録</button></a>
+            <a href="/users/admin/register"><button class="mentor_btn list_btn">管理者の登録</button></a>
+            <a href="/users/public/register"><button class="mentor_btn list_btn">受講生の登録</button></a>
         </div>
     </div>
     

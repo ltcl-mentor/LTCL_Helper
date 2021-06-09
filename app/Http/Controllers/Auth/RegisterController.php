@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Student;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -27,7 +28,17 @@ class RegisterController extends Controller
 
     use RegistersUsers;
     
-    // 新規登録処理（デフォルトのものからログイン処理を削除、redirectを指定）
+    public function showRegistrationForm()
+    {
+        return view('User.register');
+    }
+    
+    public function showPublicRegistrationForm()
+    {
+        return view('User.publicRegister');
+    }
+    
+    // 管理者新規登録処理（デフォルトのものからログイン処理を削除、redirectを指定）
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -36,6 +47,31 @@ class RegisterController extends Controller
 
         return $this->registered($request, $user)
                         ?: redirect('/users/index');
+    }
+    
+    // 受講生新規登録処理
+    public function publicRegister(Request $request)
+    {
+        $this->publicValidator($request->all())->validate();
+        
+        for($i=1;$i<=10;$i++){
+            if($request["name$i"]){
+                $user = User::create([
+                    'name' => $request["name$i"],
+                    'password' => Hash::make($request['password']),
+                    'is_admin' => null,
+                ]);
+                
+                Student::create([
+                    'name' => $request["name$i"],
+                    'password' => $request['password'],
+                    'user_id' => $user->id,
+                ]);
+            }
+            
+        }
+
+        return redirect('/users/index');
     }
 
     /**
@@ -68,6 +104,23 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
+    
+    protected function publicValidator(array $data)
+    {
+        return Validator::make($data, [
+            'name1' => ['string'],
+            'name2' => ['string'],
+            'name3' => ['string'],
+            'name4' => ['string'],
+            'name5' => ['string'],
+            'name6' => ['string'],
+            'name7' => ['string'],
+            'name8' => ['string'],
+            'name9' => ['string'],
+            'name10' => ['string'],
+            'password' => ['required', 'string'],
+        ]);
+    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -80,7 +133,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'password' => Hash::make($data['password']),
-            'is_admin' => $data['is_admin'],
+            'is_admin' => 'staff',
         ]);
     }
 }
