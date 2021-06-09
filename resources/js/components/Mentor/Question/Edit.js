@@ -18,7 +18,7 @@ class Edit extends React.Component{
             question: '',
             comment: '',
             categories: ['カリキュラム','成果物'],
-            topics: ['AWS', 'HTML', 'CSS', 'JavaScript', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'],
+            topics: ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP' , 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'],
         };
     }
     
@@ -69,19 +69,20 @@ class Edit extends React.Component{
                     <label className="radios"><input type="radio" name="post[topic]" value="1" onClick={() => { this.handleTopic(1) }} checked={ this.state.topic === 1 }/>HTML</label>
                     <label className="radios"><input type="radio" name="post[topic]" value="2" onClick={() => { this.handleTopic(2) }} checked={ this.state.topic === 2 }/>CSS</label>
                     <label className="radios"><input type="radio" name="post[topic]" value="3" onClick={() => { this.handleTopic(3) }} checked={ this.state.topic === 3 }/>JavaScript</label>
-                    <label className="radios"><input type="radio" name="post[topic]" value="4" onClick={() => { this.handleTopic(4) }} checked={ this.state.topic === 4 }/>PHP</label>
-                    <label className="radios"><input type="radio" name="post[topic]" value="5" onClick={() => { this.handleTopic(5) }} checked={ this.state.topic === 5 }/>Laravel</label>
-                    <label className="radios"><input type="radio" name="post[topic]" value="6" onClick={() => { this.handleTopic(6) }} checked={ this.state.topic === 6 }/>DB</label>
-                    <label className="radios"><input type="radio" name="post[topic]" value="7" onClick={() => { this.handleTopic(7) }} checked={ this.state.topic === 7 }/>Git&GitHub</label>
+                    <label className="radios"><input type="radio" name="post[topic]" value="4" onClick={() => { this.handleTopic(4) }} checked={ this.state.topic === 4 }/>サーバー</label>
+                    <label className="radios"><input type="radio" name="post[topic]" value="5" onClick={() => { this.handleTopic(5) }} checked={ this.state.topic === 5 }/>PHP</label>
+                    <label className="radios"><input type="radio" name="post[topic]" value="6" onClick={() => { this.handleTopic(6) }} checked={ this.state.topic === 6 }/>Laravel</label>
+                    <label className="radios"><input type="radio" name="post[topic]" value="7" onClick={() => { this.handleTopic(7) }} checked={ this.state.topic === 7 }/>DB</label>
+                    <label className="radios"><input type="radio" name="post[topic]" value="8" onClick={() => { this.handleTopic(8) }} checked={ this.state.topic === 8 }/>Git&GitHub</label>
                 </div>
             );
         }else{
             topic=(
                 <div className="portfolio">
-                    <label className="radios"><input type="radio" name="post[topic]" value="8" onClick={() => { this.handleTopic(8) }} checked={ this.state.topic === 8 }/>環境構築</label>
-                    <label className="radios"><input type="radio" name="post[topic]" value="9" onClick={() => { this.handleTopic(9) }} checked={ this.state.topic === 9 }/>設計図</label>
-                    <label className="radios"><input type="radio" name="post[topic]" value="10" onClick={() => { this.handleTopic(10) }} checked={ this.state.topic === 10 }/>デプロイ</label>
-                    <label className="radios"><input type="radio" name="post[topic]" value="11" onClick={() => { this.handleTopic(11) }} checked={ this.state.topic === 11 }/>API</label>
+                    <label className="radios"><input type="radio" name="post[topic]" value="9" onClick={() => { this.handleTopic(9) }} checked={ this.state.topic === 9 }/>環境構築</label>
+                    <label className="radios"><input type="radio" name="post[topic]" value="10" onClick={() => { this.handleTopic(10) }} checked={ this.state.topic === 10 }/>設計図</label>
+                    <label className="radios"><input type="radio" name="post[topic]" value="11" onClick={() => { this.handleTopic(11) }} checked={ this.state.topic === 11 }/>デプロイ</label>
+                    <label className="radios"><input type="radio" name="post[topic]" value="12" onClick={() => { this.handleTopic(12) }} checked={ this.state.topic === 12 }/>API</label>
                 </div>
             );
         }
@@ -100,18 +101,30 @@ class Edit extends React.Component{
                     <select name="post[curriculum_number]" className="pulldown" required>
                         <option value={ this.state.question_data['curriculum_number'] }>{ this.state.question_data['curriculum_number'] }</option>
                         <option value="2-1-1">2-1-1</option>
-                        <option value="2-1-2">2-1-2</option>
-                        <option value="2-1-3">2-1-3</option>
                     </select>
                 );
             }else if(this.state.topic===2){
                 curriculum_number=(
                     <select name="post[curriculum_number]" className="pulldown" required>
                         <option value={ this.state.question_data['curriculum_number'] }>{ this.state.question_data['curriculum_number'] }</option>
-                        <option value="3-1-1">3-1-1</option>
+                        <option value="2-1-2">2-1-2</option>
                     </select>
                 );
             }else if(this.state.topic===3){
+                curriculum_number=(
+                    <select name="post[curriculum_number]" className="pulldown" required>
+                        <option value={ this.state.question_data['curriculum_number'] }>{ this.state.question_data['curriculum_number'] }</option>
+                        <option value="2-1-3">2-1-3</option>
+                    </select>
+                );
+            }else if(this.state.topic===4){
+                curriculum_number=(
+                    <select name="post[curriculum_number]" className="pulldown" required>
+                        <option value={ this.state.question_data['curriculum_number'] }>{ this.state.question_data['curriculum_number'] }</option>
+                        <option value="3-1-1">3-1-1</option>
+                    </select>
+                );
+            }else if(this.state.topic===5){
                 curriculum_number=(
                     <select name="post[curriculum_number]" className="pulldown" required>
                         <option value={ this.state.question_data['curriculum_number'] }>{ this.state.question_data['curriculum_number'] }</option>
@@ -121,14 +134,20 @@ class Edit extends React.Component{
                         <option value="4-1-4">4-1-4</option>
                     </select>
                 );
-            }else if(this.state.topic===4){
+            }else if(this.state.topic===6){
                 curriculum_number=(
                     <select name="post[curriculum_number]" className="pulldown" required>
                         <option value={ this.state.question_data['curriculum_number'] }>{ this.state.question_data['curriculum_number'] }</option>
                         <option value="5-1-1">5-1-1</option>
+                        <option value="8-1-1">8-1-1</option>
+                        <option value="8-2-1">8-2-1</option>
+                        <option value="8-3-1">8-3-1</option>
+                        <option value="8-4-1">8-4-1</option>
+                        <option value="8-5-1">8-5-1</option>
+                        <option value="8-6-1">8-6-1</option>
                     </select>
                 );
-            }else if(this.state.topic===5){
+            }else if(this.state.topic===7){
                 curriculum_number=(
                     <select name="post[curriculum_number]" className="pulldown" required>
                         <option value={ this.state.question_data['curriculum_number'] }>{ this.state.question_data['curriculum_number'] }</option>
@@ -136,23 +155,11 @@ class Edit extends React.Component{
                         <option value="6-2-1">6-2-1</option>
                     </select>
                 );
-            }else if(this.state.topic===6){
+            }else if(this.state.topic===8){
                 curriculum_number=(
                     <select name="post[curriculum_number]" className="pulldown" required>
                         <option value={ this.state.question_data['curriculum_number'] }>{ this.state.question_data['curriculum_number'] }</option>
                         <option value="7-1-1">7-1-1</option>
-                    </select>
-                );
-            }else if(this.state.topic===7){
-                curriculum_number=(
-                    <select name="post[curriculum_number]" className="pulldown" required>
-                        <option value={ this.state.question_data['curriculum_number'] }>{ this.state.question_data['curriculum_number'] }</option>
-                        <option value="8-1-1">8-1-1</option>
-                        <option value="8-2-1">8-2-1</option>
-                        <option value="8-3-1">8-3-1</option>
-                        <option value="8-4-1">8-4-1</option>
-                        <option value="8-5-1">8-5-1</option>
-                        <option value="8-6-1">8-6-1</option>
                     </select>
                 );
             }else{

@@ -18,13 +18,18 @@ class QuestionController extends Controller
     
     public function show(Question $question, User $user)
     {
-        $author = $user->find($question['user_id']);
+        if($user->find($question['user_id'])){
+            $author = $user->find($question['user_id']);
+            $author_name = $author->name;
+        } else{
+            $author_name = null;
+        }
         return view('Question.show')->with([
             'question' => $question,
             'documents' => $question->documents()->get(),
             'category' => Question::$category,
             'topic' => Question::$topic,
-            'author_name' => $author->name,
+            'author_name' => $author_name,
             'isChecked' => $question['check'],
         ]);
     }

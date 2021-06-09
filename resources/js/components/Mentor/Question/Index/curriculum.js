@@ -12,10 +12,11 @@ class Curriculum extends React.Component {
                 {"id":1, "topic":"HTML"},
                 {"id":2, "topic":"CSS"},
                 {"id":3, "topic":"JavaScript"},
-                {"id":4, "topic":"PHP"},
-                {"id":5, "topic":"Laravel"},
-                {"id":6, "topic":"DB"},
-                {"id":7, "topic":"Git&GitHub"}
+                {"id":4, "topic":"サーバー"},
+                {"id":5, "topic":"PHP"},
+                {"id":6, "topic":"Laravel"},
+                {"id":7, "topic":"DB"},
+                {"id":8, "topic":"Git&GitHub"}
             ],
         };
     } 

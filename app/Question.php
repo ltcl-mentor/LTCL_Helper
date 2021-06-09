@@ -11,7 +11,7 @@ class Question extends Model
     
     static $category = ['カリキュラム', '成果物'];
     
-    static $topic = ['AWS', 'HTML', 'CSS', 'JavaScript', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'];
+    static $topic = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'];
     
     // リレーション関係
     public function documents()

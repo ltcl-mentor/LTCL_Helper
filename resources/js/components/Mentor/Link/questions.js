@@ -8,20 +8,21 @@ class Questions extends React.Component {
         this.state={
             questions: [],
             curriculumTopics: [
-                {"id":0,"topic":"AWS"},
-                {"id":1,"topic":"HTML"},
-                {"id":2,"topic":"CSS"},
-                {"id":3,"topic":"JavaScript"},
-                {"id":4,"topic":"PHP"},
-                {"id":5,"topic":"Laravel"},
-                {"id":6,"topic":"DB"},
-                {"id":7,"topic":"Git&GitHub"}
+                {"id":0, "topic":"AWS"},
+                {"id":1, "topic":"HTML"},
+                {"id":2, "topic":"CSS"},
+                {"id":3, "topic":"JavaScript"},
+                {"id":4, "topic":"サーバー"},
+                {"id":5, "topic":"PHP"},
+                {"id":6, "topic":"Laravel"},
+                {"id":7, "topic":"DB"},
+                {"id":8, "topic":"Git&GitHub"}
             ],
             portfolioTopics: [
-                {"id":8,"topic":"環境構築"},
-                {"id":9,"topic":"成果物"},
-                {"id":10,"topic":"デプロイ"},
-                {"id":11,"topic":"API"}
+                {"id":9, "topic":"環境構築"},
+                {"id":10, "topic":"成果物"},
+                {"id":11, "topic":"デプロイ"},
+                {"id":12, "topic":"API"}
             ],
         };
     } 

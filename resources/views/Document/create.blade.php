@@ -12,12 +12,12 @@
             <div class="content">
                 <h2 class="title">記事のタイトルを入力してください。</h2>
                 <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
-                <textarea name="post[title]" placeholder="制限字数は５０文字です"></textarea>
+                <textarea name="post[title]" placeholder="制限字数は５０文字です">{{ old('title') }}</textarea>
             </div>
             <div class="content">
                 <h2 class="title">記事のリンクを入力してください。</h2>
                 <p class="link__error" style="color:red">{{ $errors->first('post.link') }}</p>
-                <textarea name="post[link]" placeholder="URLを入力"></textarea>
+                <textarea name="post[link]" placeholder="URLを入力">{{ old('link') }}</textarea>
             </div>
             <div class="submit">
                 <button type="submit">登録する</button>

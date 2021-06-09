@@ -8,7 +8,7 @@ class Questions extends React.Component {
         this.state={
             questions: [],
             category: ['カリキュラム', '成果物'],
-            topic: ['AWS', 'HTML', 'CSS', 'JavaScript', 'PHP','Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'],
+            topic: ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'],
         };
     } 
     

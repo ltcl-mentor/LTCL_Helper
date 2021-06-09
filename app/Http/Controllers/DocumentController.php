@@ -21,11 +21,16 @@ class DocumentController extends Controller
     
     public function show(Document $document, User $user)
     {
-        $author = $user->find($document['user_id']);
+        if($user->find($question['user_id'])){
+            $author = $user->find($question['user_id']);
+            $author_name = $author->name;
+        } else{
+            $author_name = null;
+        }
         $questions = $document->questions()->get();
         return view('Document.show')->with([
             'document' => $document,
-            'author_name' => $author->name,
+            'author_name' => $author_name,
             'questions' => $questions,
         ]);
     }

@@ -71119,28 +71119,31 @@ var Questions = /*#__PURE__*/function (_React$Component) {
         "topic": "JavaScript"
       }, {
         "id": 4,
-        "topic": "PHP"
+        "topic": "サーバー"
       }, {
         "id": 5,
-        "topic": "Laravel"
+        "topic": "PHP"
       }, {
         "id": 6,
-        "topic": "DB"
+        "topic": "Laravel"
       }, {
         "id": 7,
+        "topic": "DB"
+      }, {
+        "id": 8,
         "topic": "Git&GitHub"
       }],
       portfolioTopics: [{
-        "id": 8,
+        "id": 9,
         "topic": "環境構築"
       }, {
-        "id": 9,
+        "id": 10,
         "topic": "成果物"
       }, {
-        "id": 10,
+        "id": 11,
         "topic": "デプロイ"
       }, {
-        "id": 11,
+        "id": 12,
         "topic": "API"
       }]
     };
@@ -71749,7 +71752,7 @@ var Create = /*#__PURE__*/function (_React$Component) {
           onClick: function onClick() {
             _this2.handleTopic(4);
           }
-        }), "PHP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        }), "\u30B5\u30FC\u30D0\u30FC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "radios"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "radio",
@@ -71758,7 +71761,7 @@ var Create = /*#__PURE__*/function (_React$Component) {
           onClick: function onClick() {
             _this2.handleTopic(5);
           }
-        }), "Laravel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        }), "PHP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "radios"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "radio",
@@ -71767,7 +71770,7 @@ var Create = /*#__PURE__*/function (_React$Component) {
           onClick: function onClick() {
             _this2.handleTopic(6);
           }
-        }), "DB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        }), "Laravel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "radios"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "radio",
@@ -71775,6 +71778,15 @@ var Create = /*#__PURE__*/function (_React$Component) {
           value: "7",
           onClick: function onClick() {
             _this2.handleTopic(7);
+          }
+        }), "DB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "radios"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "radio",
+          name: "post[topic]",
+          value: "8",
+          onClick: function onClick() {
+            _this2.handleTopic(8);
           }
         }), "Git&GitHub"));
       } else {
@@ -71785,20 +71797,11 @@ var Create = /*#__PURE__*/function (_React$Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "radio",
           name: "post[topic]",
-          value: "8",
-          onClick: function onClick() {
-            _this2.handleTopic(8);
-          }
-        }), "\u74B0\u5883\u69CB\u7BC9"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "radios"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "radio",
-          name: "post[topic]",
           value: "9",
           onClick: function onClick() {
             _this2.handleTopic(9);
           }
-        }), "\u8A2D\u8A08\u56F3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        }), "\u74B0\u5883\u69CB\u7BC9"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "radios"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "radio",
@@ -71807,7 +71810,7 @@ var Create = /*#__PURE__*/function (_React$Component) {
           onClick: function onClick() {
             _this2.handleTopic(10);
           }
-        }), "\u30C7\u30D7\u30ED\u30A4"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        }), "\u8A2D\u8A08\u56F3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "radios"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "radio",
@@ -71815,6 +71818,15 @@ var Create = /*#__PURE__*/function (_React$Component) {
           value: "11",
           onClick: function onClick() {
             _this2.handleTopic(11);
+          }
+        }), "\u30C7\u30D7\u30ED\u30A4"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "radios"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "radio",
+          name: "post[topic]",
+          value: "12",
+          onClick: function onClick() {
+            _this2.handleTopic(12);
           }
         }), "API"));
       }
@@ -71841,12 +71853,28 @@ var Create = /*#__PURE__*/function (_React$Component) {
             value: ""
           }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "2-1-1"
-          }, "2-1-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          }, "2-1-1"));
+        } else if (this.state.topic === 2) {
+          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "post[curriculum_number]",
+            className: "pulldown",
+            required: true
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: ""
+          }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "2-1-2"
-          }, "2-1-2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          }, "2-1-2"));
+        } else if (this.state.topic === 3) {
+          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "post[curriculum_number]",
+            className: "pulldown",
+            required: true
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: ""
+          }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "2-1-3"
           }, "2-1-3"));
-        } else if (this.state.topic === 2) {
+        } else if (this.state.topic === 4) {
           curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             name: "post[curriculum_number]",
             className: "pulldown",
@@ -71856,7 +71884,7 @@ var Create = /*#__PURE__*/function (_React$Component) {
           }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "3-1-1"
           }, "3-1-1"));
-        } else if (this.state.topic === 3) {
+        } else if (this.state.topic === 5) {
           curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             name: "post[curriculum_number]",
             className: "pulldown",
@@ -71872,28 +71900,6 @@ var Create = /*#__PURE__*/function (_React$Component) {
           }, "4-1-3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "4-1-4"
           }, "4-1-4"));
-        } else if (this.state.topic === 4) {
-          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-            name: "post[curriculum_number]",
-            className: "pulldown",
-            required: true
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            value: ""
-          }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            value: "5-1-1"
-          }, "5-1-1"));
-        } else if (this.state.topic === 5) {
-          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-            name: "post[curriculum_number]",
-            className: "pulldown",
-            required: true
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            value: ""
-          }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            value: "6-1-1"
-          }, "6-1-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            value: "6-2-1"
-          }, "6-2-1"));
         } else if (this.state.topic === 6) {
           curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             name: "post[curriculum_number]",
@@ -71902,16 +71908,8 @@ var Create = /*#__PURE__*/function (_React$Component) {
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: ""
           }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            value: "7-1-1"
-          }, "7-1-1"));
-        } else if (this.state.topic === 7) {
-          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-            name: "post[curriculum_number]",
-            className: "pulldown",
-            required: true
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            value: ""
-          }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "5-1-1"
+          }, "5-1-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "8-1-1"
           }, "8-1-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "8-2-1"
@@ -71924,6 +71922,28 @@ var Create = /*#__PURE__*/function (_React$Component) {
           }, "8-5-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "8-6-1"
           }, "8-6-1"));
+        } else if (this.state.topic === 7) {
+          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "post[curriculum_number]",
+            className: "pulldown",
+            required: true
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: ""
+          }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "6-1-1"
+          }, "6-1-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "6-2-1"
+          }, "6-2-1"));
+        } else if (this.state.topic === 8) {
+          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "post[curriculum_number]",
+            className: "pulldown",
+            required: true
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: ""
+          }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "7-1-1"
+          }, "7-1-1"));
         } else {
           curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u30C8\u30D4\u30C3\u30AF\u3092\u9078\u629E\u3057\u76F4\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
         }
@@ -72083,7 +72103,7 @@ var Edit = /*#__PURE__*/function (_React$Component) {
       question: '',
       comment: '',
       categories: ['カリキュラム', '成果物'],
-      topics: ['AWS', 'HTML', 'CSS', 'JavaScript', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API']
+      topics: ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API']
     };
     return _this;
   }
@@ -72200,7 +72220,7 @@ var Edit = /*#__PURE__*/function (_React$Component) {
             _this3.handleTopic(4);
           },
           checked: this.state.topic === 4
-        }), "PHP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        }), "\u30B5\u30FC\u30D0\u30FC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "radios"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "radio",
@@ -72210,7 +72230,7 @@ var Edit = /*#__PURE__*/function (_React$Component) {
             _this3.handleTopic(5);
           },
           checked: this.state.topic === 5
-        }), "Laravel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        }), "PHP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "radios"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "radio",
@@ -72220,7 +72240,7 @@ var Edit = /*#__PURE__*/function (_React$Component) {
             _this3.handleTopic(6);
           },
           checked: this.state.topic === 6
-        }), "DB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        }), "Laravel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "radios"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "radio",
@@ -72230,11 +72250,7 @@ var Edit = /*#__PURE__*/function (_React$Component) {
             _this3.handleTopic(7);
           },
           checked: this.state.topic === 7
-        }), "Git&GitHub"));
-      } else {
-        topic = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "portfolio"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        }), "DB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "radios"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "radio",
@@ -72244,7 +72260,11 @@ var Edit = /*#__PURE__*/function (_React$Component) {
             _this3.handleTopic(8);
           },
           checked: this.state.topic === 8
-        }), "\u74B0\u5883\u69CB\u7BC9"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        }), "Git&GitHub"));
+      } else {
+        topic = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "portfolio"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "radios"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "radio",
@@ -72254,7 +72274,7 @@ var Edit = /*#__PURE__*/function (_React$Component) {
             _this3.handleTopic(9);
           },
           checked: this.state.topic === 9
-        }), "\u8A2D\u8A08\u56F3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        }), "\u74B0\u5883\u69CB\u7BC9"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "radios"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "radio",
@@ -72264,7 +72284,7 @@ var Edit = /*#__PURE__*/function (_React$Component) {
             _this3.handleTopic(10);
           },
           checked: this.state.topic === 10
-        }), "\u30C7\u30D7\u30ED\u30A4"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        }), "\u8A2D\u8A08\u56F3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "radios"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "radio",
@@ -72274,6 +72294,16 @@ var Edit = /*#__PURE__*/function (_React$Component) {
             _this3.handleTopic(11);
           },
           checked: this.state.topic === 11
+        }), "\u30C7\u30D7\u30ED\u30A4"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "radios"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "radio",
+          name: "post[topic]",
+          value: "12",
+          onClick: function onClick() {
+            _this3.handleTopic(12);
+          },
+          checked: this.state.topic === 12
         }), "API"));
       }
 
@@ -72299,12 +72329,28 @@ var Edit = /*#__PURE__*/function (_React$Component) {
             value: this.state.question_data['curriculum_number']
           }, this.state.question_data['curriculum_number']), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "2-1-1"
-          }, "2-1-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          }, "2-1-1"));
+        } else if (this.state.topic === 2) {
+          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "post[curriculum_number]",
+            className: "pulldown",
+            required: true
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: this.state.question_data['curriculum_number']
+          }, this.state.question_data['curriculum_number']), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "2-1-2"
-          }, "2-1-2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          }, "2-1-2"));
+        } else if (this.state.topic === 3) {
+          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "post[curriculum_number]",
+            className: "pulldown",
+            required: true
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: this.state.question_data['curriculum_number']
+          }, this.state.question_data['curriculum_number']), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "2-1-3"
           }, "2-1-3"));
-        } else if (this.state.topic === 2) {
+        } else if (this.state.topic === 4) {
           curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             name: "post[curriculum_number]",
             className: "pulldown",
@@ -72314,7 +72360,7 @@ var Edit = /*#__PURE__*/function (_React$Component) {
           }, this.state.question_data['curriculum_number']), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "3-1-1"
           }, "3-1-1"));
-        } else if (this.state.topic === 3) {
+        } else if (this.state.topic === 5) {
           curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             name: "post[curriculum_number]",
             className: "pulldown",
@@ -72330,28 +72376,6 @@ var Edit = /*#__PURE__*/function (_React$Component) {
           }, "4-1-3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "4-1-4"
           }, "4-1-4"));
-        } else if (this.state.topic === 4) {
-          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-            name: "post[curriculum_number]",
-            className: "pulldown",
-            required: true
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            value: this.state.question_data['curriculum_number']
-          }, this.state.question_data['curriculum_number']), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            value: "5-1-1"
-          }, "5-1-1"));
-        } else if (this.state.topic === 5) {
-          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-            name: "post[curriculum_number]",
-            className: "pulldown",
-            required: true
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            value: this.state.question_data['curriculum_number']
-          }, this.state.question_data['curriculum_number']), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            value: "6-1-1"
-          }, "6-1-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            value: "6-2-1"
-          }, "6-2-1"));
         } else if (this.state.topic === 6) {
           curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             name: "post[curriculum_number]",
@@ -72360,16 +72384,8 @@ var Edit = /*#__PURE__*/function (_React$Component) {
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: this.state.question_data['curriculum_number']
           }, this.state.question_data['curriculum_number']), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            value: "7-1-1"
-          }, "7-1-1"));
-        } else if (this.state.topic === 7) {
-          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-            name: "post[curriculum_number]",
-            className: "pulldown",
-            required: true
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            value: this.state.question_data['curriculum_number']
-          }, this.state.question_data['curriculum_number']), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "5-1-1"
+          }, "5-1-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "8-1-1"
           }, "8-1-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "8-2-1"
@@ -72382,6 +72398,28 @@ var Edit = /*#__PURE__*/function (_React$Component) {
           }, "8-5-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "8-6-1"
           }, "8-6-1"));
+        } else if (this.state.topic === 7) {
+          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "post[curriculum_number]",
+            className: "pulldown",
+            required: true
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: this.state.question_data['curriculum_number']
+          }, this.state.question_data['curriculum_number']), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "6-1-1"
+          }, "6-1-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "6-2-1"
+          }, "6-2-1"));
+        } else if (this.state.topic === 8) {
+          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "post[curriculum_number]",
+            className: "pulldown",
+            required: true
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: this.state.question_data['curriculum_number']
+          }, this.state.question_data['curriculum_number']), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "7-1-1"
+          }, "7-1-1"));
         } else {
           curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u30C8\u30D4\u30C3\u30AF\u3092\u9078\u629E\u3057\u76F4\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
         }
@@ -72626,15 +72664,18 @@ var Curriculum = /*#__PURE__*/function (_React$Component) {
         "topic": "JavaScript"
       }, {
         "id": 4,
-        "topic": "PHP"
+        "topic": "サーバー"
       }, {
         "id": 5,
-        "topic": "Laravel"
+        "topic": "PHP"
       }, {
         "id": 6,
-        "topic": "DB"
+        "topic": "Laravel"
       }, {
         "id": 7,
+        "topic": "DB"
+      }, {
+        "id": 8,
         "topic": "Git&GitHub"
       }]
     };
@@ -73396,7 +73437,7 @@ var Questions = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       questions: [],
       category: ['カリキュラム', '成果物'],
-      topic: ['AWS', 'HTML', 'CSS', 'JavaScript', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API']
+      topic: ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API']
     };
     return _this;
   }
@@ -73715,7 +73756,7 @@ var Topic = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       topicSelected: '',
-      topic: ['AWS', 'HTML', 'CSS', 'JavaScript', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'],
+      topic: ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'],
       lastCategory: ''
     };
     return _this;

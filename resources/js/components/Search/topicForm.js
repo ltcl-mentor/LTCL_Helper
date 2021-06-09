@@ -6,7 +6,7 @@ class Topic extends React.Component {
         super(props);
         this.state={
             topicSelected: '',
-            topic:['AWS', 'HTML', 'CSS', 'JavaScript', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'],
+            topic:['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'],
             lastCategory: '',
         };
     } 
@@ -36,7 +36,7 @@ class Topic extends React.Component {
                             <label className="topic_button"><input type="radio" name="curriculum" onClick={() => { this.handleTopic(4) }}/>PHP</label>
                             <label className="topic_button"><input type="radio" name="curriculum" onClick={() => { this.handleTopic(5) }}/>Laravel</label>
                             <label className="topic_button"><input type="radio" name="curriculum" onClick={() => { this.handleTopic(6) }}/>DB</label>
-                            <label className="topic_button"><input type="radio" name="curriculum" onClick={( )=> { this.handleTopic(7) }}/>Git&GitHub</label>
+                            <label className="topic_button"><input type="radio" name="curriculum" onClick={()=> { this.handleTopic(7) }}/>Git&GitHub</label>
                         </div>
                     </div>
                 );

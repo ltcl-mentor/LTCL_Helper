@@ -30,8 +30,12 @@
             <div class="parameters word">{{ $question->curriculum_number }}</div>
         
             <h2 class="columns">作成者</h2>
-            <div class="parameters word">{{ $author_name }}</div>
-                
+            @if($author_name)
+                <div class="parameters word">{{ $author_name }}</div>
+            @else
+                <div class="parameters word">削除されたユーザー</div>
+            @endif
+            
             <h2 class="columns">承認状況</h2>
             @if($isChecked===1)
                 <div class="parameters word">承認済み</div>
