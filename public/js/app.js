@@ -73832,7 +73832,7 @@ var Topic = /*#__PURE__*/function (_React$Component) {
             onClick: function onClick() {
               _this2.handleTopic(4);
             }
-          }), "PHP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          }), "\u30B5\u30FC\u30D0\u30FC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             className: "topic_button"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "radio",
@@ -73840,7 +73840,7 @@ var Topic = /*#__PURE__*/function (_React$Component) {
             onClick: function onClick() {
               _this2.handleTopic(5);
             }
-          }), "Laravel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          }), "PHP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             className: "topic_button"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "radio",
@@ -73848,13 +73848,21 @@ var Topic = /*#__PURE__*/function (_React$Component) {
             onClick: function onClick() {
               _this2.handleTopic(6);
             }
-          }), "DB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          }), "Laravel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             className: "topic_button"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "radio",
             name: "curriculum",
             onClick: function onClick() {
               _this2.handleTopic(7);
+            }
+          }), "DB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+            className: "topic_button"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "radio",
+            name: "curriculum",
+            onClick: function onClick() {
+              _this2.handleTopic(8);
             }
           }), "Git&GitHub")));
         } else if (this.props.category === 1) {
@@ -73868,7 +73876,7 @@ var Topic = /*#__PURE__*/function (_React$Component) {
             type: "radio",
             name: "portfolio",
             onClick: function onClick() {
-              _this2.handleTopic(8);
+              _this2.handleTopic(9);
             }
           }), "\u74B0\u5883\u69CB\u7BC9"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             className: "topic_button"
@@ -73876,7 +73884,7 @@ var Topic = /*#__PURE__*/function (_React$Component) {
             type: "radio",
             name: "portfolio",
             onClick: function onClick() {
-              _this2.handleTopic(9);
+              _this2.handleTopic(10);
             }
           }), "\u8A2D\u8A08\u56F3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             className: "topic_button"
@@ -73884,7 +73892,7 @@ var Topic = /*#__PURE__*/function (_React$Component) {
             type: "radio",
             name: "portfolio",
             onClick: function onClick() {
-              _this2.handleTopic(10);
+              _this2.handleTopic(11);
             }
           }), "\u30C7\u30D7\u30ED\u30A4"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             className: "topic_button"
@@ -73892,7 +73900,7 @@ var Topic = /*#__PURE__*/function (_React$Component) {
             type: "radio",
             name: "portfolio",
             onClick: function onClick() {
-              _this2.handleTopic(11);
+              _this2.handleTopic(12);
             }
           }), "API")));
         } else {
@@ -73911,6 +73919,8 @@ var Topic = /*#__PURE__*/function (_React$Component) {
           }, "CSS"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "topic_button_preview"
           }, "JavaScript"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "topic_button_preview"
+          }, "\u30B5\u30FC\u30D0\u30FC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "topic_button_preview"
           }, "PHP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "topic_button_preview"

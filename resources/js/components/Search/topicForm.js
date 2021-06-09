@@ -33,10 +33,11 @@ class Topic extends React.Component {
                             <label className="topic_button"><input type="radio" name="curriculum" onClick={() => { this.handleTopic(1) }}/>HTML</label>
                             <label className="topic_button"><input type="radio" name="curriculum" onClick={() => { this.handleTopic(2) }}/>CSS</label>
                             <label className="topic_button"><input type="radio" name="curriculum" onClick={() => { this.handleTopic(3) }}/>JavaScript</label>
-                            <label className="topic_button"><input type="radio" name="curriculum" onClick={() => { this.handleTopic(4) }}/>PHP</label>
-                            <label className="topic_button"><input type="radio" name="curriculum" onClick={() => { this.handleTopic(5) }}/>Laravel</label>
-                            <label className="topic_button"><input type="radio" name="curriculum" onClick={() => { this.handleTopic(6) }}/>DB</label>
-                            <label className="topic_button"><input type="radio" name="curriculum" onClick={()=> { this.handleTopic(7) }}/>Git&GitHub</label>
+                            <label className="topic_button"><input type="radio" name="curriculum" onClick={() => { this.handleTopic(4) }}/>サーバー</label>
+                            <label className="topic_button"><input type="radio" name="curriculum" onClick={() => { this.handleTopic(5) }}/>PHP</label>
+                            <label className="topic_button"><input type="radio" name="curriculum" onClick={() => { this.handleTopic(6) }}/>Laravel</label>
+                            <label className="topic_button"><input type="radio" name="curriculum" onClick={() => { this.handleTopic(7) }}/>DB</label>
+                            <label className="topic_button"><input type="radio" name="curriculum" onClick={() => { this.handleTopic(8) }}/>Git&GitHub</label>
                         </div>
                     </div>
                 );
@@ -45,10 +46,10 @@ class Topic extends React.Component {
                     <div>
                         <h2 className="steps">STEP2 該当するトピックを選択します。</h2>
                         <div  className="topic_box">
-                            <label className="topic_button"><input type="radio" name="portfolio"  onClick={() => { this.handleTopic(8) }}/>環境構築</label>
-                            <label className="topic_button"><input type="radio" name="portfolio"  onClick={() => { this.handleTopic(9) }}/>設計図</label>
-                            <label className="topic_button"><input type="radio" name="portfolio"  onClick={() => { this.handleTopic(10) }}/>デプロイ</label>
-                            <label className="topic_button"><input type="radio" name="portfolio"  onClick={() => { this.handleTopic(11) }}/>API</label>
+                            <label className="topic_button"><input type="radio" name="portfolio"  onClick={() => { this.handleTopic(9) }}/>環境構築</label>
+                            <label className="topic_button"><input type="radio" name="portfolio"  onClick={() => { this.handleTopic(10) }}/>設計図</label>
+                            <label className="topic_button"><input type="radio" name="portfolio"  onClick={() => { this.handleTopic(11) }}/>デプロイ</label>
+                            <label className="topic_button"><input type="radio" name="portfolio"  onClick={() => { this.handleTopic(12) }}/>API</label>
                         </div>
                     </div>
                 );
@@ -61,6 +62,7 @@ class Topic extends React.Component {
                             <div className="topic_button_preview">HTML</div>
                             <div className="topic_button_preview">CSS</div>
                             <div className="topic_button_preview">JavaScript</div>
+                            <div className="topic_button_preview">サーバー</div>
                             <div className="topic_button_preview">PHP</div>
                             <div className="topic_button_preview">Laravel</div>
                             <div className="topic_button_preview">DB</div>
