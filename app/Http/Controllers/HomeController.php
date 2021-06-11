@@ -42,7 +42,38 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $questions = $user->questions()->get();
-        return view('Search.history')->with(['questions' => $questions]);
+        $today = date("Y-m-d H:i:s");
+        foreach($questions as $question){
+            $question['whenClicked'] = $question->pivot->created_at;
+            $day_diff = $question['whenClicked']->diffInDays($today);
+            $month_diff = $question['whenClicked']->diffInMonths($today);
+            // dd($month_diff);
+            if($day_diff === 0){
+                $today_histories[] = $question;
+            }elseif(0 < $day_diff && $day_diff <= 7){
+                $last_week_histories[] = $question;
+            }elseif($month_diff === 1){
+                $last_month_histories[] = $question;
+            }
+        }
+        
+        if(empty($today_histories)){
+            $today_histories = null;
+        }
+        
+        if(empty($last_week_histories)){
+            $last_week_histories = null;
+        }
+        
+        if(empty($last_month_histories)){
+            $last_month_histories = null;
+        }
+        
+        return view('Search.history')->with([
+            'today_histories' => $today_histories,
+            'last_week_histories' => $last_week_histories,
+            'last_month_histories' => $last_month_histories,
+        ]);
     }
     
     //以下メンターのみがアクセス可能

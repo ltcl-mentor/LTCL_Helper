@@ -19,6 +19,7 @@ class UserController extends Controller
     public function delete(User $user)
     {
         Student::where('user_id', $user->id)->delete();
+        $user->questions()->detach();
         $user->delete();
         return redirect('/users/index');
     }

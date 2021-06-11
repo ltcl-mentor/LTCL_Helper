@@ -25,10 +25,10 @@
                             <th>{{ $i }}</th>
                             <td>{{ $staff->name }}</td>
                             <td>
-                                <form action="/users/{{ $staff->id }}/delete" method="post" id="delete">
+                                <form action="/users/{{ $staff->id }}/delete" method="post" id="delete_{{ $staff->id }}">
                                     @csrf
                                     <input type="submit" class="hidden">
-                                    <p onclick="deleteConfirm()" class="deleteBtn">削除する</p>
+                                    <p onclick="indexDeleteConfirm({{ $staff->id }})" class="deleteBtn">削除する</p>
                                 </form>
                             </td>
                         </tr>
@@ -58,10 +58,10 @@
                             <td>{{ $student->name }}</td>
                             <td>{{ $student->password }}</td>
                             <td>
-                                <form action="/users/{{ $student->id }}/delete" method="post" id="delete_{{ $student->id }}">
+                                <form action="/users/{{ $student->user_id }}/delete" method="post" id="delete_{{ $student->user_id }}">
                                     @csrf
                                     <input type="submit" class="hidden">
-                                    <p onclick="indexDeleteConfirm({{ $student->id }})" class="deleteBtn">削除する</p>
+                                    <p onclick="indexDeleteConfirm({{ $student->user_id }})" class="deleteBtn">削除する</p>
                                 </form>
                             </td>
                         </tr>

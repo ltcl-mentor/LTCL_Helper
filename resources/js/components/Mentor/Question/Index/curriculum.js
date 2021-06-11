@@ -42,9 +42,9 @@ class Curriculum extends React.Component {
                     { this.state.questions.map((question) => {
                         if(question.topic === topic.id){
                             if(question.check===1){
-                                return <div className="question">・<a href={`/questions/`+question.id} target="_blank">{ question.question }</a></div>;
+                                return <div className="question">・<a href={`/questions/`+question.id}>{ question.question }</a></div>;
                             }else{
-                                return <div className="question">・<a href={`/questions/`+question.id} target="_blank">{ question.question }</a>（未承認）</div>;
+                                return <div className="question">・<a href={`/questions/`+question.id}>{ question.question }</a>（未承認）</div>;
                             }
                         }
                     })}

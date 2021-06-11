@@ -71430,9 +71430,38 @@ var Approved = /*#__PURE__*/function (_React$Component) {
           }
         }));
       });
+      var no_author_list = this.state.questions.map(function (question) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "question"
+        }, "\u30FB", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "/questions/" + question.id
+        }, question.question)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "button"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+          action: "/questions/" + question.id + "/uncheck",
+          method: "post",
+          id: "unapprove"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "hidden",
+          name: "_token",
+          value: _this3.state.csrf_token
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "submit",
+          className: "hidden"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          onClick: function onClick() {
+            _this3.confirmMessage();
+          },
+          className: "approveBtn"
+        }, "\u627F\u8A8D\u3092\u89E3\u9664\u3059\u308B"))));
+      });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
-      }, list);
+      }, list, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "title"
+      }, "\u524A\u9664\u6E08\u307F\u30E6\u30FC\u30B6\u30FC"), no_author_list));
     }
   }]);
 
@@ -71549,7 +71578,7 @@ var Unapproved = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      var list = this.state.staffs.map(function (staff) {
+      var author_list = this.state.staffs.map(function (staff) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "content"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
@@ -71592,9 +71621,38 @@ var Unapproved = /*#__PURE__*/function (_React$Component) {
           }
         }));
       });
+      var no_author_list = this.state.questions.map(function (question) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "question"
+        }, "\u30FB", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "/questions/" + question.id
+        }, question.question)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "button"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+          action: "/questions/" + question.id + "/check",
+          method: "post",
+          id: "approve"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "hidden",
+          name: "_token",
+          value: _this3.state.csrf_token
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "submit",
+          className: "hidden"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          onClick: function onClick() {
+            _this3.confirmMessage();
+          },
+          className: "approveBtn"
+        }, "\u627F\u8A8D\u3059\u308B"))));
+      });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
-      }, list);
+      }, author_list, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "title"
+      }, "\u524A\u9664\u6E08\u307F\u30E6\u30FC\u30B6\u30FC"), no_author_list));
     }
   }]);
 
@@ -72711,15 +72769,13 @@ var Curriculum = /*#__PURE__*/function (_React$Component) {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
                 className: "question"
               }, "\u30FB", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-                href: "/questions/" + question.id,
-                target: "_blank"
+                href: "/questions/" + question.id
               }, question.question));
             } else {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
                 className: "question"
               }, "\u30FB", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-                href: "/questions/" + question.id,
-                target: "_blank"
+                href: "/questions/" + question.id
               }, question.question), "\uFF08\u672A\u627F\u8A8D\uFF09");
             }
           }
@@ -72838,15 +72894,13 @@ var Portfolio = /*#__PURE__*/function (_React$Component) {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
                 className: "question"
               }, "\u30FB", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-                href: "/questions/" + question.id,
-                target: "_blank"
+                href: "/questions/" + question.id
               }, question.question));
             } else {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
                 className: "question"
               }, "\u30FB", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-                href: "/questions/" + question.id,
-                target: "_blank"
+                href: "/questions/" + question.id
               }, question.question), "\uFF08\u672A\u627F\u8A8D\uFF09");
             }
           }

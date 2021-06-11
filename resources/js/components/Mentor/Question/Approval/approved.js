@@ -74,9 +74,28 @@ class Approved extends React.Component {
             );
         });
         
+        const no_author_list = this.state.questions.map((question) => {
+            return (
+                <div>
+                    <div className="question">・<a href={ `/questions/`+question.id }>{ question.question }</a></div>
+                    <div className="button">
+                        <form action={ `/questions/`+question.id+`/uncheck` } method="post" id="unapprove">
+                            <input type="hidden" name="_token" value={ this.state.csrf_token }/>
+                            <input type="submit" className="hidden"/>
+                            <a onClick={() => { this.confirmMessage() }} className="approveBtn">承認を解除する</a>
+                        </form>
+                    </div>
+                </div>
+            );
+        });
+        
         return (
             <div className="container">
                 { list }
+                <div className="content">
+                    <h1 className="title">削除済みユーザー</h1>
+                    { no_author_list }
+                </div>
             </div>
         );
     }

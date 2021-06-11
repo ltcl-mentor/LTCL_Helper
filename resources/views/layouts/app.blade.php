@@ -61,7 +61,7 @@
                                         @csrf
                                     </form>
                                     
-                                    <!--<a class="dropdown-item" href="/history">質問閲覧履歴</a>-->
+                                    <a class="dropdown-item" href="/history">質問閲覧履歴</a>
                                     
                                     @if(Auth::user()->is_admin)
                                         <a class="dropdown-item" href="{{route('mentor')}}">管理ページへ</a>
