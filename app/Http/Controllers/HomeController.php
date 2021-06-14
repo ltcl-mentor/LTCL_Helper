@@ -47,7 +47,6 @@ class HomeController extends Controller
             $question['whenClicked'] = $question->pivot->created_at;
             $day_diff = $question['whenClicked']->diffInDays($today);
             $month_diff = $question['whenClicked']->diffInMonths($today);
-            // dd($month_diff);
             if($day_diff === 0){
                 $today_histories[] = $question;
             }elseif(0 < $day_diff && $day_diff <= 7){

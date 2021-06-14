@@ -38,8 +38,16 @@ class Question extends Model
         return Document::whereNotIn('id', $related_ids_array)->get();
     }
     
-    // public static function forceDelete()
-    // {
-    //     self::onlyTrashed()->where('id', 1)->forceDelete();
-    // }
+    public static function questionForceDelete()
+    {
+        $deleted_questions = self::onlyTrashed()->get();
+        $today = date("Y-m-d H:i:s");
+        foreach($deleted_questions as $deleted_question){
+            $month_diff = $deleted_question['deleted_at']->diffInMonths($today);
+            // 論理削除されてから３ヶ月以上経過していた場合に物理削除を実行
+            if($month_diff > 3){
+                $deleted_question->forceDelete();
+            }
+        }
+    }
 }

@@ -48,10 +48,10 @@ class User extends Authenticatable
     {
         Student::where('user_id', $data->id)->delete();
         $data->questions()->detach();
-        $relatedQuestions = Question::where('user_id', $data->id)->get();
-        foreach($relatedQuestions as $relatedQuestion){
-            $relatedQuestion['user_id'] = 0;
-            $relatedQuestion->save();
+        $related_questions = Question::where('user_id', $data->id)->get();
+        foreach($related_questions as $related_question){
+            $related_question['user_id'] = 0;
+            $related_question->save();
         }
         $data->delete();
     }

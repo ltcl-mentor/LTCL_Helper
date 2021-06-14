@@ -61,6 +61,7 @@ class DocumentController extends Controller
     public function delete(Document $document)
     {
         $document->delete();
+        Document::documentForceDelete();
         return redirect('/documents/index');
     }
 }

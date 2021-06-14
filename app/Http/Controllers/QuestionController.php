@@ -65,7 +65,7 @@ class QuestionController extends Controller
     public function delete(Question $question)
     {
         $question->delete();
-        // Question::forceDelete();
+        Question::questionForceDelete();
         return redirect('/questions/index');
     }
     

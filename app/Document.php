@@ -27,4 +27,17 @@ class Document extends Model
         // 紐付けがすでに行われているデータ以外(まだ紐付けのできていないデータ)を取得
         return Question::whereNotIn('id', $related_ids_array)->get();
     }
+    
+    public static function documentForceDelete()
+    {
+        $deleted_documents = self::onlyTrashed()->get();
+        $today = date("Y-m-d H:i:s");
+        foreach($deleted_documents as $deleted_document){
+            $month_diff = $deleted_document['deleted_at']->diffInMonths($today);
+            // 論理削除されてから３ヶ月以上経過していた場合に物理削除を実行
+            if($month_diff > 3){
+                $deleted_document->forceDelete();
+            }
+        }
+    }
 }
