@@ -14,7 +14,7 @@ class Questions extends React.Component {
     
     componentDidMount() {
         axios
-            .get("/react/approved/questions")
+            .get(`/react/search/questions/${this.props.category}/${this.props.topic}`)
             .then(response => {
                 this.setState({
                     questions: response.data
@@ -25,11 +25,24 @@ class Questions extends React.Component {
             });
     }
     
+    componentDidUpdate(prevProps) {
+        if (this.props.topic !== prevProps.topic || this.props.category !== prevProps.category) {
+            axios
+            .get(`/react/search/questions/${this.props.category}/${this.props.topic}`)
+            .then(response => {
+                this.setState({
+                    questions: response.data
+                });
+ 
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+    }
+    
     render(){
         const list = this.state.questions.map((item) => {
-            if(item.category === this.props.category && item.topic === this.props.topic){
-                return <a href={ `/show/`+item.id } className="question" key={ item.id } target="_blank">{item.question}</a>;
-            }
+            return <a href={ `/show/`+item.id } className="question" key={ item.id } target="_blank">{item.question}</a>;
         });
         
         

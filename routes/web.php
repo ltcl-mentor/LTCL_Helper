@@ -24,7 +24,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@search'); // トップ画面表示
     Route::get('/show/{question}', 'HomeController@show'); // 質問詳細画面表示
     Route::get('/history', 'HomeController@history'); // 履歴画面表示
-    Route::get('react/approved/questions', 'ReactController@getApprovedQuestions'); // 承認済み質問のreactへの受け渡し
+    Route::get('react/search/questions/{category}/{topic}', 'ReactController@getSearchQuestions'); // 質問検索結果の受け渡し
     
     
     Route::group(['middleware' => ['administrator']], function () {
@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('react/all/documents', 'ReactController@getAllDocuments'); // 全記事受け渡し
         Route::get('react/all/questions', 'ReactController@getAllQuestions'); // 全質問受け渡し
         Route::get('react/all/staffs', 'ReactController@getAllStaffs'); // 全管理者受け渡し
+        Route::get('react/approved/questions', 'ReactController@getApprovedQuestions'); // 承認済み質問受け渡し
         Route::get('react/unapproved/questions', 'ReactController@getUnapprovedQuestions'); // 未承認質問受け渡し
         Route::get('react/curriculum/questions', 'ReactController@getCurriculumQuestions'); // カリキュラム範囲質問受け渡し
         Route::get('react/portfolio/questions', 'ReactController@getPortfolioQuestions'); // 成果物範囲質問受け渡し

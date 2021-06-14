@@ -73501,7 +73501,7 @@ var Questions = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/react/approved/questions").then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/react/search/questions/".concat(this.props.category, "/").concat(this.props.topic)).then(function (response) {
         _this2.setState({
           questions: response.data
         });
@@ -73510,19 +73510,30 @@ var Questions = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
-    key: "render",
-    value: function render() {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
       var _this3 = this;
 
+      if (this.props.topic !== prevProps.topic || this.props.category !== prevProps.category) {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/react/search/questions/".concat(this.props.category, "/").concat(this.props.topic)).then(function (response) {
+          _this3.setState({
+            questions: response.data
+          });
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
       var list = this.state.questions.map(function (item) {
-        if (item.category === _this3.props.category && item.topic === _this3.props.topic) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-            href: "/show/" + item.id,
-            className: "question",
-            key: item.id,
-            target: "_blank"
-          }, item.question);
-        }
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "/show/" + item.id,
+          className: "question",
+          key: item.id,
+          target: "_blank"
+        }, item.question);
       });
       var emptyMessage;
 
@@ -73715,10 +73726,26 @@ var SearchButton = /*#__PURE__*/function (_React$Component) {
   _createClass(SearchButton, [{
     key: "handleClick",
     value: function handleClick() {
-      this.setState({
-        isButtonClicked: true
-      });
-    }
+      if (this.state.isButtonClicked) {
+        this.setState({
+          isButtonClicked: false
+        });
+        this.setState({
+          isButtonClicked: true
+        });
+      } else {
+        this.setState({
+          isButtonClicked: true
+        });
+      }
+    } // shouldComponentUpdate() {
+    //     if(this.state.update) {
+    //         return true;
+    //     }else {
+    //         return false;
+    //     }
+    // }
+
   }, {
     key: "render",
     value: function render() {

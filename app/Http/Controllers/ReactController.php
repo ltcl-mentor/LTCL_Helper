@@ -42,6 +42,12 @@ class ReactController extends Controller
         return $question;
     }
     
+    public function getSearchQuestions($category, $topic)
+    {
+        $results = Question::where('check', 1)->where('category', $category)->where('topic', $topic)->get();
+        return $results;
+    }
+    
     // 記事関連
     public function getAlldocuments()
     {
