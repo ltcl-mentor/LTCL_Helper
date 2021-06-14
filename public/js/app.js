@@ -71355,7 +71355,8 @@ var Approved = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       questions: [],
       staffs: [],
-      csrf_token: csrf_token
+      csrf_token: csrf_token,
+      id: ''
     };
     return _this;
   }
@@ -71382,27 +71383,55 @@ var Approved = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "confirmMessage",
-    value: function confirmMessage() {
+    value: function confirmMessage(id) {
       "use strict";
 
       if (confirm('承認を解除すると質問が公開されなくなります。\nよろしいですか？')) {
-        document.getElementById('unapprove').submit();
+        this.setState({
+          id: id
+        });
+        document.getElementById('unapprove' + id).submit();
       } else {
         window.alert('キャンセルしました');
         return false;
       }
     }
   }, {
+    key: "handleSubmit",
+    value: function handleSubmit(event, id) {
+      var _this3 = this;
+
+      event.preventDefault();
+      var csrf = {
+        _token: this.state.csrf_token
+      };
+
+      if (this.state.id === id) {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/questions/".concat(id, "/uncheck"), {
+          csrf: csrf
+        }).then(function (response) {
+          _this3.setState({
+            questions: response.data
+          });
+        })["catch"](function (error) {
+          console.log(error);
+        });
+        this.setState({
+          id: false
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var list = this.state.staffs.map(function (staff) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "content"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
           className: "title"
-        }, staff.name), _this3.state.questions.map(function (question) {
+        }, staff.name), _this4.state.questions.map(function (question) {
           if (question.user_id === staff.id) {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "question"
@@ -71411,19 +71440,14 @@ var Approved = /*#__PURE__*/function (_React$Component) {
             }, question.question)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "button"
             }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-              action: "/questions/" + question.id + "/uncheck",
-              method: "post",
-              id: "unapprove"
+              onSubmit: _this4.handleSubmit(event, question.id),
+              id: "unapprove_" + question.id
             }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-              type: "hidden",
-              name: "_token",
-              value: _this3.state.csrf_token
-            }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
               type: "submit",
               className: "hidden"
             }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
               onClick: function onClick() {
-                _this3.confirmMessage();
+                _this4.confirmMessage(question.id);
               },
               className: "approveBtn"
             }, "\u627F\u8A8D\u3092\u89E3\u9664\u3059\u308B"))));
@@ -71431,29 +71455,31 @@ var Approved = /*#__PURE__*/function (_React$Component) {
         }));
       });
       var no_author_list = this.state.questions.map(function (question) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "question"
-        }, "\u30FB", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "/questions/" + question.id
-        }, question.question)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "button"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-          action: "/questions/" + question.id + "/uncheck",
-          method: "post",
-          id: "unapprove"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "hidden",
-          name: "_token",
-          value: _this3.state.csrf_token
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "submit",
-          className: "hidden"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          onClick: function onClick() {
-            _this3.confirmMessage();
-          },
-          className: "approveBtn"
-        }, "\u627F\u8A8D\u3092\u89E3\u9664\u3059\u308B"))));
+        if (question.user_id === 0) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "question"
+          }, "\u30FB", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+            href: "/questions/" + question.id
+          }, question.question)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "button"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+            action: "/questions/" + question.id + "/uncheck",
+            method: "post",
+            id: "unapprove"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "hidden",
+            name: "_token",
+            value: _this4.state.csrf_token
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "submit",
+            className: "hidden"
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+            onClick: function onClick() {
+              _this4.confirmMessage();
+            },
+            className: "approveBtn"
+          }, "\u627F\u8A8D\u3092\u89E3\u9664\u3059\u308B"))));
+        }
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
@@ -71529,7 +71555,8 @@ var Unapproved = /*#__PURE__*/function (_React$Component) {
       questions: [],
       login_user_id: [],
       staffs: [],
-      csrf_token: csrf_token
+      csrf_token: csrf_token,
+      id: ''
     };
     return _this;
   }
@@ -71563,29 +71590,57 @@ var Unapproved = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "confirmMessage",
-    value: function confirmMessage() {
+    value: function confirmMessage(id) {
       "use strict";
 
       if (confirm('承認すると質問が全体に公開されます。\nよろしいですか？')) {
-        document.getElementById('approve').submit();
+        this.setState({
+          id: id
+        });
+        document.getElementById('approve' + id).submit();
       } else {
         window.alert('キャンセルしました');
         return false;
       }
     }
   }, {
+    key: "handleSubmit",
+    value: function handleSubmit(event, id) {
+      var _this3 = this;
+
+      event.preventDefault();
+      var csrf = {
+        _token: this.state.csrf_token
+      };
+
+      if (this.state.id === id) {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/questions/".concat(id, "/check"), {
+          csrf: csrf
+        }).then(function (response) {
+          _this3.setState({
+            questions: response.data
+          });
+        })["catch"](function (error) {
+          console.log(error);
+        });
+        this.setState({
+          id: false
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var author_list = this.state.staffs.map(function (staff) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "content"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
           className: "title"
-        }, staff.name), _this3.state.questions.map(function (question) {
+        }, staff.name), _this4.state.questions.map(function (question) {
           if (question.user_id === staff.id) {
-            if (question.user_id === _this3.state.login_user_id) {
+            if (question.user_id === _this4.state.login_user_id) {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
                 className: "question"
               }, "\u30FB", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -71601,19 +71656,14 @@ var Unapproved = /*#__PURE__*/function (_React$Component) {
               }, question.question)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
                 className: "button"
               }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-                action: "/questions/" + question.id + "/check",
-                method: "post",
-                id: "approve"
+                onSubmit: _this4.handleSubmit(event, question.id),
+                id: "unapprove_" + question.id
               }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-                type: "hidden",
-                name: "_token",
-                value: _this3.state.csrf_token
-              }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
                 type: "submit",
                 className: "hidden"
               }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
                 onClick: function onClick() {
-                  _this3.confirmMessage();
+                  _this4.confirmMessage(question.id);
                 },
                 className: "approveBtn"
               }, "\u627F\u8A8D\u3059\u308B"))));
@@ -71622,29 +71672,26 @@ var Unapproved = /*#__PURE__*/function (_React$Component) {
         }));
       });
       var no_author_list = this.state.questions.map(function (question) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "question"
-        }, "\u30FB", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "/questions/" + question.id
-        }, question.question)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "button"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-          action: "/questions/" + question.id + "/check",
-          method: "post",
-          id: "approve"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "hidden",
-          name: "_token",
-          value: _this3.state.csrf_token
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "submit",
-          className: "hidden"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          onClick: function onClick() {
-            _this3.confirmMessage();
-          },
-          className: "approveBtn"
-        }, "\u627F\u8A8D\u3059\u308B"))));
+        if (question.user_id === 0) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "question"
+          }, "\u30FB", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+            href: "/questions/" + question.id
+          }, question.question)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "button"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+            onSubmit: _this4.handleSubmit(event, question.id),
+            id: "approve_" + question.id
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "submit",
+            className: "hidden"
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+            onClick: function onClick() {
+              _this4.confirmMessage(question.id);
+            },
+            className: "approveBtn"
+          }, "\u627F\u8A8D\u3059\u308B"))));
+        }
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"

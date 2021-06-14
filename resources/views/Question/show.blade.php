@@ -12,7 +12,7 @@
         <div class="title">
             <h1>質問詳細</h1>
             <a href="/questions/{{ $question->id }}/edit">編集する</a>
-            <form action="/questions/{{ $question->id }}/delete" method="post">
+            <form action="/questions/{{ $question->id }}/delete" method="post" id="delete">
                 @csrf
                 <input type="submit" class="hidden">
                 <p onclick="deleteConfirm()" class="deleteBtn">削除する</p>

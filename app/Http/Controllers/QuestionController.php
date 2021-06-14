@@ -65,6 +65,7 @@ class QuestionController extends Controller
     public function delete(Question $question)
     {
         $question->delete();
+        // Question::forceDelete();
         return redirect('/questions/index');
     }
     
@@ -77,13 +78,15 @@ class QuestionController extends Controller
     {
         $question['check'] = 1;
         $question->save();
-        return redirect('/questions/approval');
+        $questions = Question::where('check', 0)->get();
+        return response()->json($questions);
     }
     
     public function uncheck(Question $question)
     {
         $question['check'] = 0;
         $question->save();
-        return redirect('/questions/approval');
+        $questions = Question::where('check', 1)->get();
+        return response()->json($questions);
     }
 }

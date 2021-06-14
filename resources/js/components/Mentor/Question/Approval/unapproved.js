@@ -11,6 +11,7 @@ class Unapproved extends React.Component {
             login_user_id: [],
             staffs: [],
             csrf_token: csrf_token,
+            id: '',
         }; 
     } 
     
@@ -49,14 +50,37 @@ class Unapproved extends React.Component {
             }); 
     }
     
-    confirmMessage() {
+    confirmMessage(id) {
         "use strict"; 
         if (confirm('承認すると質問が全体に公開されます。\nよろしいですか？')){
-            document.getElementById('approve').submit();
+            this.setState({ id: id });
+            document.getElementById('approve'+id).submit();
         }else{
             window.alert('キャンセルしました');
             return false;
         }
+    }
+    
+    handleSubmit(event, id) {
+        event.preventDefault();
+        const csrf = {
+            _token: this.state.csrf_token
+        };
+        
+        if(this.state.id === id){
+            axios
+            .post(`/questions/${id}/check`, { csrf })
+            .then(response => {
+                this.setState({
+                    questions: response.data
+                });
+            }).catch(error => {
+                console.log(error);
+            }); 
+            
+            this.setState({ id: false });
+        }
+        
     }
     
     render(){
@@ -78,10 +102,9 @@ class Unapproved extends React.Component {
                                     <div>
                                         <div className="question">・<a href={ `/questions/`+question.id }>{ question.question }</a></div>
                                         <div className="button">
-                                            <form action={ `/questions/`+question.id+`/check` } method="post" id="approve">
-                                                <input type="hidden" name="_token" value={ this.state.csrf_token }/>
+                                            <form onSubmit={ this.handleSubmit(event, question.id) } id={`unapprove_`+question.id}>
                                                 <input type="submit" className="hidden"/>
-                                                <a onClick={() => { this.confirmMessage() }} className="approveBtn">承認する</a>
+                                                <a onClick={() => { this.confirmMessage(question.id) }} className="approveBtn">承認する</a>
                                             </form>
                                         </div>
                                     </div>
@@ -94,18 +117,19 @@ class Unapproved extends React.Component {
         });
         
         const no_author_list = this.state.questions.map((question) => {
-            return (
-                <div>
-                    <div className="question">・<a href={ `/questions/`+question.id }>{ question.question }</a></div>
-                    <div className="button">
-                        <form action={ `/questions/`+question.id+`/check` } method="post" id="approve">
-                            <input type="hidden" name="_token" value={ this.state.csrf_token }/>
-                            <input type="submit" className="hidden"/>
-                            <a onClick={() => { this.confirmMessage() }} className="approveBtn">承認する</a>
-                        </form>
+            if(question.user_id === 0){
+                return (
+                    <div>
+                        <div className="question">・<a href={ `/questions/`+question.id }>{ question.question }</a></div>
+                        <div className="button">
+                            <form onSubmit={ this.handleSubmit(event, question.id) } id={`approve_`+question.id}>
+                                <input type="submit" className="hidden"/>
+                                <a onClick={() => { this.confirmMessage(question.id) }} className="approveBtn">承認する</a>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            );
+                );
+            }
         });
         
         return (

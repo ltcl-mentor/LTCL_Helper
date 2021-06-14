@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Question;
+use App\Student;
 
 class User extends Authenticatable
 {
@@ -40,5 +42,17 @@ class User extends Authenticatable
     public function questions()
     {
         return $this->belongsToMany('App\Question')->withPivot(['created_at'])->orderBy('pivot_created_at', 'desc');
+    }
+    
+    public static function userDelete($data)
+    {
+        Student::where('user_id', $data->id)->delete();
+        $data->questions()->detach();
+        $relatedQuestions = Question::where('user_id', $data->id)->get();
+        foreach($relatedQuestions as $relatedQuestion){
+            $relatedQuestion['user_id'] = 0;
+            $relatedQuestion->save();
+        }
+        $data->delete();
     }
 }

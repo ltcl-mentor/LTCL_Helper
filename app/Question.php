@@ -4,9 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Document;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Question extends Model
 {
+    use SoftDeletes;
+    
     protected $fillable=['category','topic','curriculum_number','question','comment','check','user_id'];
     
     static $category = ['カリキュラム', '成果物'];
@@ -34,4 +37,9 @@ class Question extends Model
         // 紐付けがすでに行われているデータ以外(まだ紐付けのできていないデータ)を取得
         return Document::whereNotIn('id', $related_ids_array)->get();
     }
+    
+    // public static function forceDelete()
+    // {
+    //     self::onlyTrashed()->where('id', 1)->forceDelete();
+    // }
 }

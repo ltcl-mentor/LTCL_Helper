@@ -19,6 +19,7 @@ class CreateDocumentsTable extends Migration
             $table->text('link');
             $table->integer('user_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
