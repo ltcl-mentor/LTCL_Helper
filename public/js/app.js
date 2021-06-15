@@ -71624,7 +71624,7 @@ var Unapproved = /*#__PURE__*/function (_React$Component) {
           console.log(error);
         });
         this.setState({
-          id: false
+          id: null
         });
       }
     }

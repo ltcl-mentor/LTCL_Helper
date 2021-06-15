@@ -78,7 +78,7 @@ class Unapproved extends React.Component {
                 console.log(error);
             }); 
             
-            this.setState({ id: false });
+            this.setState({ id: null });
         }
         
     }

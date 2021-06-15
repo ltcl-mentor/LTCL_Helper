@@ -10,7 +10,7 @@ class Question extends Model
 {
     use SoftDeletes;
     
-    protected $fillable=['category','topic','curriculum_number','question','comment','check','user_id'];
+    protected $fillable=['category', 'topic', 'curriculum_number', 'question', 'comment', 'check', 'user_id'];
     
     static $category = ['カリキュラム', '成果物'];
     
