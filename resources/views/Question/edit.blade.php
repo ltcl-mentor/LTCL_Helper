@@ -8,15 +8,10 @@
     <div class="container">
         <a href="/mentor">管理ページ</a> > <a href="/questions/index">質問一覧</a> > <a href="/questions/{{ $question_id }}">質問詳細</a> > 質問編集
     </div>
-    <form action="/questions/{{ $question_id }}/update" method="post">
+    <form action="/questions/{{ $question_id }}/update" method="post" id="edit" question_id={{ $question_id }}>
         @csrf
         <!--React-->
         <div id="Edit"></div>
     </form>
     
-    <!--reactに受け渡す値（viewには非表示）-->
-    <div id="question_id" class="hidden">{{ $question_id }}</div>
-    <div id="question_validation" class="hidden">{{ $errors->first('post.question') }}</div>
-    <div id="comment_validation" class="hidden">{{ $errors->first('post.comment') }}</div>
-
 @endsection
