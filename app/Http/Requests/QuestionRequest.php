@@ -31,12 +31,4 @@ class QuestionRequest extends FormRequest
             'post.comment' => 'required|string',
         ];
     }
-    
-    public function messages()
-    {
-        return [
-            'post.question.required' => '質問内容の入力は必須です。',
-            'post.comment.required' => 'コメントの入力は必須です。保留の場合は保留と入力してください。',
-        ];
-    }
 }

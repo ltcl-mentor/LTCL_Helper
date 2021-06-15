@@ -16,7 +16,7 @@ class SearchButton extends React.Component {
         }
     }
     
-    handleClick(){
+    handleClick() {
         this.setState({ isButtonClicked: true });
     }
     

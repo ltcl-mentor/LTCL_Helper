@@ -70802,7 +70802,7 @@ __webpack_require__(/*! ./components/Mentor/Question/Approval/Approval */ "./res
 
 __webpack_require__(/*! ./components/Mentor/Question/Index/Index */ "./resources/js/components/Mentor/Question/Index/Index.js");
 
-__webpack_require__(/*! ./components/Mentor/Question/Create */ "./resources/js/components/Mentor/Question/Create.js");
+__webpack_require__(/*! ./components/Mentor/Question/Create/Create */ "./resources/js/components/Mentor/Question/Create/Create.js");
 
 __webpack_require__(/*! ./components/Mentor/Question/Edit */ "./resources/js/components/Mentor/Question/Edit.js");
 
@@ -71714,10 +71714,380 @@ var Unapproved = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Mentor/Question/Create.js":
-/*!***********************************************************!*\
-  !*** ./resources/js/components/Mentor/Question/Create.js ***!
-  \***********************************************************/
+/***/ "./resources/js/components/Mentor/Question/Create/Create.js":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/Mentor/Question/Create/Create.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _curriculum_number__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./curriculum-number */ "./resources/js/components/Mentor/Question/Create/curriculum-number.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var Create = /*#__PURE__*/function (_React$Component) {
+  _inherits(Create, _React$Component);
+
+  var _super = _createSuper(Create);
+
+  function Create(props) {
+    var _this;
+
+    _classCallCheck(this, Create);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      category: 0,
+      topic: 0,
+      question: '',
+      question_validation_message: '質問内容の入力は必須です。',
+      question_validation_error: 0,
+      comment: '',
+      comment_validation_message: 'コメントの入力は必須です。保留の場合は保留と入力してください。',
+      comment_validation_error: 0
+    };
+    return _this;
+  }
+
+  _createClass(Create, [{
+    key: "handleCategory",
+    value: function handleCategory(category) {
+      this.setState({
+        category: category
+      });
+    }
+  }, {
+    key: "handleTopic",
+    value: function handleTopic(topic) {
+      this.setState({
+        topic: topic
+      });
+    }
+  }, {
+    key: "changeQuestion",
+    value: function changeQuestion(event) {
+      this.setState({
+        question: event.target.value
+      });
+    }
+  }, {
+    key: "changeComment",
+    value: function changeComment(event) {
+      this.setState({
+        comment: event.target.value
+      });
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick() {
+      if (this.state.question.trim().length !== 0 && this.state.comment.trim().length !== 0) {
+        document.getElementById('create').submit();
+      } else if (this.state.question.trim().length === 0 && this.state.comment.trim().length !== 0) {
+        this.setState({
+          question_validation_error: 1
+        });
+        this.setState({
+          comment_validation_error: 0
+        });
+        return false;
+      } else if (this.state.question.trim().length !== 0 && this.state.comment.trim().length === 0) {
+        this.setState({
+          question_validation_error: 0
+        });
+        this.setState({
+          comment_validation_error: 1
+        });
+        return false;
+      } else {
+        this.setState({
+          question_validation_error: 1
+        });
+        this.setState({
+          comment_validation_error: 1
+        });
+        return false;
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var topic;
+
+      if (this.state.category === 0) {
+        topic = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "carriculum"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "radios"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "radio",
+          name: "post[topic]",
+          value: "0",
+          onClick: function onClick() {
+            _this2.handleTopic(0);
+          },
+          checked: this.state.topic === 0
+        }), "AWS"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "radios"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "radio",
+          name: "post[topic]",
+          value: "1",
+          onClick: function onClick() {
+            _this2.handleTopic(1);
+          },
+          checked: this.state.topic === 1
+        }), "HTML"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "radios"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "radio",
+          name: "post[topic]",
+          value: "2",
+          onClick: function onClick() {
+            _this2.handleTopic(2);
+          },
+          checked: this.state.topic === 2
+        }), "CSS"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "radios"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "radio",
+          name: "post[topic]",
+          value: "3",
+          onClick: function onClick() {
+            _this2.handleTopic(3);
+          },
+          checked: this.state.topic === 3
+        }), "JavaScript"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "radios"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "radio",
+          name: "post[topic]",
+          value: "4",
+          onClick: function onClick() {
+            _this2.handleTopic(4);
+          },
+          checked: this.state.topic === 4
+        }), "\u30B5\u30FC\u30D0\u30FC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "radios"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "radio",
+          name: "post[topic]",
+          value: "5",
+          onClick: function onClick() {
+            _this2.handleTopic(5);
+          },
+          checked: this.state.topic === 5
+        }), "PHP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "radios"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "radio",
+          name: "post[topic]",
+          value: "6",
+          onClick: function onClick() {
+            _this2.handleTopic(6);
+          },
+          checked: this.state.topic === 6
+        }), "Laravel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "radios"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "radio",
+          name: "post[topic]",
+          value: "7",
+          onClick: function onClick() {
+            _this2.handleTopic(7);
+          },
+          checked: this.state.topic === 7
+        }), "DB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "radios"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "radio",
+          name: "post[topic]",
+          value: "8",
+          onClick: function onClick() {
+            _this2.handleTopic(8);
+          },
+          checked: this.state.topic === 8
+        }), "Git&GitHub"));
+      } else {
+        topic = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "portfolio"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "radios"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "radio",
+          name: "post[topic]",
+          value: "9",
+          onClick: function onClick() {
+            _this2.handleTopic(9);
+          },
+          checked: this.state.topic === 9
+        }), "\u74B0\u5883\u69CB\u7BC9"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "radios"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "radio",
+          name: "post[topic]",
+          value: "10",
+          onClick: function onClick() {
+            _this2.handleTopic(10);
+          },
+          checked: this.state.topic === 10
+        }), "\u8A2D\u8A08\u56F3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "radios"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "radio",
+          name: "post[topic]",
+          value: "11",
+          onClick: function onClick() {
+            _this2.handleTopic(11);
+          },
+          checked: this.state.topic === 11
+        }), "\u30C7\u30D7\u30ED\u30A4"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "radios"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "radio",
+          name: "post[topic]",
+          value: "12",
+          onClick: function onClick() {
+            _this2.handleTopic(12);
+          },
+          checked: this.state.topic === 12
+        }), "API"));
+      }
+
+      var question_validation_message;
+
+      if (this.state.question_validation_error === 1) {
+        question_validation_message = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "errorMassage"
+        }, this.state.question_validation_message);
+      } else {
+        question_validation_message = '';
+      }
+
+      var comment_validation_message;
+
+      if (this.state.comment_validation_error === 1) {
+        comment_validation_message = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "errorMassage"
+        }, this.state.comment_validation_message);
+      } else {
+        comment_validation_message = '';
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "title"
+      }, "\u30AB\u30C6\u30B4\u30EA\u30FC\u306E\u9078\u629E"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "radios"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "radio",
+        name: "post[category]",
+        value: "0",
+        onClick: function onClick() {
+          _this2.handleCategory(0);
+        },
+        checked: this.state.category === 0
+      }), "\u30AB\u30EA\u30AD\u30E5\u30E9\u30E0"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "radios"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "radio",
+        name: "post[category]",
+        value: "1",
+        onClick: function onClick() {
+          _this2.handleCategory(1);
+        },
+        checked: this.state.category === 1
+      }), "\u6210\u679C\u7269")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "title"
+      }, "\u30C8\u30D4\u30C3\u30AF\u306E\u9078\u629E"), topic), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_curriculum_number__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        category: this.state.category,
+        topic: this.state.topic
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "title"
+      }, "\u8CEA\u554F\u5185\u5BB9\u3092\u5165\u529B"), question_validation_message, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        name: "post[question]",
+        placeholder: "\u8CEA\u554F\u5185\u5BB9\u3092\u7C21\u6F54\u306B\u5165\u529B",
+        rows: "8",
+        value: this.state.question,
+        onChange: function onChange(event) {
+          _this2.changeQuestion(event);
+        }
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "title"
+      }, "\u554F\u984C\u89E3\u6C7A\u306E\u30D2\u30F3\u30C8\u3084\u30B3\u30E1\u30F3\u30C8\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), comment_validation_message, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        name: "post[comment]",
+        placeholder: "\u3042\u304F\u307E\u3067\u3082\u30D2\u30F3\u30C8\u306B\u3068\u3069\u3081\u308B\u3088\u3046\u306B\u3057\u3066\u304F\u3060\u3055\u3044\u3002",
+        rows: "8",
+        value: this.state.comment,
+        onChange: function onChange(event) {
+          _this2.changeComment(event);
+        }
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "submit"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "hidden"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        onClick: function onClick() {
+          _this2.handleClick();
+        }
+      }, "\u767B\u9332\u3059\u308B")));
+    }
+  }]);
+
+  return Create;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Create);
+
+if (document.getElementById('Create')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Create, null), document.getElementById('Create'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/Mentor/Question/Create/curriculum-number.js":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/Mentor/Question/Create/curriculum-number.js ***!
+  \*****************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -71752,198 +72122,28 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var Create = /*#__PURE__*/function (_React$Component) {
-  _inherits(Create, _React$Component);
+var CrriculumNumber = /*#__PURE__*/function (_React$Component) {
+  _inherits(CrriculumNumber, _React$Component);
 
-  var _super = _createSuper(Create);
+  var _super = _createSuper(CrriculumNumber);
 
-  function Create(props) {
+  function CrriculumNumber(props) {
     var _this;
 
-    _classCallCheck(this, Create);
+    _classCallCheck(this, CrriculumNumber);
 
     _this = _super.call(this, props);
-    var question_validation = document.getElementById('question_validation').textContent;
-    var question_old = document.getElementById('question_old').textContent;
-    var comment_validation = document.getElementById('comment_validation').textContent;
-    var comment_old = document.getElementById('comment_old').textContent;
-    _this.state = {
-      category: 0,
-      topic: 0,
-      question_validation: question_validation,
-      comment_validation: comment_validation,
-      question_old: question_old,
-      comment_old: comment_old
-    };
+    _this.state = {};
     return _this;
   }
 
-  _createClass(Create, [{
-    key: "handleCategory",
-    value: function handleCategory(number) {
-      this.setState({
-        category: number
-      });
-    }
-  }, {
-    key: "handleTopic",
-    value: function handleTopic(number) {
-      this.setState({
-        topic: number
-      });
-    }
-  }, {
-    key: "changeQuestion",
-    value: function changeQuestion(event) {
-      this.setState({
-        question_old: event.target.value
-      });
-    }
-  }, {
-    key: "changeComment",
-    value: function changeComment(event) {
-      this.setState({
-        comment_old: event.target.value
-      });
-    }
-  }, {
+  _createClass(CrriculumNumber, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
-
-      var topic;
-
-      if (this.state.category === 0) {
-        topic = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "carriculum"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "radios"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "radio",
-          name: "post[topic]",
-          value: "0",
-          onClick: function onClick() {
-            _this2.handleTopic(0);
-          }
-        }), "AWS"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "radios"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "radio",
-          name: "post[topic]",
-          value: "1",
-          onClick: function onClick() {
-            _this2.handleTopic(1);
-          }
-        }), "HTML"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "radios"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "radio",
-          name: "post[topic]",
-          value: "2",
-          onClick: function onClick() {
-            _this2.handleTopic(2);
-          }
-        }), "CSS"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "radios"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "radio",
-          name: "post[topic]",
-          value: "3",
-          onClick: function onClick() {
-            _this2.handleTopic(3);
-          }
-        }), "JavaScript"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "radios"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "radio",
-          name: "post[topic]",
-          value: "4",
-          onClick: function onClick() {
-            _this2.handleTopic(4);
-          }
-        }), "\u30B5\u30FC\u30D0\u30FC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "radios"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "radio",
-          name: "post[topic]",
-          value: "5",
-          onClick: function onClick() {
-            _this2.handleTopic(5);
-          }
-        }), "PHP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "radios"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "radio",
-          name: "post[topic]",
-          value: "6",
-          onClick: function onClick() {
-            _this2.handleTopic(6);
-          }
-        }), "Laravel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "radios"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "radio",
-          name: "post[topic]",
-          value: "7",
-          onClick: function onClick() {
-            _this2.handleTopic(7);
-          }
-        }), "DB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "radios"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "radio",
-          name: "post[topic]",
-          value: "8",
-          onClick: function onClick() {
-            _this2.handleTopic(8);
-          }
-        }), "Git&GitHub"));
-      } else {
-        topic = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "portfolio"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "radios"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "radio",
-          name: "post[topic]",
-          value: "9",
-          onClick: function onClick() {
-            _this2.handleTopic(9);
-          }
-        }), "\u74B0\u5883\u69CB\u7BC9"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "radios"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "radio",
-          name: "post[topic]",
-          value: "10",
-          onClick: function onClick() {
-            _this2.handleTopic(10);
-          }
-        }), "\u8A2D\u8A08\u56F3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "radios"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "radio",
-          name: "post[topic]",
-          value: "11",
-          onClick: function onClick() {
-            _this2.handleTopic(11);
-          }
-        }), "\u30C7\u30D7\u30ED\u30A4"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "radios"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "radio",
-          name: "post[topic]",
-          value: "12",
-          onClick: function onClick() {
-            _this2.handleTopic(12);
-          }
-        }), "API"));
-      }
-
       var curriculum_number;
 
-      if (this.state.category === 0) {
-        if (this.state.topic === 0) {
+      if (this.props.category === 0) {
+        if (this.props.topic === 0) {
           curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             name: "post[curriculum_number]",
             className: "pulldown",
@@ -71953,7 +72153,7 @@ var Create = /*#__PURE__*/function (_React$Component) {
           }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "1-1-1"
           }, "1-1-1"));
-        } else if (this.state.topic === 1) {
+        } else if (this.props.topic === 1) {
           curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             name: "post[curriculum_number]",
             className: "pulldown",
@@ -71963,7 +72163,7 @@ var Create = /*#__PURE__*/function (_React$Component) {
           }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "2-1-1"
           }, "2-1-1"));
-        } else if (this.state.topic === 2) {
+        } else if (this.props.topic === 2) {
           curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             name: "post[curriculum_number]",
             className: "pulldown",
@@ -71973,7 +72173,7 @@ var Create = /*#__PURE__*/function (_React$Component) {
           }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "2-1-2"
           }, "2-1-2"));
-        } else if (this.state.topic === 3) {
+        } else if (this.props.topic === 3) {
           curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             name: "post[curriculum_number]",
             className: "pulldown",
@@ -71983,7 +72183,7 @@ var Create = /*#__PURE__*/function (_React$Component) {
           }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "2-1-3"
           }, "2-1-3"));
-        } else if (this.state.topic === 4) {
+        } else if (this.props.topic === 4) {
           curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             name: "post[curriculum_number]",
             className: "pulldown",
@@ -72009,7 +72209,7 @@ var Create = /*#__PURE__*/function (_React$Component) {
           }, "4-1-3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "4-1-4"
           }, "4-1-4"));
-        } else if (this.state.topic === 6) {
+        } else if (this.props.topic === 6) {
           curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             name: "post[curriculum_number]",
             className: "pulldown",
@@ -72031,7 +72231,7 @@ var Create = /*#__PURE__*/function (_React$Component) {
           }, "8-5-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "8-6-1"
           }, "8-6-1"));
-        } else if (this.state.topic === 7) {
+        } else if (this.props.topic === 7) {
           curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             name: "post[curriculum_number]",
             className: "pulldown",
@@ -72043,7 +72243,7 @@ var Create = /*#__PURE__*/function (_React$Component) {
           }, "6-1-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "6-2-1"
           }, "6-2-1"));
-        } else if (this.state.topic === 8) {
+        } else if (this.props.topic === 8) {
           curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             name: "post[curriculum_number]",
             className: "pulldown",
@@ -72056,7 +72256,7 @@ var Create = /*#__PURE__*/function (_React$Component) {
         } else {
           curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u30C8\u30D4\u30C3\u30AF\u3092\u9078\u629E\u3057\u76F4\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
         }
-      } else if (this.state.category === 1) {
+      } else if (this.props.category === 1) {
         curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
           name: "post[curriculum_number]",
           className: "pulldown",
@@ -72069,81 +72269,17 @@ var Create = /*#__PURE__*/function (_React$Component) {
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "content"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "title"
-      }, "\u30AB\u30C6\u30B4\u30EA\u30FC\u306E\u9078\u629E"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "radios"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "radio",
-        name: "post[category]",
-        value: "0",
-        onClick: function onClick() {
-          _this2.handleCategory(0);
-        }
-      }), "\u30AB\u30EA\u30AD\u30E5\u30E9\u30E0"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "radios"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "radio",
-        name: "post[category]",
-        value: "1",
-        onClick: function onClick() {
-          _this2.handleCategory(1);
-        }
-      }), "\u6210\u679C\u7269")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "content"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "title"
-      }, "\u30C8\u30D4\u30C3\u30AF\u306E\u9078\u629E"), topic), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "content"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "title"
-      }, "\u8A72\u5F53\u30AB\u30EA\u30AD\u30E5\u30E9\u30E0\u306E\u9078\u629E"), curriculum_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "content"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "title"
-      }, "\u8CEA\u554F\u5185\u5BB9\u3092\u5165\u529B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "errorMassage"
-      }, this.state.question_validation), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
-        name: "post[question]",
-        placeholder: "\u8CEA\u554F\u5185\u5BB9\u3092\u7C21\u6F54\u306B\u5165\u529B",
-        rows: "8",
-        value: this.state.question_old,
-        onChange: function onChange(event) {
-          _this2.changeQuestion(event);
-        }
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "content"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "title"
-      }, "\u554F\u984C\u89E3\u6C7A\u306E\u30D2\u30F3\u30C8\u3084\u30B3\u30E1\u30F3\u30C8\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "errorMassage"
-      }, this.state.comment_validation), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
-        name: "post[comment]",
-        placeholder: "\u3042\u304F\u307E\u3067\u3082\u30D2\u30F3\u30C8\u306B\u3068\u3069\u3081\u308B\u3088\u3046\u306B\u3057\u3066\u304F\u3060\u3055\u3044\u3002",
-        rows: "8",
-        value: this.state.comment_old,
-        onChange: function onChange(event) {
-          _this2.changeComment(event);
-        }
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "submit"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "submit"
-      }, "\u767B\u9332\u3059\u308B")));
+      }, "\u8A72\u5F53\u30AB\u30EA\u30AD\u30E5\u30E9\u30E0\u306E\u9078\u629E"), curriculum_number);
     }
   }]);
 
-  return Create;
+  return CrriculumNumber;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Create);
-
-if (document.getElementById('Create')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Create, null), document.getElementById('Create'));
-}
+/* harmony default export */ __webpack_exports__["default"] = (CrriculumNumber);
 
 /***/ }),
 
