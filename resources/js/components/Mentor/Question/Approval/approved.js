@@ -5,11 +5,9 @@ import axios from "axios";
 class Approved extends React.Component {
     constructor(props){
         super(props);
-        let csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
         this.state={
             questions: [],
             staffs: [],
-            csrf_token: csrf_token,
             id: '',
         };
     } 
@@ -25,24 +23,12 @@ class Approved extends React.Component {
             }).catch(error => {
                 console.log(error);
             });
-        
-        axios
-            .get("/react/all/staffs")
-            .then(response => {
-                this.setState({
-                    staffs: response.data
-                });
- 
-            }).catch(error => {
-                console.log(error);
-            }); 
     }
     
     confirmMessage(id) {
         "use strict"; 
         if (confirm('承認を解除すると質問が公開されなくなります。\nよろしいですか？')){
             this.setState({ id: id });
-            document.getElementById('unapprove'+id).submit();
         }else{
             window.alert('キャンセルしました');
             return false;
@@ -52,7 +38,7 @@ class Approved extends React.Component {
     handleSubmit(event, id) {
         event.preventDefault();
         const csrf = {
-            _token: this.state.csrf_token
+            _token: this.props.csrf_token
         };
         
         if(this.state.id === id){
@@ -72,7 +58,7 @@ class Approved extends React.Component {
     }
     
     render(){
-        const list = this.state.staffs.map((staff) => {
+        const list = this.props.staffs.map((staff) => {
             return (
                 <div className="content">
                     <h1 className="title">{ staff.name }</h1>

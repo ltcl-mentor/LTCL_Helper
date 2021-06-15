@@ -3,30 +3,22 @@ import ReactDOM from 'react-dom';
 import {Link} from 'react-scroll';
 
 class SearchButton extends React.Component {
-   constructor(props){
+    constructor(props){
         super(props);
         this.state={
             isButtonClicked: false,
         };
     }
     
-    handleClick(){
-        if(this.state.isButtonClicked){
+    componentDidUpdate(prevProps) {
+        if (this.props.topic !== prevProps.topic || this.props.category !== prevProps.category) {
             this.setState({ isButtonClicked: false });
-            this.setState({ isButtonClicked: true });
-        }else{
-            this.setState({ isButtonClicked: true });
         }
-        
     }
     
-    // shouldComponentUpdate() {
-    //     if(this.state.update) {
-    //         return true;
-    //     }else {
-    //         return false;
-    //     }
-    // }
+    handleClick(){
+        this.setState({ isButtonClicked: true });
+    }
     
     render(){
         let searchButton;

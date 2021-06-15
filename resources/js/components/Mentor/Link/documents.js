@@ -5,11 +5,9 @@ import axios from "axios";
 class Documents extends React.Component {
     constructor(props){
         super(props);
-        let csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
         this.state={
             documents: [],
             staffs: [],
-            csrf_token: csrf_token,
         };
     } 
     

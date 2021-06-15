@@ -74,7 +74,10 @@ class Public extends React.Component{
                     名登録する
                     <div className="empty"></div>
                 </div>
-                <Forms password={ 'ltcl'+this.state.year%100+('0'+this.state.month).slice(-2) } number={ this.state.number } makeForm={ this.state.makeForm }/>
+                <Forms
+                    password={ 'ltcl'+this.state.year%100+('0'+this.state.month).slice(-2) }
+                    number={ this.state.number } makeForm={ this.state.makeForm }
+                />
             </div>
         );
     }

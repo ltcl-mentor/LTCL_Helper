@@ -44,12 +44,12 @@ class Edit extends React.Component{
     }
         
     
-    handleCategory(number) {
-        this.setState({ category: number });
+    handleCategory(category) {
+        this.setState({ category: category });
     }
     
-    handleTopic(number) {
-        this.setState({ topic: number });
+    handleTopic(topic) {
+        this.setState({ topic: topic });
     }
     
     changeQuestion(event) {

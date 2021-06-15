@@ -5,25 +5,24 @@ class Topic extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            topicSelected: '',
-            topic:['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'],
+            topic: '',
             lastCategory: '',
         };
     } 
     
     handleTopic(topic){
-        this.setState({ topicSelected: topic });
+        this.setState({ topic: topic });
         this.setState({ lastCategory: this.props.category });
     }
     
     handleChange(){
-        this.setState({ topicSelected: '' });
+        this.setState({ topic: '' });
     }
     
     render(){
         let topicForm;
         
-        if(this.state.topicSelected === '' || this.state.lastCategory !== this.props.category){
+        if(this.state.topic === '' || this.state.lastCategory !== this.props.category){
             if(this.props.category === 0){
                 topicForm = (
                     <div>
@@ -76,7 +75,7 @@ class Topic extends React.Component {
                 <div>
                     <h2 className="steps">STEP2 該当するトピックを選択します。</h2>
                     <div className="topic_result_box">
-                        <h4 className="topic_result">{ this.state.topic[this.state.topicSelected] }</h4>
+                        <h4 className="topic_result">{ this.props.topics[this.state.topic] }</h4>
                         <a className="change_button" onClick={() => { this.handleChange() }}>変更する</a>
                     </div>
                 </div>
@@ -85,7 +84,7 @@ class Topic extends React.Component {
         
         return (
             <div className="container">
-                { this.props.setTopic(this.state.topicSelected) }
+                { this.props.setTopic(this.state.topic) }
                 { topicForm }
             </div>
         );

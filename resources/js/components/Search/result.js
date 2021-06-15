@@ -22,7 +22,12 @@ class Result extends React.Component {
                         <div className="circle3"></div>
                     </div>
                     <div className="result_box">
-                        <Questions category={ this.props.category } topic={ this.props.topic }/>
+                        <Questions
+                            category={ this.props.category }
+                            topic={ this.props.topic }
+                            categories={ this.props.categories }
+                            topics={ this.props.topics }
+                        />
                     </div>
                 </div>
             );

@@ -38,8 +38,8 @@ class Create extends React.Component{
     
     render(){
         let topic;
-        if(this.state.category===0){
-            topic=(
+        if(this.state.category === 0){
+            topic = (
                 <div className="carriculum">
                     <label className="radios"><input type="radio" name="post[topic]" value="0" onClick={() => { this.handleTopic(0) }}/>AWS</label>
                     <label className="radios"><input type="radio" name="post[topic]" value="1" onClick={() => { this.handleTopic(1) }}/>HTML</label>
@@ -53,7 +53,7 @@ class Create extends React.Component{
                 </div>
             );
         }else{
-            topic=(
+            topic = (
                 <div className="portfolio">
                     <label className="radios"><input type="radio" name="post[topic]" value="9" onClick={() => { this.handleTopic(9) }}/>環境構築</label>
                     <label className="radios"><input type="radio" name="post[topic]" value="10" onClick={() => { this.handleTopic(10) }}/>設計図</label>
@@ -64,44 +64,44 @@ class Create extends React.Component{
         }
         
         let curriculum_number;
-        if(this.state.category===0){
-            if(this.state.topic===0){
-                curriculum_number=(
+        if(this.state.category === 0){
+            if(this.state.topic === 0){
+                curriculum_number = (
                     <select name="post[curriculum_number]" className="pulldown" required>
                         <option value="">選択してください。</option>
                         <option value="1-1-1">1-1-1</option>
                     </select>
                 );
-            }else if(this.state.topic===1){
-                curriculum_number=(
+            }else if(this.state.topic === 1){
+                curriculum_number = (
                     <select name="post[curriculum_number]" className="pulldown" required>
                         <option value="">選択してください。</option>
                         <option value="2-1-1">2-1-1</option>
                     </select>
                 );
-            }else if(this.state.topic===2){
-                curriculum_number=(
+            }else if(this.state.topic === 2){
+                curriculum_number = (
                     <select name="post[curriculum_number]" className="pulldown" required>
                         <option value="">選択してください。</option>
                         <option value="2-1-2">2-1-2</option>
                     </select>
                 );
-            }else if(this.state.topic===3){
-                curriculum_number=(
+            }else if(this.state.topic === 3){
+                curriculum_number = (
                     <select name="post[curriculum_number]" className="pulldown" required>
                         <option value="">選択してください。</option>
                         <option value="2-1-3">2-1-3</option>
                     </select>
                 );
-            }else if(this.state.topic===4){
-                curriculum_number=(
+            }else if(this.state.topic === 4){
+                curriculum_number = (
                     <select name="post[curriculum_number]" className="pulldown" required>
                         <option value="">選択してください。</option>
                         <option value="3-1-1">3-1-1</option>
                     </select>
                 );
-            }else if(this.state.topic===5){
-                curriculum_number=(
+            }else if(this.state.topic === 5){
+                curriculum_number = (
                     <select name="post[curriculum_number]" className="pulldown" required>
                         <option value="">選択してください。</option>
                         <option value="4-1-1">4-1-1</option>
@@ -110,8 +110,8 @@ class Create extends React.Component{
                         <option value="4-1-4">4-1-4</option>
                     </select>
                 );
-            }else if(this.state.topic===6){
-                curriculum_number=(
+            }else if(this.state.topic === 6){
+                curriculum_number = (
                     <select name="post[curriculum_number]" className="pulldown" required>
                         <option value="">選択してください。</option>
                         <option value="5-1-1">5-1-1</option>
@@ -123,29 +123,29 @@ class Create extends React.Component{
                         <option value="8-6-1">8-6-1</option>
                     </select>
                 );
-            }else if(this.state.topic===7){
-                curriculum_number=(
+            }else if(this.state.topic === 7){
+                curriculum_number = (
                     <select name="post[curriculum_number]" className="pulldown" required>
                         <option value="">選択してください。</option>
                         <option value="6-1-1">6-1-1</option>
                         <option value="6-2-1">6-2-1</option>
                     </select>
                 );
-            }else if(this.state.topic===8){
-                curriculum_number=(
+            }else if(this.state.topic === 8){
+                curriculum_number = (
                     <select name="post[curriculum_number]" className="pulldown" required>
                         <option value="">選択してください。</option>
                         <option value="7-1-1">7-1-1</option>
                     </select>
                 );
             }else{
-                curriculum_number=(
+                curriculum_number = (
                     <div>トピックを選択し直してください。</div>
                 );
             }
             
-        }else if(this.state.category===1){
-            curriculum_number=(
+        }else if(this.state.category === 1){
+            curriculum_number = (
                 <select name="post[curriculum_number]" className="pulldown" required>
                     <option value="">選択してください。</option>
                     <option value="成果物">成果物</option>

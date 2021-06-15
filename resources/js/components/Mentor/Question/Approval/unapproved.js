@@ -5,12 +5,8 @@ import axios from "axios";
 class Unapproved extends React.Component {
     constructor(props){
         super(props);
-        let csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
         this.state={
             questions: [],
-            login_user_id: [],
-            staffs: [],
-            csrf_token: csrf_token,
             id: '',
         }; 
     } 
@@ -26,35 +22,12 @@ class Unapproved extends React.Component {
             }).catch(error => {
                 console.log(error);
             });
-            
-        axios
-            .get("/react/id")
-            .then(response => {
-                this.setState({
-                    login_user_id: response.data
-                });
-                
-            }).catch(error => {
-                console.log(error);
-            });
-            
-        axios
-            .get("/react/all/staffs")
-            .then(response => {
-                this.setState({
-                    staffs: response.data
-                });
- 
-            }).catch(error => {
-                console.log(error);
-            }); 
     }
     
     confirmMessage(id) {
         "use strict"; 
         if (confirm('承認すると質問が全体に公開されます。\nよろしいですか？')){
             this.setState({ id: id });
-            document.getElementById('approve'+id).submit();
         }else{
             window.alert('キャンセルしました');
             return false;
@@ -64,7 +37,7 @@ class Unapproved extends React.Component {
     handleSubmit(event, id) {
         event.preventDefault();
         const csrf = {
-            _token: this.state.csrf_token
+            _token: this.props.csrf_token
         };
         
         if(this.state.id === id){
@@ -84,13 +57,13 @@ class Unapproved extends React.Component {
     }
     
     render(){
-        const author_list = this.state.staffs.map((staff) => {
+        const author_list = this.props.staffs.map((staff) => {
             return (
                 <div className="content">
                     <h1 className="title">{ staff.name }</h1>
                     { this.state.questions.map((question) => {
                         if( question.user_id === staff.id ){
-                            if( question.user_id === this.state.login_user_id ){
+                            if( question.user_id === this.props.login_user_id ){
                                 return (
                                     <div>
                                         <div className="question">・<a href={ `/questions/`+question.id }>{ question.question }</a></div>

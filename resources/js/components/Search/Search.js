@@ -9,15 +9,36 @@ function Search() {
     const [category, setCategory] = useState();
     const [topic, setTopic] = useState();
     const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
+    const categories = ['カリキュラム', '成果物'];
+    const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'];
 
     return (
         <div className="container">
             <div className="form_box">
-                <Category setCategory={ setCategory }/>
-                <Topic category={ category } setTopic={ setTopic }/>
-                <SearchButton category={ category } topic={ topic } setIsSearchButtonClicked={ setIsSearchButtonClicked }/>
+                <Category 
+                    setCategory={ setCategory }
+                    categories={ categories }
+                />
+                <Topic 
+                    category={ category }
+                    setTopic={ setTopic }
+                    topics={ topics }
+                />
+                <SearchButton
+                    category={ category }
+                    topic={ topic }
+                    setIsSearchButtonClicked={ setIsSearchButtonClicked }
+                />
             </div>
-            <Result isSearchButtonClicked={ isSearchButtonClicked } category={ category } topic={ topic }/>
+            
+            <Result
+                isSearchButtonClicked={ isSearchButtonClicked }
+                category={ category }
+                topic={ topic }
+                categories={ categories }
+                topics={ topics }
+            />
+            
         </div>
     );
     

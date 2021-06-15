@@ -16,20 +16,20 @@ class Link extends React.Component{
     render(){
         return (
             <div>
-            <Tabs>
-                <TabList>
-                    <Tab>質問から紐付け</Tab>
-                    <Tab>記事から紐付け</Tab>
-                </TabList>
+                <Tabs>
+                    <TabList>
+                        <Tab>質問から紐付け</Tab>
+                        <Tab>記事から紐付け</Tab>
+                    </TabList>
             
-                <TabPanel>
-                    <Questions />
-                </TabPanel>
+                    <TabPanel>
+                        <Questions />
+                    </TabPanel>
                 
-                <TabPanel>
-                    <Documents />
-                </TabPanel>
-            </Tabs>
+                    <TabPanel>
+                        <Documents />
+                    </TabPanel>
+                </Tabs>
             </div>
         );
     }

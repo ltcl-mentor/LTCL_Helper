@@ -8,10 +8,10 @@ class Portfolio extends React.Component {
         this.state={
             questions: [],
             portfolio_topics: [
-                {"id":8,"topic":"環境構築"},
-                {"id":9,"topic":"成果物"},
-                {"id":10,"topic":"デプロイ"},
-                {"id":11,"topic":"API"}
+                {"id":8, "topic":"環境構築"},
+                {"id":9, "topic":"成果物"},
+                {"id":10, "topic":"デプロイ"},
+                {"id":11, "topic":"API"}
             ],
         };
     } 
@@ -36,7 +36,7 @@ class Portfolio extends React.Component {
                     <h1 className="title">{ topic.topic }</h1>
                     { this.state.questions.map((question) => {
                         if(question.topic === topic.id){
-                            if(question.check===1){
+                            if(question.check === 1){
                                 return <div className="question">・<a href={`/questions/`+question.id}>{ question.question }</a></div>;
                             }else{
                                 return <div className="question">・<a href={`/questions/`+question.id}>{ question.question }</a>（未承認）</div>;

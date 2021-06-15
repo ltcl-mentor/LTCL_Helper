@@ -70989,11 +70989,9 @@ var Documents = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Documents);
 
     _this = _super.call(this, props);
-    var csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
     _this.state = {
       documents: [],
-      staffs: [],
-      csrf_token: csrf_token
+      staffs: []
     };
     return _this;
   }
@@ -71235,8 +71233,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-tabs */ "./node_modules/react-tabs/esm/index.js");
 /* harmony import */ var react_tabs_style_react_tabs_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-tabs/style/react-tabs.css */ "./node_modules/react-tabs/style/react-tabs.css");
 /* harmony import */ var react_tabs_style_react_tabs_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_tabs_style_react_tabs_css__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _approved__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./approved */ "./resources/js/components/Mentor/Question/Approval/approved.js");
-/* harmony import */ var _unapproved__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./unapproved */ "./resources/js/components/Mentor/Question/Approval/unapproved.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _approved__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./approved */ "./resources/js/components/Mentor/Question/Approval/approved.js");
+/* harmony import */ var _unapproved__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./unapproved */ "./resources/js/components/Mentor/Question/Approval/unapproved.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -71266,6 +71266,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Approval = /*#__PURE__*/function (_React$Component) {
   _inherits(Approval, _React$Component);
 
@@ -71277,14 +71278,46 @@ var Approval = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Approval);
 
     _this = _super.call(this, props);
-    _this.state = {};
+    var csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
+    _this.state = {
+      csrf_token: csrf_token,
+      login_user_id: [],
+      staffs: []
+    };
     return _this;
   }
 
   _createClass(Approval, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("/react/id").then(function (response) {
+        _this2.setState({
+          login_user_id: response.data
+        });
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("/react/all/staffs").then(function (response) {
+        _this2.setState({
+          staffs: response.data
+        });
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_tabs__WEBPACK_IMPORTED_MODULE_2__["Tabs"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_tabs__WEBPACK_IMPORTED_MODULE_2__["TabList"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_tabs__WEBPACK_IMPORTED_MODULE_2__["Tab"], null, "\u627F\u8A8D\u6E08\u307F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_tabs__WEBPACK_IMPORTED_MODULE_2__["Tab"], null, "\u627F\u8A8D\u5F85\u3061")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_tabs__WEBPACK_IMPORTED_MODULE_2__["TabPanel"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_approved__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_tabs__WEBPACK_IMPORTED_MODULE_2__["TabPanel"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_unapproved__WEBPACK_IMPORTED_MODULE_5__["default"], null))));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_tabs__WEBPACK_IMPORTED_MODULE_2__["Tabs"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_tabs__WEBPACK_IMPORTED_MODULE_2__["TabList"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_tabs__WEBPACK_IMPORTED_MODULE_2__["Tab"], null, "\u627F\u8A8D\u5F85\u3061"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_tabs__WEBPACK_IMPORTED_MODULE_2__["Tab"], null, "\u627F\u8A8D\u6E08\u307F")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_tabs__WEBPACK_IMPORTED_MODULE_2__["TabPanel"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_unapproved__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        csrf_token: this.state.csrf_token,
+        login_user_id: this.state.login_user_id,
+        staffs: this.state.staffs
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_tabs__WEBPACK_IMPORTED_MODULE_2__["TabPanel"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_approved__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        csrf_token: this.state.csrf_token,
+        staffs: this.state.staffs
+      }))));
     }
   }]);
 
@@ -71351,11 +71384,9 @@ var Approved = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Approved);
 
     _this = _super.call(this, props);
-    var csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
     _this.state = {
       questions: [],
       staffs: [],
-      csrf_token: csrf_token,
       id: ''
     };
     return _this;
@@ -71373,13 +71404,6 @@ var Approved = /*#__PURE__*/function (_React$Component) {
       })["catch"](function (error) {
         console.log(error);
       });
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/react/all/staffs").then(function (response) {
-        _this2.setState({
-          staffs: response.data
-        });
-      })["catch"](function (error) {
-        console.log(error);
-      });
     }
   }, {
     key: "confirmMessage",
@@ -71390,7 +71414,6 @@ var Approved = /*#__PURE__*/function (_React$Component) {
         this.setState({
           id: id
         });
-        document.getElementById('unapprove' + id).submit();
       } else {
         window.alert('キャンセルしました');
         return false;
@@ -71403,7 +71426,7 @@ var Approved = /*#__PURE__*/function (_React$Component) {
 
       event.preventDefault();
       var csrf = {
-        _token: this.state.csrf_token
+        _token: this.props.csrf_token
       };
 
       if (this.state.id === id) {
@@ -71426,7 +71449,7 @@ var Approved = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
-      var list = this.state.staffs.map(function (staff) {
+      var list = this.props.staffs.map(function (staff) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "content"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
@@ -71550,12 +71573,8 @@ var Unapproved = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Unapproved);
 
     _this = _super.call(this, props);
-    var csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
     _this.state = {
       questions: [],
-      login_user_id: [],
-      staffs: [],
-      csrf_token: csrf_token,
       id: ''
     };
     return _this;
@@ -71573,20 +71592,6 @@ var Unapproved = /*#__PURE__*/function (_React$Component) {
       })["catch"](function (error) {
         console.log(error);
       });
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/react/id").then(function (response) {
-        _this2.setState({
-          login_user_id: response.data
-        });
-      })["catch"](function (error) {
-        console.log(error);
-      });
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/react/all/staffs").then(function (response) {
-        _this2.setState({
-          staffs: response.data
-        });
-      })["catch"](function (error) {
-        console.log(error);
-      });
     }
   }, {
     key: "confirmMessage",
@@ -71597,7 +71602,6 @@ var Unapproved = /*#__PURE__*/function (_React$Component) {
         this.setState({
           id: id
         });
-        document.getElementById('approve' + id).submit();
       } else {
         window.alert('キャンセルしました');
         return false;
@@ -71610,7 +71614,7 @@ var Unapproved = /*#__PURE__*/function (_React$Component) {
 
       event.preventDefault();
       var csrf = {
-        _token: this.state.csrf_token
+        _token: this.props.csrf_token
       };
 
       if (this.state.id === id) {
@@ -71633,14 +71637,14 @@ var Unapproved = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
-      var author_list = this.state.staffs.map(function (staff) {
+      var author_list = this.props.staffs.map(function (staff) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "content"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
           className: "title"
         }, staff.name), _this4.state.questions.map(function (question) {
           if (question.user_id === staff.id) {
-            if (question.user_id === _this4.state.login_user_id) {
+            if (question.user_id === _this4.props.login_user_id) {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
                 className: "question"
               }, "\u30FB", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -72239,16 +72243,16 @@ var Edit = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "handleCategory",
-    value: function handleCategory(number) {
+    value: function handleCategory(category) {
       this.setState({
-        category: number
+        category: category
       });
     }
   }, {
     key: "handleTopic",
-    value: function handleTopic(number) {
+    value: function handleTopic(topic) {
       this.setState({
-        topic: number
+        topic: topic
       });
     }
   }, {
@@ -73330,15 +73334,19 @@ function Search() {
       isSearchButtonClicked = _useState6[0],
       setIsSearchButtonClicked = _useState6[1];
 
+  var categories = ['カリキュラム', '成果物'];
+  var topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form_box"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_categoryForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    setCategory: setCategory
+    setCategory: setCategory,
+    categories: categories
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_topicForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
     category: category,
-    setTopic: setTopic
+    setTopic: setTopic,
+    topics: topics
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchButton__WEBPACK_IMPORTED_MODULE_4__["default"], {
     category: category,
     topic: topic,
@@ -73346,7 +73354,9 @@ function Search() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_result__WEBPACK_IMPORTED_MODULE_5__["default"], {
     isSearchButtonClicked: isSearchButtonClicked,
     category: category,
-    topic: topic
+    topic: topic,
+    categories: categories,
+    topics: topics
   }));
 }
 
@@ -73408,24 +73418,23 @@ var Category = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      whichSelected: '',
-      category: ['カリキュラム', '成果物']
+      category: ''
     };
     return _this;
   }
 
   _createClass(Category, [{
     key: "handleCategory",
-    value: function handleCategory(number) {
+    value: function handleCategory(category) {
       this.setState({
-        whichSelected: number
+        category: category
       });
     }
   }, {
     key: "handleChange",
     value: function handleChange() {
       this.setState({
-        whichSelected: ''
+        category: ''
       });
     }
   }, {
@@ -73435,7 +73444,7 @@ var Category = /*#__PURE__*/function (_React$Component) {
 
       var categoryForm;
 
-      if (this.state.whichSelected === '') {
+      if (this.state.category === '') {
         categoryForm = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "category_box"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -73460,7 +73469,7 @@ var Category = /*#__PURE__*/function (_React$Component) {
           className: "category_result_box"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
           className: "category_result"
-        }, this.state.category[this.state.whichSelected]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        }, this.props.categories[this.state.category]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           className: "change_button",
           onClick: function onClick() {
             _this2.handleChange();
@@ -73472,7 +73481,7 @@ var Category = /*#__PURE__*/function (_React$Component) {
         className: "container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "steps"
-      }, "STEP1 \u8A72\u5F53\u3059\u308B\u30AB\u30C6\u30B4\u30EA\u30FC\u3092\u9078\u629E\u3057\u307E\u3059\u3002"), this.props.setCategory(this.state.whichSelected), categoryForm);
+      }, "STEP1 \u8A72\u5F53\u3059\u308B\u30AB\u30C6\u30B4\u30EA\u30FC\u3092\u9078\u629E\u3057\u307E\u3059\u3002"), this.props.setCategory(this.state.category), categoryForm);
     }
   }]);
 
@@ -73536,9 +73545,7 @@ var Questions = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      questions: [],
-      category: ['カリキュラム', '成果物'],
-      topic: ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API']
+      questions: []
     };
     return _this;
   }
@@ -73574,13 +73581,12 @@ var Questions = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var list = this.state.questions.map(function (item) {
+      var list = this.state.questions.map(function (question) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "/show/" + item.id,
+          href: "/show/" + question.id,
           className: "question",
-          key: item.id,
-          target: "_blank"
-        }, item.question);
+          key: question.id
+        }, question.question);
       });
       var emptyMessage;
 
@@ -73597,9 +73603,9 @@ var Questions = /*#__PURE__*/function (_React$Component) {
         className: "searchResultDocument"
       }, "\u30AB\u30C6\u30B4\u30EA\u30FC\uFF1A", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("font", {
         color: "green"
-      }, this.state.category[this.props.category]), "\u3001\u30C8\u30D4\u30C3\u30AF\uFF1A", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("font", {
+      }, this.props.categories[this.props.category]), "\u3001\u30C8\u30D4\u30C3\u30AF\uFF1A", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("font", {
         color: "blue"
-      }, this.state.topic[this.props.topic]), "\u306E\u691C\u7D22\u7D50\u679C", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("font", {
+      }, this.props.topics[this.props.topic]), "\u306E\u691C\u7D22\u7D50\u679C", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("font", {
         color: "purple"
       }, list.filter(function (v) {
         return v;
@@ -73691,7 +73697,9 @@ var Result = /*#__PURE__*/function (_React$Component) {
           className: "result_box"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_questions__WEBPACK_IMPORTED_MODULE_2__["default"], {
           category: this.props.category,
-          topic: this.props.topic
+          topic: this.props.topic,
+          categories: this.props.categories,
+          topics: this.props.topics
         })));
       } else {
         results = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -73771,28 +73779,21 @@ var SearchButton = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(SearchButton, [{
-    key: "handleClick",
-    value: function handleClick() {
-      if (this.state.isButtonClicked) {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.topic !== prevProps.topic || this.props.category !== prevProps.category) {
         this.setState({
           isButtonClicked: false
         });
-        this.setState({
-          isButtonClicked: true
-        });
-      } else {
-        this.setState({
-          isButtonClicked: true
-        });
       }
-    } // shouldComponentUpdate() {
-    //     if(this.state.update) {
-    //         return true;
-    //     }else {
-    //         return false;
-    //     }
-    // }
-
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick() {
+      this.setState({
+        isButtonClicked: true
+      });
+    }
   }, {
     key: "render",
     value: function render() {
@@ -73883,8 +73884,7 @@ var Topic = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      topicSelected: '',
-      topic: ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'],
+      topic: '',
       lastCategory: ''
     };
     return _this;
@@ -73894,7 +73894,7 @@ var Topic = /*#__PURE__*/function (_React$Component) {
     key: "handleTopic",
     value: function handleTopic(topic) {
       this.setState({
-        topicSelected: topic
+        topic: topic
       });
       this.setState({
         lastCategory: this.props.category
@@ -73904,7 +73904,7 @@ var Topic = /*#__PURE__*/function (_React$Component) {
     key: "handleChange",
     value: function handleChange() {
       this.setState({
-        topicSelected: ''
+        topic: ''
       });
     }
   }, {
@@ -73914,7 +73914,7 @@ var Topic = /*#__PURE__*/function (_React$Component) {
 
       var topicForm;
 
-      if (this.state.topicSelected === '' || this.state.lastCategory !== this.props.category) {
+      if (this.state.topic === '' || this.state.lastCategory !== this.props.category) {
         if (this.props.category === 0) {
           topicForm = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
             className: "steps"
@@ -74065,7 +74065,7 @@ var Topic = /*#__PURE__*/function (_React$Component) {
           className: "topic_result_box"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
           className: "topic_result"
-        }, this.state.topic[this.state.topicSelected]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        }, this.props.topics[this.state.topic]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           className: "change_button",
           onClick: function onClick() {
             _this2.handleChange();
@@ -74075,7 +74075,7 @@ var Topic = /*#__PURE__*/function (_React$Component) {
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
-      }, this.props.setTopic(this.state.topicSelected), topicForm);
+      }, this.props.setTopic(this.state.topic), topicForm);
     }
   }]);
 
