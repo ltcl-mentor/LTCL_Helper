@@ -13,18 +13,15 @@ class Public extends React.Component{
     }
  
     setYear(event) {
-        const selectedYear = event.target.value;
-        this.setState({ year: selectedYear });
+        this.setState({ year: event.target.value });
     }
     
     setMonth(event) {
-        const selectedMonth = event.target.value;
-        this.setState({ month: selectedMonth });
+        this.setState({ month: event.target.value });
     }
     
     setNumber(event) {
-        const selectedNumber = event.target.value;
-        this.setState({ number: selectedNumber });
+        this.setState({ number: event.target.value });
     }
     
     render(){
