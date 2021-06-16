@@ -98,7 +98,7 @@ function Edit() {
             
             <div className="submit">
                 <input type="hidden"/>
-                <a onClick={() => { handleClick() }}>登録する</a>
+                <p onClick={() => { handleClick() }} className="submit_btn">登録する</p>
             </div>
         </div>
     );

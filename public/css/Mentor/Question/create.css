@@ -34,6 +34,31 @@ textarea{
     text-align: center;
 }
 
+.submit_btn{
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    color: white;
+    width: 120px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 5px;
+    text-align: center;
+    overflow: hidden;
+    font-weight: bold;
+    background: linear-gradient(rgb(250,150,250) 30%, rgb(230,50,250) 100%);
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.66);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.28);
+    cursor: pointer;
+}
+
+.submit_btn:active{
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+    background-image: linear-gradient(#fed6e3 0%, #ffbcbc 100%);
+}
+
 .hidden{
     display: none;
 }

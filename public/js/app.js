@@ -71841,10 +71841,11 @@ function Create() {
     className: "submit"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "hidden"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     onClick: function onClick() {
       handleClick();
-    }
+    },
+    className: "submit_btn"
   }, "\u767B\u9332\u3059\u308B")));
 }
 
@@ -72630,10 +72631,11 @@ function Edit() {
     className: "submit"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "hidden"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     onClick: function onClick() {
       handleClick();
-    }
+    },
+    className: "submit_btn"
   }, "\u767B\u9332\u3059\u308B")));
 }
 
