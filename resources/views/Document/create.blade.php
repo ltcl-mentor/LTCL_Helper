@@ -20,7 +20,7 @@
                 <textarea name="post[link]" placeholder="URLを入力">{{ old('link') }}</textarea>
             </div>
             <div class="submit">
-                <button type="submit">登録する</button>
+                <button type="submit" class="submit_btn">登録する</button>
             </div>
         </form>
     </div>

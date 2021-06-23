@@ -43,7 +43,7 @@
                 </div>
                 
                 <div class="submit">
-                    <button type="submit">確定する</button>
+                    <button type="submit" class="submit_btn">確定する</button>
                 </div>
             </form>
         </div>
