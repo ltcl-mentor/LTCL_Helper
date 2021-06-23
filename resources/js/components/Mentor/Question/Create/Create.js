@@ -4,6 +4,7 @@ import TopicForm from './topicForm';
 import CrriculumNumber from './curriculum-number';
 import QuestionForm from './questionForm';
 import CommentForm from './commentForm';
+import Picture from './picture';
 
 function Create() {
     const [category, setCategory] = useState(0);
@@ -59,8 +60,9 @@ function Create() {
                 comment_validation_error={ comment_validation_error }
             />
             
+            <Picture/>
+            
             <div className="submit">
-                <input type="hidden"/>
                 <p onClick={() => { handleClick() }} className="submit_btn">登録する</p>
             </div>
         </div>

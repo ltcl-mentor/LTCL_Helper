@@ -10,7 +10,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register(10名まで同時に登録できます)') }}</div>
+                <div class="card-header">{{ __('Register(20名まで同時に登録できます)') }}</div>
                 
                     <!--React-->
                     <div id="Public"></div>

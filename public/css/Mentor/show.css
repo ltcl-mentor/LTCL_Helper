@@ -58,6 +58,11 @@
     margin: 0 auto;
 }
 
+.image{
+    height: 180px;
+    width: 280px;
+}
+
 /*関連記事詳細画面のみ*/
 .document{
     font-size: 25px;

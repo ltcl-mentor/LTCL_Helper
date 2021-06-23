@@ -54,7 +54,7 @@ class RegisterController extends Controller
     {
         $this->publicValidator($request->all())->validate();
         
-        for($i=1;$i<=10;$i++){
+        for($i=1;$i<=20;$i++){
             if($request["name$i"]){
                 $user = User::create([
                     'name' => $request["name$i"],

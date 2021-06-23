@@ -44,10 +44,19 @@
             @endif
         
             <h2 class="columns">質問内容</h2>
-            <div class="parameters">{{ $question->question }}</div>
+            <div class="parameters">{!! nl2br(e($question->question)) !!}</div>
         
-            <h3 class="columns">コメント</h3>
-            <div class="parameters">{{ $question->comment }}</div>
+            <h2 class="columns">コメント</h2>
+            <div class="parameters">{!! nl2br(e($question->comment)) !!}</div>
+            
+            <h2 class="columns">関連画像</h2>
+            @if($images)
+                @foreach($images as $image)
+                    <a href="{{ $image->image_path }}" data-lightbox="group"><img src="{{ $image->image_path }}" class="image"></a>
+                @endforeach
+            @else
+                <div class="parameters word">画像はありません</div>
+            @endif
         </div>
         
         <div>

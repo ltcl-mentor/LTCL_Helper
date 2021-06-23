@@ -69,15 +69,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/users/{user}/delete', 'UserController@delete'); // 削除実行
         
         // Reactへのデータ受け渡し
-        Route::get('react/all/documents', 'ReactController@getAllDocuments'); // 全記事受け渡し
         Route::get('react/all/questions', 'ReactController@getAllQuestions'); // 全質問受け渡し
-        Route::get('react/all/staffs', 'ReactController@getAllStaffs'); // 全管理者受け渡し
+        Route::get('react/question/{question}', 'ReactController@getQuestion'); // 個別質問データの受け渡し
         Route::get('react/approved/questions', 'ReactController@getApprovedQuestions'); // 承認済み質問受け渡し
         Route::get('react/unapproved/questions', 'ReactController@getUnapprovedQuestions'); // 未承認質問受け渡し
         Route::get('react/curriculum/questions', 'ReactController@getCurriculumQuestions'); // カリキュラム範囲質問受け渡し
         Route::get('react/portfolio/questions', 'ReactController@getPortfolioQuestions'); // 成果物範囲質問受け渡し
+        Route::get('react/images/{question_id}', 'ReactController@getImages'); // 質問に関連する画像の受け渡し
+        Route::get('react/all/documents', 'ReactController@getAllDocuments'); // 全記事受け渡し
+        Route::get('react/all/staffs', 'ReactController@getAllStaffs'); // 全管理者受け渡し
         Route::get('react/id', 'ReactController@getUserId'); // ログインユーザーid受け渡し
-        Route::get('react/question/{question}', 'ReactController@getQuestion'); // 個別質問データの受け渡し
+        
     }); 
 });    
     

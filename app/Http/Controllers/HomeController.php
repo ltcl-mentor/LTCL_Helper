@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Question;
 use App\Document;
 use App\User;
+use App\Image;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -30,11 +31,16 @@ class HomeController extends Controller
     {
         $question->users()->attach(Auth::id());
         $documents = $question->documents()->get();
+        $images = Image::where('question_id', $question->id)->get();
+        if(empty($images[0])){
+            $images = null;
+        }
         return view('Search.show')->with([
             'question' => $question,
             'documents' => $documents,
             'category' => Question::$category,
             'topic' => Question::$topic,
+            'images' => $images,
         ]);
     }
     

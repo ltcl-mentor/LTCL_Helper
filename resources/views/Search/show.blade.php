@@ -23,11 +23,19 @@
                 <div class="illusts">
                     <div class="question_illust">
                         <img class="student_img" src="{{ asset('images/pose_english_shrug_man.png') }}">
-                        <div class="question_balloon">{{ $question->question }}</div>
+                        <div class="question_balloon">{!! nl2br(e($question->question)) !!}</div>
                     </div>
+                    
+                    <h2 class="columns">参考画像</h2>
+                    @if($images)
+                        @foreach($images as $image)
+                            <a href="{{ $image->image_path }}" data-lightbox="group"><img src="{{ $image->image_path }}" class="image"></a>
+                        @endforeach
+                    @endif
+                    
                     <div class="comment_illust">
                         <img class="mentor_img" src="{{ asset('images/images.jpg') }}">
-                        <div class="comment_balloon">{{ $question->comment }}</div>
+                        <div class="comment_balloon">{!! nl2br(e($question->comment)) !!}</div>
                     </div>
                 </div>
             </div>

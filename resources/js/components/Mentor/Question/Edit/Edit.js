@@ -5,6 +5,7 @@ import TopicForm from './topicForm';
 import CrriculumNumber from './curriculum-number';
 import QuestionForm from './questionForm';
 import CommentForm from './commentForm';
+import Picture from './picture';
 
 function Edit() {
     const [category, setCategory] = useState();
@@ -28,7 +29,7 @@ function Edit() {
     }, []);
     
     const componentDidMount = () => {
-        const question_id = document.getElementById('edit').getAttribute('question_id');
+        const question_id = document.getElementById('Edit').getAttribute('question_id');
         axios
             .get(`/react/question/${ question_id }`)
             .then(response => {
@@ -46,7 +47,7 @@ function Edit() {
     
     const handleClick = () => {
         if(question.trim().length !== 0 && comment.trim().length !== 0){
-            document.getElementById('edit').submit();
+            document.getElementById('update').submit();
         }else if(question.trim().length === 0 && comment.trim().length !== 0){
             setQuestionValidationError(1);
             setCommentValidationError(0);
@@ -95,6 +96,8 @@ function Edit() {
                 setComment={ setComment }
                 comment_validation_error={ comment_validation_error }
             />
+            
+            <Picture/>
             
             <div className="submit">
                 <input type="hidden"/>

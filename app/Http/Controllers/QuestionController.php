@@ -7,6 +7,8 @@ use App\Http\Requests\QuestionRequest;
 use App\Question;
 use App\Document;
 use App\User;
+use App\Image;
+use Storage;
 use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
@@ -24,6 +26,12 @@ class QuestionController extends Controller
         } else{
             $author_name = null;
         }
+        
+        $images = Image::where('question_id', $question->id)->get();
+        if(empty($images[0])){
+            $images = null;
+        }
+        
         return view('Question.show')->with([
             'question' => $question,
             'documents' => $question->documents()->get(),
@@ -31,6 +39,7 @@ class QuestionController extends Controller
             'topic' => Question::$topic,
             'author_name' => $author_name,
             'isChecked' => $question['check'],
+            'images' => $images,
         ]);
     }
     
@@ -41,10 +50,18 @@ class QuestionController extends Controller
     
     public function store(QuestionRequest $request, Question $question)
     {
+        // 質問に関する処理
         $question->fill($request['post']);
         $question['check'] = 0;
         $question['user_id'] = Auth::id();
         $question->save();
+        
+        // 画像に関する処理
+        $pictures = $request->file('image');
+        if($pictures){
+            Image::imageCreate($pictures, $question->id);
+        }
+        
         return redirect('/questions/index');
     }
     
@@ -57,13 +74,35 @@ class QuestionController extends Controller
     
     public function update(QuestionRequest $request, Question $question)
     {
+        // 質問に関する処理
         $question->fill($request['post']);
         $question->save();
+        
+        // 画像に関する処理
+        // 画像の削除
+        if($request['delete_id']){
+            $delete_images = Image::whereIn('id', $request['delete_id'])->get();
+            Image::imageDelete($delete_images);
+        }
+        
+        // 画像の登録
+        $create_images = $request->file('image');
+        if($create_images){
+            Image::imageCreate($create_images, $question->id);
+        }
+        
         return redirect('/questions/'. $question->id);
     }
     
     public function delete(Question $question)
     {
+        // 画像の削除
+        $images = Image::where('question_id', $question->id)->get();
+        if($images){
+            Image::imageDelete($images);
+        }
+        
+        // 質問の削除
         $question->delete();
         Question::questionForceDelete();
         return redirect('/questions/index');

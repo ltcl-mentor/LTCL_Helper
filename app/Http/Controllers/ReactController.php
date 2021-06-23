@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Question;
 use App\Document;
 use App\User;
+use App\Image;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,6 +47,11 @@ class ReactController extends Controller
     {
         $results = Question::where('check', 1)->where('category', $category)->where('topic', $topic)->get();
         return $results;
+    }
+    
+    public function getImages($question_id)
+    {
+        return Image::where('question_id', $question_id)->get();
     }
     
     // 記事関連

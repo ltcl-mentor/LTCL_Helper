@@ -93,7 +93,6 @@
     border: solid 3px #555;
     box-sizing: border-box;
     border-radius: 10px;
-    /*white-space: pre-wrap;*/
 }
 
 .question_balloon:before {
@@ -116,6 +115,11 @@
     border: 14px solid transparent;
     border-right: 14px solid #555;
     z-index: 1;
+}
+
+.image{
+    height: 180px;
+    width: 280px;
 }
 
 .comment_illust{
@@ -177,7 +181,7 @@
     margin-top:100px;
     min-height:400px;
     text-align: center;   
-    /*後でレスポンシブデザインにする際に一定以上小さくなったら宙覆う寄せを解除するようにせっってい*/
+    /*後でレスポンシブデザインにする際に一定以上小さくなったら宙覆う寄せを解除するように設定*/
 }
 
 .document{
