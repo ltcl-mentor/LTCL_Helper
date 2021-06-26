@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Document;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+
 class Question extends Model
 {
     use SoftDeletes;
@@ -27,7 +28,7 @@ class Question extends Model
         return $this->belongsToMany('App\User')->withTimestamps();
     }
     
-    public function getRelatedDocuments()
+    public function getUnrelatedDocuments()
     {
         $related_document_ids = $this->documents()->select('document_id')->get();
         // 取得したidを配列に変換

@@ -28,17 +28,13 @@ class RegisterController extends Controller
 
     use RegistersUsers;
     
+    // 管理者の新規作成画面表示
     public function showRegistrationForm()
     {
         return view('User.register');
     }
     
-    public function showPublicRegistrationForm()
-    {
-        return view('User.publicRegister');
-    }
-    
-    // 管理者新規登録処理（デフォルトのものからログイン処理を削除、redirectを指定）
+    // 管理者の新規作成実行（デフォルトのものからログイン処理を削除、redirectを指定）
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -49,7 +45,13 @@ class RegisterController extends Controller
                         ?: redirect('/users/index');
     }
     
-    // 受講生新規登録処理
+    // 受講生の新規作成画面表示
+    public function showPublicRegistrationForm()
+    {
+        return view('User.publicRegister');
+    }
+    
+    // 受講生の新規作成実行
     public function publicRegister(Request $request)
     {
         $this->publicValidator($request->all())->validate();

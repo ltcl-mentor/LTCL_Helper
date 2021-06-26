@@ -9,6 +9,7 @@ use App\Question;
 
 class UserController extends Controller
 {
+    // 初期画面表示
     public function index(User $user, Student $student)
     {
         return view('User.index')->with([
@@ -17,6 +18,7 @@ class UserController extends Controller
         ]);
     }
     
+    // 削除実行
     public function delete(User $user)
     {
         User::userDelete($user);

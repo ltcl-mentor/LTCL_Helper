@@ -26,8 +26,8 @@
                         <div class="question_balloon">{!! nl2br(e($question->question)) !!}</div>
                     </div>
                     
-                    <h2 class="columns">参考画像</h2>
                     @if($images)
+                        <h2 class="columns">参考画像</h2>
                         @foreach($images as $image)
                             <a href="{{ $image->image_path }}" data-lightbox="group"><img src="{{ $image->image_path }}" class="image"></a>
                         @endforeach
@@ -44,7 +44,7 @@
             <div class="documents">
                 @if(count($documents)!=0)
                     @foreach($documents as $document)
-                        <a href="{{ $document->link }}" class="document">
+                        <a href="{{ $document->link }}" class="document" target="_blank">
                             <img class="document_img" src="{{ asset('images/NotePM_Logo_Vertical.png') }}">
                             <div class="document_title">{{ $document->title }}</div>
                         </a>

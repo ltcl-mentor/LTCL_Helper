@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class DocumentController extends Controller
 {
+    // 初期画面表示
     public function index(Document $document, User $user)
     {
         return view('Document.index')->with([
@@ -19,10 +20,25 @@ class DocumentController extends Controller
         ]);
     }
     
+    // 新規作成画面表示
+    public function create()
+    {
+        return view('Document.create')->with(['where' => '記事新規登録']);
+    }
+    
+    // 新規作成実行
+    public function store(DocumentRequest $request, Document $document)
+    {
+        $document['user_id'] = Auth::id();
+        $document->fill($request['post'])->save();
+        return redirect('/documents/index');
+    }
+    
+    // 詳細画面表示
     public function show(Document $document, User $user)
     {
-        if($user->find($question['user_id'])){
-            $author = $user->find($question['user_id']);
+        $author = $user->find($document['user_id']);
+        if($author){
             $author_name = $author->name;
         } else{
             $author_name = null;
@@ -35,29 +51,20 @@ class DocumentController extends Controller
         ]);
     }
     
-    public function create()
-    {
-        return view('Document.create')->with(['where' => '記事新規登録']);
-    }
-    
-    public function store(DocumentRequest $request, Document $document)
-    {
-        $document['user_id'] = Auth::id();
-        $document->fill($request['post'])->save();
-        return redirect('/documents/index');
-    }
-    
+    // 編集画面表示
     public function edit(Document $document)
     {
         return view('Document.edit')->with(['document' => $document]);
     }
     
+    // 編集実行
     public function update(DocumentRequest $request, Document $document)
     {
         $document->fill($request['post'])->save();
         return redirect('documents/index');
     }
     
+    // 削除実行
     public function delete(Document $document)
     {
         $document->delete();

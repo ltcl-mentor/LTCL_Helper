@@ -8,12 +8,13 @@ use App\Document;
 
 class LinkController extends Controller
 {
+    // 初期画面表示
     public function index()
     {
         return view('Link.index');
     }
     
-    // 記事1つに対して質問複数の紐付け
+    // 新規作成画面表示(記事：質問＝１：多)
     public function getDocumentToQuestions(Document $document, Question $question)
     {
         $related_questions = $document->questions()->get();
@@ -22,7 +23,7 @@ class LinkController extends Controller
         if(count($related_questions) === 0){
             $unrelated_questions = $question->get();
         }else{
-            $unrelated_questions = $document->getRelatedQuestions();
+            $unrelated_questions = $document->getUnrelatedQuestions();
         }
         
         return view('Link.documentToQuestions')->with([
@@ -32,6 +33,7 @@ class LinkController extends Controller
         ]);
     }
     
+    // 新規作成実行(記事：質問＝１：多)
     public function postDocumentToQuestions(Request $request,Document $document)
     {
         $document->questions()->detach($request['detach_id']);
@@ -40,7 +42,7 @@ class LinkController extends Controller
     }
     
     
-    // 質問1つに対して記事複数の紐付け
+    // 新規作成画面表示(記事：質問＝多：1)
     public function getQuestionToDocuments(Question $question, Document $document)
     {
         $related_documents = $question->documents()->get();
@@ -48,7 +50,7 @@ class LinkController extends Controller
         if(count($related_documents) === 0){
             $unrelated_documents = $document->get();
         }else{
-            $unrelated_documents = $question->getRelatedDocuments();
+            $unrelated_documents = $question->getUnrelatedDocuments();
         }
         
         return view('Link.questionToDocuments')->with([
@@ -58,6 +60,7 @@ class LinkController extends Controller
         ]);
     }
     
+    // 新規作成実行(記事：質問＝多：1)
     public function postQuestionToDocuments(Request $request,Question $question)
     {
         $question->documents()->detach($request['detach_id']);

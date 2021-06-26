@@ -17,7 +17,7 @@ class Document extends Model
         return $this->belongsToMany('App\Question');
     }
     
-    public function getRelatedQuestions()
+    public function getUnrelatedQuestions()
     {
         $related_question_ids = $this->questions()->select('question_id')->get();
         // 取得したidを配列に変換

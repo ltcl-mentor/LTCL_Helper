@@ -13,15 +13,41 @@ use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
+    // 初期画面表示
     public function index(Question $question)
     {
         return view('Question.index');
     }
     
+    // 新規作成画面表示
+    public function create()
+    {
+        return view('Question.create');
+    }
+    
+    // 新規作成実行
+    public function store(QuestionRequest $request, Question $question)
+    {
+        // 質問に関する処理
+        $question->fill($request['post']);
+        $question['check'] = 0;
+        $question['user_id'] = Auth::id();
+        $question->save();
+        
+        // 画像に関する処理
+        $pictures = $request->file('image');
+        if($pictures){
+            Image::imageCreate($pictures, $question->id);
+        }
+        
+        return redirect('/questions/index');
+    }
+    
+    // 詳細画面表示
     public function show(Question $question, User $user)
     {
-        if($user->find($question['user_id'])){
-            $author = $user->find($question['user_id']);
+        $author = $user->find($question['user_id']);
+        if($author){
             $author_name = $author->name;
         } else{
             $author_name = null;
@@ -43,28 +69,7 @@ class QuestionController extends Controller
         ]);
     }
     
-    public function create()
-    {
-        return view('Question.create');
-    }
-    
-    public function store(QuestionRequest $request, Question $question)
-    {
-        // 質問に関する処理
-        $question->fill($request['post']);
-        $question['check'] = 0;
-        $question['user_id'] = Auth::id();
-        $question->save();
-        
-        // 画像に関する処理
-        $pictures = $request->file('image');
-        if($pictures){
-            Image::imageCreate($pictures, $question->id);
-        }
-        
-        return redirect('/questions/index');
-    }
-    
+    // 編集画面表示
     public function edit(Question $question)
     {
         return view('Question.edit')->with([
@@ -72,6 +77,7 @@ class QuestionController extends Controller
         ]);
     }
     
+    // 編集実行
     public function update(QuestionRequest $request, Question $question)
     {
         // 質問に関する処理
@@ -94,6 +100,7 @@ class QuestionController extends Controller
         return redirect('/questions/'. $question->id);
     }
     
+    // 削除実行
     public function delete(Question $question)
     {
         // 画像の削除
@@ -108,11 +115,13 @@ class QuestionController extends Controller
         return redirect('/questions/index');
     }
     
+    // 承認用一覧画面表示
     public function approval(Question $question)
     {
         return view('Question.approval');
     }
     
+    // 承認実行
     public function check(Question $question)
     {
         $question['check'] = 1;
@@ -121,6 +130,7 @@ class QuestionController extends Controller
         return response()->json($questions);
     }
     
+    // 承認解除実行
     public function uncheck(Question $question)
     {
         $question['check'] = 0;

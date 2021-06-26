@@ -27,9 +27,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('react/search/questions/{category}/{topic}', 'ReactController@getSearchQuestions'); // 質問検索結果の受け渡し
     
     
+    // 管理者権限を持っているユーザーのみがアクセス可能
     Route::group(['middleware' => ['administrator']], function () {
         
-        // 管理者権限を持っているユーザーのみがアクセス可能
+        // 管理画面表示
         Route::get('/mentor', 'HomeController@mentorTop')->name('mentor');
         
         // 参考記事
@@ -50,11 +51,11 @@ Route::group(['middleware' => ['auth']], function () {
         
         // 質問
         Route::get('/questions/index', 'QuestionController@index'); // 初期画面表示
+        Route::get('/questions/create', 'QuestionController@create'); // 新規作成画面表示
+        Route::post('/questions/store', 'QuestionController@store'); // 新規作成実行
         Route::get('/questions/approval', 'QuestionController@approval'); // 承認用一覧画面表示
         Route::post('/questions/{question}/check', 'QuestionController@check'); // 承認実行
         Route::post('/questions/{question}/uncheck', 'QuestionController@uncheck'); // 承認解除実行
-        Route::get('/questions/create', 'QuestionController@create'); // 新規作成画面表示
-        Route::post('/questions/store', 'QuestionController@store'); // 新規作成実行
         Route::get('/questions/{question}', 'QuestionController@show'); // 詳細画面表示
         Route::get('/questions/{question}/edit', 'QuestionController@edit'); // 編集画面表示
         Route::post('/questions/{question}/update', 'QuestionController@update'); // 編集実行

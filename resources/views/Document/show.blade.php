@@ -27,7 +27,6 @@
             <div class="parameters"><a href="{{ $document->link }}">{{ $document->link }}</a></div>
         
             <h2 class="columns">作成者</h2>
-            <h2 class="columns">作成者</h2>
             @if($author_name)
                 <div class="parameters word">{{ $author_name }}</div>
             @else

@@ -7,6 +7,7 @@ use App\Question;
 use App\Document;
 use App\User;
 use App\Image;
+use App\History;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -22,14 +23,20 @@ class HomeController extends Controller
     // }
     
     //一般に公開される部分
+    // トップ画面表示
     public function search(Question $question)
     {
         return view('Search.search');
     }
     
+    // 質問詳細画面表示
     public function show(Question $question)
     {
+        // 質問閲覧履歴への記録
         $question->users()->attach(Auth::id());
+        // データベースの容量を考慮して履歴保持の期限は２１日間とする
+        History::historyDelete(21);
+        
         $documents = $question->documents()->get();
         $images = Image::where('question_id', $question->id)->get();
         if(empty($images[0])){
@@ -44,44 +51,24 @@ class HomeController extends Controller
         ]);
     }
     
+    // 履歴画面表示
     public function history()
     {
         $user = Auth::user();
         $questions = $user->questions()->get();
-        $today = date("Y-m-d H:i:s");
+        // アクセス履歴の情報を質問に付随させる
         foreach($questions as $question){
             $question['whenClicked'] = $question->pivot->created_at;
-            $day_diff = $question['whenClicked']->diffInDays($today);
-            $month_diff = $question['whenClicked']->diffInMonths($today);
-            if($day_diff === 0){
-                $today_histories[] = $question;
-            }elseif(0 < $day_diff && $day_diff <= 7){
-                $last_week_histories[] = $question;
-            }elseif($month_diff === 1){
-                $last_month_histories[] = $question;
-            }
-        }
-        
-        if(empty($today_histories)){
-            $today_histories = null;
-        }
-        
-        if(empty($last_week_histories)){
-            $last_week_histories = null;
-        }
-        
-        if(empty($last_month_histories)){
-            $last_month_histories = null;
         }
         
         return view('Search.history')->with([
-            'today_histories' => $today_histories,
-            'last_week_histories' => $last_week_histories,
-            'last_month_histories' => $last_month_histories,
+            'today' => date("Y-m-d H:i:s"),
+            'questions' => $questions,
         ]);
     }
     
     //以下メンターのみがアクセス可能
+    // 管理画面表示
     public function mentorTop()
     {
         return view('mentor');
