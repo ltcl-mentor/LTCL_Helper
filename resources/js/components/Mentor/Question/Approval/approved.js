@@ -71,7 +71,7 @@ class Approved extends React.Component {
                                     </div>
                                     <div className="button">
                                         <form onSubmit={ this.handleSubmit(event, question.id) } id={`unapprove_`+question.id}>
-                                                <input type="submit" className="hidden"/>
+                                            <input type="submit" className="hidden"/>
                                             <a onClick={() => { this.confirmMessage(question.id) }} className="approveBtn">承認を解除する</a>
                                         </form>
                                     </div>

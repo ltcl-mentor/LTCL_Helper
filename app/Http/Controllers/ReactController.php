@@ -78,6 +78,11 @@ class ReactController extends Controller
         return User::where('is_admin','staff')->get();
     }
     
+    public function getRelatedDocuments(Question $question)
+    {
+        return $question->documents()->get();
+    }
+    
     
     // ログインユーザー情報
     // ログインユーザーid受け渡し

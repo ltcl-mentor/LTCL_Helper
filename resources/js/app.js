@@ -17,5 +17,6 @@ require('./components/Mentor/Question/Approval/Approval');
 require('./components/Mentor/Question/Index/Index');
 require('./components/Mentor/Question/Create/Create');
 require('./components/Mentor/Question/Edit/Edit');
+require('./components/Mentor/Question/Show/Show');
 require('./components/Mentor/Link/Index');
 require('./components/Mentor/User/Public');

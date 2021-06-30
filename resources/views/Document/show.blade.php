@@ -11,7 +11,7 @@
         </div>
         <div class="title">
             <h1>記事詳細</h1>
-            <a href="/documents/{{ $document->id }}/edit">編集する</a>
+            <a href="/documents/{{ $document->id }}/edit" class="editBtn">編集する</a>
             <form action="/documents/{{ $document->id }}/delete" method="post">
                 @csrf
                 <input type="submit" class="hidden">
