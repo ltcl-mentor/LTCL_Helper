@@ -75601,7 +75601,7 @@ var Curriculum = /*#__PURE__*/function (_React$Component) {
           className: "content"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
           className: "title"
-        }, topic.topic, "(\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
+        }, topic.topic, "  (\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
           return question.topic == topic.id && question.check === 1;
         }).length, "\u4EF6\u3001\u975E\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
           return question.topic == topic.id && question.check === 0;
@@ -75730,7 +75730,7 @@ var Portfolio = /*#__PURE__*/function (_React$Component) {
           className: "content"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
           className: "title"
-        }, topic.topic, "(\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
+        }, topic.topic, "  (\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
           return question.topic == topic.id && question.check === 1;
         }).length, "\u4EF6\u3001\u975E\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
           return question.topic == topic.id && question.check === 0;
