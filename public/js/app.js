@@ -75601,7 +75601,11 @@ var Curriculum = /*#__PURE__*/function (_React$Component) {
           className: "content"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
           className: "title"
-        }, topic.topic)), _this3.state.questions.map(function (question) {
+        }, topic.topic, "(\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
+          return question.topic == topic.id && question.check === 1;
+        }).length, "\u4EF6\u3001\u975E\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
+          return question.topic == topic.id && question.check === 0;
+        }).length, "\u4EF6)")), _this3.state.questions.map(function (question) {
           if (question.topic === topic.id) {
             if (question.check === 1) {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75614,7 +75618,7 @@ var Curriculum = /*#__PURE__*/function (_React$Component) {
                 className: "question"
               }, "\u30FB", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
                 href: "/questions/" + question.id
-              }, question.question), "\uFF08\u672A\u627F\u8A8D\uFF09");
+              }, question.question), "\uFF08\u975E\u516C\u958B\uFF09");
             }
           }
         })));
@@ -75726,7 +75730,11 @@ var Portfolio = /*#__PURE__*/function (_React$Component) {
           className: "content"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
           className: "title"
-        }, topic.topic)), _this3.state.questions.map(function (question) {
+        }, topic.topic, "(\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
+          return question.topic == topic.id && question.check === 1;
+        }).length, "\u4EF6\u3001\u975E\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
+          return question.topic == topic.id && question.check === 0;
+        }).length, "\u4EF6)")), _this3.state.questions.map(function (question) {
           if (question.topic === topic.id) {
             if (question.check === 1) {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
