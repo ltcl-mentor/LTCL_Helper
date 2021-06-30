@@ -45,7 +45,7 @@ class Curriculum extends React.Component {
                                 if(question.check === 1){
                                     return <div className="question">・<a href={`/questions/`+question.id}>{ question.question }</a></div>;
                                 }else{
-                                    return <div className="question">・<a href={`/questions/`+question.id}>{ question.question }</a>（未承認）</div>;
+                                    return <div className="question">・<a href={`/questions/`+question.id}>{ question.question }</a>（非公開）</div>;
                                 }
                             }
                         })}

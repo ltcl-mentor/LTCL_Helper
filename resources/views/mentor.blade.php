@@ -10,7 +10,7 @@
         <div class="mentor_btns">
             <a href="/questions/index"><button class="mentor_btn question_btns">一覧</button></a>
             <a href="/questions/create"><button class="mentor_btn question_btns">新規登録</button></a>
-            <a href="/questions/approval"><button class="mentor_btn question_btns">承認確認</button></a>
+            <!--<a href="/questions/approval"><button class="mentor_btn question_btns">承認確認</button></a>-->
         </div>
         
         <h1 class="mentor_document_title">関連記事</h1>

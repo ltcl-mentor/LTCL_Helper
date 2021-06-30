@@ -126,8 +126,6 @@ class QuestionController extends Controller
     {
         $question['check'] = 1;
         $question->save();
-        // $questions = Question::where('check', 0)->get();
-        // return response()->json($questions);
         return redirect('/questions/'. $question->id);
     }
     
@@ -136,8 +134,6 @@ class QuestionController extends Controller
     {
         $question['check'] = 0;
         $question->save();
-        $questions = Question::where('check', 1)->get();
-        // return response()->json($questions);
         return redirect('/questions/'. $question->id);
     }
 }

@@ -53,7 +53,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/questions/index', 'QuestionController@index'); // 初期画面表示
         Route::get('/questions/create', 'QuestionController@create'); // 新規作成画面表示
         Route::post('/questions/store', 'QuestionController@store'); // 新規作成実行
-        Route::get('/questions/approval', 'QuestionController@approval'); // 承認用一覧画面表示
+        // Route::get('/questions/approval', 'QuestionController@approval'); // 承認用一覧画面表示
         Route::post('/questions/{question}/check', 'QuestionController@check'); // 承認実行
         Route::post('/questions/{question}/uncheck', 'QuestionController@uncheck'); // 承認解除実行
         Route::get('/questions/{question}', 'QuestionController@show'); // 詳細画面表示
