@@ -33,16 +33,18 @@ class Portfolio extends React.Component {
         const portfolio = this.state.portfolio_topics.map((topic) => {
             return (
                 <div className="content">
-                    <h1 className="title">{ topic.topic }</h1>
-                    { this.state.questions.map((question) => {
-                        if(question.topic === topic.id){
-                            if(question.check === 1){
-                                return <div className="question">・<a href={`/questions/`+question.id}>{ question.question }</a></div>;
-                            }else{
-                                return <div className="question">・<a href={`/questions/`+question.id}>{ question.question }</a>（未承認）</div>;
+                    <details>
+                        <summary><h1 className="title">{ topic.topic }</h1></summary>
+                        { this.state.questions.map((question) => {
+                            if(question.topic === topic.id){
+                                if(question.check === 1){
+                                    return <div className="question">・<a href={`/questions/`+question.id}>{ question.question }</a></div>;
+                                }else{
+                                    return <div className="question">・<a href={`/questions/`+question.id}>{ question.question }</a>（未承認）</div>;
+                                }
                             }
-                        }
-                    })}
+                        })}
+                    </details>
                 </div>
             );
         });

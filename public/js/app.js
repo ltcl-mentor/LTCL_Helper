@@ -73658,9 +73658,9 @@ var Curriculum = /*#__PURE__*/function (_React$Component) {
       var curriculum = this.state.curriculum_topics.map(function (topic) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "content"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
           className: "title"
-        }, topic.topic), _this3.state.questions.map(function (question) {
+        }, topic.topic)), _this3.state.questions.map(function (question) {
           if (question.topic === topic.id) {
             if (question.check === 1) {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -73676,7 +73676,7 @@ var Curriculum = /*#__PURE__*/function (_React$Component) {
               }, question.question), "\uFF08\u672A\u627F\u8A8D\uFF09");
             }
           }
-        }));
+        })));
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
@@ -73783,9 +73783,9 @@ var Portfolio = /*#__PURE__*/function (_React$Component) {
       var portfolio = this.state.portfolio_topics.map(function (topic) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "content"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
           className: "title"
-        }, topic.topic), _this3.state.questions.map(function (question) {
+        }, topic.topic)), _this3.state.questions.map(function (question) {
           if (question.topic === topic.id) {
             if (question.check === 1) {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -73801,7 +73801,7 @@ var Portfolio = /*#__PURE__*/function (_React$Component) {
               }, question.question), "\uFF08\u672A\u627F\u8A8D\uFF09");
             }
           }
-        }));
+        })));
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
