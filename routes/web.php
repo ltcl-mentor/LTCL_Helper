@@ -24,8 +24,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@search'); // トップ画面表示
     Route::get('/show/{question}', 'HomeController@show'); // 質問詳細画面表示
     Route::get('/history', 'HomeController@history'); // 履歴画面表示
-    Route::get('react/search/questions/{category}/{topic}', 'ReactController@getSearchQuestions'); // 質問検索結果の受け渡し
-    
+    Route::get('react/search/questions', 'ReactController@getSearchQuestions'); // 質問検索結果の受け渡し
     
     // 管理者権限を持っているユーザーのみがアクセス可能
     Route::group(['middleware' => ['administrator']], function () {

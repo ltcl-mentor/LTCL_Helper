@@ -27,6 +27,8 @@ class Result extends React.Component {
                             topic={ this.props.topic }
                             categories={ this.props.categories }
                             topics={ this.props.topics }
+                            curriculum_number={ this.props.curriculum_number }
+                            keyword={ this.props.keyword }
                         />
                     </div>
                 </div>

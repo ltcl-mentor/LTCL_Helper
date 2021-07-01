@@ -12,7 +12,7 @@ class Questions extends React.Component {
     
     componentDidMount() {
         axios
-            .get(`/react/search/questions/${this.props.category}/${this.props.topic}`)
+            .get(`/react/search/questions?category=${ this.props.category }&topic=${ this.props.topic }&curriculum_number=${ this.props.curriculum_number }&keyword=${ this.props.keyword }`)
             .then(response => {
                 this.setState({
                     questions: response.data
@@ -24,9 +24,9 @@ class Questions extends React.Component {
     }
     
     componentDidUpdate(prevProps) {
-        if (this.props.topic !== prevProps.topic || this.props.category !== prevProps.category) {
+        if (this.props.topic !== prevProps.topic || this.props.category !== prevProps.category || this.props.curriculum_number !== prevProps.curriculum_number || this.props.keyword !== prevProps.keyword) {
             axios
-                .get(`/react/search/questions/${this.props.category}/${this.props.topic}`)
+                .get(`/react/search/questions?category=${ this.props.category }&topic=${ this.props.topic }&curriculum_number=${ this.props.curriculum_number }&keyword=${ this.props.keyword }`)
                 .then(response => {
                     this.setState({
                         questions: response.data
