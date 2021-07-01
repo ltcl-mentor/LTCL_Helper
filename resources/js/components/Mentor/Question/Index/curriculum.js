@@ -39,7 +39,7 @@ class Curriculum extends React.Component {
             return (
                 <div className="content">
                     <details>
-                        <summary><h1 className="title">{ topic.topic }  (公開：{ this.state.questions.filter(question => question.topic == topic.id && question.check === 1).length }件、非公開：{ this.state.questions.filter(question => question.topic == topic.id && question.check === 0).length }件)</h1></summary>
+                        <summary><h1 className="title">{ topic.topic }  (公開：{ this.state.questions.filter(question => question.topic == topic.id && question.check === 1).length }、非公開：{ this.state.questions.filter(question => question.topic == topic.id && question.check === 0).length })</h1></summary>
                         { this.state.questions.map((question) => {
                             if(question.topic === topic.id){
                                 if(question.check === 1){
