@@ -75603,9 +75603,9 @@ var Curriculum = /*#__PURE__*/function (_React$Component) {
           className: "title"
         }, topic.topic, "  (\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
           return question.topic == topic.id && question.check === 1;
-        }).length, "\u4EF6\u3001\u975E\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
+        }).length, "\u3001\u975E\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
           return question.topic == topic.id && question.check === 0;
-        }).length, "\u4EF6)")), _this3.state.questions.map(function (question) {
+        }).length, ")")), _this3.state.questions.map(function (question) {
           if (question.topic === topic.id) {
             if (question.check === 1) {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
