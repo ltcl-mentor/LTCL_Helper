@@ -92,7 +92,7 @@ class CrriculumNumber extends React.Component{
          
         return (
             <div className="content">
-                <h2 className="title">該当カリキュラムの選択</h2>
+                <h2 className="title">該当カリキュラム番号の選択</h2>
                 { curriculum_number }
             </div>
         );

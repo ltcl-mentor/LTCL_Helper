@@ -74056,7 +74056,7 @@ var CrriculumNumber = /*#__PURE__*/function (_React$Component) {
         className: "content"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "title"
-      }, "\u8A72\u5F53\u30AB\u30EA\u30AD\u30E5\u30E9\u30E0\u306E\u9078\u629E"), curriculum_number);
+      }, "\u8A72\u5F53\u30AB\u30EA\u30AD\u30E5\u30E9\u30E0\u756A\u53F7\u306E\u9078\u629E"), curriculum_number);
     }
   }]);
 
@@ -75603,9 +75603,9 @@ var Curriculum = /*#__PURE__*/function (_React$Component) {
           className: "title"
         }, topic.topic, "  (\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
           return question.topic == topic.id && question.check === 1;
-        }).length, "\u4EF6\u3001\u975E\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
+        }).length, "\u3001\u975E\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
           return question.topic == topic.id && question.check === 0;
-        }).length, "\u4EF6)")), _this3.state.questions.map(function (question) {
+        }).length, ")")), _this3.state.questions.map(function (question) {
           if (question.topic === topic.id) {
             if (question.check === 1) {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -76746,8 +76746,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _categoryForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./categoryForm */ "./resources/js/components/Search/categoryForm.js");
 /* harmony import */ var _topicForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./topicForm */ "./resources/js/components/Search/topicForm.js");
-/* harmony import */ var _searchButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./searchButton */ "./resources/js/components/Search/searchButton.js");
-/* harmony import */ var _result__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./result */ "./resources/js/components/Search/result.js");
+/* harmony import */ var _additionalForms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./additionalForms */ "./resources/js/components/Search/additionalForms.js");
+/* harmony import */ var _searchButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./searchButton */ "./resources/js/components/Search/searchButton.js");
+/* harmony import */ var _result__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./result */ "./resources/js/components/Search/result.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -76767,6 +76768,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function Search() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState2 = _slicedToArray(_useState, 2),
@@ -76778,10 +76780,20 @@ function Search() {
       topic = _useState4[0],
       setTopic = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState6 = _slicedToArray(_useState5, 2),
-      isSearchButtonClicked = _useState6[0],
-      setIsSearchButtonClicked = _useState6[1];
+      curriculum_number = _useState6[0],
+      setCurriculumnumber = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState8 = _slicedToArray(_useState7, 2),
+      keyword = _useState8[0],
+      setKeyword = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      isSearchButtonClicked = _useState10[0],
+      setIsSearchButtonClicked = _useState10[1];
 
   var categories = ['カリキュラム', '成果物'];
   var topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'];
@@ -76796,16 +76808,25 @@ function Search() {
     category: category,
     setTopic: setTopic,
     topics: topics
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchButton__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_additionalForms__WEBPACK_IMPORTED_MODULE_4__["default"], {
     category: category,
     topic: topic,
+    setCurriculumnumber: setCurriculumnumber,
+    setKeyword: setKeyword
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    category: category,
+    topic: topic,
+    curriculum_number: curriculum_number,
+    keyword: keyword,
     setIsSearchButtonClicked: setIsSearchButtonClicked
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_result__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_result__WEBPACK_IMPORTED_MODULE_6__["default"], {
     isSearchButtonClicked: isSearchButtonClicked,
     category: category,
     topic: topic,
     categories: categories,
-    topics: topics
+    topics: topics,
+    curriculum_number: curriculum_number,
+    keyword: keyword
   }));
 }
 
@@ -76814,6 +76835,125 @@ function Search() {
 if (document.getElementById('search')) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Search, null), document.getElementById('search'));
 }
+
+/***/ }),
+
+/***/ "./resources/js/components/Search/additionalForms.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/Search/additionalForms.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _curriculum_number__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./curriculum-number */ "./resources/js/components/Search/curriculum-number.js");
+/* harmony import */ var _keywordForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./keywordForm */ "./resources/js/components/Search/keywordForm.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var Addition = /*#__PURE__*/function (_React$Component) {
+  _inherits(Addition, _React$Component);
+
+  var _super = _createSuper(Addition);
+
+  function Addition(props) {
+    var _this;
+
+    _classCallCheck(this, Addition);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      isOpen: false
+    };
+    return _this;
+  }
+
+  _createClass(Addition, [{
+    key: "openDetail",
+    value: function openDetail() {
+      this.setState({
+        isOpen: true
+      });
+    }
+  }, {
+    key: "closeDetail",
+    value: function closeDetail() {
+      this.setState({
+        isOpen: false
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var detail;
+
+      if ((this.props.topic === 0 || this.props.topic >= 1 && this.props.topic <= 8) && this.props.category === 0 || this.props.topic >= 9 && this.props.category === 1) {
+        if (this.state.isOpen) {
+          detail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+            onClick: function onClick() {
+              _this2.closeDetail();
+            },
+            className: "additionBtn"
+          }, "----\u8FFD\u52A0\u6761\u4EF6\u3092\u9589\u3058\u308B----"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_curriculum_number__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            category: this.props.category,
+            topic: this.props.topic,
+            setCurriculumnumber: this.props.setCurriculumnumber
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_keywordForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            setKeyword: this.props.setKeyword
+          }));
+        } else {
+          detail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+            onClick: function onClick() {
+              _this2.openDetail();
+            },
+            className: "additionBtn"
+          }, "----\u3055\u3089\u306B\u7D5E\u308A\u8FBC\u3080----"));
+        }
+      } else {
+        detail = '';
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, detail);
+    }
+  }]);
+
+  return Addition;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Addition);
 
 /***/ }),
 
@@ -76941,6 +77081,349 @@ var Category = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
+/***/ "./resources/js/components/Search/curriculum-number.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/Search/curriculum-number.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var CrriculumNumber = /*#__PURE__*/function (_React$Component) {
+  _inherits(CrriculumNumber, _React$Component);
+
+  var _super = _createSuper(CrriculumNumber);
+
+  function CrriculumNumber(props) {
+    var _this;
+
+    _classCallCheck(this, CrriculumNumber);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      curriculum_number: ''
+    };
+    return _this;
+  }
+
+  _createClass(CrriculumNumber, [{
+    key: "setCurriculumnumber",
+    value: function setCurriculumnumber(event) {
+      this.setState({
+        curriculum_number: event.target.value
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var curriculum_number;
+
+      if (this.props.category === 0) {
+        if (this.props.topic === 0) {
+          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "curriculum_number_box"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "curriculum_number",
+            className: "pulldown",
+            onChange: function onChange(event) {
+              _this2.setCurriculumnumber(event);
+            }
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: ""
+          }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "1-1-1"
+          }, "1-1-1")));
+        } else if (this.props.topic === 1) {
+          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "curriculum_number_box"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "curriculum_number",
+            className: "pulldown",
+            onChange: function onChange(event) {
+              _this2.setCurriculumnumber(event);
+            }
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: ""
+          }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "2-1-1"
+          }, "2-1-1")));
+        } else if (this.props.topic === 2) {
+          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "curriculum_number_box"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "curriculum_number",
+            className: "pulldown",
+            onChange: function onChange(event) {
+              _this2.setCurriculumnumber(event);
+            }
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: ""
+          }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "2-1-2"
+          }, "2-1-2")));
+        } else if (this.props.topic === 3) {
+          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "curriculum_number_box"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "curriculum_number",
+            className: "pulldown",
+            onChange: function onChange(event) {
+              _this2.setCurriculumnumber(event);
+            }
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: ""
+          }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "2-1-3"
+          }, "2-1-3")));
+        } else if (this.props.topic === 4) {
+          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "curriculum_number_box"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "curriculum_number",
+            className: "pulldown",
+            onChange: function onChange(event) {
+              _this2.setCurriculumnumber(event);
+            }
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: ""
+          }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "3-1-1"
+          }, "3-1-1")));
+        } else if (this.props.topic === 5) {
+          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "curriculum_number_box"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "curriculum_number",
+            className: "pulldown",
+            onChange: function onChange(event) {
+              _this2.setCurriculumnumber(event);
+            }
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: ""
+          }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "4-1-1"
+          }, "4-1-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "4-1-2"
+          }, "4-1-2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "4-1-3"
+          }, "4-1-3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "4-1-4"
+          }, "4-1-4")));
+        } else if (this.props.topic === 6) {
+          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "curriculum_number_box"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "curriculum_number",
+            className: "pulldown",
+            onChange: function onChange(event) {
+              _this2.setCurriculumnumber(event);
+            }
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: ""
+          }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "5-1-1"
+          }, "5-1-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "8-1-1"
+          }, "8-1-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "8-2-1"
+          }, "8-2-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "8-3-1"
+          }, "8-3-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "8-4-1"
+          }, "8-4-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "8-5-1"
+          }, "8-5-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "8-6-1"
+          }, "8-6-1")));
+        } else if (this.props.topic === 7) {
+          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "curriculum_number_box"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "curriculum_number",
+            className: "pulldown",
+            onChange: function onChange(event) {
+              _this2.setCurriculumnumber(event);
+            }
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: ""
+          }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "6-1-1"
+          }, "6-1-1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "6-2-1"
+          }, "6-2-1")));
+        } else if (this.props.topic === 8) {
+          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "curriculum_number_box"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "curriculum_number",
+            className: "pulldown",
+            onChange: function onChange(event) {
+              _this2.setCurriculumnumber(event);
+            }
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: ""
+          }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "7-1-1"
+          }, "7-1-1")));
+        } else {
+          curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "curriculum_number_box"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u30C8\u30D4\u30C3\u30AF\u3092\u9078\u629E\u3057\u76F4\u3057\u3066\u304F\u3060\u3055\u3044\u3002"));
+        }
+      } else if (this.props.category === 1) {
+        curriculum_number = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "curriculum_number_box"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+          name: "curriculum_number",
+          className: "pulldown",
+          onChange: function onChange(event) {
+            _this2.setCurriculumnumber(event);
+          }
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: ""
+        }, "\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "\u6210\u679C\u7269"
+        }, "\u6210\u679C\u7269")));
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "step"
+      }, "STEP3 \u8A72\u5F53\u30AB\u30EA\u30AD\u30E5\u30E9\u30E0\u756A\u53F7\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002\uFF08\u4EFB\u610F\uFF09"), curriculum_number, this.props.setCurriculumnumber(this.state.curriculum_number));
+    }
+  }]);
+
+  return CrriculumNumber;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (CrriculumNumber);
+
+/***/ }),
+
+/***/ "./resources/js/components/Search/keywordForm.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/Search/keywordForm.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var Keyword = /*#__PURE__*/function (_React$Component) {
+  _inherits(Keyword, _React$Component);
+
+  var _super = _createSuper(Keyword);
+
+  function Keyword(props) {
+    var _this;
+
+    _classCallCheck(this, Keyword);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      keyword: ''
+    };
+    return _this;
+  }
+
+  _createClass(Keyword, [{
+    key: "changeKeyword",
+    value: function changeKeyword(event) {
+      this.setState({
+        keyword: event.target.value
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "step"
+      }, "STEP4 \u691C\u7D22\u30EF\u30FC\u30C9\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002\uFF08\u4EFB\u610F\uFF09"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "keyword_box"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        name: "keyword",
+        placeholder: "\u30AD\u30FC\u30EF\u30FC\u30C9\u3092\u5165\u529B",
+        rows: "1",
+        onChange: function onChange(event) {
+          _this2.changeKeyword(event);
+        }
+      }), this.props.setKeyword(this.state.keyword)));
+    }
+  }]);
+
+  return Keyword;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Keyword);
+
+/***/ }),
+
 /***/ "./resources/js/components/Search/questions.js":
 /*!*****************************************************!*\
   !*** ./resources/js/components/Search/questions.js ***!
@@ -77004,7 +77487,7 @@ var Questions = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/react/search/questions/".concat(this.props.category, "/").concat(this.props.topic)).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/react/search/questions?category=".concat(this.props.category, "&topic=").concat(this.props.topic, "&curriculum_number=").concat(this.props.curriculum_number, "&keyword=").concat(this.props.keyword)).then(function (response) {
         _this2.setState({
           questions: response.data
         });
@@ -77017,8 +77500,8 @@ var Questions = /*#__PURE__*/function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       var _this3 = this;
 
-      if (this.props.topic !== prevProps.topic || this.props.category !== prevProps.category) {
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/react/search/questions/".concat(this.props.category, "/").concat(this.props.topic)).then(function (response) {
+      if (this.props.topic !== prevProps.topic || this.props.category !== prevProps.category || this.props.curriculum_number !== prevProps.curriculum_number || this.props.keyword !== prevProps.keyword) {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/react/search/questions?category=".concat(this.props.category, "&topic=").concat(this.props.topic, "&curriculum_number=").concat(this.props.curriculum_number, "&keyword=").concat(this.props.keyword)).then(function (response) {
           _this3.setState({
             questions: response.data
           });
@@ -77148,7 +77631,9 @@ var Result = /*#__PURE__*/function (_React$Component) {
           category: this.props.category,
           topic: this.props.topic,
           categories: this.props.categories,
-          topics: this.props.topics
+          topics: this.props.topics,
+          curriculum_number: this.props.curriculum_number,
+          keyword: this.props.keyword
         })));
       } else {
         results = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -77230,7 +77715,7 @@ var SearchButton = /*#__PURE__*/function (_React$Component) {
   _createClass(SearchButton, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      if (this.props.topic !== prevProps.topic || this.props.category !== prevProps.category) {
+      if (this.props.topic !== prevProps.topic || this.props.category !== prevProps.category || this.props.curriculum_number !== prevProps.curriculum_number || this.props.keyword !== prevProps.keyword) {
         this.setState({
           isButtonClicked: false
         });

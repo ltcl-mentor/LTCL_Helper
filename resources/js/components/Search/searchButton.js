@@ -11,7 +11,7 @@ class SearchButton extends React.Component {
     }
     
     componentDidUpdate(prevProps) {
-        if (this.props.topic !== prevProps.topic || this.props.category !== prevProps.category) {
+        if (this.props.topic !== prevProps.topic || this.props.category !== prevProps.category || this.props.curriculum_number !== prevProps.curriculum_number || this.props.keyword !== prevProps.keyword) {
             this.setState({ isButtonClicked: false });
         }
     }

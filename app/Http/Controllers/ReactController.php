@@ -14,9 +14,29 @@ class ReactController extends Controller
 {
     // 質問関連
     // 質問検索結果の受け渡し
-    public function getSearchQuestions($category, $topic)
+    public function getSearchQuestions(Request $request)
     {
-        $results = Question::where('check', 1)->where('category', $category)->where('topic', $topic)->get();
+        if($request->keyword && $request->curriculum_number){
+            $results = Question::where('check', 1)
+                        ->where('category', $request->category)
+                        ->where('topic', $request->topic)
+                        ->where('curriculum_number', $request->curriculum_number)
+                        ->where('question', 'LIKE', '%'.$request->keyword.'%')->get();
+        }elseif($request->curriculum_number){
+            $results = Question::where('check', 1)
+                        ->where('category', $request->category)
+                        ->where('topic', $request->topic)
+                        ->where('curriculum_number', $request->curriculum_number)->get();
+        }elseif($request->keyword){
+            $results = Question::where('check', 1)
+                        ->where('category', $request->category)
+                        ->where('topic', $request->topic)
+                        ->where('question', 'LIKE', '%'.$request->keyword.'%')->get();
+        }else{
+            $results = Question::where('check', 1)
+                        ->where('category', $request->category)
+                        ->where('topic', $request->topic)->get();
+        }
         return $results;
     }
     
@@ -90,4 +110,5 @@ class ReactController extends Controller
     {
         return Auth::id();
     }
+
 }
