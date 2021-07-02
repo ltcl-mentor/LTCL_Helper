@@ -72965,9 +72965,9 @@ var Documents = /*#__PURE__*/function (_React$Component) {
       var list = this.state.staffs.map(function (staff) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "content"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
           className: "title"
-        }, staff.name), _this3.state.documents.map(function (document) {
+        }, staff.name)), _this3.state.documents.map(function (document) {
           if (document.user_id === staff.id) {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "question"
@@ -72975,7 +72975,7 @@ var Documents = /*#__PURE__*/function (_React$Component) {
               href: "/links/document/" + document.id
             }, document.title));
           }
-        }));
+        })));
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
@@ -73110,9 +73110,9 @@ var Questions = /*#__PURE__*/function (_React$Component) {
       var curriculum = this.state.curriculumTopics.map(function (topic) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "content"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
           className: "title"
-        }, topic.topic), _this3.state.questions.map(function (question) {
+        }, topic.topic)), _this3.state.questions.map(function (question) {
           if (question.category === 0 && question.topic === topic.id) {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "question"
@@ -73120,14 +73120,14 @@ var Questions = /*#__PURE__*/function (_React$Component) {
               href: "/links/question/" + question.id
             }, question.question));
           }
-        }));
+        })));
       });
       var portfolio = this.state.portfolioTopics.map(function (topic) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "content"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
           className: "title"
-        }, topic.topic), _this3.state.questions.map(function (question) {
+        }, topic.topic)), _this3.state.questions.map(function (question) {
           if (question.category === 0 && question.topic === topic.id) {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "question"
@@ -73135,7 +73135,7 @@ var Questions = /*#__PURE__*/function (_React$Component) {
               href: "/links/question/" + question.id
             }, question.question));
           }
-        }));
+        })));
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
@@ -76780,12 +76780,12 @@ function Search() {
       topic = _useState4[0],
       setTopic = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState6 = _slicedToArray(_useState5, 2),
       curriculum_number = _useState6[0],
       setCurriculumnumber = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState8 = _slicedToArray(_useState7, 2),
       keyword = _useState8[0],
       setKeyword = _useState8[1];

@@ -18,6 +18,9 @@
     margin-left: 5%;
     font-size: 25px;
     margin-top: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /*質問のapprovalでのみ使用*/
@@ -37,6 +40,9 @@
     margin-left: 5%;
     font-size: 25px;
     margin-top: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /*紐付け(Link)の一覧でのみ使用*/

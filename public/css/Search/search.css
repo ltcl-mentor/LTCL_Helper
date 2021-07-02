@@ -184,6 +184,13 @@ input{
     border:1px solid black;
     border-radius: 10px;
     display:block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.question:hover{
+    text-decoration: none;
 }
 
 .emptyMessage{

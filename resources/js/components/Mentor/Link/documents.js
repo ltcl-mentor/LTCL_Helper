@@ -41,12 +41,14 @@ class Documents extends React.Component {
         const list = this.state.staffs.map((staff) => {
             return (
                 <div className="content">
-                    <h1 className="title">{ staff.name }</h1>
-                    { this.state.documents.map((document) => {
-                        if(document.user_id === staff.id){
-                            return <div  className="question">・<a href={ `/links/document/`+document.id }>{ document.title }</a></div>;
-                        }
-                    })}
+                    <details>
+                        <summary><h1 className="title">{ staff.name }</h1></summary>
+                        { this.state.documents.map((document) => {
+                            if(document.user_id === staff.id){
+                                return <div  className="question">・<a href={ `/links/document/`+document.id }>{ document.title }</a></div>;
+                            }
+                        })}
+                    </details>
                 </div>
             );
         });

@@ -124,15 +124,17 @@
 
 .comment_illust{
     position: relative;
-    min-height:250px;
+    /*min-height:250px;*/
+    text-align: right;
 }
 
 .mentor_img{
-    position: absolute;
+    /*position: absolute;*/
     bottom: 0;
     right:50px;
     width:150px;
     height:200px;
+    
 }
 
 .comment_balloon {

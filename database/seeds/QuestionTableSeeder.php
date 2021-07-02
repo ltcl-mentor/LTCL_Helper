@@ -12,6 +12,7 @@ class QuestionTableSeeder extends Seeder
     public function run()
     {
         DB::table('questions')->insert([
+            'id' => 1,
             'category' => 0,
             'topic' => 6,
             'curriculum_number' => '8-1-1',
@@ -21,6 +22,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
         ]);
         DB::table('questions')->insert([
+            'id' => 2,
             'category' => 0,
             'topic' => 6,
             'curriculum_number' => '5-1-1',
@@ -30,6 +32,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
         ]);
         DB::table('questions')->insert([
+            'id' => 3,
             'category' => 0,
             'topic' => 7,
             'curriculum_number' => '6-1-2',
@@ -39,6 +42,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
         ]);
         DB::table('questions')->insert([
+            'id' => 4,
             'category' => 0,
             'topic' => 6,
             'curriculum_number' => '8-2-1',
@@ -48,6 +52,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
         ]);
         DB::table('questions')->insert([
+            'id' => 5,
             'category' => 0,
             'topic' => 5,
             'curriculum_number' => '4-1-4',
@@ -57,6 +62,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
         ]);
         DB::table('questions')->insert([
+            'id' => 6,
             'category' => 0,
             'topic' => 6,
             'curriculum_number' => '8-4-1',

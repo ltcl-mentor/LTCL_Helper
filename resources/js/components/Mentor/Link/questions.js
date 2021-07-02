@@ -44,12 +44,14 @@ class Questions extends React.Component {
         const curriculum = this.state.curriculumTopics.map((topic) => {
             return (
                 <div className="content">
-                    <h2 className="title">{ topic.topic }</h2>
-                    { this.state.questions.map((question) => {
-                        if(question.category === 0 && question.topic === topic.id){
-                            return <div className="question">・<a href={ `/links/question/`+question.id }>{ question.question }</a></div>;
-                        }
-                    })}
+                    <details>
+                        <summary><h2 className="title">{ topic.topic }</h2></summary>
+                        { this.state.questions.map((question) => {
+                            if(question.category === 0 && question.topic === topic.id){
+                                return <div className="question">・<a href={ `/links/question/`+question.id }>{ question.question }</a></div>;
+                            }
+                        })}
+                    </details>
                 </div>
             );
         });
@@ -57,12 +59,14 @@ class Questions extends React.Component {
         const portfolio = this.state.portfolioTopics.map((topic) => {
             return (
                 <div className="content">
-                    <h2 className="title">{ topic.topic }</h2>
-                    { this.state.questions.map((question) => {
-                        if(question.category === 0 && question.topic === topic.id){
-                            return <div className="question">・<a href={ `/links/question/`+question.id }>{ question.question }</a></div>;
-                        }
-                    })}
+                    <details>
+                        <summary><h2 className="title">{ topic.topic }</h2></summary>
+                        { this.state.questions.map((question) => {
+                            if(question.category === 0 && question.topic === topic.id){
+                                return <div className="question">・<a href={ `/links/question/`+question.id }>{ question.question }</a></div>;
+                            }
+                        })}
+                    </details>
                 </div>
             );
         });
