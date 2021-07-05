@@ -6453,7 +6453,7 @@ exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base
 
 
 // module
-exports.push([module.i, ".react-tabs {\n  -webkit-tap-highlight-color: transparent;\n}\n\n.react-tabs__tab-list {\n  border-bottom: 1px solid #aaa;\n  margin: 0 0 10px;\n  padding: 0;\n}\n\n.react-tabs__tab {\n  display: inline-block;\n  border: 1px solid transparent;\n  border-bottom: none;\n  bottom: -1px;\n  position: relative;\n  list-style: none;\n  padding: 6px 12px;\n  cursor: pointer;\n}\n\n.react-tabs__tab--selected {\n  background: #fff;\n  border-color: #aaa;\n  color: black;\n  border-radius: 5px 5px 0 0;\n}\n\n.react-tabs__tab--disabled {\n  color: GrayText;\n  cursor: default;\n}\n\n.react-tabs__tab:focus {\n  box-shadow: 0 0 5px hsl(208, 99%, 50%);\n  border-color: hsl(208, 99%, 50%);\n  outline: none;\n}\n\n.react-tabs__tab:focus:after {\n  content: \"\";\n  position: absolute;\n  height: 5px;\n  left: -4px;\n  right: -4px;\n  bottom: -5px;\n  background: #fff;\n}\n\n.react-tabs__tab-panel {\n  display: none;\n}\n\n.react-tabs__tab-panel--selected {\n  display: block;\n}\n", ""]);
+exports.push([module.i, ".react-tabs {\n  -webkit-tap-highlight-color: transparent;\n}\n\n.react-tabs__tab-list {\n  border-bottom: 1px solid #aaa;\n  margin: 0 0 10px;\n  padding: 0;\n}\n\n.react-tabs__tab {\n  display: inline-block;\n  border: 1px solid transparent;\n  border-bottom: none;\n  bottom: -1px;\n  position: relative;\n  list-style: none;\n  padding: 6px 12px;\n  cursor: pointer;\n  width: 50%;\n  text-align: center;\n  font-weight: bold;\n  font-size: 25px;\n}\n\n.react-tabs__tab--selected {\n  background: #fff;\n  border-color: #aaa;\n  color: black;\n  border-radius: 5px 5px 0 0;\n}\n\n.react-tabs__tab--disabled {\n  color: GrayText;\n  cursor: default;\n}\n\n.react-tabs__tab:focus {\n  box-shadow: 0 0 5px hsl(208, 99%, 50%);\n  border-color: hsl(208, 99%, 50%);\n  outline: none;\n}\n\n.react-tabs__tab:focus:after {\n  content: \"\";\n  position: absolute;\n  height: 5px;\n  left: -4px;\n  right: -4px;\n  bottom: -5px;\n  background: #fff;\n}\n\n.react-tabs__tab-panel {\n  display: none;\n}\n\n.react-tabs__tab-panel--selected {\n  display: block;\n}\n", ""]);
 
 // exports
 
@@ -73724,9 +73724,16 @@ function Create() {
       comment_validation_error = _useState12[0],
       setCommentValidationError = _useState12[1];
 
+  var set = 0;
+
   var handleClick = function handleClick() {
     if (question.trim().length !== 0 && comment.trim().length !== 0) {
-      document.getElementById('create').submit();
+      if (set == 0) {
+        set = 1;
+        document.getElementById('create').submit();
+      } else {
+        return false;
+      }
     } else if (question.trim().length === 0 && comment.trim().length !== 0) {
       setQuestionValidationError(1);
       setCommentValidationError(0);
@@ -74584,9 +74591,16 @@ function Edit() {
     });
   };
 
+  var set = 0;
+
   var handleClick = function handleClick() {
     if (question.trim().length !== 0 && comment.trim().length !== 0) {
-      document.getElementById('update').submit();
+      if (set == 0) {
+        set = 1;
+        document.getElementById('update').submit();
+      } else {
+        return false;
+      }
     } else if (question.trim().length === 0 && comment.trim().length !== 0) {
       setQuestionValidationError(1);
       setCommentValidationError(0);
@@ -75691,16 +75705,16 @@ var Portfolio = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       questions: [],
       portfolio_topics: [{
-        "id": 8,
+        "id": 9,
         "topic": "環境構築"
       }, {
-        "id": 9,
-        "topic": "成果物"
-      }, {
         "id": 10,
-        "topic": "デプロイ"
+        "topic": "設計図"
       }, {
         "id": 11,
+        "topic": "デプロイ"
+      }, {
+        "id": 12,
         "topic": "API"
       }]
     };
@@ -76655,14 +76669,29 @@ var Forms = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     var csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
     _this.state = {
-      csrf_token: csrf_token
+      csrf_token: csrf_token,
+      set: 0
     };
     return _this;
   }
 
   _createClass(Forms, [{
+    key: "doubleClickStopper",
+    value: function doubleClickStopper() {
+      if (this.state.set === 0) {
+        this.setState({
+          set: 1
+        });
+        document.getElementById('create').submit();
+      } else {
+        return false;
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var i;
       var forms = [];
 
@@ -76707,15 +76736,18 @@ var Forms = /*#__PURE__*/function (_React$Component) {
           className: "form-group row mb-0"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "col-md-6 offset-md-4"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          type: "submit",
-          className: "btn btn-primary"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "btn btn-primary",
+          onClick: function onClick() {
+            _this2.doubleClickStopper();
+          }
         }, "Register")));
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         method: "POST",
-        action: "/users/public/register"
+        action: "/users/public/register",
+        id: "create"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "hidden",
         name: "_token",
@@ -78038,8 +78070,8 @@ var Topic = /*#__PURE__*/function (_React$Component) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/ec2-user/environment/LTCL_Helper/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/ec2-user/environment/LTCL_Helper/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/ec2-user/environment/Helper/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/ec2-user/environment/Helper/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

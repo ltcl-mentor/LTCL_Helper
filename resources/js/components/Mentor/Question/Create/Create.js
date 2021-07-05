@@ -14,9 +14,16 @@ function Create() {
     const [comment, setComment] = useState('');
     const [comment_validation_error, setCommentValidationError] = useState(0);
     
+    var set = 0;
+    
     const handleClick = () => {
         if(question.trim().length !== 0 && comment.trim().length !== 0){
-            document.getElementById('create').submit();
+            if(set==0){
+                set=1;
+                document.getElementById('create').submit();
+            }else{
+                return false;
+            }
         }else if(question.trim().length === 0 && comment.trim().length !== 0){
             setQuestionValidationError(1);
             setCommentValidationError(0);

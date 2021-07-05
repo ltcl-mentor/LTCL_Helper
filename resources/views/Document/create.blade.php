@@ -7,7 +7,7 @@
     <!--HTML-->
     <div class="container">
         <div><a href="/mentor">管理ページ</a> > 記事新規登録</div>
-        <form action="/documents/store" method="post">
+        <form action="/documents/store" method="post" id="create">
             @csrf
             <div class="content">
                 <h2 class="title">記事のタイトルを入力してください。</h2>
@@ -20,7 +20,7 @@
                 <textarea name="post[link]" placeholder="URLを入力">{{ old('link') }}</textarea>
             </div>
             <div class="submit">
-                <button type="submit" class="submit_btn">登録する</button>
+                <p class="submit_btn" onclick="doubleClickStopper()">登録する</p>
             </div>
         </form>
     </div>

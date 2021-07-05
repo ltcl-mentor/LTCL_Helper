@@ -7,7 +7,17 @@ class Forms extends React.Component{
         let csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
         this.state={
             csrf_token: csrf_token,
+            set: 0,
         };
+    }
+
+    doubleClickStopper() {
+        if( this.state.set === 0){
+            this.setState({ set: 1 });
+            document.getElementById('create').submit();
+        }else{
+            return false;
+        }
     }
     
     render(){
@@ -41,9 +51,9 @@ class Forms extends React.Component{
             submitBtn = (
                  <div className="form-group row mb-0">
                     <div className="col-md-6 offset-md-4">
-                        <button type="submit" className="btn btn-primary">
+                        <p className="btn btn-primary" onClick={() => { this.doubleClickStopper() }}>
                             Register
-                        </button>
+                        </p>
                     </div>
                 </div>
             );
@@ -51,7 +61,7 @@ class Forms extends React.Component{
         
         return (
             <div>
-                <form method="POST" action="/users/public/register">
+                <form method="POST" action="/users/public/register" id="create">
                     <input type="hidden" name="_token" value={ this.state.csrf_token }/>
                     { forms }
                     { submitBtn }

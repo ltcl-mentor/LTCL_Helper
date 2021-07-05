@@ -8,10 +8,10 @@ class Portfolio extends React.Component {
         this.state={
             questions: [],
             portfolio_topics: [
-                {"id":8, "topic":"環境構築"},
-                {"id":9, "topic":"成果物"},
-                {"id":10, "topic":"デプロイ"},
-                {"id":11, "topic":"API"}
+                {"id":9, "topic":"環境構築"},
+                {"id":10, "topic":"設計図"},
+                {"id":11, "topic":"デプロイ"},
+                {"id":12, "topic":"API"}
             ],
         };
     } 
