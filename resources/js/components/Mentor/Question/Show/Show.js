@@ -156,7 +156,7 @@ class Show extends React.Component{
         return (
             <div className="container">
                 <Modal
-                    isOpen={this.state.modalIsOpen}
+                    isOpen={ this.state.modalIsOpen }
                     onRequestClose={() => { this.closeModal() }}
                 >
                     <button onClick={() => { this.closeModal() }}>×</button>

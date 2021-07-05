@@ -45,9 +45,16 @@ function Edit() {
             });
     };
     
+    var set = 0;
+    
     const handleClick = () => {
         if(question.trim().length !== 0 && comment.trim().length !== 0){
-            document.getElementById('update').submit();
+            if(set==0){
+                set=1;
+                document.getElementById('update').submit();
+            }else{
+                return false;
+            }
         }else if(question.trim().length === 0 && comment.trim().length !== 0){
             setQuestionValidationError(1);
             setCommentValidationError(0);

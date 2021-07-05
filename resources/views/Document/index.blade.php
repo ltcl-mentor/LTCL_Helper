@@ -10,7 +10,7 @@
         @foreach($staffs as $staff)
             <div class="content">
                 <details>
-                    <summary><h1 class="title">{{ $staff->name }}</h1></summary>
+                    <summary class="title">{{ $staff->name }}</summary>
                     @foreach($documents as $document)
                         @if($document->user_id === $staff->id)
                             <div class="document">

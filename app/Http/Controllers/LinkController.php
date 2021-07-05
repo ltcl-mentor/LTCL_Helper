@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Question;
 use App\Document;
+use App\User;
 
 class LinkController extends Controller
 {
@@ -30,14 +31,19 @@ class LinkController extends Controller
             'document' => $document,
             'related_questions' => $related_questions,
             'unrelated_questions' => $unrelated_questions,
+            'topic' => Question::$topic,
         ]);
     }
     
     // 新規作成実行(記事：質問＝１：多)
     public function postDocumentToQuestions(Request $request,Document $document)
     {
-        $document->questions()->detach($request['detach_id']);
-        $document->questions()->attach($request['attach_id']);
+        if($request['detach_id']){
+            $document->questions()->detach($request['detach_id']);
+        }
+        if($request['attach_id']){
+            $document->questions()->attach($request['attach_id']);
+        }
         return redirect('/links/index');
     }
     
@@ -57,14 +63,20 @@ class LinkController extends Controller
             'question' => $question,
             'related_documents' => $related_documents,
             'unrelated_documents' => $unrelated_documents,
+            'staffs' => User::where('is_admin', 'staff')->get(),
         ]);
     }
     
     // 新規作成実行(記事：質問＝多：1)
     public function postQuestionToDocuments(Request $request,Question $question)
     {
-        $question->documents()->detach($request['detach_id']);
-        $question->documents()->attach($request['attach_id']);
+        // dd($request);
+        if($request['detach_id']){
+            $question->documents()->detach($request['detach_id']);
+        }
+        if($request['attach_id']){
+            $question->documents()->attach($request['attach_id']);
+        }
         return redirect('/links/index');
     }
 }

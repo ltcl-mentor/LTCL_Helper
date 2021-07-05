@@ -8,10 +8,10 @@ class Portfolio extends React.Component {
         this.state={
             questions: [],
             portfolio_topics: [
-                {"id":8, "topic":"環境構築"},
-                {"id":9, "topic":"成果物"},
-                {"id":10, "topic":"デプロイ"},
-                {"id":11, "topic":"API"}
+                {"id":9, "topic":"環境構築"},
+                {"id":10, "topic":"設計図"},
+                {"id":11, "topic":"デプロイ"},
+                {"id":12, "topic":"API"}
             ],
         };
     } 
@@ -34,7 +34,7 @@ class Portfolio extends React.Component {
             return (
                 <div className="content">
                     <details>
-                        <summary><h1 className="title">{ topic.topic }  (公開：{ this.state.questions.filter(question => question.topic == topic.id && question.check === 1).length }件、非公開：{ this.state.questions.filter(question => question.topic == topic.id && question.check === 0).length }件)</h1></summary>
+                        <summary className="title">{ topic.topic }  (公開：{ this.state.questions.filter(question => question.topic == topic.id && question.check === 1).length }件、非公開：{ this.state.questions.filter(question => question.topic == topic.id && question.check === 0).length }件)</summary>
                         { this.state.questions.map((question) => {
                             if(question.topic === topic.id){
                                 if(question.check === 1){
