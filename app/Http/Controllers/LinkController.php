@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Question;
 use App\Document;
+use App\User;
 
 class LinkController extends Controller
 {
@@ -30,6 +31,7 @@ class LinkController extends Controller
             'document' => $document,
             'related_questions' => $related_questions,
             'unrelated_questions' => $unrelated_questions,
+            'topic' => Question::$topic,
         ]);
     }
     
@@ -61,6 +63,7 @@ class LinkController extends Controller
             'question' => $question,
             'related_documents' => $related_documents,
             'unrelated_documents' => $unrelated_documents,
+            'staffs' => User::where('is_admin', 'staff')->get(),
         ]);
     }
     

@@ -13,7 +13,7 @@
         <div class="content">
             @for($i=0; $i<=14; $i++)
             <details>
-                <summary><h2 class="title">{{ date( "n月d日", strtotime($today . "-${i}day")) }}</h2></summary>
+                <summary class="title">{{ date( "n月d日", strtotime($today . "-${i}day")) }}</summary>
                 <?php $count = 0?>
                 @foreach($questions as $question)
                     @if(date( "Y-m-d", strtotime($question['whenClicked'])) === date( "Y-m-d", strtotime($today . "+${i}day")))

@@ -72965,9 +72965,9 @@ var Documents = /*#__PURE__*/function (_React$Component) {
       var list = this.state.staffs.map(function (staff) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "content"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", {
           className: "title"
-        }, staff.name)), _this3.state.documents.map(function (document) {
+        }, staff.name), _this3.state.documents.map(function (document) {
           if (document.user_id === staff.id) {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "question"
@@ -73110,9 +73110,9 @@ var Questions = /*#__PURE__*/function (_React$Component) {
       var curriculum = this.state.curriculumTopics.map(function (topic) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "content"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", {
           className: "title"
-        }, topic.topic)), _this3.state.questions.map(function (question) {
+        }, topic.topic), _this3.state.questions.map(function (question) {
           if (question.category === 0 && question.topic === topic.id) {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "question"
@@ -73125,9 +73125,9 @@ var Questions = /*#__PURE__*/function (_React$Component) {
       var portfolio = this.state.portfolioTopics.map(function (topic) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "content"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", {
           className: "title"
-        }, topic.topic)), _this3.state.questions.map(function (question) {
+        }, topic.topic), _this3.state.questions.map(function (question) {
           if (question.category === 0 && question.topic === topic.id) {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "question"
@@ -75613,13 +75613,13 @@ var Curriculum = /*#__PURE__*/function (_React$Component) {
       var curriculum = this.state.curriculum_topics.map(function (topic) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "content"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", {
           className: "title"
         }, topic.topic, "  (\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
           return question.topic == topic.id && question.check === 1;
         }).length, "\u3001\u975E\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
           return question.topic == topic.id && question.check === 0;
-        }).length, ")")), _this3.state.questions.map(function (question) {
+        }).length, ")"), _this3.state.questions.map(function (question) {
           if (question.topic === topic.id) {
             if (question.check === 1) {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75742,13 +75742,13 @@ var Portfolio = /*#__PURE__*/function (_React$Component) {
       var portfolio = this.state.portfolio_topics.map(function (topic) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "content"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", {
           className: "title"
         }, topic.topic, "  (\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
           return question.topic == topic.id && question.check === 1;
         }).length, "\u4EF6\u3001\u975E\u516C\u958B\uFF1A", _this3.state.questions.filter(function (question) {
           return question.topic == topic.id && question.check === 0;
-        }).length, "\u4EF6)")), _this3.state.questions.map(function (question) {
+        }).length, "\u4EF6)"), _this3.state.questions.map(function (question) {
           if (question.topic === topic.id) {
             if (question.check === 1) {
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

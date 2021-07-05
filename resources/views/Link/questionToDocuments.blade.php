@@ -23,20 +23,34 @@
                 <div class="detach">
                     <h2 class="columns">関連記事の解除</h2>
                     <p class="message">既に質問に紐づけられている記事の紐付けを解除します。</p>
-                    @foreach($related_documents as $related_document)
-                        <div class="document">
-                            <label><input type="checkbox" name="detach_id[]" value="{{ $related_document->id }}">{{ $related_document->title }}</label>
-                        </div>
+                    @foreach($staffs as $staff)
+                        <details>
+                            <summary class="summary">{{ $staff->name }}</summary>
+                            @foreach($related_documents as $related_document)
+                                @if($related_document->user_id === $staff->id)
+                                    <div class="document">
+                                        <label><input type="checkbox" name="detach_id[]" value="{{ $related_document->id }}">{{ $related_document->title }}</label>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </details>
                     @endforeach
                 </div>
                 
                 <div class="attach">
                     <h2 class="columns">関連記事を登録</h2>
                     <p class="message">新たに質問に紐づける記事を登録します。</p>
-                    @foreach($unrelated_documents as $unrelated_document)
-                        <div class="document">
-                            <label><input type="checkbox" name="attach_id[]" value="{{ $unrelated_document->id }}">{{ $unrelated_document->title }}</label>
-                        </div>
+                    @foreach($staffs as $staff)
+                        <details>
+                            <summary class="summary">{{ $staff->name }}</summary>
+                            @foreach($unrelated_documents as $unrelated_document)
+                                @if($related_document->user_id === $staff->id)
+                                    <div class="document">
+                                        <label><input type="checkbox" name="attach_id[]" value="{{ $unrelated_document->id }}">{{ $unrelated_document->title }}</label>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </details>
                     @endforeach
                 </div>
                 

@@ -42,9 +42,14 @@
     color: red;
 }
 
+.summary{
+    font-size: 25px;
+    margin-left: 10%;
+}
+
 .document, .question{
     width:80%;
-    margin-left: 10%;
+    margin-left: 13%;
     font-size: 23px;
 }
 

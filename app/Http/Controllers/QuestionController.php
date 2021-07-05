@@ -116,12 +116,12 @@ class QuestionController extends Controller
     }
     
     // 承認用一覧画面表示
-    public function approval(Question $question)
-    {
-        return view('Question.approval');
-    }
+    // public function approval(Question $question)
+    // {
+    //     return view('Question.approval');
+    // }
     
-    // 承認実行
+    // 公開処理
     public function check(Question $question)
     {
         $question['check'] = 1;
@@ -129,7 +129,7 @@ class QuestionController extends Controller
         return redirect('/questions/'. $question->id);
     }
     
-    // 承認解除実行
+    // 非公開処理
     public function uncheck(Question $question)
     {
         $question['check'] = 0;
