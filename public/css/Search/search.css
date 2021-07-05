@@ -52,6 +52,10 @@ input{
     margin-left: 20px;
 }
 
+.topic_box {
+    display: flex;
+    flex-wrap: wrap;
+}
 .topic_button{
     border:solid 1px green;
     border-radius: 5px; 
@@ -61,6 +65,8 @@ input{
     font-weight: bold;
     text-align: center;
 }
+
+
 
 .topic_button:hover{
     background-color: rgb(190,255,190);
@@ -199,4 +205,57 @@ input{
     text-align: center;
     font-size: 30px;
 }
+
+
+/*=================================
+    以下レスポンシブ対応CSS
+    750px幅で適応
+=================================*/
+
+@media screen and (max-width: 750px) {
+    
+    .sp{
+        display: block;
+    }
+    .pc{
+        display: none;
+    }
+    
+    .title{
+        padding: 0px;
+        margin:20px 0; 
+        font-size: 1.75rem;
+    }
+    .steps{
+        font-size: 1rem;
+        margin: 0;
+        padding-bottom: 20px;
+        text-align: center;
+    }
+    
+    .category_box {
+        display: flex;
+        justify-content: space-around;
+    }
+    .category_button {
+        width: 40%;
+        margin: 0; 
+    }    
+    
+    .topic_button {
+        width: 30%;
+        margin: 15px 0;
+    }
+    .topic_box{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+    
+    .form_box {
+        padding: 20px 0;
+    }
+	
+}
+
 

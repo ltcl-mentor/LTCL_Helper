@@ -9,14 +9,28 @@
         @if($question->check===1)
             <h1 class="title">質問概要</h1>
             <div class="question">
-                <div class="table">
-                    <div>
-                        <div class="columns category_column">カテゴリー</div>
-                        <div class="parameters category_parameter">{{ $category[$question->category] }}</div>
-                        <div class="columns topic_column">トピック</div>
-                        <div class="parameters topic_parameter">{{ $topic[$question->topic] }}</div>
-                        <div class="columns curriculum_number_column">カリキュラム番号</div>
-                        <div class="parameters curriculum_number_parameter">{{ $question->curriculum_number }}</div>
+                <div class="table question_table">
+                    <div class="show_result_nav ">
+                            <div class="columns category_column pc">カテゴリー</div>
+                            <div class="parameters category_parameter pc">{{ $category[$question->category] }}</div>
+                            <div class="columns topic_column pc">トピック</div>
+                            <div class="parameters topic_parameter pc">{{ $topic[$question->topic] }}</div>
+                            <div class="columns curriculum_number_column pc">カリキュラム番号</div>
+                            <div class="parameters curriculum_number_parameter pc">{{ $question->curriculum_number }}</div>
+                    </div>
+                    <div class="sp">
+                        <div class="show_result_nav_pc">
+                            <div class="columns category_column">カテゴリー</div>
+                            <div class="parameters category_parameter">{{ $category[$question->category] }}</div>
+                        </div>
+                        <div class="show_result_nav_pc">
+                            <div class="columns topic_column">トピック</div>
+                            <div class="parameters topic_parameter">{{ $topic[$question->topic] }}</div>
+                        </div>
+                        <div class="show_result_nav_pc">
+                            <div class="columns curriculum_number_column">カリキュラム番号</div>
+                            <div class="parameters curriculum_number_parameter">{{ $question->curriculum_number }}</div>
+                        </div>
                     </div>
                 </div>
                             
@@ -34,8 +48,8 @@
                     @endif
                     
                     <div class="comment_illust">
-                        <img class="mentor_img" src="{{ asset('images/images.jpg') }}">
                         <div class="comment_balloon">{!! nl2br(e($question->comment)) !!}</div>
+                        <img class="mentor_img" src="{{ asset('images/images.jpg') }}">
                     </div>
                 </div>
             </div>
