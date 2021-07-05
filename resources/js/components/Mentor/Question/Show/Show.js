@@ -133,7 +133,7 @@ class Show extends React.Component{
         
         let images;
         if(this.state.images.filter(v=>v).length === 0){
-            images = (<div className="parameters word">画像はありません</div>);
+            images = (<div className="parameters_q_detail word">画像はありません</div>);
         }else{
             images = this.state.images.map((image) => {
                 return (
@@ -188,29 +188,29 @@ class Show extends React.Component{
                     { publishBtn }
                 </div>
         
-                <div className="table">
-                    <h2 className="columns">カテゴリー</h2>
-                    <div className="parameters word">{ this.state.categories[this.state.question.category] }</div>
+                <div className="table_q_detail">
+                    <h2 className="columns_q_detail">カテゴリー</h2>
+                    <div className="parameters_q_detail word">{ this.state.categories[this.state.question.category] }</div>
             
-                    <h2 className="columns">トピック</h2>
-                    <div className="parameters word">{ this.state.topics[this.state.question.topic] }</div>
+                    <h2 className="columns_q_detail">トピック</h2>
+                    <div className="parameters_q_detail word">{ this.state.topics[this.state.question.topic] }</div>
         
-                    <h2 className="columns">カリキュラム番号</h2>
-                    <div className="parameters word">{ this.state.question.curriculum_number }</div>
+                    <h2 className="columns_q_detail">カリキュラム番号</h2>
+                    <div className="parameters_q_detail word">{ this.state.question.curriculum_number }</div>
         
-                    <h2 className="columns">作成者</h2>
-                    <div className="parameters word">{ author }</div>
+                    <h2 className="columns_q_detail">作成者</h2>
+                    <div className="parameters_q_detail word">{ author }</div>
             
-                    <h2 className="columns">公開状況</h2>
-                    <div className="parameters word">{ isPublic }</div>
+                    <h2 className="columns_q_detail">公開状況</h2>
+                    <div className="parameters_q_detail word">{ isPublic }</div>
         
-                    <h2 className="columns">質問内容</h2>
-                    <div className="parameters">{ this.state.question.question }</div>
+                    <h2 className="columns_q_detail">質問内容</h2>
+                    <div className="parameters_q_detail">{ this.state.question.question }</div>
         
-                    <h2 className="columns">コメント</h2>
-                    <div className="parameters">{ this.state.question.comment }</div>
+                    <h2 className="columns_q_detail">コメント</h2>
+                    <div className="parameters_q_detail">{ this.state.question.comment }</div>
             
-                    <h2 className="columns">関連画像</h2>
+                    <h2 className="columns_q_detail">関連画像</h2>
                     { images }
                 </div>
         

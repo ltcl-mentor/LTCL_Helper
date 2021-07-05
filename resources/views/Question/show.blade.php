@@ -3,6 +3,8 @@
 @section('content')    
     <!--CSS-->
     <link href="{{ asset('css/Mentor/show.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/Search/show.css') }}">
+    
     
     <!--HTML-->
     <div class="container">
