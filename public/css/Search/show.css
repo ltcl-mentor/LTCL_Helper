@@ -12,7 +12,7 @@
 /*質問の概要に関する部分*/
 .table{
     border:1px solid black;
-    font-size: 0;
+    font-size: 0;     
     /*表示の時にできる隙間をなくすために親要素でfont-size:0、子要素でそれぞれおサイズを定義*/
     box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.2);
 }
@@ -73,7 +73,7 @@
 /*イラスト部分*/
 .question_illust{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     padding-bottom: 100px;
 }
 
@@ -87,8 +87,8 @@
     display: inline-block;
     margin: 1.5em 0 1.5em 15px;
     padding: 7px 10px;
-    min-width: 120px;
-    max-width: 60%;
+    width: 60%;
+    /*max-width: 60%;*/
     color: #555;
     font-size: 16px;
     background: #FFF;
@@ -140,8 +140,8 @@
     display: inline-block;
     margin: 1.5em 15px 1.5em 0;
     padding: 7px 10px;
-    min-width: 120px;
-    max-width: 60%;
+    width: 60%;
+    /*max-width: 60%;*/
     color: #555;
     font-size: 16px;
     background: #FFF;
@@ -253,13 +253,39 @@
 	    font-size: 18px;
 	}
 	.student_img {
-        width: 150px;
-        height: 150px;
+        width: 100px;
+        height: 100px;
     }
     .mentor_img {
-        width: 120px;
-        height: 150px;
+        width: 75px;
+        height: 100px;
     }
-
+    .question_balloon {
+        margin: 5px 0 5px 15px;
+        padding: 5px;
+        font-size: 16px;
+        border: solid 2px #555;
+        border-radius: 5px;
+    }
+    
+    .comment_balloon{
+        margin: 5px 0 5px 15px;
+        padding: 5px;
+        font-size: 16px;
+        border: solid 2px #555;
+        border-radius: 5px;
+    }
+    .comment_balloon:before{
+        right:-23px;
+    }
+    .comment_balloon:after{
+        right: -28px;
+    }
+    .question_balloon:before{
+        left:-23px;
+    }
+    .question_balloon:after{
+        left:-28px;
+    }
 	
 }

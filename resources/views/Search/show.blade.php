@@ -10,7 +10,7 @@
             <h1 class="title">質問概要</h1>
             <div class="question">
                 <div class="table question_table">
-                    <div class="show_result_nav ">
+                    <div class="show_result_nav">
                             <div class="columns category_column pc">カテゴリー</div>
                             <div class="parameters category_parameter pc">{{ $category[$question->category] }}</div>
                             <div class="columns topic_column pc">トピック</div>

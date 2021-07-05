@@ -75986,7 +75986,7 @@ var Show = /*#__PURE__*/function (_React$Component) {
         return v;
       }).length === 0) {
         images = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "parameters word"
+          className: "parameters_q_detail word"
         }, "\u753B\u50CF\u306F\u3042\u308A\u307E\u305B\u3093");
       } else {
         images = this.state.images.map(function (image) {
@@ -76062,37 +76062,37 @@ var Show = /*#__PURE__*/function (_React$Component) {
           _this3.deleteConfirm();
         }
       }, "\u524A\u9664\u3059\u308B")), publishBtn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "table"
+        className: "table_q_detail"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "columns"
+        className: "columns_q_detail"
       }, "\u30AB\u30C6\u30B4\u30EA\u30FC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "parameters word"
+        className: "parameters_q_detail word"
       }, this.state.categories[this.state.question.category]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "columns"
+        className: "columns_q_detail"
       }, "\u30C8\u30D4\u30C3\u30AF"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "parameters word"
+        className: "parameters_q_detail word"
       }, this.state.topics[this.state.question.topic]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "columns"
+        className: "columns_q_detail"
       }, "\u30AB\u30EA\u30AD\u30E5\u30E9\u30E0\u756A\u53F7"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "parameters word"
+        className: "parameters_q_detail word"
       }, this.state.question.curriculum_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "columns"
+        className: "columns_q_detail"
       }, "\u4F5C\u6210\u8005"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "parameters word"
+        className: "parameters_q_detail word"
       }, author), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "columns"
+        className: "columns_q_detail"
       }, "\u516C\u958B\u72B6\u6CC1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "parameters word"
+        className: "parameters_q_detail word"
       }, isPublic), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "columns"
+        className: "columns_q_detail"
       }, "\u8CEA\u554F\u5185\u5BB9"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "parameters"
+        className: "parameters_q_detail"
       }, this.state.question.question), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "columns"
+        className: "columns_q_detail"
       }, "\u30B3\u30E1\u30F3\u30C8"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "parameters"
+        className: "parameters_q_detail"
       }, this.state.question.comment), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "columns"
+        className: "columns_q_detail"
       }, "\u95A2\u9023\u753B\u50CF"), images), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "title"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u95A2\u9023\u8A18\u4E8B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -76333,13 +76333,13 @@ var Preview = /*#__PURE__*/function (_React$Component) {
       } else {
         images = this.props.images.map(function (image) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-            className: "preview_columns"
+            className: "columns"
           }, "\u53C2\u8003\u753B\u50CF"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
             href: image.image_path,
             "data-lightbox": "group"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
             src: image.image_path,
-            className: "preview_image"
+            className: "image"
           })));
         });
       }
@@ -76355,12 +76355,12 @@ var Preview = /*#__PURE__*/function (_React$Component) {
       } else {
         documents = this.props.documents.map(function (document) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "preview_document"
+            className: "document"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-            className: "preview_document_img",
+            className: "document_img",
             src: "/images/NotePM_Logo_Vertical.png"
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "preview_document_title"
+            className: "document_title"
           }, document.title)));
         });
       }
@@ -76368,43 +76368,65 @@ var Preview = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "box"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-        className: "preview_title"
+        className: "title"
       }, "\u8CEA\u554F\u6982\u8981"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "preview_question"
+        className: "question"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "preview_table"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "preview_columns preview_category_column"
+        className: "table"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "show_result_nav"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "columns category_column pc"
       }, "\u30AB\u30C6\u30B4\u30EA\u30FC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "preview_parameters preview_category_parameter"
+        className: "parameters category_parameter pc"
       }, this.props.category), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "preview_columns preview_topic_column"
+        className: "columns topic_column pc"
       }, "\u30C8\u30D4\u30C3\u30AF"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "preview_parameters preview_topic_parameter"
+        className: "parameters topic_parameter pc"
       }, this.props.topic), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "preview_columns preview_curriculum_number_column"
+        className: "columns curriculum_number_column pc"
       }, "\u30AB\u30EA\u30AD\u30E5\u30E9\u30E0\u756A\u53F7"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "preview_parameters preview_curriculum_number_parameter"
-      }, this.props.question.curriculum_number))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "preview_illusts"
+        className: "parameters curriculum_number_parameter pc"
+      }, this.props.question.curriculum_number)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sp"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "preview_question_illust"
+        className: "show_result_nav_pc"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "columns category_column"
+      }, "\u30AB\u30C6\u30B4\u30EA\u30FC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "parameters category_parameter"
+      }, this.props.category)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "show_result_nav_pc"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "columns topic_column"
+      }, "\u30C8\u30D4\u30C3\u30AF"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "parameters topic_parameter"
+      }, this.props.topic)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "show_result_nav_pc"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "columns curriculum_number_column"
+      }, "\u30AB\u30EA\u30AD\u30E5\u30E9\u30E0\u756A\u53F7"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "parameters curriculum_number_parameter"
+      }, this.props.question.curriculum_number)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "illusts"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "question_illust"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "preview_student_img",
+        className: "student_img",
         src: "/images/pose_english_shrug_man.png"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "preview_question_balloon"
+        className: "question_balloon"
       }, this.props.question.question)), images, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "preview_comment_illust"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "preview_mentor_img",
+        className: "comment_illust"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "comment_balloon"
+      }, this.props.question.comment), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "mentor_img",
         src: "/images/images.jpg"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "preview_comment_balloon"
-      }, this.props.question.comment)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-        className: "preview_title"
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "title"
       }, "\u95A2\u9023\u8A18\u4E8B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "preview_documents"
+        className: "documents"
       }, documents)));
     }
   }]);
