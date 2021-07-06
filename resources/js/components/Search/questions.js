@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from "axios";
+import ReactPaginate from 'react-paginate';
 
 class Questions extends React.Component {
     constructor(props){
         super(props);
         this.state={
             questions: [],
+            currentPage: 1,
         };
     } 
     
@@ -38,6 +40,10 @@ class Questions extends React.Component {
         }
     }
     
+    handlePaginate({ selected: selectedPage }) {
+        this.setState({ currentPage: selectedPage });
+    }
+    
     render(){
         const list = this.state.questions.map((question) => {
             return <a href={ `/show/`+question.id } className="question" key={ question.id }>{ question.question }</a>;
@@ -55,6 +61,23 @@ class Questions extends React.Component {
                     カテゴリー：<font color="green">{ this.props.categories[this.props.category] }</font>、トピック：<font color="blue">{ this.props.topics[this.props.topic] }</font>の検索結果<font color="purple">{ list.filter(v=>v).length }</font>件
                 </div>
                 { list }
+                { this.state.currentPage }
+                <ReactPaginate
+                    pageCount={ list.filter(v=>v).length }
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={2}
+                    onPageChange={ () => this.handlePaginate() }
+                    containerClassName="pagination"
+                    pageClassName="page-item"
+                    pageLinkClassName="page-link"
+                    activeClassName="active"
+                    activeLinkClassName="active"
+                    previousLinkClassName="previous-link"
+                    nextLinkClassName="next-link"
+                    previousLabel="<<"
+                    nextLabel=">>"
+                    disabledClassName="disabled-button"
+                />
                 { emptyMessage }
             </div>
         );
