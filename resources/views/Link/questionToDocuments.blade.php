@@ -26,15 +26,13 @@
                     @foreach($staffs as $staff)
                         <details>
                             <summary class="summary">{{ $staff->name }}</summary>
-                            @if($related_documents)
-                                @foreach($related_documents as $related_document)
-                                    @if($related_document->user_id === $staff->id)
-                                        <div class="document">
-                                            <label><input type="checkbox" name="detach_id[]" value="{{ $related_document->id }}">{{ $related_document->title }}</label>
-                                        </div>
-                                    @endif
-                                @endforeach
-                            @endif
+                            @foreach($related_documents as $related_document)
+                                @if($related_document->user_id === $staff->id)
+                                    <div class="document">
+                                        <label><input type="checkbox" name="detach_id[]" value="{{ $related_document->id }}">{{ $related_document->title }}</label>
+                                    </div>
+                                @endif
+                            @endforeach
                         </details>
                     @endforeach
                 </div>
@@ -46,7 +44,7 @@
                         <details>
                             <summary class="summary">{{ $staff->name }}</summary>
                             @foreach($unrelated_documents as $unrelated_document)
-                                @if($related_document->user_id === $staff->id)
+                                @if($unrelated_document->user_id === $staff->id)
                                     <div class="document">
                                         <label><input type="checkbox" name="attach_id[]" value="{{ $unrelated_document->id }}">{{ $unrelated_document->title }}</label>
                                     </div>
