@@ -26,13 +26,15 @@
                     @foreach($staffs as $staff)
                         <details>
                             <summary class="summary">{{ $staff->name }}</summary>
-                            @foreach($related_documents as $related_document)
-                                @if($related_document->user_id === $staff->id)
-                                    <div class="document">
-                                        <label><input type="checkbox" name="detach_id[]" value="{{ $related_document->id }}">{{ $related_document->title }}</label>
-                                    </div>
-                                @endif
-                            @endforeach
+                            @if($related_documents)
+                                @foreach($related_documents as $related_document)
+                                    @if($related_document->user_id === $staff->id)
+                                        <div class="document">
+                                            <label><input type="checkbox" name="detach_id[]" value="{{ $related_document->id }}">{{ $related_document->title }}</label>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
                         </details>
                     @endforeach
                 </div>
