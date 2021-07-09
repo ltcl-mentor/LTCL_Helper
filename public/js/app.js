@@ -77580,10 +77580,7 @@ var Questions = /*#__PURE__*/function (_React$Component) {
           console.log(error);
         });
       }
-    } // handlePaginate({ selected: selectedPage }) {
-    //     this.setState({ currentPage: selectedPage });
-    // }
-
+    }
   }, {
     key: "handlePageClick",
     value: function handlePageClick(event) {
