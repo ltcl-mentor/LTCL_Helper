@@ -199,6 +199,17 @@ input{
     text-decoration: none;
 }
 
+.pagination{
+    justify-content: center;
+}
+
+.previous-link, .next-link{
+    margin: 0 8px;
+    display: inline-block;
+    height: 100%;
+    padding-top: 20%;
+}
+
 .emptyMessage{
     width: 90%;
     margin:20px auto;
