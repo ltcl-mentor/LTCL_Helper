@@ -10,8 +10,19 @@
     width: 100%;
 }
 
+.title .editBtn{
+    font-size: 20px;
+}
+.title .deleteBtn{
+    font-size: 20px;
+}
+
+.title .publishBtn{
+    font-size: 20px;
+}
+
 .table_q_detail{
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     margin-bottom: 40px;
 }
@@ -28,6 +39,7 @@
     margin: 0 auto;
     padding: 10px 0 20px 0; 
     font-size: 25px;
+    overflow-wrap: break-word;
 }
 
 .word{
@@ -345,3 +357,16 @@
     width: 80%;
     margin: 0 auto;
 }
+
+
+/*=================================
+    以下レスポンシブ対応CSS
+    750px幅で適応
+=================================*/
+
+    .title{
+        padding: 0px;
+        margin:20px 0; 
+        font-size: 1.75rem;
+    }
+    

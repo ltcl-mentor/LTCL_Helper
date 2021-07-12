@@ -10,7 +10,7 @@
             <a href="/mentor">管理ページ</a> > <a href="/documents/index">記事一覧</a> > 記事詳細
         </div>
         <div class="title">
-            <h1>記事詳細</h1>
+            <h1 class="title">記事詳細</h1>
             <a href="/documents/{{ $document->id }}/edit" class="editBtn">編集する</a>
             <form action="/documents/{{ $document->id }}/delete" method="post">
                 @csrf
@@ -19,18 +19,18 @@
             </form>
         </div>
         
-        <div class="table">
-            <h2 class="columns">タイトル</h2>
-            <div class="parameters">{{ $document->title }}</div>
+        <div class="table_q_detail">
+            <h2 class="columns_q_detail">タイトル</h2>
+            <div class="parameters_q_detail">{{ $document->title }}</div>
             
-            <h2 class="columns">記事URL</h2>
-            <div class="parameters"><a href="{{ $document->link }}">{{ $document->link }}</a></div>
+            <h2 class="columns_q_detail">記事URL</h2>
+            <div class="parameters_q_detail"><a href="{{ $document->link }}">{{ $document->link }}</a></div>
         
-            <h2 class="columns">作成者</h2>
+            <h2 class="columns_q_detail">作成者</h2>
             @if($author_name)
-                <div class="parameters word">{{ $author_name }}</div>
+                <div class="parameters_q_detail word">{{ $author_name }}</div>
             @else
-                <div class="parameters word">削除されたユーザー</div>
+                <div class="parameters_q_detail word">削除されたユーザー</div>
             @endif
         </div>
         
