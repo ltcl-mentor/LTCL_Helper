@@ -6,6 +6,22 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+ 
+ /*=================================
+    追加部分
+    以下共通スタイルとして定義する
+    内容をapp.cssに記述する
+  =================================*/
+ 
+ .ReactModal__Content.ReactModal__Content--after-open{
+  inset:8px!important; 
+ }
+ 
+ 
+  /*=================================
+    ここまで
+  =================================*/
+ 
 
 :root {
   --blue: #3490dc;
