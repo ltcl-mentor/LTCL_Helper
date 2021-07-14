@@ -51,20 +51,14 @@ class Questions extends React.Component {
         });
         
         let emptyMessage;
-        let questions
+        let questions;
+        let pagination;
         
         if(list.filter(v=>v).length === 0){    //filterでlistに存在する空要素を排除し,その上で配列内の要素が何個あるかを判定。
             emptyMessage = ( <div className="emptyMessage">該当する質問がありません。</div> );
         }else{
             questions = list.slice(this.state.currentPage*10, (this.state.currentPage+1)*10);
-        }
-        
-        return (
-            <div>
-                <div className="searchResultDocument">
-                    カテゴリー：<font color="green">{ this.props.categories[this.props.category] }</font>、トピック：<font color="blue">{ this.props.topics[this.props.topic] }</font>の検索結果<font color="purple">{ list.filter(v=>v).length }</font>件
-                </div>
-                { questions }
+            pagination = (
                 <div className="paginationBox">
                     <ReactPaginate
                         pageCount={ list.filter(v=>v).length/10 }
@@ -83,6 +77,16 @@ class Questions extends React.Component {
                         disabledClassName="disabled-button"
                     />
                 </div>
+            );
+        }
+        
+        return (
+            <div>
+                <div className="searchResultDocument">
+                    カテゴリー：<font color="green">{ this.props.categories[this.props.category] }</font>、トピック：<font color="blue">{ this.props.topics[this.props.topic] }</font>の検索結果<font color="purple">{ list.filter(v=>v).length }</font>件
+                </div>
+                { questions }
+                { pagination }
                 { emptyMessage }
             </div>
         );
