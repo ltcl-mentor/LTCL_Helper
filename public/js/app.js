@@ -103530,6 +103530,7 @@ function Search() {
     setActiveStep(function (prevActiveStep) {
       return prevActiveStep - 1;
     });
+    setIsSearchButtonClicked(false);
   };
 
   var handleReset = function handleReset() {

@@ -52,6 +52,7 @@ function Search() {
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
+        setIsSearchButtonClicked(false);
     };
 
     const handleReset = () => {
