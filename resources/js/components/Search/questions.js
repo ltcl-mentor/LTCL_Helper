@@ -5,6 +5,7 @@ import ReactPaginate from 'react-paginate';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
 
 class Questions extends React.Component {
     constructor(props){
@@ -50,13 +51,17 @@ class Questions extends React.Component {
     render(){
         const list = this.state.questions.map((question) => {
             return (
-                <ListItem button>
-                    <a href={ `/show/`+question.id } className="question" key={ question.id } target="_blank">
-                        <ListItemText
-                            primary={ question.question }
-                        />
-                    </a>
-                </ListItem>
+                <div>
+                    <Divider light />
+                    <ListItem button>
+                        <a href={ `/show/`+question.id } className="question" key={ question.id } target="_blank">
+                            <ListItemText
+                                primary={ question.question }
+                            />
+                        </a>
+                    </ListItem>
+                    <Divider />
+                </div>
             );
         });
         
