@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Link} from 'react-scroll';
+import Fab from '@material-ui/core/Fab';
+// import NavigationIcon from '@material-ui/icons/Navigation';
 
 class SearchButton extends React.Component {
     constructor(props){
@@ -26,7 +28,11 @@ class SearchButton extends React.Component {
         if( (((this.props.topic === 0) || (this.props.topic >= 1 && this.props.topic <= 8)) && this.props.category === 0) || (this.props.topic >= 9 && this.props.category === 1) ){
             searchButton = (
                 <div className="search_button_box">
-                    <Link activeClass="active" to="box" spy={ true } smooth={ true } offset={ 500 } duration={ 800 }><button className="search_button" onClick={() => { this.handleClick() }}>検索する</button></Link>
+                    <Link activeClass="active" to="box" spy={ true } smooth={ true } offset={ 500 } duration={ 800 }>
+                        <Fab variant="extended" onClick={() => { this.handleClick() }}>
+                            検索する
+                        </Fab>
+                    </Link>
                 </div>
             );
         }else{

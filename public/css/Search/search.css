@@ -54,9 +54,9 @@ input{
 }
 
 .topic_box {
-    display: flex;
-    flex-wrap: wrap;
+    text-align: center;
 }
+
 .topic_button{
     border:solid 1px green;
     border-radius: 5px; 
@@ -184,12 +184,33 @@ input{
     padding-left: 5%;
 }
 
+.list{
+    background-color: white;
+}
+
+
+.MuiListItem-gutters {
+     padding-left: 0px; 
+     padding-right: 0px; 
+}
+
+.MuiListItem-root {
+    width: 100%;
+    display: flex;
+    position: relative;
+    box-sizing: border-box;
+    text-align: left;
+    align-items: center;
+     padding-top: 0px; 
+     padding-bottom: 0px; 
+    justify-content: flex-start;
+    text-decoration: none;
+}
+
 .question{
-    width: 90%;
-    margin:20px auto;
+    width: 100%;
+    padding :20px;
     font-size: 30px;
-    border:1px solid black;
-    border-radius: 10px;
     display:block;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -269,5 +290,4 @@ input{
     }
 	
 }
-
 

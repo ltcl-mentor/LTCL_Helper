@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ asset('css/Search/show.css') }}">
     
     <!--HTML-->
-    <div class="box">
+    <div class="box container">
         @if($question->check===1)
             <h1 class="title">質問概要</h1>
             <div class="question">

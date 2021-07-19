@@ -1,44 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 
 class Category extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            category: '',
+            category: 0,
         };
-    } 
-    
-    handleCategory(category){
-        this.setState({ category: category });
     }
     
-    handleChange(){
-        this.setState({ category: '' });
+    handleCategory(event) {
+        this.setState({ category: Number(event.target.value) });
     }
     
     render(){
-        let categoryForm;
-        
-        if(this.state.category === ''){
-            categoryForm=(
+        let categoryForm=(
                 <div className="category_box">
-                    <label className="category_button"><input type="radio" name="category" onClick={() => { this.handleCategory(0) }}/>カリキュラム</label>
-                    <label className="category_button"><input type="radio" name="category" onClick={() => { this.handleCategory(1) }}/>成果物</label>
+                    <FormControl component="fieldset">
+                        <RadioGroup row aria-label="category" name="category" value={ this.state.category } onChange={(event) => { this.handleCategory(event) }}>
+                            <FormControlLabel value={0} control={<Radio />} label="カリキュラム" />
+                            <FormControlLabel value={1} control={<Radio />} label="成果物" />
+                        </RadioGroup>
+                    </FormControl>
                 </div>
             );
-        }else{
-            categoryForm=(
-                <div className="category_result_box">
-                    <h4 className="category_result">{ this.props.categories[this.state.category] }</h4>
-                    <a className="change_button" onClick={() => { this.handleChange() }}>変更する</a>
-                </div>
-            );
-        }
         
         return (
             <div className="container">
-                <h2 className="steps">STEP1 該当するカテゴリーを選択します。</h2>
                 { this.props.setCategory(this.state.category) }
                 { categoryForm }
             </div>

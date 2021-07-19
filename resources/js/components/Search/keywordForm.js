@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import TextField from '@material-ui/core/TextField';
 
 class Keyword extends React.Component{
     constructor(props){
@@ -18,9 +19,8 @@ class Keyword extends React.Component{
          
         return (
             <div className="content">
-                <h2 className="step">STEP4 検索ワードを入力してください。（任意）</h2>
                 <div className="keyword_box">
-                    <textarea name="keyword" placeholder="キーワードを入力" rows="1" onChange={(event) => { this.changeKeyword(event) }}/>
+                    <TextField id="standard-basic" label="キーワード" onChange={(event) => { this.changeKeyword(event) }} />
                     { this.props.setKeyword(this.state.keyword) }
                 </div>
             </div>

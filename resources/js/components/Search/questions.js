@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from "axios";
 import ReactPaginate from 'react-paginate';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 class Questions extends React.Component {
     constructor(props){
@@ -44,10 +47,17 @@ class Questions extends React.Component {
         this.setState({ currentPage: event.selected });
     }
     
-    
     render(){
         const list = this.state.questions.map((question) => {
-            return <a href={ `/show/`+question.id } className="question" key={ question.id }>{ question.question }</a>;
+            return (
+                <ListItem button>
+                    <a href={ `/show/`+question.id } className="question" key={ question.id } target="_blank">
+                        <ListItemText
+                            primary={ question.question }
+                        />
+                    </a>
+                </ListItem>
+            );
         });
         
         let emptyMessage;
@@ -85,7 +95,11 @@ class Questions extends React.Component {
                 <div className="searchResultDocument">
                     カテゴリー：<font color="green">{ this.props.categories[this.props.category] }</font>、トピック：<font color="blue">{ this.props.topics[this.props.topic] }</font>の検索結果<font color="purple">{ list.filter(v=>v).length }</font>件
                 </div>
-                { questions }
+                <div className="list">
+                    <List>
+                        { questions }
+                    </List>
+                </div>
                 { pagination }
                 { emptyMessage }
             </div>
