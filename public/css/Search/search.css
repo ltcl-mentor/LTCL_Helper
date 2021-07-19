@@ -201,10 +201,15 @@ input{
     box-sizing: border-box;
     text-align: left;
     align-items: center;
-     padding-top: 0px; 
-     padding-bottom: 0px; 
+    padding-top: 0px; 
+    padding-bottom: 0px; 
     justify-content: flex-start;
     text-decoration: none;
+}
+
+.MuiList-padding {
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 .question{
