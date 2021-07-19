@@ -45,7 +45,7 @@ class Questions extends React.Component {
             return (
                 <div className="content">
                     <details>
-                        <summary className="title">{ topic.topic }</summary>
+                        <summary className="title">{ topic.topic }  { this.state.questions.filter(question => question.topic == topic.id).length }件</summary>
                         { this.state.questions.map((question) => {
                             if(question.category === 0 && question.topic === topic.id){
                                 return <div className="question">・<a href={ `/links/question/`+question.id }>{ question.question }</a></div>;
@@ -60,7 +60,7 @@ class Questions extends React.Component {
             return (
                 <div className="content">
                     <details>
-                        <summary className="title">{ topic.topic }</summary>
+                        <summary className="title">{ topic.topic }  { this.state.questions.filter(question => question.topic == topic.id).length }件</summary>
                         { this.state.questions.map((question) => {
                             if(question.category === 0 && question.topic === topic.id){
                                 return <div className="question">・<a href={ `/links/question/`+question.id }>{ question.question }</a></div>;

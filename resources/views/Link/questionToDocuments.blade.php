@@ -25,7 +25,7 @@
                     <p class="message">既に質問に紐づけられている記事の紐付けを解除します。</p>
                     @foreach($staffs as $staff)
                         <details>
-                            <summary class="summary">{{ $staff->name }}</summary>
+                            <summary class="summary">{{ $staff->name }}  ({{ $related_documents->where('user_id', $staff->id)->count() }}件)</summary>
                             @foreach($related_documents as $related_document)
                                 @if($related_document->user_id === $staff->id)
                                     <div class="document">
@@ -42,7 +42,7 @@
                     <p class="message">新たに質問に紐づける記事を登録します。</p>
                     @foreach($staffs as $staff)
                         <details>
-                            <summary class="summary">{{ $staff->name }}</summary>
+                            <summary class="summary">{{ $staff->name }}  ({{ $unrelated_documents->where('user_id', $staff->id)->count() }}件)</summary>
                             @foreach($unrelated_documents as $unrelated_document)
                                 @if($unrelated_document->user_id === $staff->id)
                                     <div class="document">

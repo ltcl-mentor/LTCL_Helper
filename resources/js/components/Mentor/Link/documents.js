@@ -42,7 +42,7 @@ class Documents extends React.Component {
             return (
                 <div className="content">
                     <details>
-                        <summary className="title">{ staff.name }</summary>
+                        <summary className="title">{ staff.name }  { this.state.documents.filter(document => document.user_id == staff.id).length }件</summary>
                         { this.state.documents.map((document) => {
                             if(document.user_id === staff.id){
                                 return <div  className="question">・<a href={ `/links/document/`+document.id }>{ document.title }</a></div>;

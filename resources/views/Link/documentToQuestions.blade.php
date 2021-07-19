@@ -25,11 +25,11 @@
                 <div class="detach">
                     <h2 class="columns">関連質問の解除</h2>
                     <p class="message">既に記事に紐づけられている質問の紐付けを解除します。</p>
-                    @for($i=0;$i<=12;$i++)
+                    @for($topicCount=0;$topicCount<=12;$topicCount++)
                         <details>
-                            <summary class="summary">{{ $topic[$i] }}</summary>
+                            <summary class="summary">{{ $topic[$topicCount] }}  ({{ $related_questions->where('topic', $topicCount)->count() }}件)</summary>
                             @foreach($related_questions as $related_question)
-                                @if($related_question->topic === $i)
+                                @if($related_question->topic === $topicCount)
                                     <div class="question">
                                         <label><input type="checkbox" name="detach_id[]" value="{{ $related_question->id }}">{{ $related_question->question }}</label>
                                     </div>
@@ -42,11 +42,11 @@
                 <div class="attach">
                     <h2 class="columns">関連質問を登録</h2>
                     <p class="message">新たに記事に紐づける質問を登録します。</p>
-                    @for($i=0;$i<=12;$i++)
+                    @for($topicCount=0;$topicCount<=12;$topicCount++)
                         <details>
-                            <summary class="summary">{{ $topic[$i] }}</summary>
+                            <summary class="summary">{{ $topic[$topicCount] }}  ({{ $unrelated_questions->where('topic', $topicCount)->count() }}件)</summary>
                             @foreach($unrelated_questions as $unrelated_question)
-                                @if($unrelated_question->topic === $i)
+                                @if($unrelated_question->topic === $topicCount)
                                     <div class="question">
                                         <label><input type="checkbox" name="attach_id[]" value="{{ $unrelated_question->id }}">{{ $unrelated_question->question }}</label>
                                     </div>

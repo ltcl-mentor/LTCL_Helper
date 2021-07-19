@@ -10,7 +10,7 @@
         @foreach($staffs as $staff)
             <div class="content">
                 <details>
-                    <summary class="title">{{ $staff->name }}</summary>
+                    <summary class="title">{{ $staff->name }}  ({{ $documents->where('user_id', $staff->id)->count() }}件)</summary>
                     @foreach($documents as $document)
                         @if($document->user_id === $staff->id)
                             <div class="document">

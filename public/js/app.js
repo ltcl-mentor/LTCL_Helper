@@ -99777,7 +99777,9 @@ var Documents = /*#__PURE__*/function (_React$Component) {
           className: "content"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", {
           className: "title"
-        }, staff.name), _this3.state.documents.map(function (document) {
+        }, staff.name, "  ", _this3.state.documents.filter(function (document) {
+          return document.user_id == staff.id;
+        }).length, "\u4EF6"), _this3.state.documents.map(function (document) {
           if (document.user_id === staff.id) {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "question"
@@ -99922,7 +99924,9 @@ var Questions = /*#__PURE__*/function (_React$Component) {
           className: "content"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", {
           className: "title"
-        }, topic.topic), _this3.state.questions.map(function (question) {
+        }, topic.topic, "  ", _this3.state.questions.filter(function (question) {
+          return question.topic == topic.id;
+        }).length, "\u4EF6"), _this3.state.questions.map(function (question) {
           if (question.category === 0 && question.topic === topic.id) {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "question"
@@ -99937,7 +99941,9 @@ var Questions = /*#__PURE__*/function (_React$Component) {
           className: "content"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", {
           className: "title"
-        }, topic.topic), _this3.state.questions.map(function (question) {
+        }, topic.topic, "  ", _this3.state.questions.filter(function (question) {
+          return question.topic == topic.id;
+        }).length, "\u4EF6"), _this3.state.questions.map(function (question) {
           if (question.category === 0 && question.topic === topic.id) {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "question"
