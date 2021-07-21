@@ -73,4 +73,22 @@ class HomeController extends Controller
     {
         return view('mentor');
     }
+    
+    
+    
+    public function demo(Question $question)
+    {
+        $documents = $question->documents()->get();
+        $images = Image::where('question_id', $question->id)->get();
+        if(empty($images[0])){
+            $images = null;
+        }
+        return view('Search.Demo')->with([
+            'question' => $question,
+            'documents' => $documents,
+            'category' => Question::$category,
+            'topic' => Question::$topic,
+            'images' => $images,
+        ]);
+    }
 }
