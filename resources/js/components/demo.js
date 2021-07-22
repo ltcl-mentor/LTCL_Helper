@@ -140,7 +140,7 @@ class Show extends React.Component{
                 <div className="box">
                     <h1 className="title">質問概要</h1>
                     <div className="question">
-                        <Paper>
+                        <Paper className="QA_table">
                             <Table>
                                 <TableBody>
                                     <TableRow>
@@ -159,34 +159,32 @@ class Show extends React.Component{
                             </Table>
                         </Paper>
                     
-                        <div>
-                            <br/>
-                            <br/>
-                            <br/>
-                        </div>
-                    
                         <div class="wrapper">
                             <div className="cards">
-                                <Card>
-                                    <Avatar alt="Remy Sharp" src="/images/pose_english_shrug_man.png" />
-                                    <p>受講生</p>
-                                    <div>{ this.state.question.question }</div>
+                                <Card className="QA_card">
+                                    <div className="Avatar-wrap">
+                                        <Avatar alt="Remy Sharp" src="/images/pose_english_shrug_man.png" className="Avatar_catch"/>
+                                        <div className="Avatar-detail-wrap">
+                                            <div className="Avatar_name">受講生</div>
+                                            <span className="Avatar_date" >2021/7/22 18:00(直に打ってます)</span>
+                                        </div>
+                                    </div>
+                                    <p className="QA_textblock">{ this.state.question.question }</p>
                                 </Card>
                     
-                                <div>
-                                    <br/>
-                                    <br/>
-                                    <br/>
-                                </div>
-                    
-                                <Card >
-                                    <Avatar alt="Remy Sharp" src="/images/images.jpg" />
-                                    <p>メンター</p>
-                                    <div>{ this.state.question.comment }</div>
+                                <Card className="QA_card">
+                                    <div className="Avatar-wrap">
+                                        <Avatar alt="Remy Sharp" src="/images/images.jpg" className="Avatar_catch" />
+                                        <div className="Avatar-detail-wrap">
+                                                <div className="Avatar_name">メンター</div>
+                                                <span className="Avatar_date" >2021/7/22 18:00(直に打ってます))</span>
+                                        </div>
+                                    </div>
+                                    <p className="QA_textblock">{ this.state.question.comment }</p>
                                     { images }
                                 </Card>
                                 
-                                <div>
+                                <div className="realated_documents_wrap">
                                     <h1 className="title">関連記事</h1>
                                     <div className="documents">
                                         { documents }
@@ -195,7 +193,7 @@ class Show extends React.Component{
                             </div>
                     
                             <List subheader={<li />} className="demolist">
-                                <ListSubheader align="center">関連質問</ListSubheader>
+                                <ListSubheader align="center" className="related_title" >関連質問</ListSubheader>
                                 { related_questions }
                             </List>
                         </div>
