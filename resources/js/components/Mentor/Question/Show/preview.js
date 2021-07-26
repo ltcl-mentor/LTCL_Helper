@@ -130,8 +130,7 @@ class Preview extends React.Component{
         
         const related_questions = this.state.related_questions.map((question) => {
             return (
-                <div>
-                    <Divider light />
+                <div className="related_question_itme">
                     <ListItem button>
                         <a href={ `/show/`+question.id } target="_blank" className="related_question">
                             <ListItemText
@@ -139,7 +138,6 @@ class Preview extends React.Component{
                             />
                         </a>
                     </ListItem>
-                    <Divider />
                 </div>
             );
         });
@@ -193,7 +191,7 @@ class Preview extends React.Component{
                             </Card>
                                 
                             <div className="realated_documents_wrap">
-                                <h1 className="title">関連記事</h1>
+                                <h1 className="title">参考記事</h1>
                                 <div className="documents">
                                     { documents }
                                 </div>
