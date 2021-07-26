@@ -91,6 +91,7 @@ function Search() {
                         <Button
                             onClick={ handleBack }
                             className={ classes.button }
+                            color="secondary"
                         >
                             Back
                         </Button>
@@ -109,7 +110,7 @@ function Search() {
             case 2:
                 return (
                     <div>
-                        <div>※条件の追加が不要な場合はSKIPを押してください</div>
+                        <div>※条件の追加が不要な場合はNextを押してください</div>
                         <Addition 
                             category={ category }
                             topic={ topic }
@@ -119,6 +120,7 @@ function Search() {
                         <Button
                             onClick={ handleBack }
                             className={ classes.button }
+                            color="secondary"
                         >
                             Back
                         </Button>
@@ -128,7 +130,7 @@ function Search() {
                             onClick={ handleNext }
                             className={ classes.button }
                         >
-                            Skip
+                            Next
                         </Button>
                     </div>
                 );
@@ -159,10 +161,16 @@ function Search() {
                             <Button
                                 onClick={ handleBack }
                                 className={ classes.button }
+                                color="secondary"
                             >
                                 Back
                             </Button>
-                            <Button onClick={ handleReset } className={ classes.button }>
+                            <Button
+                                variant="contained"
+                                onClick={ handleReset }
+                                className={ classes.button }
+                                color="primary"
+                            >
                                 Reset
                             </Button>
                             <SearchButton

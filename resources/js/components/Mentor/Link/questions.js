@@ -19,10 +19,13 @@ class Questions extends React.Component {
                 {"id":8, "topic":"Git&GitHub"}
             ],
             portfolioTopics: [
-                {"id":9, "topic":"環境構築"},
-                {"id":10, "topic":"成果物"},
-                {"id":11, "topic":"デプロイ"},
-                {"id":12, "topic":"API"}
+                {"id":9, "topic":"マイグレーション"},
+                {"id":10, "topic":"リレーション"},
+                {"id":11, "topic":"Laravel拡張"},
+                {"id":12, "topic":"画像処理"},
+                {"id":13, "topic":"Heroku環境"},
+                {"id":14, "topic":"API"},
+                {"id":15, "topic":"デザイン"},
             ],
         };
     } 

@@ -9,6 +9,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -31,7 +34,7 @@ class Show extends React.Component{
     }
     
     componentDidMount() {
-        const question_id = document.getElementById('demo').getAttribute('question_id');
+        const question_id = document.getElementById('Public_Show').getAttribute('question_id');
         axios
             .get(`/react/question/${ question_id }`)
             .then(response => {
@@ -110,10 +113,16 @@ class Show extends React.Component{
             documents = this.state.documents.map((document) => {
                 return (
                     <div>
-                        <div className="document">
-                            <img className="document_img" src="/images/NotePM_Logo_Vertical.png"/>
-                            <div className="document_title">{ document.title }</div>
-                        </div>
+                        <CardActionArea>
+                            <Card className="document">
+                                <img className="document_img" src="/images/NotePM_Logo_Vertical.png"/>
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="h2" align="center">
+                                        { document.title }
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </CardActionArea>
                     </div>
                 );
             });
@@ -136,7 +145,7 @@ class Show extends React.Component{
         });
         
         return (
-            <div>
+            <div className="container">
                 <div className="box">
                     <h1 className="title">質問概要</h1>
                     <div className="question">
@@ -166,7 +175,7 @@ class Show extends React.Component{
                                         <Avatar alt="Remy Sharp" src="/images/pose_english_shrug_man.png" className="Avatar_catch"/>
                                         <div className="Avatar-detail-wrap">
                                             <div className="Avatar_name">受講生</div>
-                                            <span className="Avatar_date" >2021/7/22 18:00(直に打ってます)</span>
+                                            <span className="Avatar_date" >{ this.state.question.created_at }</span>
                                         </div>
                                     </div>
                                     <p className="QA_textblock">{ this.state.question.question }</p>
@@ -177,7 +186,7 @@ class Show extends React.Component{
                                         <Avatar alt="Remy Sharp" src="/images/images.jpg" className="Avatar_catch" />
                                         <div className="Avatar-detail-wrap">
                                                 <div className="Avatar_name">メンター</div>
-                                                <span className="Avatar_date" >2021/7/22 18:00(直に打ってます))</span>
+                                                <span className="Avatar_date" >{ this.state.question.updated_at }</span>
                                         </div>
                                     </div>
                                     <p className="QA_textblock">{ this.state.question.comment }</p>
@@ -198,7 +207,6 @@ class Show extends React.Component{
                             </List>
                         </div>
                     </div>
-                
                 </div>
             </div>
         );
@@ -208,7 +216,7 @@ class Show extends React.Component{
 
 export default Show;
 
-if (document.getElementById('demo')) {
-    ReactDOM.render(<Show />, document.getElementById('demo'));
+if (document.getElementById('Public_Show')) {
+    ReactDOM.render(<Show />, document.getElementById('Public_Show'));
 }
 

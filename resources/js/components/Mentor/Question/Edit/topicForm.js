@@ -1,5 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
 
 class TopicForm extends React.Component{
     constructor(props){
@@ -9,14 +13,18 @@ class TopicForm extends React.Component{
         };
     }
     
-    componentDidUpdate(prevProps){
-        if(this.props.topic !== prevProps.topic){
-            this.setState({ topic: this.props.topic });
+    componentDidUpdate(prevProps) {
+        if(this.props.category !== prevProps.category){
+            if(this.props.category === 0){
+                this.setState({ topic: 0 });
+            }else{
+                this.setState({ topic: 9 });
+            }
         }
     }
     
-    handleTopic(topic) {
-        this.setState({ topic: topic });
+    handleTopic(event) {
+        this.setState({ topic: Number(event.target.value) });
     }
     
     render(){
@@ -24,24 +32,35 @@ class TopicForm extends React.Component{
         if(this. props.category === 0){
             topic = (
                 <div className="carriculum">
-                    <label className="radios"><input type="radio" name="post[topic]" value="0" onClick={() => { this.handleTopic(0) }} checked={ this.state.topic === 0 }/>AWS</label>
-                    <label className="radios"><input type="radio" name="post[topic]" value="1" onClick={() => { this.handleTopic(1) }} checked={ this.state.topic === 1 }/>HTML</label>
-                    <label className="radios"><input type="radio" name="post[topic]" value="2" onClick={() => { this.handleTopic(2) }} checked={ this.state.topic === 2 }/>CSS</label>
-                    <label className="radios"><input type="radio" name="post[topic]" value="3" onClick={() => { this.handleTopic(3) }} checked={ this.state.topic === 3 }/>JavaScript</label>
-                    <label className="radios"><input type="radio" name="post[topic]" value="4" onClick={() => { this.handleTopic(4) }} checked={ this.state.topic === 4 }/>サーバー</label>
-                    <label className="radios"><input type="radio" name="post[topic]" value="5" onClick={() => { this.handleTopic(5) }} checked={ this.state.topic === 5 }/>PHP</label>
-                    <label className="radios"><input type="radio" name="post[topic]" value="6" onClick={() => { this.handleTopic(6) }} checked={ this.state.topic === 6 }/>Laravel</label>
-                    <label className="radios"><input type="radio" name="post[topic]" value="7" onClick={() => { this.handleTopic(7) }} checked={ this.state.topic === 7 }/>DB</label>
-                    <label className="radios"><input type="radio" name="post[topic]" value="8" onClick={() => { this.handleTopic(8) }} checked={ this.state.topic === 8 }/>Git&GitHub</label>
+                    <FormControl component="fieldset">
+                        <RadioGroup row aria-label="topic" name="topic" value={ this.state.topic } onChange={(event) => { this.handleTopic(event) }}>
+                            <FormControlLabel value={0} control={<Radio />} label="AWS" />
+                            <FormControlLabel value={1} control={<Radio />} label="HTML" />
+                            <FormControlLabel value={2} control={<Radio />} label="CSS" />
+                            <FormControlLabel value={3} control={<Radio />} label="JavaScript" />
+                            <FormControlLabel value={4} control={<Radio />} label="サーバー" />
+                            <FormControlLabel value={5} control={<Radio />} label="PHP" />
+                            <FormControlLabel value={6} control={<Radio />} label="Laravel" />
+                            <FormControlLabel value={7} control={<Radio />} label="データベース" />
+                            <FormControlLabel value={8} control={<Radio />} label="Git&GitHub" />
+                        </RadioGroup>
+                    </FormControl>
                 </div>
             );
         }else{
             topic = (
                 <div className="portfolio">
-                    <label className="radios"><input type="radio" name="post[topic]" value="9" onClick={() => { this.handleTopic(9) }} checked={ this.state.topic === 9 }/>環境構築</label>
-                    <label className="radios"><input type="radio" name="post[topic]" value="10" onClick={() => { this.handleTopic(10) }} checked={ this.state.topic === 10 }/>設計図</label>
-                    <label className="radios"><input type="radio" name="post[topic]" value="11" onClick={() => { this.handleTopic(11) }} checked={ this.state.topic === 11 }/>デプロイ</label>
-                    <label className="radios"><input type="radio" name="post[topic]" value="12" onClick={() => { this.handleTopic(12) }} checked={ this.state.topic === 12 }/>API</label>
+                    <FormControl component="fieldset">
+                        <RadioGroup row aria-label="topic" name="topic" value={ this.state.topic } onChange={(event) => { this.handleTopic(event) }}>
+                            <FormControlLabel value={9} control={<Radio />} label="マイグレーション" />
+                            <FormControlLabel value={10} control={<Radio />} label="リレーション" />
+                            <FormControlLabel value={11} control={<Radio />} label="Laravel拡張" />
+                            <FormControlLabel value={12} control={<Radio />} label="画像処理" />
+                            <FormControlLabel value={13} control={<Radio />} label="Heroku環境" />
+                            <FormControlLabel value={14} control={<Radio />} label="API" />
+                            <FormControlLabel value={15} control={<Radio />} label="デザイン" />
+                        </RadioGroup>
+                    </FormControl>
                 </div>
             );
         }

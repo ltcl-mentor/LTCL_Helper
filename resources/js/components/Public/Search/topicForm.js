@@ -5,7 +5,6 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
-
 class Topic extends React.Component {
     constructor(props){
         super(props);
@@ -52,11 +51,13 @@ class Topic extends React.Component {
                 <div  className="topic_box">
                     <FormControl component="fieldset">
                         <RadioGroup row aria-label="topic" name="topic" value={ this.state.topic } onChange={(event) => { this.handleTopic(event) }}>
-                            <FormControlLabel value={9} control={<Radio />} label="環境構築" />
-                            <FormControlLabel value={10} control={<Radio />} label="デプロイ" />
-                            <FormControlLabel value={11} control={<Radio />} label="API" />
-                            <FormControlLabel value={12} control={<Radio />} label="マイグレーション" />
-                            <FormControlLabel value={13} control={<Radio />} label="リレーション" />
+                            <FormControlLabel value={9} control={<Radio />} label="マイグレーション" />
+                            <FormControlLabel value={10} control={<Radio />} label="リレーション" />
+                            <FormControlLabel value={11} control={<Radio />} label="Laravel拡張" />
+                            <FormControlLabel value={12} control={<Radio />} label="画像処理" />
+                            <FormControlLabel value={13} control={<Radio />} label="Heroku環境" />
+                            <FormControlLabel value={14} control={<Radio />} label="API" />
+                            <FormControlLabel value={15} control={<Radio />} label="デザイン" />
                         </RadioGroup>
                     </FormControl>
                 </div>

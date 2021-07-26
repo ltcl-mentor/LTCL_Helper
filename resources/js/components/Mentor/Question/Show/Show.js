@@ -4,6 +4,10 @@ import Modal from "react-modal";
 import axios from "axios";
 import Preview from './preview';
 import CheckForm from './checkForm';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
 Modal.setAppElement("#app");
 
@@ -19,7 +23,7 @@ class Show extends React.Component{
             modalIsOpen: false,
             csrf_token: csrf_token,
             categories: ['カリキュラム', '成果物'],
-            topics: ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'],
+            topics: ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', 'マイグレーション', 'リレーション', 'Laravel拡張', '画像処理', 'Heroku環境', 'API', 'デザイン'],
         };
     }
     
@@ -149,7 +153,20 @@ class Show extends React.Component{
             documents = (<div className="emptyMessage">関連する記事はありません。</div>);
         }else{
             documents = this.state.documents.map((document) => {
-                return (<div className="document">・<a href={ `/documents/`+document.link }>{ document.title }</a></div>);
+                return (
+                    <div>
+                        <CardActionArea>
+                            <Card className="document">
+                                <img className="document_img" src="/images/NotePM_Logo_Vertical.png"/>
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="h2" align="center">
+                                        { document.title }
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </CardActionArea>
+                    </div>
+                );
             });
         }
         
@@ -219,7 +236,9 @@ class Show extends React.Component{
                         <h1>関連記事</h1>
                         <a href={`/links/question/`+this.state.question.id }>編集する</a>
                     </div>
-                    { documents }
+                    <div className="documents">
+                        { documents }
+                    </div>
                 </div>
             </div>
         );

@@ -6,6 +6,10 @@ import CrriculumNumber from './curriculum-number';
 import QuestionForm from './questionForm';
 import CommentForm from './commentForm';
 import Picture from './picture';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
 
 function Edit() {
     const [category, setCategory] = useState();
@@ -20,9 +24,7 @@ function Edit() {
     const [old_comment, setOldComment] = useState();
     const [comment_validation_error, setCommentValidationError] = useState(0);
     const categories = ['カリキュラム', '成果物'];
-    const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'];
-    
-
+    const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', 'マイグレーション', 'リレーション', 'Laravel拡張', '画像処理', 'Heroku環境', 'API', 'デザイン'];
     
     useEffect(() => {
         componentDidMount();
@@ -70,13 +72,21 @@ function Edit() {
         }
     };
     
+    const handleCategory = (event) => {
+        setCategory( Number(event.target.value) );
+    };
+    
     return (
         <div className="container">
             <div className="content">
                 <h2 className="title">カテゴリーの選択</h2>
                 <p>変更前：{ categories[ old_category ] }</p>
-                <label className="radios"><input type="radio" name="post[category]" value="0" onClick={() => { setCategory(0) }} checked={ category === 0 }/>カリキュラム</label>
-                <label className="radios"><input type="radio" name="post[category]" value="1" onClick={() => { setCategory(1) }} checked={ category === 1 }/>成果物</label>
+                <FormControl component="fieldset">
+                    <RadioGroup row aria-label="category" name="category" value={ Number(category) } onChange={(event) => { handleCategory(event) }}>
+                        <FormControlLabel value={0} control={<Radio />} label="カリキュラム" />
+                        <FormControlLabel value={1} control={<Radio />} label="成果物" />
+                    </RadioGroup>
+                </FormControl>
             </div>
                 
             <TopicForm

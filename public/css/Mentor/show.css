@@ -85,6 +85,13 @@
     width: 280px;
 }
 
+.documents{
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
 .alert{
     border:1px solid pink;
     background-color: rgba(255, 200, 200, 0.7);
