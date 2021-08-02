@@ -37,7 +37,11 @@ class HomeController extends Controller
         // データベースの容量を考慮して履歴保持の期限は２１日間とする
         History::historyDelete(21);
         
-        return view('Search.show')->with(['question_id' => $question->id]);
+        return view('Search.show')->with([
+            'question_id' => $question->id,
+            'category' => $question->category,
+            'topic' => $question->topic,
+        ]);
     }
     
     // 履歴画面表示

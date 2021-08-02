@@ -106861,8 +106861,7 @@ var Show = /*#__PURE__*/function (_React$Component) {
       documents: [],
       related_questions: [],
       categories: ['カリキュラム', '成果物'],
-      topics: ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'],
-      update_count: 0
+      topics: ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API']
     };
     return _this;
   }
@@ -106873,6 +106872,8 @@ var Show = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       var question_id = document.getElementById('Public_Show').getAttribute('question_id');
+      var category = document.getElementById('Public_Show').getAttribute('category');
+      var topic = document.getElementById('Public_Show').getAttribute('topic');
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/react/question/".concat(question_id)).then(function (response) {
         _this2.setState({
           question: response.data
@@ -106901,26 +106902,13 @@ var Show = /*#__PURE__*/function (_React$Component) {
       })["catch"](function (error) {
         console.log(error);
       });
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevState) {
-      var _this3 = this;
-
-      if (this.state.question !== prevState.question) {
-        if (this.state.update_count === 0) {
-          axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/react/search/questions?category=".concat(this.state.question.category, "&topic=").concat(this.state.question.topic)).then(function (response) {
-            _this3.setState({
-              related_questions: response.data
-            });
-          })["catch"](function (error) {
-            console.log(error);
-          });
-          this.setState({
-            update_count: 1
-          });
-        }
-      }
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/react/search/questions?category=".concat(category, "&topic=").concat(topic)).then(function (response) {
+        _this2.setState({
+          related_questions: response.data
+        });
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   }, {
     key: "render",

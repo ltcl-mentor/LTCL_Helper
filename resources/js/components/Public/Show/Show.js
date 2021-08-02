@@ -27,12 +27,13 @@ class Show extends React.Component{
             related_questions: [],
             categories: ['カリキュラム', '成果物'],
             topics: ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'],
-            update_count: 0,
         };
     }
     
     componentDidMount() {
         const question_id = document.getElementById('Public_Show').getAttribute('question_id');
+        const category = document.getElementById('Public_Show').getAttribute('category');
+        const topic = document.getElementById('Public_Show').getAttribute('topic');
         axios
             .get(`/react/question/${ question_id }`)
             .then(response => {
@@ -76,23 +77,16 @@ class Show extends React.Component{
             }).catch(error => {
                 console.log(error);
             });
-    }
-    
-    componentDidUpdate(prevState) {
-        if(this.state.question !== prevState.question){
-            if(this.state.update_count === 0){
-                axios
-                    .get(`/react/search/questions?category=${ this.state.question.category }&topic=${ this.state.question.topic }`)
-                    .then(response => {
-                        this.setState({
-                            related_questions: response.data
-                        });
-                    }).catch(error => {
-                        console.log(error);
-                    });
-                this.setState({ update_count: 1 });
-            }
-        }
+        
+        axios
+            .get(`/react/search/questions?category=${ category }&topic=${ topic }`)
+            .then(response => {
+                this.setState({
+                    related_questions: response.data
+                });
+            }).catch(error => {
+                console.log(error);
+            });
     }
     
     render(){
