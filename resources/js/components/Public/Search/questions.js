@@ -29,7 +29,7 @@ class Questions extends React.Component {
             });
     }
     
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         if(this.props.topic !== prevProps.topic || this.props.category !== prevProps.category || this.props.curriculum_number !== prevProps.curriculum_number || this.props.keyword !== prevProps.keyword) {
             axios
                 .get(`/react/search/questions?category=${ this.props.category }&topic=${ this.props.topic }&curriculum_number=${ this.props.curriculum_number }&keyword=${ this.props.keyword }`)

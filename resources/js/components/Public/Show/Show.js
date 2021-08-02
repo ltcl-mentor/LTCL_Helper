@@ -4,8 +4,6 @@ import axios from "axios";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
@@ -17,7 +15,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import Divider from '@material-ui/core/Divider';
 
 class Show extends React.Component{
     constructor(props){
@@ -30,6 +27,7 @@ class Show extends React.Component{
             related_questions: [],
             categories: ['カリキュラム', '成果物'],
             topics: ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'],
+            update_count: 0,
         };
     }
     
@@ -78,17 +76,23 @@ class Show extends React.Component{
             }).catch(error => {
                 console.log(error);
             });
-            
-        axios
-            .get(`/react/search/questions?category=${ this.state.question.category }&topic=${ this.state.question.topic }`)
-            .then(response => {
-                this.setState({
-                    related_questions: response.data
-                });
-                
-            }).catch(error => {
-                console.log(error);
-            });
+    }
+    
+    componentDidUpdate(prevState) {
+        if(this.state.question !== prevState.question){
+            if(this.state.update_count === 0){
+                axios
+                    .get(`/react/search/questions?category=${ this.state.question.category }&topic=${ this.state.question.topic }`)
+                    .then(response => {
+                        this.setState({
+                            related_questions: response.data
+                        });
+                    }).catch(error => {
+                        console.log(error);
+                    });
+                this.setState({ update_count: 1 });
+            }
+        }
     }
     
     render(){
