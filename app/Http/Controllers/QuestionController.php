@@ -46,35 +46,13 @@ class QuestionController extends Controller
     // 詳細画面表示
     public function show(Question $question, User $user)
     {
-        $author = $user->find($question['user_id']);
-        if($author){
-            $author_name = $author->name;
-        } else{
-            $author_name = null;
-        }
-        
-        $images = Image::where('question_id', $question->id)->get();
-        if(empty($images[0])){
-            $images = null;
-        }
-        
-        return view('Question.show')->with([
-            'question' => $question,
-            'documents' => $question->documents()->get(),
-            'category' => Question::$category,
-            'topic' => Question::$topic,
-            'author_name' => $author_name,
-            'isChecked' => $question['check'],
-            'images' => $images,
-        ]);
+        return view('Question.show')->with(['question_id' => $question->id]);
     }
     
     // 編集画面表示
     public function edit(Question $question)
     {
-        return view('Question.edit')->with([
-            'question_id' => $question->id,
-        ]);
+        return view('Question.edit')->with(['question_id' => $question->id]);
     }
     
     // 編集実行

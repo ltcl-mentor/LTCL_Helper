@@ -37,18 +37,7 @@ class HomeController extends Controller
         // データベースの容量を考慮して履歴保持の期限は２１日間とする
         History::historyDelete(21);
         
-        $documents = $question->documents()->get();
-        $images = Image::where('question_id', $question->id)->get();
-        if(empty($images[0])){
-            $images = null;
-        }
-        return view('Search.show')->with([
-            'question' => $question,
-            'documents' => $documents,
-            'category' => Question::$category,
-            'topic' => Question::$topic,
-            'images' => $images,
-        ]);
+        return view('Search.show')->with(['question_id' => $question->id]);
     }
     
     // 履歴画面表示
@@ -74,21 +63,4 @@ class HomeController extends Controller
         return view('mentor');
     }
     
-    
-    
-    public function demo(Question $question)
-    {
-        $documents = $question->documents()->get();
-        $images = Image::where('question_id', $question->id)->get();
-        if(empty($images[0])){
-            $images = null;
-        }
-        return view('Search.Demo')->with([
-            'question' => $question,
-            'documents' => $documents,
-            'category' => Question::$category,
-            'topic' => Question::$topic,
-            'images' => $images,
-        ]);
-    }
 }

@@ -20,8 +20,6 @@ Auth::routes([
 
 Route::group(['middleware' => ['auth']], function () {
     
-    Route::get('/demo/{question}', 'HomeController@demo');
-    
     // ログイン済みユーザーのみアクセス可能
     Route::get('/', 'HomeController@search'); // トップ画面表示
     Route::get('/show/{question}', 'HomeController@show'); // 質問詳細画面表示

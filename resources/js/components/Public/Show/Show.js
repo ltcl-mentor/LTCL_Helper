@@ -108,7 +108,7 @@ class Show extends React.Component{
         
         let documents;
         if(this.state.documents.filter(v=>v).length === 0){
-            documents = (<div className="preview_emptyMessage">関連する記事はありません。</div>);
+            documents = (<div className="empty_message">関連する記事はありません。</div>);
         }else{
             documents = this.state.documents.map((document) => {
                 return (
@@ -134,7 +134,7 @@ class Show extends React.Component{
                     <ListItem button>
                         <a href={ `/show/`+question.id } target="_blank" className="related_question">
                             <ListItemText
-                                primary={ question.question }
+                                primary={ question.question.length > 30 ? question.question.substr(0, 29)+'...' : question.question }
                             />
                         </a>
                     </ListItem>

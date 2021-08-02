@@ -17,6 +17,10 @@
     color: #fff;
 }
 
+a:hover{
+    text-decoration: none;
+}
+
 
 /*質問の概要に関する部分*/
 .realated_documents_wrap{
@@ -135,10 +139,16 @@
     padding:20px;
     margin: 0;
     line-height: 1.7;
+    white-space: pre-wrap;
 }
 
 .MuiAvatar-img{
     object-fit: contain;
+}
+
+.empty_message{
+    width: 100%;
+    text-align: center;
 }
 
 .related_question_itme{

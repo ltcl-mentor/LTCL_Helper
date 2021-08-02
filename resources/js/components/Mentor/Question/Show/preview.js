@@ -172,7 +172,7 @@ class Preview extends React.Component{
                                     <Avatar alt="Remy Sharp" src="/images/pose_english_shrug_man.png" className="Avatar_catch"/>
                                     <div className="Avatar-detail-wrap">
                                         <div className="Avatar_name">受講生</div>
-                                        <span className="Avatar_date" >{ this.state.question.question }</span>
+                                        <span className="Avatar_date" >{ this.state.question.created_at }</span>
                                     </div>
                                 </div>
                                 <p className="QA_textblock">{ this.state.question.question }</p>

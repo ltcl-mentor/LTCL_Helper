@@ -22,9 +22,9 @@ function Create() {
     
     const handleClick = () => {
         if(question.trim().length !== 0 && comment.trim().length !== 0){
-            if(set==0){
-                set=1;
+            if(set === 0){
                 document.getElementById('create').submit();
+                set=1;
             }else{
                 return false;
             }
@@ -52,7 +52,7 @@ function Create() {
             <div className="content">
                 <h2 className="title">カテゴリーの選択</h2>
                 <FormControl component="fieldset">
-                    <RadioGroup row aria-label="category" name="category" value={ category } onChange={(event) => { handleCategory(event) }}>
+                    <RadioGroup row aria-label="category" name="post[category]" value={ category } onChange={(event) => { handleCategory(event) }}>
                         <FormControlLabel value={0} control={<Radio />} label="カリキュラム" />
                         <FormControlLabel value={1} control={<Radio />} label="成果物" />
                     </RadioGroup>
