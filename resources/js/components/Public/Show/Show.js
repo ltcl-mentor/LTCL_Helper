@@ -114,14 +114,16 @@ class Show extends React.Component{
                 return (
                     <div>
                         <CardActionArea>
-                            <Card className="document">
-                                <img className="document_img" src="/images/NotePM_Logo_Vertical.png"/>
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="h2" align="center">
-                                        { document.title }
-                                    </Typography>
-                                </CardContent>
-                            </Card>
+                            <a href={ document.link }>
+                                <Card className="document">
+                                    <img className="document_img" src="/images/NotePM_Logo_Vertical.png"/>
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="h2" align="center">
+                                            { document.title }
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
+                            </a>
                         </CardActionArea>
                     </div>
                 );

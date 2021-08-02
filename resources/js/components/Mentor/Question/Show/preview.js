@@ -108,7 +108,7 @@ class Preview extends React.Component{
         
         let documents;
         if(this.state.documents.filter(v=>v).length === 0){
-            documents = (<div className="preview_emptyMessage">関連する記事はありません。</div>);
+            documents = (<div className="emptyMessage">関連する記事はありません。</div>);
         }else{
             documents = this.state.documents.map((document) => {
                 return (
@@ -132,7 +132,7 @@ class Preview extends React.Component{
             return (
                 <div className="related_question_itme">
                     <ListItem button>
-                        <a href={ `/show/`+question.id } target="_blank" className="related_question">
+                        <a className="related_question">
                             <ListItemText
                                 primary={ question.question }
                             />
