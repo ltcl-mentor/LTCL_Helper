@@ -106969,7 +106969,7 @@ var Show = /*#__PURE__*/function (_React$Component) {
           target: "_blank",
           className: "related_question"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_15__["default"], {
-          primary: question.question.length > 30 ? question.question.substr(0, 29) + '...' : question.question
+          primary: question.question.length > 50 ? question.question.substr(0, 49) + '...' : question.question
         }))));
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

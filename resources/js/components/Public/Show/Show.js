@@ -134,7 +134,7 @@ class Show extends React.Component{
                     <ListItem button>
                         <a href={ `/show/`+question.id } target="_blank" className="related_question">
                             <ListItemText
-                                primary={ question.question.length > 30 ? question.question.substr(0, 29)+'...' : question.question }
+                                primary={ question.question.length > 50 ? question.question.substr(0, 49)+'...' : question.question }
                             />
                         </a>
                     </ListItem>
