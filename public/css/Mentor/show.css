@@ -62,15 +62,17 @@
 }
 
 .deleteBtn{
+    width:100px;
     color: red;
-    margin: 5px 0;
-    padding: 0 5px;
+    margin: 0 auto;
     cursor: pointer;
 }
 
 /*質問詳細画面のみ*/
 /*メインの画面*/
 .publishBtn{
+    width:100px;
+    margin: 0 auto;
     color: green;
     cursor: pointer;
 }
