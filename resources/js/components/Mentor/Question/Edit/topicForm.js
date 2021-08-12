@@ -33,7 +33,7 @@ class TopicForm extends React.Component{
             topic = (
                 <div className="carriculum">
                     <FormControl component="fieldset">
-                        <RadioGroup row aria-label="topic" name="topic" value={ this.state.topic } onChange={(event) => { this.handleTopic(event) }}>
+                        <RadioGroup row aria-label="topic" name="post[topic]" value={ this.state.topic } onChange={(event) => { this.handleTopic(event) }}>
                             <FormControlLabel value={0} control={<Radio />} label="AWS" />
                             <FormControlLabel value={1} control={<Radio />} label="HTML" />
                             <FormControlLabel value={2} control={<Radio />} label="CSS" />
@@ -51,7 +51,7 @@ class TopicForm extends React.Component{
             topic = (
                 <div className="portfolio">
                     <FormControl component="fieldset">
-                        <RadioGroup row aria-label="topic" name="topic" value={ this.state.topic } onChange={(event) => { this.handleTopic(event) }}>
+                        <RadioGroup row aria-label="topic" name="post[topic]" value={ this.state.topic } onChange={(event) => { this.handleTopic(event) }}>
                             <FormControlLabel value={9} control={<Radio />} label="マイグレーション" />
                             <FormControlLabel value={10} control={<Radio />} label="リレーション" />
                             <FormControlLabel value={11} control={<Radio />} label="Laravel拡張" />

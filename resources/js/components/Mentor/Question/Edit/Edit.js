@@ -82,13 +82,13 @@ function Edit() {
                 <h2 className="title">カテゴリーの選択</h2>
                 <p>変更前：{ categories[ old_category ] }</p>
                 <FormControl component="fieldset">
-                    <RadioGroup row aria-label="category" name="category" value={ Number(category) } onChange={(event) => { handleCategory(event) }}>
+                    <RadioGroup row aria-label="category" name="post[category]" value={ Number(category) } onChange={(event) => { handleCategory(event) }}>
                         <FormControlLabel value={0} control={<Radio />} label="カリキュラム" />
                         <FormControlLabel value={1} control={<Radio />} label="成果物" />
                     </RadioGroup>
                 </FormControl>
             </div>
-                
+            
             <TopicForm
                 category={ category }
                 topic={ old_topic }

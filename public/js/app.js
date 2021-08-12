@@ -103146,7 +103146,7 @@ function Edit() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_RadioGroup__WEBPACK_IMPORTED_MODULE_9__["default"], {
     row: true,
     "aria-label": "category",
-    name: "category",
+    name: "post[category]",
     value: Number(category),
     onChange: function onChange(event) {
       handleCategory(event);
@@ -103810,7 +103810,7 @@ var TopicForm = /*#__PURE__*/function (_React$Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_RadioGroup__WEBPACK_IMPORTED_MODULE_3__["default"], {
           row: true,
           "aria-label": "topic",
-          name: "topic",
+          name: "post[topic]",
           value: this.state.topic,
           onChange: function onChange(event) {
             _this2.handleTopic(event);
@@ -103860,7 +103860,7 @@ var TopicForm = /*#__PURE__*/function (_React$Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_RadioGroup__WEBPACK_IMPORTED_MODULE_3__["default"], {
           row: true,
           "aria-label": "topic",
-          name: "topic",
+          name: "post[topic]",
           value: this.state.topic,
           onChange: function onChange(event) {
             _this2.handleTopic(event);
