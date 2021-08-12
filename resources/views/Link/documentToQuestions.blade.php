@@ -25,7 +25,7 @@
                 <div class="detach">
                     <h2 class="columns">関連質問の解除</h2>
                     <p class="message">既に記事に紐づけられている質問の紐付けを解除します。</p>
-                    @for($topicCount=0;$topicCount<=12;$topicCount++)
+                    @for($topicCount=0;$topicCount<=15;$topicCount++)
                         <details>
                             <summary class="summary">{{ $topic[$topicCount] }}  ({{ $related_questions->where('topic', $topicCount)->count() }}件)</summary>
                             @foreach($related_questions as $related_question)
@@ -42,7 +42,7 @@
                 <div class="attach">
                     <h2 class="columns">関連質問を登録</h2>
                     <p class="message">新たに記事に紐づける質問を登録します。</p>
-                    @for($topicCount=0;$topicCount<=12;$topicCount++)
+                    @for($topicCount=0;$topicCount<=15;$topicCount++)
                         <details>
                             <summary class="summary">{{ $topic[$topicCount] }}  ({{ $unrelated_questions->where('topic', $topicCount)->count() }}件)</summary>
                             @foreach($unrelated_questions as $unrelated_question)
