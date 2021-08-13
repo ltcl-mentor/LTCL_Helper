@@ -21,21 +21,25 @@ class ReactController extends Controller
                         ->where('category', $request->category)
                         ->where('topic', $request->topic)
                         ->where('curriculum_number', $request->curriculum_number)
-                        ->where('question', 'LIKE', '%'.$request->keyword.'%')->get();
+                        ->where('question', 'LIKE', '%'.$request->keyword.'%')
+                        ->orderBy('question', 'asc')->get();
         }elseif($request->curriculum_number){
             $results = Question::where('check', 1)
                         ->where('category', $request->category)
                         ->where('topic', $request->topic)
-                        ->where('curriculum_number', $request->curriculum_number)->get();
+                        ->where('curriculum_number', $request->curriculum_number)
+                        ->orderBy('question', 'asc')->get();
         }elseif($request->keyword){
             $results = Question::where('check', 1)
                         ->where('category', $request->category)
                         ->where('topic', $request->topic)
-                        ->where('question', 'LIKE', '%'.$request->keyword.'%')->get();
+                        ->where('question', 'LIKE', '%'.$request->keyword.'%')
+                        ->orderBy('question', 'asc')->get();
         }else{
             $results = Question::where('check', 1)
                         ->where('category', $request->category)
-                        ->where('topic', $request->topic)->get();
+                        ->where('topic', $request->topic)
+                        ->orderBy('question', 'asc')->get();
         }
         return $results;
     }
