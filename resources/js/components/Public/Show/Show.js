@@ -177,6 +177,7 @@ class Show extends React.Component{
                                         </div>
                                     </div>
                                     <p className="QA_textblock">{ this.state.question.question }</p>
+                                    { images }
                                 </Card>
                     
                                 <Card className="QA_card">
@@ -188,7 +189,6 @@ class Show extends React.Component{
                                         </div>
                                     </div>
                                     <p className="QA_textblock">{ this.state.question.comment }</p>
-                                    { images }
                                 </Card>
                                 
                                 <div className="realated_documents_wrap">
