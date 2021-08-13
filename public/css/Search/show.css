@@ -146,6 +146,11 @@ a:hover{
     object-fit: contain;
 }
 
+.image{
+    height: 200px;
+    width: 150px;
+}
+
 .empty_message{
     width: 100%;
     text-align: center;

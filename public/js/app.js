@@ -105022,7 +105022,7 @@ var Preview = /*#__PURE__*/function (_React$Component) {
         className: "Avatar_date"
       }, this.state.question.created_at))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "QA_textblock"
-      }, this.state.question.question)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      }, this.state.question.question), images), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_10__["default"], {
         className: "QA_card"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "Avatar-wrap"
@@ -105038,7 +105038,7 @@ var Preview = /*#__PURE__*/function (_React$Component) {
         className: "Avatar_date"
       }, this.state.question.updated_at))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "QA_textblock"
-      }, this.state.question.comment), images), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.state.question.comment)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "realated_documents_wrap"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "title"
