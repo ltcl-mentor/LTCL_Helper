@@ -10,6 +10,6 @@ class BlogController extends Controller
 {
     public function blog()
     {
-        return Question::where('category', 0)->get();
+        return Question::where('category', 0)->limit(10)->select('id', 'question')->get();
     }
 }
