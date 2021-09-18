@@ -94,17 +94,17 @@ class ReactController extends Controller
         return Document::All();
     }
     
+    public function getRelatedDocuments(Question $question)
+    {
+        return $question->documents()->get();
+    }
+    
     
     // staff関連
     // 全管理者受け渡し
     public function getAllStaffs()
     {
         return User::where('is_admin','staff')->get();
-    }
-    
-    public function getRelatedDocuments(Question $question)
-    {
-        return $question->documents()->get();
     }
     
     

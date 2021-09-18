@@ -1,10 +1,10 @@
 import React,{useState} from 'react';
 import ReactDOM from 'react-dom';
-import Category from './categoryForm';
-import Topic from './topicForm';
-import Addition from './additionalForms';
-import SearchButton from './searchButton';
-import Result from './result';
+import Category from './Search/Forms/categoryForm';
+import Topic from './Search/Forms/topicForm';
+import Addition from './Search/Forms/additionalForms/additionalForms';
+import SearchButton from './Search/searchButton';
+import Result from './Result/result';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 function Search() {
     const [category, setCategory] = useState('');
     const [topic, setTopic] = useState('');
-    const [curriculum_number, setCurriculumnumber] = useState('');
+    const [curriculum_number, setCurriculumNumber] = useState('');
     const [keyword, setKeyword] = useState('');
     const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
     const categories = ['カリキュラム', '成果物'];
@@ -114,7 +114,7 @@ function Search() {
                         <Addition 
                             category={ category }
                             topic={ topic }
-                            setCurriculumnumber={ setCurriculumnumber }
+                            setCurriculumNumber={ setCurriculumNumber }
                             setKeyword={ setKeyword }
                         />
                         <Button

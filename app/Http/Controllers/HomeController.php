@@ -34,6 +34,7 @@ class HomeController extends Controller
     {
         // 質問閲覧履歴への記録
         $question->users()->attach(Auth::id());
+        
         // データベースの容量を考慮して履歴保持の期限は２１日間とする
         History::historyDelete(21);
         
