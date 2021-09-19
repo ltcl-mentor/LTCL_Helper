@@ -27,7 +27,7 @@ function Publish(props) {
     };
     
     let publishBtn;
-    if(props.check === 0){
+    if(props.question.check === 0){
         publishBtn = (<div><p onClick={() => { openModal() }} className="publishBtn">公開する</p></div>);
     }else{
         publishBtn = (

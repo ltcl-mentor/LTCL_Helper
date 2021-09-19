@@ -57,17 +57,18 @@ function Show() {
         <div className="container">
             <div className="title">
                 <h1>質問詳細</h1>
+                
                 <Publish 
-                    check={ question.check }
                     csrf_token={ csrf_token }
-                    question_id={ question.id }
                     question={ question }
                     images={ images }
                     documents={ documents }
                     category={ categories[question.category] }
                     topic={ topics[question.topic] }
                 />
+                
                 <a href={`/questions/`+question.id+`/edit`} className="editBtn">編集する</a>
+                
                 <form action={`/questions/`+question.id+`/delete`} method="post" id="delete">
                     <input type="hidden" name="_token" value={ csrf_token }/>
                     <input type="submit" className="hidden"/>
@@ -89,6 +90,7 @@ function Show() {
                     images={ images }
                     question={ question.question }
                 />
+                
                 <Comment 
                     comment={ question.comment }
                 />

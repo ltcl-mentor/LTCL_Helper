@@ -73,7 +73,7 @@ function Show() {
                                 updated_at={ question.updated_at }
                                 question={ question.question }
                             />
-                
+                            
                             <Comment 
                                 comment={ question.comment }
                             />
