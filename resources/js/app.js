@@ -14,7 +14,6 @@ require('./bootstrap');
 
 require('./components/Public/Search/Search');
 require('./components/Public/Show/Show');
-require('./components/Mentor/Question/Approval/Approval');
 require('./components/Mentor/Question/Index/Index');
 require('./components/Mentor/Question/Create/Create');
 require('./components/Mentor/Question/Edit/Edit');

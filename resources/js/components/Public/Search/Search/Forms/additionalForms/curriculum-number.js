@@ -24,6 +24,7 @@ function CrriculumNumber(props) {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             onChange={(event) => { handleCurriculumNumber(event) }}
+                            name="post[curriculum_number]"
                         >
                             <MenuItem value="1-1-1">1-1-1</MenuItem>
                         </Select>
@@ -39,6 +40,7 @@ function CrriculumNumber(props) {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             onChange={(event) => { handleCurriculumNumber(event) }}
+                            name="post[curriculum_number]"
                         >
                             <MenuItem value="2-1-1">2-1-1</MenuItem>
                         </Select>
@@ -54,6 +56,7 @@ function CrriculumNumber(props) {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             onChange={(event) => { handleCurriculumNumber(event) }}
+                            name="post[curriculum_number]"
                         >
                             <MenuItem value="2-1-2">2-1-2</MenuItem>
                         </Select>
@@ -69,6 +72,7 @@ function CrriculumNumber(props) {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             onChange={(event) => { handleCurriculumNumber(event) }}
+                            name="post[curriculum_number]"
                         >
                             <MenuItem value="2-1-3">2-1-3</MenuItem>
                         </Select>
@@ -84,6 +88,7 @@ function CrriculumNumber(props) {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             onChange={(event) => { handleCurriculumNumber(event) }}
+                            name="post[curriculum_number]"
                         >
                             <MenuItem value="3-1-1">3-1-1</MenuItem>
                         </Select>
@@ -99,6 +104,7 @@ function CrriculumNumber(props) {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             onChange={(event) => { handleCurriculumNumber(event) }}
+                            name="post[curriculum_number]"
                         >
                             <MenuItem value="4-1-1">4-1-1</MenuItem>
                             <MenuItem value="4-1-2">4-1-2</MenuItem>
@@ -117,6 +123,7 @@ function CrriculumNumber(props) {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             onChange={(event) => { handleCurriculumNumber(event) }}
+                            name="post[curriculum_number]"
                         >
                             <MenuItem value="5-1-1">5-1-1</MenuItem>
                             <MenuItem value="8-1-1">8-1-1</MenuItem>
@@ -138,6 +145,7 @@ function CrriculumNumber(props) {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             onChange={(event) => { handleCurriculumNumber(event) }}
+                            name="post[curriculum_number]"
                         >
                             <MenuItem value="6-1-1">6-1-1</MenuItem>
                             <MenuItem value="6-2-1">6-2-1</MenuItem>
@@ -154,6 +162,7 @@ function CrriculumNumber(props) {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             onChange={(event) => { handleCurriculumNumber(event) }}
+                            name="post[curriculum_number]"
                         >
                             <MenuItem value="7-1-1">7-1-1</MenuItem>
                         </Select>
@@ -171,6 +180,7 @@ function CrriculumNumber(props) {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         onChange={(event) => { handleCurriculumNumber(event) }}
+                        name="post[curriculum_number]"
                     >
                         <MenuItem value="成果物">成果物</MenuItem>
                     </Select>

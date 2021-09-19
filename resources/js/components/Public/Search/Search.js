@@ -66,7 +66,6 @@ function Search() {
                     <div>
                         <Category 
                             setCategory={ setCategory }
-                            categories={ categories }
                         />
                         { category !== '' && (
                             <Button

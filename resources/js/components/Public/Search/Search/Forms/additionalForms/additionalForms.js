@@ -1,12 +1,12 @@
 import React from 'react';
-import CurriculumNamber from './curriculum-number';
+import CurriculumNumber from './curriculum-number';
 import Keyword from './keyword';
 
 function Addition(props) {
         
     return(
         <div className="container">
-            <CurriculumNamber 
+            <CurriculumNumber 
                 category={ props.category }
                 topic={ props.topic }
                 setCurriculumNumber={ props.setCurriculumNumber }

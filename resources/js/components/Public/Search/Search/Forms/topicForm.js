@@ -9,7 +9,7 @@ function Topic(props) {
     
     useEffect(() => {
         props.category === 0 ? setTopic(0) : setTopic(9);
-    },[]);
+    },[props.category]);
     
     const handleTopic = (event) => {
         setTopic(Number(event.target.value));

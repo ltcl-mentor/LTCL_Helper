@@ -1,18 +1,18 @@
 import React,{useState} from 'react';
 import ReactDOM from 'react-dom';
-import TopicForm from './topicForm';
-import CrriculumNumber from './curriculum-number';
+import TopicForm from '../../../Public/Search/Search/Forms/topicForm';
+import CurriculumNumber from '../../../Public/Search/Search/Forms/additionalForms/curriculum-number';
 import QuestionForm from './questionForm';
 import CommentForm from './commentForm';
 import Picture from './picture';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
+
+import Category from '../../../Public/Search/Search/Forms/categoryForm';
 
 function Create() {
     const [category, setCategory] = useState(0);
     const [topic, setTopic] = useState(0);
+    const [curriculum_number, setCurriculumNumber] = useState('');
+    const [curriculum_number_validation_error, setCurriculumNumberValidationError] = useState(0);
     const [question, setQuestion] = useState('');
     const [question_validation_error, setQuestionValidationError] = useState(0);
     const [comment, setComment] = useState('');
@@ -21,6 +21,11 @@ function Create() {
     var set = 0;
     
     const handleClick = () => {
+        if(!(curriculum_number)){
+            setCurriculumNumberValidationError(1);
+            return false;
+        }
+        
         if(question.trim().length !== 0 && comment.trim().length !== 0){
             if(set === 0){
                 document.getElementById('create').submit();
@@ -43,31 +48,42 @@ function Create() {
         }
     };
     
-    const handleCategory = (event) => {
-        setCategory( Number(event.target.value) );
-    };
+    let validation_message;
+        if(curriculum_number_validation_error === 1){
+            validation_message = (<p className="errorMassage">カリキュラム番号を選択してください。</p>);
+        }else{
+            validation_message = ('');
+        }
     
     return (
         <div className="container">
             <div className="content">
                 <h2 className="title">カテゴリーの選択</h2>
-                <FormControl component="fieldset">
-                    <RadioGroup row aria-label="category" name="post[category]" value={ category } onChange={(event) => { handleCategory(event) }}>
-                        <FormControlLabel value={0} control={<Radio />} label="カリキュラム" />
-                        <FormControlLabel value={1} control={<Radio />} label="成果物" />
-                    </RadioGroup>
-                </FormControl>
+                <Category 
+                    setCategory={ setCategory }
+                />
+                <input type="hidden" name="post[category]" value={ category } />
             </div>
-                
-            <TopicForm
-                category={ category }
-                setTopic={ setTopic }
-            />
-                
-            <CrriculumNumber
-                category={ category }
-                topic={ topic }
-            />
+            
+            <div className="content">
+                <h2 className="title">トピックの選択</h2>
+                <TopicForm
+                    category={ category }
+                    setTopic={ setTopic }
+                />
+                <input type="hidden" name="post[topic]" value={ topic } />
+            </div>
+            
+            <div className="content">
+                <h2 className="title">該当カリキュラム番号の選択</h2>
+                { validation_message }
+                <CurriculumNumber
+                    category={ category }
+                    topic={ topic }
+                    setCurriculumNumber={ setCurriculumNumber }
+                />
+                <input type="hidden" name="post[curriculum_number]" value={ curriculum_number } />
+            </div>
                 
             <QuestionForm
                 setQuestion={ setQuestion }
