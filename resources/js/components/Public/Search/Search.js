@@ -5,7 +5,7 @@ import Topic from './Search/Forms/topicForm';
 import Addition from './Search/Forms/additionalForms/additionalForms';
 import SearchButton from './Search/searchButton';
 import Result from './Result/result';
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -14,21 +14,21 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-    },
-    button: {
-        marginTop: theme.spacing(1),
-        marginRight: theme.spacing(1),
-    },
-    actionsContainer: {
-        marginBottom: theme.spacing(2),
-    },
-    resetContainer: {
-        padding: theme.spacing(3),
-    },
-}));
+// const useStyles = makeStyles((theme) => ({
+//     root: {
+//         width: '100%',
+//     },
+//     button: {
+//         marginTop: theme.spacing(1),
+//         marginRight: theme.spacing(1),
+//     },
+//     actionsContainer: {
+//         marginBottom: theme.spacing(2),
+//     },
+//     resetContainer: {
+//         padding: theme.spacing(3),
+//     },
+// }));
 
 function Search() {
     const [category, setCategory] = useState('');
@@ -38,7 +38,7 @@ function Search() {
     const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
     const categories = ['カリキュラム', '成果物'];
     const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'];
-    const classes = useStyles();
+    // const classes = useStyles();
     const [activeStep, setActiveStep] = useState(0);
     const steps = [
         `カテゴリーを選択する  ${ activeStep >= 1 ? ` ___${categories[category]}` : '' }`,
@@ -72,7 +72,7 @@ function Search() {
                                 variant="contained"
                                 color="primary"
                                 onClick={ handleNext }
-                                className={ classes.button }
+                                // className={ classes.button }
                             >
                                 Next
                             </Button>
@@ -89,7 +89,7 @@ function Search() {
                         />
                         <Button
                             onClick={ handleBack }
-                            className={ classes.button }
+                            // className={ classes.button }
                             color="secondary"
                         >
                             Back
@@ -99,7 +99,7 @@ function Search() {
                                 variant="contained"
                                 color="primary"
                                 onClick={ handleNext }
-                                className={ classes.button }
+                                // className={ classes.button }
                             >
                                 Next
                             </Button>
@@ -118,7 +118,7 @@ function Search() {
                         />
                         <Button
                             onClick={ handleBack }
-                            className={ classes.button }
+                            // className={ classes.button }
                             color="secondary"
                         >
                             Back
@@ -127,7 +127,7 @@ function Search() {
                             variant="contained"
                             color="primary"
                             onClick={ handleNext }
-                            className={ classes.button }
+                            // className={ classes.button }
                         >
                             Next
                         </Button>
@@ -141,25 +141,25 @@ function Search() {
     return (
         <div className="container">
             <div className="form_box">
-                <div className={ classes.root }>
+
                     <Stepper activeStep={ activeStep }  orientation="vertical">
                         { steps.map((label, index) => (
                             <Step key={ label }>
                                 <StepLabel>{ label }</StepLabel>
                                 <StepContent>
                                     <Typography>{ getStepContent(index) }</Typography>
-                                    <div className={ classes.actionsContainer }>
-                                    </div>
+
+
                                 </StepContent>
                             </Step>
                         ))}
                     </Stepper>
                     
                     { activeStep === steps.length && (
-                        <Paper square elevation={ 0 } className={ classes.resetContainer }>
+                        <Paper square elevation={ 0 } >
                             <Button
                                 onClick={ handleBack }
-                                className={ classes.button }
+
                                 color="secondary"
                             >
                                 Back
@@ -167,7 +167,7 @@ function Search() {
                             <Button
                                 variant="contained"
                                 onClick={ handleReset }
-                                className={ classes.button }
+
                                 color="primary"
                             >
                                 Reset
@@ -181,7 +181,7 @@ function Search() {
                             />
                         </Paper>
                     )}
-                </div>
+            
             </div>
 
             
