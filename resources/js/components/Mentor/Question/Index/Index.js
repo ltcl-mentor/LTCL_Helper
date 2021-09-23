@@ -3,11 +3,8 @@ import ReactDOM from 'react-dom';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-import 'react-tabs/style/react-tabs.css';
 import Curriculum from './curriculum';
 import Portfolio from './portfolio';
-
-
 
 function Index() {
     const [value, setValue] = React.useState(0);
@@ -18,9 +15,9 @@ function Index() {
     
     let tab_content;
     if(value === 0) {
-        tab_content = (<Curriculum />);
+        tab_content = ( <Curriculum /> );
     }else {
-        tab_content = (<Portfolio />);
+        tab_content = ( <Portfolio /> );
     }
     
     return (

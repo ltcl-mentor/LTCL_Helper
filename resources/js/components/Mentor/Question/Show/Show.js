@@ -7,16 +7,15 @@ import Question from './question';
 import Comment from './comment';
 import Documents from '../../../Public/Show/documents';
 
-const question_id = document.getElementById('Show').getAttribute('question__id');
-const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
-
 function Show() {
     const [question, setQuestion] = useState([]);
     const [images, setImages] = useState([]);
     const [documents, setDocuments] = useState([]);
     const categories = ['カリキュラム', '成果物'];
     const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', 'マイグレーション', 'リレーション', 'Laravel拡張', '画像処理', 'Heroku環境', 'API', 'デザイン'];
-    
+    const question_id = document.getElementById('Show').getAttribute('question__id');
+    const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
+
     useEffect(() => {
         axios
             .get(`/react/question/${ question_id }`)

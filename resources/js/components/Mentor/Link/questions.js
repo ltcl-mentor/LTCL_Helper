@@ -1,89 +1,62 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, {useState, useEffect} from 'react';
 import axios from "axios";
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-class Questions extends React.Component {
-    constructor(props){
-        super(props);
-        this.state={
-            questions: [],
-            curriculumTopics: [
-                {"id":0, "topic":"AWS"},
-                {"id":1, "topic":"HTML"},
-                {"id":2, "topic":"CSS"},
-                {"id":3, "topic":"JavaScript"},
-                {"id":4, "topic":"サーバー"},
-                {"id":5, "topic":"PHP"},
-                {"id":6, "topic":"Laravel"},
-                {"id":7, "topic":"DB"},
-                {"id":8, "topic":"Git&GitHub"}
-            ],
-            portfolioTopics: [
-                {"id":9, "topic":"マイグレーション"},
-                {"id":10, "topic":"リレーション"},
-                {"id":11, "topic":"Laravel拡張"},
-                {"id":12, "topic":"画像処理"},
-                {"id":13, "topic":"Heroku環境"},
-                {"id":14, "topic":"API"},
-                {"id":15, "topic":"デザイン"},
-            ],
-        };
-    } 
+function Questions(props) {
+    const [questions, setQuestions] = useState([]);
+    const [expanded, setExpanded] = React.useState(false);
     
-    componentDidMount() {
+    useEffect(() => {
         axios
             .get("/react/all/questions")
             .then(response => {
-                this.setState({
-                    questions: response.data
-                });
- 
+                setQuestions(response.data);
             }).catch(error => {
                 console.log(error);
             });
-    }
+    }, []);
     
-    render(){
-        const curriculum = this.state.curriculumTopics.map((topic) => {
-            return (
-                <div className="content">
-                    <details>
-                        <summary className="title">{ topic.topic }  { this.state.questions.filter(question => question.topic == topic.id).length }件</summary>
-                        { this.state.questions.map((question) => {
-                            if(question.category === 0 && question.topic === topic.id){
-                                return <div className="question">・<a href={ `/links/question/`+question.id }>{ question.question }</a></div>;
-                            }
-                        })}
-                    </details>
-                </div>
-            );
-        });
-        
-        const portfolio = this.state.portfolioTopics.map((topic) => {
-            return (
-                <div className="content">
-                    <details>
-                        <summary className="title">{ topic.topic }  { this.state.questions.filter(question => question.topic == topic.id).length }件</summary>
-                        { this.state.questions.map((question) => {
-                            if(question.category === 0 && question.topic === topic.id){
-                                return <div className="question">・<a href={ `/links/question/`+question.id }>{ question.question }</a></div>;
-                            }
-                        })}
-                    </details>
-                </div>
-            );
-        });
-
-        
+    const handleChange = (panel) => (event, isExpanded) => {
+        setExpanded(isExpanded ? panel : false);
+    };
+    
+    const question = props.topics.map((topic) => {
         return (
-            <div className="container">
-                <div className="cover"><h1 className="curriculum">カリキュラム</h1></div>
-                { curriculum }
-                <div className="cover"><h1 className="portfolio">成果物</h1></div>
-                { portfolio }
+            <div className="content">
+                <Accordion expanded={ expanded === topic.id } onChange={handleChange(topic.id)}>
+                    <AccordionSummary
+                        expandIcon={ <ExpandMoreIcon /> }
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ width: '33%', flexShrink: 0 }}>
+                            { topic.topic }
+                        </Typography>
+                        <Typography sx={{ color: 'text.secondary' }}>{ questions.filter(question => question.topic == topic.id).length }件</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>
+                            { questions.map((question) => {
+                                if(question.topic === topic.id){
+                                    return <div className="question">・<a href={`/questions/`+question.id}>{ question.question }</a></div>;
+                                }
+                            })}
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
             </div>
         );
-    }
+    });
+    
+    return (
+        <div className="container">
+            { question }
+        </div>
+    );
 }
 
 export default Questions;
