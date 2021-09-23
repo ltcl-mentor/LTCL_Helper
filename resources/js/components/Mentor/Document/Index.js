@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import ReactDOM from 'react-dom';
 import axios from "axios";
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -6,7 +7,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-function Documents() {
+function Document() {
     const [documents, setDocuments] = useState([]);
     const [staffs, setStaffs] = useState([]);
     const [expanded, setExpanded] = React.useState(false);
@@ -26,14 +27,15 @@ function Documents() {
                 setStaffs(response.data);
             }).catch(error => {
                 console.log(error);
-            });
+            }); 
+        
     }, []);
     
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
     
-    const list = staffs.map((staff) => {
+    const document = staffs.map((staff) => {
         return (
             <div className="content">
                 <Accordion expanded={ expanded === staff.id } onChange={handleChange(staff.id)}>
@@ -51,7 +53,7 @@ function Documents() {
                         <Typography>
                             { documents.map((document) => {
                                 if(document.user_id === staff.id){
-                                    return <div  className="document">・<a href={ `/links/document/`+document.id }>{ document.title }</a></div>;
+                                    return <div  className="document">・<a href={ `/documents/`+document.id }>{ document.title }</a></div>;
                                 }
                             })}
                         </Typography>
@@ -63,9 +65,13 @@ function Documents() {
     
     return (
         <div className="container">
-            { list }
+            { document }
         </div>
     );
 }
 
-export default Documents;
+export default Document;
+
+if (document.getElementById('Document')) {
+    ReactDOM.render(<Document />, document.getElementById('Document'));
+}

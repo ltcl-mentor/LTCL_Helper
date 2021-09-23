@@ -20,3 +20,4 @@ require('./components/Mentor/Question/Edit/Edit');
 require('./components/Mentor/Question/Show/Show');
 require('./components/Mentor/Link/Index');
 require('./components/Mentor/User/Public');
+require('./components/Mentor/Document/Index');

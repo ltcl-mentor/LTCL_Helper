@@ -12,12 +12,9 @@ use Illuminate\Support\Facades\Auth;
 class DocumentController extends Controller
 {
     // 初期画面表示
-    public function index(Document $document, User $user)
+    public function index()
     {
-        return view('Document.index')->with([
-            'documents' => $document->get(),
-            'staffs' => $user->where('is_admin', 'staff')->get(),
-        ]);
+        return view('Document.index');
     }
     
     // 新規作成画面表示
