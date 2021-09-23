@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import ReactDOM from 'react-dom';
 import TopicForm from '../../../Public/Search/Search/Forms/topicForm';
-import CurriculumNumber from '../../../Public/Search/Search/Forms/additionalForms/curriculum-number';
+import CurriculumNumber from '../../../Public/Search/Search/Forms/additionalForms/curriculum-number/curriculum-number';
 import QuestionForm from './questionForm';
 import CommentForm from './commentForm';
 import Picture from './picture';
@@ -17,15 +17,37 @@ function Create() {
     const [question_validation_error, setQuestionValidationError] = useState(0);
     const [comment, setComment] = useState('');
     const [comment_validation_error, setCommentValidationError] = useState(0);
+    const curriculum_numbers = [
+        [
+            ["1-1-1"],
+            ["2-1-1"],
+            ["2-1-2"],
+            ["2-1-3"],
+            ["3-1-1"],
+            ["4-1-1", "4-1-2", "4-1-3", "4-1-4"],
+            ["5-1-1", "8-1-1", "8-2-1", "8-3-1", "8-4-1", "8-5-1", "8-6-1"],
+            ["6-1-1", "6-2-1"],
+            ["7-1-1"]
+        ],
+        ["成果物"]
+    ];
     
-    var set = 0;
+    let set = 0;
     
     const handleClick = () => {
+        // カリキュラム番号のバリデーション
+        // カリキュラム番号が選択されているか
         if(!(curriculum_number)){
             setCurriculumNumberValidationError(1);
             return false;
         }
+        // カテゴリーとトピックに対して適切なカリキュラム番号が選択されているか
+        if(!(curriculum_numbers[Number(category)][Number(topic)].includes(curriculum_number))) {
+            setCurriculumNumberValidationError(1);
+            return false;
+        }
         
+        // 質問とコメントのバリデーション
         if(question.trim().length !== 0 && comment.trim().length !== 0){
             if(set === 0){
                 document.getElementById('create').submit();
@@ -49,11 +71,11 @@ function Create() {
     };
     
     let validation_message;
-        if(curriculum_number_validation_error === 1){
-            validation_message = (<p className="errorMassage">カリキュラム番号を選択してください。</p>);
-        }else{
-            validation_message = ('');
-        }
+    if(curriculum_number_validation_error === 1){
+        validation_message = (<p className="errorMassage">カリキュラム番号を選択してください。</p>);
+    }else{
+        validation_message = ('');
+    }
     
     return (
         <div className="container">
@@ -86,11 +108,13 @@ function Create() {
             </div>
                 
             <QuestionForm
+                question={ question }
                 setQuestion={ setQuestion }
                 question_validation_error={ question_validation_error }
             />
                 
             <CommentForm
+                comment={ comment }
                 setComment={ setComment }
                 comment_validation_error={ comment_validation_error }
             />

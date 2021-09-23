@@ -1,12 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 function CommentForm(props) {
-    const [comment, setComment] = useState('');
     
     const handleComment = (event) => {
-        setComment(event.target.value);
+        props.setComment(event.target.value);
     };
-    
     
     let validation_message;
     if(props.comment_validation_error === 1){
@@ -19,8 +17,7 @@ function CommentForm(props) {
         <div className="content">
             <h2 className="title">問題解決のヒントやコメントを入力</h2> 
             { validation_message }
-            <textarea name="post[comment]" placeholder="あくまでもヒントにとどめるようにしてください。" rows="8" value={ comment } onChange={(event) => { handleComment(event) }}/>
-            { props.setComment(comment) }
+            <textarea name="post[comment]" placeholder="あくまでもヒントにとどめるようにしてください。" rows="8" value={ props.comment } onChange={(event) => { handleComment(event) }}/>
         </div>
     );
 }

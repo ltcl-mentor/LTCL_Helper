@@ -1,10 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 function QuestionForm(props) {
-    const [question, setQuestion] = useState('');
     
     const handleQuestion = (event) => {
-        setQuestion(event.target.value);
+        props.setQuestion(event.target.value);
     };
     
     let validation_message;
@@ -18,8 +17,7 @@ function QuestionForm(props) {
         <div className="content">
             <h2 className="title">質問内容を入力</h2>
             { validation_message }
-            <textarea name="post[question]" placeholder="質問内容を簡潔に入力" rows="8" value={ question } onChange={(event) => { handleQuestion(event) }}/>
-            { props.setQuestion(question) }
+            <textarea name="post[question]" placeholder="質問内容を簡潔に入力" rows="8" value={ props.question } onChange={(event) => { handleQuestion(event) }}/>
         </div>
     );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import CurriculumNumber from './curriculum-number';
+import CurriculumNumber from './curriculum-number/curriculum-number';
 import Keyword from './keyword';
 
 function Addition(props) {
