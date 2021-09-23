@@ -1,38 +1,39 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Box from '@material-ui/core/Box';
 import 'react-tabs/style/react-tabs.css';
 import Curriculum from './curriculum';
 import Portfolio from './portfolio';
 
-class Index extends React.Component{
-    constructor(props){
-        super(props);
-        this.state={
-            
-        };
+
+
+function Index() {
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+    
+    let tab_content;
+    if(value === 0) {
+        tab_content = (<Curriculum />);
+    }else {
+        tab_content = (<Portfolio />);
     }
     
-    render(){
-        return (
-            <div>
-            <Tabs>
-                <TabList>
-                    <Tab>カリキュラム</Tab>
-                    <Tab>成果物</Tab>
-                </TabList>
-            
-                <TabPanel>
-                    <Curriculum />
-                </TabPanel>
-                
-                <TabPanel>
-                    <Portfolio />
-                </TabPanel>
-            </Tabs>
-            </div>
-        );
-    }
+    return (
+        <Box sx={{ width: '95%' }}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                    <Tab label="カリキュラム" />
+                    <Tab label="成果物" />
+                </Tabs>
+            </Box>
+            { tab_content }
+        </Box>
+    );
 }
 
 export default Index;
