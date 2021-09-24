@@ -13,10 +13,16 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     //一般に公開される部分
+    
     // トップ画面表示
+    public function home()
+    {
+        return view('home');
+    }
+    
     public function search(Question $question)
     {
-        return view('Public.Search.search');
+        return view('Public.Search.Condition.search');
     }
     
     // 公開中の質問一覧表示

@@ -21,7 +21,8 @@ Auth::routes([
 Route::group(['middleware' => ['auth']], function () {
     
     // ログイン済みユーザーのみアクセス可能
-    Route::get('/', 'HomeController@search'); // トップ画面表示
+    Route::get('/', 'HomeController@home'); // トップ画面表示
+    Route::get('/search/condition', 'HomeController@search'); // 絞り込み検索画面表示
     Route::get('/questions', 'HomeController@questionIndex'); // 公開中の質問一覧表示
     Route::get('/documents', 'HomeController@documentIndex'); // 公開中の参考記事一覧表示
     Route::get('/show/{question}', 'HomeController@show'); // 質問詳細画面表示

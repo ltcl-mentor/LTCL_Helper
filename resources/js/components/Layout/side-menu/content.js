@@ -15,7 +15,7 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 function Content(props) {
     const searchMenu = [
         {"menu":"フリーワード検索", "url":"/search/freeword"},
-        {"menu":"絞り込み検索", "url":"/"}
+        {"menu":"絞り込み検索", "url":"/search/condition"}
     ];
     const itemMenu = [
         {"menu":"質問一覧", "url":"/questions"},

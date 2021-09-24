@@ -20,17 +20,6 @@ function Questions(props) {
             });
     },[]);
     
-    useEffect(() => {
-        axios
-            .get(`/react/search/questions?category=${ props.category }&topic=${ props.topic }&curriculum_number=${ props.curriculum_number }&keyword=${ props.keyword }`)
-            .then(response => {
-                setQuestions(response.data);
-
-            }).catch(error => {
-                console.log(error);
-            });
-    },[props.curriculum_number, props.keyword]);
-    
     const handlePageClick = (event) => {
         setCurrentPage(event.selected);
     };

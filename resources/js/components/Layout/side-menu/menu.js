@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
 
 import Content from './content';
 
@@ -22,9 +21,7 @@ function Menu(props) {
             sx={{ mr: 2 }}
         >
             <React.Fragment>
-                <Button onClick={ toggleDrawer(true) }>
-                    <MenuIcon />
-                </Button>
+                <MenuIcon onClick={ toggleDrawer(true) }/>
                 <Drawer
                     anchor="left"
                     open={ menu }

@@ -12,6 +12,7 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+require('./components/Public/Home/Home');
 require('./components/Public/Search/Search');
 require('./components/Public/Question/Index/Index');
 require('./components/Public/Question/Show/Show');
