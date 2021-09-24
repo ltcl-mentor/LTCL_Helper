@@ -22,6 +22,8 @@ Route::group(['middleware' => ['auth']], function () {
     
     // ログイン済みユーザーのみアクセス可能
     Route::get('/', 'HomeController@search'); // トップ画面表示
+    Route::get('/questions', 'HomeController@questionIndex'); // 公開中の質問一覧表示
+    Route::get('/documents', 'HomeController@documentIndex'); // 公開中の参考記事一覧表示
     Route::get('/show/{question}', 'HomeController@show'); // 質問詳細画面表示
     Route::get('/history', 'HomeController@history'); // 履歴画面表示
     Route::get('react/search/questions', 'ReactController@getSearchQuestions'); // 質問検索結果の受け渡し
@@ -55,7 +57,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/questions/index', 'QuestionController@index'); // 初期画面表示
         Route::get('/questions/create', 'QuestionController@create'); // 新規作成画面表示
         Route::post('/questions/store', 'QuestionController@store'); // 新規作成実行
-        // Route::get('/questions/approval', 'QuestionController@approval'); // 承認用一覧画面表示
         Route::post('/questions/{question}/check', 'QuestionController@check'); // 承認実行
         Route::post('/questions/{question}/uncheck', 'QuestionController@uncheck'); // 承認解除実行
         Route::get('/questions/{question}', 'QuestionController@show'); // 詳細画面表示
@@ -74,13 +75,13 @@ Route::group(['middleware' => ['auth']], function () {
         // Reactへのデータ受け渡し
         Route::get('react/all/questions', 'ReactController@getAllQuestions'); // 全質問受け渡し
         Route::get('react/approved/questions', 'ReactController@getApprovedQuestions'); // 承認済み質問受け渡し
-        Route::get('react/unapproved/questions', 'ReactController@getUnapprovedQuestions'); // 未承認質問受け渡し
+        Route::get('react/unapproved/questions', 'ReactController@getUnapprovedQuestions'); // 未承認質問受け渡し（未使用？）
         Route::get('react/curriculum/questions', 'ReactController@getCurriculumQuestions'); // カリキュラム範囲の質問受け渡し
         Route::get('react/portfolio/questions', 'ReactController@getPortfolioQuestions'); // 成果物範囲の質問受け渡し
         Route::get('react/all/documents', 'ReactController@getAllDocuments'); // 全記事受け渡し
         Route::get('react/all/staffs', 'ReactController@getAllStaffs'); // 全管理者受け渡し
         Route::get('react/id', 'ReactController@getUserId'); // ログインユーザーid受け渡し
-        
+        Route::get('react/user', 'ReactController@getUser'); // ログインユーザー受け渡し
     }); 
 });    
     

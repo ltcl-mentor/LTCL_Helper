@@ -114,5 +114,9 @@ class ReactController extends Controller
     {
         return Auth::id();
     }
-
+    
+    public function getUser()
+    {
+        return Auth::user();
+    }
 }

@@ -12,16 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    // public function index()
-    // {
-    //     return view('home');
-    // }
-    
     //一般に公開される部分
     // トップ画面表示
     public function search(Question $question)
@@ -29,6 +19,12 @@ class HomeController extends Controller
         return view('Search.search');
     }
     
+    // 公開中の質問一覧表示
+    public function questionIndex()
+    {
+        return view('Public.Question.index');
+    }
+
     // 質問詳細画面表示
     public function show(Question $question)
     {
@@ -43,6 +39,12 @@ class HomeController extends Controller
             'category' => $question->category,
             'topic' => $question->topic,
         ]);
+    }
+    
+    // 公開中の参考記事一覧表示
+    public function documentIndex()
+    {
+        return view('Public.Document.index');
     }
     
     // 履歴画面表示

@@ -38,7 +38,7 @@ function Curriculum() {
     const curriculum = curriculum_topics.map((topic) => {
         return (
             <div className="content">
-                <Accordion expanded={ expanded === topic.id } onChange={handleChange(topic.id)}>
+                <Accordion expanded={ expanded === topic.id } onChange={ handleChange(topic.id) }>
                     <AccordionSummary
                         expandIcon={ <ExpandMoreIcon /> }
                         aria-controls="panel1bh-content"

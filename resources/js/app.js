@@ -13,7 +13,9 @@ require('./bootstrap');
  */
 
 require('./components/Public/Search/Search');
-require('./components/Public/Show/Show');
+require('./components/Public/Question/Index/Index');
+require('./components/Public/Question/Show/Show');
+require('./components/Public/Document/Index/Index');
 require('./components/Mentor/Question/Index/Index');
 require('./components/Mentor/Question/Create/Create');
 require('./components/Mentor/Question/Edit/Edit');
@@ -21,3 +23,4 @@ require('./components/Mentor/Question/Show/Show');
 require('./components/Mentor/Link/Index');
 require('./components/Mentor/User/Public');
 require('./components/Mentor/Document/Index');
+require('./components/Layout/Bar');

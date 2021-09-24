@@ -5,7 +5,7 @@ import Publish from './Publish/publish';
 import Parameters from './parameters';
 import Question from './question';
 import Comment from './comment';
-import Documents from '../../../Public/Show/documents';
+import Documents from '../../../Public/Question/Show/documents';
 
 function Show() {
     const [question, setQuestion] = useState([]);
@@ -13,7 +13,7 @@ function Show() {
     const [documents, setDocuments] = useState([]);
     const categories = ['カリキュラム', '成果物'];
     const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', 'マイグレーション', 'リレーション', 'Laravel拡張', '画像処理', 'Heroku環境', 'API', 'デザイン'];
-    const question_id = document.getElementById('Show').getAttribute('question__id');
+    const question_id = document.getElementById('Question_mentor_show').getAttribute('question__id');
     const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
 
     useEffect(() => {
@@ -110,7 +110,7 @@ function Show() {
 
 export default Show;
 
-if (document.getElementById('Show')) {
-    ReactDOM.render(<Show />, document.getElementById('Show'));
+if (document.getElementById('Question_mentor_show')) {
+    ReactDOM.render(<Show />, document.getElementById('Question_mentor_show'));
 }
 

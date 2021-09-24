@@ -130,6 +130,6 @@ function Create() {
 
 export default Create;
 
-if (document.getElementById('Create')) {
-    ReactDOM.render(<Create />, document.getElementById('Create'));
+if (document.getElementById('Question_mentor_create')) {
+    ReactDOM.render(<Create />, document.getElementById('Question_mentor_create'));
 }

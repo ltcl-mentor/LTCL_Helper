@@ -35,7 +35,7 @@ function Edit() {
     const [question_validation_error, setQuestionValidationError] = useState(0);
     const [comment, setComment] = useState();
     const [comment_validation_error, setCommentValidationError] = useState(0);
-    const question_id = document.getElementById('Edit').getAttribute('question_id');
+    const question_id = document.getElementById('Question_mentor_edit').getAttribute('question_id');
     
     useEffect(() => {
         axios
@@ -147,7 +147,7 @@ function Edit() {
 
 export default Edit;
 
-if (document.getElementById('Edit')) {
-    ReactDOM.render(<Edit />, document.getElementById('Edit'));
+if (document.getElementById('Question_mentor_edit')) {
+    ReactDOM.render(<Edit />, document.getElementById('Question_mentor_edit'));
 }
 

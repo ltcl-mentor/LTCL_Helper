@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
-import Parameters from '../../../../Public/Show/parameters';
-import Question from '../../../../Public/Show/question';
-import Comment from '../../../../Public/Show/comment';
-import Documents from '../../../../Public/Show/documents';
-import RelatedQuestions from '../../../../Public/Show/related-questions';
+import Parameters from '../../../../Public/Question/Show/parameters';
+import Question from '../../../../Public/Question/Show/question';
+import Comment from '../../../../Public/Question/Show/comment';
+import Documents from '../../../../Public/Question/Show/documents';
+import RelatedQuestions from '../../../../Public/Question/Show/related-questions';
 
 function Preview(props) {
     const [relatedQuestions, setRelatedQuestions] = useState([]);

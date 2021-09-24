@@ -7,7 +7,7 @@
     <!--React-->
     <div class="container">
         <div><a href="/mentor">管理ページ</a> > 質問一覧</div>
-        <div id="Index"></div>
+        <div id="Question_mentor_index"></div>
     </div>
 
 @endsection

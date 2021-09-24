@@ -72,6 +72,6 @@ function Document() {
 
 export default Document;
 
-if (document.getElementById('Document')) {
-    ReactDOM.render(<Document />, document.getElementById('Document'));
+if (document.getElementById('Document_mentor_index')) {
+    ReactDOM.render(<Document />, document.getElementById('Document_mentor_index'));
 }

@@ -11,7 +11,7 @@
         <div>
             <a href="/mentor">管理ページ</a> > <a href="/questions/index">質問一覧</a> > 質問詳細
         </div>
-        <div id="Show" question__id="{{ $question_id }}"></div>
+        <div id="Question_mentor_show" question__id="{{ $question_id }}"></div>
     </div>
     
 @endsection

@@ -84,6 +84,6 @@ function Public() {
 
 export default Public;
 
-if (document.getElementById('Public')) {
-    ReactDOM.render(<Public />, document.getElementById('Public'));
+if (document.getElementById('User_public_register')) {
+    ReactDOM.render(<Public />, document.getElementById('User_public_register'));
 }

@@ -11,7 +11,7 @@
     <form action="/questions/store" method="post" id="create" enctype="multipart/form-data">
         @csrf
         <!--React-->
-        <div id="Create"></div>
+        <div id="Question_mentor_create"></div>
     </form>
     
 @endsection

@@ -36,9 +36,9 @@ function Portfolio() {
     const portfolio = portfolio_topics.map((topic) => {
         return (
             <div className="content">
-                <Accordion expanded={ expanded === topic.id } onChange={handleChange(topic.id)}>
+                <Accordion expanded={ expanded === topic.id } onChange={ handleChange(topic.id) }>
                     <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
+                        expandIcon={ <ExpandMoreIcon /> }
                         aria-controls="panel1bh-content"
                         id="panel1bh-header"
                     >

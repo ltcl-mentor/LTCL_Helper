@@ -35,6 +35,6 @@ function Index() {
 
 export default Index;
 
-if (document.getElementById('Index')) {
-    ReactDOM.render(<Index />, document.getElementById('Index'));
+if (document.getElementById('Question_mentor_index')) {
+    ReactDOM.render(<Index />, document.getElementById('Question_mentor_index'));
 }

@@ -13,7 +13,7 @@
                 <div class="card-header">{{ __('Register(20名まで同時に登録できます)') }}</div>
                 
                     <!--React-->
-                    <div id="Public"></div>
+                    <div id="User_public_register"></div>
                     
                 </div>
             </div>

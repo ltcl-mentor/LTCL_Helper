@@ -11,7 +11,7 @@
     <form action="/questions/{{ $question_id }}/update" method="post" enctype="multipart/form-data" id ="update">
         @csrf
         <!--React-->
-        <div id="Edit" question_id={{ $question_id }}></div>
+        <div id="Question_mentor_edit" question_id={{ $question_id }}></div>
     </form>
     
 @endsection
