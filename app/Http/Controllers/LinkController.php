@@ -12,7 +12,7 @@ class LinkController extends Controller
     // 初期画面表示
     public function index()
     {
-        return view('Link.index');
+        return view('Mentor.Link.index');
     }
     
     // 新規作成画面表示(記事：質問＝１：多)
@@ -27,7 +27,7 @@ class LinkController extends Controller
             $unrelated_questions = $document->getUnrelatedQuestions();
         }
         
-        return view('Link.documentToQuestions')->with([
+        return view('Mentor.Link.documentToQuestions')->with([
             'document' => $document,
             'related_questions' => $related_questions,
             'unrelated_questions' => $unrelated_questions,
@@ -59,7 +59,7 @@ class LinkController extends Controller
             $unrelated_documents = $question->getUnrelatedDocuments();
         }
         
-        return view('Link.questionToDocuments')->with([
+        return view('Mentor.Link.questionToDocuments')->with([
             'question' => $question,
             'related_documents' => $related_documents,
             'unrelated_documents' => $unrelated_documents,

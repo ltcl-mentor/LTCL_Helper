@@ -31,7 +31,7 @@ class RegisterController extends Controller
     // 管理者の新規作成画面表示
     public function showRegistrationForm()
     {
-        return view('User.register');
+        return view('Mentor.User.register');
     }
     
     // 管理者の新規作成実行（デフォルトのものからログイン処理を削除、redirectを指定）
@@ -48,7 +48,7 @@ class RegisterController extends Controller
     // 受講生の新規作成画面表示
     public function showPublicRegistrationForm()
     {
-        return view('User.publicRegister');
+        return view('Mentor.User.publicRegister');
     }
     
     // 受講生の新規作成実行

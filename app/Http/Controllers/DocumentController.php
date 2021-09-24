@@ -14,13 +14,13 @@ class DocumentController extends Controller
     // 初期画面表示
     public function index()
     {
-        return view('Document.index');
+        return view('Mentor.Document.index');
     }
     
     // 新規作成画面表示
     public function create()
     {
-        return view('Document.create')->with(['where' => '記事新規登録']);
+        return view('Mentor.Document.create')->with(['where' => '記事新規登録']);
     }
     
     // 新規作成実行
@@ -41,7 +41,7 @@ class DocumentController extends Controller
             $author_name = null;
         }
         $questions = $document->questions()->get();
-        return view('Document.show')->with([
+        return view('Mentor.Document.show')->with([
             'document' => $document,
             'author_name' => $author_name,
             'questions' => $questions,
@@ -51,7 +51,7 @@ class DocumentController extends Controller
     // 編集画面表示
     public function edit(Document $document)
     {
-        return view('Document.edit')->with(['document' => $document]);
+        return view('Mentor.Document.edit')->with(['document' => $document]);
     }
     
     // 編集実行

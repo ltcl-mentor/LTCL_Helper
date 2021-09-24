@@ -16,13 +16,13 @@ class QuestionController extends Controller
     // 初期画面表示
     public function index(Question $question)
     {
-        return view('Question.index');
+        return view('Mentor.Question.index');
     }
     
     // 新規作成画面表示
     public function create()
     {
-        return view('Question.create');
+        return view('Mentor.Question.create');
     }
     
     // 新規作成実行
@@ -46,13 +46,13 @@ class QuestionController extends Controller
     // 詳細画面表示
     public function show(Question $question, User $user)
     {
-        return view('Question.show')->with(['question_id' => $question->id]);
+        return view('Mentor.Question.show')->with(['question_id' => $question->id]);
     }
     
     // 編集画面表示
     public function edit(Question $question)
     {
-        return view('Question.edit')->with(['question_id' => $question->id]);
+        return view('Mentor.Question.edit')->with(['question_id' => $question->id]);
     }
     
     // 編集実行
@@ -92,12 +92,6 @@ class QuestionController extends Controller
         Question::questionForceDelete();
         return redirect('/questions/index');
     }
-    
-    // 承認用一覧画面表示
-    // public function approval(Question $question)
-    // {
-    //     return view('Question.approval');
-    // }
     
     // 公開処理
     public function check(Question $question)

@@ -16,7 +16,7 @@ class HomeController extends Controller
     // トップ画面表示
     public function search(Question $question)
     {
-        return view('Search.search');
+        return view('Public.Search.search');
     }
     
     // 公開中の質問一覧表示
@@ -34,7 +34,7 @@ class HomeController extends Controller
         // データベースの容量を考慮して履歴保持の期限は２１日間とする
         History::historyDelete(21);
         
-        return view('Search.show')->with([
+        return view('Public.Question.show')->with([
             'question_id' => $question->id,
             'category' => $question->category,
             'topic' => $question->topic,
@@ -57,7 +57,7 @@ class HomeController extends Controller
             $question['whenClicked'] = $question->pivot->created_at;
         }
         
-        return view('Search.history')->with([
+        return view('Public.Search.history')->with([
             'today' => date("Y-m-d H:i:s"),
             'questions' => $questions,
         ]);
@@ -67,7 +67,7 @@ class HomeController extends Controller
     // 管理画面表示
     public function mentorTop()
     {
-        return view('mentor');
+        return view('Mentor.mentor');
     }
     
 }
