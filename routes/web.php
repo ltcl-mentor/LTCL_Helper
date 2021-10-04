@@ -31,6 +31,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('react/question/{question}', 'ReactController@getQuestion'); // 個別質問データの受け渡し
     Route::get('react/images/{question_id}', 'ReactController@getImages'); // 質問に関連する画像の受け渡し
     Route::get('react/related/documents/{question}', 'ReactController@getRelatedDocuments'); // 質問に紐づいている記事の受け渡し
+    Route::get('react/user', 'ReactController@getUser'); // ログインユーザー受け渡し
+    Route::get('react/weather', 'ReactController@getWeather'); // 今日の天気のデータ受け渡し
+    Route::get('react/college/{year}/{month}/{date}', 'ReactController@getCollegeData'); // 校舎に関するデータ受け渡し
     
     // 管理者権限を持っているユーザーのみがアクセス可能
     Route::group(['middleware' => ['administrator']], function () {
@@ -82,7 +85,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('react/all/documents', 'ReactController@getAllDocuments'); // 全記事受け渡し
         Route::get('react/all/staffs', 'ReactController@getAllStaffs'); // 全管理者受け渡し
         Route::get('react/id', 'ReactController@getUserId'); // ログインユーザーid受け渡し
-        Route::get('react/user', 'ReactController@getUser'); // ログインユーザー受け渡し
     }); 
 });    
     

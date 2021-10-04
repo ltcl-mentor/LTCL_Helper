@@ -69,11 +69,10 @@ class HomeController extends Controller
         ]);
     }
     
-    //以下メンターのみがアクセス可能
+    // 以下メンターのみがアクセス可能
     // 管理画面表示
     public function mentorTop()
     {
         return view('Mentor.mentor');
     }
-    
 }

@@ -15,7 +15,7 @@ function Bar() {
         axios
             .get(`/react/user`)
             .then(response => {
-                 setUser(response.data);
+                setUser(response.data);
             }).catch(error => {
                 console.log(error);
             });
