@@ -9,6 +9,7 @@ import Info from './info';
 function Calendar() {
     const [date, setDate] = useState(new Date());
     const [collegeInfo, setCollegeInfo] = useState([]);
+    const [isDateClicked, setIsDateClicked] = useState(false);
     const today = new Date();
     
     useEffect(() => {
@@ -16,6 +17,7 @@ function Calendar() {
             .get(`/react/college/${ date.getFullYear() }/${ date.getMonth()+1 }/${ date.getDate() }`)
             .then(response => {
                 setCollegeInfo(response.data);
+                setIsDateClicked(true);
             }).catch(error => {
                 console.log(error);
             });
@@ -24,7 +26,12 @@ function Calendar() {
     let info;
     if((date.getMonth() >= today.getMonth()-1) && (date.getMonth() <= today.getMonth()+1)){
         
-        info = <Info collegeInfo={ collegeInfo } />;
+        info = (
+            <Info 
+                collegeInfo={ collegeInfo }
+                isDateClicked={ isDateClicked }
+            />
+        );
         
     }else{
         
@@ -40,7 +47,7 @@ function Calendar() {
     return (
         <div>
             <LocalizationProvider dateAdapter={ AdapterDateFns }>
-                <CalendarPicker date={ date } onChange={ (newDate) => setDate(newDate) } />
+                <CalendarPicker date={ date } onChange={ (newDate) => {setDate(newDate), setIsDateClicked(false)} } />
             </LocalizationProvider>
         
             <Typography align="center" variant="h6" component="div" >
