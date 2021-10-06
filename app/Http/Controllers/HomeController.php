@@ -8,6 +8,7 @@ use App\Document;
 use App\User;
 use App\Image;
 use App\History;
+use App\Info;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -74,5 +75,20 @@ class HomeController extends Controller
     public function mentorTop()
     {
         return view('Mentor.mentor');
+    }
+    
+    // お知らせ新規作成処理
+    public function storeInfo(Info $info, Request $request)
+    {
+        $input = $request['info'];
+        $info->fill($input)->save();
+        return redirect('/');
+    }
+    
+    // お知らせ削除処理
+    public function deleteInfo(Info $info)
+    {
+        $info->delete();
+        return redirect('/');
     }
 }

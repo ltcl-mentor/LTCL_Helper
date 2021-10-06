@@ -7,6 +7,7 @@ use App\Question;
 use App\Document;
 use App\User;
 use App\Image;
+use App\Info;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -58,7 +59,7 @@ class ReactController extends Controller
     }
     
     // 承認済み質問受け渡し
-    public function getApprovedQuestions()
+    public function getCheckedQuestions()
     {
         return Question::where('check', 1)->get();
     }
@@ -156,7 +157,7 @@ class ReactController extends Controller
         $weather_datas['today']['temp_min'] = $weather['daily'][0]['temp']['min'];
         
         // 1時間おきの天気情報
-        $hourly_datas = array_slice($weather['hourly'], 5, 14);
+        $hourly_datas = array_slice($weather['hourly'], 9, 8);
         foreach($hourly_datas as $data_id => $hourly_data){
             $time = new Carbon($hourly_data['dt']);
             $weather_datas['hourly'][$data_id]['time'] = $time->format('G時');
@@ -203,5 +204,19 @@ class ReactController extends Controller
         }
         
         return $college_datas;
+    }
+    
+    public function getInfos(Info $info){
+        $infos = [];
+        
+        // infosテーブルの全日付を取得
+        $infos['dates'] = $info->orderBy('date', 'desc')->pluck('date');
+        
+        // 各日付のデータを取得して配列に代入
+        foreach($infos['dates'] as $date){
+            $infos['infos'][$date] = $info->where('date', $date)->select('id', 'information')->get();
+        }
+        // dd($infos['infos']);
+        return $infos;
     }
 }

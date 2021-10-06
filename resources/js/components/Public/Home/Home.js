@@ -3,21 +3,29 @@ import ReactDOM from 'react-dom';
 import axios from "axios";
 import Card from '@mui/material/Card';
 import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 
 import Content from '../../Layout/side-menu/content';
+import Information from './information/information';
 import Clendar from './calendar/calendar';
 import Weather from './weather';
 
 function Home() {
+    const [user, setUser] = useState([]);
+    
+    useEffect(() => {
+        axios
+            .get(`/react/user`)
+            .then(response => {
+                setUser(response.data);
+            }).catch(error => {
+                console.log(error);
+            });
+    },[]);
     
     return (
         <div className="home-items">
             <Card sx={{ width: 300 }}>
-                <Content />
+                <Content is_admin={ user.is_admin }/>
             </Card>
             
             <Card sx={{ marginLeft: "1%", width: "45%" }}>
@@ -32,34 +40,10 @@ function Home() {
                         width: "90%",
                     }}
                 >
-                    お知らせ
+                    お知らせ　　
                 </Typography>
                 
-                <List
-                    sx={{
-                        width: '80%',
-                        bgcolor: 'background.paper',
-                        position: 'relative',
-                        overflow: 'auto',
-                        maxHeight: 300,
-                        paddingLeft: "10%",
-                        '& ul': { padding: 0 },
-                    }}
-                    subheader={<li />}
-                >
-                    {["2021/9/25", "2021/9/26", "2021/9/27"].map((sectionId) => (
-                        <li key={ sectionId }>
-                            <ul>
-                                <ListSubheader>{ sectionId }</ListSubheader>
-                                {[0, 1, 2].map((item) => (
-                                    <ListItem key={`${sectionId}-${item}`}>
-                                        <ListItemText primary={`news ${item}`} />
-                                    </ListItem>
-                                ))}
-                            </ul>
-                        </li>
-                    ))}
-                </List>
+                <Information  is_admin={ user.is_admin }/>
                 
                 <Typography
                     variant="h5"

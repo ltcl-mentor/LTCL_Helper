@@ -3,11 +3,10 @@ import axios from "axios";
 
 function Picture(props) {
     const [images, setImages] = useState([]);
-    const question_id = document.getElementById('Edit').getAttribute('question_id');
     
     useEffect(() => {
         axios
-            .get(`/react/images/${ question_id }`)
+            .get(`/react/images/${ props.question_id }`)
             .then(response => {
                 setImages(response.data);
             }).catch(error => {

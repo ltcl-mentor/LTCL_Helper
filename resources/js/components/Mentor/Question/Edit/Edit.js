@@ -135,7 +135,9 @@ function Edit() {
                 comment_validation_error={ comment_validation_error }
             />
             
-            <Picture/>
+            <Picture 
+                question_id={ question_id }
+            />
             
             <div className="submit">
                 <input type="hidden"/>

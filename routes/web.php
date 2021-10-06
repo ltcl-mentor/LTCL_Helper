@@ -24,22 +24,28 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@home'); // トップ画面表示
     Route::get('/search/condition', 'HomeController@search'); // 絞り込み検索画面表示
     Route::get('/questions', 'HomeController@questionIndex'); // 公開中の質問一覧表示
+    Route::get('/questions/{question}/public', 'HomeController@show'); // 質問詳細画面表示
     Route::get('/documents', 'HomeController@documentIndex'); // 公開中の参考記事一覧表示
-    Route::get('/show/{question}', 'HomeController@show'); // 質問詳細画面表示
     Route::get('/history', 'HomeController@history'); // 履歴画面表示
     Route::get('react/search/questions', 'ReactController@getSearchQuestions'); // 質問検索結果の受け渡し
+    Route::get('react/approved/questions', 'ReactController@getCheckedQuestions'); // 承認済み質問受け渡し
     Route::get('react/question/{question}', 'ReactController@getQuestion'); // 個別質問データの受け渡し
     Route::get('react/images/{question_id}', 'ReactController@getImages'); // 質問に関連する画像の受け渡し
     Route::get('react/related/documents/{question}', 'ReactController@getRelatedDocuments'); // 質問に紐づいている記事の受け渡し
     Route::get('react/user', 'ReactController@getUser'); // ログインユーザー受け渡し
     Route::get('react/weather', 'ReactController@getWeather'); // 今日の天気のデータ受け渡し
     Route::get('react/college/{year}/{month}/{date}', 'ReactController@getCollegeData'); // 校舎に関するデータ受け渡し
+    Route::get('react/infos', 'ReactController@getInfos'); // お知らせのデータ受け渡し
     
     // 管理者権限を持っているユーザーのみがアクセス可能
     Route::group(['middleware' => ['administrator']], function () {
         
+        // トップ画面
+        Route::post('/informations', 'HomeController@storeInfo'); // お知らせの登録
+        Route::post('/informations/{info}/delete', 'HomeController@deleteInfo'); // お知らせの削除
+        
         // 管理画面表示
-        Route::get('/mentor', 'HomeController@mentorTop')->name('mentor');
+        Route::get('/mentor', 'HomeController@mentorTop')->name('mentor'); // メンター管理画面表示
         
         // 参考記事
         Route::get('/documents/index', 'DocumentController@index'); // 初期画面表示
@@ -78,13 +84,13 @@ Route::group(['middleware' => ['auth']], function () {
         
         // Reactへのデータ受け渡し
         Route::get('react/all/questions', 'ReactController@getAllQuestions'); // 全質問受け渡し
-        Route::get('react/approved/questions', 'ReactController@getApprovedQuestions'); // 承認済み質問受け渡し
         Route::get('react/unapproved/questions', 'ReactController@getUnapprovedQuestions'); // 未承認質問受け渡し（未使用？）
         Route::get('react/curriculum/questions', 'ReactController@getCurriculumQuestions'); // カリキュラム範囲の質問受け渡し
         Route::get('react/portfolio/questions', 'ReactController@getPortfolioQuestions'); // 成果物範囲の質問受け渡し
         Route::get('react/all/documents', 'ReactController@getAllDocuments'); // 全記事受け渡し
         Route::get('react/all/staffs', 'ReactController@getAllStaffs'); // 全管理者受け渡し
         Route::get('react/id', 'ReactController@getUserId'); // ログインユーザーid受け渡し
+        
     }); 
 });    
     

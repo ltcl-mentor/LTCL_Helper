@@ -29,7 +29,7 @@ function Questions(props) {
             <div>
                 <Divider light />
                 <ListItem button>
-                    <a href={ `/show/`+question.id } className="question" key={ question.id } target="_blank">
+                    <a href={ '/questions/' + question.id + '/public' } className="question" key={ question.id } target="_blank">
                         <ListItemText
                             primary={ question.question }
                         />

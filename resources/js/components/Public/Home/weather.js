@@ -35,14 +35,14 @@ function Weather() {
                 <div>最高気温：{ weather.today.temp_max }℃</div>
                 <div>最低気温：{ weather.today.temp_min }℃</div>
                 
-                <Typography align="center" variant="h6" component="div" >1時間ごとの天気</Typography>
+                <Typography align="center" variant="h6" component="div" >今後の天気</Typography>
                 
                 <Table sx={{ width: "100%" }} size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
                             <TableCell>時間</TableCell>
-                            <TableCell align="right">天気</TableCell>
                             <TableCell align="right">気温</TableCell>
+                            <TableCell align="right">天気</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

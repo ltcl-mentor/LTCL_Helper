@@ -42,9 +42,9 @@ function Curriculum(props) {
                             { props.questions.map((question) => {
                                 if(question.topic === topic.id){
                                     if(question.check === 1){
-                                        return <div className="question">・<a href={`/questions/`+question.id}>{ question.question }</a></div>;
+                                        return <div className="question">・<a href={'/questions/' + question.id + '/public'}>{ question.question }</a></div>;
                                     }else{
-                                        return <div className="question">・（非公開）<a href={`/questions/`+question.id}>{ question.question }</a></div>;
+                                        return <div className="question">・（非公開）<a href={'/questions/' + question.id + '/public'}>{ question.question }</a></div>;
                                     }
                                 }
                             })}

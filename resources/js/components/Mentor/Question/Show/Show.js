@@ -13,7 +13,7 @@ function Show() {
     const [documents, setDocuments] = useState([]);
     const categories = ['カリキュラム', '成果物'];
     const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', 'マイグレーション', 'リレーション', 'Laravel拡張', '画像処理', 'Heroku環境', 'API', 'デザイン'];
-    const question_id = document.getElementById('Question_mentor_show').getAttribute('question__id');
+    const question_id = document.getElementById('Question_mentor_show').getAttribute('question_id');
     const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
 
     useEffect(() => {
