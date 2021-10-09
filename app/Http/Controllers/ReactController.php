@@ -8,6 +8,7 @@ use App\Document;
 use App\User;
 use App\Image;
 use App\Info;
+use App\Weather;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -126,30 +127,11 @@ class ReactController extends Controller
     // 今日の天気のデータ受け渡し
     public function getWeather()
     {
-        $client = new \GuzzleHttp\Client();
-        $url = 'https://api.openweathermap.org/data/2.5/onecall';
-        $weather_datas = [];
-        $weather_types = [
-            'Clouds' => 'くもり',
-            'Clear' => '快晴',
-            'Snow' => '雪',
-            'Rain' => '雨',
-            'Drizzle' => '霧雨',
-            'Thunderstorm' => '雷雨',
-            'Atmosphere' => '異常気象'
-        ];
-        
-        $response = $client->request(
-            'GET',
-            $url,
-            ['query' => ['lat' => 35.6594, 'lon' => 139.7006,'appid' => env('WeatherMapApiKey'), 'lang' => 'ja', 'units' => 'metric']]
-        );
-        
-        $weather = json_decode($response->getBody(), true);
+        $weather = Weather::getWeatherData();
         
         // 現在の天気情報
         $weather_datas['current']['temp'] = $weather['current']['temp'];
-        $weather_datas['current']['main'] = $weather_types[$weather['current']['weather'][0]['main']];
+        $weather_datas['current']['main'] = Weather::$weather_types[$weather['current']['weather'][0]['main']];
         
         // 今日の天気情報
         $weather_datas['today']['temp_ave'] = $weather['daily'][0]['temp']['day'];
@@ -162,7 +144,7 @@ class ReactController extends Controller
             $time = new Carbon($hourly_data['dt']);
             $weather_datas['hourly'][$data_id]['time'] = $time->format('G時');
             $weather_datas['hourly'][$data_id]['temp'] = $hourly_data['temp'];
-            $weather_datas['hourly'][$data_id]['main'] = $weather_types[$hourly_data['weather'][0]['main']];
+            $weather_datas['hourly'][$data_id]['main'] = Weather::$weather_types[$hourly_data['weather'][0]['main']];
         }
         
         return $weather_datas;

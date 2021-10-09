@@ -7,12 +7,13 @@ function Result(props) {
     if(props.isSearchButtonClicked){
         results = (
             <div className="box">
-                <div className="empty">
-                    <div className="space"></div>
+                {/*<div className="empty">
+                    
                     <div className="circle1"></div>
                     <div className="circle2"></div>
                     <div className="circle3"></div>
-                </div>
+                </div>*/}
+                <div className="space"></div>
                 <div className="result_box">
                     <Questions
                         category={ props.category }

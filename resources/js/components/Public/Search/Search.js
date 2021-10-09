@@ -5,7 +5,8 @@ import Topic from './Search/Forms/topicForm';
 import Addition from './Search/Forms/additionalForms/additionalForms';
 import SearchButton from './Search/searchButton';
 import Result from './Result/result';
-// import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -141,25 +142,28 @@ function Search() {
     return (
         <div className="container">
             <div className="form_box">
-
+                <Box
+                    sx={{ 
+                        maxWidth: "80%",
+                        marginLeft: "10%",
+                        paddingBottom: "5%"
+                    }}
+                >
                     <Stepper activeStep={ activeStep }  orientation="vertical">
                         { steps.map((label, index) => (
                             <Step key={ label }>
                                 <StepLabel>{ label }</StepLabel>
                                 <StepContent>
                                     <Typography>{ getStepContent(index) }</Typography>
-
-
                                 </StepContent>
                             </Step>
                         ))}
                     </Stepper>
                     
                     { activeStep === steps.length && (
-                        <Paper square elevation={ 0 } >
+                        <Box>
                             <Button
                                 onClick={ handleBack }
-
                                 color="secondary"
                             >
                                 Back
@@ -167,24 +171,24 @@ function Search() {
                             <Button
                                 variant="contained"
                                 onClick={ handleReset }
-
                                 color="primary"
                             >
                                 Reset
                             </Button>
-                            <SearchButton
-                                category={ category }
-                                topic={ topic }
-                                curriculum_number={ curriculum_number }
-                                keyword={ keyword }
-                                setIsSearchButtonClicked={ setIsSearchButtonClicked }
-                            />
-                        </Paper>
+                        </Box>
                     )}
-            
+                </Box>
+                { activeStep === steps.length && (
+                    <SearchButton
+                        category={ category }
+                        topic={ topic }
+                        curriculum_number={ curriculum_number }
+                        keyword={ keyword }
+                        setIsSearchButtonClicked={ setIsSearchButtonClicked }
+                    />
+                )}
             </div>
 
-            
             <Result
                 isSearchButtonClicked={ isSearchButtonClicked }
                 category={ category }

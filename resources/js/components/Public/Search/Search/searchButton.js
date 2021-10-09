@@ -19,11 +19,9 @@ function SearchButton(props) {
     if( (((props.topic === 0) || (props.topic >= 1 && props.topic <= 8)) && props.category === 0) || (props.topic >= 9 && props.category === 1) ){
         searchButton = (
             <div className="search_button_box">
-                <Link activeClass="active" to="box" spy={ true } smooth={ true } offset={ 500 } duration={ 800 }>
-                    <Fab variant="extended" onClick={() => { handleClick() }}>
-                        検索する
-                    </Fab>
-                </Link>
+                <Fab variant="extended" onClick={() => { handleClick() }}>
+                    検索する
+                </Fab>
             </div>
         );
     }else{
