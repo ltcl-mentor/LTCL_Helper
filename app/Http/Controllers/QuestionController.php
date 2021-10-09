@@ -9,6 +9,7 @@ use App\Document;
 use App\User;
 use App\Image;
 use App\History;
+use App\Slack;
 use Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,6 +44,25 @@ class QuestionController extends Controller
         return view('Public.Question.create');
     }
     
+    public function publicStore(QuestionRequest $request, Question $question)
+    {
+        // 質問に関する処理
+        $question->fill($request['post']);
+        $question['check'] = 0;
+        $question['user_id'] = 1;
+        $question->save();
+        
+        // 画像に関する処理
+        $pictures = $request->file('image');
+        if($pictures){
+            Image::imageCreate($pictures, $question->id);
+        }
+        
+        $message = "受講生によって質問が投稿されました。\n以下のリンクから確認してください。\nhttps://~/" . $question->id;
+        Slack::sendMessage($message);
+        
+        return redirect('/');
+    }
     
     // 以下メンターのみがアクセス可能
     

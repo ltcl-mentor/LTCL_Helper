@@ -26,10 +26,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@home'); // トップ画面表示
     Route::get('/search/condition', 'SearchController@search'); // 絞り込み検索画面表示
     Route::get('/questions/index/public', 'QuestionController@publicIndex'); // 公開中の質問一覧表示
-    Route::get('/questions/{question}/public', 'QuestionController@publicShow'); // 質問詳細画面表示
     Route::get('/questions/create/public', 'QuestionController@publicCreate'); // 受講生の質問投稿画面表示
+    Route::post('/questions/store/public', 'QuestionController@publicStore'); // 受講生の質問投稿処理
+    Route::get('/questions/{question}/public', 'QuestionController@publicShow'); // 質問詳細画面表示
     Route::get('/documents/index/public', 'DocumentController@publicIndex'); // 公開中の参考記事一覧表示
     Route::get('/history', 'HomeController@history'); // 履歴画面表示
+    Route::get('/contact/create', 'ContactController@create'); // お問い合わせ画面表示
+    Route::post('/contact/post', 'ContactController@post'); // お問い合わせ内容送信処理
     Route::get('react/search/questions', 'ReactController@getSearchQuestions'); // 質問検索結果の受け渡し
     Route::get('react/approved/questions', 'ReactController@getCheckedQuestions'); // 承認済み質問受け渡し
     Route::get('react/question/{question}', 'ReactController@getQuestion'); // 個別質問データの受け渡し

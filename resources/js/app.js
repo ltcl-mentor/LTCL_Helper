@@ -16,6 +16,7 @@ require('./components/Public/Home/Home');
 require('./components/Public/Search/Search');
 require('./components/Public/Question/Index/Index');
 require('./components/Public/Question/Show/Show');
+require('./components/Public/Question/Create/Create');
 require('./components/Public/Document/Index/Index');
 require('./components/Mentor/Question/Index/Index');
 require('./components/Mentor/Question/Create/Create');

@@ -19,6 +19,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => '.envファイルをいじれることは成果物を作る際に非常に重要です。下の関連記事を参考に自分なりにまとめてみましょう！',
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -28,6 +30,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => 'アプリケーションを動かすにあたって重要な役割を持つキーです。一応キーと名前がついていますが、実際はただの文字列です。このキーの使われ方を理解するには暗号化についての知識も必要になりますので、合わせて学んでみましょう！',
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -37,6 +41,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => '現在自分がログインしているユーザーを確認してみましょう！権限の付与にもまた権限が必要です。',
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -47,6 +53,8 @@ class QuestionTableSeeder extends Seeder
                          DBの確認の仕方に関しては該当カリキュラムのリンクを下に貼っておきましたので参考にしてください。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -56,6 +64,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => "保留。この質問には画像をつけたい",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -67,6 +77,8 @@ class QuestionTableSeeder extends Seeder
                         ."oldメソッドに関しては登録時のデータの動きなど細かい理解が必要になるので下のの参考記事を読んでみてください。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -76,6 +88,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => "ディレクトリに関して復習しましょう。この場合blog/blogというようにblogディレクトリの中にサ再度blogディレクトリを作成してしまっています。削除しましょう。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -86,6 +100,8 @@ class QuestionTableSeeder extends Seeder
                         ."また、後からコマンドが何を実行しているのかを把握しましょう。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -96,6 +112,8 @@ class QuestionTableSeeder extends Seeder
                         ."blogディレクトリを削除し再度プロジェクトを作成しましょう。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 1,
@@ -108,6 +126,8 @@ class QuestionTableSeeder extends Seeder
                         ."よってプロジェクトディレクトリ（今回でいうblogディレクトリ）に移動すれば実行できるようになります。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -118,6 +138,8 @@ class QuestionTableSeeder extends Seeder
                         ."エラー分を的確に把握し、対処することが重要です",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -128,6 +150,8 @@ class QuestionTableSeeder extends Seeder
                         ."写真のボタンを押すことで開くことができます。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -137,6 +161,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => "[Preview (プレビュー)] => Preview Running Application (実行中のアプリケーションのプレビュー)]から表示できます。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -149,6 +175,8 @@ class QuestionTableSeeder extends Seeder
                         ."をセットすることで解決できます。Googleでプレビューしている生徒さんはご確認ください！",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -162,6 +190,8 @@ class QuestionTableSeeder extends Seeder
                         ."注意点としては画像はダウンロード後imgフォルダに格納し、そこから参照したURLを使用してください。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -173,6 +203,8 @@ class QuestionTableSeeder extends Seeder
                         ."この場合3行目の{post}がcreateと誤認識されており4行目のルートが通っていないようです。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -182,6 +214,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => "ファイルを一度保存してからリロードしてください",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -191,6 +225,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => "ボタンクリック後のイベントを発生させるトリガーが重複しているため意図した挙動ができていないようです。どちらか一つにまとめましょう。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -202,6 +238,8 @@ class QuestionTableSeeder extends Seeder
                         ."自分で色々考えるのももちろん大切ですが、必要な情報をネットから適切に持ってくるスキルはエンジニアに限らず重要ですのでそういったスキルも身につけていきましょう",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -213,6 +251,8 @@ class QuestionTableSeeder extends Seeder
                         ."Normalモード、Insertモード、Visualモードを使い分けられるようにしましょう！",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -224,6 +264,8 @@ class QuestionTableSeeder extends Seeder
                         ."Normalモード、Insertモード、Visualモードを使い分けられるようにしましょう！",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -234,6 +276,8 @@ class QuestionTableSeeder extends Seeder
                         ."また、rootユーザーと新規ユーザーの違いを復習しておきましょう。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -243,6 +287,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => "IDEの対象行に出ている赤バツにカーソルを合わせてエラー内容を確認しましょう。【syntax error】はプログラミングの構文エラーを指します。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 1,
@@ -252,6 +298,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => "シーダのファイル名クラス名が正しく指定されているか確認しましょう。\nDatabaseSeeder.phpで呼び出すクラス名は〇〇TableSeederになります。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -261,6 +309,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => "今回の場合モデル内のメソッドが不完全であったためコントローラー内で返り値をを受け取れていなかったようです。\nメソッドの使い方を復習しましょう。解答は写真に記載してあります。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -270,6 +320,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => "indexはpostsテーブルの情報を用いたビューになるので、https://〜〜〜/posts にしておいた方が、テーブルが増えた時にわかりやすいかな、と思います。ですが、laravelを起動したときにアクセスされるのは、https://〜〜〜/ になります(いわゆるトップページ)。なので、起動するたび毎回URLの末尾にpostsを打つ必要があり少し面倒かなとも感じます。ご自分でindexが表示されるURLをわかっているならば、使いやすいほうでいいと思います。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -279,6 +331,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => "パスワードを入力するときは画面に文字はでません。そのまま正しいパスワードを入力し、Enterを押せばログインできます。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -290,6 +344,8 @@ class QuestionTableSeeder extends Seeder
                         ."エラー文をしっかり読むまたは、検索する癖をつけましょう。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -299,6 +355,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => "DBにデータが複数入っていない可能性があります。Mysqlに入ってデータを確認しましょう。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -308,6 +366,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => "画像のように下にシートを追加するとlink選択時シート名が出てきます。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -322,6 +382,8 @@ class QuestionTableSeeder extends Seeder
                         ."です。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -331,6 +393,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => "アプリプレビュー時、cloud9特有のエラーが起きてしまうことがあるようです。解決方法として下記の記事の方法を実践してください。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -343,6 +407,8 @@ class QuestionTableSeeder extends Seeder
                         ."③コントローラーでviewに必要なデータが渡せているか(with()のところ)④<a>タグないのURLが正しいか",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -355,6 +421,8 @@ class QuestionTableSeeder extends Seeder
                         ."③viewのファイル名が正しいか",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -368,6 +436,8 @@ class QuestionTableSeeder extends Seeder
                         ."④S3のバケットにおいてアクセス権限を全てオフにしているか",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -377,6 +447,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => "419エラーはLaravelのpost通信エラーになります。\nこの場合フォーム内でのCSRFトークンの記述忘れが考えられるので、確認してみましょう。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -386,6 +458,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => "次のNotePMを参考にしてみてください",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -395,6 +469,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => "次の点を確認しましょう。\n①deleteメソッドにおいて削除後にリダイレクトするためにルーティングを設定しているか\n②フォーム内にCSRFとメソッドの設定はされているか",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -404,6 +480,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => "Laravelのバージョンを確認しましょう。最新のバージョン8の場合カリキュラムのものと異なる場合があるためバージョン6をお勧めします。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         DB::table('questions')->insert([
             'category' => 0,
@@ -413,6 +491,8 @@ class QuestionTableSeeder extends Seeder
             'comment' => "linkタグでcssファイルの参照がうまくできていない可能性があります。\nhtmlファイルに対してcssファイルがどの階層にあるのか確認しましょう。",
             'check' => 0,
             'user_id' => 1,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
         ]);
         
         // 7月1日以降から

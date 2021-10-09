@@ -31,7 +31,7 @@ class HomeController extends Controller
             $question['whenClicked'] = $question->pivot->created_at;
         }
         
-        return view('Public.Search.history')->with([
+        return view('history')->with([
             'today' => date("Y-m-d H:i:s"),
             'questions' => $questions,
         ]);

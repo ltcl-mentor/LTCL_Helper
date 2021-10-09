@@ -22,8 +22,8 @@ function Content(props) {
         {"menu":"関連記事一覧", "url":"/documents/index/public"}
     ];
     const formMenu = [
-        {"menu":"質問投稿", "url":"/questions/student/create"},
-        {"menu":"お問い合わせ", "url":"/call"}
+        {"menu":"質問投稿", "url":"/questions/create/public"},
+        {"menu":"お問い合わせ", "url":"/contact/create"}
     ];
     
     let admin_menu;
