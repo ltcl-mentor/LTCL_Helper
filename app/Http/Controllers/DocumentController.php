@@ -11,6 +11,17 @@ use Illuminate\Support\Facades\Auth;
 
 class DocumentController extends Controller
 {
+    // 一般に公開される部分
+    
+    // 公開中の参考記事一覧表示
+    public function documentIndex()
+    {
+        return view('Public.Document.index');
+    }
+    
+    
+    // 以下メンターのみがアクセス可能
+    
     // 初期画面表示
     public function index()
     {

@@ -18,8 +18,8 @@ function Content(props) {
         {"menu":"絞り込み検索", "url":"/search/condition"}
     ];
     const itemMenu = [
-        {"menu":"質問一覧", "url":"/questions"},
-        {"menu":"関連記事一覧", "url":"/documents"}
+        {"menu":"質問一覧", "url":"/questions/index/public"},
+        {"menu":"関連記事一覧", "url":"/documents/index/public"}
     ];
     const formMenu = [
         {"menu":"質問投稿", "url":"/questions/student/create"},

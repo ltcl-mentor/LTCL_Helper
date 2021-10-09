@@ -8,11 +8,44 @@ use App\Question;
 use App\Document;
 use App\User;
 use App\Image;
+use App\History;
 use Storage;
 use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
+    // 一般に公開される部分
+    
+    // 公開中の質問一覧表示
+    public function publicIndex()
+    {
+        return view('Public.Question.index');
+    }
+    
+    // 質問詳細画面表示
+    public function publicShow(Question $question)
+    {
+        // 質問閲覧履歴への記録
+        $question->users()->attach(Auth::id());
+        
+        // データベースの容量を考慮して履歴保持の期限は２１日間とする
+        History::historyDelete(21);
+        
+        return view('Public.Question.show')->with([
+            'question_id' => $question->id,
+            'category' => $question->category,
+            'topic' => $question->topic,
+        ]);
+    }
+    
+    public function publicCreate()
+    {
+        return view('Public.Question.create');
+    }
+    
+    
+    // 以下メンターのみがアクセス可能
+    
     // 初期画面表示
     public function index(Question $question)
     {

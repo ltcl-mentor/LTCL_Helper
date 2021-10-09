@@ -32,7 +32,7 @@ function Publish(props) {
     }else{
         publishBtn = (
             <div>
-                <form action={`/questions/`+props.question_id+`/uncheck`} method="post" id="unpublish">
+                <form action={`/questions/` + props.question_id + `/uncheck`} method="post" id="unpublish">
                     <input type="hidden" name="_token" value={ props.csrf_token }/>
                     <input type="submit" className="hidden"/>
                     <p className="publishBtn" onClick={() => { unpublishConfirm() }}>非公開にする</p>

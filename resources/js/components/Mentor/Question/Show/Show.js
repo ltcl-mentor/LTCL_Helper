@@ -57,7 +57,8 @@ function Show() {
             <div className="title">
                 <h1>質問詳細</h1>
                 
-                <Publish 
+                <Publish
+                    question_id={ question_id }
                     csrf_token={ csrf_token }
                     question={ question }
                     images={ images }

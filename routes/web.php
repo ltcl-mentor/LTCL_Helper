@@ -20,12 +20,15 @@ Auth::routes([
 
 Route::group(['middleware' => ['auth']], function () {
     
+    // 'react/'から始まるurlはreact上で非同期通信として利用
+    
     // ログイン済みユーザーのみアクセス可能
     Route::get('/', 'HomeController@home'); // トップ画面表示
-    Route::get('/search/condition', 'HomeController@search'); // 絞り込み検索画面表示
-    Route::get('/questions', 'HomeController@questionIndex'); // 公開中の質問一覧表示
-    Route::get('/questions/{question}/public', 'HomeController@show'); // 質問詳細画面表示
-    Route::get('/documents', 'HomeController@documentIndex'); // 公開中の参考記事一覧表示
+    Route::get('/search/condition', 'SearchController@search'); // 絞り込み検索画面表示
+    Route::get('/questions/index/public', 'QuestionController@publicIndex'); // 公開中の質問一覧表示
+    Route::get('/questions/{question}/public', 'QuestionController@publicShow'); // 質問詳細画面表示
+    Route::get('/questions/create/public', 'QuestionController@publicCreate'); // 受講生の質問投稿画面表示
+    Route::get('/documents/index/public', 'DocumentController@publicIndex'); // 公開中の参考記事一覧表示
     Route::get('/history', 'HomeController@history'); // 履歴画面表示
     Route::get('react/search/questions', 'ReactController@getSearchQuestions'); // 質問検索結果の受け渡し
     Route::get('react/approved/questions', 'ReactController@getCheckedQuestions'); // 承認済み質問受け渡し
@@ -82,7 +85,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/users/public/register', 'Auth\RegisterController@publicRegister'); // 受講生の新規作成実行
         Route::post('/users/{user}/delete', 'UserController@delete'); // 削除実行
         
-        // Reactへのデータ受け渡し
+        // Reactでのデータ受け渡し
         Route::get('react/all/questions', 'ReactController@getAllQuestions'); // 全質問受け渡し
         Route::get('react/unapproved/questions', 'ReactController@getUnapprovedQuestions'); // 未承認質問受け渡し（未使用？）
         Route::get('react/curriculum/questions', 'ReactController@getCurriculumQuestions'); // カリキュラム範囲の質問受け渡し
