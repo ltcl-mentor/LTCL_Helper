@@ -9,6 +9,7 @@ use App\User;
 use App\Image;
 use App\Info;
 use App\Weather;
+use App\College;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -16,36 +17,10 @@ use Carbon\Carbon;
 class ReactController extends Controller
 {
     // 質問関連
-    // 質問検索結果の受け渡し
+    // 絞り込み質問検索結果の受け渡し
     public function getSearchQuestions(Request $request)
     {
-        if($request->keyword && $request->curriculum_number){
-            $results = Question::where('check', true)
-                        ->where('category', $request->category)
-                        ->where('topic', $request->topic)
-                        ->where('curriculum_number', $request->curriculum_number)
-                        ->where('question', 'LIKE', '%'.$request->keyword.'%')
-                        ->orderBy('question', 'asc')->get();
-        }elseif($request->curriculum_number){
-            $results = Question::where('check', true)
-                        ->where('category', $request->category)
-                        ->where('topic', $request->topic)
-                        ->where('curriculum_number', $request->curriculum_number)
-                        ->orderBy('question', 'asc')->get();
-        }elseif($request->keyword){
-            $results = Question::where('check', true)
-                        ->where('category', $request->category)
-                        ->where('topic', $request->topic)
-                        ->where('question', 'LIKE', '%'.$request->keyword.'%')
-                        ->orderBy('question', 'asc')->get();
-        }else{
-            $results = Question::where('check', true)
-                        ->where('category', $request->category)
-                        ->where('topic', $request->topic)
-                        ->orderBy('question', 'asc')->get();
-        }
-        
-        return $results;
+        return Question::conditionSearch($request->category, $request->topic, $request->curriculum_number, $request->keyword);
     }
     
     // 全質問受け渡し
@@ -124,74 +99,25 @@ class ReactController extends Controller
         return Auth::user();
     }
     
+    
     // home画面用データ受け渡し
     // 今日の天気のデータ受け渡し
     public function getWeather()
     {
-        $weather = Weather::getWeatherData();
-        
-        // 現在の天気情報
-        $weather_datas['current']['temp'] = $weather['current']['temp'];
-        $weather_datas['current']['main'] = Weather::$weather_types[$weather['current']['weather'][0]['main']];
-        
-        // 今日の天気情報
-        $weather_datas['today']['temp_ave'] = $weather['daily'][0]['temp']['day'];
-        $weather_datas['today']['temp_max'] = $weather['daily'][0]['temp']['max'];
-        $weather_datas['today']['temp_min'] = $weather['daily'][0]['temp']['min'];
-        
-        // 1時間おきの天気情報
-        $hourly_datas = array_slice($weather['hourly'], 9, 8);
-        foreach($hourly_datas as $data_id => $hourly_data){
-            $time = new Carbon($hourly_data['dt']);
-            $weather_datas['hourly'][$data_id]['time'] = $time->format('G時');
-            $weather_datas['hourly'][$data_id]['temp'] = $hourly_data['temp'];
-            $weather_datas['hourly'][$data_id]['main'] = Weather::$weather_types[$hourly_data['weather'][0]['main']];
-        }
-        
-        return $weather_datas;
+        return Weather::getWeatherData();
     }
     
+    
+    // URLで指定された日付の校舎情報受け渡し
     public function getCollegeData($year, $month, $date)
     {
-        $client = new \GuzzleHttp\Client();
-        $url = 'https://sheets.googleapis.com/v4/spreadsheets/'. env('GoogleSheetsID') .'/values/'. $year .'_'. $month;
-        $college_datas = [];
-        
-        $response = $client->request(
-            'GET',
-            $url,
-            ['query' => ['key' => env('GoogleSheetsKey'), 'majorDimension' => 'COLUMNS']]
-        );
-        
-        $datas = json_decode($response->getBody(), true);
-        
-        // 開校・閉館時間の代入
-        $college_datas['start'] = $datas['values'][$date][2] ?: null;
-        $college_datas['close'] = $datas['values'][$date][3] ?: null;
-        
-        // 校舎出勤メンターの代入
-        if($datas['values'][$date][17] !== ""){
-            $college_datas['staff'] = explode("\n", $datas['values'][$date][17], -1);
-        }else{
-            $college_datas['staff'][] = "本日校舎に出勤するメンターはいません。";
-        }
-        
-        // オンライン自習室担当の代入
-        if(count($datas['values'][$date]) < 30){
-            $college_datas['zoom'][] = "データを取得できませんでした。スタッフに直接ご確認ください。";
-        }elseif(count($datas['values'][$date]) === 30){
-            $college_datas['zoom'][] = $datas['values'][$date][29] ?: null;
-        }else{
-            $college_datas['zoom'][] = $datas['values'][$date][29] ?: null;
-            $college_datas['zoom'][] = $datas['values'][$date][30] ?: null;
-        }
-        
-        return $college_datas;
+        return College::getCollegeData($year, $month, $date);
     }
     
-    public function getInfos(Info $info){
-        $infos = [];
-        
+    
+    // 記録されているお知らせの受け渡し
+    public function getInfos(Info $info)
+    {
         // infosテーブルの全日付を取得
         $infos['dates'] = $info->orderBy('date', 'desc')->pluck('date');
         
@@ -199,7 +125,7 @@ class ReactController extends Controller
         foreach($infos['dates'] as $date){
             $infos['infos'][$date] = $info->where('date', $date)->select('id', 'information')->get();
         }
-        // dd($infos['infos']);
+        
         return $infos;
     }
 }

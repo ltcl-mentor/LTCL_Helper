@@ -14,7 +14,7 @@ class DocumentController extends Controller
     // 一般に公開される部分
     
     // 公開中の参考記事一覧表示
-    public function documentIndex()
+    public function publicIndex()
     {
         return view('Public.Document.index');
     }

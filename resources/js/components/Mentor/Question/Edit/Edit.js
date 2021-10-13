@@ -120,7 +120,6 @@ function Edit() {
                 curriculum_number_validation_error={ curriculum_number_validation_error }
                 curriculum_numbers={ curriculum_numbers }
             />
-            <input type="hidden" name="post[curriculum_number]" value={ curriculum_number } />
                 
             <QuestionForm
                 question={ question }

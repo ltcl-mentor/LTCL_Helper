@@ -28,6 +28,7 @@ class Question extends Model
         return $this->belongsToMany('App\User')->withTimestamps();
     }
     
+    // 指定の質問に対してまだ紐付けがされていない参考記事を取得
     public function getUnrelatedDocuments()
     {
         $related_document_ids = $this->documents()->select('document_id')->get();
@@ -39,6 +40,7 @@ class Question extends Model
         return Document::whereNotIn('id', $related_ids_array)->get();
     }
     
+    // 質問のデータの物理削除の実行
     public static function questionForceDelete()
     {
         $deleted_questions = self::onlyTrashed()->get();
@@ -50,5 +52,30 @@ class Question extends Model
                 $deleted_question->forceDelete();
             }
         }
+    }
+    
+    // 質問の絞り込み検索
+    public static function conditionSearch($category, $topic, $curriculum_number, $keyword)
+    {
+        $basic_data = self::where('check', true)
+                        ->where('category', $category)
+                        ->where('topic', $topic);
+                        
+        if($keyword && $curriculum_number){
+            $results = $basic_data
+                        ->where('curriculum_number', $curriculum_number)
+                        ->where('question', 'LIKE', '%'.$keyword.'%');
+                        
+        }elseif($curriculum_number){
+            $results = $basic_data->where('curriculum_number', $curriculum_number);
+                        
+        }elseif($keyword){
+            $results = $basic_data->where('question', 'LIKE', '%'.$keyword.'%');
+            
+        }else{
+            $results = $basic_data;
+        }
+        
+        return $results->orderBy('question', 'asc')->get();
     }
 }
