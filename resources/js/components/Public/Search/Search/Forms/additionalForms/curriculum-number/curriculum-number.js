@@ -21,11 +21,11 @@ function CrriculumNumber(props) {
     const [curriculum_numbers, setCurriculumNumbers] = useState(["1-1-1"]);
     
     useEffect(() => {
-        if(props.category === 0 && props.topic <= 8) {
+        if (props.category === 0 && props.topic <= 8) {
             setCurriculumNumbers(curriculum_numbers_array[Number(props.category)][Number(props.topic)]);
-        }else if(props.category === 1 && props.topic >= 9) {
+        } else if (props.category === 1 && props.topic >= 9) {
             setCurriculumNumbers(curriculum_numbers_array[Number(props.category)][0]);
-        }else {
+        } else {
             setCurriculumNumbers(curriculum_numbers_array[0][0]);
         }
     }, [props.category, props.topic]);

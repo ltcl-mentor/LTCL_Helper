@@ -9,7 +9,7 @@ function Topic(props) {
     
     useEffect(() => {
         props.category === 0 ? setTopic(0) : setTopic(9);
-    },[props.category]);
+    }, [props.category]);
     
     const handleTopic = (event) => {
         setTopic(Number(event.target.value));
@@ -17,11 +17,11 @@ function Topic(props) {
 
     let topicForm;
 
-    if(props.category === 0){
+    if (props.category === 0) {
         topicForm = (
             <div className="topic_box">
                 <FormControl component="fieldset">
-                    <RadioGroup row aria-label="topic" name="topic" value={ topic } onChange={(event) => { handleTopic(event) }}>
+                    <RadioGroup row aria-label="topic" name="topic" value={ topic } onChange={ (event) => handleTopic(event) }>
                         <FormControlLabel value={0} control={<Radio />} label="AWS" />
                         <FormControlLabel value={1} control={<Radio />} label="HTML" />
                         <FormControlLabel value={2} control={<Radio />} label="CSS" />
@@ -35,11 +35,11 @@ function Topic(props) {
                 </FormControl>
             </div>
         );
-    }else if(props.category === 1){
+    } else if (props.category === 1) {
         topicForm = (
             <div  className="topic_box">
                 <FormControl component="fieldset">
-                    <RadioGroup row aria-label="topic" name="topic" value={ topic } onChange={(event) => { handleTopic(event) }}>
+                    <RadioGroup row aria-label="topic" name="topic" value={ topic } onChange={ (event) => handleTopic(event) }>
                         <FormControlLabel value={9} control={<Radio />} label="マイグレーション" />
                         <FormControlLabel value={10} control={<Radio />} label="リレーション" />
                         <FormControlLabel value={11} control={<Radio />} label="Laravel拡張" />

@@ -15,13 +15,13 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('category');
-            $table->integer('topic');
+            $table->UnsignedTinyInteger('category');
+            $table->UnsignedTinyInteger('topic');
             $table->string('curriculum_number',10);
             $table->longtext('question');
             $table->longtext('comment');
-            $table->integer('check');
-            $table->integer('user_id');
+            $table->boolean('check');
+            $table->UnsignedBigInteger('user_id');
             $table->timestamps();
             $table->softDeletes();
         });

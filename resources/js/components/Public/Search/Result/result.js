@@ -4,7 +4,7 @@ import Questions from './questions';
 function Result(props) {
     
     let results;
-    if(props.isSearchButtonClicked){
+    if (props.isSearchButtonClicked) {
         results = (
             <div className="box">
                 {/*<div className="empty">
@@ -26,7 +26,7 @@ function Result(props) {
                 </div>
             </div>
         );
-    }else{
+    } else {
         results = ('');
     }
     

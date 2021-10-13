@@ -48,7 +48,7 @@ function Show() {
             }).catch(error => {
                 console.log(error);
             });
-    },[]);
+    }, []);
     
     return (
         <div className="container">

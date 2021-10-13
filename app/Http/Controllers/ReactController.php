@@ -20,30 +20,31 @@ class ReactController extends Controller
     public function getSearchQuestions(Request $request)
     {
         if($request->keyword && $request->curriculum_number){
-            $results = Question::where('check', 1)
+            $results = Question::where('check', true)
                         ->where('category', $request->category)
                         ->where('topic', $request->topic)
                         ->where('curriculum_number', $request->curriculum_number)
                         ->where('question', 'LIKE', '%'.$request->keyword.'%')
                         ->orderBy('question', 'asc')->get();
         }elseif($request->curriculum_number){
-            $results = Question::where('check', 1)
+            $results = Question::where('check', true)
                         ->where('category', $request->category)
                         ->where('topic', $request->topic)
                         ->where('curriculum_number', $request->curriculum_number)
                         ->orderBy('question', 'asc')->get();
         }elseif($request->keyword){
-            $results = Question::where('check', 1)
+            $results = Question::where('check', true)
                         ->where('category', $request->category)
                         ->where('topic', $request->topic)
                         ->where('question', 'LIKE', '%'.$request->keyword.'%')
                         ->orderBy('question', 'asc')->get();
         }else{
-            $results = Question::where('check', 1)
+            $results = Question::where('check', true)
                         ->where('category', $request->category)
                         ->where('topic', $request->topic)
                         ->orderBy('question', 'asc')->get();
         }
+        
         return $results;
     }
     
@@ -62,13 +63,13 @@ class ReactController extends Controller
     // 承認済み質問受け渡し
     public function getCheckedQuestions()
     {
-        return Question::where('check', 1)->get();
+        return Question::where('check', true)->get();
     }
     
     // 未承認質問受け渡し
     public function getUnapprovedQuestions()
     {
-        return Question::where('check', 0)->get();
+        return Question::where('check', false)->get();
     }
     
     // カリキュラム範囲質問受け渡し

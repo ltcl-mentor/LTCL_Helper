@@ -26,16 +26,16 @@ function Index() {
     };
     
     let tab_content;
-    if(value === 0) {
+    if (value === 0) {
         tab_content = ( <Curriculum questions={ questions }/> );
-    }else {
+    } else {
         tab_content = ( <Portfolio questions={ questions }/> );
     }
     
     return (
         <Box sx={{ width: '95%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                <Tabs value={ value } onChange={ handleChange } aria-label="basic tabs example">
                     <Tab label="カリキュラム" />
                     <Tab label="成果物" />
                 </Tabs>

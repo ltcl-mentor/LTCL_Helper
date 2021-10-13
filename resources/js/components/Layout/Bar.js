@@ -5,6 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Link from '@mui/material/Link';
 import User from './user-icon';
 import Menu from './side-menu/menu'; 
 
@@ -22,16 +23,16 @@ function Bar() {
     }, []);
     
     let user_icon;
-    if(user.id) {
+    if (user.id) {
         user_icon = (
             <User 
                 user_name={ user.name }
             />
         );
-    }else {
+    } else {
         user_icon = (
             <div>
-                <a href="/login">Login</a>
+                <Link className="navbar-brand" href="/login" underline="none">Login</Link>
             </div>
         );
     }
@@ -50,9 +51,9 @@ function Bar() {
                     />
                     
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        <a className="navbar-brand" href="/">
+                        <Link className="navbar-brand" href="/" underline="none">
                             LTCL Helper
-                        </a>
+                        </Link>
                     </Typography>
                     
                     { user_icon }

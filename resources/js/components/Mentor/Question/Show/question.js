@@ -4,9 +4,9 @@ import Avatar from '@material-ui/core/Avatar';
 
 function Question(props) {
     let image;
-    if(props.count === 0){
+    if (props.count === 0) {
         image = ('');
-    }else{
+    } else {
         image = (
             <div>
                 <h2 className="columns">参考画像</h2>
@@ -24,7 +24,9 @@ function Question(props) {
                     <div className="Avatar_name">質問</div>
                 </div>
             </div>
+            
             <p className="QA_textblock">{ props.question }</p>
+            
             { image }
         </Card>
     );

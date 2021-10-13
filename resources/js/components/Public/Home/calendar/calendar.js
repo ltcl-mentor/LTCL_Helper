@@ -14,17 +14,17 @@ function Calendar() {
     
     useEffect(() => {
         axios
-            .get(`/react/college/${ date.getFullYear() }/${ date.getMonth()+1 }/${ date.getDate() }`)
+            .get(`/react/college/${ date.getFullYear() }/${ date.getMonth() + 1 }/${ date.getDate() }`)
             .then(response => {
                 setCollegeInfo(response.data);
                 setIsDateClicked(true);
             }).catch(error => {
                 console.log(error);
             });
-    },[date]);
+    }, [date]);
     
     let info;
-    if((date.getMonth() >= today.getMonth()-1) && (date.getMonth() <= today.getMonth()+1)){
+    if ( (date.getMonth() >= today.getMonth() - 1) && (date.getMonth() <= today.getMonth() + 1) ) {
         
         info = (
             <Info 
@@ -33,7 +33,7 @@ function Calendar() {
             />
         );
         
-    }else{
+    } else {
         
         info = (
             <Typography align="center" variant="h7" component="div" sx={{ paddingTop: 2 }}>
@@ -47,11 +47,11 @@ function Calendar() {
     return (
         <div>
             <LocalizationProvider dateAdapter={ AdapterDateFns }>
-                <CalendarPicker date={ date } onChange={ (newDate) => {setDate(newDate), setIsDateClicked(false)} } />
+                <CalendarPicker date={ date } onChange={ (newDate) => { setDate(newDate), setIsDateClicked(false) } } />
             </LocalizationProvider>
         
             <Typography align="center" variant="h6" component="div" >
-                { date.getMonth()+1 }月{ date.getDate() }日の校舎情報
+                { date.getMonth() + 1 }月{ date.getDate() }日の校舎情報
             </Typography>
             
             { info }

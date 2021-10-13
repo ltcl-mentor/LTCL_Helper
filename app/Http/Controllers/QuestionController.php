@@ -48,7 +48,7 @@ class QuestionController extends Controller
     {
         // 質問に関する処理
         $question->fill($request['post']);
-        $question['check'] = 0;
+        $question['check'] = false;
         $question['user_id'] = 1;
         $question->save();
         
@@ -83,7 +83,7 @@ class QuestionController extends Controller
     {
         // 質問に関する処理
         $question->fill($request['post']);
-        $question['check'] = 0;
+        $question['check'] = false;
         $question['user_id'] = Auth::id();
         $question->save();
         
@@ -149,7 +149,7 @@ class QuestionController extends Controller
     // 公開処理
     public function check(Question $question)
     {
-        $question['check'] = 1;
+        $question['check'] = true;
         $question->save();
         return redirect('/questions/'. $question->id);
     }
@@ -157,7 +157,7 @@ class QuestionController extends Controller
     // 非公開処理
     public function uncheck(Question $question)
     {
-        $question['check'] = 0;
+        $question['check'] = false;
         $question->save();
         return redirect('/questions/'. $question->id);
     }

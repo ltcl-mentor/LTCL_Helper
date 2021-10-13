@@ -41,8 +41,8 @@ function Questions(props) {
                     <AccordionDetails>
                         <Typography>
                             { questions.map((question) => {
-                                if(question.topic === topic.id){
-                                    return <div className="question">・<a href={`/questions/`+question.id}>{ question.question }</a></div>;
+                                if (question.topic === topic.id) {
+                                    return <div className="question">・<a href={ `/questions/`+question.id }>{ question.question }</a></div>;
                                 }
                             })}
                         </Typography>

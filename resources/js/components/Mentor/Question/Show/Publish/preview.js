@@ -14,11 +14,10 @@ function Preview(props) {
             .get(`/react/search/questions?category=${ props.question.category }&topic=${ props.question.topic }`)
             .then(response => {
                 setRelatedQuestions(response.data);
-                
             }).catch(error => {
                 console.log(error);
             });
-    },[]);
+    }, []);
     
     return (
         <div className="box">

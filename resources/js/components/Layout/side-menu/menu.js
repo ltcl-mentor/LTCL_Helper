@@ -22,6 +22,7 @@ function Menu(props) {
         >
             <React.Fragment>
                 <MenuIcon onClick={ toggleDrawer(true) }/>
+                
                 <Drawer
                     anchor="left"
                     open={ menu }

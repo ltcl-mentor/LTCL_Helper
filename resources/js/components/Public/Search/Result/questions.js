@@ -18,7 +18,7 @@ function Questions(props) {
             }).catch(error => {
                 console.log(error);
             });
-    },[]);
+    }, []);
     
     const handlePageClick = (event) => {
         setCurrentPage(event.selected);
@@ -44,10 +44,10 @@ function Questions(props) {
     let questionList;
     let pagination;
     
-    if(list.filter(v=>v).length === 0){    //filterでlistに存在する空要素を排除し,その上で配列内の要素が何個あるかを判定。
+    if (list.filter(v=>v).length === 0) {    //filterでlistに存在する空要素を排除し,その上で配列内の要素が何個あるかを判定。
         emptyMessage = ( <div className="emptyMessage">該当する質問がありません。</div> );
-    }else{
-        questionList = list.slice(currentPage*10, (currentPage+1)*10);
+    } else {
+        questionList = list.slice(currentPage*10, (currentPage + 1)*10);
         pagination = (
             <div className="paginationBox">
                 <ReactPaginate

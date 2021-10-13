@@ -53,11 +53,11 @@ function Edit() {
     }, []);
     
     useEffect(() => {
-        if(category === 0 && topic <= 8) {
+        if (category === 0 && topic <= 8) {
             setCurriculumNumbers(curriculum_numbers_array[Number(category)][Number(topic)]);
-        }else if(category === 1 && topic >= 9) {
+        } else if (category === 1 && topic >= 9) {
             setCurriculumNumbers(curriculum_numbers_array[Number(category)][0]);
-        }else {
+        } else {
             setCurriculumNumbers(curriculum_numbers_array[0][0]);
         }
     }, [category, topic]);
@@ -67,34 +67,34 @@ function Edit() {
     let set = 0;
     const handleClick = () => {
         // カリキュラム番号のバリデーション
-        if(!(curriculum_number)){
+        if (!(curriculum_number)) {
             setCurriculumNumberValidationError(1);
             return false;
         }
         
-        if(!(curriculum_numbers[Number(category)][Number(topic)].includes(curriculum_number))) {
+        if (!(curriculum_numbers[Number(category)][Number(topic)].includes(curriculum_number))) {
             setCurriculumNumberValidationError(1);
             return false;
         }
             
         
         // 質問とコメントのバリデーション
-        if(question.trim().length !== 0 && comment.trim().length !== 0){
-            if(set==0){
+        if (question.trim().length !== 0 && comment.trim().length !== 0){
+            if (set==0) {
                 set=1;
                 document.getElementById('update').submit();
-            }else{
+            } else {
                 return false;
             }
-        }else if(question.trim().length === 0 && comment.trim().length !== 0){
+        } else if (question.trim().length === 0 && comment.trim().length !== 0) {
             setQuestionValidationError(1);
             setCommentValidationError(0);
             return false;
-        }else if(question.trim().length !== 0 && comment.trim().length === 0){
+        } else if (question.trim().length !== 0 && comment.trim().length === 0) {
             setQuestionValidationError(0);
             setCommentValidationError(1);
             return false;
-        }else{
+        } else {
             setQuestionValidationError(1);
             setCommentValidationError(1);
             return false;
@@ -141,7 +141,7 @@ function Edit() {
             
             <div className="submit">
                 <input type="hidden"/>
-                <p onClick={() => { handleClick() }} className="submit_btn">登録する</p>
+                <p onClick={ handleClick } className="submit_btn">登録する</p>
             </div>
         </div>
     );

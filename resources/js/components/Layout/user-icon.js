@@ -16,9 +16,9 @@ function Icon(props) {
         setAnchorEl(null);
     };
     
-     const logout = () => {
+    const logout = () => {
         document.getElementById('logout-form').submit();
-     };
+    };
     
     return (
         <div>
@@ -37,8 +37,10 @@ function Icon(props) {
                 >
                     { props.user_name }
                 </Typography>
+                
                 <AccountCircle />
             </IconButton>
+            
             <Menu
                 id="menu-appbar"
                 anchorEl={ anchorEl }
@@ -57,6 +59,7 @@ function Icon(props) {
                 <MenuItem onClick={handleClose}>
                     <a class="dropdown-item" onClick={ logout }>Logout</a>
                 </MenuItem>
+                
                 <MenuItem onClick={handleClose}>
                     <a className="dropdown-item" href="/history">質問閲覧履歴</a>
                 </MenuItem>

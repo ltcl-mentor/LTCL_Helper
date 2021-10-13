@@ -25,14 +25,14 @@ function Public() {
     return (
         <div className="card-body">
             <div>
-                <select onChange={(event) => { handleYear(event) }} required>
+                <select onChange={ (event) => handleYear(event) } required>
                     <option value="">選択してください。</option>
                     <option value={ thisYear-1 }>{ thisYear-1 }</option>
                     <option value={ thisYear }>{ thisYear }</option>
                     <option value={ thisYear+1 }>{ thisYear+1 }</option>
                 </select>
                 年
-                <select onChange={(event) => { handleMonth(event) }} required>
+                <select onChange={ (event) => handleMonth(event) } required>
                     <option value="">選択してください。</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -48,7 +48,7 @@ function Public() {
                     <option value="12">12</option>
                 </select>
                 月入学者を
-                <select onChange={(event) => { handleNumber(event) }} require>
+                <select onChange={ (event) => handleNumber(event) } require>
                     <option value="">選択してください。</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -75,7 +75,7 @@ function Public() {
                 <div className="empty"></div>
             </div>
             <Forms
-                password={ 'ltcl'+year%100+('0'+month).slice(-2) }
+                password={ 'ltcl' + year%100 + ( '0' + month ).slice(-2) }
                 number={ number }
             />
         </div>

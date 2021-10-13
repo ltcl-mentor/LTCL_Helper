@@ -40,21 +40,21 @@ function Create(props) {
     };
     
     const submit = () => {
-        if(info.trim().length !== 0 && date.length !== 0){
+        if (info.trim().length !== 0 && date.length !== 0) {
             document.getElementById('create_info').submit();
         }
         
-        if(info.trim().length === 0){
+        if (info.trim().length === 0) {
             setInfoValidationError(true);
         }
         
-        if(date.length === 0){
+        if (date.length === 0) {
             setDateValidationError(true);
         }
     };
     
     let validation_message;
-    if(infoValodationError || dateValodationError){
+    if (infoValodationError || dateValodationError) {
         validation_message = (
             <Typography
                 align="center"
@@ -65,23 +65,23 @@ function Create(props) {
                 未入力の項目があります！
             </Typography>
         );
-    }else{
+    } else {
         validation_message = ("");
     }
     
     return (
         <div>
             <Typography align="center" variant="h5">
-                <Button onClick={handleOpen}>お知らせを追加する</Button>
+                <Button onClick={ handleOpen }>お知らせを追加する</Button>
             </Typography>
             
             <Modal
-                open={open}
-                onClose={handleClose}
+                open={ open }
+                onClose={ handleClose }
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
+                <Box sx={ style }>
                     <form action="/informations" method="post" id="create_info">
                         <input type="hidden" value={ props.csrf_token } name="_token" />
                         
@@ -98,7 +98,7 @@ function Create(props) {
                             placeholder="お知らせを簡潔に(250文字以内で)入力"
                             minRows={3}
                             value={ info }
-                            onChange={(event) => { handleInfo(event) }}
+                            onChange={ (event) => handleInfo(event) }
                             style={{ 
                                 width: "80%",
                                 marginLeft: "10%",

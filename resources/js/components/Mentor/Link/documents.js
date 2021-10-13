@@ -36,7 +36,7 @@ function Documents() {
     const list = staffs.map((staff) => {
         return (
             <div className="content">
-                <Accordion expanded={ expanded === staff.id } onChange={handleChange(staff.id)}>
+                <Accordion expanded={ expanded === staff.id } onChange={ handleChange(staff.id) }>
                     <AccordionSummary
                         expandIcon={ <ExpandMoreIcon /> }
                         aria-controls="panel1bh-content"
@@ -50,7 +50,7 @@ function Documents() {
                     <AccordionDetails>
                         <Typography>
                             { documents.map((document) => {
-                                if(document.user_id === staff.id){
+                                if (document.user_id === staff.id) {
                                     return <div  className="document">・<a href={ `/links/document/`+document.id }>{ document.title }</a></div>;
                                 }
                             })}

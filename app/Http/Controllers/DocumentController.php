@@ -46,12 +46,15 @@ class DocumentController extends Controller
     public function show(Document $document, User $user)
     {
         $author = $user->find($document['user_id']);
+        
         if($author){
             $author_name = $author->name;
         } else{
             $author_name = null;
         }
+        
         $questions = $document->questions()->get();
+        
         return view('Mentor.Document.show')->with([
             'document' => $document,
             'author_name' => $author_name,
@@ -69,6 +72,7 @@ class DocumentController extends Controller
     public function update(DocumentRequest $request, Document $document)
     {
         $document->fill($request['post'])->save();
+        
         return redirect('documents/index');
     }
     
@@ -76,7 +80,9 @@ class DocumentController extends Controller
     public function delete(Document $document)
     {
         $document->delete();
+        
         Document::documentForceDelete();
+        
         return redirect('/documents/index');
     }
 }

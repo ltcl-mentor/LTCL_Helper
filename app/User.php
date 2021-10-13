@@ -47,12 +47,16 @@ class User extends Authenticatable
     public static function userDelete($data)
     {
         Student::where('user_id', $data->id)->delete();
+        
         $data->questions()->detach();
+        
         $related_questions = Question::where('user_id', $data->id)->get();
+        
         foreach($related_questions as $related_question){
             $related_question['user_id'] = 0;
             $related_question->save();
         }
+        
         $data->delete();
     }
 }

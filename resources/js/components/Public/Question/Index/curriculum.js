@@ -7,15 +7,15 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 function Curriculum(props) {
     const curriculum_topics = [
-        {"id":0, "topic":"AWS"},
-        {"id":1, "topic":"HTML"},
-        {"id":2, "topic":"CSS"},
-        {"id":3, "topic":"JavaScript"},
-        {"id":4, "topic":"サーバー"},
-        {"id":5, "topic":"PHP"},
-        {"id":6, "topic":"Laravel"},
-        {"id":7, "topic":"DB"},
-        {"id":8, "topic":"Git&GitHub"}
+        {"id": 0, "topic": "AWS"},
+        {"id": 1, "topic": "HTML"},
+        {"id": 2, "topic": "CSS"},
+        {"id": 3, "topic": "JavaScript"},
+        {"id": 4, "topic": "サーバー"},
+        {"id": 5, "topic": "PHP"},
+        {"id": 6, "topic": "Laravel"},
+        {"id": 7, "topic": "DB"},
+        {"id": 8, "topic": "Git&GitHub"}
     ];
     const [expanded, setExpanded] = React.useState(false);
     
@@ -26,7 +26,7 @@ function Curriculum(props) {
     const curriculum = curriculum_topics.map((topic) => {
         return (
             <div className="content">
-                <Accordion expanded={ expanded === topic.id } onChange={handleChange(topic.id)}>
+                <Accordion expanded={ expanded === topic.id } onChange={ handleChange(topic.id) }>
                     <AccordionSummary
                         expandIcon={ <ExpandMoreIcon /> }
                         aria-controls="panel1bh-content"
@@ -40,12 +40,8 @@ function Curriculum(props) {
                     <AccordionDetails>
                         <Typography>
                             { props.questions.map((question) => {
-                                if(question.topic === topic.id){
-                                    if(question.check === 1){
-                                        return <div className="question">・<a href={'/questions/' + question.id + '/public'}>{ question.question }</a></div>;
-                                    }else{
-                                        return <div className="question">・（非公開）<a href={'/questions/' + question.id + '/public'}>{ question.question }</a></div>;
-                                    }
+                                if (question.topic === topic.id) {
+                                    return <div className="question">・<a href={ '/questions/' + question.id + '/public' }>{ question.question }</a></div>;
                                 }
                             })}
                         </Typography>

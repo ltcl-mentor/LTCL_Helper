@@ -5,24 +5,24 @@ function Forms(props) {
     const [clickCount, setClickCount] = useState(0);
 
     const doubleClickStopper = () => {
-        if( clickCount === 0){
+        if (clickCount === 0) {
             setClickCount(1);
             document.getElementById('create').submit();
-        }else{
+        } else {
             return false;
         }
     };
     
     let formCount;
     let forms = [];
-    for(formCount=1; formCount<=props.number; formCount++) {
+    for (formCount=1; formCount<=props.number; formCount++) {
         forms.push(
             <div>
                 <div className="form-group row">
                     <label for="name" className="col-md-4 col-form-label text-md-right">name{ formCount }</label>
 
                     <div className="col-md-6">
-                        <input id="name" type="text" className="form-control" name={ `name`+formCount } required autoComplete="name"/>
+                        <input id="name" type="text" className="form-control" name={ `name` + formCount } required autoComplete="name"/>
                     </div>
                 </div>
                 
@@ -39,11 +39,11 @@ function Forms(props) {
     }
     
     let submitBtn;
-    if(props.number){
+    if (props.number) {
         submitBtn = (
              <div className="form-group row mb-0">
                 <div className="col-md-6 offset-md-4">
-                    <p className="btn btn-primary" onClick={() => { doubleClickStopper() }}>
+                    <p className="btn btn-primary" onClick={ doubleClickStopper }>
                         Register
                     </p>
                 </div>

@@ -37,33 +37,33 @@ function Create() {
     const handleClick = () => {
         // カリキュラム番号のバリデーション
         // カリキュラム番号が選択されているか
-        if(!(curriculum_number)){
+        if (!(curriculum_number)) {
             setCurriculumNumberValidationError(1);
             return false;
         }
         // カテゴリーとトピックに対して適切なカリキュラム番号が選択されているか
-        if(!(curriculum_numbers[Number(category)][Number(topic)].includes(curriculum_number))) {
+        if (!(curriculum_numbers[Number(category)][Number(topic)].includes(curriculum_number))) {
             setCurriculumNumberValidationError(1);
             return false;
         }
         
         // 質問とコメントのバリデーション
-        if(question.trim().length !== 0 && comment.trim().length !== 0){
-            if(set === 0){
+        if (question.trim().length !== 0 && comment.trim().length !== 0) {
+            if (set === 0) {
                 document.getElementById('create').submit();
                 set=1;
-            }else{
+            } else {
                 return false;
             }
-        }else if(question.trim().length === 0 && comment.trim().length !== 0){
+        } else if (question.trim().length === 0 && comment.trim().length !== 0) {
             setQuestionValidationError(1);
             setCommentValidationError(0);
             return false;
-        }else if(question.trim().length !== 0 && comment.trim().length === 0){
+        } else if (question.trim().length !== 0 && comment.trim().length === 0) {
             setQuestionValidationError(0);
             setCommentValidationError(1);
             return false;
-        }else{
+        } else {
             setQuestionValidationError(1);
             setCommentValidationError(1);
             return false;
@@ -71,9 +71,9 @@ function Create() {
     };
     
     let validation_message;
-    if(curriculum_number_validation_error === 1){
+    if (curriculum_number_validation_error === 1) {
         validation_message = (<p className="errorMassage">カリキュラム番号を選択してください。</p>);
-    }else{
+    } else {
         validation_message = ('');
     }
     
@@ -122,7 +122,7 @@ function Create() {
             <Picture/>
             
             <div className="submit">
-                <p onClick={() => { handleClick() }} className="submit_btn">登録する</p>
+                <p onClick={ handleClick } className="submit_btn">登録する</p>
             </div>
         </div>
     );

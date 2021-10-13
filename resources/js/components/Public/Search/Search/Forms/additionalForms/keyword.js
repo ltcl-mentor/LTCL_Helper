@@ -11,7 +11,7 @@ function Keyword(props) {
     return (
         <div className="content">
             <div className="keyword_box">
-                <TextField id="standard-basic" label="キーワード" onChange={(event) => { handleKeyword(event) }} />
+                <TextField id="standard-basic" label="キーワード" onChange={ (event) => handleKeyword(event) } />
                 { props.setKeyword(keyword) }
             </div>
         </div>

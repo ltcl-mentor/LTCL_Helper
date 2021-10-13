@@ -4,13 +4,13 @@ import Typography from '@material-ui/core/Typography';
 function Info(props) {
     
     let info;
-    if(!(props.isDateClicked)){
+    if (!(props.isDateClicked)) {
         info = (
             <Typography align="center" variant="h7" component="div" sx={{ paddingTop: 2 }}>
                 データの読み込み中です。
             </Typography>
         );
-    }else{
+    } else {
         info = (
             <div>
                 <Typography align="center" variant="h7" component="div" sx={{ paddingTop: 2 }}>

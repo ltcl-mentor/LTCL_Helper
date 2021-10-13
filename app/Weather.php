@@ -11,6 +11,7 @@ class Weather extends Model
         'Clear' => '快晴',
         'Snow' => '雪',
         'Rain' => '雨',
+        'Mist' => '霧',
         'Drizzle' => '霧雨',
         'Thunderstorm' => '雷雨',
         'Atmosphere' => '異常気象'

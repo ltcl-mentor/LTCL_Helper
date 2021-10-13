@@ -1,6 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import ReactDOM from 'react-dom';
-import {Link} from 'react-scroll';
 import Fab from '@material-ui/core/Fab';
 
 function SearchButton(props) {
@@ -8,7 +6,7 @@ function SearchButton(props) {
     
     useEffect(() => {
         setIsButtonClicked(false);
-    },[props.corriculum_number, props.keyword]);
+    }, [props.corriculum_number, props.keyword]);
     
     const handleClick = () => {
         setIsButtonClicked(true);
@@ -16,15 +14,15 @@ function SearchButton(props) {
     
     let searchButton;
     // topicの条件で不等号に0を入れるとundefindedでも動いてしまうので0の時と1~8の時を分けて定義
-    if( (((props.topic === 0) || (props.topic >= 1 && props.topic <= 8)) && props.category === 0) || (props.topic >= 9 && props.category === 1) ){
+    if ( (((props.topic === 0) || (props.topic >= 1 && props.topic <= 8)) && props.category === 0) || (props.topic >= 9 && props.category === 1) ) {
         searchButton = (
             <div className="search_button_box">
-                <Fab variant="extended" onClick={() => { handleClick() }}>
+                <Fab variant="extended" onClick={ handleClick() }>
                     検索する
                 </Fab>
             </div>
         );
-    }else{
+    } else {
         searchButton = ('');
     }
     

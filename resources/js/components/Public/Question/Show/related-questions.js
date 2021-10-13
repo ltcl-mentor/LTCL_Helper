@@ -9,9 +9,9 @@ function Questions(props) {
         return (
             <div className="related_question_itme">
                 <ListItem button>
-                    <a href={ `/show/`+question.id } target="_blank" className="related_question">
+                    <a href={ `/show/` + question.id } target="_blank" className="related_question">
                         <ListItemText
-                            primary={ question.question.length > 50 ? question.question.substr(0, 49)+'...' : question.question }
+                            primary={ question.question.length > 50 ? question.question.substr(0, 49) + '...' : question.question }
                         />
                     </a>
                 </ListItem>
@@ -20,7 +20,7 @@ function Questions(props) {
     });
     
     return (
-        <List subheader={<h2 />} className="demolist">
+        <List subheader={ <h2 /> } className="demolist">
             <ListSubheader align="center" className="related_title" >関連質問</ListSubheader>
             { related_question }
         </List>

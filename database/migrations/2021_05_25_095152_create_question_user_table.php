@@ -15,8 +15,8 @@ class CreateQuestionUserTable extends Migration
     {
         Schema::create('question_user', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('question_id');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('question_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

@@ -12,24 +12,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//         width: '100%',
-//     },
-//     button: {
-//         marginTop: theme.spacing(1),
-//         marginRight: theme.spacing(1),
-//     },
-//     actionsContainer: {
-//         marginBottom: theme.spacing(2),
-//     },
-//     resetContainer: {
-//         padding: theme.spacing(3),
-//     },
-// }));
 
 function Search() {
     const [category, setCategory] = useState('');
@@ -39,7 +22,6 @@ function Search() {
     const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
     const categories = ['カリキュラム', '成果物'];
     const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'];
-    // const classes = useStyles();
     const [activeStep, setActiveStep] = useState(0);
     const steps = [
         `カテゴリーを選択する  ${ activeStep >= 1 ? ` ___${categories[category]}` : '' }`,
@@ -73,7 +55,6 @@ function Search() {
                                 variant="contained"
                                 color="primary"
                                 onClick={ handleNext }
-                                // className={ classes.button }
                             >
                                 Next
                             </Button>
@@ -90,7 +71,6 @@ function Search() {
                         />
                         <Button
                             onClick={ handleBack }
-                            // className={ classes.button }
                             color="secondary"
                         >
                             Back
@@ -100,7 +80,6 @@ function Search() {
                                 variant="contained"
                                 color="primary"
                                 onClick={ handleNext }
-                                // className={ classes.button }
                             >
                                 Next
                             </Button>
@@ -119,7 +98,6 @@ function Search() {
                         />
                         <Button
                             onClick={ handleBack }
-                            // className={ classes.button }
                             color="secondary"
                         >
                             Back
@@ -128,7 +106,6 @@ function Search() {
                             variant="contained"
                             color="primary"
                             onClick={ handleNext }
-                            // className={ classes.button }
                         >
                             Next
                         </Button>

@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
-import Avatar from '@material-ui/core/Avatar';
 
 function Comment(props) {
     

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import axios from "axios";
 import Card from '@mui/material/Card';
 import Typography from '@material-ui/core/Typography';
-
 import Content from '../../Layout/side-menu/content';
 import Information from './information/information';
 import Clendar from './calendar/calendar';
@@ -20,11 +19,11 @@ function Home() {
             }).catch(error => {
                 console.log(error);
             });
-    },[]);
+    }, []);
     
     return (
         <div className="home-items">
-            <Card sx={{ width: 300 }}>
+            <Card sx={{ width: "24%" }}>
                 <Content is_admin={ user.is_admin }/>
             </Card>
             
@@ -62,7 +61,7 @@ function Home() {
             
             </Card>
             
-            <Card sx={{ width: "25%", marginLeft: "1%" }}>
+            <Card sx={{ width: "29%", marginLeft: "1%" }}>
                 <Weather />
             </Card>
         </div>

@@ -6,7 +6,7 @@ function Information(props) {
     const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
     
     let create_btn;
-    if(props.is_admin){
+    if (props.is_admin) {
         create_btn=(
             <Create 
                 csrf_token={ csrf_token }

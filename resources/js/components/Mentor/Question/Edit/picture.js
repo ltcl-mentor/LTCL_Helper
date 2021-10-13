@@ -12,13 +12,15 @@ function Picture(props) {
             }).catch(error => {
                 console.log(error);
             });
-    },[]);
+    }, []);
     
     const list = images.map((image) => {
         return (
             <label>
                 <input type="checkbox" name="delete_id[]" value={ image.id }/>
-                <a href={ image.image_path } data-lightbox="group"><img src={image.image_path} className="image"/></a>
+                <a href={ image.image_path } data-lightbox="group">
+                    <img src={ image.image_path } className="image"/>
+                </a>
             </label>
         );
     });
@@ -26,11 +28,15 @@ function Picture(props) {
     return (
         <div className="content">
             <h2 className="title">画像のアップロードと削除（複数選択可）</h2>
+            
             <h3>現在登録されている画像</h3>
+            
             <p>登録を解除する場合はチェックを入れてください。</p>
+            
             { list }
             
             <h3>新たに登録する画像</h3>
+            
             <input type="file" name="image[]" multiple/>
         </div>
     );

@@ -40,13 +40,13 @@ function Show() {
             }).catch(error => {
                 console.log(error);
             });
-    },[]);
+    }, []);
     
     const deleteConfirm = () => {
         "use strict"; 
-        if (confirm('データが削除されます。\nよろしいですか？')){
+        if (confirm('データが削除されます。\nよろしいですか？')) {
             document.getElementById('delete').submit();
-        }else{
+        } else {
             window.alert('キャンセルしました');
             return false;
         }
@@ -67,12 +67,12 @@ function Show() {
                     topic={ topics[question.topic] }
                 />
                 
-                <a href={`/questions/`+question.id+`/edit`} className="editBtn">編集する</a>
+                <a href={ `/questions/` + question.id + `/edit` } className="editBtn">編集する</a>
                 
-                <form action={`/questions/`+question.id+`/delete`} method="post" id="delete">
+                <form action={ `/questions/` + question.id + `/delete` } method="post" id="delete">
                     <input type="hidden" name="_token" value={ csrf_token }/>
                     <input type="submit" className="hidden"/>
-                    <p className="deleteBtn" onClick={() => { deleteConfirm() }}>削除する</p>
+                    <p className="deleteBtn" onClick={ deleteConfirm }>削除する</p>
                 </form>
             </div>
     
@@ -99,7 +99,7 @@ function Show() {
             <div>
                 <div className="title">
                     <h1>関連記事</h1>
-                    <a href={`/links/question/`+question.id }>編集する</a>
+                    <a href={ `/links/question/` + question.id }>編集する</a>
                 </div>
                 <Documents 
                     documents={ documents }

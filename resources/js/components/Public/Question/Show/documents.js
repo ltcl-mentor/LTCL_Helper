@@ -6,9 +6,9 @@ import Typography from '@material-ui/core/Typography';
 
 function Document(props) {
     let document;
-    if(props.documents.filter(v=>v).length === 0){
+    if (props.documents.filter(v=>v).length === 0) {
         document = (<div className="empty_message">関連する記事はありません。</div>);
-    }else{
+    } else {
         document = props.documents.map((document) => {
             return (
                 <div>

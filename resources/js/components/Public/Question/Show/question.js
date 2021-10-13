@@ -4,14 +4,14 @@ import Avatar from '@material-ui/core/Avatar';
 
 function Question(props) {
     let image;
-    if(props.count === 0){
+    if (props.count === 0) {
         image = ('');
-    }else{
+    } else {
         image = (
             <div>
                 <h2 className="columns">参考画像</h2>
                 { props.images.map((image) => {
-                    return <a href={image.image_path} data-lightbox="group"><img src={image.image_path} className="image"/></a>;
+                    return <a href={ image.image_path } data-lightbox="group"><img src={ image.image_path } className="image"/></a>;
                 })}
             </div>
         );

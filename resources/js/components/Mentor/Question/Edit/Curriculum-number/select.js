@@ -23,7 +23,7 @@ function Selects(props) {
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    onChange={(event) => { handleCurriculumNumber(event) }}
+                    onChange={ (event) => handleCurriculumNumber(event) }
                     defaultValue={ props.old_curriculum_number }
                 >
                     { MenuItems }

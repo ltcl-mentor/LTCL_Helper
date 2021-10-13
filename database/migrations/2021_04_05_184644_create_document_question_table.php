@@ -15,8 +15,8 @@ class CreateDocumentQuestionTable extends Migration
     {
         Schema::create('document_question', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('document_id');
-            $table->integer('question_id');
+            $table->unsignedBigInteger('document_id');
+            $table->unsignedBigInteger('question_id');
             $table->timestamps();
         });
     }

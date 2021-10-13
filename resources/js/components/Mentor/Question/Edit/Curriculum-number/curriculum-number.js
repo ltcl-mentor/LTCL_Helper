@@ -4,9 +4,9 @@ import Selects from './select';
 function CrriculumNumber(props) {
     
     let validation_message;
-    if(props.curriculum_number_validation_error === 1){
+    if (props.curriculum_number_validation_error === 1) {
         validation_message = (<p className="errorMassage">カリキュラム番号を正しく選択してください。</p>);
-    }else{
+    } else {
         validation_message = ('');
     }
      

@@ -11,23 +11,24 @@ import Description from '@material-ui/icons/Description';
 import PostAdd from '@material-ui/icons/PostAdd';
 import ContactPhone from '@material-ui/icons/ContactPhone'; 
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import Link from '@mui/material/Link';
 
 function Content(props) {
     const searchMenu = [
-        {"menu":"フリーワード検索", "url":"/search/freeword"},
-        {"menu":"絞り込み検索", "url":"/search/condition"}
+        {"menu": "フリーワード検索", "url": "/search/freeword"},
+        {"menu": "絞り込み検索", "url": "/search/condition"}
     ];
     const itemMenu = [
-        {"menu":"質問一覧", "url":"/questions/index/public"},
-        {"menu":"関連記事一覧", "url":"/documents/index/public"}
+        {"menu": "質問一覧", "url": "/questions/index/public"},
+        {"menu": "関連記事一覧", "url": "/documents/index/public"}
     ];
     const formMenu = [
-        {"menu":"質問投稿", "url":"/questions/create/public"},
-        {"menu":"お問い合わせ", "url":"/contact/create"}
+        {"menu": "質問投稿", "url": "/questions/create/public"},
+        {"menu": "お問い合わせ", "url": "/contact/create"}
     ];
     
     let admin_menu;
-    if(props.is_admin) {
+    if (props.is_admin) {
         admin_menu = (
             <div>
                 <Divider />
@@ -44,8 +45,9 @@ function Content(props) {
                 >
                     管理者用
                 </Typography>
+                
                 <List>
-                    <a href="/mentor">
+                    <Link href="/mentor" underline="none">
                         <ListItem button key="管理ページ">
                             <ListItemIcon sx={{ paddingLeft: 4 }}>
                                 <SupervisorAccountIcon />
@@ -55,7 +57,7 @@ function Content(props) {
                                 sx={{ paddingLeft: 2 }}
                             />
                         </ListItem>
-                    </a>
+                    </Link>
                 </List>
             </div>
         );
@@ -91,16 +93,17 @@ function Content(props) {
             >
                 検索機能
             </Typography>
+            
             <List>
-                {searchMenu.map((menu) => (
-                    <a href={ menu.url }>
+                { searchMenu.map((menu) => (
+                    <Link href={ menu.url } underline="none">
                         <ListItem button key={ menu.menu }>
                             <ListItemIcon sx={{ paddingLeft: 4 }}>
                                 <Search />
                             </ListItemIcon>
                             <ListItemText primary={ menu.menu } sx={{ paddingLeft: 2 }}/>
                         </ListItem>
-                    </a>
+                    </Link>
                 ))}
             </List>
             
@@ -118,16 +121,17 @@ function Content(props) {
             >
                 資料
             </Typography>
+            
             <List>
-                {itemMenu.map((menu) => (
-                    <a href={ menu.url }>
+                { itemMenu.map((menu) => (
+                    <Link href={ menu.url } underline="none">
                         <ListItem button key={ menu.menu }>
                             <ListItemIcon sx={{ paddingLeft: 4 }}>
                                <Description />
                             </ListItemIcon>
                             <ListItemText primary={ menu.menu } sx={{ paddingLeft: 2 }}/>
                         </ListItem>
-                    </a>
+                    </Link>
                 ))}
             </List>
             
@@ -146,15 +150,15 @@ function Content(props) {
                 問い合わせ関連
             </Typography>
             <List>
-                {formMenu.map((menu) => (
-                    <a href={ menu.url }>
+                { formMenu.map((menu) => (
+                    <Link href={ menu.url } underline="none">
                         <ListItem button key={ menu.menu }>
                             <ListItemIcon sx={{ paddingLeft: 4 }}>
                                 { menu === "質問投稿" ? <PostAdd /> : <ContactPhone /> }
                             </ListItemIcon>
                             <ListItemText primary={ menu.menu } sx={{ paddingLeft: 2 }}/>
                         </ListItem>
-                    </a>
+                    </Link>
                 ))}
             </List>
             

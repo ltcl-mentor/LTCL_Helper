@@ -39,7 +39,7 @@ function Infos(props) {
             }).catch(error => {
                 console.log(error);
             });
-    },[]);
+    }, []);
     
     const handleOpen = () => setOpen(true);
     
@@ -55,7 +55,7 @@ function Infos(props) {
     };
     
     let list;
-    if(dates.length !== 0) {
+    if (dates.length !== 0) {
         list = (
             <List
                 sx={{
@@ -63,20 +63,20 @@ function Infos(props) {
                     bgcolor: 'background.paper',
                     position: 'relative',
                     overflow: 'auto',
-                    maxHeight: 300,
+                    height: 300,
                     paddingLeft: "10%",
                     '& ul': { padding: 0 },
                 }}
                 subheader={<li />}
             >
-                {dates.map((date) => (
+                { dates.map((date) => (
                     <li key={ date }>
                         <ul>
                             <ListSubheader>{ date }</ListSubheader>
-                            {infos[date].map((info) => (
+                            { infos[date].map((info) => (
                                 <ListItem key={`${date}-info`}>
                                     <ListItemText primary={ info.information } />
-                                    { props.is_admin ? <DeleteIcon onClick={() => {handleOpen(), handleDelete(info.id, info.information)}}/> : ''}
+                                    { props.is_admin ? <DeleteIcon onClick={ () => {handleOpen(), handleDelete(info.id, info.information)} }/> : ''}
                                 </ListItem>
                             ))}
                         </ul>
@@ -91,13 +91,13 @@ function Infos(props) {
             { list }
             
             <Modal
-                open={open}
-                onClose={handleClose}
+                open={ open }
+                onClose={ handleClose }
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
-                    <form action={'/informations/' + deleteId + '/delete'} method="post" id="delete_info">
+                <Box sx={ style }>
+                    <form action={ '/informations/' + deleteId + '/delete' } method="post" id="delete_info">
                         <input type="hidden" value={ props.csrf_token } name="_token" />
                         
                         <Typography align="center" sx={{ paddingTop:2 }}>
