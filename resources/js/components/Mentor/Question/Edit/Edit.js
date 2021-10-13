@@ -62,7 +62,6 @@ function Edit() {
         }
     }, [category, topic]);
     
-    
     // 保存処理の重複を防止するためにクリック回数を記録する変数set
     let set = 0;
     const handleClick = () => {
@@ -76,7 +75,6 @@ function Edit() {
             setCurriculumNumberValidationError(1);
             return false;
         }
-            
         
         // 質問とコメントのバリデーション
         if (question.trim().length !== 0 && comment.trim().length !== 0){
@@ -121,7 +119,8 @@ function Edit() {
                 setCurriculumNumber={ setCurriculumNumber }
                 curriculum_number_validation_error={ curriculum_number_validation_error }
                 curriculum_numbers={ curriculum_numbers }
-            />  
+            />
+            <input type="hidden" name="post[curriculum_number]" value={ curriculum_number } />
                 
             <QuestionForm
                 question={ question }
@@ -135,7 +134,7 @@ function Edit() {
                 comment_validation_error={ comment_validation_error }
             />
             
-            <Picture 
+            <Picture
                 question_id={ question_id }
             />
             

@@ -5,7 +5,6 @@ import CurriculumNumber from '../../../Public/Search/Search/Forms/additionalForm
 import QuestionForm from './questionForm';
 import CommentForm from './commentForm';
 import Picture from './picture';
-
 import Category from '../../../Public/Search/Search/Forms/categoryForm';
 
 function Create() {

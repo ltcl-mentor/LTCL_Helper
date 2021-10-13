@@ -20,8 +20,6 @@ Auth::routes([
 
 Route::group(['middleware' => ['auth']], function () {
     
-    // 'react/'から始まるurlはreact上で非同期通信として利用
-    
     // ログイン済みユーザーのみアクセス可能
     Route::get('/', 'HomeController@home'); // トップ画面表示
     Route::get('/search/condition', 'SearchController@search'); // 絞り込み検索画面表示
@@ -33,6 +31,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/history', 'HomeController@history'); // 履歴画面表示
     Route::get('/contact/create', 'ContactController@create'); // お問い合わせ画面表示
     Route::post('/contact/post', 'ContactController@post'); // お問い合わせ内容送信処理
+    
+    // 'react/'から始まるurlはreact上で非同期通信として利用
     Route::get('react/search/questions', 'ReactController@getSearchQuestions'); // 質問検索結果の受け渡し
     Route::get('react/approved/questions', 'ReactController@getCheckedQuestions'); // 承認済み質問受け渡し
     Route::get('react/question/{question}', 'ReactController@getQuestion'); // 個別質問データの受け渡し
@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('react/weather', 'ReactController@getWeather'); // 今日の天気のデータ受け渡し
     Route::get('react/college/{year}/{month}/{date}', 'ReactController@getCollegeData'); // 校舎に関するデータ受け渡し
     Route::get('react/infos', 'ReactController@getInfos'); // お知らせのデータ受け渡し
+    
     
     // 管理者権限を持っているユーザーのみがアクセス可能
     Route::group(['middleware' => ['administrator']], function () {

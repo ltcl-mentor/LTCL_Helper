@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 function Weather() {
     const [weather, setWeather] = useState([]);
     const weatherImages = {
-        "くもり": "images/cloulds.jpg",
+        "くもり": "images/clouds.jpg",
         "快晴": "images/clear.jpg",
         "雪": "images/snow.jpg",
         "雨": "images/rain.jpg",
@@ -44,9 +44,9 @@ function Weather() {
                 <Typography align="center" variant="h7" component="div" >最高気温：{ weather.today.temp_max }℃</Typography>
                 <Typography align="center" variant="h7" component="div" >最低気温：{ weather.today.temp_min }℃</Typography>
                 
-                <Typography align="center" variant="h6" component="div" >今後の天気</Typography>
+                <Typography align="center" variant="h6" component="div" >今後8時間の天気</Typography>
                 
-                <Table sx={{ width: "100%" }} size="small" aria-label="a dense table">
+                <Table sx={{ width: "90%", marginLeft: "5%" }} size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
                             <TableCell>時間</TableCell>
@@ -54,6 +54,7 @@ function Weather() {
                             <TableCell align="right">天気</TableCell>
                         </TableRow>
                     </TableHead>
+                    
                     <TableBody>
                         { weather.hourly.map((hourly_data) => (
                             <TableRow
