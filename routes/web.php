@@ -98,6 +98,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('react/all/staffs', 'ReactController@getAllStaffs'); // 全管理者受け渡し
         Route::get('react/id', 'ReactController@getUserId'); // ログインユーザーid受け渡し
         
-    }); 
-});    
+    });
     
+    // Route::get('/{any}', function(){
+    //     return view('test');
+    // })->where('any', '.*');
+});    
+
