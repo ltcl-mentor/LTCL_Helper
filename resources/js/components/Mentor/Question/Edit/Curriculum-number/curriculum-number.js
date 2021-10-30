@@ -17,6 +17,7 @@ function CrriculumNumber(props) {
                 { validation_message }
                 <Selects
                     setCurriculumNumber={ props.setCurriculumNumber }
+                    curriculum_number={ props.curriculum_number }
                     old_curriculum_number={ props.old_curriculum_number }
                     items={ props.curriculum_numbers }
                 />

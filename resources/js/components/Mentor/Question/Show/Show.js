@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import axios from "axios";
+import {Link} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import Publish from './Publish/publish';
 import Parameters from './parameters';
 import Question from './question';
@@ -8,17 +10,18 @@ import Comment from './comment';
 import Documents from '../../../Public/Question/Show/documents';
 
 function Show() {
+    const { id } = useParams();
     const [question, setQuestion] = useState([]);
     const [images, setImages] = useState([]);
     const [documents, setDocuments] = useState([]);
     const categories = ['カリキュラム', '成果物'];
     const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', 'マイグレーション', 'リレーション', 'Laravel拡張', '画像処理', 'Heroku環境', 'API', 'デザイン'];
-    const question_id = document.getElementById('Question_mentor_show').getAttribute('question_id');
+    // const question_id = document.getElementById('Question_mentor_show').getAttribute('question_id');
     const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
 
     useEffect(() => {
         axios
-            .get(`/react/question/${ question_id }`)
+            .get(`/react/question/${ id }`)
             .then(response => {
                 setQuestion(response.data);
             }).catch(error => {
@@ -26,7 +29,7 @@ function Show() {
             });
             
         axios
-            .get(`/react/images/${ question_id }`)
+            .get(`/react/images/${ id }`)
             .then(response => {
                 setImages(response.data);
             }).catch(error => {
@@ -34,7 +37,7 @@ function Show() {
             });
             
         axios
-            .get(`/react/related/documents/${ question_id }`)
+            .get(`/react/related/documents/${ id }`)
             .then(response => {
                 setDocuments(response.data);
             }).catch(error => {
@@ -58,7 +61,7 @@ function Show() {
                 <h1>質問詳細</h1>
                 
                 <Publish
-                    question_id={ question_id }
+                    question_id={ id }
                     csrf_token={ csrf_token }
                     question={ question }
                     images={ images }
@@ -67,11 +70,10 @@ function Show() {
                     topic={ topics[question.topic] }
                 />
                 
-                <a href={ `/questions/` + question.id + `/edit` } className="editBtn">編集する</a>
+                <Link to={ `/questions/` + question.id + `/edit` } className="editBtn">編集する</Link>
                 
                 <form action={ `/questions/` + question.id + `/delete` } method="post" id="delete">
                     <input type="hidden" name="_token" value={ csrf_token }/>
-                    <input type="submit" className="hidden"/>
                     <p className="deleteBtn" onClick={ deleteConfirm }>削除する</p>
                 </form>
             </div>

@@ -28,14 +28,13 @@
 </head>
 <body>
     <div id="app">
-        <div id="Bar"></div>
+        <!--<div id="Bar"></div>-->
+        <main>
+            @yield('content')
+        </main>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
-        
-        <main class="py-4">
-            @yield('content')
-        </main>
     </div>
 </body>
 </html>

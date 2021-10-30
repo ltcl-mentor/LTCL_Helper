@@ -4,6 +4,8 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Box from '@material-ui/core/Box';
+import {Link} from 'react-router-dom';
 
 function Portfolio(props) {
     const portfolio_topics = [
@@ -23,7 +25,7 @@ function Portfolio(props) {
     
     const portfolio = portfolio_topics.map((topic) => {
         return (
-            <div className="content">
+            <Box sx={{paddingTop: 3}}>
                 <Accordion expanded={ expanded === topic.id } onChange={ handleChange(topic.id) }>
                     <AccordionSummary
                         expandIcon={ <ExpandMoreIcon /> }
@@ -39,13 +41,13 @@ function Portfolio(props) {
                         <Typography>
                             { props.questions.map((question) => {
                                 if (question.topic === topic.id) {
-                                    return <div className="question">・<a href={ `/questions/` + question.id + '/public' }>{ question.question }</a></div>;
+                                    return <div className="question">・<Link to={ `/questions/` + question.id + '/public' }>{ question.question }</Link></div>;
                                 }
                             })}
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
-            </div>
+            </Box>
         );
     });
 

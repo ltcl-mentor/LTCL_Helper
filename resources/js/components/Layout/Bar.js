@@ -65,6 +65,6 @@ function Bar() {
 
 export default Bar;
 
-if (document.getElementById('Bar')) {
-    ReactDOM.render(<Bar />, document.getElementById('Bar'));
-}
+// if (document.getElementById('Bar')) {
+//     ReactDOM.render(<Bar />, document.getElementById('Bar'));
+// }

@@ -4,9 +4,18 @@ import axios from "axios";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
+import Bar from './Layout/Bar';
 import Home from './Public/Home/Home';
-import Search from './Public/Search/Search';
-import Create from './Mentor/Question/Create/Create';
+import PublicDocumentIndex from './Public/Document/Index/Index';
+import PublicQuestionIndex from './Public/Question/Index/Index';
+import PublicQuestionCreate from './Public/Question/Create/Create';
+import PublicQuestionShow from './Public/Question/Show/Show';
+import Condition from './Public/Search/Condition/Condition';
+import MentorTop from './Mentor/Top';
+import QuestionIndex from './Mentor/Question/Index/Index';
+import QuestionShow from './Mentor/Question/Show/Show';
+import QuestionCreate from './Mentor/Question/Create/Create';
+import QuestionEdit from './Mentor/Question/Edit/Edit';
 
 function Router() {
     const [user, setUser] = useState([]);
@@ -27,14 +36,23 @@ function Router() {
         user_links = (
             <Switch>
                 <Route path="/" exact component={ Home }/>
-                <Route path="/search" component={ Search }/>
+                <Route path="/documents/index/public" component={ PublicDocumentIndex }/>
+                <Route path="/questions/index/public" component={ PublicQuestionIndex }/>
+                <Route path="/questions/create/public" component={ PublicQuestionCreate }/>
+                <Route path="/questions/:id/public" component={ PublicQuestionShow }/>
+                <Route path="/search/condition" component={ Condition }/>
             </Switch>
         );
         
         if (user.is_admin === "staff") {
             admin_links = (
                 <Switch>
-                    <Route path="/create" component={ Create }/>
+                    <Route path="/mentor/top" component={ MentorTop }/>
+                    <Route path="/questions/index" component={ QuestionIndex }/>
+                    <Route path="/questions/create" component={ QuestionCreate }/>
+                    <Route path="/questions/:id/edit" component={ QuestionEdit }/>
+                    <Route path="/questions/:id" component={ QuestionShow }/>
+                    
                 </Switch>
             );
         }
@@ -42,6 +60,7 @@ function Router() {
     
     return (
         <BrowserRouter>
+            <Bar/>
             { user_links }
             { admin_links }
         </BrowserRouter>
@@ -50,6 +69,6 @@ function Router() {
 
 export default Router;
 
-if (document.getElementById('app')) {
-    ReactDOM.render(<Router />, document.getElementById('app'));
+if (document.getElementById('Router')) {
+    ReactDOM.render(<Router />, document.getElementById('Router'));
 }

@@ -1,6 +1,9 @@
 import React,{useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
 import axios from "axios";
+import {useParams} from 'react-router-dom';
+import Button from '@mui/material/Button';
+
 import Category from './categoryForm';
 import TopicForm from './topicForm';
 import CurriculumNumber from './Curriculum-number/curriculum-number';
@@ -9,12 +12,13 @@ import CommentForm from '../Create/commentForm';
 import Picture from './picture';
 
 function Edit() {
+    const { id } = useParams();
     const [oldData, setOldData] = useState([]);
     const [category, setCategory] = useState(0);
     const [topic, setTopic] = useState(0);
     const [curriculum_number, setCurriculumNumber] = useState();
     const [curriculum_number_validation_error, setCurriculumNumberValidationError] = useState(0);
-    const curriculum_numbers_array = [
+    const curriculum_numbers = [
         [
             ["1-1-1"],
             ["2-1-1"],
@@ -30,16 +34,18 @@ function Edit() {
             ["成果物"],
         ]
     ];
-    const [curriculum_numbers, setCurriculumNumbers] = useState(["1-1-1"]);
+    // 選択されたcategory、topicに該当するカリキュラム番号群を保持
+    // const [curriculum_numbers, setCurriculumNumbers] = useState(["1-1-1"]);
     const [question, setQuestion] = useState();
     const [question_validation_error, setQuestionValidationError] = useState(0);
     const [comment, setComment] = useState();
     const [comment_validation_error, setCommentValidationError] = useState(0);
-    const question_id = document.getElementById('Question_mentor_edit').getAttribute('question_id');
+    // const question_id = document.getElementById('Question_mentor_edit').getAttribute('question_id');
+    const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
     
     useEffect(() => {
         axios
-            .get(`/react/question/${ question_id }`)
+            .get(`/react/question/${ id }`)
             .then(response => {
                 setOldData(response.data);
                 setCategory(response.data.category);
@@ -52,25 +58,22 @@ function Edit() {
             });
     }, []);
     
+    // カリキュラム番号の初期値が変更されたvategory、topicと対応していなくても
+    // 更新ができてしまうのでその対策
     useEffect(() => {
-        if (category === 0 && topic <= 8) {
-            setCurriculumNumbers(curriculum_numbers_array[Number(category)][Number(topic)]);
-        } else if (category === 1 && topic >= 9) {
-            setCurriculumNumbers(curriculum_numbers_array[Number(category)][0]);
-        } else {
-            setCurriculumNumbers(curriculum_numbers_array[0][0]);
-        }
+        setCurriculumNumber('');
     }, [category, topic]);
     
     // 保存処理の重複を防止するためにクリック回数を記録する変数set
     let set = 0;
     const handleClick = () => {
         // カリキュラム番号のバリデーション
+        // 入力確認
         if (!(curriculum_number)) {
             setCurriculumNumberValidationError(1);
             return false;
         }
-        
+        // category、topicとの対応確認
         if (!(curriculum_numbers[Number(category)][Number(topic)].includes(curriculum_number))) {
             setCurriculumNumberValidationError(1);
             return false;
@@ -79,8 +82,9 @@ function Edit() {
         // 質問とコメントのバリデーション
         if (question.trim().length !== 0 && comment.trim().length !== 0){
             if (set==0) {
-                set=1;
+                console.log(0);
                 document.getElementById('update').submit();
+                set=1;
             } else {
                 return false;
             }
@@ -101,46 +105,51 @@ function Edit() {
     
     return (
         <div className="container">
-            <Category
-                category={ category }
-                old_category={ oldData.category }
-                setCategory={ setCategory }
-            />
-            
-            <TopicForm
-                category={ category }
-                topic={ topic }
-                setTopic={ setTopic }
-                old_topic={ oldData.topic }
-            />
-            
-            <CurriculumNumber
-                old_curriculum_number={ oldData.curriculum_number }
-                setCurriculumNumber={ setCurriculumNumber }
-                curriculum_number_validation_error={ curriculum_number_validation_error }
-                curriculum_numbers={ curriculum_numbers }
-            />
+            <form action={`/questions/` + id  + `/update`} method="post" enctype="multipart/form-data" id ="update">
+                <input type="hidden" name="_token" value={ csrf_token }/>
                 
-            <QuestionForm
-                question={ question }
-                setQuestion={ setQuestion }
-                question_validation_error={ question_validation_error }
-            />
+                <Category
+                    category={ category }
+                    old_category={ oldData.category }
+                    setCategory={ setCategory }
+                />
+            
+                <TopicForm
+                    category={ category }
+                    topic={ topic }
+                    setTopic={ setTopic }
+                    old_topic={ oldData.topic }
+                />
+            
+                <CurriculumNumber
+                    setCurriculumNumber={ setCurriculumNumber }
+                    curriculum_number={ curriculum_number }
+                    old_curriculum_number={ oldData.curriculum_number }
+                    curriculum_number_validation_error={ curriculum_number_validation_error }
+                    curriculum_numbers={ curriculum_numbers[Number(category)][Number(topic)] }
+                />
+                <input type="hidden" name="post[curriculum_number]" value={ curriculum_number } />
                 
-            <CommentForm
-                comment={ comment }
-                setComment={ setComment }
-                comment_validation_error={ comment_validation_error }
-            />
+                <QuestionForm
+                    question={ question }
+                    setQuestion={ setQuestion }
+                    question_validation_error={ question_validation_error }
+                />
+                
+                <CommentForm
+                    comment={ comment }
+                    setComment={ setComment }
+                    comment_validation_error={ comment_validation_error }
+                />
             
-            <Picture
-                question_id={ question_id }
-            />
-            
-            <div className="submit">
-                <input type="hidden"/>
-                <p onClick={ handleClick } className="submit_btn">登録する</p>
-            </div>
+                <Picture
+                    question_id={ id }
+                />
+                
+                <Button variant="outlined" size="large" onClick={ handleClick }>
+                    更新する
+                </Button>
+            </form>
         </div>
     );
 }

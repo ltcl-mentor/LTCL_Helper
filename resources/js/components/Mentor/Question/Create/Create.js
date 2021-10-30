@@ -1,11 +1,13 @@
 import React,{useState} from 'react';
 import ReactDOM from 'react-dom';
-import TopicForm from '../../../Public/Search/Search/Forms/topicForm';
-import CurriculumNumber from '../../../Public/Search/Search/Forms/additionalForms/curriculum-number/curriculum-number';
+import Button from '@mui/material/Button';
+
+import TopicForm from '../../../Public/Search/Condition/Search/Forms/topicForm';
+import CurriculumNumber from '../../../Public/Search/Condition/Search/Forms/additionalForms/curriculum-number/curriculum-number';
 import QuestionForm from './questionForm';
 import CommentForm from './commentForm';
 import Picture from './picture';
-import Category from '../../../Public/Search/Search/Forms/categoryForm';
+import Category from '../../../Public/Search/Condition/Search/Forms/categoryForm';
 
 function Create() {
     const [category, setCategory] = useState(0);
@@ -30,6 +32,7 @@ function Create() {
         ],
         ["成果物"]
     ];
+    const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
     
     let set = 0;
     
@@ -49,6 +52,7 @@ function Create() {
         // 質問とコメントのバリデーション
         if (question.trim().length !== 0 && comment.trim().length !== 0) {
             if (set === 0) {
+                // console.log(0);
                 document.getElementById('create').submit();
                 set=1;
             } else {
@@ -78,51 +82,62 @@ function Create() {
     
     return (
         <div className="container">
-            <div className="content">
-                <h2 className="title">カテゴリーの選択</h2>
-                <Category 
-                    setCategory={ setCategory }
-                />
-                <input type="hidden" name="post[category]" value={ category } />
-            </div>
-            
-            <div className="content">
-                <h2 className="title">トピックの選択</h2>
-                <TopicForm
-                    category={ category }
-                    setTopic={ setTopic }
-                />
-                <input type="hidden" name="post[topic]" value={ topic } />
-            </div>
-            
-            <div className="content">
-                <h2 className="title">該当カリキュラム番号の選択</h2>
-                { validation_message }
-                <CurriculumNumber
-                    category={ category }
-                    topic={ topic }
-                    setCurriculumNumber={ setCurriculumNumber }
-                />
-                <input type="hidden" name="post[curriculum_number]" value={ curriculum_number } />
-            </div>
+            <form action="/questions/store" method="post" id="create" enctype="multipart/form-data">
+                <input type="hidden" name="_token" value={ csrf_token }/>
                 
-            <QuestionForm
-                question={ question }
-                setQuestion={ setQuestion }
-                question_validation_error={ question_validation_error }
-            />
+                <div className="content">
+                    <h2 className="title">カテゴリーの選択</h2>
+                    
+                    <Category 
+                        setCategory={ setCategory }
+                    />
+                    
+                    <input type="hidden" name="post[category]" value={ category } />
+                </div>
                 
-            <CommentForm
-                comment={ comment }
-                setComment={ setComment }
-                comment_validation_error={ comment_validation_error }
-            />
+                <div className="content">
+                    <h2 className="title">トピックの選択</h2>
+                    
+                    <TopicForm
+                        category={ category }
+                        setTopic={ setTopic }
+                    />
+                    
+                    <input type="hidden" name="post[topic]" value={ topic } />
+                </div>
             
-            <Picture/>
+                <div className="content">
+                    <h2 className="title">該当カリキュラム番号の選択</h2>
+                    
+                    { validation_message }
+                    
+                    <CurriculumNumber
+                        category={ category }
+                        topic={ topic }
+                        setCurriculumNumber={ setCurriculumNumber }
+                    />
+                    
+                    <input type="hidden" name="post[curriculum_number]" value={ curriculum_number } />
+                </div>
+                
+                <QuestionForm
+                    question={ question }
+                    setQuestion={ setQuestion }
+                    question_validation_error={ question_validation_error }
+                />
+                
+                <CommentForm
+                    comment={ comment }
+                    setComment={ setComment }
+                    comment_validation_error={ comment_validation_error }
+                />
             
-            <div className="submit">
-                <p onClick={ handleClick } className="submit_btn">登録する</p>
-            </div>
+                <Picture/>
+            
+                <Button variant="outlined" size="large" onClick={ handleClick }>
+                    保存する
+                </Button>
+            </form>
         </div>
     );
 }

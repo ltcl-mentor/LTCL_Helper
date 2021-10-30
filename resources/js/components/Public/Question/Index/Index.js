@@ -33,20 +33,22 @@ function Index() {
     }
     
     return (
-        <Box sx={{ width: '95%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={ value } onChange={ handleChange } aria-label="basic tabs example">
-                    <Tab label="カリキュラム" />
-                    <Tab label="成果物" />
-                </Tabs>
+        <div className="container">
+            <Box sx={{ width: '95%' }}>
+                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                    <Tabs value={ value } onChange={ handleChange } aria-label="basic tabs example">
+                        <Tab label="カリキュラム" />
+                        <Tab label="成果物" />
+                    </Tabs>
+                </Box>
+                { tab_content }
             </Box>
-            { tab_content }
-        </Box>
+        </div>
     );
 }
 
 export default Index;
 
-if (document.getElementById('Question_public_index')) {
-    ReactDOM.render(<Index />, document.getElementById('Question_public_index'));
-}
+// if (document.getElementById('Question_public_index')) {
+//     ReactDOM.render(<Index />, document.getElementById('Question_public_index'));
+// }

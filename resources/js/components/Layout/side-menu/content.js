@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 import Box from '@material-ui/core/Box';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -11,17 +12,21 @@ import Description from '@material-ui/icons/Description';
 import PostAdd from '@material-ui/icons/PostAdd';
 import ContactPhone from '@material-ui/icons/ContactPhone'; 
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 
 function Content(props) {
+    const [isLinkClicked, setIsLinkClicked] = useState(false);
+    
     const searchMenu = [
         {"menu": "フリーワード検索", "url": "/search/freeword"},
         {"menu": "絞り込み検索", "url": "/search/condition"}
     ];
+    
     const itemMenu = [
         {"menu": "質問一覧", "url": "/questions/index/public"},
         {"menu": "関連記事一覧", "url": "/documents/index/public"}
     ];
+    
     const formMenu = [
         {"menu": "質問投稿", "url": "/questions/create/public"},
         {"menu": "お問い合わせ", "url": "/contact/create"}
@@ -47,7 +52,7 @@ function Content(props) {
                 </Typography>
                 
                 <List>
-                    <Link href="/mentor" underline="none">
+                    <Link to="/mentor/top" onClick={ () => setIsLinkClicked(true) }>
                         <ListItem button key="管理ページ">
                             <ListItemIcon sx={{ paddingLeft: 4 }}>
                                 <SupervisorAccountIcon />
@@ -96,7 +101,7 @@ function Content(props) {
             
             <List>
                 { searchMenu.map((menu) => (
-                    <Link href={ menu.url } underline="none">
+                    <Link to={ menu.url } onClick={ () => setIsLinkClicked(true) }>
                         <ListItem button key={ menu.menu }>
                             <ListItemIcon sx={{ paddingLeft: 4 }}>
                                 <Search />
@@ -124,7 +129,7 @@ function Content(props) {
             
             <List>
                 { itemMenu.map((menu) => (
-                    <Link href={ menu.url } underline="none">
+                    <Link to={ menu.url } onClick={ () => setIsLinkClicked(true) }>
                         <ListItem button key={ menu.menu }>
                             <ListItemIcon sx={{ paddingLeft: 4 }}>
                                <Description />
@@ -151,7 +156,7 @@ function Content(props) {
             </Typography>
             <List>
                 { formMenu.map((menu) => (
-                    <Link href={ menu.url } underline="none">
+                    <Link to={ menu.url } onClick={ () => setIsLinkClicked(true) }>
                         <ListItem button key={ menu.menu }>
                             <ListItemIcon sx={{ paddingLeft: 4 }}>
                                 { menu === "質問投稿" ? <PostAdd /> : <ContactPhone /> }
@@ -163,6 +168,7 @@ function Content(props) {
             </List>
             
             { admin_menu }
+            { props.isMenu ? props.setIsLinkClicked(isLinkClicked) : '' }
         </Box>
     );
 }

@@ -1,7 +1,5 @@
-
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
-import ReactDOM from 'react-dom';
 import Documents from '../../Question/Show/documents';
 
 function Index() {
@@ -18,7 +16,7 @@ function Index() {
     }, []);
     
     return (
-        <div>
+        <div className="container">
             <Documents 
                 documents={ documents }
             />
@@ -28,6 +26,3 @@ function Index() {
 
 export default Index;
 
-if (document.getElementById('Document_public_index')) {
-    ReactDOM.render(<Index />, document.getElementById('Document_public_index'));
-}

@@ -21,12 +21,12 @@ Auth::routes([
 Route::group(['middleware' => ['auth']], function () {
     
     // ログイン済みユーザーのみアクセス可能
-    Route::get('/', 'HomeController@home'); // トップ画面表示
-    Route::get('/search/condition', 'SearchController@search'); // 絞り込み検索画面表示
-    Route::get('/questions/index/public', 'QuestionController@publicIndex'); // 公開中の質問一覧表示
-    Route::get('/questions/create/public', 'QuestionController@publicCreate'); // 受講生の質問投稿画面表示
+    // Route::get('/', 'HomeController@home'); // トップ画面表示
+    // Route::get('/search/condition', 'SearchController@search'); // 絞り込み検索画面表示
+    // Route::get('/questions/index/public', 'QuestionController@publicIndex'); // 公開中の質問一覧表示
+    // Route::get('/questions/create/public', 'QuestionController@publicCreate'); // 受講生の質問投稿画面表示
     Route::post('/questions/store/public', 'QuestionController@publicStore'); // 受講生の質問投稿処理
-    Route::get('/questions/{question}/public', 'QuestionController@publicShow'); // 質問詳細画面表示
+    // Route::get('/questions/{question}/public', 'QuestionController@publicShow'); // 質問詳細画面表示
     Route::get('/documents/index/public', 'DocumentController@publicIndex'); // 公開中の参考記事一覧表示
     Route::get('/history', 'HomeController@history'); // 履歴画面表示
     Route::get('/contact/create', 'ContactController@create'); // お問い合わせ画面表示
@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/informations/{info}/delete', 'HomeController@deleteInfo'); // お知らせの削除
         
         // 管理画面表示
-        Route::get('/mentor', 'HomeController@mentorTop')->name('mentor'); // メンター管理画面表示
+        Route::get('/mentor', 'HomeController@mentorTop'); // メンター管理画面表示
         
         // 参考記事
         Route::get('/documents/index', 'DocumentController@index'); // 初期画面表示
@@ -71,13 +71,13 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/links/question/{question}', 'LinkController@postQuestionToDocuments'); // 新規作成実行(記事：質問＝多：1)
         
         // 質問
-        Route::get('/questions/index', 'QuestionController@index'); // 初期画面表示
-        Route::get('/questions/create', 'QuestionController@create'); // 新規作成画面表示
+        // Route::get('/questions/index', 'QuestionController@index'); // 初期画面表示
+        // Route::get('/questions/create', 'QuestionController@create'); // 新規作成画面表示
         Route::post('/questions/store', 'QuestionController@store'); // 新規作成実行
         Route::post('/questions/{question}/check', 'QuestionController@check'); // 承認実行
         Route::post('/questions/{question}/uncheck', 'QuestionController@uncheck'); // 承認解除実行
-        Route::get('/questions/{question}', 'QuestionController@show'); // 詳細画面表示
-        Route::get('/questions/{question}/edit', 'QuestionController@edit'); // 編集画面表示
+        // Route::get('/questions/{question}', 'QuestionController@show'); // 詳細画面表示
+        // Route::get('/questions/{question}/edit', 'QuestionController@edit'); // 編集画面表示
         Route::post('/questions/{question}/update', 'QuestionController@update'); // 編集実行
         Route::post('/questions/{question}/delete', 'QuestionController@delete'); // 削除実行
         
@@ -100,8 +100,8 @@ Route::group(['middleware' => ['auth']], function () {
         
     });
     
-    // Route::get('/{any}', function(){
-    //     return view('test');
-    // })->where('any', '.*');
+    Route::get('/{any}', function(){
+        return view('test');
+    })->where('any', '.*');
 });    
 

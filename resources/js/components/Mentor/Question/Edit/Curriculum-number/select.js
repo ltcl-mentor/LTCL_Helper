@@ -5,7 +5,6 @@ import Select from '@material-ui/core/Select';
 import FormLabel from '@material-ui/core/FormLabel';
 
 function Selects(props) {
-    
     const handleCurriculumNumber = (event) => {
         props.setCurriculumNumber(event.target.value);
     };
@@ -21,10 +20,9 @@ function Selects(props) {
             <FormControl>
                 <FormLabel component="legend">カリキュラム番号</FormLabel>
                 <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
+                    value={ props.curriculum_number }
                     onChange={ (event) => handleCurriculumNumber(event) }
-                    defaultValue={ props.old_curriculum_number }
+                    displayEmpty
                 >
                     { MenuItems }
                 </Select>

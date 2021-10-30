@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
+import {Link} from 'react-router-dom';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
@@ -52,9 +53,9 @@ function Portfolio() {
                             { questions.map((question) => {
                                 if (question.topic === topic.id) {
                                     if (question.check === true) {
-                                        return <div className="question">・<a href={ `/questions/` + question.id }>{ question.question }</a></div>;
+                                        return <div className="question">・<Link to={ `/questions/` + question.id }>{ question.question }</Link></div>;
                                     } else {
-                                        return <div className="question">・（非公開）<a href={ `/questions/` + question.id }>{ question.question }</a></div>;
+                                        return <div className="question">・（非公開）<Link to={ `/questions/` + question.id }>{ question.question }</Link></div>;
                                     }
                                 }
                             })}

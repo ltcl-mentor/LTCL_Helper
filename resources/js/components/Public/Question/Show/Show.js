@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
+import {useParams} from 'react-router-dom';
 import axios from "axios";
 import Parameters from './parameters';
 import Question from './question';
@@ -8,17 +9,18 @@ import Documents from './documents';
 import RelatedQuestions from './related-questions';
 
 function Show() {
+    const { id } = useParams();
     const [question, setQuestion] = useState([]);
     const [images, setImages] = useState([]);
     const [documents, setDocuments] = useState([]);
     const [relatedQuestions, setRelatedQuestions] = useState([]);
-    const question_id = document.getElementById('Question_public_show').getAttribute('question_id');
-    const category = document.getElementById('Question_public_show').getAttribute('category');
-    const topic = document.getElementById('Question_public_show').getAttribute('topic');
+    // const question_id = document.getElementById('Question_public_show').getAttribute('question_id');
+    // const category = document.getElementById('Question_public_show').getAttribute('category');
+    // const topic = document.getElementById('Question_public_show').getAttribute('topic');
 
     useEffect(() => {
         axios
-            .get(`/react/question/${ question_id }`)
+            .get(`/react/question/${ id }`)
             .then(response => {
                 setQuestion(response.data);
             }).catch(error => {
@@ -26,7 +28,7 @@ function Show() {
             });
             
         axios
-            .get(`/react/images/${ question_id }`)
+            .get(`/react/images/${ id }`)
             .then(response => {
                 setImages(response.data);
             }).catch(error => {
@@ -34,7 +36,7 @@ function Show() {
             });
             
         axios
-            .get(`/react/related/documents/${ question_id }`)
+            .get(`/react/related/documents/${ id }`)
             .then(response => {
                 setDocuments(response.data);
             }).catch(error => {
@@ -42,7 +44,7 @@ function Show() {
             });
         
         axios
-            .get(`/react/search/questions?category=${ category }&topic=${ topic }`)
+            .get(`/react/search/questions?category=${ 0 }&topic=${ 0 }`)
             .then(response => {
                 setRelatedQuestions(response.data);
             }).catch(error => {
@@ -96,7 +98,7 @@ function Show() {
 
 export default Show;
 
-if (document.getElementById('Question_public_show')) {
-    ReactDOM.render(<Show />, document.getElementById('Question_public_show'));
-}
+// if (document.getElementById('Question_public_show')) {
+//     ReactDOM.render(<Show />, document.getElementById('Question_public_show'));
+// }
 
