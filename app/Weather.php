@@ -37,7 +37,6 @@ class Weather extends Model
     {
         $client = new \GuzzleHttp\Client();
         $url = 'https://api.openweathermap.org/data/2.5/onecall';
-        $weather_datas = [];
         
         $response = $client->request(
             'GET',
@@ -51,20 +50,20 @@ class Weather extends Model
     // 現在の天気情報
     public static function getCurrentWeather($data)
     {
-        $data_array['temp'] = $data['current']['temp'];
-        $data_array['main'] = self::$weather_types[$data['current']['weather'][0]['main']];
+        $current_weather['temp'] = $data['current']['temp'];
+        $current_weather['main'] = self::$weather_types[$data['current']['weather'][0]['main']];
         
-        return $data_array;
+        return $current_weather;
     }
     
     // 今日の天気情報
     public static function getTodayWeather($data)
     {
-        $data_array['temp_ave'] = $data['daily'][0]['temp']['day'];
-        $data_array['temp_max'] = $data['daily'][0]['temp']['max'];
-        $data_array['temp_min'] = $data['daily'][0]['temp']['min'];
+        $today_weather['temp_ave'] = $data['daily'][0]['temp']['day'];
+        $today_weather['temp_max'] = $data['daily'][0]['temp']['max'];
+        $today_weather['temp_min'] = $data['daily'][0]['temp']['min'];
         
-        return $data_array;
+        return $today_weather;
     }
     
     // 1時間おきの天気情報
@@ -74,11 +73,11 @@ class Weather extends Model
         
         foreach($hourly_datas as $data_id => $hourly_data){
             $time = new Carbon($hourly_data['dt']);
-            $data_array[$data_id]['time'] = $time->format('G時');
-            $data_array[$data_id]['temp'] = $hourly_data['temp'];
-            $data_array[$data_id]['main'] = self::$weather_types[$hourly_data['weather'][0]['main']];
+            $hourly_weather[$data_id]['time'] = $time->format('G時');
+            $hourly_weather[$data_id]['temp'] = $hourly_data['temp'];
+            $hourly_weather[$data_id]['main'] = self::$weather_types[$hourly_data['weather'][0]['main']];
         }
         
-        return $data_array;
+        return $hourly_weather;
     }
 }

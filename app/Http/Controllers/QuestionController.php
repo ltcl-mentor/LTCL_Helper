@@ -58,7 +58,7 @@ class QuestionController extends Controller
             Image::imageCreate($pictures, $question->id);
         }
         
-        $message = "受講生によって質問が投稿されました。\n以下のリンクから確認してください。\n/questions/" . $question->id;
+        $message = "受講生によって質問が投稿されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $question->id;
         Slack::sendMessage($message);
         
         return redirect('/');

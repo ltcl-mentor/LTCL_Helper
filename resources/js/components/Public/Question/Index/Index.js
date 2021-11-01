@@ -13,7 +13,7 @@ function Index() {
     
     useEffect(() => {
         axios
-            .get("/react/approved/questions")
+            .get("/react/checked/questions")
             .then(response => {
                 setQuestions(response.data);
             }).catch(error => {

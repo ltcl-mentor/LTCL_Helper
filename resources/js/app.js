@@ -12,10 +12,5 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 require('./components/Route');
-require('./components/Mentor/Question/Create/Create');
-require('./components/Mentor/Question/Edit/Edit');
-require('./components/Mentor/Question/Show/Show');
 require('./components/Mentor/Link/Index');
 require('./components/Mentor/User/Public');
-require('./components/Mentor/Document/Index');
-// require('./components/Layout/Bar');

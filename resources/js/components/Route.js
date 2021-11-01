@@ -11,7 +11,11 @@ import PublicQuestionIndex from './Public/Question/Index/Index';
 import PublicQuestionCreate from './Public/Question/Create/Create';
 import PublicQuestionShow from './Public/Question/Show/Show';
 import Condition from './Public/Search/Condition/Condition';
+import Freeword from './Public/Search/Freeword/Freeword';
 import MentorTop from './Mentor/Top';
+import DocumentIndex from './Mentor/Document/Index/Index';
+import DocumentShow from './Mentor/Document/Show/Show';
+import DocumentCreate from './Mentor/Document/Create/Create';
 import QuestionIndex from './Mentor/Question/Index/Index';
 import QuestionShow from './Mentor/Question/Show/Show';
 import QuestionCreate from './Mentor/Question/Create/Create';
@@ -41,6 +45,7 @@ function Router() {
                 <Route path="/questions/create/public" component={ PublicQuestionCreate }/>
                 <Route path="/questions/:id/public" component={ PublicQuestionShow }/>
                 <Route path="/search/condition" component={ Condition }/>
+                <Route path="/search/freeword" component={ Freeword }/>
             </Switch>
         );
         
@@ -48,6 +53,9 @@ function Router() {
             admin_links = (
                 <Switch>
                     <Route path="/mentor/top" component={ MentorTop }/>
+                    <Route path="/documents/index" component={ DocumentIndex }/>
+                    <Route path="/documents/create" component={ DocumentCreate }/>
+                    <Route path="/documents/:id" component={ DocumentShow }/>
                     <Route path="/questions/index" component={ QuestionIndex }/>
                     <Route path="/questions/create" component={ QuestionCreate }/>
                     <Route path="/questions/:id/edit" component={ QuestionEdit }/>

@@ -5,11 +5,11 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
 function Document(props) {
-    let document;
+    let documents;
     if (props.documents.filter(v=>v).length === 0) {
-        document = (<div className="empty_message">関連する記事はありません。</div>);
+        documents = (<div className="empty_message">関連する記事はありません。</div>);
     } else {
-        document = props.documents.map((document) => {
+        documents = props.documents.map((document) => {
             return (
                 <div>
                     <CardActionArea>
@@ -31,7 +31,7 @@ function Document(props) {
     
     return (
         <div className="documents">
-            { document }
+            { documents }
         </div>
     );
 }

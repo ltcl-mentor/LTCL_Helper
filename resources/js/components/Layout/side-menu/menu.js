@@ -19,8 +19,6 @@ function Menu(props) {
         setMenu(isOpen);
     };
     
-    console.log(menu);
-    
     return(
         <IconButton
             size="large"

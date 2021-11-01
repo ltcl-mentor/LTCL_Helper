@@ -20,7 +20,7 @@ function Show() {
 
     useEffect(() => {
         axios
-            .get(`/react/question/${ id }`)
+            .get(`/react/checked/question/${ id }`)
             .then(response => {
                 setQuestion(response.data);
             }).catch(error => {

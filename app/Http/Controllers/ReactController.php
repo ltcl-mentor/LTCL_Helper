@@ -20,7 +20,11 @@ class ReactController extends Controller
     // 絞り込み質問検索結果の受け渡し
     public function getSearchQuestions(Request $request)
     {
-        return Question::conditionSearch($request->category, $request->topic, $request->curriculum_number, $request->keyword);
+        return Question::conditionSearch(
+            // 絞り込み検索用
+            $request->category, $request->topic, $request->curriculum_number, $request->keyword, 
+            // キーワード検索用
+            $request->searchType, urldecode($request->freeword));
     }
     
     // 全質問受け渡し
@@ -35,17 +39,26 @@ class ReactController extends Controller
         return $question;
     }
     
-    // 承認済み質問受け渡し
+    // 公開中の個別質問データの受け渡し
+    public function getCheckedQuestion(Question $question)
+    {
+        if($question->check == true){
+            return $question;
+        }
+        return null;
+    }
+    
+    // 公開中の質問受け渡し
     public function getCheckedQuestions()
     {
         return Question::where('check', true)->get();
     }
     
-    // 未承認質問受け渡し
-    public function getUnapprovedQuestions()
-    {
-        return Question::where('check', false)->get();
-    }
+    // // 未承認質問受け渡し
+    // public function getUnapprovedQuestions()
+    // {
+    //     return Question::where('check', false)->get();
+    // }
     
     // カリキュラム範囲質問受け渡し
     public function getCurriculumQuestions()
@@ -65,6 +78,12 @@ class ReactController extends Controller
         return Image::where('question_id', $question_id)->get();
     }
     
+    // 関連質問受け渡し
+    public function getRelatedQuestions(Document $document)
+    {
+        return $document->questions()->get();
+    }
+    
     
     // 参考記事関連
     // 全記事受け渡し
@@ -73,6 +92,13 @@ class ReactController extends Controller
         return Document::All();
     }
     
+    // 個別記事データの受け渡し
+    public function getDocument(Document $document)
+    {
+        return $document;
+    }
+    
+    // 関連記事受け渡し
     public function getRelatedDocuments(Question $question)
     {
         return $question->documents()->get();

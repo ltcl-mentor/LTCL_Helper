@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use App\Document;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
 class Question extends Model
 {
     use SoftDeletes;
@@ -54,26 +53,58 @@ class Question extends Model
         }
     }
     
-    // 質問の絞り込み検索
-    public static function conditionSearch($category, $topic, $curriculum_number, $keyword)
+    // 質問の検索
+    public static function conditionSearch($category, $topic, $curriculum_number, $keyword, $searchType, $freeword)
     {
-        $basic_data = self::where('check', true)
+        if($freeword){
+            // フリーワード検索
+            // 検索ワードが複数の場合に要素を配列に変換し、空文字列の要素を排除
+            $freewords = explode("/", $freeword);
+            $noEmptyFreewords = array_filter($freewords);
+            
+            if($searchType === "OR"){
+                // OR検索
+                // 複数の検索ワードのいづれかに該当するものを選出
+                $results = self::where('check', true)
+                        ->where(function ($query) use ($noEmptyFreewords) {
+                            $i = 0;
+                            foreach ($noEmptyFreewords as $searchFreeword) {
+                                $where = (!$i) ? 'where' : 'orWhere';
+                                $i++;
+                                $query->$where('question', 'like', '%'.$searchFreeword.'%');
+                            }
+                        });
+            }else{
+                // AND検索
+                $basic_data = self::where('check', true);
+                
+                // 複数の検索ワードの全てに該当するものを選出
+                foreach($noEmptyFreewords as $searchWord){
+                    $basic_data->where('question', 'LIKE', '%'.$searchWord.'%');
+                };
+                $results = $basic_data;
+            }
+            
+        }else{
+            // 絞り込み検索
+            $basic_data = self::where('check', true)
                         ->where('category', $category)
                         ->where('topic', $topic);
                         
-        if($keyword && $curriculum_number){
-            $results = $basic_data
+            if($keyword && $curriculum_number){
+                $results = $basic_data
                         ->where('curriculum_number', $curriculum_number)
                         ->where('question', 'LIKE', '%'.$keyword.'%');
                         
-        }elseif($curriculum_number){
-            $results = $basic_data->where('curriculum_number', $curriculum_number);
+            }elseif($curriculum_number){
+                $results = $basic_data->where('curriculum_number', $curriculum_number);
                         
-        }elseif($keyword){
-            $results = $basic_data->where('question', 'LIKE', '%'.$keyword.'%');
+            }elseif($keyword){
+                $results = $basic_data->where('question', 'LIKE', '%'.$keyword.'%');
             
-        }else{
-            $results = $basic_data;
+            }else{
+                $results = $basic_data;
+            }
         }
         
         return $results->orderBy('question', 'asc')->get();

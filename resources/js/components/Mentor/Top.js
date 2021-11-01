@@ -12,8 +12,8 @@ function Top() {
         
             <h1 class="mentor_document_title">関連記事</h1>
             <div class="mentor_btns">
-                <a href="/documents/index"><button class="mentor_btn document_btn">一覧</button></a>
-                <a href="/documents/create"><button class="mentor_btn document_btn">新規登録</button></a>
+                <Link to="/documents/index"><button class="mentor_btn document_btn">一覧</button></Link>
+                <Link to="/documents/create"><button class="mentor_btn document_btn">新規登録</button></Link>
             </div>
         
             <h1 class="mentor_document_title">記事と質問の紐付け</h1>

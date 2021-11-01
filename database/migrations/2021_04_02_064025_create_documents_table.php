@@ -17,6 +17,10 @@ class CreateDocumentsTable extends Migration
             $table->bigIncrements('id');
             $table->text('title');
             $table->text('link');
+            $table->boolean('beginner');
+            $table->boolean('amature');
+            $table->boolean('master');
+            $table->boolean('all');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->softDeletes();

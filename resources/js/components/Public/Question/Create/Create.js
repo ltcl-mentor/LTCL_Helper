@@ -45,7 +45,7 @@ function Create() {
         }
         
         // 質問とコメントのバリデーション
-        if (question.trim().length !== 0){
+        if (question.trim().length !== 0) {
             if (set === 0) {
                 document.getElementById('create').submit();
                 set=1;
