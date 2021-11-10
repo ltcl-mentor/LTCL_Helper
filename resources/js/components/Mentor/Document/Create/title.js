@@ -14,7 +14,7 @@ function Title(props) {
             <h2 className="title">記事タイトルの入力</h2>
             { title_validation_message }
             <TextareaAutosize 
-                name="post[title]"
+                name="document[title]"
                 placeholder="制限字数は５０文字です"
                 minRows={2}
                 value={ props.title }

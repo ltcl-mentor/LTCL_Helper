@@ -15,7 +15,7 @@ function Link(props) {
             <h2 className="title">記事URLの入力</h2>
             { link_validation_message }
             <TextareaAutosize 
-                name="post[link]"
+                name="document[link]"
                 placeholder="URLを入力。入力する際はNotePMの外部共有を利用"
                 minRows={3}
                 value={ props.link }

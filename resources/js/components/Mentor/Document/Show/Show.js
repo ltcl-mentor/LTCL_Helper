@@ -4,9 +4,6 @@ import axios from "axios";
 import {Link} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
 
 import Parameters from './parameters';
 import Questions from './questions';

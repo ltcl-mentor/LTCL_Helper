@@ -37,8 +37,16 @@ class DocumentController extends Controller
     // 新規作成実行
     public function store(DocumentRequest $request, Document $document)
     {
+        $targets = ['beginner', 'amature', 'master', 'all'];
+        foreach($targets as $target){
+            if(isset($request[$target])){
+                $document[$target] = true;
+            }else{
+                $document[$target] = false;
+            }
+        }
         $document['user_id'] = Auth::id();
-        $document->fill($request['post'])->save();
+        $document->fill($request['document'])->save();
         return redirect('/documents/index');
     }
     
@@ -49,7 +57,7 @@ class DocumentController extends Controller
         
         if($author){
             $author_name = $author->name;
-        } else{
+        }else{
             $author_name = null;
         }
         

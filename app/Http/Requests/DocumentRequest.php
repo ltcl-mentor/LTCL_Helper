@@ -24,17 +24,17 @@ class DocumentRequest extends FormRequest
     public function rules()
     {
         return [
-            'post.title' => 'required|max:50',
-            'post.link' => 'required',
+            'document.title' => 'required|max:50',
+            'document.link' => 'required',
         ];
     }
     
     public function messages()
     {
         return [
-            'post.title.required' => '記事のタイトルは必須です。',
-            'post.title.max' => '記事のタイトルは字数制限50文字です。',
-            'post.link.required' => '記事のリンクは必須です。',
+            'document.title.required' => '記事のタイトルは必須です。',
+            'document.title.max' => '記事のタイトルは字数制限50文字です。',
+            'document.link.required' => '記事のリンクは必須です。',
         ];
     }
 }

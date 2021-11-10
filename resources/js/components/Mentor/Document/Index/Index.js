@@ -7,6 +7,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Chip from '@mui/material/Chip';
 
 function Document() {
     const [documents, setDocuments] = useState([]);
@@ -54,7 +55,15 @@ function Document() {
                         <Typography>
                             { documents.map((document) => {
                                 if (document.user_id === staff.id) {
-                                    return <div  className="document">・<Link to={ `/documents/` + document.id }>{ document.title }</Link></div>;
+                                    return (
+                                        <div className="document">
+                                            ・<Link to={ `/documents/` + document.id }>{ document.title }</Link><br/>
+                                            { document.beginner === 1 ? <Chip variant="outlined" label="初心者向け" /> : "" }
+                                            { document.amature === 1 ? <Chip label="中級者向け" /> : "" }
+                                            { document.master === 1 ? <Chip label="上級者向け" /> : "" }
+                                            { document.all === 1 ? <Chip label="全員向け" /> : "" }
+                                        </div>
+                                    );
                                 }
                             })}
                         </Typography>
