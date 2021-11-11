@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from "axios";
 import {useParams} from 'react-router-dom';
 import Button from '@mui/material/Button';
+import SaveIcon from '@material-ui/icons/Save';
 
 import Category from './categoryForm';
 import TopicForm from './topicForm';
@@ -146,7 +147,7 @@ function Edit() {
                     question_id={ id }
                 />
                 
-                <Button variant="outlined" size="large" onClick={ handleClick }>
+                <Button onClick={ handleClick } variant="contained" endIcon={<SaveIcon />}>
                     更新する
                 </Button>
             </form>

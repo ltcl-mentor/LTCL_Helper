@@ -1,5 +1,8 @@
 import React,{useState} from 'react';
 import ReactDOM from 'react-dom';
+import Button from '@mui/material/Button';
+import SaveIcon from '@material-ui/icons/Save';
+
 import TopicForm from '../../Search/Condition/Search/Forms/topicForm';
 import CurriculumNumber from '../../Search/Condition/Search/Forms/additionalForms/curriculum-number/curriculum-number';
 import QuestionForm from '../../../Mentor/Question/Create/questionForm';
@@ -108,9 +111,9 @@ function Create() {
             
                 <Picture/>
             
-                <div className="submit">
-                    <p onClick={ handleClick } className="submit_btn">登録する</p>
-                </div>
+                <Button onClick={ handleClick } variant="contained" endIcon={<SaveIcon />}>
+                    更新する
+                </Button>
             </form>
         </div>
     );

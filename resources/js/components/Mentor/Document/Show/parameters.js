@@ -8,6 +8,7 @@ import Paper from '@material-ui/core/Paper';
 
 function Parameters(props) {
     const [staffs, setStaffs] = useState([]);
+    // const targets = ["beginner", "amature", "master", "all"];
     
     useEffect(() => {
         axios
@@ -30,6 +31,17 @@ function Parameters(props) {
         });
     }
     
+    let targets = "";
+    props.targets.map((target) => {
+        if(target || target !== undefined) {
+            if(targets.length === 0) {
+                targets += target;
+            } else {
+                targets += `、` + target;
+            }
+        }
+    });
+    
     return (
         <div>
             <Paper className="QA_table">
@@ -38,6 +50,11 @@ function Parameters(props) {
                         <TableRow>
                             <TableCell align="center" component="th" scope="row">記事タイトル</TableCell>
                             <TableCell align="center">{ props.title }</TableCell>
+                        </TableRow>
+                        
+                        <TableRow>
+                            <TableCell align="center" component="th" scope="row">対象者</TableCell>
+                            <TableCell align="center">{ targets }</TableCell>
                         </TableRow>
                         
                         <TableRow>

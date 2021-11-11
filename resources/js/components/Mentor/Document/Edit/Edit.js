@@ -130,11 +130,9 @@ function Edit() {
                     link_validation_error={ link_validation_error }
                 />
             
-                <div className="submit">
-                    <Button onClick={ handleClick } variant="contained" endIcon={<SaveIcon />}>
-                        登録する
-                    </Button>
-                </div>
+                <Button onClick={ handleClick } variant="contained" endIcon={<SaveIcon />}>
+                    更新する
+                </Button>
             </form>
         </div>
     );

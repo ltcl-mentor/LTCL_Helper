@@ -48,6 +48,12 @@ function Document() {
 
             <Parameters 
                 title={ doc.title }
+                targets={ [
+                    doc.beginner ? "初心者" : false,
+                    doc.amature ? "中級者" : false,
+                    doc.master ? "上級者" : false,
+                    doc.all ? "全員" : false,
+                ] }
                 link={ doc.link }
                 author={ doc.user_id }
             />

@@ -59,7 +59,7 @@ Route::group(['middleware' => ['auth']], function () {
         // Route::get('/documents/create', 'DocumentController@create'); // 新規作成画面表示
         Route::post('/documents/store', 'DocumentController@store'); // 新規作成実行
         // Route::get('/documents/{document}', 'DocumentController@show'); // 詳細画面表示
-        Route::get('/documents/{document}/edit', 'DocumentController@edit'); // 編集画面表示
+        // Route::get('/documents/{document}/edit', 'DocumentController@edit'); // 編集画面表示
         Route::post('/documents/{document}/update', 'DocumentController@update'); // 編集実行
         Route::post('/documents/{document}/delete','DocumentController@delete'); // 削除実行
         

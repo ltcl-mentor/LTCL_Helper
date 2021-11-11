@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import ReactDOM from 'react-dom';
 import Button from '@mui/material/Button';
+import SaveIcon from '@material-ui/icons/Save';
 
 import TopicForm from '../../../Public/Search/Condition/Search/Forms/topicForm';
 import CurriculumNumber from '../../../Public/Search/Condition/Search/Forms/additionalForms/curriculum-number/curriculum-number';
@@ -134,8 +135,8 @@ function Create() {
             
                 <Picture/>
             
-                <Button variant="outlined" size="large" onClick={ handleClick }>
-                    保存する
+                <Button onClick={ handleClick } variant="contained" endIcon={<SaveIcon />}>
+                    登録する
                 </Button>
             </form>
         </div>

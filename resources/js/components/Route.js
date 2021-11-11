@@ -62,7 +62,6 @@ function Router() {
                     <Route path="/questions/create" component={ QuestionCreate }/>
                     <Route path="/questions/:id/edit" component={ QuestionEdit }/>
                     <Route path="/questions/:id" component={ QuestionShow }/>
-                    
                 </Switch>
             );
         }
