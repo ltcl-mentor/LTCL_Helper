@@ -16,6 +16,7 @@ import MentorTop from './Mentor/Top';
 import DocumentIndex from './Mentor/Document/Index/Index';
 import DocumentShow from './Mentor/Document/Show/Show';
 import DocumentCreate from './Mentor/Document/Create/Create';
+import DocumentEdit from './Mentor/Document/Edit/Edit';
 import QuestionIndex from './Mentor/Question/Index/Index';
 import QuestionShow from './Mentor/Question/Show/Show';
 import QuestionCreate from './Mentor/Question/Create/Create';
@@ -55,6 +56,7 @@ function Router() {
                     <Route path="/mentor/top" component={ MentorTop }/>
                     <Route path="/documents/index" component={ DocumentIndex }/>
                     <Route path="/documents/create" component={ DocumentCreate }/>
+                    <Route path="/documents/:id/edit" component={ DocumentEdit }/>
                     <Route path="/documents/:id" component={ DocumentShow }/>
                     <Route path="/questions/index" component={ QuestionIndex }/>
                     <Route path="/questions/create" component={ QuestionCreate }/>

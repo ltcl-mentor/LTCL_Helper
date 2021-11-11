@@ -36,9 +36,9 @@ function Document() {
         <div className="container">
             <Typography align="center" variant="h4" component="div" sx={{ marginTop: "5%" }}>記事詳細</Typography>
             <Typography align="center" variant="h6" component="div">
-                <Link to="/documents/{{ $document->id }}/edit" className="editBtn">編集する</Link>
+                <Link to={`/documents/` + id + `/edit`} className="editBtn">編集する</Link>
             </Typography>
-            <form action="/documents/{{ $document->id }}/delete" method="post" id="delete">
+            <form action={`/documents/` + id + `/delete`} method="post" id="delete">
                 <input type="hidden" value={ csrf_token } name="_token" />
                 
                 <Typography align="center" variant="h6" component="div">
