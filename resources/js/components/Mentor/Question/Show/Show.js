@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 import axios from "axios";
 import {Link} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
+import Button from '@mui/material/Button';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 import Publish from './Publish/publish';
 import Parameters from './parameters';
 import Question from './question';
@@ -55,25 +60,43 @@ function Show() {
     
     return (
         <div className="container">
-            <div className="title">
-                <h1>質問詳細</h1>
+            <div>
+                <Typography
+                    variant="h4"
+                    component="div"
+                    align="center"
+                    sx={{
+                        marginTop: 4,
+                        marginBottom: 2,
+                    }}
+                >
+                    質問詳細
+                </Typography>
                 
-                <Publish
-                    question_id={ id }
-                    csrf_token={ csrf_token }
-                    question={ question }
-                    images={ images }
-                    documents={ documents }
-                    category={ categories[question.category] }
-                    topic={ topics[question.topic] }
-                />
+                <Typography component="div" align="center" sx={{ marginTop: 4}} >
+                    <Publish
+                        question_id={ id }
+                        csrf_token={ csrf_token }
+                        question={ question }
+                        images={ images }
+                        documents={ documents }
+                        category={ categories[question.category] }
+                        topic={ topics[question.topic] }
+                    />
+                </Typography>
                 
-                <Link to={ `/questions/` + question.id + `/edit` } className="editBtn">編集する</Link>
+                <Typography component="div" align="center" sx={{ marginTop: 1}} >
+                    <Link to={ `/questions/` + question.id + `/edit` }>
+                        <Button variant="contained" color="info" onClick={ deleteConfirm } startIcon={ <EditIcon /> }>編集する</Button>
+                    </Link>
+                </Typography>
                 
-                <form action={ `/questions/` + question.id + `/delete` } method="post" id="delete">
-                    <input type="hidden" name="_token" value={ csrf_token }/>
-                    <p className="deleteBtn" onClick={ deleteConfirm }>削除する</p>
-                </form>
+                <Typography component="div" align="center" sx={{ marginTop: 1, marginBottom: 2}} >
+                    <form action={ `/questions/` + question.id + `/delete` } method="post" id="delete">
+                        <input type="hidden" name="_token" value={ csrf_token }/>
+                        <Button variant="contained" color="error" onClick={ deleteConfirm } startIcon={ <DeleteIcon /> }>削除する</Button>
+                    </form>
+                </Typography>
             </div>
     
             <Parameters 
@@ -84,7 +107,7 @@ function Show() {
                 check={ question.check }
             />
             
-            <div className="table_q_detail">
+            <div>
                 <Question 
                     count={ images.filter(v=>v).length }
                     images={ images }
@@ -97,10 +120,24 @@ function Show() {
             </div>
     
             <div>
-                <div className="title">
-                    <h1>関連記事</h1>
-                    <a href={ `/links/question/` + question.id }>編集する</a>
-                </div>
+                <Typography
+                    variant="h4"
+                    component="div"
+                    align="center"
+                    sx={{
+                        marginTop: 4,
+                        marginBottom: 2,
+                    }}
+                >
+                    関連記事
+                </Typography>
+                
+                <Typography component="div" align="center" sx={{ marginTop: 1, marginBottom: 2}} >
+                    <Link to={ `/links/question/` + question.id }>
+                        <Button variant="contained" color="info" onClick={ deleteConfirm } startIcon={ <EditIcon /> }>編集する</Button>
+                    </Link>
+                </Typography>
+                    
                 <Documents 
                     documents={ documents }
                 />
@@ -110,8 +147,4 @@ function Show() {
 }
 
 export default Show;
-
-if (document.getElementById('Question_mentor_show')) {
-    ReactDOM.render(<Show />, document.getElementById('Question_mentor_show'));
-}
 

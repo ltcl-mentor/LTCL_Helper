@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
-import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
 
 function Question(props) {
     let image;
@@ -18,14 +18,14 @@ function Question(props) {
     }
     
     return (
-        <Card className="QA_card">
-            <div className="Avatar-wrap">
-                <div className="Avatar-detail-wrap">
-                    <div className="Avatar_name">質問</div>
-                </div>
-            </div>
+        <Card sx={{ marginBottom: 2 }}>
+            <Typography variant="h5" component="div" sx={{ marginTop: 3, marginLeft: 2}} >
+                質問
+            </Typography>
             
-            <p className="QA_textblock">{ props.question }</p>
+            <Typography variant="h6" component="div" sx={{ marginTop: 1, marginLeft: 3, marginBottom: 1}} >
+                { props.question }
+            </Typography>
             
             { image }
         </Card>

@@ -13,20 +13,38 @@ function Top() {
         <div class="container">
             <h1 class="mentor_question_title">質問</h1>
             <div class="mentor_btns">
-                <Link to="/questions/index"><Button variant="contained" color="info" startIcon={ <ListIcon /> }>一覧</Button></Link>
-                <Link to="/questions/create"><Button variant="contained" color="info" startIcon={ <CreateIcon /> }>新規登録</Button></Link>
+                <Link to="/questions/index">
+                    <Button variant="contained" color="info" startIcon={ <ListIcon /> }>一覧</Button>
+                </Link>
+                
+                <Link to="/questions/create">
+                    <Button variant="contained" color="info" startIcon={ <CreateIcon /> }>新規登録</Button>
+                </Link>
+            
             </div>
         
             <h1 class="mentor_document_title">関連記事</h1>
             <div class="mentor_btns">
-                <Link to="/documents/index"><Button variant="contained" color="success" startIcon={ <ListIcon /> }>一覧</Button></Link>
-                <Link to="/documents/create"><Button variant="contained" color="success" startIcon={ <CreateIcon /> }>新規登録</Button></Link>
+                <Link to="/documents/index">
+                    <Button variant="contained" color="success" startIcon={ <ListIcon /> }>一覧</Button>
+                </Link>
+                
+                <Link to="/documents/create">
+                    <Button variant="contained" color="success" startIcon={ <CreateIcon /> }>新規登録</Button>
+                </Link>
+            
             </div>
         
             <h1 class="mentor_document_title">記事と質問の紐付け</h1>
             <div class="mentor_btns">
-                <a href="/links/index"><Button variant="contained" color="secondary" startIcon={ <QuestionAnswerIcon /> }>質問から紐付け</Button></a>
-                <a href="/links/index"><Button variant="contained" color="secondary" startIcon={ <DescriptionIcon /> }>記事から紐付け</Button></a>
+                <Link to="/links/question/index">
+                    <Button variant="contained" color="secondary" startIcon={ <QuestionAnswerIcon /> }>質問から紐付け</Button>
+                </Link>
+                
+                <Link to="/links/document/index">
+                    <Button variant="contained" color="secondary" startIcon={ <DescriptionIcon /> }>記事から紐付け</Button>
+                </Link>
+                
             </div>
         
             <h1 class="mentor_list_title">名簿</h1>

@@ -39,7 +39,7 @@ function Parameters(props) {
     
     return (
         <div>
-            <Paper className="QA_table">
+            <Paper sx={{ marginBottom: 2 }}>
                 <Table>
                     <TableBody>
                         <TableRow>

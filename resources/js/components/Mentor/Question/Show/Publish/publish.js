@@ -1,6 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import Typography from '@material-ui/core/Typography';
+import Button from '@mui/material/Button';
+import PublicIcon from '@material-ui/icons/Public';
+import PublicOffIcon from '@material-ui/icons/PublicOff';
+import Alert from '@mui/material/Alert';
+
 import Preview from './preview';
 import CheckForm from './checkForm';
 
@@ -10,7 +16,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width:'50%',
+  width:'70%',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -38,21 +44,26 @@ function Publish(props) {
     
     let publishBtn;
     if (props.question.check === 0) {
-        publishBtn = (<div><p onClick={ handleOpen } className="publishBtn">公開する</p></div>);
+        publishBtn = (
+            <Typography align="center" onClick={ handleOpen }>
+                <Button variant="contained" color="success" startIcon={ <PublicIcon /> }>公開する</Button>
+            </Typography>
+        );
     } else {
         publishBtn = (
-            <div>
-                <form action={ `/questions/` + props.question_id + `/uncheck` } method="post" id="unpublish">
-                    <input type="hidden" name="_token" value={ props.csrf_token }/>
-                    <input type="submit" className="hidden"/>
-                    <p className="publishBtn" onClick={ unpublishConfirm }>非公開にする</p>
-                </form>
-            </div>
+            <form action={ `/questions/` + props.question_id + `/uncheck` } method="post" id="unpublish">
+                <input type="hidden" name="_token" value={ props.csrf_token }/>
+                <Typography onClick={ unpublishConfirm }>
+                    <Button variant="contained" color="warning" startIcon={ <PublicOffIcon /> }>非公開にする</Button>
+                </Typography>
+            </form>
         );
     }
     
     return (
         <div>
+            { publishBtn }
+    
             <Modal
                 open={ open }
                 onClose={ handleClose }
@@ -61,7 +72,7 @@ function Publish(props) {
             >
                 <Box sx={ style }>
                     <button onClick={ handleClose }>×</button>
-                    <div className="alert">これは公開時のプレビューです。まだ公開処理は完了していません。</div>
+                    <Alert severity="error">これは公開時のプレビューです。まだ公開処理は完了していません。</Alert>
                 
                     <CheckForm 
                         question_id={ props.question_id }
@@ -78,8 +89,6 @@ function Publish(props) {
                 </Box>
                 
             </Modal>
-            
-            { publishBtn }
         </div>
     );
 }

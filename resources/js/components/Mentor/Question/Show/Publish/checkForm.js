@@ -1,4 +1,9 @@
 import React, {useState} from 'react';
+import Button from '@mui/material/Button';
+import Typography from '@material-ui/core/Typography';
+import Box from '@mui/material/Box';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 function CheckForm(props) {
     const [check1, setCheck1] = useState(false);
@@ -31,21 +36,33 @@ function CheckForm(props) {
     
     let btn;
     if (check1 && check2 && check3) {
-        btn = (<div><input type="submit" value="公開する" className="submit_btn"/></div>);
+        btn = (
+            <Typography component="div" align="center" sx={{ marginTop: 1, marginBottom: 1}} >
+                <Button type="submit" variant="contained" color="success">公開する</Button>
+            </Typography>
+        );
     } else {
-        btn = (<div className="pre_btn">公開する</div>);
+        btn = (
+            <Typography component="div" align="center" sx={{ marginTop: 1, marginBottom: 1}} >
+                <Button variant="outlined" color="success">公開する</Button>
+            </Typography>
+        );
     }
     
     return (
         <div className="checkForm">
-            <div>以下の確認事項を確認してチェックを入れてください。</div>
-            <form action={ `/questions/` + props.question_id + `/check` } method="post">
-                <input type="hidden" name="_token" value={ props.csrf_token }/>
-                <div><label><input type="checkbox" name="check1" onClick={ handleCheck1 } className="check"/>誤字、脱字、不適切な表現はありませんか？</label></div>
-                <div><label><input type="checkbox" name="check2" onClick={ handleCheck2 } className="check"/>（参考画像がある場合）個人情報が漏洩するような部分はありませんか？</label></div>
-                <div><label><input type="checkbox" name="check3" onClick={ handleCheck3 } className="check"/>公開する内容に間違いはありませんか？</label></div>
-                { btn }
-            </form>
+            <Box sx={{width: "95%", marginLeft: "3%", marginTop: 2}}>
+                <h5>以下の確認事項を確認してチェックを入れてください。</h5>
+        
+                <FormControlLabel control={<Checkbox onClick={ handleCheck1 } value={ check1 }/>} label="誤字、脱字、不適切な表現はありませんか？" />
+                <FormControlLabel control={<Checkbox onClick={ handleCheck2 } value={ check2 }/>} label="（参考画像がある場合）個人情報が漏洩するような部分はありませんか？" />
+                <FormControlLabel control={<Checkbox onClick={ handleCheck3 } value={ check3 }/>} label="公開する内容に間違いはありませんか？" />
+        
+                <form action={ `/questions/` + props.question_id + `/check` } method="post">
+                    <input type="hidden" name="_token" value={ props.csrf_token }/>
+                    { btn }
+                </form>
+            </Box>
         </div>
     );
 }

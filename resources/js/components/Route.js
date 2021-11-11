@@ -21,6 +21,8 @@ import QuestionIndex from './Mentor/Question/Index/Index';
 import QuestionShow from './Mentor/Question/Show/Show';
 import QuestionCreate from './Mentor/Question/Create/Create';
 import QuestionEdit from './Mentor/Question/Edit/Edit';
+import LinkFromQuestionIndex from './Mentor/Link/fromQuestion/Index/Index';
+import LinkFromDocumentIndex from './Mentor/Link/fromDocument/Index/Index';
 
 function Router() {
     const [user, setUser] = useState([]);
@@ -62,6 +64,8 @@ function Router() {
                     <Route path="/questions/create" component={ QuestionCreate }/>
                     <Route path="/questions/:id/edit" component={ QuestionEdit }/>
                     <Route path="/questions/:id" component={ QuestionShow }/>
+                    <Route path="/links/question/index" component={ LinkFromQuestionIndex }/>
+                    <Route path="/links/document/index" component={ LinkFromDocumentIndex }/>
                 </Switch>
             );
         }

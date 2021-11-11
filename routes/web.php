@@ -64,7 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/documents/{document}/delete','DocumentController@delete'); // 削除実行
         
         // 質問と参考記事の紐付け
-        Route::get('/links/index', 'LinkController@index'); // 初期画面表示
+        // Route::get('/links/index', 'LinkController@index'); // 初期画面表示
         Route::get('/links/document/{document}', 'LinkController@getDocumentToQuestions'); // 新規作成画面表示(記事：質問＝１：多)
         Route::post('/links/document/{document}', 'LinkController@postDocumentToQuestions'); // 新規作成実行(記事：質問＝１：多)
         Route::get('/links/question/{question}', 'LinkController@getQuestionToDocuments'); // 新規作成画面表示(記事：質問＝多：1)
@@ -104,7 +104,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
     
     Route::get('/{any}', function(){
-        return view('test');
+        return view('react');
     })->where('any', '.*');
 });    
 
