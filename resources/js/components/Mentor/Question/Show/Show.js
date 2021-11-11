@@ -60,44 +60,42 @@ function Show() {
     
     return (
         <div className="container">
-            <div>
-                <Typography
-                    variant="h4"
-                    component="div"
-                    align="center"
-                    sx={{
-                        marginTop: 4,
-                        marginBottom: 2,
-                    }}
-                >
-                    質問詳細
-                </Typography>
-                
-                <Typography component="div" align="center" sx={{ marginTop: 4}} >
-                    <Publish
-                        question_id={ id }
-                        csrf_token={ csrf_token }
-                        question={ question }
-                        images={ images }
-                        documents={ documents }
-                        category={ categories[question.category] }
-                        topic={ topics[question.topic] }
-                    />
-                </Typography>
-                
-                <Typography component="div" align="center" sx={{ marginTop: 1}} >
-                    <Link to={ `/questions/` + question.id + `/edit` }>
-                        <Button variant="contained" color="info" onClick={ deleteConfirm } startIcon={ <EditIcon /> }>編集する</Button>
-                    </Link>
-                </Typography>
-                
-                <Typography component="div" align="center" sx={{ marginTop: 1, marginBottom: 2}} >
-                    <form action={ `/questions/` + question.id + `/delete` } method="post" id="delete">
-                        <input type="hidden" name="_token" value={ csrf_token }/>
-                        <Button variant="contained" color="error" onClick={ deleteConfirm } startIcon={ <DeleteIcon /> }>削除する</Button>
-                    </form>
-                </Typography>
-            </div>
+            <Typography
+                variant="h4"
+                component="div"
+                align="center"
+                sx={{
+                    marginTop: 4,
+                    marginBottom: 2,
+                }}
+            >
+                質問詳細
+            </Typography>
+            
+            <Typography component="div" align="center" sx={{ marginTop: 4}} >
+                <Publish
+                    question_id={ id }
+                    csrf_token={ csrf_token }
+                    question={ question }
+                    images={ images }
+                    documents={ documents }
+                    category={ categories[question.category] }
+                    topic={ topics[question.topic] }
+                />
+            </Typography>
+            
+            <Typography component="div" align="center" sx={{ marginTop: 1}} >
+                <Link to={ `/questions/` + question.id + `/edit` }>
+                    <Button variant="contained" color="info" onClick={ deleteConfirm } startIcon={ <EditIcon /> }>編集する</Button>
+                </Link>
+            </Typography>
+            
+            <Typography component="div" align="center" sx={{ marginTop: 1, marginBottom: 2}} >
+                <form action={ `/questions/` + question.id + `/delete` } method="post" id="delete">
+                    <input type="hidden" name="_token" value={ csrf_token }/>
+                    <Button variant="contained" color="error" onClick={ deleteConfirm } startIcon={ <DeleteIcon /> }>削除する</Button>
+                </form>
+            </Typography>
     
             <Parameters 
                 category={ categories[question.category] }
@@ -107,41 +105,37 @@ function Show() {
                 check={ question.check }
             />
             
-            <div>
-                <Question 
-                    count={ images.filter(v=>v).length }
-                    images={ images }
-                    question={ question.question }
-                />
-                
-                <Comment 
-                    comment={ question.comment }
-                />
-            </div>
+            <Question 
+                count={ images.filter(v=>v).length }
+                images={ images }
+                question={ question.question }
+            />
+            
+            <Comment 
+                comment={ question.comment }
+            />
     
-            <div>
-                <Typography
-                    variant="h4"
-                    component="div"
-                    align="center"
-                    sx={{
-                        marginTop: 4,
-                        marginBottom: 2,
-                    }}
-                >
-                    関連記事
-                </Typography>
+            <Typography
+                variant="h4"
+                component="div"
+                align="center"
+                sx={{
+                    marginTop: 4,
+                    marginBottom: 2,
+                }}
+            >
+                関連記事
+            </Typography>
+            
+            <Typography component="div" align="center" sx={{ marginTop: 1, marginBottom: 2}} >
+                <Link to={ `/links/question/` + question.id }>
+                    <Button variant="contained" color="info" onClick={ deleteConfirm } startIcon={ <EditIcon /> }>編集する</Button>
+                </Link>
+            </Typography>
                 
-                <Typography component="div" align="center" sx={{ marginTop: 1, marginBottom: 2}} >
-                    <Link to={ `/links/question/` + question.id }>
-                        <Button variant="contained" color="info" onClick={ deleteConfirm } startIcon={ <EditIcon /> }>編集する</Button>
-                    </Link>
-                </Typography>
-                    
-                <Documents 
-                    documents={ documents }
-                />
-            </div>
+            <Documents 
+                documents={ documents }
+            />
         </div>
     );
 }
