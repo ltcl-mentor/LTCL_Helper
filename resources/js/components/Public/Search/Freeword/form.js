@@ -24,7 +24,7 @@ function Form(props) {
                 sx={{
                     width: "100%",
                     padding: "5%",
-                    margin: "10% 0",
+                    margin: "5% 0",
                     backgroundColor: "rgb(200,200,200)",
                 }}
             >

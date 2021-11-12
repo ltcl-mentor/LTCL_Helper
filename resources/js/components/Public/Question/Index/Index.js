@@ -37,7 +37,7 @@ function Index() {
     
     return (
         <div className="container">
-            <Breadcrumbs aria-label="breadcrumb">
+            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
                 <Link underline="hover" to="/">
                     HOME
                 </Link>

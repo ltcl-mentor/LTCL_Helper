@@ -56,7 +56,7 @@ function Show() {
     
     return (
         <div className="container">
-            <Breadcrumbs aria-label="breadcrumb">
+            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
                 <Link underline="hover" to="/">
                     HOME
                 </Link>
@@ -69,18 +69,6 @@ function Show() {
                     質問詳細
                 </Typography>
             </Breadcrumbs>
-            
-            <Typography
-                variant="h4"
-                component="div"
-                align="center"
-                sx={{
-                    marginTop: 4,
-                    marginBottom: 2,
-                }}
-            >
-                質問詳細
-            </Typography>
             
             <Parameters 
                 category={ question.category }

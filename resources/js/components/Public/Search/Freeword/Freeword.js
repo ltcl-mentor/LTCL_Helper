@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import TextareaAutosize from '@mui/material/TextareaAutosize';
+import {Link} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import Form from './form';
 import Result from './Result/result';
@@ -11,9 +12,15 @@ function Freeword() {
     
     return (
         <div className="container">
-            <Typography align="center" variant="h3" component="div" >
-                フリーワード検索
-            </Typography>
+            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
+                <Link underline="hover" to="/">
+                    HOME
+                </Link>
+                
+                <Typography color="text.primary">
+                    フリーワード検索
+                </Typography>
+            </Breadcrumbs>
             
             <Form
                 searchType={ searchType }

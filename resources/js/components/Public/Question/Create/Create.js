@@ -73,7 +73,7 @@ function Create() {
     
     return (
         <div className="container">
-            <Breadcrumbs aria-label="breadcrumb">
+            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
                 <Link underline="hover" to="/">
                     HOME
                 </Link>
@@ -82,18 +82,6 @@ function Create() {
                     質問投稿
                 </Typography>
             </Breadcrumbs>
-            
-            <Typography
-                variant="h4"
-                component="div"
-                align="center"
-                sx={{
-                    marginTop: 4,
-                    marginBottom: 2,
-                }}
-            >
-                質問投稿
-            </Typography>
             
             <Box sx={{ width: "70%", marginLeft: "15%"}}>
                 <form action="/questions/store/public" method="post" id="create" enctype="multipart/form-data">
