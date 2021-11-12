@@ -25,7 +25,7 @@ function Portfolio(props) {
     
     const portfolio = portfolio_topics.map((topic) => {
         return (
-            <Box sx={{paddingTop: 3}}>
+            <Box sx={{paddingTop: 3, marginBottom: 3}}>
                 <Accordion expanded={ expanded === topic.id } onChange={ handleChange(topic.id) }>
                     <AccordionSummary
                         expandIcon={ <ExpandMoreIcon /> }
@@ -41,7 +41,7 @@ function Portfolio(props) {
                         <Typography>
                             { props.questions.map((question) => {
                                 if (question.topic === topic.id) {
-                                    return <div className="question">・<Link to={ `/questions/` + question.id + '/public' }>{ question.question }</Link></div>;
+                                    return <div className="question">・<Link to={ `/public/questions/` + question.id }>{ question.question }</Link></div>;
                                 }
                             })}
                         </Typography>

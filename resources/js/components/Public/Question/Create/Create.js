@@ -1,7 +1,9 @@
 import React,{useState} from 'react';
-import ReactDOM from 'react-dom';
+import {Link} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import SaveIcon from '@material-ui/icons/Save';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Typography from '@material-ui/core/Typography';
 
 import TopicForm from '../../Search/Condition/Search/Forms/topicForm';
 import CurriculumNumber from '../../Search/Condition/Search/Forms/additionalForms/curriculum-number/curriculum-number';
@@ -70,6 +72,16 @@ function Create() {
     
     return (
         <div className="container">
+            <Breadcrumbs aria-label="breadcrumb">
+                <Link underline="hover" to="/">
+                    HOME
+                </Link>
+                
+                <Typography color="text.primary">
+                    質問投稿
+                </Typography>
+            </Breadcrumbs>
+            
             <form action="/questions/store/public" method="post" id="create" enctype="multipart/form-data">
                 <input type="hidden" value={ csrf_token } name="_token" />
             

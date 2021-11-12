@@ -38,38 +38,36 @@ function Parameters(props) {
     }
     
     return (
-        <div>
-            <Paper sx={{ marginBottom: 2 }}>
-                <Table>
-                    <TableBody>
-                        <TableRow>
-                            <TableCell align="center" component="th" scope="row">カテゴリー</TableCell>
-                            <TableCell align="center">{ props.category }</TableCell>
-                        </TableRow>
+        <Paper sx={{ marginBottom: 2 }}>
+            <Table>
+                <TableBody>
+                    <TableRow>
+                        <TableCell align="center" component="th" scope="row">カテゴリー</TableCell>
+                        <TableCell align="center">{ props.category }</TableCell>
+                    </TableRow>
                         
-                        <TableRow>
-                            <TableCell align="center" component="th" scope="row">トピック</TableCell>
-                            <TableCell align="center">{ props.topic }</TableCell>
-                        </TableRow>
+                    <TableRow>
+                        <TableCell align="center" component="th" scope="row">トピック</TableCell>
+                        <TableCell align="center">{ props.topic }</TableCell>
+                    </TableRow>
                         
-                        <TableRow>
-                            <TableCell align="center" component="th" scope="row">カリキュラム番号</TableCell>
-                            <TableCell align="center">{ props.curriculum_number }</TableCell>
-                        </TableRow>
-                        
-                        <TableRow>
-                            <TableCell align="center" component="th" scope="row">作成者</TableCell>
-                            <TableCell align="center">{ author }</TableCell>
-                        </TableRow>
-                        
-                        <TableRow>
-                            <TableCell align="center" component="th" scope="row">公開状況</TableCell>
-                            <TableCell align="center">{ isPublic }</TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            </Paper>
-        </div>
+                    <TableRow>
+                        <TableCell align="center" component="th" scope="row">カリキュラム番号</TableCell>
+                        <TableCell align="center">{ props.curriculum_number }</TableCell>
+                    </TableRow>
+                    
+                    <TableRow>
+                        <TableCell align="center" component="th" scope="row">作成者</TableCell>
+                        <TableCell align="center">{ author }</TableCell>
+                    </TableRow>
+                
+                    <TableRow>
+                        <TableCell align="center" component="th" scope="row">公開状況</TableCell>
+                        <TableCell align="center">{ isPublic }</TableCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
+        </Paper>
     );
 }
 

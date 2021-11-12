@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@mui/material/Button';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import Publish from './Publish/publish';
 import Parameters from './parameters';
@@ -60,6 +61,20 @@ function Show() {
     
     return (
         <div className="container">
+            <Breadcrumbs aria-label="breadcrumb">
+                <Link underline="hover" to="/mentor/top">
+                    メンタートップ
+                </Link>
+                
+                <Link underline="hover" to="/questions/index">
+                    質問一覧
+                </Link>
+                
+                <Typography color="text.primary">
+                    質問詳細
+                </Typography>
+            </Breadcrumbs>
+            
             <Typography
                 variant="h4"
                 component="div"

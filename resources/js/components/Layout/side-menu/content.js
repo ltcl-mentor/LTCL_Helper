@@ -23,12 +23,12 @@ function Content(props) {
     ];
     
     const itemMenu = [
-        {"menu": "質問一覧", "url": "/questions/index/public"},
-        {"menu": "関連記事一覧", "url": "/documents/index/public"}
+        {"menu": "質問一覧", "url": "/public/questions/index"},
+        {"menu": "関連記事一覧", "url": "/public/documents/index"}
     ];
     
     const formMenu = [
-        {"menu": "質問投稿", "url": "/questions/create/public"},
+        {"menu": "質問投稿", "url": "/public/questions/create"},
         {"menu": "お問い合わせ", "url": "/contact/create"}
     ];
     

@@ -1,7 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import ReactDOM from 'react-dom';
+import {Link} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
 import axios from "axios";
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+
 import Parameters from './parameters';
 import Question from './question';
 import Comment from './comment';
@@ -14,9 +19,6 @@ function Show() {
     const [images, setImages] = useState([]);
     const [documents, setDocuments] = useState([]);
     const [relatedQuestions, setRelatedQuestions] = useState([]);
-    // const question_id = document.getElementById('Question_public_show').getAttribute('question_id');
-    // const category = document.getElementById('Question_public_show').getAttribute('category');
-    // const topic = document.getElementById('Question_public_show').getAttribute('topic');
 
     useEffect(() => {
         axios
@@ -54,51 +56,79 @@ function Show() {
     
     return (
         <div className="container">
-            <div className="box">
-                <h1 className="title">質問概要</h1>
-                <div className="question">
-                    <Parameters 
-                        category={ question.category }
-                        topic={ question.topic }
-                        curriculum_number={ question.curriculum_number }
-                    />
+            <Breadcrumbs aria-label="breadcrumb">
+                <Link underline="hover" to="/">
+                    HOME
+                </Link>
                 
-                    <div className="wrapper">
-                        <div className="cards">
-                            <Question 
-                                count={ images.filter(v=>v).length }
-                                image={ images }
-                                updated_at={ question.updated_at }
-                                question={ question.question }
-                            />
-                            
-                            <Comment 
-                                comment={ question.comment }
-                            />
-                            
-                            <div className="realated_documents_wrap">
-                                <h1 className="title">参考記事</h1>
-                                <Documents 
-                                    documents={ documents }
-                                />
-                            </div>
-                        </div>
+                <Link underline="hover" to="/public/questions/index">
+                    質問一覧
+                </Link>
                 
-                        <RelatedQuestions 
-                            relatedQuestions={ relatedQuestions }
+                <Typography color="text.primary">
+                    質問詳細
+                </Typography>
+            </Breadcrumbs>
+            
+            <Typography
+                variant="h4"
+                component="div"
+                align="center"
+                sx={{
+                    marginTop: 4,
+                    marginBottom: 2,
+                }}
+            >
+                質問詳細
+            </Typography>
+            
+            <Parameters 
+                category={ question.category }
+                topic={ question.topic }
+                curriculum_number={ question.curriculum_number }
+            />
+            
+            <Grid container spacing={2} sx={{ flexGrow: 1 }}>
+                <Grid item sx={{ width:"70%" }}>
+                    <Box>
+                        <Question 
+                            count={ images.filter(v=>v).length }
+                            image={ images }
+                            updated_at={ question.updated_at }
+                            question={ question.question }
                         />
                         
-                    </div>
-                </div>
-            </div>
+                        <Comment 
+                            comment={ question.comment }
+                        />
+                        
+                        <Typography
+                            variant="h4"
+                            component="div"
+                            align="center"
+                            sx={{
+                                marginTop: 4,
+                                marginBottom: 2,
+                            }}
+                        >
+                            参考記事
+                        </Typography>
+                        
+                        <Documents 
+                            documents={ documents }
+                        />
+                    </Box>
+                </Grid>
+                
+                <Grid item sx={{ width: "30%", minWidth: "300px" }}>
+                    <RelatedQuestions 
+                        relatedQuestions={ relatedQuestions }
+                    />
+                </Grid>
+            </Grid>
         </div>
     );
     
 }
 
 export default Show;
-
-// if (document.getElementById('Question_public_show')) {
-//     ReactDOM.render(<Show />, document.getElementById('Question_public_show'));
-// }
-

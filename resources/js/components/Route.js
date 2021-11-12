@@ -43,10 +43,10 @@ function Router() {
         user_links = (
             <Switch>
                 <Route path="/" exact component={ Home }/>
-                <Route path="/documents/index/public" component={ PublicDocumentIndex }/>
-                <Route path="/questions/index/public" component={ PublicQuestionIndex }/>
-                <Route path="/questions/create/public" component={ PublicQuestionCreate }/>
-                <Route path="/questions/:id/public" component={ PublicQuestionShow }/>
+                <Route path="/public/documents/index" component={ PublicDocumentIndex }/>
+                <Route path="/public/questions/index" component={ PublicQuestionIndex }/>
+                <Route path="/public/questions/create" component={ PublicQuestionCreate }/>
+                <Route path="/public/questions/:id" component={ PublicQuestionShow }/>
                 <Route path="/search/condition" component={ Condition }/>
                 <Route path="/search/freeword" component={ Freeword }/>
             </Switch>

@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
-import ReactDOM from 'react-dom';
+import {Link} from 'react-router-dom';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Typography from '@material-ui/core/Typography';
+
 import Curriculum from './curriculum';
 import Portfolio from './portfolio';
 
@@ -34,6 +37,16 @@ function Index() {
     
     return (
         <div className="container">
+            <Breadcrumbs aria-label="breadcrumb">
+                <Link underline="hover" to="/">
+                    HOME
+                </Link>
+                
+                <Typography color="text.primary">
+                    質問一覧
+                </Typography>
+            </Breadcrumbs>
+            
             <Box sx={{ width: '95%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={ value } onChange={ handleChange } aria-label="basic tabs example">
@@ -48,7 +61,3 @@ function Index() {
 }
 
 export default Index;
-
-// if (document.getElementById('Question_public_index')) {
-//     ReactDOM.render(<Index />, document.getElementById('Question_public_index'));
-// }
