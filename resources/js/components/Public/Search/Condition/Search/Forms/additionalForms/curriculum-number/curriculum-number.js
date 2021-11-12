@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Selects from './select';
+import Box from '@mui/material/Box';
 
 function CrriculumNumber(props) {
     const curriculum_numbers_array = [
@@ -31,12 +32,12 @@ function CrriculumNumber(props) {
     }, [props.category, props.topic]);
      
     return (
-        <div className="content">
+        <Box sx={{ textAlign: "center", marginTop: 4 }}>
             <Selects
                 setCurriculumNumber={ props.setCurriculumNumber }
                 curriculum_numbers={ curriculum_numbers }
             />
-        </div>
+        </Box>
     );
 }
 

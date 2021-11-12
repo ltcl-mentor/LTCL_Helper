@@ -1,4 +1,7 @@
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
+import Box from '@mui/material/Box';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 
 function CommentForm(props) {
     
@@ -14,10 +17,33 @@ function CommentForm(props) {
     }
     
     return (
-        <div className="content">
-            <h2 className="title">問題解決のヒントやコメントを入力</h2> 
+        <div>
+            <Typography
+                variant="h5"
+                component="div"
+                sx={{
+                    marginTop: 4,
+                    marginLeft: 2,
+                }}
+            >
+                5. ヒント、コメントを入力
+            </Typography>
+            
             { validation_message }
-            <textarea name="post[comment]" placeholder="あくまでもヒントにとどめるようにしてください。" rows="8" value={ props.comment } onChange={ (event) => handleComment(event) }/>
+            
+            <Box sx={{ textAlign: "center", marginTop: 4 }}>
+                <TextareaAutosize 
+                    name="post[comment]"
+                    placeholder="あくまでもヒントにとどめるようにしてください。"
+                    minRows={8}
+                    value={ props.comment }
+                    onChange={ (event) => handleComment(event) }
+                    style={{ 
+                        width: "80%",
+                        paddingTop:2,
+                    }}
+                />
+            </Box>
         </div>
     );
 }

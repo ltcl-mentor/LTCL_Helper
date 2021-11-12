@@ -1,4 +1,9 @@
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
+import Box from '@mui/material/Box';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
+
+import Picture from './picture';
 
 function QuestionForm(props) {
     
@@ -14,10 +19,35 @@ function QuestionForm(props) {
     }
     
     return (
-        <div className="content">
-            <h2 className="title">質問内容を入力</h2>
+        <div>
+            <Typography
+                variant="h5"
+                component="div"
+                sx={{
+                    marginTop: 4,
+                    marginLeft: 2,
+                }}
+            >
+                4. 質問内容を入力
+            </Typography>
+            
             { validation_message }
-            <textarea name="post[question]" placeholder="質問内容を簡潔に入力" rows="8" value={ props.question } onChange={ (event) => handleQuestion(event) }/>
+            
+            <Picture/>
+            
+            <Box sx={{ textAlign: "center", marginTop: 2 }}>
+                <TextareaAutosize 
+                    name="post[question]"
+                    placeholder="質問内容を簡潔に入力"
+                    minRows={8}
+                    value={ props.question }
+                    onChange={ (event) => handleQuestion(event) }
+                    style={{ 
+                        width: "80%",
+                        paddingTop:2,
+                    }}
+                />
+            </Box>
         </div>
     );
 }
