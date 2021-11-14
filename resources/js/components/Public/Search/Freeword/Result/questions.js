@@ -7,10 +7,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@material-ui/core/Typography';
+import Pagination from '@mui/material/Pagination';
+import Box from '@mui/material/Box';
+import Card from '@material-ui/core/Card';
 
 function Questions(props) {
     const [questions, setQuestions] = useState([]);
-    const [currentPage, setCurrentPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
     const [isLoarding, setIsLording] = useState(false);
     
     useEffect(() => {
@@ -41,6 +44,7 @@ function Questions(props) {
         return (
             <div>
                 <Divider light />
+                
                 <ListItem button>
                     <a href={ '/questions/' + question.id + '/public' } className="question" key={ question.id } target="_blank">
                         <ListItemText
@@ -48,6 +52,7 @@ function Questions(props) {
                         />
                     </a>
                 </ListItem>
+                
                 <Divider />
             </div>
         );
@@ -63,42 +68,30 @@ function Questions(props) {
         if(isLoarding) {
             emptyMessage = ( <CircularProgress color="secondary" /> );
         } else {
-            questionList = list.slice(currentPage*10, (currentPage + 1)*10);
+            questionList = list.slice((currentPage - 1)*10, currentPage*10);
             pagination = (
-                <div className="paginationBox">
-                <Typography align="center" component="div" >
-                    <ReactPaginate
-                        pageCount={ list.filter(v=>v).length/10 }
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={2}
-                        onPageChange={ (event) => handlePageClick(event) }
-                        containerClassName="pagination"
-                        pageClassName="page-item"
-                        pageLinkClassName="page-link"
-                        activeClassName="active"
-                        activeLinkClassName="active"
-                        previousLinkClassName="previous-link"
-                        nextLinkClassName="next-link"
-                        previousLabel="<<"
-                        nextLabel=">>"
-                        disabledClassName="disabled-button"
-                    />
-                    </Typography>
-                </div>
+                <Pagination
+                    count={ Math.floor(list.filter(v=>v).length/10) + 1 }
+                    page={ currentPage }
+                    onChange={ handlePageClick }
+                    sx={{ display: "block" }}
+                />
             );
         }
     }
     
     return (
-        <div>
-            <div className="list">
+        <Card sx={{ marginTop: 4, marginBottom:4 }}>
+            <Box sx={{ width: "80%", textAlign: "center" }}>
                 <List>
                     { questionList }
                 </List>
-            </div>
+            </Box>
+            
             { pagination }
+            
             { emptyMessage }
-        </div>
+        </Card>
     );
 }
 

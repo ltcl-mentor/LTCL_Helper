@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Stepper from '@material-ui/core/Stepper';
@@ -8,10 +8,13 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Card from '@material-ui/core/Card';
+import Grid from '@mui/material/Grid';
 
 import Category from './Search/Forms/categoryForm';
 import Topic from './Search/Forms/topicForm';
 import Addition from './Search/Forms/additionalForms/additionalForms';
+import Parameter from './Search/Forms/parameters';
 import SearchButton from './Search/searchButton';
 import Result from './Result/result';
 
@@ -22,23 +25,30 @@ function Condition() {
     const [keyword, setKeyword] = useState('');
     const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
     const categories = ['カリキュラム', '成果物'];
-    const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'];
+    const topics = [
+        // カリキュラムのトピック
+        'AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'データベース', 'Git&GitHub',
+        // 成果物のトピック
+        'マイグレーション', 'リレーション', 'Laravel拡張', '画像処理', 'Heroku環境', 'API', 'デザイン'
+    ];
     const [activeStep, setActiveStep] = useState(0);
     const steps = [
-        `カテゴリーを選択する  ${ activeStep >= 1 ? ` ___${categories[category]}` : '' }`,
-        `トピックを選択する  ${ activeStep >= 2 ? ` ___${topics[topic]}` : '' }`, 
-        `さらに絞り込む  ${ activeStep >= 3 ? (curriculum_number !== '' ? ` ___カリキュラム番号：${curriculum_number}` : ' ___カリキュラム番号：なし') : '' } ${ activeStep >= 3 ? (keyword !== '' ? `, キーワード：${keyword}` : ', キーワード：なし') : '' }`,
+        "カテゴリーを選択する",
+        "トピックを選択する", 
+        "さらに絞り込む（任意）",
     ];
+    const [topicIsCanceling, setTopicIsCanceling] = useState(false);
+    const [addtionalFormsIsCanceling, setAdditionalFormsIsCanceling] = useState(false);
     
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
-
+    
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
         setIsSearchButtonClicked(false);
     };
-
+    
     const handleReset = () => {
         setActiveStep(0);
     };
@@ -51,6 +61,7 @@ function Condition() {
                         <Category 
                             setCategory={ setCategory }
                         />
+                        
                         { category !== '' && (
                             <Button
                                 variant="contained"
@@ -62,61 +73,88 @@ function Condition() {
                         )}
                     </div>
                 );
+                
             case 1:
                 return (
                     <div>
                         <Topic 
                             category={ category }
+                            topic={ topic }
                             setTopic={ setTopic }
                             topics={ topics }
+                            isCanceling={ topicIsCanceling }
+                            setIsCanceling={ setTopicIsCanceling }
                         />
-                        <Button
-                            onClick={ handleBack }
-                            color="secondary"
-                        >
-                            Back
-                        </Button>
-                        { topic !== '' && (
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={ handleNext }
-                            >
-                                Next
-                            </Button>
-                        )}
+                        
+                        <Grid container spacing={2}>
+                            <Grid item>
+                                <Button
+                                    variant="outlined"
+                                    onClick={ () => { handleBack(), setTopic(''), setTopicIsCanceling(true) } }
+                                    color="secondary"
+                                >
+                                    Back
+                                </Button>
+                            </Grid>
+                        
+                            <Grid item>
+                                { topic !== '' && (
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={ handleNext }
+                                    >
+                                        Next
+                                    </Button>
+                                )}
+                            </Grid>
+                        </Grid>
                     </div>
                 );
+                
             case 2:
                 return (
                     <div>
                         <div>※条件の追加が不要な場合はNextを押してください</div>
+                        
                         <Addition 
                             category={ category }
                             topic={ topic }
                             setCurriculumNumber={ setCurriculumNumber }
                             setKeyword={ setKeyword }
+                            isCanceling={ addtionalFormsIsCanceling }
+                            setIsCanceling={ setAdditionalFormsIsCanceling }
                         />
-                        <Button
-                            onClick={ handleBack }
-                            color="secondary"
-                        >
-                            Back
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={ handleNext }
-                        >
-                            Next
-                        </Button>
+                        
+                        <Grid container spacing={2}>
+                            <Grid item>
+                                <Button
+                                    variant="outlined"
+                                    onClick={ () => { handleBack(), setCurriculumNumber(''), setKeyword(''), setAdditionalFormsIsCanceling(true) } }
+                                    color="secondary"
+                                >
+                                    Back
+                                </Button>
+                            </Grid>
+                        
+                            <Grid item>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={ handleNext }
+                                >
+                                    Next
+                                </Button>
+                            </Grid>
+                        </Grid>
                     </div>
                 );
+                
             default:
                 return 'Unknown step';
         }
     };
-
+    
     return (
         <div className="container">
             <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
@@ -129,54 +167,74 @@ function Condition() {
                 </Typography>
             </Breadcrumbs>
             
-            <div className="form_box">
-                <Box
-                    sx={{ 
-                        maxWidth: "80%",
-                        marginLeft: "10%",
-                        paddingBottom: "5%"
-                    }}
-                >
-                    <Stepper activeStep={ activeStep }  orientation="vertical">
-                        { steps.map((label, index) => (
-                            <Step key={ label }>
-                                <StepLabel>{ label }</StepLabel>
-                                <StepContent>
-                                    <Typography>{ getStepContent(index) }</Typography>
-                                </StepContent>
-                            </Step>
-                        ))}
-                    </Stepper>
-                    
-                    { activeStep === steps.length && (
-                        <Box>
-                            <Button
-                                onClick={ handleBack }
-                                color="secondary"
-                            >
-                                Back
-                            </Button>
-                            <Button
-                                variant="contained"
-                                onClick={ handleReset }
-                                color="primary"
-                            >
-                                Reset
-                            </Button>
-                        </Box>
-                    )}
-                </Box>
-                { activeStep === steps.length && (
-                    <SearchButton
-                        category={ category }
-                        topic={ topic }
-                        curriculum_number={ curriculum_number }
-                        keyword={ keyword }
-                        setIsSearchButtonClicked={ setIsSearchButtonClicked }
-                    />
-                )}
-            </div>
-
+            <Box>
+                <Card>
+                    <Grid container spacing={5} justifyContent="center">
+                        <Grid item sx={{ marginTop: 4 }}>
+                            <Parameter
+                                category={ category }
+                                topic={ topic }
+                                categories={ categories }
+                                topics={ topics }
+                                curriculum_number={ curriculum_number }
+                                keyword={ keyword }
+                            />
+                        </Grid>
+                        
+                        <Grid item sx={{ marginBottom: 4, marginTop: 4 }}>
+                            <Box sx={{ width: "400px", maxWidth: "400px" }}>
+                                <Stepper activeStep={ activeStep }  orientation="vertical">
+                                    { steps.map((label, index) => (
+                                        <Step key={ label }>
+                                            <StepLabel>{ label }</StepLabel>
+                                            <StepContent>
+                                                <Typography>{ getStepContent(index) }</Typography>
+                                            </StepContent>
+                                        </Step>
+                                    ))}
+                                </Stepper>
+                                
+                                { activeStep === steps.length && (
+                                    <Box sx={{ marginTop: 4 }}>
+                                        <Grid container spacing={2}>
+                                            <Grid item>
+                                                <Button
+                                                    variant="outlined"
+                                                    onClick={ handleBack }
+                                                    color="secondary"
+                                                >
+                                                    戻る
+                                                </Button>
+                                            </Grid>
+                                            
+                                            <Grid item>
+                                                <Button
+                                                    variant="contained"
+                                                    onClick={ handleReset }
+                                                    color="primary"
+                                                >
+                                                    検索条件をリセット
+                                                </Button>
+                                            </Grid>
+                                        </Grid>
+                                    </Box>
+                                )}
+                                
+                                { activeStep === steps.length && (
+                                    <SearchButton
+                                        category={ category }
+                                        topic={ topic }
+                                        curriculum_number={ curriculum_number }
+                                        keyword={ keyword }
+                                        setIsSearchButtonClicked={ setIsSearchButtonClicked }
+                                    />
+                                )}
+                            </Box>
+                        </Grid>
+                    </Grid>
+                </Card>
+            </Box>
+                
             <Result
                 isSearchButtonClicked={ isSearchButtonClicked }
                 category={ category }
@@ -189,7 +247,6 @@ function Condition() {
             
         </div>
     );
-    
 }
 
 export default Condition;

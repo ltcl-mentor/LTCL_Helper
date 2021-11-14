@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import TextField from '@material-ui/core/TextField';
+import Box from '@mui/material/Box';
 
 function Keyword(props) {
     const [keyword, setKeyword] = useState('');
@@ -7,14 +8,12 @@ function Keyword(props) {
     const handleKeyword = (event) => {
         setKeyword(event.target.value);
     };
-         
+    
     return (
-        <div className="content">
-            <div className="keyword_box">
-                <TextField id="standard-basic" label="キーワード" onChange={ (event) => handleKeyword(event) } />
-                { props.setKeyword(keyword) }
-            </div>
-        </div>
+        <Box sx={{ textAlign: "center", marginTop: 4, marginBottom: 3 }}>
+            <TextField id="standard-basic" label="キーワード" onChange={ (event) => handleKeyword(event) } />
+            { props.isCanceling ? '' : props.setKeyword(keyword) }
+        </Box>
     );
 }
 

@@ -83,7 +83,7 @@ function Create() {
                 </Typography>
             </Breadcrumbs>
             
-            <Box sx={{ width: "70%", marginLeft: "15%"}}>
+            <Box sx={{ width: "70%", marginLeft: "15%" }}>
                 <form action="/questions/store/public" method="post" id="create" enctype="multipart/form-data">
                     <input type="hidden" value={ csrf_token } name="_token" />
                     <input type="hidden" name="post[category]" value={ category } />
@@ -110,7 +110,7 @@ function Create() {
                                 marginLeft: 4,
                             }}
                         >
-                            <Category 
+                            <Category
                                 setCategory={ setCategory }
                             />
                         </Typography>
@@ -136,6 +136,7 @@ function Create() {
                             <TopicForm
                                 category={ category }
                                 setTopic={ setTopic }
+                                isCanceling={ false }
                             />
                         </Typography>
                         

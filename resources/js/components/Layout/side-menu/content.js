@@ -12,7 +12,6 @@ import Description from '@material-ui/icons/Description';
 import PostAdd from '@material-ui/icons/PostAdd';
 import ContactPhone from '@material-ui/icons/ContactPhone'; 
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-// import Link from '@mui/material/Link';
 
 function Content(props) {
     const [isLinkClicked, setIsLinkClicked] = useState(false);
@@ -57,6 +56,7 @@ function Content(props) {
                             <ListItemIcon sx={{ paddingLeft: 4 }}>
                                 <SupervisorAccountIcon />
                             </ListItemIcon>
+                            
                             <ListItemText 
                                 primary="管理ページへ"
                                 sx={{ paddingLeft: 2 }}

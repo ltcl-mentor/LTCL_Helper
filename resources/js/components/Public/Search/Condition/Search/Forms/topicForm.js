@@ -8,6 +8,12 @@ function Topic(props) {
     const [topic, setTopic] = useState(0);
     
     useEffect(() => {
+        if (props.IsCanceling) {
+            props.setIsCanceling(false);
+        }
+    }, []);
+    
+    useEffect(() => {
         props.category === 0 ? setTopic(0) : setTopic(9);
     }, [props.category]);
     
@@ -55,7 +61,7 @@ function Topic(props) {
     
     return (
         <div className="container">
-            { props.setTopic(topic) }
+            { props.isCanceling ? '' : props.setTopic(topic) }
             { topicForm }
         </div>
     );

@@ -31,7 +31,7 @@ function Result(props) {
     }
     
     return (
-        <div className="container">
+        <div>
            { results } 
         </div>
     );
