@@ -12,8 +12,7 @@ function Category(props) {
     };
         
     return (
-        <div className="content">
-            <h2 className="title">カテゴリーの選択</h2>
+        <div>
             <p>変更前：{ categories[ props.old_category ] }</p>
             <FormControl component="fieldset">
                 <RadioGroup row aria-label="category" name="post[category]" value={ Number(props.category) } onChange={ (event) => handleCategory(event) }>

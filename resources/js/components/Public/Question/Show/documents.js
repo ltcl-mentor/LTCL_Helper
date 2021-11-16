@@ -25,10 +25,10 @@ function Document(props) {
                                     image="/images/NotePM_Logo_Vertical.png"
                                 />
                                 <CardContent>
-                                    { document.beginner === 1 ? <Chip variant="outlined" label="初心者向け" /> : "" }
-                                    { document.amature === 1 ? <Chip label="中級者向け" /> : "" }
-                                    { document.master === 1 ? <Chip label="上級者向け" /> : "" }
-                                    { document.all === 1 ? <Chip label="全員向け" /> : "" }
+                                    { document.beginner === 1 ? <Chip variant="outlined" color="success" label="初心者向け" /> : "" }
+                                    { document.amature === 1 ? <Chip variant="outlined" color="primary" label="中級者向け" /> : "" }
+                                    { document.master === 1 ? <Chip variant="outlined" color="secondary" label="上級者向け" /> : "" }
+                                    { document.all === 1 ? <Chip variant="outlined" color="error" label="全員向け" /> : "" }
                                     <Typography gutterBottom variant="h6" component="div" align="center">
                                         { document.title }
                                     </Typography>

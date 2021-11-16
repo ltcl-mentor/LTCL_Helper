@@ -47,7 +47,7 @@ class DocumentController extends Controller
         }
         $document['user_id'] = Auth::id();
         $document->fill($request['document'])->save();
-        return redirect('/documents/index');
+        return redirect('/documents/index?document=success');
     }
     
     // 詳細画面表示
@@ -79,9 +79,16 @@ class DocumentController extends Controller
     // 編集実行
     public function update(DocumentRequest $request, Document $document)
     {
-        $document->fill($request['post'])->save();
-        
-        return redirect('documents/index');
+        $targets = ['beginner', 'amature', 'master', 'all'];
+        foreach($targets as $target){
+            if(isset($request[$target])){
+                $document[$target] = true;
+            }else{
+                $document[$target] = false;
+            }
+        }
+        $document->fill($request['document'])->save();
+        return redirect('documents/index?document=success');
     }
     
     // 削除実行

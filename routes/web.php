@@ -29,8 +29,8 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::get('/questions/{question}/public', 'QuestionController@publicShow'); // 質問詳細画面表示
     // Route::get('/documents/index/public', 'DocumentController@publicIndex'); // 公開中の参考記事一覧表示
     Route::get('/history', 'HomeController@history'); // 履歴画面表示
-    Route::get('/contact/create', 'ContactController@create'); // お問い合わせ画面表示
-    Route::post('/contact/post', 'ContactController@post'); // お問い合わせ内容送信処理
+    // Route::get('/contact/create', 'ContactController@create'); // お問い合わせ画面表示
+    // Route::post('/contact', 'ContactController@post'); // お問い合わせ内容送信処理
     
     // 'react/'から始まるurlはreact上で非同期通信として利用
     Route::get('react/search/questions', 'ReactController@getSearchQuestions'); // 質問検索結果の受け渡し

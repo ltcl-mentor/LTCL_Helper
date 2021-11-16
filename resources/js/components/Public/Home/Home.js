@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import ReactDOM from 'react-dom';
+import {useLocation} from 'react-router-dom';
 import axios from "axios";
 import Card from '@mui/material/Card';
 import Typography from '@material-ui/core/Typography';
 import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 import Content from '../../Layout/side-menu/content';
 import Information from './information/information';
@@ -11,6 +13,7 @@ import Clendar from './calendar/calendar';
 import Weather from './weather';
 
 function Home() {
+    const parameter = useLocation().search.substr(1).split('=');
     const [user, setUser] = useState([]);
     
     useEffect(() => {
@@ -23,12 +26,56 @@ function Home() {
             });
     }, []);
     
+    
+    let success_message;
+    switch (parameter[0]) {
+        case "contact":
+            if (parameter[1] === "success") {
+                success_message = (
+                    <Alert
+                        variant="outlined"
+                        severity="success"
+                        sx={{
+                            margin: "0 auto",
+                            width: "70%",
+                        }}
+                    >
+                        <AlertTitle>Success</AlertTitle>
+                        お問い合わせの送信に成功しました。
+                    </Alert>
+                );
+            }
+            break;
+        
+        case "question":
+            if (parameter[1] === "success") {
+                success_message = (
+                    <Alert
+                        variant="outlined"
+                        severity="success"
+                        sx={{
+                            margin: "0 auto",
+                            width: "70%",
+                        }}
+                    >
+                        <AlertTitle>Success</AlertTitle>
+                        質問の投稿に成功しました。
+                    </Alert>
+                );
+            }
+            break;
+    }
+    
     return (
         <div className="container">
+        
+            { success_message }
+        
             <Box
                 sx={{
                     display: "flex",
                     alignItems: "flex-start",
+                    marginTop: 3,
                 }}
             >
                 <Card sx={{ width: "24%" }}>
@@ -50,7 +97,7 @@ function Home() {
                             width: "90%",
                         }}
                     >
-                        お知らせ　　
+                        お知らせ
                     </Typography>
                 
                     <Information  is_admin={ user.is_admin }/>

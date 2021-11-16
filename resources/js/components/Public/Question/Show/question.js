@@ -49,6 +49,7 @@ function Question(props) {
                     paddingTop: 2,
                     marginLeft: 4,
                     marginBottom: 2,
+                    marginRight: 2,
                     clear: "left",
                 }}
             >

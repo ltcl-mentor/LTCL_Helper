@@ -63,11 +63,8 @@ function TopicForm(props) {
     }
     
     return (
-        <div className="content">
-            <h2 className="title">トピックの選択</h2>
-
+        <div>
             <p>変更前：{ topics[props.old_topic] }</p>
-
             { topic }
         </div>
     );

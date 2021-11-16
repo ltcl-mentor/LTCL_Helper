@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
+import Typography from '@material-ui/core/Typography';
 
 function Picture(props) {
     const [images, setImages] = useState([]);
@@ -26,18 +27,21 @@ function Picture(props) {
     });
     
     return (
-        <div className="content">
-            <h2 className="title">画像のアップロードと削除（複数選択可）</h2>
-            
-            <h3>現在登録されている画像</h3>
-            
-            <p>登録を解除する場合はチェックを入れてください。</p>
+        <div>
+            { images.length !== 0 && 
+                <Typography
+                    variant="h5"
+                    component="div"
+                    sx={{
+                        marginTop: 4,
+                        marginLeft: 2,
+                    }}
+                >
+                    4.5. 既存画像の削除
+                </Typography>
+            }
             
             { list }
-            
-            <h3>新たに登録する画像</h3>
-            
-            <input type="file" name="image[]" multiple/>
         </div>
     );
 }

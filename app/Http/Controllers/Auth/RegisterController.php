@@ -42,7 +42,7 @@ class RegisterController extends Controller
         event(new Registered($user = $this->create($request->all())));
 
         return $this->registered($request, $user)
-                        ?: redirect('/users/index');
+                        ?: redirect('/users/index?admin=success');
     }
     
     // 受講生の新規作成画面表示
@@ -73,7 +73,7 @@ class RegisterController extends Controller
             
         }
 
-        return redirect('/users/index');
+        return redirect('/users/index?user=success');
     }
 
     /**

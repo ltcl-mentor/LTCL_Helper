@@ -16,11 +16,11 @@ class ContactController extends Controller
     public function post(Request $request)
     {
         $user = Auth::user()->name;
-        // dd($request['message']);
+        
         $message = $user . "さんから次のような問い合わせがありました。\n----------------\n" . $request['message'] . "\n----------------";
         
         Slack::sendMessage($message);
         
-        return redirect('/');
+        return redirect('/?contact=success');
     }
 }

@@ -4,6 +4,7 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import Box from '@mui/material/Box';
 
 function Parameters(props) {
     return (
@@ -23,7 +24,7 @@ function Parameters(props) {
                         <TableCell align="center" component="th" scope="row">カテゴリー</TableCell>
                         <TableCell align="center">{ props.category !== '' && props.categories[props.category] }</TableCell>
                     </TableRow>
-                
+                    
                     <TableRow>
                         <TableCell align="center" component="th" scope="row">トピック</TableCell>
                         <TableCell align="center">{ props.topic !== '' && props.topics[props.topic] }</TableCell>

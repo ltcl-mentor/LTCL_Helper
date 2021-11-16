@@ -81,7 +81,7 @@ function Show() {
                     <Box>
                         <Question 
                             count={ images.filter(v=>v).length }
-                            image={ images }
+                            images={ images }
                             updated_at={ question.updated_at }
                             question={ question.question }
                         />

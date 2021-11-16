@@ -1,5 +1,7 @@
 import React,{useState} from 'react';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
+import Typography from '@material-ui/core/Typography';
+import Box from '@mui/material/Box';
 
 function Link(props) {
     
@@ -12,20 +14,32 @@ function Link(props) {
     
     return (
         <div>
-            <h2 className="title">記事URLの入力</h2>
-            { link_validation_message }
-            <TextareaAutosize 
-                name="document[link]"
-                placeholder="URLを入力。入力する際はNotePMの外部共有を利用"
-                minRows={3}
-                value={ props.link }
-                onChange={ (event) => handleLink(event) }
-                style={{ 
-                    width: "60%",
-                    marginLeft: "10%",
-                    paddingTop:2,
+            <Typography
+                variant="h5"
+                component="div"
+                sx={{
+                    marginTop: 4,
+                    marginLeft: 2,
                 }}
-            />
+            >
+                3. 記事URLの入力
+            </Typography>
+        
+            { link_validation_message }
+            
+            <Box sx={{ textAlign: "center", marginTop: 4 }}>
+                <TextareaAutosize 
+                    name="document[link]"
+                    placeholder="URLを入力。入力する際はNotePMの外部共有を利用"
+                    minRows={3}
+                    value={ props.link }
+                    onChange={ (event) => handleLink(event) }
+                    style={{ 
+                        width: "70%",
+                        paddingTop:2,
+                    }}
+                />
+            </Box>
         </div>
     );
 }

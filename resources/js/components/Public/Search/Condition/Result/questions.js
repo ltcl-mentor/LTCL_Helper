@@ -58,7 +58,7 @@ function Questions(props) {
                 count={ Math.floor(list.filter(v=>v).length/10) + 1 }
                 page={ currentPage }
                 onChange={ handlePageClick }
-                sx={{ display: "block" }}
+                sx={{ justifyContent: "center" }}
             />
         );
     }
@@ -77,16 +77,14 @@ function Questions(props) {
                 カテゴリー：<font color="green">{ props.categories[props.category] }</font>、トピック：<font color="blue">{ props.topics[props.topic] }</font>の検索結果<font color="purple">{ list.filter(v=>v).length }</font>件
             </Typography>
             
-            <Box sx={{ width: "80%", textAlign: "center" }}>
+            <Box sx={{ width: "90%", margin: "0 auto" }}>
                 <List>
                     { questionList }
                 </List>
             </Box>
             
-            <Box sx={{ textAlign: "center" }}>
-                { pagination }
-            </Box>
-    
+            { pagination }
+            
             { emptyMessage }
         </Card>
     );

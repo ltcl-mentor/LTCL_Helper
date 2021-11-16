@@ -1,5 +1,7 @@
 import React,{useState} from 'react';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
+import Typography from '@material-ui/core/Typography';
+import Box from '@mui/material/Box';
 
 function Title(props) {
     const handleTitle = (event) => {
@@ -11,20 +13,32 @@ function Title(props) {
     
     return (
         <div>
-            <h2 className="title">記事タイトルの入力</h2>
-            { title_validation_message }
-            <TextareaAutosize 
-                name="document[title]"
-                placeholder="制限字数は５０文字です"
-                minRows={2}
-                value={ props.title }
-                onChange={ (event) => handleTitle(event) }
-                style={{ 
-                    width: "60%",
-                    marginLeft: "10%",
-                    paddingTop:2,
+            <Typography
+                variant="h5"
+                component="div"
+                sx={{
+                    marginTop: 4,
+                    marginLeft: 2,
                 }}
-            />
+            >
+                2. 記事タイトルの入力
+            </Typography>
+            
+            { title_validation_message }
+            
+            <Box sx={{ textAlign: "center", marginTop: 4 }}>
+                <TextareaAutosize 
+                    name="document[title]"
+                    placeholder="制限字数は５０文字です"
+                    minRows={2}
+                    value={ props.title }
+                    onChange={ (event) => handleTitle(event) }
+                    style={{ 
+                        width: "70%",
+                        paddingTop:2,
+                    }}
+                />
+            </Box>
         </div>
     );
 }

@@ -12,6 +12,7 @@ import PublicQuestionCreate from './Public/Question/Create/Create';
 import PublicQuestionShow from './Public/Question/Show/Show';
 import Condition from './Public/Search/Condition/Condition';
 import Freeword from './Public/Search/Freeword/Freeword';
+import Contact from './Public/Contact/Contact';
 import MentorTop from './Mentor/Top';
 import DocumentIndex from './Mentor/Document/Index/Index';
 import DocumentShow from './Mentor/Document/Show/Show';
@@ -49,6 +50,8 @@ function Router() {
                 <Route path="/public/questions/:id" component={ PublicQuestionShow }/>
                 <Route path="/search/condition" component={ Condition }/>
                 <Route path="/search/freeword" component={ Freeword }/>
+                <Route path="/contact" component={ Contact }/>
+                
             </Switch>
         );
         

@@ -1,13 +1,16 @@
 import React,{useState} from 'react';
-import ReactDOM from 'react-dom';
+import {Link} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import SaveIcon from '@material-ui/icons/Save';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Typography from '@material-ui/core/Typography';
+import Box from '@mui/material/Box';
+import Card from '@material-ui/core/Card';
 
 import TopicForm from '../../../Public/Search/Condition/Search/Forms/topicForm';
 import CurriculumNumber from '../../../Public/Search/Condition/Search/Forms/additionalForms/curriculum-number/curriculum-number';
 import QuestionForm from './questionForm';
 import CommentForm from './commentForm';
-import Picture from './picture';
 import Category from '../../../Public/Search/Condition/Search/Forms/categoryForm';
 
 function Create() {
@@ -83,68 +86,123 @@ function Create() {
     
     return (
         <div className="container">
-            <form action="/questions/store" method="post" id="create" enctype="multipart/form-data">
-                <input type="hidden" name="_token" value={ csrf_token }/>
+            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
+                <Link underline="hover" to="/">
+                    HOME
+                </Link>
                 
-                <div className="content">
-                    <h2 className="title">カテゴリーの選択</h2>
-                    
-                    <Category 
-                        setCategory={ setCategory }
-                    />
-                    
+                <Link underline="hover" to="/mentor/top">
+                    メンタートップ
+                </Link>
+                
+                <Typography color="text.primary">
+                    質問投稿
+                </Typography>
+            </Breadcrumbs>
+            
+            <Box sx={{ width: "70%", marginLeft: "15%" }}>
+                <form action="/questions/store" method="post" id="create" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value={ csrf_token }/>
                     <input type="hidden" name="post[category]" value={ category } />
-                </div>
-                
-                <div className="content">
-                    <h2 className="title">トピックの選択</h2>
-                    
-                    <TopicForm
-                        category={ category }
-                        setTopic={ setTopic }
-                    />
-                    
                     <input type="hidden" name="post[topic]" value={ topic } />
-                </div>
-            
-                <div className="content">
-                    <h2 className="title">該当カリキュラム番号の選択</h2>
-                    
-                    { validation_message }
-                    
-                    <CurriculumNumber
-                        category={ category }
-                        topic={ topic }
-                        setCurriculumNumber={ setCurriculumNumber }
-                    />
-                    
                     <input type="hidden" name="post[curriculum_number]" value={ curriculum_number } />
-                </div>
+                    
+                    <Card sx={{ marginBottom: 2 }}>
+                        <Typography
+                            variant="h5"
+                            component="div"
+                            sx={{
+                                marginTop: 4,
+                                marginLeft: 2,
+                            }}
+                        >
+                            1. カテゴリーの選択
+                        </Typography>
+                        
+                        <Typography
+                            component="div"
+                            sx={{
+                                marginTop: 2,
+                                marginLeft: 4,
+                            }}
+                        >
+                            <Category 
+                                setCategory={ setCategory }
+                            />
+                        </Typography>
+                        
+                        <Typography
+                            variant="h5"
+                            component="div"
+                            sx={{
+                                marginTop: 4,
+                                marginLeft: 2,
+                            }}
+                        >
+                            2. トピックの選択
+                        </Typography>
+                        
+                        <Typography
+                            component="div"
+                            sx={{
+                                marginTop: 2,
+                                marginLeft: 4,
+                            }}
+                        >
+                            <TopicForm
+                                category={ category }
+                                setTopic={ setTopic }
+                            />
+                        </Typography>
+                        
+                        <Typography
+                            variant="h5"
+                            component="div"
+                            sx={{
+                                marginTop: 4,
+                                marginLeft: 2,
+                            }}
+                        >
+                            3. 該当カリキュラム番号の選択
+                        </Typography>
+                    
+                        { validation_message }
+                    
+                        <CurriculumNumber
+                            category={ category }
+                            topic={ topic }
+                            setCurriculumNumber={ setCurriculumNumber }
+                        />
+                        
+                        <QuestionForm
+                            question={ question }
+                            setQuestion={ setQuestion }
+                            question_validation_error={ question_validation_error }
+                        />
                 
-                <QuestionForm
-                    question={ question }
-                    setQuestion={ setQuestion }
-                    question_validation_error={ question_validation_error }
-                />
-                
-                <CommentForm
-                    comment={ comment }
-                    setComment={ setComment }
-                    comment_validation_error={ comment_validation_error }
-                />
-            
-                <Picture/>
-            
-                <Button onClick={ handleClick } variant="contained" endIcon={<SaveIcon />}>
-                    登録する
-                </Button>
-            </form>
+                        <CommentForm
+                            comment={ comment }
+                            setComment={ setComment }
+                            comment_validation_error={ comment_validation_error }
+                        />
+                        
+                        <Typography
+                            align="center"
+                            component="div"
+                            sx={{
+                                marginTop: 4,
+                                marginBottom: 3,
+                            }}
+                        >
+                            <Button onClick={ handleClick } variant="contained" endIcon={<SaveIcon />}>
+                                登録する
+                            </Button>
+                        </Typography>
+                    </Card>
+                </form>
+            </Box>
         </div>
     );
 }
 
 export default Create;
-
-if (document.getElementById('Question_mentor_create')) {
-    ReactDOM.render(<Create />, document.getElementById('Question_mentor_create'));
-}

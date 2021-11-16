@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import ReactDOM from 'react-dom';
 import axios from "axios";
 import {Link} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
@@ -62,6 +61,10 @@ function Show() {
     return (
         <div className="container">
             <Breadcrumbs aria-label="breadcrumb">
+                <Link underline="hover" to="/">
+                    HOME
+                </Link>
+                
                 <Link underline="hover" to="/mentor/top">
                     メンタートップ
                 </Link>
@@ -75,19 +78,7 @@ function Show() {
                 </Typography>
             </Breadcrumbs>
             
-            <Typography
-                variant="h4"
-                component="div"
-                align="center"
-                sx={{
-                    marginTop: 4,
-                    marginBottom: 2,
-                }}
-            >
-                質問詳細
-            </Typography>
-            
-            <Typography component="div" align="center" sx={{ marginTop: 4}} >
+            <Typography component="div" align="center" sx={{ marginTop: 4 }} >
                 <Publish
                     question_id={ id }
                     csrf_token={ csrf_token }
@@ -99,14 +90,14 @@ function Show() {
                 />
             </Typography>
             
-            <Typography component="div" align="center" sx={{ marginTop: 1}} >
-                <Link to={ `/questions/` + question.id + `/edit` }>
-                    <Button variant="contained" color="info" onClick={ deleteConfirm } startIcon={ <EditIcon /> }>編集する</Button>
+            <Typography component="div" align="center" sx={{ marginTop: 1 }} >
+                <Link to={ `/questions/` + id + `/edit` }>
+                    <Button variant="contained" color="info" startIcon={ <EditIcon /> }>編集する</Button>
                 </Link>
             </Typography>
             
-            <Typography component="div" align="center" sx={{ marginTop: 1, marginBottom: 2}} >
-                <form action={ `/questions/` + question.id + `/delete` } method="post" id="delete">
+            <Typography component="div" align="center" sx={{ marginTop: 1, marginBottom: 2 }} >
+                <form action={ `/questions/` + id + `/delete` } method="post" id="delete">
                     <input type="hidden" name="_token" value={ csrf_token }/>
                     <Button variant="contained" color="error" onClick={ deleteConfirm } startIcon={ <DeleteIcon /> }>削除する</Button>
                 </form>

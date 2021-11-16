@@ -33,7 +33,7 @@ function Parameters(props) {
     
     let targets = "";
     props.targets.map((target) => {
-        if(target || target !== undefined) {
+        if(target || target !== false) {
             if(targets.length === 0) {
                 targets += target;
             } else {

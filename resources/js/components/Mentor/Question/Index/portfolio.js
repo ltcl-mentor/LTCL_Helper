@@ -6,6 +6,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Box from '@material-ui/core/Box';
 
 function Portfolio() {
     const [questions, setQuestions] = useState([]);
@@ -36,7 +37,7 @@ function Portfolio() {
     
     const portfolio = portfolio_topics.map((topic) => {
         return (
-            <div className="content">
+            <Box sx={{paddingTop: 3, marginBottom: 3}}>
                 <Accordion expanded={ expanded === topic.id } onChange={ handleChange(topic.id) }>
                     <AccordionSummary
                         expandIcon={ <ExpandMoreIcon /> }
@@ -52,7 +53,7 @@ function Portfolio() {
                         <Typography>
                             { questions.map((question) => {
                                 if (question.topic === topic.id) {
-                                    if (question.check === true) {
+                                    if (question.check === 1) {
                                         return <div className="question">・<Link to={ `/questions/` + question.id }>{ question.question }</Link></div>;
                                     } else {
                                         return <div className="question">・（非公開）<Link to={ `/questions/` + question.id }>{ question.question }</Link></div>;
@@ -62,11 +63,10 @@ function Portfolio() {
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
-            </div>
+            </Box>
         );
     });
 
-    
     return (
         <div className="container">
             { portfolio }

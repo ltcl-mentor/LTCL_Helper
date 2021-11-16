@@ -1,9 +1,13 @@
 import React,{useEffect, useState} from 'react';
-import ReactDOM from 'react-dom';
+import {Link} from 'react-router-dom';
 import axios from "axios";
 import {useParams} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import SaveIcon from '@material-ui/icons/Save';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Typography from '@material-ui/core/Typography';
+import Box from '@mui/material/Box';
+import Card from '@material-ui/core/Card';
 
 import Category from './categoryForm';
 import TopicForm from './topicForm';
@@ -106,58 +110,133 @@ function Edit() {
     
     return (
         <div className="container">
-            <form action={`/questions/` + id  + `/update`} method="post" enctype="multipart/form-data" id ="update">
-                <input type="hidden" name="_token" value={ csrf_token }/>
+            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
+                <Link underline="hover" to="/">
+                    HOME
+                </Link>
                 
-                <Category
-                    category={ category }
-                    old_category={ oldData.category }
-                    setCategory={ setCategory }
-                />
+                <Link underline="hover" to="/mentor/top">
+                    メンタートップ
+                </Link>
+                
+                <Link underline="hover" to={ `/questions/` + id }>
+                    質問詳細
+                </Link>
+                
+                <Typography color="text.primary">
+                    質問編集
+                </Typography>
+            </Breadcrumbs>
             
-                <TopicForm
-                    category={ category }
-                    topic={ topic }
-                    setTopic={ setTopic }
-                    old_topic={ oldData.topic }
-                />
-            
-                <CurriculumNumber
-                    setCurriculumNumber={ setCurriculumNumber }
-                    curriculum_number={ curriculum_number }
-                    old_curriculum_number={ oldData.curriculum_number }
-                    curriculum_number_validation_error={ curriculum_number_validation_error }
-                    curriculum_numbers={ curriculum_numbers[Number(category)][Number(topic)] }
-                />
-                <input type="hidden" name="post[curriculum_number]" value={ curriculum_number } />
-                
-                <QuestionForm
-                    question={ question }
-                    setQuestion={ setQuestion }
-                    question_validation_error={ question_validation_error }
-                />
-                
-                <CommentForm
-                    comment={ comment }
-                    setComment={ setComment }
-                    comment_validation_error={ comment_validation_error }
-                />
-            
-                <Picture
-                    question_id={ id }
-                />
-                
-                <Button onClick={ handleClick } variant="contained" endIcon={<SaveIcon />}>
-                    更新する
-                </Button>
-            </form>
+            <Box sx={{ width: "70%", marginLeft: "15%" }}>
+                <form action={`/questions/` + id  + `/update`} method="post" enctype="multipart/form-data" id ="update">
+                    <input type="hidden" name="_token" value={ csrf_token }/>
+                    <input type="hidden" name="post[curriculum_number]" value={ curriculum_number } />
+                    
+                    <Card sx={{ marginBottom: 2 }}>
+                        <Typography
+                            variant="h5"
+                            component="div"
+                            sx={{
+                                marginTop: 4,
+                                marginLeft: 2,
+                            }}
+                        >
+                            1. カテゴリーの選択
+                        </Typography>
+                        
+                        <Typography
+                            component="div"
+                            sx={{
+                                marginTop: 2,
+                                marginLeft: 4,
+                            }}
+                        >
+                            <Category
+                                category={ category }
+                                old_category={ oldData.category }
+                                setCategory={ setCategory }
+                            />
+                        </Typography>
+                        
+                        <Typography
+                            variant="h5"
+                            component="div"
+                            sx={{
+                                marginTop: 4,
+                                marginLeft: 2,
+                            }}
+                        >
+                            2. トピックの選択
+                        </Typography>
+                        
+                        <Typography
+                            component="div"
+                            sx={{
+                                marginTop: 2,
+                                marginLeft: 4,
+                            }}
+                        >
+                            <TopicForm
+                                category={ category }
+                                topic={ topic }
+                                setTopic={ setTopic }
+                                old_topic={ oldData.topic }
+                            />
+                        </Typography>
+                        
+                        <Typography
+                            variant="h5"
+                            component="div"
+                            sx={{
+                                marginTop: 4,
+                                marginLeft: 2,
+                            }}
+                        >
+                            3. 該当カリキュラム番号の選択
+                        </Typography>
+                        
+                        <CurriculumNumber
+                            setCurriculumNumber={ setCurriculumNumber }
+                            curriculum_number={ curriculum_number }
+                            old_curriculum_number={ oldData.curriculum_number }
+                            curriculum_number_validation_error={ curriculum_number_validation_error }
+                            curriculum_numbers={ curriculum_numbers[Number(category)][Number(topic)] }
+                        />
+                        
+                        <QuestionForm
+                            question={ question }
+                            setQuestion={ setQuestion }
+                            question_validation_error={ question_validation_error }
+                        />
+                        
+                        <Picture
+                            question_id={ id }
+                        />
+                        
+                        <CommentForm
+                            comment={ comment }
+                            setComment={ setComment }
+                            comment_validation_error={ comment_validation_error }
+                        />
+                        
+                        <Typography
+                            align="center"
+                            component="div"
+                            sx={{
+                                marginTop: 4,
+                                marginBottom: 3,
+                            }}
+                        >
+                            <Button onClick={ handleClick } variant="contained" endIcon={<SaveIcon />}>
+                                更新する
+                            </Button>
+                        </Typography>
+                    </Card>
+                </form>
+            </Box>
         </div>
     );
 }
 
 export default Edit;
-
-if (document.getElementById('Question_mentor_edit')) {
-    ReactDOM.render(<Edit />, document.getElementById('Question_mentor_edit'));
-}
-

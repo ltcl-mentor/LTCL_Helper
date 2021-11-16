@@ -78,14 +78,16 @@ function Publish(props) {
                         question_id={ props.question_id }
                         csrf_token={ props.csrf_token }
                     />
-                
-                    <Preview 
-                        question={ props.question }
-                        images={ props.images }
-                        documents={ props.documents }
-                        category={ props.category }
-                        topic={ props.topic }
-                    />
+                    
+                    <Box sx={{ border: "1px solid black" }}>
+                        <Preview 
+                            question={ props.question }
+                            images={ props.images }
+                            documents={ props.documents }
+                            category={ props.category }
+                            topic={ props.topic }
+                        />
+                    </Box>
                 </Box>
                 
             </Modal>

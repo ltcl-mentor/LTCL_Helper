@@ -1,15 +1,17 @@
 import React,{useState,useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import axios from "axios";
 import {useParams} from 'react-router-dom';
-import FormControl from '@mui/material/FormControl';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import SaveIcon from '@material-ui/icons/Save';
+import Box from '@mui/material/Box';
+import Card from '@material-ui/core/Card';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Typography from '@material-ui/core/Typography';
 
+import Target from '../Create/target';
 import Title from '../Create/title';
-import Link from '../Create/link';
+import URL from '../Create/link';
 
 function Edit() {
     const { id } = useParams();
@@ -42,18 +44,6 @@ function Edit() {
             });
     }, []);
     
-    const handleChange = (event) => {
-        setTargets({
-            ...targets,
-            [event.target.name]: event.target.checked,
-        });
-    };
-    
-    const { beginner, amature, master, all } = targets;
-    const error = [beginner, amature, master, all].filter((v) => v).length == 0;
-    let target_validation_message;
-    error ? target_validation_message = (<p className="errorMassage">対象者してください。</p>) : target_validation_message = ('');
-    
     let set = 0;
     const handleClick = () => {
         // タイトルのバリデーション
@@ -78,62 +68,66 @@ function Edit() {
     
     return (
         <div className="container">
-            <form action="/documents/store" method="post" id="create">
-                <input type="hidden" value={ csrf_token } name="_token" />
+            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
+                <Link underline="hover" to="/">
+                    HOME
+                </Link>
                 
-                <h2 className="title">対象者の選択</h2>
-                <FormControl
-                    required
-                    error={error}
-                    component="fieldset"
-                    sx={{ m: 3 }}
-                    variant="standard"
-                >
-                    { target_validation_message }
-                    <FormGroup>
-                        <FormControlLabel
-                            control={
-                                <Checkbox checked={beginner} onChange={handleChange} name="beginner" />
-                            }
-                            label="初級者"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox checked={amature} onChange={handleChange} name="amature" />
-                            }
-                            label="中級者"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox checked={master} onChange={handleChange} name="master" />
-                            }
-                            label="上級者"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox checked={all} onChange={handleChange} name="all" />
-                            }
-                            label="全員必読"
-                        />
-                    </FormGroup>
-                </FormControl>
+                <Link underline="hover" to="/mentor/top">
+                    メンタートップ
+                </Link>
                 
-                <Title 
-                    title={ title }
-                    setTitle={ setTitle }
-                    title_validation_error={ title_validation_error }
-                />
+                <Link underline="hover" to="/documents/index">
+                    記事一覧
+                </Link>
                 
-                <Link
-                    link={ link }
-                    setLink={ setLink }
-                    link_validation_error={ link_validation_error }
-                />
+                <Link underline="hover" to={ `/documents/` + id }>
+                    記事詳細
+                </Link>
+                
+                <Typography color="text.primary">
+                    記事編集
+                </Typography>
+            </Breadcrumbs>
             
-                <Button onClick={ handleClick } variant="contained" endIcon={<SaveIcon />}>
-                    更新する
-                </Button>
-            </form>
+            <Box sx={{ width: "70%", marginLeft: "15%" }}>
+                <form action={ `/documents/` + id + `/update` } method="post" id="create">
+                    <input type="hidden" value={ csrf_token } name="_token" />
+                    
+                    <Card sx={{ marginBottom: 2 }}>
+                        
+                        <Target
+                            targets={ targets }
+                            setTargets={ setTargets }
+                        />
+                        
+                        <Title 
+                            title={ title }
+                            setTitle={ setTitle }
+                            title_validation_error={ title_validation_error }
+                        />
+                        
+                        <URL
+                            link={ link }
+                            setLink={ setLink }
+                            link_validation_error={ link_validation_error }
+                        />
+                        
+                        <Typography
+                            align="center"
+                            component="div"
+                            sx={{
+                                marginTop: 4,
+                                marginBottom: 3,
+                            }}
+                        >
+                            <Button onClick={ handleClick } variant="contained" endIcon={<SaveIcon />}>
+                                登録する
+                            </Button>
+                        </Typography>
+                    </Card>
+                </form>
+            </Box>
         </div>
     );
 }

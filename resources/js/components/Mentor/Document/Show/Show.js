@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import ReactDOM from 'react-dom';
-import axios from "axios";
 import {Link} from 'react-router-dom';
+import axios from "axios";
 import {useParams} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Button from '@mui/material/Button';
 
 import Parameters from './parameters';
 import Questions from './questions';
@@ -34,18 +37,37 @@ function Document() {
     
     return (
         <div className="container">
-            <Typography align="center" variant="h4" component="div" sx={{ marginTop: "5%" }}>記事詳細</Typography>
-            <Typography align="center" variant="h6" component="div">
-                <Link to={`/documents/` + id + `/edit`} className="editBtn">編集する</Link>
-            </Typography>
-            <form action={`/documents/` + id + `/delete`} method="post" id="delete">
-                <input type="hidden" value={ csrf_token } name="_token" />
+            <Breadcrumbs aria-label="breadcrumb">
+                <Link underline="hover" to="/">
+                    HOME
+                </Link>
                 
-                <Typography align="center" variant="h6" component="div">
-                    <p onClick={ deleteConfirm } >削除する</p>
+                <Link underline="hover" to="/mentor/top">
+                    メンタートップ
+                </Link>
+                
+                <Link underline="hover" to="/documents/index">
+                    記事一覧
+                </Link>
+                
+                <Typography color="text.primary">
+                    記事詳細
                 </Typography>
-            </form>
-
+            </Breadcrumbs>
+            
+            <Typography align="center" variant="h6" component="div" sx={{ marginTop: 4 }}>
+                <Link to={`/documents/` + id + `/edit`} className="editBtn">
+                    <Button variant="contained" color="info" startIcon={ <EditIcon /> }>編集する</Button>
+                </Link>
+            </Typography>
+            
+            <Typography align="center" variant="h6" component="div" sx={{ marginTop: 1, marginBottom: 2 }}>
+                <form action={`/documents/` + id + `/delete`} method="post" id="delete">
+                    <input type="hidden" value={ csrf_token } name="_token" />
+                    <Button variant="contained" color="error" onClick={ deleteConfirm } startIcon={ <DeleteIcon /> }>削除する</Button>
+                </form>
+            </Typography>
+            
             <Parameters 
                 title={ doc.title }
                 targets={ [

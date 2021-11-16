@@ -1,5 +1,6 @@
 import React from 'react';
 import Selects from './select';
+import Box from '@mui/material/Box';
 
 function CrriculumNumber(props) {
     
@@ -11,17 +12,17 @@ function CrriculumNumber(props) {
     }
      
     return (
-        <div className="content">
-            <h2 className="title">該当カリキュラムの選択</h2>
-            <div className="content">
-                { validation_message }
+        <div>
+            { validation_message }
+    
+            <Box sx={{ textAlign: "center", marginTop: 4 }}>
                 <Selects
                     setCurriculumNumber={ props.setCurriculumNumber }
                     curriculum_number={ props.curriculum_number }
                     old_curriculum_number={ props.old_curriculum_number }
                     items={ props.curriculum_numbers }
                 />
-            </div>
+            </Box>
         </div>
     );
 }

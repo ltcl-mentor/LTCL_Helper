@@ -10,7 +10,7 @@ function Comment(props) {
                 コメント
             </Typography>
             
-            <Typography variant="h6" component="div" sx={{ margin: 1, marginLeft: 3, marginBottom: 1}} >
+            <Typography variant="h6" component="div" sx={{ margin: 1, marginLeft: 3, marginBottom: 1, marginRight: 2 }} >
                 { props.comment }
             </Typography>
         </Card>

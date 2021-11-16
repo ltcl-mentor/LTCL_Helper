@@ -61,7 +61,7 @@ class QuestionController extends Controller
         $message = "受講生によって質問が投稿されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $question->id;
         Slack::sendMessage($message);
         
-        return redirect('/');
+        return redirect('/?question=success');
     }
     
     // 以下メンターのみがアクセス可能
@@ -93,7 +93,7 @@ class QuestionController extends Controller
             Image::imageCreate($pictures, $question->id);
         }
         
-        return redirect('/questions/index');
+        return redirect('/questions/index?question=success');
     }
     
     // 詳細画面表示

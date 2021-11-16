@@ -46,7 +46,7 @@ class LinkController extends Controller
             $document->questions()->attach($request['attach_id']);
         }
         
-        return redirect('/links/index');
+        return redirect('/links/index?link=success');
     }
     
     
@@ -80,6 +80,6 @@ class LinkController extends Controller
             $question->documents()->attach($request['attach_id']);
         }
         
-        return redirect('/links/index');
+        return redirect('/links/index?link=success');
     }
 }
