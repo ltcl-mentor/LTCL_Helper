@@ -72,11 +72,11 @@ function Index() {
                 </Link>
                 
                 <Link underline="hover" to="/links/document/index">
-                    質問から紐付け（一覧）
+                    記事から紐付け（一覧）
                 </Link>
                 
                 <Typography color="text.primary">
-                    質問から紐付け（詳細）
+                    記事から紐付け（詳細）
                 </Typography>
             </Breadcrumbs>
             

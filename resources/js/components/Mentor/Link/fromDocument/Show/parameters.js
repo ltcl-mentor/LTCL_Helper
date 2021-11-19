@@ -8,7 +8,6 @@ import Paper from '@material-ui/core/Paper';
 
 function Parameters(props) {
     const [staffs, setStaffs] = useState([]);
-    // const targets = ["beginner", "amature", "master", "all"];
     
     useEffect(() => {
         axios

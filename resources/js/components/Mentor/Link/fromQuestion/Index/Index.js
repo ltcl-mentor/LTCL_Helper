@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
-import ReactDOM from 'react-dom';
+import {Link} from 'react-router-dom';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Typography from '@material-ui/core/Typography';
+
 import Questions from './questions';
 
 function Index() {
@@ -41,6 +44,20 @@ function Index() {
     
     return (
         <div class="container">
+            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
+                <Link underline="hover" to="/">
+                    HOME
+                </Link>
+                
+                <Link underline="hover" to="/mentor/top">
+                    メンタートップ
+                </Link>
+                
+                <Typography color="text.primary">
+                    質問から紐付け
+                </Typography>
+            </Breadcrumbs>
+            
             <Box sx={{ width: '95%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={ value } onChange={ handleChange } aria-label="basic tabs example">

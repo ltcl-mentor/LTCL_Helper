@@ -6,12 +6,14 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 
 function Documents(props) {
     const [documents, setDocuments] = useState([]);
     const [staffs, setStaffs] = useState([]);
-    const [expanded, setExpanded] = React.useState(false);
-    const targets = ["beginner", "amature", "master"];
+    const [expanded, setExpanded] = useState(false);
     
     useEffect(() => {
         axios
@@ -54,34 +56,74 @@ function Documents(props) {
                     </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography>
+                    <List>
                         { documents.map((document) => {
                             if (document.user_id === staff.id) {
                                 switch(props.target) {
                                     case 0:
                                         if (document.beginner) {
-                                            return <div  className="document">・<Link to={ `/links/document/` + document.id }>{ document.title }</Link></div>;
+                                            return (
+                                                <ListItem
+                                                    key={ document.id }
+                                                    role="listitem"
+                                                    button
+                                                >
+                                                    <Link to={ `/links/document/` + document.id }>
+                                                        <ListItemText primary={ document.title } />
+                                                    </Link>
+                                                </ListItem>
+                                            );
                                         }
                                         break;
                                     case 1:
                                         if (document.amature) {
-                                            return <div  className="document">・<Link to={ `/links/document/` + document.id }>{ document.title }</Link></div>;
+                                            return (
+                                                <ListItem
+                                                    key={ document.id }
+                                                    role="listitem"
+                                                    button
+                                                >
+                                                    <Link to={ `/links/document/` + document.id }>
+                                                        <ListItemText primary={ document.title } />
+                                                    </Link>
+                                                </ListItem>
+                                            );
                                         }
                                         break;
                                     case 2:
                                         if (document.master) {
-                                            return <div  className="document">・<Link to={ `/links/document/` + document.id }>{ document.title }</Link></div>;
+                                            return (
+                                                <ListItem
+                                                    key={ document.id }
+                                                    role="listitem"
+                                                    button
+                                                >
+                                                    <Link to={ `/links/document/` + document.id }>
+                                                        <ListItemText primary={ document.title } />
+                                                    </Link>
+                                                </ListItem>
+                                            );
                                         }
                                         break;
                                     case 3:
                                         if (document.all) {
-                                            return <div  className="document">・<Link to={ `/links/document/` + document.id }>{ document.title }</Link></div>;
+                                            return (
+                                                <ListItem
+                                                    key={ document.id }
+                                                    role="listitem"
+                                                    button
+                                                >
+                                                    <Link to={ `/links/document/` + document.id }>
+                                                        <ListItemText primary={ document.title } />
+                                                    </Link>
+                                                </ListItem>
+                                            );
                                         }
                                         break;
                                 }
                             }
                         })}
-                    </Typography>
+                    </List>
                 </AccordionDetails>
             </Accordion>
         );

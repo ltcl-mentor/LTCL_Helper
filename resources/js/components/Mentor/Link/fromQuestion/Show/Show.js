@@ -1,23 +1,27 @@
 import React, {useState, useEffect} from 'react';
-import ReactDOM from 'react-dom';
-import axios from "axios";
+import {useLocation} from 'react-router-dom';
 import {Link} from 'react-router-dom';
+import axios from "axios";
 import {useParams} from 'react-router-dom';
-import Publish from './Publish/publish';
-import Parameters from './parameters';
-import Question from './question';
-import Comment from './comment';
-import Documents from '../../../Public/Question/Show/documents';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Typography from '@material-ui/core/Typography';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
-function Show() {
+import Parameters from './parameters';
+import Links from './links';
+
+function Index() {
     const { id } = useParams();
+    const parameter = useLocation().search.substr(1).split('=');
     const [question, setQuestion] = useState([]);
-    const [images, setImages] = useState([]);
-    const [documents, setDocuments] = useState([]);
+    const [attach_id, setAttachId] = useState([]);
+    const [detach_id, setDetachId] = useState([]);
+    const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
     const categories = ['カリキュラム', '成果物'];
     const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', 'マイグレーション', 'リレーション', 'Laravel拡張', '画像処理', 'Heroku環境', 'API', 'デザイン'];
-    const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
-
+    const [staffs, setStaffs] = useState([]);
+    
     useEffect(() => {
         axios
             .get(`/react/question/${ id }`)
@@ -28,73 +32,89 @@ function Show() {
             });
             
         axios
-            .get(`/react/images/${ id }`)
+            .get("/react/all/staffs")
             .then(response => {
-                setImages(response.data);
-            }).catch(error => {
-                console.log(error);
-            });
-            
-        axios
-            .get(`/react/related/documents/${ id }`)
-            .then(response => {
-                setDocuments(response.data);
+                setStaffs(response.data);
             }).catch(error => {
                 console.log(error);
             });
     }, []);
     
-    const deleteConfirm = () => {
-        if (confirm('データが削除されます。\nよろしいですか？')) {
-            document.getElementById('delete').submit();
+    let set = 0;
+    const handleSubmit = () => {
+        // フォーム送信と重複保存の防止
+        if (set === 0) {
+            document.getElementById('link').submit();
+            set=1;
         } else {
-            window.alert('キャンセルしました');
             return false;
         }
     };
     
-    return (
-        <div className="container">
-            <div className="title">
-                <h1>質問詳細</h1>
-            </div>
+    let success_message;
+    if (parameter[0] === "link") {
+        if (parameter[1] === "success") {
+            success_message = (
+                <Alert
+                    variant="outlined"
+                    severity="success"
+                    sx={{
+                        margin: "0 auto",
+                        width: "70%",
+                    }}
+                >
+                    <AlertTitle>Success</AlertTitle>
+                    記事への紐付けに成功しました。
+                </Alert>
+            );
+        }
+    }
     
-            <Parameters 
+    return (
+        <div class="container">
+            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 2 }}>
+                <Link underline="hover" to="/">
+                    HOME
+                </Link>
+                
+                <Link underline="hover" to="/mentor/top">
+                    メンタートップ
+                </Link>
+                
+                <Link underline="hover" to="/links/question/index">
+                    質問から紐付け（一覧）
+                </Link>
+                
+                <Typography color="text.primary">
+                    質問から紐付け（詳細）
+                </Typography>
+            </Breadcrumbs>
+            
+            { success_message }
+            
+            <Parameters
                 category={ categories[question.category] }
                 topic={ topics[question.topic] }
                 curriculum_number={ question.curriculum_number }
                 user_id={ question.user_id }
                 check={ question.check }
+                question={ question.question }
+                comment={ question.comment }
+                staffs={ staffs }
             />
             
-            <div className="table_q_detail">
-                <Question 
-                    count={ images.filter(v=>v).length }
-                    images={ images }
-                    question={ question.question }
-                />
-                
-                <Comment 
-                    comment={ question.comment }
-                />
-            </div>
-    
-            <div>
-                <div className="title">
-                    <h1>関連記事</h1>
-                    <a href={ `/links/question/` + question.id }>編集する</a>
-                </div>
-                <Documents 
-                    documents={ documents }
-                />
-            </div>
+            <Links
+                id={ id }
+                attach_id={ attach_id }
+                setAttachId={ setAttachId }
+                detach_id={ detach_id }
+                setDetachId={ setDetachId }
+                csrf_token={ csrf_token }
+                handleSubmit={ handleSubmit }
+                staffs={ staffs }
+            />
         </div>
     );
 }
 
-export default Show;
-
-if (document.getElementById('Question_mentor_show')) {
-    ReactDOM.render(<Show />, document.getElementById('Question_mentor_show'));
-}
-
+export default Index;

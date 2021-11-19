@@ -103,7 +103,7 @@ function Show() {
                 </form>
             </Typography>
     
-            <Parameters 
+            <Parameters
                 category={ categories[question.category] }
                 topic={ topics[question.topic] }
                 curriculum_number={ question.curriculum_number }

@@ -12,5 +12,4 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 require('./components/Route');
-require('./components/Mentor/Link/Index');
 require('./components/Mentor/User/Public');

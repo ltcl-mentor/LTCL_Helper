@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -61,7 +62,7 @@ function Icon(props) {
                 </MenuItem>
                 
                 <MenuItem onClick={handleClose}>
-                    <a className="dropdown-item" href="/history">質問閲覧履歴</a>
+                    <Link to="/history">質問閲覧履歴</Link>
                 </MenuItem>
             </Menu>
         </div>

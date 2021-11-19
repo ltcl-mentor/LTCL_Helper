@@ -12,6 +12,9 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Box from '@material-ui/core/Box';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 
 function Document() {
     const parameter = useLocation().search.substr(1).split('=');
@@ -56,21 +59,27 @@ function Document() {
                     <Typography sx={{ color: 'text.secondary' }}>{ documents.filter(document => document.user_id == staff.id).length }件</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography>
+                    <List>
                         { documents.map((document) => {
                         if (document.user_id === staff.id) {
                                 return (
-                                    <div className="document">
-                                        ・<Link to={ `/documents/` + document.id }>{ document.title }</Link><br/>
+                                    <ListItem
+                                        key={ document.id }
+                                        role="listitem"
+                                        button
+                                    >
+                                        <Link to={ `/documents/` + document.id }>
+                                            <ListItemText primary={ document.title } />
+                                        </Link>
                                         { document.beginner === 1 ? <Chip variant="outlined" color="success" label="初心者向け" /> : "" }
                                         { document.amature === 1 ? <Chip variant="outlined" color="primary" label="中級者向け" /> : "" }
                                         { document.master === 1 ? <Chip variant="outlined" color="secondary" label="上級者向け" /> : "" }
                                         { document.all === 1 ? <Chip variant="outlined" color="error" label="全員向け" /> : "" }
-                                    </div>
+                                    </ListItem>
                                 );
                             }
                         })}
-                    </Typography>
+                    </List>
                 </AccordionDetails>
             </Accordion>
         );

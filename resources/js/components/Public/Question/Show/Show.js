@@ -22,6 +22,14 @@ function Show() {
 
     useEffect(() => {
         axios
+            .post(`/questions/${ id }`)
+            .then(response => {
+                
+            }).catch(error => {
+                console.log(error);
+            });
+        
+        axios
             .get(`/react/checked/question/${ id }`)
             .then(response => {
                 setQuestion(response.data);

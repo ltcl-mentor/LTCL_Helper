@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import axios from "axios";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {Link} from 'react-router-dom';
 
 import Bar from './Layout/Bar';
+import History from './Public/History/History';
 import Home from './Public/Home/Home';
 import PublicDocumentIndex from './Public/Document/Index/Index';
 import PublicQuestionIndex from './Public/Question/Index/Index';
@@ -23,6 +23,7 @@ import QuestionShow from './Mentor/Question/Show/Show';
 import QuestionCreate from './Mentor/Question/Create/Create';
 import QuestionEdit from './Mentor/Question/Edit/Edit';
 import LinkFromQuestionIndex from './Mentor/Link/fromQuestion/Index/Index';
+import LinkFromQuestionShow from './Mentor/Link/fromQuestion/Show/Show';
 import LinkFromDocumentIndex from './Mentor/Link/fromDocument/Index/Index';
 import LinkFromDocumentShow from './Mentor/Link/fromDocument/Show/Show';
 
@@ -45,6 +46,7 @@ function Router() {
         user_links = (
             <Switch>
                 <Route path="/" exact component={ Home }/>
+                <Route path="/history" component={ History }/>
                 <Route path="/public/documents/index" component={ PublicDocumentIndex }/>
                 <Route path="/public/questions/index" component={ PublicQuestionIndex }/>
                 <Route path="/public/questions/create" component={ PublicQuestionCreate }/>
@@ -52,7 +54,6 @@ function Router() {
                 <Route path="/search/condition" component={ Condition }/>
                 <Route path="/search/freeword" component={ Freeword }/>
                 <Route path="/contact" component={ Contact }/>
-                
             </Switch>
         );
         
@@ -69,6 +70,7 @@ function Router() {
                     <Route path="/questions/:id/edit" component={ QuestionEdit }/>
                     <Route path="/questions/:id" component={ QuestionShow }/>
                     <Route path="/links/question/index" component={ LinkFromQuestionIndex }/>
+                    <Route path="/links/question/:id" component={ LinkFromQuestionShow }/>
                     <Route path="/links/document/index" component={ LinkFromDocumentIndex }/>
                     <Route path="/links/document/:id" component={ LinkFromDocumentShow }/>
                 </Switch>

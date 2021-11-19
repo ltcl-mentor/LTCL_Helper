@@ -27,6 +27,15 @@ class Question extends Model
         return $this->belongsToMany('App\User')->withTimestamps();
     }
     
+    public function getRelatedDocumentsIds(){
+        $related_documents = $this->documents()->get(['document_id'])->toArray();
+        foreach($related_documents as $document){
+            $related_document_ids[] = $document['document_id'];
+        }
+        
+        return $related_document_ids;
+    }
+    
     // 指定の質問に対してまだ紐付けがされていない参考記事を取得
     public function getUnrelatedDocuments()
     {

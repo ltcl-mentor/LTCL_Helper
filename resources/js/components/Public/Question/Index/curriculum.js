@@ -6,6 +6,9 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Box from '@material-ui/core/Box';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 
 function Curriculum(props) {
     const curriculum_topics = [
@@ -43,13 +46,23 @@ function Curriculum(props) {
                         <Typography sx={{ color: 'text.secondary' }}>{ props.questions.filter(question => question.topic == topic.id).length }件</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography>
+                        <List>
                             { props.questions.map((question) => {
                                 if (question.topic === topic.id) {
-                                    return <div className="question">・<Link to={ '/public/questions/' + question.id }>{ question.question }</Link></div>;
+                                    return (
+                                        <ListItem
+                                            key={ question.id }
+                                            role="listitem"
+                                            button
+                                        >
+                                            <Link to={ `/public/questions/` + question.id }>
+                                                <ListItemText primary={ question.question } />
+                                            </Link>
+                                        </ListItem>
+                                    );
                                 }
                             })}
-                        </Typography>
+                        </List>
                     </AccordionDetails>
                 </Accordion>
             </Box>

@@ -7,6 +7,9 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Box from '@material-ui/core/Box';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 
 function Portfolio() {
     const [questions, setQuestions] = useState([]);
@@ -50,17 +53,38 @@ function Portfolio() {
                         <Typography sx={{ color: 'text.secondary' }}>公開：{ questions.filter(question => question.topic == topic.id && question.check === 1).length }、非公開：{ questions.filter(question => question.topic == topic.id && question.check === 0).length }</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography>
+                        <List>
                             { questions.map((question) => {
                                 if (question.topic === topic.id) {
                                     if (question.check === 1) {
-                                        return <div className="question">・<Link to={ `/questions/` + question.id }>{ question.question }</Link></div>;
+                                        return (
+                                            <ListItem
+                                                key={ question.id }
+                                                role="listitem"
+                                                button
+                                            >
+                                                <Link to={ `/public/questions/` + question.id }>
+                                                    <ListItemText primary={ question.question } />
+                                                </Link>
+                                            </ListItem>
+                                        );
                                     } else {
-                                        return <div className="question">・（非公開）<Link to={ `/questions/` + question.id }>{ question.question }</Link></div>;
+                                        return (
+                                            <ListItem
+                                                key={ question.id }
+                                                role="listitem"
+                                                button
+                                            >
+                                                <Link to={ `/public/questions/` + question.id }>
+                                                    <Typography color="text.primary">（非公開）</Typography>
+                                                    <ListItemText primary={ question.question } />
+                                                </Link>
+                                            </ListItem>
+                                        );
                                     }
                                 }
                             })}
-                        </Typography>
+                        </List>
                     </AccordionDetails>
                 </Accordion>
             </Box>

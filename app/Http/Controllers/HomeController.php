@@ -22,7 +22,7 @@ class HomeController extends Controller
     }
     
     // 履歴画面表示
-    public function history()
+    public function getHistory()
     {
         $user = Auth::user();
         $questions = $user->questions()->get();
@@ -31,10 +31,7 @@ class HomeController extends Controller
             $question['whenClicked'] = $question->pivot->created_at;
         }
         
-        return view('history')->with([
-            'today' => date("Y-m-d H:i:s"),
-            'questions' => $questions,
-        ]);
+        return $questions;
     }
     
     

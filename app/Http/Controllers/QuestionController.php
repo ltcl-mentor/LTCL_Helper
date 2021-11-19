@@ -23,7 +23,7 @@ class QuestionController extends Controller
         return view('Public.Question.index');
     }
     
-    // 質問詳細画面表示
+    // 質問詳細画面表示時に閲覧を記録
     public function publicShow(Question $question)
     {
         // 質問閲覧履歴への記録
@@ -31,12 +31,6 @@ class QuestionController extends Controller
         
         // データベースの容量を考慮して履歴保持の期限は２１日間とする
         History::historyDelete(21);
-        
-        return view('Public.Question.show')->with([
-            'question_id' => $question->id,
-            'category' => $question->category,
-            'topic' => $question->topic,
-        ]);
     }
     
     public function publicCreate()
