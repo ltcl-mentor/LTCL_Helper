@@ -47,7 +47,14 @@ function Link(props) {
         {"id": 5, "topic": "PHP"},
         {"id": 6, "topic": "Laravel"},
         {"id": 7, "topic": "DB"},
-        {"id": 8, "topic": "Git&GitHub"}
+        {"id": 8, "topic": "Git&GitHub"},
+        {"id": 9, "topic": "マイグレーション"},
+        {"id": 10, "topic": "リレーション"},
+        {"id": 11, "topic": "Laravel拡張"},
+        {"id": 12, "topic": "画像処理"},
+        {"id": 13, "topic": "Heroku環境"},
+        {"id": 14, "topic": "API"},
+        {"id": 15, "topic": "デザイン"},
     ];
     
     useEffect(() => {
