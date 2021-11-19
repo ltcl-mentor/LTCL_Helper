@@ -30,7 +30,7 @@ function Index() {
                 </Typography>
             </Breadcrumbs>
             
-            <Box sx={{ width: '95%' }}>
+            <Box sx={{ width: '95%', marginTop: 3 }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={ value } onChange={ handleChange } aria-label="basic tabs example">
                         <Tab label="初心者向け" />

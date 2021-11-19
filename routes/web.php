@@ -65,8 +65,8 @@ Route::group(['middleware' => ['auth']], function () {
         
         // 質問と参考記事の紐付け
         // Route::get('/links/index', 'LinkController@index'); // 初期画面表示
-        Route::get('/links/document/{document}', 'LinkController@getDocumentToQuestions'); // 新規作成画面表示(記事：質問＝１：多)
-        Route::post('/links/document/{document}', 'LinkController@postDocumentToQuestions'); // 新規作成実行(記事：質問＝１：多)
+        // Route::get('/links/document/{document}', 'LinkController@getDocumentToQuestions'); // 新規作成画面表示(記事：質問＝１：多)
+        Route::post('/links/document/{document}', 'LinkController@linkQuestionsFromDocument'); // 新規作成実行(記事：質問＝１：多)
         Route::get('/links/question/{question}', 'LinkController@getQuestionToDocuments'); // 新規作成画面表示(記事：質問＝多：1)
         Route::post('/links/question/{question}', 'LinkController@postQuestionToDocuments'); // 新規作成実行(記事：質問＝多：1)
         
@@ -92,6 +92,7 @@ Route::group(['middleware' => ['auth']], function () {
         // Reactでのデータ受け渡し
         Route::get('react/all/questions', 'ReactController@getAllQuestions'); // 全質問受け渡し
         Route::get('react/question/{question}', 'ReactController@getQuestion'); // 個別質問データの受け渡し
+        Route::get('react/questions/{document}', 'LinkController@getQuestionsFromDocument'); // 個別に記事に関する質問データの受け渡し
         // Route::get('react/unapproved/questions', 'ReactController@getUnapprovedQuestions'); // 未承認質問受け渡し（未使用？）
         Route::get('react/curriculum/questions', 'ReactController@getCurriculumQuestions'); // カリキュラム範囲の質問受け渡し
         Route::get('react/portfolio/questions', 'ReactController@getPortfolioQuestions'); // 成果物範囲の質問受け渡し
@@ -100,7 +101,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('react/related/questions/{document}', 'ReactController@getRelatedQuestions'); // 記事に紐づいている質問の受け渡し
         Route::get('react/all/staffs', 'ReactController@getAllStaffs'); // 全管理者受け渡し
         Route::get('react/id', 'ReactController@getUserId'); // ログインユーザーid受け渡し
-        
     });
     
     Route::get('/{any}', function(){

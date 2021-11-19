@@ -17,6 +17,15 @@ class Document extends Model
         return $this->belongsToMany('App\Question');
     }
     
+    public function getRelatedQuestionsIds(){
+        $related_questions = $this->questions()->get(['question_id'])->toArray();
+        foreach($related_questions as $question){
+            $related_question_ids[] = $question['question_id'];
+        }
+        
+        return $related_question_ids;
+    }
+    
     public function getUnrelatedQuestions()
     {
         $related_question_ids = $this->questions()->select('question_id')->get();

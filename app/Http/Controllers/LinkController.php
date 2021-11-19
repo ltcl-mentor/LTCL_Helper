@@ -16,7 +16,7 @@ class LinkController extends Controller
     }
     
     // 新規作成画面表示(記事：質問＝１：多)
-    public function getDocumentToQuestions(Document $document, Question $question)
+    public function getQuestionsFromDocument(Document $document, Question $question)
     {
         $related_questions = $document->questions()->get();
 
@@ -27,26 +27,38 @@ class LinkController extends Controller
             $unrelated_questions = $document->getUnrelatedQuestions();
         }
         
-        return view('Mentor.Link.documentToQuestions')->with([
-            'document' => $document,
-            'related_questions' => $related_questions,
-            'unrelated_questions' => $unrelated_questions,
-            'topic' => Question::$topic,
-        ]);
+        return [ "related_questions" => $related_questions, "unrelated_questions" => $unrelated_questions];
     }
     
     // 新規作成実行(記事：質問＝１：多)
-    public function postDocumentToQuestions(Request $request,Document $document)
+    public function linkQuestionsFromDocument(Request $request,Document $document)
     {
+        // 現在指定の記事にリレーションされている質問のidを取得し、配列に変換
+        $related_question_ids = $document->getRelatedQuestionsIds();
+        
         if($request['detach_id']){
-            $document->questions()->detach($request['detach_id']);
+            // リクエストの"detach_id"の文字列を配列に変換
+            $request_detach_id = explode(",", $request['detach_id']);
+            
+            // detachする質問の特定
+            // リクエストの"detach_id"に含まれている、リレーション質済み質問のidを取得
+            $detach_id = array_intersect($request_detach_id, $related_question_ids);
+            // dd($detach_id);
+            $document->questions()->detach($detach_id);
         }
         
         if($request['attach_id']){
-            $document->questions()->attach($request['attach_id']);
+            // リクエストの"detach_id"の文字列を配列に変換
+            $request_attach_id = explode(",", $request['attach_id']);
+            
+            // attachする質問の特定
+            // リクエストの"attach_id"の中で、まだリレーションされていない質問のidを取得
+            $attach_id = array_diff($request_attach_id, $related_question_ids);
+        
+            $document->questions()->attach($attach_id);
         }
         
-        return redirect('/links/index?link=success');
+        return redirect('/links/document/'. $document->id .'?link=success');
     }
     
     

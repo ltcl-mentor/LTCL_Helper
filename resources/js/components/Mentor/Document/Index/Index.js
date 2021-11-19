@@ -81,7 +81,7 @@ function Document() {
         if (parameter[1] === "success") {
             success_message = (
                 <Alert
-                variant="outlined"
+                    variant="outlined"
                     severity="success"
                     sx={{
                         margin: "0 auto",

@@ -13,8 +13,6 @@ function Documents(props) {
     const [expanded, setExpanded] = React.useState(false);
     const targets = ["beginner", "amature", "master"];
     
-    console.log(targets[props.target]);
-    
     useEffect(() => {
         axios
             .get("/react/all/documents")
@@ -39,55 +37,53 @@ function Documents(props) {
     
     const list = staffs.map((staff) => {
         return (
-            <div className="content">
-                <Accordion expanded={ expanded === staff.id } onChange={ handleChange(staff.id) }>
-                    <AccordionSummary
-                        expandIcon={ <ExpandMoreIcon /> }
-                        aria-controls="panel1bh-content"
-                        id="panel1bh-header"
-                    >
-                        <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                            { staff.name }
-                        </Typography>
-                        <Typography sx={{ color: 'text.secondary' }}>
-                            { props.target === 0 ? documents.filter(document => document.user_id == staff.id && document.beginner).length + `件` : "" }
-                            { props.target === 1 ? documents.filter(document => document.user_id == staff.id && document.amature).length + `件` : "" }
-                            { props.target === 2 ? documents.filter(document => document.user_id == staff.id && document.master).length + `件` : "" }
-                            { props.target === 3 ? documents.filter(document => document.user_id == staff.id && document.all).length + `件` : "" }
-                        </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
-                            { documents.map((document) => {
-                                if (document.user_id === staff.id) {
-                                    switch(props.target) {
-                                        case 0:
-                                            if (document.beginner) {
-                                                return <div  className="document">・<Link to={ `/links/document/`+document.id }>{ document.title }</Link></div>;
-                                            }
-                                            break;
-                                        case 1:
-                                            if (document.amature) {
-                                                return <div  className="document">・<Link to={ `/links/document/`+document.id }>{ document.title }</Link></div>;
-                                            }
-                                            break;
-                                        case 2:
-                                            if (document.master) {
-                                                return <div  className="document">・<Link to={ `/links/document/`+document.id }>{ document.title }</Link></div>;
-                                            }
-                                            break;
-                                        case 3:
-                                            if (document.all) {
-                                                return <div  className="document">・<Link to={ `/links/document/`+document.id }>{ document.title }</Link></div>;
-                                            }
-                                            break;
-                                    }
+            <Accordion expanded={ expanded === staff.id } onChange={ handleChange(staff.id) } sx={{ marginTop: 3 }}>
+                <AccordionSummary
+                    expandIcon={ <ExpandMoreIcon /> }
+                    aria-controls="panel1bh-content"
+                    id="panel1bh-header"
+                >
+                    <Typography sx={{ width: '33%', flexShrink: 0 }}>
+                        { staff.name }
+                    </Typography>
+                    <Typography sx={{ color: 'text.secondary' }}>
+                        { props.target === 0 ? documents.filter(document => document.user_id == staff.id && document.beginner).length + `件` : "" }
+                        { props.target === 1 ? documents.filter(document => document.user_id == staff.id && document.amature).length + `件` : "" }
+                        { props.target === 2 ? documents.filter(document => document.user_id == staff.id && document.master).length + `件` : "" }
+                        { props.target === 3 ? documents.filter(document => document.user_id == staff.id && document.all).length + `件` : "" }
+                    </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        { documents.map((document) => {
+                            if (document.user_id === staff.id) {
+                                switch(props.target) {
+                                    case 0:
+                                        if (document.beginner) {
+                                            return <div  className="document">・<Link to={ `/links/document/` + document.id }>{ document.title }</Link></div>;
+                                        }
+                                        break;
+                                    case 1:
+                                        if (document.amature) {
+                                            return <div  className="document">・<Link to={ `/links/document/` + document.id }>{ document.title }</Link></div>;
+                                        }
+                                        break;
+                                    case 2:
+                                        if (document.master) {
+                                            return <div  className="document">・<Link to={ `/links/document/` + document.id }>{ document.title }</Link></div>;
+                                        }
+                                        break;
+                                    case 3:
+                                        if (document.all) {
+                                            return <div  className="document">・<Link to={ `/links/document/` + document.id }>{ document.title }</Link></div>;
+                                        }
+                                        break;
                                 }
-                            })}
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion>
-            </div>
+                            }
+                        })}
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
         );
     });
     
