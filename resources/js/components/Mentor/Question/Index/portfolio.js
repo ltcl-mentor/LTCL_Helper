@@ -50,38 +50,26 @@ function Portfolio() {
                         <Typography sx={{ width: '33%', flexShrink: 0 }}>
                             { topic.topic }
                         </Typography>
-                        <Typography sx={{ color: 'text.secondary' }}>公開：{ questions.filter(question => question.topic == topic.id && question.check === 1).length }、非公開：{ questions.filter(question => question.topic == topic.id && question.check === 0).length }</Typography>
+                        <Typography sx={{ color: 'text.secondary' }}>
+                            公開：{ questions.filter(question => question.topic == topic.id && (question.check === 1 || question.check === true)).length }、非公開：{ questions.filter(question => question.topic == topic.id && (question.check === 0 || question.check === false)).length }
+                        </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <List>
                             { questions.map((question) => {
                                 if (question.topic === topic.id) {
-                                    if (question.check === 1) {
-                                        return (
+                                    return (
+                                        <Link to={ `/questions/` + question.id }>
                                             <ListItem
                                                 key={ question.id }
                                                 role="listitem"
                                                 button
                                             >
-                                                <Link to={ `/public/questions/` + question.id }>
-                                                    <ListItemText primary={ question.question } />
-                                                </Link>
+                                                { question.check === 1 || question.check === true ? <Typography color="text.primary">（非公開）</Typography> : "" }
+                                                <ListItemText primary={ question.question } />
                                             </ListItem>
-                                        );
-                                    } else {
-                                        return (
-                                            <ListItem
-                                                key={ question.id }
-                                                role="listitem"
-                                                button
-                                            >
-                                                <Link to={ `/public/questions/` + question.id }>
-                                                    <Typography color="text.primary">（非公開）</Typography>
-                                                    <ListItemText primary={ question.question } />
-                                                </Link>
-                                            </ListItem>
-                                        );
-                                    }
+                                        </Link>
+                                    );
                                 }
                             })}
                         </List>

@@ -25,7 +25,7 @@ class College extends Model
         
         // オンライン自習室担当の代入
         if(count($datas['values'][$date]) < 30){
-            $college_datas['zoom'][] = "データを取得できませんでした。スタッフに直接ご確認ください。";
+            $college_datas['zoom'][] = "データ取得失敗。\nスタッフにご確認ください。";
         }elseif(count($datas['values'][$date]) === 30){
             $college_datas['zoom'][] = $datas['values'][$date][29] ?: null;
         }else{

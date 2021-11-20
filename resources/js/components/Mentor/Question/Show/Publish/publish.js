@@ -21,7 +21,7 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
-  height: '70%',
+  height: '90%',
   overflow: 'scroll',
 };
 
@@ -43,7 +43,7 @@ function Publish(props) {
     };
     
     let publishBtn;
-    if (props.question.check === 0) {
+    if (props.question.check === 0 || props.question.check === false) {
         publishBtn = (
             <Typography align="center" onClick={ handleOpen }>
                 <Button variant="contained" color="success" startIcon={ <PublicIcon /> }>公開する</Button>

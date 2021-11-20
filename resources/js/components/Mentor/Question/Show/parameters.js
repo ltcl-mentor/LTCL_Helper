@@ -31,7 +31,7 @@ function Parameters(props) {
     }
     
     let isPublic;
-    if (props.check === 0) {
+    if (props.check === 0 || props.check === false) {
         isPublic = "非公開";
     } else {
         isPublic = "公開";

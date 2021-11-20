@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Question;
 use App\Document;
 use App\User;
+use App\Student;
 use App\Image;
 use App\Info;
 use App\Weather;
@@ -105,11 +106,17 @@ class ReactController extends Controller
     }
     
     
-    // staff関連
+    // ユーザ関連
     // 全管理者受け渡し
     public function getAllStaffs()
     {
         return User::where('is_admin','staff')->get();
+    }
+    
+    // 全受講生受け渡し
+    public function getAllStudents()
+    {
+        return Student::orderBy('password', 'asc')->get();
     }
     
     

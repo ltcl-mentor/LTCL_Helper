@@ -47,15 +47,15 @@ function Questions(props) {
                         { questions.map((question) => {
                             if (question.topic === topic.id) {
                                 return (
-                                    <ListItem
-                                        key={ question.id }
-                                        role="listitem"
-                                        button
-                                    >
-                                        <Link to={ `/links/question/` + question.id }>
+                                    <Link to={ `/links/question/` + question.id }>
+                                        <ListItem
+                                            key={ question.id }
+                                            role="listitem"
+                                            button
+                                        >
                                             <ListItemText primary={ question.question } />
-                                        </Link>
-                                    </ListItem>
+                                        </ListItem>
+                                    </Link>
                                 );
                             }
                         })}

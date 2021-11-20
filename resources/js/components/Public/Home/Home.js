@@ -69,6 +69,24 @@ function Home() {
                 );
             }
             break;
+            
+        case "info":
+            if (parameter[1] === "success") {
+                success_message = (
+                    <Alert
+                        variant="outlined"
+                        severity="success"
+                        sx={{
+                            margin: "0 auto",
+                            width: "70%",
+                        }}
+                    >
+                        <AlertTitle>Success</AlertTitle>
+                        お知らせの投稿に成功しました。
+                    </Alert>
+                );
+            }
+            break;
     }
     
     return (

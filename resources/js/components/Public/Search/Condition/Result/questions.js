@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
+import {Link} from 'react-router-dom';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -32,13 +33,13 @@ function Questions(props) {
             <div>
                 <Divider light />
                 
-                <ListItem button>
-                    <a href={ '/questions/' + question.id + '/public' } className="question" key={ question.id } target="_blank">
+                <Link to={ `/public/questions/` + question.id } target="_blank">
+                    <ListItem button>
                         <ListItemText
                             primary={ question.question }
                         />
-                    </a>
-                </ListItem>
+                    </ListItem>
+                </Link>
                 
                 <Divider />
             </div>

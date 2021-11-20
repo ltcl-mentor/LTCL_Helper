@@ -25,7 +25,6 @@ function Calendar() {
     
     let info;
     if ( (date.getMonth() >= today.getMonth() - 1) && (date.getMonth() <= today.getMonth() + 1) ) {
-        
         info = (
             <Info 
                 collegeInfo={ collegeInfo }
@@ -34,7 +33,6 @@ function Calendar() {
         );
         
     } else {
-        
         info = (
             <Typography align="center" variant="h7" component="div" sx={{ paddingTop: 2 }}>
                 確認可能なのは先月、今月、来月の情報のみです。<br />

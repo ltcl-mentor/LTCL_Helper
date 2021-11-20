@@ -84,7 +84,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/questions/{question}/delete', 'QuestionController@delete'); // 削除実行
         
         // ユーザー
-        Route::get('/users/index', 'UserController@index'); // 初期画面表示
+        // Route::get('/users/index', 'UserController@index'); // 初期画面表示
         Route::get('users/admin/register', 'Auth\RegisterController@showRegistrationForm')->name('register'); // 管理者の新規作成画面表示
         Route::post('users/admin/register', 'Auth\RegisterController@register'); // 管理者の新規作成実行
         Route::get('/users/public/register', 'Auth\RegisterController@showPublicRegistrationForm'); // 受講生の新規作成画面表示
@@ -103,6 +103,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('react/documents/{question}', 'LinkController@getDocumentsFromQuestion'); // 個別に質問に関する記事データの受け渡し
         Route::get('react/related/questions/{document}', 'ReactController@getRelatedQuestions'); // 記事に紐づいている質問の受け渡し
         Route::get('react/all/staffs', 'ReactController@getAllStaffs'); // 全管理者受け渡し
+        Route::get('react/all/students', 'ReactController@getAllStudents'); // 全受講生受け渡し
         Route::get('react/id', 'ReactController@getUserId'); // ログインユーザーid受け渡し
     });
     

@@ -44,7 +44,9 @@ function Weather() {
     if (weather.current) {
         weather_data = (
             <div>
-                <Typography align="center" variant="h5" component="div" >渋谷の天気情報</Typography>
+                <Typography align="center" variant="h5" component="div" sx={{ marginTop: 1 }}>
+                    渋谷の天気情報
+                </Typography>
                 
                 <Typography align="center" variant="h6" component="div" sx={{ marginTop: 2 }}>
                     現在の天気

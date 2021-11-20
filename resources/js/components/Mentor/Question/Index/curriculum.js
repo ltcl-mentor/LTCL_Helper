@@ -58,32 +58,18 @@ function Curriculum() {
                         <List>
                             { questions.map((question) => {
                                 if (question.topic === topic.id) {
-                                    if (question.check === 1) {
-                                        return (
+                                    return (
+                                        <Link to={ `/questions/` + question.id }>
                                             <ListItem
                                                 key={ question.id }
                                                 role="listitem"
                                                 button
                                             >
-                                                <Link to={ `/public/questions/` + question.id }>
-                                                    <ListItemText primary={ question.question } />
-                                                </Link>
+                                                { question.check === 1 || question.check === true ? <Typography color="text.primary">（非公開）</Typography> : "" }
+                                                <ListItemText primary={ question.question } />
                                             </ListItem>
-                                        );
-                                    } else {
-                                        return (
-                                            <ListItem
-                                                key={ question.id }
-                                                role="listitem"
-                                                button
-                                            >
-                                                <Link to={ `/public/questions/` + question.id }>
-                                                    <Typography color="text.primary">（非公開）</Typography>
-                                                    <ListItemText primary={ question.question } />
-                                                </Link>
-                                            </ListItem>
-                                        );
-                                    }
+                                        </Link>
+                                    );
                                 }
                             })}
                         </List>

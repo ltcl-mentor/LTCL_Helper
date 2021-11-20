@@ -48,7 +48,7 @@ class HomeController extends Controller
     {
         $input = $request['info'];
         $info->fill($input)->save();
-        return redirect('/');
+        return redirect('/?info=success');
     }
     
     // お知らせ削除処理

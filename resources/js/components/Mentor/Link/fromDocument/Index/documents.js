@@ -59,67 +59,20 @@ function Documents(props) {
                     <List>
                         { documents.map((document) => {
                             if (document.user_id === staff.id) {
-                                switch(props.target) {
-                                    case 0:
-                                        if (document.beginner) {
-                                            return (
-                                                <ListItem
-                                                    key={ document.id }
-                                                    role="listitem"
-                                                    button
-                                                >
-                                                    <Link to={ `/links/document/` + document.id }>
-                                                        <ListItemText primary={ document.title } />
-                                                    </Link>
-                                                </ListItem>
-                                            );
-                                        }
-                                        break;
-                                    case 1:
-                                        if (document.amature) {
-                                            return (
-                                                <ListItem
-                                                    key={ document.id }
-                                                    role="listitem"
-                                                    button
-                                                >
-                                                    <Link to={ `/links/document/` + document.id }>
-                                                        <ListItemText primary={ document.title } />
-                                                    </Link>
-                                                </ListItem>
-                                            );
-                                        }
-                                        break;
-                                    case 2:
-                                        if (document.master) {
-                                            return (
-                                                <ListItem
-                                                    key={ document.id }
-                                                    role="listitem"
-                                                    button
-                                                >
-                                                    <Link to={ `/links/document/` + document.id }>
-                                                        <ListItemText primary={ document.title } />
-                                                    </Link>
-                                                </ListItem>
-                                            );
-                                        }
-                                        break;
-                                    case 3:
-                                        if (document.all) {
-                                            return (
-                                                <ListItem
-                                                    key={ document.id }
-                                                    role="listitem"
-                                                    button
-                                                >
-                                                    <Link to={ `/links/document/` + document.id }>
-                                                        <ListItemText primary={ document.title } />
-                                                    </Link>
-                                                </ListItem>
-                                            );
-                                        }
-                                        break;
+                                const targets = [document.beginner, document.amature, document.master, document.all];
+                                
+                                if (targets[props.target]) {
+                                    return (
+                                        <Link to={ `/links/document/` + document.id }>
+                                            <ListItem
+                                                key={ document.id }
+                                                role="listitem"
+                                                button
+                                            >
+                                                <ListItemText primary={ document.title } />
+                                            </ListItem>
+                                        </Link>
+                                    );
                                 }
                             }
                         })}

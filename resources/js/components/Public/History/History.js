@@ -63,16 +63,16 @@ function History() {
                                     const time = question.whenClicked.substr(11).split('.');
                                     
                                     return (
-                                        <ListItem
-                                            key={ question.id }
-                                            role="listitem"
-                                            button
-                                        >
-                                            <Link to={ `/public/questions/` + question.id }>
+                                        <Link to={ `/public/questions/` + question.id }>
+                                            <ListItem
+                                                key={ question.id }
+                                                role="listitem"
+                                                button
+                                            >
                                                 <ListItemText primary={ question.question } />
-                                            </Link>
-                                            <ListItemText primary={ time[0] } />
-                                        </ListItem>
+                                                <ListItemText primary={ time[0] } />
+                                            </ListItem>
+                                        </Link>
                                     );
                                 }
                             }) }
