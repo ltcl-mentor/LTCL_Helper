@@ -6,24 +6,15 @@ function Result(props) {
     let results;
     if (props.isSearchButtonClicked) {
         results = (
-            <div className="box">
-                {/*<div className="empty">
-                    
-                    <div className="circle1"></div>
-                    <div className="circle2"></div>
-                    <div className="circle3"></div>
-                </div>*/}
-                <div className="space"></div>
-                <div className="result_box">
-                    <Questions
-                        category={ props.category }
-                        topic={ props.topic }
-                        categories={ props.categories }
-                        topics={ props.topics }
-                        curriculum_number={ props.curriculum_number }
-                        keyword={ props.keyword }
-                    />
-                </div>
+            <div>
+                <Questions
+                    category={ props.category }
+                    topic={ props.topic }
+                    categories={ props.categories }
+                    topics={ props.topics }
+                    curriculum_number={ props.curriculum_number }
+                    keyword={ props.keyword }
+                />
             </div>
         );
     } else {

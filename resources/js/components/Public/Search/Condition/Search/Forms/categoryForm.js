@@ -14,14 +14,13 @@ function Category(props) {
     return (
         <div className="container">
             { props.setCategory(category) }
-            <div className="category_box">
-                <FormControl component="fieldset">
-                    <RadioGroup row aria-label="category" name="category" value={ category } onChange={ (event) => handleCategory(event) }>
-                        <FormControlLabel value={0} control={<Radio />} label="カリキュラム" />
-                        <FormControlLabel value={1} control={<Radio />} label="成果物" />
-                    </RadioGroup>
-                </FormControl>
-            </div>
+            
+            <FormControl component="fieldset">
+                <RadioGroup row aria-label="category" name="category" value={ category } onChange={ (event) => handleCategory(event) }>
+                    <FormControlLabel value={0} control={<Radio />} label="カリキュラム" />
+                    <FormControlLabel value={1} control={<Radio />} label="成果物" />
+                </RadioGroup>
+            </FormControl>
         </div>
     );
 }

@@ -114,7 +114,7 @@ function Condition() {
             case 2:
                 return (
                     <div>
-                        <div>※条件の追加が不要な場合はNextを押してください</div>
+                        <p>※条件の追加が不要な場合はNextを押してください</p>
                         
                         <Addition 
                             category={ category }

@@ -6,15 +6,10 @@ function Result(props) {
     
     return (
         <div className="container">
-           <div className="box">
-                <div className="space"></div>
-                <div className="result_box">
-                    <Questions
-                        searchType={ props.searchType }
-                        freeword={ props.freeword }
-                    />
-                </div>
-            </div> 
+            <Questions
+                searchType={ props.searchType }
+                freeword={ props.freeword }
+            />
         </div>
     );
 }
