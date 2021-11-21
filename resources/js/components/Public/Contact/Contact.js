@@ -5,6 +5,10 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
+import Paper from '@mui/material/Paper';
+import Input from '@mui/material/Input';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
 
 import Breadcrumbs from '../../Breadcrumbs';
 

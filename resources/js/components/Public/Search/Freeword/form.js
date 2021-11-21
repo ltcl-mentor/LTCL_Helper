@@ -7,6 +7,10 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import Paper from '@mui/material/Paper';
+import Input from '@mui/material/Input';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
 
 function Form(props) {
     const handleFreeword = (event) => {
@@ -44,12 +48,26 @@ function Form(props) {
                 </RadioGroup>
             </FormControl>
             
-            <TextareaAutosize
-                aria-label="empty textarea"
-                placeholder="検索ワードを入力してください。"
-                style={{ width: "100%" }}
-                onChange={ (event) => handleFreeword(event) }
-            />
+            <Paper
+                component="form"
+                sx={{
+                    p: '2px 4px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    width: "90%",
+                    minWidth: "350px",
+                    margin: "0 auto", 
+                }}
+            >
+                <Input
+                    sx={{ ml: 1, flex: 1 }}
+                    placeholder="検索ワードを入力してください。"
+                    onChange={ (event) => handleFreeword(event) }
+                />
+                <IconButton sx={{ p: '10px' }}>
+                    <SearchIcon />
+                </IconButton>
+            </Paper>
         </div>
     );
 }
