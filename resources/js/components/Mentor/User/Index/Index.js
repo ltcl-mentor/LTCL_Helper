@@ -2,20 +2,23 @@ import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import {Link} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
-import Button from '@mui/material/Button';
-import DeleteIcon from '@material-ui/icons/Delete';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Table from '@material-ui/core/Table';
-import TableHead from '@mui/material/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import {useLocation} from 'react-router-dom';
+import Box from '@material-ui/core/Box';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+
+import Alert from '../../../Alert';
+import Students from './students';
+import Admins from './admins';
 
 function Index() {
+    const parameter = useLocation().search.substr(1).split('=');
     const [staffs, setStaffs] = useState([]);
     const [students, setStudents] = useState([]);
+    const [delete_user_id, setDeleteUserId] = useState();
     const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
+    const [value, setValue] = React.useState(0);
     
     useEffect(() => {
         axios
@@ -35,17 +38,32 @@ function Index() {
             });
     }, []);
     
-    const deleteConfirm = () => {
-        if (confirm('データが削除されます。\nよろしいですか？')) {
-            document.getElementById('delete').submit();
-        } else {
-            window.alert('キャンセルしました');
-            return false;
+    useEffect(() => {
+        if (delete_user_id) {
+            if (confirm('データが削除されます。\nよろしいですか？')) {
+                document.getElementById('delete').submit();
+            } else {
+                window.alert('キャンセルしました');
+                return false;
+            }
         }
+    }, [delete_user_id]);
+    
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
     };
+    
+    let tab_content;
+    if (value === 0) {
+        tab_content = (<Students students={ students } setDeleteUserId={ setDeleteUserId }/>);
+    } else {
+        tab_content = (<Admins staffs={ staffs } setDeleteUserId={ setDeleteUserId }/>);
+    }
     
     return (
         <div className="container">
+            <Alert type={ parameter[0] } status={ parameter[1] }/>
+            
             <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 3 }}>
                 <Link underline="hover" to="/">
                     HOME
@@ -60,88 +78,20 @@ function Index() {
                 </Typography>
             </Breadcrumbs>
             
-            <Typography
-                variant="h4"
-                component="div"
-                align="center"
-                sx={{
-                    marginBottom: 2,
-                }}
-            >
-                管理者一覧
-            </Typography>
+            <form action={ `/users/` + delete_user_id + `/delete` } method="post" id="delete">
+                <input type="hidden" name="_token" value={ csrf_token }/>
+            </form>
             
-            <Paper sx={{ margin: "0 auto", maxWidth: "700px" }}>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell align="center">ID</TableCell>
-                            <TableCell align="center">名前</TableCell>
-                            <TableCell align="center">削除</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        { staffs.map((staff) => {
-                            return (
-                                <TableRow>
-                                    <TableCell align="center" component="th" scope="row">{ staff.id }</TableCell>
-                                    <TableCell align="center">{ staff.name }</TableCell>
-                                    <TableCell align="center">
-                                        <form action={ `/users/` + staff.id + `/delete` } method="post" id="delete">
-                                            <input type="hidden" name="_token" value={ csrf_token }/>
-                                            <Button variant="contained" color="error" onClick={ deleteConfirm } startIcon={ <DeleteIcon /> }>削除する</Button>
-                                        </form>
-                                    </TableCell>
-                                </TableRow>
-                            );
-                        }) }
-                    </TableBody>
-                </Table>
-            </Paper>
+            <Box sx={{ marginTop: 3, borderBottom: 1, borderColor: 'divider' }}>
+                <Tabs value={ value } onChange={ handleChange } aria-label="basic tabs example">
+                    <Tab label="受講生一覧" />
+                    <Tab label="管理者一覧" />
+                </Tabs>
+            </Box>
             
-            <Typography
-                variant="h4"
-                component="div"
-                align="center"
-                sx={{
-                    marginTop: 3,
-                    marginBottom: 2,
-                }}
-            >
-                受講生一覧
-            </Typography>
-            
-            <Paper sx={{ margin: "0 auto", maxWidth: "800px" }}>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell align="center">ID</TableCell>
-                            <TableCell align="center">名前</TableCell>
-                            <TableCell align="center">パスワード</TableCell>
-                            <TableCell align="center">削除</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        { students.length !== 0 &&
-                            students.map((student) => {
-                                return (
-                                    <TableRow>
-                                        <TableCell align="center" component="th" scope="row">{ student.id }</TableCell>
-                                        <TableCell align="center">{ student.name }</TableCell>
-                                        <TableCell align="center">{ student.password }</TableCell>
-                                        <TableCell align="center">
-                                            <form action={ `/users/` + student.id + `/delete` } method="post" id="delete">
-                                                <input type="hidden" name="_token" value={ csrf_token }/>
-                                                <Button variant="contained" color="error" onClick={ deleteConfirm } startIcon={ <DeleteIcon /> }>削除する</Button>
-                                            </form>
-                                        </TableCell>
-                                    </TableRow>
-                                );
-                            })
-                        }
-                    </TableBody>
-                </Table>
-            </Paper>
+            <Box sx={{ marginTop: 3 }}>
+                { tab_content }
+            </Box>
         </div>
     );
 }

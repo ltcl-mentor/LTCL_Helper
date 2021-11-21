@@ -21,6 +21,6 @@ class ContactController extends Controller
         
         Slack::sendMessage($message);
         
-        return redirect('/?contact=success');
+        return redirect('/?contact=created');
     }
 }

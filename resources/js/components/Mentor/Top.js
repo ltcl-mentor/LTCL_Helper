@@ -130,13 +130,13 @@ function Top() {
                     </Grid>
                     
                     <Grid item >
-                        <Link to="/users/admin/register">
+                        <Link to="/users/register/admin">
                             <Button variant="contained" color="error" startIcon={ <PersonAddIcon /> }>管理者の登録</Button>
                         </Link>
                     </Grid>
                     
                     <Grid item >
-                        <Link to="/users/public/register">
+                        <Link to="/users/register/public">
                             <Button variant="contained" color="error" startIcon={ <PersonAddAltIcon /> }>受講生の登録</Button>
                         </Link>
                     </Grid>

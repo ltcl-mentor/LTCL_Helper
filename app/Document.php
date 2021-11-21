@@ -19,6 +19,8 @@ class Document extends Model
     
     public function getRelatedQuestionsIds(){
         $related_questions = $this->questions()->get(['question_id'])->toArray();
+        $related_question_ids = [];
+        
         foreach($related_questions as $question){
             $related_question_ids[] = $question['question_id'];
         }

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {useLocation} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import axios from "axios";
 import {useParams} from 'react-router-dom';
@@ -8,10 +9,12 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Button from '@mui/material/Button';
 
+import Alert from '../../../Alert';
 import Parameters from './parameters';
 import Questions from './questions';
 
 function Document() {
+    const parameter = useLocation().search.substr(1).split('=');
     const { id } = useParams();
     const [doc, setDoc] = useState([]);
     const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
@@ -37,6 +40,8 @@ function Document() {
     
     return (
         <div className="container">
+            <Alert type={ parameter[0] } status={ parameter[1] }/>
+            
             <Breadcrumbs aria-label="breadcrumb">
                 <Link underline="hover" to="/">
                     HOME

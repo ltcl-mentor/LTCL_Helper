@@ -3,12 +3,10 @@ import {useLocation} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import axios from "axios";
 import {useParams} from 'react-router-dom';
-import Box from '@material-ui/core/Box';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@material-ui/core/Typography';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
 
+import Alert from '../../../../Alert';
 import Parameters from './parameters';
 import Links from './links';
 
@@ -41,27 +39,10 @@ function Index() {
         }
     };
     
-    let success_message;
-    if (parameter[0] === "link") {
-        if (parameter[1] === "success") {
-            success_message = (
-                <Alert
-                    variant="outlined"
-                    severity="success"
-                    sx={{
-                        margin: "0 auto",
-                        width: "70%",
-                    }}
-                >
-                    <AlertTitle>Success</AlertTitle>
-                    質問への紐付けに成功しました。
-                </Alert>
-            );
-        }
-    }
-    
     return (
         <div class="container">
+            <Alert type={ parameter[0] } status={ parameter[1] }/>
+            
             <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 2 }}>
                 <Link underline="hover" to="/">
                     HOME
@@ -79,8 +60,6 @@ function Index() {
                     記事から紐付け（詳細）
                 </Typography>
             </Breadcrumbs>
-            
-            { success_message }
             
             <Parameters 
                 title={ doc.title }

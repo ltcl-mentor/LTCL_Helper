@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import {useLocation} from 'react-router-dom';
 import axios from "axios";
 import {Link} from 'react-router-dom';
 import Accordion from '@material-ui/core/Accordion';
@@ -9,15 +8,12 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Chip from '@mui/material/Chip';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
 import Box from '@material-ui/core/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
 function Document() {
-    const parameter = useLocation().search.substr(1).split('=');
     const [documents, setDocuments] = useState([]);
     const [staffs, setStaffs] = useState([]);
     const [expanded, setExpanded] = React.useState(false);
@@ -47,7 +43,7 @@ function Document() {
     
     const document = staffs.map((staff) => {
         return (
-            <Accordion expanded={ expanded === staff.id } onChange={ handleChange(staff.id) }>
+            <Accordion expanded={ expanded === staff.id } onChange={ handleChange(staff.id) } sx={{ marginBottom: 3 }}>
                 <AccordionSummary
                     expandIcon={ <ExpandMoreIcon /> }
                     aria-controls="panel1bh-content"
@@ -85,25 +81,6 @@ function Document() {
         );
     });
     
-    let success_message;
-    if (parameter[0] === "document") {
-        if (parameter[1] === "success") {
-            success_message = (
-                <Alert
-                    variant="outlined"
-                    severity="success"
-                    sx={{
-                        margin: "0 auto",
-                        width: "70%",
-                    }}
-                >
-                    <AlertTitle>Success</AlertTitle>
-                    質問の投稿に成功しました。
-                </Alert>
-            );
-        }
-    }
-    
     return (
         <div className="container">
             <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
@@ -119,8 +96,6 @@ function Document() {
                     記事一覧
                 </Typography>
             </Breadcrumbs>
-            
-            { success_message }
             
             <Box sx={{ marginTop: 3 }}>
                 { document }

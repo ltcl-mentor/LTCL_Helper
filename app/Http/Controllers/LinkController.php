@@ -58,7 +58,17 @@ class LinkController extends Controller
             $document->questions()->attach($attach_id);
         }
         
-        return redirect('/links/document/'. $document->id .'?link=success');
+        if(count($detach_id) !== 0 && count($attach_id) !== 0){
+            $whitch_do = 'attached_and_detached';
+        }else if(count($detach_id) !== 0){
+            $whitch_do = 'detached';
+        }else if(count($attach_id) !== 0){
+            $whitch_do = 'attached';
+        }else{
+            $whitch_do = '';
+        }
+        
+        return redirect('/links/document/'. $document->id .'?link_from_document='. $whitch_do);
     }
     
     
@@ -104,6 +114,16 @@ class LinkController extends Controller
             $question->documents()->attach($attach_id);
         }
         
-        return redirect('/links/question/'. $question->id .'?link=success');
+        if(count($detach_id) !== 0 && count($attach_id) !== 0){
+            $whitch_do = 'attached_and_detached';
+        }else if(count($detach_id) !== 0){
+            $whitch_do = 'detached';
+        }else if(count($attach_id) !== 0){
+            $whitch_do = 'attached';
+        }else{
+            $whitch_do = '';
+        }
+        
+        return redirect('/links/question/'. $question->id .'?link_from_question='. $whitch_do);
     }
 }

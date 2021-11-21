@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import {Link} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Button from '@mui/material/Button';
@@ -8,6 +9,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
+import Alert from '../../../Alert';
 import Publish from './Publish/publish';
 import Parameters from './parameters';
 import Question from './question';
@@ -15,6 +17,7 @@ import Comment from './comment';
 import Documents from '../../../Public/Question/Show/documents';
 
 function Show() {
+    const parameter = useLocation().search.substr(1).split('=');
     const { id } = useParams();
     const [question, setQuestion] = useState([]);
     const [images, setImages] = useState([]);
@@ -60,6 +63,8 @@ function Show() {
     
     return (
         <div className="container">
+            <Alert type={ parameter[0] } status={ parameter[1] }/>
+            
             <Breadcrumbs aria-label="breadcrumb">
                 <Link underline="hover" to="/">
                     HOME

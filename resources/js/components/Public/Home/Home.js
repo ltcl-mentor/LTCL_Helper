@@ -4,10 +4,9 @@ import axios from "axios";
 import Card from '@mui/material/Card';
 import Typography from '@material-ui/core/Typography';
 import Box from '@mui/material/Box';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
 import Grid from '@mui/material/Grid';
 
+import Alert from '../../Alert';
 import Content from '../../Layout/side-menu/content';
 import Information from './information/information';
 import Clendar from './calendar/calendar';
@@ -32,67 +31,9 @@ function Home() {
             });
     }, []);
     
-    let success_message;
-    switch (parameter[0]) {
-        case "contact":
-            if (parameter[1] === "success") {
-                success_message = (
-                    <Alert
-                        variant="outlined"
-                        severity="success"
-                        sx={{
-                            margin: "0 auto",
-                            width: "70%",
-                        }}
-                    >
-                        <AlertTitle>Success</AlertTitle>
-                        お問い合わせの送信に成功しました。
-                    </Alert>
-                );
-            }
-            break;
-        
-        case "question":
-            if (parameter[1] === "success") {
-                success_message = (
-                    <Alert
-                        variant="outlined"
-                        severity="success"
-                        sx={{
-                            margin: "0 auto",
-                            width: "70%",
-                        }}
-                    >
-                        <AlertTitle>Success</AlertTitle>
-                        質問の投稿に成功しました。
-                    </Alert>
-                );
-            }
-            break;
-            
-        case "info":
-            if (parameter[1] === "success") {
-                success_message = (
-                    <Alert
-                        variant="outlined"
-                        severity="success"
-                        sx={{
-                            margin: "0 auto",
-                            width: "70%",
-                        }}
-                    >
-                        <AlertTitle>Success</AlertTitle>
-                        お知らせの投稿に成功しました。
-                    </Alert>
-                );
-            }
-            break;
-    }
-    
     return (
         <div className="container">
-        
-            { success_message }
+            <Alert type={ parameter[0] } status={ parameter[1] }/>
             
             <Box
                 sx={{

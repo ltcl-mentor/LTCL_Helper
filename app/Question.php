@@ -29,6 +29,8 @@ class Question extends Model
     
     public function getRelatedDocumentsIds(){
         $related_documents = $this->documents()->get(['document_id'])->toArray();
+        $related_document_ids = [];
+        
         foreach($related_documents as $document){
             $related_document_ids[] = $document['document_id'];
         }

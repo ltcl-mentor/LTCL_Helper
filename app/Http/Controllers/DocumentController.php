@@ -47,7 +47,8 @@ class DocumentController extends Controller
         }
         $document['user_id'] = Auth::id();
         $document->fill($request['document'])->save();
-        return redirect('/documents/index?document=success');
+        
+        return redirect('/documents/'. $document->id .'?document=created');
     }
     
     // 詳細画面表示
@@ -88,7 +89,7 @@ class DocumentController extends Controller
             }
         }
         $document->fill($request['document'])->save();
-        return redirect('documents/index?document=success');
+        return redirect('documents/'. $document->id .'?document=edited');
     }
     
     // 削除実行
@@ -98,6 +99,6 @@ class DocumentController extends Controller
         
         Document::documentForceDelete();
         
-        return redirect('/documents/index');
+        return redirect('/documents/index?document=deleted');
     }
 }

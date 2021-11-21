@@ -55,7 +55,7 @@ class QuestionController extends Controller
         $message = "受講生によって質問が投稿されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $question->id;
         Slack::sendMessage($message);
         
-        return redirect('/?question=success');
+        return redirect('/?question=created');
     }
     
     // 以下メンターのみがアクセス可能
@@ -87,7 +87,7 @@ class QuestionController extends Controller
             Image::imageCreate($pictures, $question->id);
         }
         
-        return redirect('/questions/index?question=success');
+        return redirect('/questions/'. $question->id .'?question=created');
     }
     
     // 詳細画面表示
@@ -122,7 +122,7 @@ class QuestionController extends Controller
             Image::imageCreate($create_images, $question->id);
         }
         
-        return redirect('/questions/'. $question->id);
+        return redirect('/questions/'. $question->id. '?question=edited');
     }
     
     // 削除実行
@@ -137,7 +137,7 @@ class QuestionController extends Controller
         // 質問の削除
         $question->delete();
         Question::questionForceDelete();
-        return redirect('/questions/index');
+        return redirect('/questions/index?question=deleted');
     }
     
     // 公開処理
@@ -145,7 +145,7 @@ class QuestionController extends Controller
     {
         $question['check'] = true;
         $question->save();
-        return redirect('/questions/'. $question->id);
+        return redirect('/questions/'. $question->id . '?question=published');
     }
     
     // 非公開処理
@@ -153,6 +153,6 @@ class QuestionController extends Controller
     {
         $question['check'] = false;
         $question->save();
-        return redirect('/questions/'. $question->id);
+        return redirect('/questions/'. $question->id . '?question=unpublished');
     }
 }

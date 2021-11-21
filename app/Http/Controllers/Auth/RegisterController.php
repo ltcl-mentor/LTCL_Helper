@@ -73,7 +73,7 @@ class RegisterController extends Controller
             
         }
 
-        return redirect('/users/index?user=success');
+        return redirect('/users/index?public=success');
     }
 
     /**

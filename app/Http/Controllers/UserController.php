@@ -22,6 +22,6 @@ class UserController extends Controller
     public function delete(User $user)
     {
         User::userDelete($user);
-        return redirect('/users/index');
+        return redirect('/users/index?user=deleted');
     }
 }
