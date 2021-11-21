@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class College extends Model
 {
+    /**
+     * 引数に渡された日付情報に該当する出勤のスプレットシートのデータを取得
+     */
     public static function getCollegeData($year, $month, $date)
     {
         $college_datas = [];
@@ -36,6 +39,9 @@ class College extends Model
         return $college_datas;
     }
     
+    /**
+     * 引数に渡された年と月の情報から該当するスプレットシートの全データを取得
+     */
     public static function getCollegeApiData($year, $month)
     {
         $client = new \GuzzleHttp\Client();

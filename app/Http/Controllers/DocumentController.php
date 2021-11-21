@@ -11,32 +11,26 @@ use Illuminate\Support\Facades\Auth;
 
 class DocumentController extends Controller
 {
-    // 一般に公開される部分
+    /** 共通処理 */
     
-    // 公開中の参考記事一覧表示
-    public function publicIndex()
-    {
-        return view('Public.Document.index');
-    }
+    /**
+     * 公開中の参考記事一覧表示
+     */
+    // public function publicIndex()
+    // {
+    //     return view('Public.Document.index');
+    // }
     
     
-    // 以下メンターのみがアクセス可能
     
-    // 初期画面表示
-    public function index()
-    {
-        return view('Mentor.Document.index');
-    }
+    /** 管理者用処理 */
     
-    // 新規作成画面表示
-    public function create()
-    {
-        return view('Mentor.Document.create')->with(['where' => '記事新規登録']);
-    }
-    
-    // 新規作成実行
+    /**
+     * 新規作成実行
+     */
     public function store(DocumentRequest $request, Document $document)
     {
+        // 記事対象者情報の登録
         $targets = ['beginner', 'amature', 'master', 'all'];
         foreach($targets as $target){
             if(isset($request[$target])){
@@ -45,41 +39,21 @@ class DocumentController extends Controller
                 $document[$target] = false;
             }
         }
+        
+        // 記事作成者の登録
         $document['user_id'] = Auth::id();
+        
         $document->fill($request['document'])->save();
         
         return redirect('/documents/'. $document->id .'?document=created');
     }
     
-    // 詳細画面表示
-    public function show(Document $document, User $user)
-    {
-        $author = $user->find($document['user_id']);
-        
-        if($author){
-            $author_name = $author->name;
-        }else{
-            $author_name = null;
-        }
-        
-        $questions = $document->questions()->get();
-        
-        return view('Mentor.Document.show')->with([
-            'document' => $document,
-            'author_name' => $author_name,
-            'questions' => $questions,
-        ]);
-    }
-    
-    // 編集画面表示
-    public function edit(Document $document)
-    {
-        return view('Mentor.Document.edit')->with(['document' => $document]);
-    }
-    
-    // 編集実行
+    /**
+     * 編集実行
+     */
     public function update(DocumentRequest $request, Document $document)
     {
+        // 記事対象者情報の登録
         $targets = ['beginner', 'amature', 'master', 'all'];
         foreach($targets as $target){
             if(isset($request[$target])){
@@ -88,17 +62,69 @@ class DocumentController extends Controller
                 $document[$target] = false;
             }
         }
+        
         $document->fill($request['document'])->save();
+        
         return redirect('documents/'. $document->id .'?document=edited');
     }
     
-    // 削除実行
+    /**
+     * 削除実行
+     */
     public function delete(Document $document)
     {
+        // 対象を論理削除
         $document->delete();
         
+        // 過去に論理削除されたデータの中で３ヶ月経過したものを物理削除
         Document::documentForceDelete();
         
         return redirect('/documents/index?document=deleted');
     }
+    
+    /**
+     * 初期画面表示
+     */
+    // public function index()
+    // {
+    //     return view('Mentor.Document.index');
+    // }
+    
+    /**
+     * 新規作成画面表示
+     */
+    // public function create()
+    // {
+    //     return view('Mentor.Document.create')->with(['where' => '記事新規登録']);
+    // }
+    
+    /**
+     * 詳細画面表示
+     */
+    // public function show(Document $document, User $user)
+    // {
+    //     $author = $user->find($document['user_id']);
+        
+    //     if($author){
+    //         $author_name = $author->name;
+    //     }else{
+    //         $author_name = null;
+    //     }
+        
+    //     $questions = $document->questions()->get();
+        
+    //     return view('Mentor.Document.show')->with([
+    //         'document' => $document,
+    //         'author_name' => $author_name,
+    //         'questions' => $questions,
+    //     ]);
+    // }
+    
+    /**
+     * 編集画面表示
+     */
+    // public function edit(Document $document)
+    // {
+    //     return view('Mentor.Document.edit')->with(['document' => $document]);
+    // }
 }

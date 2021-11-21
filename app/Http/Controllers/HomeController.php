@@ -13,15 +13,11 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    //一般に公開される部分
+    /** 共通処理 */
     
-    // トップ画面表示
-    public function home()
-    {
-        return view('home');
-    }
-    
-    // 履歴画面表示
+    /**
+     * 質問閲覧履歴受け渡し
+     */
     public function getHistory()
     {
         $user = Auth::user();
@@ -34,27 +30,43 @@ class HomeController extends Controller
         return $questions;
     }
     
+    /**
+     * トップ画面表示
+     */
+    // public function home()
+    // {
+    //     return view('home');
+    // }
     
-    // 以下メンターのみがアクセス可能
     
-    // 管理画面表示
-    public function mentorTop()
-    {
-        return view('Mentor.mentor');
-    }
     
-    // お知らせ新規作成処理
+    /** 管理者用処理 */
+    
+    /**
+     * お知らせ新規作成処理
+     */
     public function storeInfo(Info $info, Request $request)
     {
         $input = $request['info'];
         $info->fill($input)->save();
+        
         return redirect('/?info=success');
     }
     
-    // お知らせ削除処理
+    /**
+     * お知らせ削除処理
+     */
     public function deleteInfo(Info $info)
     {
         $info->delete();
         return redirect('/');
     }
+    
+    /**
+     * 管理画面表示
+     */
+    // public function mentorTop()
+    // {
+    //     return view('Mentor.mentor');
+    // }
 }

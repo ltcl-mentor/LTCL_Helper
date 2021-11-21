@@ -9,6 +9,9 @@ class Image extends Model
 {
     protected $fillable=['image_path', 'question_id'];
     
+    /**
+     * S3上の画像データ削除処理
+     */
     public static function imageDelete($images)
     {
         foreach($images as $image){
@@ -18,6 +21,9 @@ class Image extends Model
         }
     }
     
+    /**
+     * S3への画像データ保存処理
+     */
     public static function imageCreate($images, $question_id)
     {
         foreach($images as $image){

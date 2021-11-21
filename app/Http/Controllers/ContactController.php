@@ -8,12 +8,10 @@ use App\Slack;
 
 class ContactController extends Controller
 {
-    public function create()
-    {
-        return view('Public.Contact.create');
-    }
-    
-    public function post(Request $request)
+    /**
+     * お問い合わせ送信処理
+     */
+    public function sendContactMessage(Request $request)
     {
         $user = Auth::user()->name;
         
@@ -22,5 +20,13 @@ class ContactController extends Controller
         Slack::sendMessage($message);
         
         return redirect('/?contact=created');
+    }
+    
+    /**
+     * お問い合わせ入力画面表示
+     */
+    public function create()
+    {
+        return view('Public.Contact.create');
     }
 }

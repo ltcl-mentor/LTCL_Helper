@@ -12,11 +12,17 @@ class Document extends Model
     
     protected $fillable=['title','link'];
     
+    /**
+     * リレーション関係
+     */
     public function questions()
     {
         return $this->belongsToMany('App\Question');
     }
     
+    /**
+     * 実行対象の記事データに関連する質問の全ID取得
+     */
     public function getRelatedQuestionsIds(){
         $related_questions = $this->questions()->get(['question_id'])->toArray();
         $related_question_ids = [];
@@ -28,6 +34,9 @@ class Document extends Model
         return $related_question_ids;
     }
     
+    /**
+     * 実行対象の記事に対してまだ紐付けがされていない全質問を取得
+     */
     public function getUnrelatedQuestions()
     {
         $related_question_ids = $this->questions()->select('question_id')->get();
@@ -39,6 +48,10 @@ class Document extends Model
         return Question::whereNotIn('id', $related_ids_array)->get();
     }
     
+    /**
+     * 記事のデータの物理削除の実行
+     * （対象：論理削除から３ヶ月が経過したもの）
+     */
     public static function documentForceDelete()
     {
         $deleted_documents = self::onlyTrashed()->get();

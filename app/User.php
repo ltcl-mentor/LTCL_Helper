@@ -39,11 +39,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
+    /**
+     * リレーション関係
+     */
     public function questions()
     {
         return $this->belongsToMany('App\Question')->withPivot(['created_at'])->orderBy('pivot_created_at', 'desc');
     }
     
+    /**
+     * 削除対象のユーザに関連するstudentsテーブルのデータとquestion_userテーブル（質問閲覧履歴）データを削除
+     */
     public static function userDelete($data)
     {
         Student::where('user_id', $data->id)->delete();

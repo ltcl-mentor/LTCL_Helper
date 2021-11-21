@@ -16,7 +16,9 @@ class Question extends Model
     
     static $topic = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', 'マイグレーション', 'リレーション', 'Laravel拡張', '画像処理', 'Heroku環境', 'API', 'デザイン'];
     
-    // リレーション関係
+    /**
+     * リレーション関係
+     */
     public function documents()
     {
         return $this->belongsToMany('App\Document');
@@ -27,6 +29,9 @@ class Question extends Model
         return $this->belongsToMany('App\User')->withTimestamps();
     }
     
+    /**
+     * 実行対象の質問データに関連する記事の全ID取得
+     */
     public function getRelatedDocumentsIds(){
         $related_documents = $this->documents()->get(['document_id'])->toArray();
         $related_document_ids = [];
@@ -38,7 +43,9 @@ class Question extends Model
         return $related_document_ids;
     }
     
-    // 指定の質問に対してまだ紐付けがされていない参考記事を取得
+    /**
+     * 実行対象の質問に対してまだ紐付けがされていない全記事を取得
+     */
     public function getUnrelatedDocuments()
     {
         $related_document_ids = $this->documents()->select('document_id')->get();
@@ -50,7 +57,10 @@ class Question extends Model
         return Document::whereNotIn('id', $related_ids_array)->get();
     }
     
-    // 質問のデータの物理削除の実行
+    /**
+     * 質問のデータの物理削除の実行
+     * （対象：論理削除から３ヶ月が経過したもの）
+     */
     public static function questionForceDelete()
     {
         $deleted_questions = self::onlyTrashed()->get();
@@ -64,7 +74,10 @@ class Question extends Model
         }
     }
     
-    // 質問の検索
+    /**
+     * 質問の検索
+     * 「絞り込み」「キーザード」共通
+     */
     public static function conditionSearch($category, $topic, $curriculum_number, $keyword, $searchType, $freeword)
     {
         if($freeword){

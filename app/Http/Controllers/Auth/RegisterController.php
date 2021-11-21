@@ -27,14 +27,18 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
+    /**
+     * Where to redirect users after registration.
+     *
+     * @var string
+     */
+    protected $redirectTo = RouteServiceProvider::HOME;
+
     
-    // 管理者の新規作成画面表示
-    public function showRegistrationForm()
-    {
-        return view('Mentor.User.register');
-    }
-    
-    // 管理者の新規作成実行（デフォルトのものからログイン処理を削除、redirectを指定）
+    /**
+     * 管理者の新規作成実行（デフォルトのものからログイン処理を削除、redirectを指定）
+     */
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -45,13 +49,9 @@ class RegisterController extends Controller
                         ?: redirect('/users/index?admin=success');
     }
     
-    // 受講生の新規作成画面表示
-    public function showPublicRegistrationForm()
-    {
-        return view('Mentor.User.publicRegister');
-    }
-    
-    // 受講生の新規作成実行
+    /**
+     * 受講生の新規作成実行
+     */
     public function publicRegister(Request $request)
     {
         $this->publicValidator($request->all())->validate();
@@ -75,23 +75,6 @@ class RegisterController extends Controller
 
         return redirect('/users/index?public=success');
     }
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('guest');
-    // }
 
     /**
      * Get a validator for an incoming registration request.
@@ -120,6 +103,16 @@ class RegisterController extends Controller
             'name8' => ['string'],
             'name9' => ['string'],
             'name10' => ['string'],
+            'name11' => ['string'],
+            'name12' => ['string'],
+            'name13' => ['string'],
+            'name14' => ['string'],
+            'name15' => ['string'],
+            'name16' => ['string'],
+            'name17' => ['string'],
+            'name18' => ['string'],
+            'name19' => ['string'],
+            'name20' => ['string'],
             'password' => ['required', 'string'],
         ]);
     }
@@ -138,4 +131,33 @@ class RegisterController extends Controller
             'is_admin' => 'staff',
         ]);
     }
+    
+    
+    /**
+     * 管理者の新規作成画面表示
+     */
+    // public function showRegistrationForm()
+    // {
+    //     return view('Mentor.User.register');
+    // }
+    
+    /**
+     * 受講生の新規作成画面表示
+     */
+    // public function showPublicRegistrationForm()
+    // {
+    //     return view('Mentor.User.publicRegister');
+    // }
+    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    // public function __construct()
+    // {
+    //     $this->middleware('guest');
+    // }
+    
+    
 }

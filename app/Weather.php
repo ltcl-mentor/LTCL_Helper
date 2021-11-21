@@ -18,7 +18,9 @@ class Weather extends Model
         'Atmosphere' => '異常気象'
     ];
     
-    // 表示に必要な天気情報を取得
+    /**
+     * 表示に必要な天気情報を取得
+     */
     public static function getWeatherData()
     {
         $weather_datas = [];
@@ -32,7 +34,9 @@ class Weather extends Model
         return $weather_datas;
     }
     
-    // 天気情報をAPIで取得
+    /**
+     * 天気情報をAPIで取得
+     */
     public static function getWeatherApiData()
     {
         $client = new \GuzzleHttp\Client();
@@ -47,7 +51,9 @@ class Weather extends Model
         return json_decode($response->getBody(), true);
     }
     
-    // 現在の天気情報
+    /**
+     * 現在の天気情報
+     */
     public static function getCurrentWeather($data)
     {
         $current_weather['temp'] = $data['current']['temp'];
@@ -56,7 +62,9 @@ class Weather extends Model
         return $current_weather;
     }
     
-    // 今日の天気情報
+    /**
+     * 今日の天気情報
+     */
     public static function getTodayWeather($data)
     {
         $today_weather['temp_ave'] = $data['daily'][0]['temp']['day'];
@@ -66,7 +74,9 @@ class Weather extends Model
         return $today_weather;
     }
     
-    // 1時間おきの天気情報
+    /**
+     * 1時間おきの天気情報
+     */
     public static function getHourlyWeather($data)
     {
         $hourly_datas = array_slice($data['hourly'], 9, 8);
