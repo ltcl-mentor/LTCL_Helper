@@ -7,23 +7,16 @@ import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import DescriptionIcon from '@material-ui/icons/Description';
 import PersonAddAltIcon from '@material-ui/icons/PersonAddAlt';
 import PersonAddIcon from '@material-ui/icons/PersonAddAlt1';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
+import Breadcrumbs from '../Breadcrumbs';
+
 function Top() {
     return (
         <div class="container">
-            <Breadcrumbs aria-label="breadcrumb">
-                <Link underline="hover" to="/">
-                    HOME
-                </Link>
-                
-                <Typography color="text.primary">
-                    メンタートップ
-                </Typography>
-            </Breadcrumbs>
+            <Breadcrumbs page="mentor_top"/>
             
             <Box sx={{marginTop:2, marginBottom: 3}}>
                 <Typography

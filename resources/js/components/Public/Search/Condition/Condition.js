@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from 'react';
-import {Link} from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -7,10 +6,10 @@ import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Card from '@material-ui/core/Card';
 import Grid from '@mui/material/Grid';
 
+import Breadcrumbs from '../../../Breadcrumbs';
 import Category from './Search/Forms/categoryForm';
 import Topic from './Search/Forms/topicForm';
 import Addition from './Search/Forms/additionalForms/additionalForms';
@@ -157,15 +156,7 @@ function Condition() {
     
     return (
         <div className="container">
-            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
-                <Link underline="hover" to="/">
-                    HOME
-                </Link>
-                
-                <Typography color="text.primary">
-                    絞り込み検索
-                </Typography>
-            </Breadcrumbs>
+            <Breadcrumbs page="condition"/>
             
             <Box>
                 <Card>

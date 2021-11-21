@@ -1,12 +1,11 @@
 import React,{useState} from 'react';
-import {Link} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import SaveIcon from '@material-ui/icons/Save';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@material-ui/core/Typography';
 import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
 
+import Breadcrumbs from '../../../Breadcrumbs';
 import Category from '../../Search/Condition/Search/Forms/categoryForm';
 import TopicForm from '../../Search/Condition/Search/Forms/topicForm';
 import CurriculumNumber from '../../Search/Condition/Search/Forms/additionalForms/curriculum-number/curriculum-number';
@@ -73,15 +72,7 @@ function Create() {
     
     return (
         <div className="container">
-            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
-                <Link underline="hover" to="/">
-                    HOME
-                </Link>
-                
-                <Typography color="text.primary">
-                    質問投稿
-                </Typography>
-            </Breadcrumbs>
+            <Breadcrumbs page="public_question_create"/>
             
             <Box sx={{ width: "70%", marginLeft: "15%" }}>
                 <form action="/questions/store/public" method="post" id="create" enctype="multipart/form-data">

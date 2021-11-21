@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
 import axios from "axios";
-import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
+import Breadcrumbs from '../../../Breadcrumbs';
 import Parameters from './parameters';
 import Question from './question';
 import Comment from './comment';
@@ -64,19 +63,7 @@ function Show() {
     
     return (
         <div className="container">
-            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
-                <Link underline="hover" to="/">
-                    HOME
-                </Link>
-                
-                <Link underline="hover" to="/public/questions/index">
-                    質問一覧
-                </Link>
-                
-                <Typography color="text.primary">
-                    質問詳細
-                </Typography>
-            </Breadcrumbs>
+            <Breadcrumbs page="public_question_show"/>
             
             <Parameters 
                 category={ question.category }

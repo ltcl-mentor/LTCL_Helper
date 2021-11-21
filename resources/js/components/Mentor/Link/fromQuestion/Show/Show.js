@@ -1,12 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
-import {Link} from 'react-router-dom';
 import axios from "axios";
 import {useParams} from 'react-router-dom';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Typography from '@material-ui/core/Typography';
 
 import Alert from '../../../../Alert';
+import Breadcrumbs from '../../../../Breadcrumbs';
 import Parameters from './parameters';
 import Links from './links';
 
@@ -54,23 +52,7 @@ function Index() {
         <div class="container">
             <Alert type={ parameter[0] } status={ parameter[1] }/>
             
-            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 2 }}>
-                <Link underline="hover" to="/">
-                    HOME
-                </Link>
-                
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-                
-                <Link underline="hover" to="/links/question/index">
-                    質問から紐付け（一覧）
-                </Link>
-                
-                <Typography color="text.primary">
-                    質問から紐付け（詳細）
-                </Typography>
-            </Breadcrumbs>
+            <Breadcrumbs page="mentor_link_question_show"/>
             
             <Parameters
                 category={ categories[question.category] }

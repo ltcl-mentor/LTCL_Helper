@@ -1,12 +1,12 @@
 import React,{useState} from 'react';
-import {Link} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import SaveIcon from '@material-ui/icons/Save';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@material-ui/core/Typography';
 import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
+
+import Breadcrumbs from '../../Breadcrumbs';
 
 function Contact() {
     const [contact, setContact] = useState('');
@@ -44,15 +44,7 @@ function Contact() {
     
     return (
         <div className="container">
-            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
-                <Link underline="hover" to="/">
-                    HOME
-                </Link>
-                
-                <Typography color="text.primary">
-                    お問合せ
-                </Typography>
-            </Breadcrumbs>
+            <Breadcrumbs page="contact"/>
             
             <Box sx={{ width: "70%", marginLeft: "15%" }}>
                 <form action="/contact" method="post" id="create" enctype="multipart/form-data">

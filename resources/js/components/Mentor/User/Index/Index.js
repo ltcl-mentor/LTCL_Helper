@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
-import {Link} from 'react-router-dom';
-import Typography from '@material-ui/core/Typography';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
 import {useLocation} from 'react-router-dom';
 import Box from '@material-ui/core/Box';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 import Alert from '../../../Alert';
+import Breadcrumbs from '../../../Breadcrumbs';
 import Students from './students';
 import Admins from './admins';
 
@@ -64,19 +62,7 @@ function Index() {
         <div className="container">
             <Alert type={ parameter[0] } status={ parameter[1] }/>
             
-            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 3 }}>
-                <Link underline="hover" to="/">
-                    HOME
-                </Link>
-                
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-                
-                <Typography color="text.primary">
-                    ユーザ名簿
-                </Typography>
-            </Breadcrumbs>
+            <Breadcrumbs page="mentor_user_index"/>
             
             <form action={ `/users/` + delete_user_id + `/delete` } method="post" id="delete">
                 <input type="hidden" name="_token" value={ csrf_token }/>

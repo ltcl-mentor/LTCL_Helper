@@ -6,10 +6,10 @@ import {useParams} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Button from '@mui/material/Button';
 
 import Alert from '../../../Alert';
+import Breadcrumbs from '../../../Breadcrumbs';
 import Parameters from './parameters';
 import Questions from './questions';
 
@@ -42,23 +42,7 @@ function Document() {
         <div className="container">
             <Alert type={ parameter[0] } status={ parameter[1] }/>
             
-            <Breadcrumbs aria-label="breadcrumb">
-                <Link underline="hover" to="/">
-                    HOME
-                </Link>
-                
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-                
-                <Link underline="hover" to="/documents/index">
-                    記事一覧
-                </Link>
-                
-                <Typography color="text.primary">
-                    記事詳細
-                </Typography>
-            </Breadcrumbs>
+            <Breadcrumbs page="mentor_document_show"/>
             
             <Typography align="center" variant="h6" component="div" sx={{ marginTop: 4 }}>
                 <Link to={`/documents/` + id + `/edit`} className="editBtn">

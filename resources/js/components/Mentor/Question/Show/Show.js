@@ -7,9 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@mui/material/Button';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import Alert from '../../../Alert';
+import Breadcrumbs from '../../../Breadcrumbs';
 import Publish from './Publish/publish';
 import Parameters from './parameters';
 import Question from './question';
@@ -65,23 +65,7 @@ function Show() {
         <div className="container">
             <Alert type={ parameter[0] } status={ parameter[1] }/>
             
-            <Breadcrumbs aria-label="breadcrumb">
-                <Link underline="hover" to="/">
-                    HOME
-                </Link>
-                
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-                
-                <Link underline="hover" to="/questions/index">
-                    質問一覧
-                </Link>
-                
-                <Typography color="text.primary">
-                    質問詳細
-                </Typography>
-            </Breadcrumbs>
+            <Breadcrumbs page="mentor_question_show"/>
             
             <Typography component="div" align="center" sx={{ marginTop: 4 }} >
                 <Publish

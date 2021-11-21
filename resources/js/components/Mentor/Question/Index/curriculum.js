@@ -65,7 +65,7 @@ function Curriculum() {
                                                 role="listitem"
                                                 button
                                             >
-                                                { question.check === 1 || question.check === true ? <Typography color="text.primary">（非公開）</Typography> : "" }
+                                                { question.check === 0 || question.check === false ? <Typography color="text.primary">（非公開）</Typography> : "" }
                                                 <ListItemText primary={ question.question } />
                                             </ListItem>
                                         </Link>

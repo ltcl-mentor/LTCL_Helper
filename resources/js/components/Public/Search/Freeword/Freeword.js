@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
-import Typography from '@material-ui/core/Typography';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
 
+import Breadcrumbs from '../../../Breadcrumbs';
 import Form from './form';
 import Result from './Result/result';
 
@@ -12,15 +10,7 @@ function Freeword() {
     
     return (
         <div className="container">
-            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
-                <Link underline="hover" to="/">
-                    HOME
-                </Link>
-                
-                <Typography color="text.primary">
-                    フリーワード検索
-                </Typography>
-            </Breadcrumbs>
+            <Breadcrumbs page="freeword"/>
             
             <Form
                 searchType={ searchType }

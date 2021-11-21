@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Button from '@mui/material/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import Card from '@material-ui/core/Card';
 import Box from '@mui/material/Box';
+
+import Breadcrumbs from '../../../../Breadcrumbs';
 
 function Admin() {
     const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
@@ -22,19 +22,7 @@ function Admin() {
     
     return (
         <div class="container">
-            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 3 }}>
-                <Link underline="hover" to="/">
-                    HOME
-                </Link>
-                
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-                
-                <Typography color="text.primary">
-                    管理者の登録
-                </Typography>
-            </Breadcrumbs>
+            <Breadcrumbs page="mentor_admin_create"/>
             
             <Box sx={{ width: "70%", marginLeft: "15%" }}>
                 <Card sx={{ marginBottom: 2, paddingTop: 3 }}>

@@ -9,6 +9,7 @@ import Pagination from '@mui/material/Pagination';
 import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@mui/material/Grid';
 
 function Questions(props) {
     const [questions, setQuestions] = useState([]);
@@ -59,7 +60,6 @@ function Questions(props) {
                 count={ Math.floor(list.filter(v=>v).length/10) + 1 }
                 page={ currentPage }
                 onChange={ handlePageClick }
-                sx={{ justifyContent: "center" }}
             />
         );
     }
@@ -84,7 +84,11 @@ function Questions(props) {
                 </List>
             </Box>
             
-            { pagination }
+            <Grid container justifyContent="center" sx={{ marginTop: 1, marginBottom: 2 }}>
+                <Grid item>
+                    { pagination }
+                </Grid>
+            </Grid>
             
             { emptyMessage }
         </Card>

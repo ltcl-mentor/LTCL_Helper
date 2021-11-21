@@ -1,12 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
-import {Link} from 'react-router-dom';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Typography from '@material-ui/core/Typography';
 
+import Breadcrumbs from '../../../Breadcrumbs';
 import Curriculum from './curriculum';
 import Portfolio from './portfolio';
 
@@ -37,15 +35,7 @@ function Index() {
     
     return (
         <div className="container">
-            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
-                <Link underline="hover" to="/">
-                    HOME
-                </Link>
-                
-                <Typography color="text.primary">
-                    質問一覧
-                </Typography>
-            </Breadcrumbs>
+            <Breadcrumbs page="public_question_index"/>
             
             <Box sx={{ width: '95%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>

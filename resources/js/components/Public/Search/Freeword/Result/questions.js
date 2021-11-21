@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Pagination from '@mui/material/Pagination';
 import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
+import Grid from '@mui/material/Grid';
 
 function Questions(props) {
     const [questions, setQuestions] = useState([]);
@@ -83,13 +84,17 @@ function Questions(props) {
     
     return (
         <Card sx={{ marginTop: 4, marginBottom:4 }}>
-            <Box sx={{ width: "80%", textAlign: "center" }}>
+            <Box sx={{ width: "90%", margin: "0 auto" }}>
                 <List>
                     { questionList }
                 </List>
             </Box>
             
-            { pagination }
+            <Grid container justifyContent="center" sx={{ marginTop: 1, marginBottom: 2 }}>
+                <Grid item>
+                    { pagination }
+                </Grid>
+            </Grid>
             
             { emptyMessage }
         </Card>

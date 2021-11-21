@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import axios from "axios";
-import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@material-ui/core/Typography';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -10,6 +9,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+
+import Breadcrumbs from '../../Breadcrumbs';
 
 function History() {
     const [questions, setQuestions] = useState([]);
@@ -85,15 +86,7 @@ function History() {
     
     return (
         <div className="container">
-            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
-                <Link underline="hover" to="/">
-                    HOME
-                </Link>
-                
-                <Typography color="text.primary">
-                    質問履歴
-                </Typography>
-            </Breadcrumbs>
+            <Breadcrumbs page="history"/>
             
             {  histories }
         </div>

@@ -7,11 +7,12 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Chip from '@mui/material/Chip';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Box from '@material-ui/core/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+
+import Breadcrumbs from '../../../Breadcrumbs';
 
 function Document() {
     const [documents, setDocuments] = useState([]);
@@ -83,19 +84,7 @@ function Document() {
     
     return (
         <div className="container">
-            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
-                <Link underline="hover" to="/">
-                    HOME
-                </Link>
-                
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-                
-                <Typography color="text.primary">
-                    記事一覧
-                </Typography>
-            </Breadcrumbs>
+            <Breadcrumbs page="mentor_document_index"/>
             
             <Box sx={{ marginTop: 3 }}>
                 { document }

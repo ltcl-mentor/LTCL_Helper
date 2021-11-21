@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
-import Typography from '@material-ui/core/Typography';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
 import Grid from '@mui/material/Grid';
 
+import Breadcrumbs from '../../../../Breadcrumbs';
 import Forms from './forms';
 
 function Public() {
@@ -30,19 +28,7 @@ function Public() {
     
     return (
         <div className="container">
-            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 3 }}>
-                <Link underline="hover" to="/">
-                    HOME
-                </Link>
-                
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-                
-                <Typography color="text.primary">
-                    受講生の登録
-                </Typography>
-            </Breadcrumbs>
+            <Breadcrumbs page="mentor_public_create"/>
             
             <Box sx={{ width: "70%", marginLeft: "15%" }}>
                 <Card sx={{ marginBottom: 2 }}>

@@ -1,12 +1,11 @@
 import React,{useState} from 'react';
-import {Link} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@material-ui/core/Typography';
 
+import Breadcrumbs from '../../../Breadcrumbs';
 import Target from './target';
 import Title from './title';
 import URL from './link';
@@ -48,19 +47,7 @@ function Create() {
     
     return (
         <div className="container">
-            <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
-                <Link underline="hover" to="/">
-                    HOME
-                </Link>
-                
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-                
-                <Typography color="text.primary">
-                    記事投稿
-                </Typography>
-            </Breadcrumbs>
+            <Breadcrumbs page="mentor_document_create"/>
             
             <Box sx={{ width: "70%", marginLeft: "15%" }}>
                 <form action="/documents/store" method="post" id="create">
