@@ -3,9 +3,8 @@ import Typography from '@material-ui/core/Typography';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Divider from '@material-ui/core/Divider';
 
 function Info(props) {
     
@@ -84,7 +83,11 @@ function Info(props) {
     }
 
     return (
-        <div>{ info }</div>
+        <div>
+            <Divider />
+            
+            { info }
+        </div>
     );
 }
 

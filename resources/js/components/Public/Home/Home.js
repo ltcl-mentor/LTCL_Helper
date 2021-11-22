@@ -11,6 +11,7 @@ import Content from '../../Layout/side-menu/content';
 import Information from './information/information';
 import Clendar from './calendar/calendar';
 import Weather from './weather';
+import Location from './location';
 
 function Home() {
     const parameter = useLocation().search.substr(1).split('=');
@@ -55,6 +56,7 @@ function Home() {
                     <Grid
                         item
                         sx={{
+                            marginBottom: 5,
                             width: screen_width >= 1200 ? "45%" : (screen_width >= 992 && screen_width <= 1200 ? "59%" : "100%")
                         }}
                     >
@@ -97,6 +99,10 @@ function Home() {
                             width: screen_width >= 1200 ? "29%" : (screen_width >= 992 && screen_width <= 1200 ? "39%" : "100%")
                         }}
                     >
+                        <Card sx={{ marginBottom: 4 }}>
+                            <Location screen_width={ screen_width }/>
+                        </Card>
+                        
                         <Card sx={{ marginBottom: 4 }}>
                             <Weather />
                         </Card>

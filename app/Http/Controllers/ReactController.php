@@ -215,4 +215,13 @@ class ReactController extends Controller
         
         return $infos;
     }
+    
+    
+    /**
+     * Google Map APIのAPIキーの受け渡し
+     */
+    public function getMapApiKey()
+    {
+        return env('GoogleMapsKey');
+    }
 }

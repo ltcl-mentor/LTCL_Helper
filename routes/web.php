@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('react/weather', 'ReactController@getWeather'); // 今日の天気のデータ受け渡し
     Route::get('react/college/{year}/{month}/{date}', 'ReactController@getCollegeData'); // 校舎に関するデータ受け渡し
     Route::get('react/infos', 'ReactController@getInfos'); // お知らせのデータ受け渡し
+    Route::get('react/map', 'ReactController@getMapApiKey'); // Google Map APIのAPIキー受け渡し
     
     
     /**
