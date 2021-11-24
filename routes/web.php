@@ -128,12 +128,12 @@ Route::group(['middleware' => ['auth']], function () {
          */
         Route::get('react/all/questions', 'ReactController@getAllQuestions'); // 全質問受け渡し
         Route::get('react/question/{question}', 'ReactController@getQuestion'); // 個別質問データの受け渡し
-        Route::get('react/questions/{document}', 'LinkController@getQuestionsFromDocument'); // 個別に記事に関する質問データの受け渡し
+        Route::get('react/questions/{document}', 'LinkController@getQuestionsFromDocument'); // 単体記事に関する質問データの受け渡し
         Route::get('react/curriculum/questions', 'ReactController@getCurriculumQuestions'); // カリキュラム範囲の質問受け渡し
         Route::get('react/portfolio/questions', 'ReactController@getPortfolioQuestions'); // 成果物範囲の質問受け渡し
         Route::get('react/all/documents', 'ReactController@getAllDocuments'); // 全記事受け渡し
         Route::get('react/document/{document}', 'ReactController@getDocument'); // 個別記事データの受け渡し
-        Route::get('react/documents/{question}', 'LinkController@getDocumentsFromQuestion'); // 個別に質問に関する記事データの受け渡し
+        Route::get('react/documents/{question}', 'LinkController@getDocumentsFromQuestion'); // 単体質問に関する記事データの受け渡し
         Route::get('react/related/questions/{document}', 'ReactController@getRelatedQuestions'); // 記事に紐づいている質問の受け渡し
         Route::get('react/all/staffs', 'ReactController@getAllStaffs'); // 全管理者受け渡し
         Route::get('react/all/students', 'ReactController@getAllStudents'); // 全受講生受け渡し

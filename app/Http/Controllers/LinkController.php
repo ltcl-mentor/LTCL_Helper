@@ -10,6 +10,23 @@ use App\User;
 class LinkController extends Controller
 {
     /**
+     * 単体記事に関する全質問データの受け渡し
+     */
+    public function getQuestionsFromDocument(Document $document, Question $question)
+    {
+        $related_questions = $document->questions()->get();
+
+         //　記事に紐づいている質問がない場合は質問全て、ある場合はすでに紐付けが完了したものを除いたものを$unlinked_questionsに代入
+        if(count($related_questions) === 0){
+            $unrelated_questions = $question->get();
+        }else{
+            $unrelated_questions = $document->getUnrelatedQuestions();
+        }
+        
+        return [ "related_questions" => $related_questions, "unrelated_questions" => $unrelated_questions];
+    }
+    
+    /**
      * 単体記事と複数質問の紐付け実行
      */
     public function linkQuestionsFromDocument(Request $request,Document $document)
@@ -53,6 +70,21 @@ class LinkController extends Controller
         return redirect('/links/document/'. $document->id .'?link_from_document='. $whitch_do);
     }
     
+    /**
+     * 単体質問に関する全記事データの受け渡し
+     */
+    public function getDocumentsFromQuestion(Question $question, Document $document)
+    {
+        $related_documents = $question->documents()->get();
+
+        if(count($related_documents) === 0){
+            $unrelated_documents = $document->get();
+        }else{
+            $unrelated_documents = $question->getUnrelatedDocuments();
+        }
+        
+        return [ "related_documents" => $related_documents, "unrelated_documents" => $unrelated_documents];
+    }
     
     /**
      * 単体質問と複数記事の紐付け実行
@@ -105,39 +137,5 @@ class LinkController extends Controller
     // public function index()
     // {
     //     return view('Mentor.Link.index');
-    // }
-    
-    /**
-     * 新規作成画面表示(記事：質問＝１：多)
-     */
-    // public function getQuestionsFromDocument(Document $document, Question $question)
-    // {
-    //     $related_questions = $document->questions()->get();
-
-    //      //　記事に紐づいている質問がない場合は質問全て、ある場合はすでに紐付けが完了したものを除いたものを$unlinked_questionsに代入
-    //     if(count($related_questions) === 0){
-    //         $unrelated_questions = $question->get();
-    //     }else{
-    //         $unrelated_questions = $document->getUnrelatedQuestions();
-    //     }
-        
-    //     return [ "related_questions" => $related_questions, "unrelated_questions" => $unrelated_questions];
-    // }
-    
-    
-    /**
-     * 新規作成画面表示(記事：質問＝多：1)
-     */
-    // public function getDocumentsFromQuestion(Question $question, Document $document)
-    // {
-    //     $related_documents = $question->documents()->get();
-
-    //     if(count($related_documents) === 0){
-    //         $unrelated_documents = $document->get();
-    //     }else{
-    //         $unrelated_documents = $question->getUnrelatedDocuments();
-    //     }
-        
-    //     return [ "related_documents" => $related_documents, "unrelated_documents" => $unrelated_documents];
     // }
 }
