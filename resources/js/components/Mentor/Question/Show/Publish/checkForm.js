@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import axios from "axios";
+import {useHistory} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Typography from '@material-ui/core/Typography';
 import Box from '@mui/material/Box';
@@ -6,6 +8,7 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 function CheckForm(props) {
+    const history = useHistory();
     const [check1, setCheck1] = useState(false);
     const [check2, setCheck2] = useState(false);
     const [check3, setCheck3] = useState(false);
@@ -34,11 +37,25 @@ function CheckForm(props) {
         }
     };
     
+    const handlePublish = () => {
+        axios
+            .post(`/questions/${ props.question_id }/check`)
+            .then(response => {
+                if (response.status === 200) {
+                    props.setQuestion(response.data);
+                    history.push(`/questions/${ props.question_id }`, { question: "published" });
+                    props.handleClose();
+                }
+            }).catch(error => {
+                console.log(error);
+            });
+    };
+    
     let btn;
     if (check1 && check2 && check3) {
         btn = (
             <Typography component="div" align="center" sx={{ marginTop: 1, marginBottom: 1}} >
-                <Button type="submit" variant="contained" color="success">公開する</Button>
+                <Button type="submit" variant="contained" color="success" onClick={ handlePublish }>公開する</Button>
             </Typography>
         );
     } else {
@@ -58,10 +75,7 @@ function CheckForm(props) {
                 <FormControlLabel control={<Checkbox onClick={ handleCheck2 } value={ check2 }/>} label="（参考画像がある場合）個人情報が漏洩するような部分はありませんか？" />
                 <FormControlLabel control={<Checkbox onClick={ handleCheck3 } value={ check3 }/>} label="公開する内容に間違いはありませんか？" />
         
-                <form action={ `/questions/` + props.question_id + `/check` } method="post">
-                    <input type="hidden" name="_token" value={ props.csrf_token }/>
-                    { btn }
-                </form>
+                { btn }
             </Box>
         </div>
     );

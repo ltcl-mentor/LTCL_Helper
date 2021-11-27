@@ -205,8 +205,8 @@ class ReactController extends Controller
      */
     public function getInfos(Info $info)
     {
-        // infosテーブルの全日付を取得
-        $infos['dates'] = $info->orderBy('date', 'desc')->pluck('date');
+        // infosテーブルの全日付を取得（重複はなし）
+        $infos['dates'] = $info->groupBy('date')->orderBy('date', 'desc')->pluck('date');
         
         // 各日付のデータを取得して配列に代入
         foreach($infos['dates'] as $date){

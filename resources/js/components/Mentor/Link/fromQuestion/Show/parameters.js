@@ -9,11 +9,11 @@ import Paper from '@material-ui/core/Paper';
 function Parameters(props) {
     
     let author;
-    if (props.user_id === 0) {
+    if (props.author === 0) {
         author = "削除済みユーザー";
     } else {
         author = props.staffs.map((staff) => {
-            if (staff.id === props.user_id) {
+            if (staff.id === props.author) {
                 return staff.name;
             }
         });

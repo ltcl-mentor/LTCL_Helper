@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {useLocation} from 'react-router-dom';
-import {Link} from 'react-router-dom';
+import {Link, useParams, useLocation, useHistory} from 'react-router-dom';
 import axios from "axios";
-import {useParams} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -14,10 +12,10 @@ import Parameters from './parameters';
 import Questions from './questions';
 
 function Document() {
-    const parameter = useLocation().search.substr(1).split('=');
+    const parameter = useLocation();
     const { id } = useParams();
+    const history = useHistory();
     const [doc, setDoc] = useState([]);
-    const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
     
     useEffect(() => {
         axios
@@ -31,7 +29,15 @@ function Document() {
     
     const deleteConfirm = () => {
         if (confirm('データが削除されます。\nよろしいですか？')) {
-            document.getElementById('delete').submit();
+            axios
+                .post(`/documents/${ id }/delete`)
+                .then(response => {
+                    if (response.status === 200) {
+                        history.push("/documents/index", { document: "deleted", number: 1 });
+                    }
+                }).catch(error => {
+                    console.log(error);
+                });
         } else {
             window.alert('キャンセルしました');
             return false;
@@ -40,7 +46,11 @@ function Document() {
     
     return (
         <div className="container">
-            <Alert type={ parameter[0] } status={ parameter[1] }/>
+            <Alert
+                type="document"
+                status={ parameter.state && parameter.state.document }
+                info={ parameter.state && parameter.state.number }
+            />
             
             <Breadcrumbs page="mentor_document_show"/>
             
@@ -51,10 +61,7 @@ function Document() {
             </Typography>
             
             <Typography align="center" variant="h6" component="div" sx={{ marginTop: 1, marginBottom: 2 }}>
-                <form action={`/documents/` + id + `/delete`} method="post" id="delete">
-                    <input type="hidden" value={ csrf_token } name="_token" />
-                    <Button variant="contained" color="error" onClick={ deleteConfirm } startIcon={ <DeleteIcon /> }>削除する</Button>
-                </form>
+                <Button variant="contained" color="error" onClick={ deleteConfirm } startIcon={ <DeleteIcon /> }>削除する</Button>
             </Typography>
             
             <Parameters 
@@ -68,10 +75,26 @@ function Document() {
                 link={ doc.link }
                 author={ doc.user_id }
             />
-        
+            
             <div>
-                <Typography align="center" variant="h4" component="div" sx={{ marginTop: "5%" }}>関連質問</Typography>
-                <Typography align="center" variant="h6" component="div"><a href={ `/links/question/` }>編集する</a></Typography>
+                <Typography
+                    variant="h4"
+                    component="div"
+                    align="center"
+                    sx={{
+                        marginTop: 4,
+                        marginBottom: 2,
+                    }}
+                >
+                    関連質問
+                </Typography>
+                
+                <Typography component="div" align="center" sx={{ marginTop: 1, marginBottom: 2}} >
+                    <Link to={ `/links/document/` + id }>
+                        <Button variant="contained" color="info" startIcon={ <EditIcon /> }>編集する</Button>
+                    </Link>
+                </Typography>
+                
                 <Questions id={ id }/>
             </div>
         </div>

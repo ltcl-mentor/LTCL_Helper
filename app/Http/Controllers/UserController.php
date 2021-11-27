@@ -12,12 +12,15 @@ class UserController extends Controller
     /**
      * 削除実行
      */
-    public function delete(User $user)
+    public function delete(User $user, Student $student)
     {
         // 該当するstudentsテーブルのデータとquestion_userテーブル（質問閲覧履歴）データを削除
         User::userDelete($user);
         
-        return redirect('/users/index?user=deleted');
+        return [
+            'staffs' => User::where('is_admin','staff')->get(),
+            'students' => Student::orderBy('password', 'asc')->get(),
+        ];
     }
     
     /**

@@ -20,7 +20,7 @@ class QuestionController extends Controller
     /**
      * 質問詳細画面表示時に閲覧を記録
      */
-    public function publicShow(Question $question)
+    public function recordShow(Question $question)
     {
         // 質問閲覧履歴への記録
         $question->users()->attach(Auth::id());
@@ -35,22 +35,28 @@ class QuestionController extends Controller
     public function publicStore(QuestionRequest $request, Question $question)
     {
         // 質問に関する処理
-        $question->fill($request['post']);
+        $input['category'] = $request['category'];
+        $input['topic'] = $request['topic'];
+        $input['curriculum_number'] = $request['curriculum_number'];
+        $input['question'] = $request['question'];
+        $input['comment'] = $request['comment'];
+        
+        $question->fill($input);
+        
         $question['check'] = false;
-        $question['user_id'] = 1;
+        $question['user_id'] = Auth::id();
+        
         $question->save();
         
         // 画像に関する処理
-        $pictures = $request->file('image');
-        if($pictures){
-            Image::imageCreate($pictures, $question->id);
-        }
+        // $pictures = $request->file('image');
+        // if($pictures){
+        //     Image::imageCreate($pictures, $question->id);
+        // }
         
         // Slackへの通知
         $message = "受講生によって質問が投稿されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $question->id;
         Slack::sendMessage($message);
-        
-        return redirect('/?question=created');
     }
     
     /**
@@ -80,18 +86,26 @@ class QuestionController extends Controller
     public function store(QuestionRequest $request, Question $question)
     {
         // 質問に関する処理
-        $question->fill($request['post']);
+        $input['category'] = $request['category'];
+        $input['topic'] = $request['topic'];
+        $input['curriculum_number'] = $request['curriculum_number'];
+        $input['question'] = $request['question'];
+        $input['comment'] = $request['comment'];
+        
+        $question->fill($input);
+        
         $question['check'] = false;
         $question['user_id'] = Auth::id();
+        
         $question->save();
         
         // 画像に関する処理
-        $pictures = $request->file('image');
-        if($pictures){
-            Image::imageCreate($pictures, $question->id);
-        }
+        // $pictures = $request->file('image');
+        // if($pictures){
+        //     Image::imageCreate($pictures, $question->id);
+        // }
         
-        return redirect('/questions/'. $question->id .'?question=created');
+        return ["id" => $question->id];
     }
     
     /**
@@ -100,23 +114,30 @@ class QuestionController extends Controller
     public function update(QuestionRequest $request, Question $question)
     {
         // 質問に関する処理
-        $question->fill($request['post']);
+        $input['category'] = $request['category'];
+        $input['topic'] = $request['topic'];
+        $input['curriculum_number'] = $request['curriculum_number'];
+        $input['question'] = $request['question'];
+        $input['comment'] = $request['comment'];
+        
+        $question->fill($input);
+        
         $question->save();
         
         // 画像に関する処理
         // 画像の削除
-        if($request['delete_id']){
-            $delete_images = Image::whereIn('id', $request['delete_id'])->get();
-            Image::imageDelete($delete_images);
-        }
+        // if($request['delete_id']){
+        //     $delete_images = Image::whereIn('id', $request['delete_id'])->get();
+        //     Image::imageDelete($delete_images);
+        // }
         
         // 画像の登録
-        $create_images = $request->file('image');
-        if($create_images){
-            Image::imageCreate($create_images, $question->id);
-        }
+        // $create_images = $request->file('image');
+        // if($create_images){
+        //     Image::imageCreate($create_images, $question->id);
+        // }
         
-        return redirect('/questions/'. $question->id. '?question=edited');
+        return ["id" => $question->id];
     }
     
     /**
@@ -135,8 +156,6 @@ class QuestionController extends Controller
         $question->delete();
         // 過去に論理削除されたデータの中で３ヶ月経過したものを物理削除
         Question::questionForceDelete();
-        
-        return redirect('/questions/index?question=deleted');
     }
     
     /**
@@ -146,7 +165,7 @@ class QuestionController extends Controller
     {
         $question['check'] = true;
         $question->save();
-        return redirect('/questions/'. $question->id . '?question=published');
+        return $question;
     }
     
     /**
@@ -156,7 +175,7 @@ class QuestionController extends Controller
     {
         $question['check'] = false;
         $question->save();
-        return redirect('/questions/'. $question->id . '?question=unpublished');
+        return $question;
     }
     
     /**

@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import {Link} from 'react-router-dom';
-import ReactPaginate from 'react-paginate';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-import CircularProgress from '@mui/material/CircularProgress';
+import Pagination from '@mui/material/Pagination';
+import Box from '@mui/material/Box';
+import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@mui/material/Grid';
 
 
 function questions(props) {
@@ -24,25 +26,27 @@ function questions(props) {
             });
     }, []);
     
+    const handlePageClick = (event, value) => {
+        setCurrentPage(value);
+    };
+    
     const list = questions.map((question) => {
         return (
             <div>
                 <Divider light />
-                <ListItem button>
-                    <Link to={ '/questions/' + question.id } className="question" key={ question.id } target="_blank">
+                
+                <Link to={ '/questions/' + question.id } className="question" key={ question.id } target="_blank">
+                    <ListItem button>
                         <ListItemText
                             primary={ question.question }
                         />
-                    </Link>
-                </ListItem>
+                    </ListItem>
+                </Link>
+                
                 <Divider />
             </div>
         );
     });
-    
-    const handlePageClick = (event) => {
-        setCurrentPage(event.selected);
-    };
     
     let emptyMessage;
     let questionList;
@@ -53,39 +57,30 @@ function questions(props) {
     } else {
         questionList = list.slice(currentPage*10, (currentPage + 1)*10);
         pagination = (
-            <div className="paginationBox">
-            <Typography align="center" component="div" >
-                <ReactPaginate
-                    pageCount={ list.filter(v=>v).length/10 }
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={2}
-                    onPageChange={ (event) => handlePageClick(event) }
-                    containerClassName="pagination"
-                    pageClassName="page-item"
-                    pageLinkClassName="page-link"
-                    activeClassName="active"
-                    activeLinkClassName="active"
-                    previousLinkClassName="previous-link"
-                    nextLinkClassName="next-link"
-                    previousLabel="<<"
-                    nextLabel=">>"
-                    disabledClassName="disabled-button"
-                />
-                </Typography>
-            </div>
+            <Pagination
+                count={ Math.floor(list.filter(v=>v).length/10) + 1 }
+                page={ currentPage }
+                onChange={ handlePageClick }
+            />
         );
     }
     
     return (
-        <div>
-            <div className="list">
+        <Card sx={{ marginTop: 4, marginBottom:4 }}>
+            <Box sx={{ width: "90%", margin: "0 auto" }}>
                 <List>
                     { questionList }
                 </List>
-            </div>
-            { pagination }
+            </Box>
+            
+            <Grid container justifyContent="center" sx={{ marginTop: 1, marginBottom: 2 }}>
+                <Grid item>
+                    { pagination }
+                </Grid>
+            </Grid>
+            
             { emptyMessage }
-        </div>
+        </Card>
     );
 }
 

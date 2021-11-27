@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
@@ -12,9 +12,11 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
+import Alert from '../../../Alert';
 import Breadcrumbs from '../../../Breadcrumbs';
 
 function Document() {
+    const parameter = useLocation();
     const [documents, setDocuments] = useState([]);
     const [staffs, setStaffs] = useState([]);
     const [expanded, setExpanded] = React.useState(false);
@@ -84,6 +86,12 @@ function Document() {
     
     return (
         <div className="container">
+            <Alert
+                type="document"
+                status={ parameter.state && parameter.state.document }
+                info={ parameter.state && parameter.state.number }
+            />
+            
             <Breadcrumbs page="mentor_document_index"/>
             
             <Box sx={{ marginTop: 3 }}>

@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {useLocation} from 'react-router-dom';
+import {useLocation, useParams, useHistory} from 'react-router-dom';
 import axios from "axios";
-import {useParams} from 'react-router-dom';
 
 import Alert from '../../../../Alert';
 import Breadcrumbs from '../../../../Breadcrumbs';
@@ -10,11 +9,12 @@ import Links from './links';
 
 function Index() {
     const { id } = useParams();
-    const parameter = useLocation().search.substr(1).split('=');
+    const parameter = useLocation();
+    const history = useHistory();
+    const [clickCount, setClickCount] = useState(0);
     const [doc, setDoc] = useState([]);
     const [attach_id, setAttachId] = useState([]);
     const [detach_id, setDetachId] = useState([]);
-    const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
     
     useEffect(() => {
         axios
@@ -26,12 +26,40 @@ function Index() {
             });
     }, []);
     
-    let set = 0;
     const handleSubmit = () => {
         // フォーム送信と重複保存の防止
-        if (set === 0) {
-            document.getElementById('link').submit();
-            set=1;
+        if (clickCount === 0) {
+            setClickCount(1);
+            axios
+                .post(`/links/document/${ id }`, {
+                    attach_id: attach_id,
+                    detach_id: detach_id,
+                })
+                .then(response => {
+                    if (response.status === 200) {
+                        // フォーム送信の重複保存防止のカウントをリセット
+                        setClickCount(0);
+                        
+                        window.scroll({top:0});
+                        
+                        console.log(response.data.whitch_do);
+                        switch (response.data.whitch_do) {
+                            case "attached":
+                                history.push(`/links/document/${ response.data.id }`, { link: "attached", number: response.data.attach_count });
+                                break;
+                            
+                            case "detached":
+                                history.push(`/links/document/${ response.data.id }`, { link: "detached", number: response.data.detach_count });
+                                break;
+                                
+                            case "attached_and_detached":
+                                history.push(`/links/document/${ response.data.id }`, { link: "attached_and_detached", number: [response.data.attach_count, response.data.detach_count]});
+                                break;
+                        }
+                    }
+                }).catch(error => {
+                    console.log(error);
+                });
         } else {
             return false;
         }
@@ -39,7 +67,11 @@ function Index() {
     
     return (
         <div class="container">
-            <Alert type={ parameter[0] } status={ parameter[1] }/>
+            <Alert
+                type="link_from_document"
+                status={ parameter.state && parameter.state.link }
+                info={ parameter.state && parameter.state.number }
+            />
             
             <Breadcrumbs page="mentor_link_document_show"/>
             
@@ -57,11 +89,8 @@ function Index() {
             
             <Links
                 id={ id }
-                attach_id={ attach_id }
                 setAttachId={ setAttachId }
-                detach_id={ detach_id }
                 setDetachId={ setDetachId }
-                csrf_token={ csrf_token }
                 handleSubmit={ handleSubmit }
             />
         </div>

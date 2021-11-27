@@ -21,7 +21,7 @@ function AlertMessage(props) {
                     break;
                     
                 case "deleted":
-                    success_message = <AlertTitle>質問を削除しました。</AlertTitle>;
+                    success_message = <AlertTitle>質問を{ props.info }件削除しました。</AlertTitle>;
                     break;
                    
                 case "published":
@@ -45,7 +45,7 @@ function AlertMessage(props) {
                     break;
                     
                 case "deleted":
-                    success_message = <AlertTitle>記事を削除しました。</AlertTitle>;
+                    success_message = <AlertTitle>記事を{ props.info }件削除しました。</AlertTitle>;
                     break;
             }
             break;
@@ -53,15 +53,15 @@ function AlertMessage(props) {
         case "link_from_question":
             switch (props.status) {
                 case "attached":
-                    success_message = <AlertTitle>関連記事を設定しました。</AlertTitle>;
+                    success_message = <AlertTitle>関連記事を{ props.info }件設定しました。</AlertTitle>;
                     break;
                 
                 case "detached":
-                    success_message = <AlertTitle>関連記事を解除しました。</AlertTitle>;
+                    success_message = <AlertTitle>関連記事を{ props.info }件解除しました。</AlertTitle>;
                     break;
                     
                 case "attached_and_detached":
-                    success_message = <AlertTitle>関連記事を設定、解除しました。</AlertTitle>;
+                    success_message = <AlertTitle>関連記事を{ props.info[0] }件設定、{ props.info[1] }件解除しました。</AlertTitle>;
                     break;
             }
             break;
@@ -69,15 +69,15 @@ function AlertMessage(props) {
         case "link_from_document":
             switch (props.status) {
                 case "attached":
-                    success_message = <AlertTitle>関連質問を設定しました。</AlertTitle>;
+                    success_message = <AlertTitle>関連質問を{ props.info }件設定しました。</AlertTitle>;
                     break;
                 
                 case "detached":
-                    success_message = <AlertTitle>関連質問を解除しました。</AlertTitle>;
+                    success_message = <AlertTitle>関連質問を{ props.info }件解除しました。</AlertTitle>;
                     break;
                     
                 case "attached_and_detached":
-                    success_message = <AlertTitle>関連質問を設定、解除しました。</AlertTitle>;
+                    success_message = <AlertTitle>関連質問を{ props.info[0] }件設定、{ props.info[1] }件解除しました。</AlertTitle>;
                     break;
             }
             break;
@@ -85,15 +85,15 @@ function AlertMessage(props) {
         case "user":
             switch (props.status) {
                 case "admin_created":
-                    success_message = <AlertTitle>ユーザ（管理者）を追加しました。</AlertTitle>;
+                    success_message = <AlertTitle>ユーザ（管理者）を{ props.info }名追加しました。</AlertTitle>;
                     break;
                 
                 case "public_created":
-                    success_message = <AlertTitle>ユーザ（受講生）を追加しました。</AlertTitle>;
+                    success_message = <AlertTitle>ユーザ（受講生）を{ props.info }名追加しました。</AlertTitle>;
                     break;
                     
                 case "deleted":
-                    success_message = <AlertTitle>ユーザを削除しました。</AlertTitle>;
+                    success_message = <AlertTitle>ユーザID{ props.info }のデータを削除しました。</AlertTitle>;
                     break;
             }
             break;
@@ -121,7 +121,7 @@ function AlertMessage(props) {
     
     return (
         <div>
-            { props.type &&
+            { props.status &&
                 <Collapse in={open}>
                     <Alert
                         action={

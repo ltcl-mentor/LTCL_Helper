@@ -21,7 +21,7 @@ function Show() {
 
     useEffect(() => {
         axios
-            .post(`/questions/${ id }`)
+            .post(`/questions/record/${ id }`)
             .then(response => {
                 
             }).catch(error => {

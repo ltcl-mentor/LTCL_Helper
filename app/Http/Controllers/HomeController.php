@@ -47,10 +47,9 @@ class HomeController extends Controller
      */
     public function storeInfo(Info $info, Request $request)
     {
-        $input = $request['info'];
+        $input['information'] = $request['info'];
+        $input['date'] = $request['date'];
         $info->fill($input)->save();
-        
-        return redirect('/?info=success');
     }
     
     /**
@@ -59,7 +58,6 @@ class HomeController extends Controller
     public function deleteInfo(Info $info)
     {
         $info->delete();
-        return redirect('/');
     }
     
     /**

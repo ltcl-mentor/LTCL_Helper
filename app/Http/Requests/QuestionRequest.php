@@ -24,11 +24,11 @@ class QuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'post.category' => 'required',
-            'post.topic' => 'required',
-            'post.curriculum_number' => 'required|max:5',
-            'post.question' => 'required|string',
-            'post.comment' => 'required|string',
+            'category' => 'required',
+            'topic' => 'required',
+            'curriculum_number' => 'required|max:5',
+            'question' => 'required|string',
+            'comment' => 'required|string',
         ];
     }
 }

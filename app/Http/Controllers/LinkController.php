@@ -34,24 +34,18 @@ class LinkController extends Controller
         // 現在指定の記事にリレーションされている質問のidを取得し、配列に変換
         $related_question_ids = $document->getRelatedQuestionsIds();
         
-        if($request['detach_id']){
-            // リクエストの"detach_id"の文字列を配列に変換
-            $request_detach_id = explode(",", $request['detach_id']);
-            
+        if(count($request['detach_id']) !== 0){
             // detachする質問の特定
             // リクエストの"detach_id"に含まれている、リレーション質済み質問のidを取得
-            $detach_id = array_intersect($request_detach_id, $related_question_ids);
+            $detach_id = array_intersect($request['detach_id'], $related_question_ids);
             
             $document->questions()->detach($detach_id);
         }
         
-        if($request['attach_id']){
-            // リクエストの"detach_id"の文字列を配列に変換
-            $request_attach_id = explode(",", $request['attach_id']);
-            
+        if(count($request['attach_id']) !== 0){
             // attachする質問の特定
             // リクエストの"attach_id"の中で、まだリレーションされていない質問のidを取得
-            $attach_id = array_diff($request_attach_id, $related_question_ids);
+            $attach_id = array_diff($request['attach_id'], $related_question_ids);
         
             $document->questions()->attach($attach_id);
         }
@@ -67,7 +61,12 @@ class LinkController extends Controller
             $whitch_do = '';
         }
         
-        return redirect('/links/document/'. $document->id .'?link_from_document='. $whitch_do);
+        return [
+            "id" => $document->id,
+            "whitch_do" => $whitch_do,
+            "attach_count" => count($attach_id),
+            "detach_count" => count($detach_id), 
+        ];
     }
     
     /**
@@ -76,7 +75,7 @@ class LinkController extends Controller
     public function getDocumentsFromQuestion(Question $question, Document $document)
     {
         $related_documents = $question->documents()->get();
-
+        
         if(count($related_documents) === 0){
             $unrelated_documents = $document->get();
         }else{
@@ -94,24 +93,18 @@ class LinkController extends Controller
         // 現在指定の記事にリレーションされている質問のidを取得し、配列に変換
         $related_document_ids = $question->getRelatedDocumentsIds();
         
-        if($request['detach_id']){
-            // リクエストの"detach_id"の文字列を配列に変換
-            $request_detach_id = explode(",", $request['detach_id']);
-            
+        if(count($request['detach_id']) !== 0){
             // detachする質問の特定
             // リクエストの"detach_id"に含まれている、リレーション質済み質問のidを取得
-            $detach_id = array_intersect($request_detach_id, $related_document_ids);
+            $detach_id = array_intersect($request['detach_id'], $related_document_ids);
             
             $question->documents()->detach($detach_id);
         }
         
-        if($request['attach_id']){
-            // リクエストの"detach_id"の文字列を配列に変換
-            $request_attach_id = explode(",", $request['attach_id']);
-            
+        if(count($request['attach_id']) !== 0){
             // attachする質問の特定
             // リクエストの"attach_id"の中で、まだリレーションされていない質問のidを取得
-            $attach_id = array_diff($request_attach_id, $related_document_ids);
+            $attach_id = array_diff($request['attach_id'], $related_document_ids);
         
             $question->documents()->attach($attach_id);
         }
@@ -127,7 +120,12 @@ class LinkController extends Controller
             $whitch_do = '';
         }
         
-        return redirect('/links/question/'. $question->id .'?link_from_question='. $whitch_do);
+        return [
+            "id" => $question->id,
+            "whitch_do" => $whitch_do,
+            "attach_count" => count($attach_id),
+            "detach_count" => count($detach_id), 
+        ];
     }
     
     

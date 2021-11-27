@@ -1,4 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
+import axios from "axios";
+import {useHistory} from 'react-router-dom';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@material-ui/core/Typography';
@@ -26,6 +28,7 @@ const style = {
 };
 
 function Publish(props) {
+    const history = useHistory();
     const [open, setOpen] = useState(false);
     
     const handleOpen = () => setOpen(true);
@@ -33,9 +36,17 @@ function Publish(props) {
     const handleClose = () => setOpen(false);
     
     const unpublishConfirm = () => {
-        "use strict"; 
         if (confirm('質問が非公開になります。\nよろしいですか？')) {
-            document.getElementById('unpublish').submit();
+            axios
+                .post(`/questions/${ props.question_id }/uncheck`)
+                .then(response => {
+                    if (response.status === 200) {
+                        props.setQuestion(response.data);
+                        history.push(`/questions/${ props.question_id }`, { question: "unpublished" });
+                    }
+                }).catch(error => {
+                    console.log(error);
+                });
         } else {
             window.alert('キャンセルしました');
             return false;
@@ -51,12 +62,9 @@ function Publish(props) {
         );
     } else {
         publishBtn = (
-            <form action={ `/questions/` + props.question_id + `/uncheck` } method="post" id="unpublish">
-                <input type="hidden" name="_token" value={ props.csrf_token }/>
-                <Typography onClick={ unpublishConfirm }>
-                    <Button variant="contained" color="warning" startIcon={ <PublicOffIcon /> }>非公開にする</Button>
-                </Typography>
-            </form>
+            <Typography onClick={ unpublishConfirm }>
+                <Button variant="contained" color="warning" startIcon={ <PublicOffIcon /> }>非公開にする</Button>
+            </Typography>
         );
     }
     
@@ -76,11 +84,12 @@ function Publish(props) {
                 
                     <CheckForm 
                         question_id={ props.question_id }
-                        csrf_token={ props.csrf_token }
+                        setQuestion={ props.setQuestion }
+                        handleClose={ handleClose }
                     />
                     
                     <Box sx={{ border: "1px solid black" }}>
-                        <Preview 
+                        <Preview
                             question={ props.question }
                             images={ props.images }
                             documents={ props.documents }

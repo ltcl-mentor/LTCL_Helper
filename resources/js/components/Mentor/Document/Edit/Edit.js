@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import axios from "axios";
-import {useParams} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import Box from '@mui/material/Box';
@@ -14,6 +14,8 @@ import URL from '../Create/link';
 
 function Edit() {
     const { id } = useParams();
+    const history = useHistory();
+    const [clickCount, setClickCount] = useState(0);
     const [title, setTitle] = useState('');
     const [title_validation_error, setTitleValidationError] = useState(false);
     const [link, setLink] = useState('');
@@ -24,7 +26,6 @@ function Edit() {
         master: false,
         all: false,
      });
-    const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
     
     useEffect(() => {
         axios
@@ -35,7 +36,7 @@ function Edit() {
                 setTargets({
                     beginner: response.data.beginner,
                     amature: response.data.amature,
-                    matser: response.data.matser,
+                    master: response.data.master,
                     all: response.data.all,
                 });
             }).catch(error => {
@@ -43,8 +44,7 @@ function Edit() {
             });
     }, []);
     
-    let set = 0;
-    const handleClick = () => {
+    const handleSubmit = () => {
         // タイトルのバリデーション
         if ( !(title.trim().length !== 0 && title.trim().length <= 50) ) {
             setTitleValidationError(true);
@@ -57,9 +57,24 @@ function Edit() {
         }
         
         // フォーム送信と重複保存の防止
-        if (set === 0) {
-            document.getElementById('create').submit();
-            set=1;
+        if (clickCount === 0) {
+            
+        console.log(targets);
+            setClickCount(1);
+            
+            axios
+                .post(`/documents/${ id }/update`, {
+                    targets: targets,
+                    title: title,
+                    link: link,
+                })
+                .then(response => {
+                    if (response.status === 200) {
+                        history.push(`/documents/${ response.data.id }`, { document: "edited" });
+                    }
+                }).catch(error => {
+                    console.log(error);
+                });
         } else {
             return false;
         }
@@ -70,42 +85,37 @@ function Edit() {
             <Breadcrumbs page="mentor_document_edit" id={ id }/>
             
             <Box sx={{ width: "70%", marginLeft: "15%" }}>
-                <form action={ `/documents/` + id + `/update` } method="post" id="create">
-                    <input type="hidden" value={ csrf_token } name="_token" />
+                <Card sx={{ marginBottom: 2 }}>
+                    <Target
+                        targets={ targets }
+                        setTargets={ setTargets }
+                    />
                     
-                    <Card sx={{ marginBottom: 2 }}>
-                        
-                        <Target
-                            targets={ targets }
-                            setTargets={ setTargets }
-                        />
-                        
-                        <Title 
-                            title={ title }
-                            setTitle={ setTitle }
-                            title_validation_error={ title_validation_error }
-                        />
-                        
-                        <URL
-                            link={ link }
-                            setLink={ setLink }
-                            link_validation_error={ link_validation_error }
-                        />
-                        
-                        <Typography
-                            align="center"
-                            component="div"
-                            sx={{
-                                marginTop: 4,
-                                marginBottom: 3,
-                            }}
-                        >
-                            <Button onClick={ handleClick } variant="contained" endIcon={<SaveIcon />}>
-                                登録する
-                            </Button>
-                        </Typography>
-                    </Card>
-                </form>
+                    <Title 
+                        title={ title }
+                        setTitle={ setTitle }
+                        title_validation_error={ title_validation_error }
+                    />
+                    
+                    <URL
+                        link={ link }
+                        setLink={ setLink }
+                        link_validation_error={ link_validation_error }
+                    />
+                    
+                    <Typography
+                        align="center"
+                        component="div"
+                        sx={{
+                            marginTop: 4,
+                            marginBottom: 3,
+                        }}
+                    >
+                        <Button onClick={ handleSubmit } variant="contained" endIcon={<SaveIcon />}>
+                            登録する
+                        </Button>
+                    </Typography>
+                </Card>
             </Box>
         </div>
     );

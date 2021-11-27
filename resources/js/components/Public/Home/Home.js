@@ -14,7 +14,7 @@ import Weather from './weather';
 import Location from './location';
 
 function Home() {
-    const parameter = useLocation().search.substr(1).split('=');
+    const parameter = useLocation();
     const [user, setUser] = useState([]);
     const [screen_width, setScreenWidth] = useState(window.innerWidth);
     
@@ -34,7 +34,10 @@ function Home() {
     
     return (
         <div className="container">
-            <Alert type={ parameter[0] } status={ parameter[1] }/>
+            <Alert
+                type={ parameter.state && parameter.state.type }
+                status={ parameter.state && parameter.state.status }
+            />
             
             <Box
                 sx={{
@@ -74,7 +77,7 @@ function Home() {
                                 お知らせ
                             </Typography>
                             
-                            <Information  is_admin={ user.is_admin }/>
+                            <Information is_admin={ user.is_admin }/>
                             
                             <Typography
                                 variant="h5"

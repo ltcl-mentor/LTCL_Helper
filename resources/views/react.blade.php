@@ -2,6 +2,6 @@
 
 @section('content')
 
-    <div id="Router"></div>
+    <div id="Router" style="white-space: pre-wrap"></div>
 
 @endsection

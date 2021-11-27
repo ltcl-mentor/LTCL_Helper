@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
-import {useLocation} from 'react-router-dom';
+import {useLocation, useHistory} from 'react-router-dom';
 import Box from '@material-ui/core/Box';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -11,11 +11,11 @@ import Students from './students';
 import Admins from './admins';
 
 function Index() {
-    const parameter = useLocation().search.substr(1).split('=');
+    const parameter = useLocation();
+    const history = useHistory();
     const [staffs, setStaffs] = useState([]);
     const [students, setStudents] = useState([]);
     const [delete_user_id, setDeleteUserId] = useState();
-    const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
     const [value, setValue] = React.useState(0);
     
     useEffect(() => {
@@ -34,12 +34,26 @@ function Index() {
             }).catch(error => {
                 console.log(error);
             });
+            
+        if (parameter.state && parameter.state.value) {
+            setValue(parameter.state.value);
+        }
     }, []);
     
     useEffect(() => {
         if (delete_user_id) {
             if (confirm('データが削除されます。\nよろしいですか？')) {
-                document.getElementById('delete').submit();
+                axios
+                    .post(`/users/${ delete_user_id }/delete`)
+                    .then(response => {
+                        if (response.status === 200) {
+                            setStaffs(response.data.staffs);
+                            setStudents(response.data.students);
+                            history.push("/users/index", { user: "deleted", number: delete_user_id });
+                        }
+                    }).catch(error => {
+                        console.log(error);
+                    });
             } else {
                 window.alert('キャンセルしました');
                 return false;
@@ -60,13 +74,13 @@ function Index() {
     
     return (
         <div className="container">
-            <Alert type={ parameter[0] } status={ parameter[1] }/>
+            <Alert
+                type="user"
+                status={ parameter.state && parameter.state.user }
+                info={ parameter.state && parameter.state.number }
+            />
             
             <Breadcrumbs page="mentor_user_index"/>
-            
-            <form action={ `/users/` + delete_user_id + `/delete` } method="post" id="delete">
-                <input type="hidden" name="_token" value={ csrf_token }/>
-            </form>
             
             <Box sx={{ marginTop: 3, borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={ value } onChange={ handleChange } aria-label="basic tabs example">

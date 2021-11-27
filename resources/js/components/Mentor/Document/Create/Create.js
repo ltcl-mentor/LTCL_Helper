@@ -1,4 +1,6 @@
 import React,{useState} from 'react';
+import axios from "axios";
+import {useHistory} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import Box from '@mui/material/Box';
@@ -11,6 +13,8 @@ import Title from './title';
 import URL from './link';
 
 function Create() {
+    const history = useHistory();
+    const [clickCount, setClickCount] = useState(0);
     const [title, setTitle] = useState('');
     const [title_validation_error, setTitleValidationError] = useState(false);
     const [link, setLink] = useState('');
@@ -21,10 +25,8 @@ function Create() {
         master: false,
         all: false,
     });
-    const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
     
-    let set = 0;
-    const handleClick = () => {
+    const handleSubmit = () => {
         // タイトルのバリデーション
         if ( !(title.trim().length !== 0 && title.trim().length <= 50) ) {
             setTitleValidationError(true);
@@ -37,9 +39,22 @@ function Create() {
         }
         
         // フォーム送信と重複保存の防止
-        if (set === 0) {
-            document.getElementById('create').submit();
-            set=1;
+        if (clickCount === 0) {
+            setClickCount(1);
+            
+            axios
+                .post("/documents/store", {
+                    targets: targets,
+                    title: title,
+                    link: link,
+                })
+                .then(response => {
+                    if (response.status === 200) {
+                        history.push(`/documents/${ response.data.id }`, { document: "created" });
+                    }
+                }).catch(error => {
+                    console.log(error);
+                });
         } else {
             return false;
         }
@@ -50,42 +65,37 @@ function Create() {
             <Breadcrumbs page="mentor_document_create"/>
             
             <Box sx={{ width: "70%", marginLeft: "15%" }}>
-                <form action="/documents/store" method="post" id="create">
-                    <input type="hidden" value={ csrf_token } name="_token" />
+                <Card sx={{ marginBottom: 2 }}>
+                    <Target
+                        targets={ targets }
+                        setTargets={ setTargets }
+                    />
                     
-                    <Card sx={{ marginBottom: 2 }}>
-                        
-                        <Target
-                            targets={ targets }
-                            setTargets={ setTargets }
-                        />
-                        
-                        <Title 
-                            title={ title }
-                            setTitle={ setTitle }
-                            title_validation_error={ title_validation_error }
-                        />
-                        
-                        <URL
-                            link={ link }
-                            setLink={ setLink }
-                            link_validation_error={ link_validation_error }
-                        />
-                        
-                        <Typography
-                            align="center"
-                            component="div"
-                            sx={{
-                                marginTop: 4,
-                                marginBottom: 3,
-                            }}
-                        >
-                            <Button onClick={ handleClick } variant="contained" endIcon={<SaveIcon />}>
-                                登録する
-                            </Button>
-                        </Typography>
-                    </Card>
-                </form>
+                    <Title 
+                        title={ title }
+                        setTitle={ setTitle }
+                        title_validation_error={ title_validation_error }
+                    />
+                    
+                    <URL
+                        link={ link }
+                        setLink={ setLink }
+                        link_validation_error={ link_validation_error }
+                    />
+                    
+                    <Typography
+                        align="center"
+                        component="div"
+                        sx={{
+                            marginTop: 4,
+                            marginBottom: 3,
+                        }}
+                    >
+                        <Button onClick={ handleSubmit } variant="contained" endIcon={<SaveIcon />}>
+                            登録する
+                        </Button>
+                    </Typography>
+                </Card>
             </Box>
         </div>
     );

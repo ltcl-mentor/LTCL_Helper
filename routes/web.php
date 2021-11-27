@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth']], function () {
      * ログイン済みユーザーのみアクセス可能
      */
     Route::post('/questions/store/public', 'QuestionController@publicStore'); // 受講生の質問投稿処理
-    Route::post('/questions/{question}', 'QuestionController@publicShow'); // 質問詳細画面のユーザ閲覧履歴記録処理
+    Route::post('/questions/record/{question}', 'QuestionController@recordShow'); // 質問詳細画面のユーザ閲覧履歴記録処理
     Route::post('/contact', 'ContactController@sendContactMessage'); // お問い合わせ内容送信処理
     // Route::get('/', 'HomeController@home'); // トップ画面表示
     // Route::get('/search/condition', 'SearchController@search'); // 絞り込み検索画面表示
@@ -66,7 +66,7 @@ Route::group(['middleware' => ['auth']], function () {
         /**
          *  トップ画面
          */
-        Route::post('/informations', 'HomeController@storeInfo'); // お知らせの登録
+        Route::post('/informations/store', 'HomeController@storeInfo'); // お知らせの登録
         Route::post('/informations/{info}/delete', 'HomeController@deleteInfo'); // お知らせの削除
         
         

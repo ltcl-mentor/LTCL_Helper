@@ -253,23 +253,17 @@ function Link(props) {
                         </Grid>
                         
                         <Grid item>
-                            <form action={ `/links/document/` + props.id } method="POST" id="link">
-                                <input type="hidden" value={ props.csrf_token } name="_token" />
-                                <input type="hidden" value={ props.attach_id } name="attach_id" />
-                                <input type="hidden" value={ props.detach_id } name="detach_id" />
-            
-                                <Button
-                                    sx={{ my: 0.5 }}
-                                    variant="contained"
-                                    onClick={ handleReset }
-                                    aria-label="reset"
-                                    disabled={ !(upChecked.length === 0 && downChecked.length === 0) }
-                                    onClick={ props.handleSubmit }
-                                    startIcon={ <SaveIcon /> }
-                                >
-                                    設定する
-                                </Button>
-                            </form>
+                            <Button
+                                sx={{ my: 0.5 }}
+                                variant="contained"
+                                onClick={ handleReset }
+                                aria-label="reset"
+                                disabled={ !(upChecked.length === 0 && downChecked.length === 0) }
+                                onClick={ props.handleSubmit }
+                                startIcon={ <SaveIcon /> }
+                            >
+                                設定する
+                            </Button>
                         </Grid>
                         
                         <Grid item sx={{ width: "100%" }}>

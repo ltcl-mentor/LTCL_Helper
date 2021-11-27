@@ -30,22 +30,20 @@ class DocumentController extends Controller
      */
     public function store(DocumentRequest $request, Document $document)
     {
-        // 記事対象者情報の登録
-        $targets = ['beginner', 'amature', 'master', 'all'];
-        foreach($targets as $target){
-            if(isset($request[$target])){
-                $document[$target] = true;
-            }else{
-                $document[$target] = false;
-            }
-        }
+        // リクエスト情報の挿入
+        $input['title'] = $request['title'];
+        $input['link'] = $request['link'];
+        $input['beginner'] = $request['targets']['beginner'];
+        $input['amature'] = $request['targets']['amature'];
+        $input['master'] = $request['targets']['master'];
+        $input['all'] = $request['targets']['all'];
         
-        // 記事作成者の登録
-        $document['user_id'] = Auth::id();
+        // 記事作成者の挿入
+        $input['user_id'] = Auth::id();
         
-        $document->fill($request['document'])->save();
+        $document->fill($input)->save();
         
-        return redirect('/documents/'. $document->id .'?document=created');
+        return ["id" => $document->id];
     }
     
     /**
@@ -53,19 +51,17 @@ class DocumentController extends Controller
      */
     public function update(DocumentRequest $request, Document $document)
     {
-        // 記事対象者情報の登録
-        $targets = ['beginner', 'amature', 'master', 'all'];
-        foreach($targets as $target){
-            if(isset($request[$target])){
-                $document[$target] = true;
-            }else{
-                $document[$target] = false;
-            }
-        }
+        // リクエスト情報の挿入
+        $input['title'] = $request['title'];
+        $input['link'] = $request['link'];
+        $input['beginner'] = $request['targets']['beginner'];
+        $input['amature'] = $request['targets']['amature'];
+        $input['master'] = $request['targets']['master'];
+        $input['all'] = $request['targets']['all'];
         
-        $document->fill($request['document'])->save();
+        $document->fill($input)->save();
         
-        return redirect('documents/'. $document->id .'?document=edited');
+        return ["id" => $document->id];
     }
     
     /**
@@ -78,8 +74,6 @@ class DocumentController extends Controller
         
         // 過去に論理削除されたデータの中で３ヶ月経過したものを物理削除
         Document::documentForceDelete();
-        
-        return redirect('/documents/index?document=deleted');
     }
     
     /**

@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import axios from "axios";
-import {useParams} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import Typography from '@material-ui/core/Typography';
@@ -17,6 +17,8 @@ import Picture from './picture';
 
 function Edit() {
     const { id } = useParams();
+    const history = useHistory();
+    const [clickCount, setClickCount] = useState(0);
     const [oldData, setOldData] = useState([]);
     const [category, setCategory] = useState(0);
     const [topic, setTopic] = useState(0);
@@ -38,14 +40,10 @@ function Edit() {
             ["成果物"],
         ]
     ];
-    // 選択されたcategory、topicに該当するカリキュラム番号群を保持
-    // const [curriculum_numbers, setCurriculumNumbers] = useState(["1-1-1"]);
     const [question, setQuestion] = useState();
     const [question_validation_error, setQuestionValidationError] = useState(0);
     const [comment, setComment] = useState();
     const [comment_validation_error, setCommentValidationError] = useState(0);
-    // const question_id = document.getElementById('Question_mentor_edit').getAttribute('question_id');
-    const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
     
     useEffect(() => {
         axios
@@ -69,8 +67,7 @@ function Edit() {
     }, [category, topic]);
     
     // 保存処理の重複を防止するためにクリック回数を記録する変数set
-    let set = 0;
-    const handleClick = () => {
+    const handleSubmit = () => {
         // カリキュラム番号のバリデーション
         // 入力確認
         if (!(curriculum_number)) {
@@ -85,10 +82,24 @@ function Edit() {
         
         // 質問とコメントのバリデーション
         if (question.trim().length !== 0 && comment.trim().length !== 0){
-            if (set==0) {
-                console.log(0);
-                document.getElementById('update').submit();
-                set=1;
+            if (clickCount==0) {
+                setClickCount(1);
+                
+                axios
+                    .post(`/questions/${ id }/update`, {
+                        category: category,
+                        topic: topic,
+                        curriculum_number: curriculum_number,
+                        question: question,
+                        comment: comment,
+                    })
+                    .then(response => {
+                        if (response.status === 200) {
+                            history.push(`/questions/${ response.data.id }`, { question: "edited" });
+                        }
+                    }).catch(error => {
+                        console.log(error);
+                    });
             } else {
                 return false;
             }
@@ -112,111 +123,106 @@ function Edit() {
             <Breadcrumbs page="mentor_question_edit" id={ id }/>
             
             <Box sx={{ width: "70%", marginLeft: "15%" }}>
-                <form action={`/questions/` + id  + `/update`} method="post" enctype="multipart/form-data" id ="update">
-                    <input type="hidden" name="_token" value={ csrf_token }/>
-                    <input type="hidden" name="post[curriculum_number]" value={ curriculum_number } />
+                <Card sx={{ marginBottom: 2 }}>
+                    <Typography
+                        variant="h5"
+                        component="div"
+                        sx={{
+                            marginTop: 4,
+                            marginLeft: 2,
+                        }}
+                    >
+                        1. カテゴリーの選択
+                    </Typography>
                     
-                    <Card sx={{ marginBottom: 2 }}>
-                        <Typography
-                            variant="h5"
-                            component="div"
-                            sx={{
-                                marginTop: 4,
-                                marginLeft: 2,
-                            }}
-                        >
-                            1. カテゴリーの選択
-                        </Typography>
-                        
-                        <Typography
-                            component="div"
-                            sx={{
-                                marginTop: 2,
-                                marginLeft: 4,
-                            }}
-                        >
-                            <Category
-                                category={ category }
-                                old_category={ oldData.category }
-                                setCategory={ setCategory }
-                            />
-                        </Typography>
-                        
-                        <Typography
-                            variant="h5"
-                            component="div"
-                            sx={{
-                                marginTop: 4,
-                                marginLeft: 2,
-                            }}
-                        >
-                            2. トピックの選択
-                        </Typography>
-                        
-                        <Typography
-                            component="div"
-                            sx={{
-                                marginTop: 2,
-                                marginLeft: 4,
-                            }}
-                        >
-                            <TopicForm
-                                category={ category }
-                                topic={ topic }
-                                setTopic={ setTopic }
-                                old_topic={ oldData.topic }
-                            />
-                        </Typography>
-                        
-                        <Typography
-                            variant="h5"
-                            component="div"
-                            sx={{
-                                marginTop: 4,
-                                marginLeft: 2,
-                            }}
-                        >
-                            3. 該当カリキュラム番号の選択
-                        </Typography>
-                        
-                        <CurriculumNumber
-                            setCurriculumNumber={ setCurriculumNumber }
-                            curriculum_number={ curriculum_number }
-                            old_curriculum_number={ oldData.curriculum_number }
-                            curriculum_number_validation_error={ curriculum_number_validation_error }
-                            curriculum_numbers={ curriculum_numbers[Number(category)][Number(topic)] }
+                    <Typography
+                        component="div"
+                        sx={{
+                            marginTop: 2,
+                            marginLeft: 4,
+                        }}
+                    >
+                        <Category
+                            category={ category }
+                            old_category={ oldData.category }
+                            setCategory={ setCategory }
                         />
-                        
-                        <QuestionForm
-                            question={ question }
-                            setQuestion={ setQuestion }
-                            question_validation_error={ question_validation_error }
+                    </Typography>
+                    
+                    <Typography
+                        variant="h5"
+                        component="div"
+                        sx={{
+                            marginTop: 4,
+                            marginLeft: 2,
+                        }}
+                    >
+                        2. トピックの選択
+                    </Typography>
+                    
+                    <Typography
+                        component="div"
+                        sx={{
+                            marginTop: 2,
+                            marginLeft: 4,
+                        }}
+                    >
+                        <TopicForm
+                            category={ category }
+                            topic={ topic }
+                            setTopic={ setTopic }
+                            old_topic={ oldData.topic }
                         />
-                        
-                        <Picture
-                            question_id={ id }
-                        />
-                        
-                        <CommentForm
-                            comment={ comment }
-                            setComment={ setComment }
-                            comment_validation_error={ comment_validation_error }
-                        />
-                        
-                        <Typography
-                            align="center"
-                            component="div"
-                            sx={{
-                                marginTop: 4,
-                                marginBottom: 3,
-                            }}
-                        >
-                            <Button onClick={ handleClick } variant="contained" endIcon={<SaveIcon />}>
-                                更新する
-                            </Button>
-                        </Typography>
-                    </Card>
-                </form>
+                    </Typography>
+                    
+                    <Typography
+                        variant="h5"
+                        component="div"
+                        sx={{
+                            marginTop: 4,
+                            marginLeft: 2,
+                        }}
+                    >
+                        3. 該当カリキュラム番号の選択
+                    </Typography>
+                    
+                    <CurriculumNumber
+                        setCurriculumNumber={ setCurriculumNumber }
+                        curriculum_number={ curriculum_number }
+                        old_curriculum_number={ oldData.curriculum_number }
+                        curriculum_number_validation_error={ curriculum_number_validation_error }
+                        curriculum_numbers={ curriculum_numbers[Number(category)][Number(topic)] }
+                    />
+                    
+                    <QuestionForm
+                        question={ question }
+                        setQuestion={ setQuestion }
+                        question_validation_error={ question_validation_error }
+                    />
+                    
+                    <Picture
+                        question_id={ id }
+                    />
+                    
+                    <CommentForm
+                        comment={ comment }
+                        setComment={ setComment }
+                        comment_validation_error={ comment_validation_error }
+                    />
+                    
+                    <Typography
+                        align="center"
+                        component="div"
+                        sx={{
+                            marginTop: 4,
+                            marginBottom: 3,
+                        }}
+                    >
+                        <Button onClick={ handleSubmit } variant="contained" endIcon={<SaveIcon />}>
+                            更新する
+                        </Button>
+                    </Typography>
+                </Card>
             </Box>
         </div>
     );

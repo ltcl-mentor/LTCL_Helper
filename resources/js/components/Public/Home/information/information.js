@@ -1,15 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Create from './create';
 import Infos from './infos';
 
 function Information(props) {
-    const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
+    const [infoChanging, setInfoChanging] = useState(false);
     
     let create_btn;
     if (props.is_admin) {
         create_btn=(
-            <Create 
-                csrf_token={ csrf_token }
+            <Create
+                setInfoChanging={ setInfoChanging }
             />
         );
     }
@@ -18,8 +18,8 @@ function Information(props) {
         <div>
             { create_btn }
             
-            <Infos 
-                csrf_token={ csrf_token }
+            <Infos
+                infoChanging={ infoChanging }
                 is_admin={ props.is_admin }
             />
         </div>

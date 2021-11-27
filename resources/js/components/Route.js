@@ -49,7 +49,7 @@ function Router() {
         user_links = (
             <Switch>
                 {/* トップ画面表示 */}
-                <Route path="/" exact component={ Home }/>
+                <Route key="home" path="/" exact component={ Home }/>
                 
                 {/* 質問履歴画面表示 */}
                 <Route path="/history" component={ History }/>

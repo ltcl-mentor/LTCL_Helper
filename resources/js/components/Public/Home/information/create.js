@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import axios from "axios";
+import {useHistory} from 'react-router-dom';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -19,9 +21,10 @@ const style = {
 };
 
 function Create(props) {
+    const history = useHistory();
     const [open, setOpen] = useState(false);
-    const [info, setInfo] = useState("");
-    const [date, setDate] = useState("");
+    const [info, setInfo] = useState('');
+    const [date, setDate] = useState('');
     const [infoValodationError, setInfoValidationError] = useState(false);
     const [dateValodationError, setDateValidationError] = useState(false);
     
@@ -41,7 +44,23 @@ function Create(props) {
     
     const submit = () => {
         if (info.trim().length !== 0 && date.length !== 0) {
-            document.getElementById('create_info').submit();
+            props.setInfoChanging(true);
+            axios
+                .post("/informations/store", {
+                    info: info,
+                    date: date,
+                })
+                .then(response => {
+                    if (response.status === 200) {
+                        setOpen(false);
+                        setInfo('');
+                        setDate('');
+                        props.setInfoChanging(false);
+                        history.push("/", { type: "info", status: "created" });
+                    }
+                }).catch(error => {
+                    console.log(error);
+                });
         }
         
         if (info.trim().length === 0) {
@@ -82,45 +101,40 @@ function Create(props) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={ style }>
-                    <form action="/informations" method="post" id="create_info">
-                        <input type="hidden" value={ props.csrf_token } name="_token" />
-                        
-                        <Typography align="center" sx={{ paddingTop:2 }} variant="h5">
-                            お知らせの入力
-                        </Typography>
-                        
-                        <Typography align="center" sx={{ paddingTop:1 }}>
-                            文字数：{ info.trim().length }文字
-                        </Typography>
-                        
-                        <TextareaAutosize 
-                            name="info[information]"
-                            placeholder="お知らせを簡潔に(250文字以内で)入力"
-                            minRows={3}
-                            value={ info }
-                            onChange={ (event) => handleInfo(event) }
-                            style={{ 
-                                width: "80%",
-                                marginLeft: "10%",
-                                paddingTop:2,
-                            }}
-                        />
-                        
-                        <Typography align="center" sx={{ paddingTop:2 }} variant="h5">
-                            公開日の設定
-                        </Typography>
-                        
-                        <Typography align="center" sx={{ paddingTop:2 }}>
-                            <p>設定した日付以降に上記のお知らせを表示します</p>
-                            <input name="info[date]" type="date" onChange={ handleDate }/>
-                        </Typography>
-                        
-                        { validation_message }
-                        
-                        <Typography align="center" sx={{ paddingTop:2 }}>
-                            <Button variant="contained" onClick={ submit }>保存</Button>
-                        </Typography>
-                    </form>
+                    <Typography align="center" sx={{ paddingTop:2 }} variant="h5">
+                        お知らせの入力
+                    </Typography>
+                    
+                    <Typography align="center" sx={{ paddingTop:1 }}>
+                        文字数：{ info.trim().length }文字
+                    </Typography>
+                    
+                    <TextareaAutosize
+                        placeholder="お知らせを簡潔に(250文字以内で)入力"
+                        minRows={3}
+                        value={ info }
+                        onChange={ (event) => handleInfo(event) }
+                        style={{ 
+                            width: "80%",
+                            marginLeft: "10%",
+                            paddingTop:2,
+                        }}
+                    />
+                    
+                    <Typography align="center" sx={{ paddingTop:2 }} variant="h5">
+                        公開日の設定
+                    </Typography>
+                    
+                    <Typography align="center" sx={{ paddingTop:2 }}>
+                        <p>設定した日付以降に上記のお知らせを表示します</p>
+                        <input type="date" onChange={ handleDate }/>
+                    </Typography>
+                    
+                    { validation_message }
+                    
+                    <Typography align="center" sx={{ paddingTop:2 }}>
+                        <Button variant="contained" onClick={ submit }>保存</Button>
+                    </Typography>
                 </Box>
             </Modal>
         </div>

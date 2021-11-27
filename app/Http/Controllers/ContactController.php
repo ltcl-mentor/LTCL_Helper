@@ -18,15 +18,13 @@ class ContactController extends Controller
         $message = $user . "さんから次のような問い合わせがありました。\n----------------\n" . $request['message'] . "\n----------------";
         
         Slack::sendMessage($message);
-        
-        return redirect('/?contact=created');
     }
     
     /**
      * お問い合わせ入力画面表示
      */
-    public function create()
-    {
-        return view('Public.Contact.create');
-    }
+    // public function create()
+    // {
+    //     return view('Public.Contact.create');
+    // }
 }

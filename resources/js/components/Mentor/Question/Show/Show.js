@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
-import {Link} from 'react-router-dom';
-import {useLocation} from 'react-router-dom';
-import {useParams} from 'react-router-dom';
+import {Link, useParams, useLocation, useHistory} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Button from '@mui/material/Button';
 import EditIcon from '@material-ui/icons/Edit';
@@ -17,14 +15,14 @@ import Comment from './comment';
 import Documents from '../../../Public/Question/Show/documents';
 
 function Show() {
-    const parameter = useLocation().search.substr(1).split('=');
+    const parameter = useLocation();
     const { id } = useParams();
+    const history = useHistory();
     const [question, setQuestion] = useState([]);
     const [images, setImages] = useState([]);
     const [documents, setDocuments] = useState([]);
     const categories = ['カリキュラム', '成果物'];
     const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', 'マイグレーション', 'リレーション', 'Laravel拡張', '画像処理', 'Heroku環境', 'API', 'デザイン'];
-    const csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
 
     useEffect(() => {
         axios
@@ -54,7 +52,15 @@ function Show() {
     
     const deleteConfirm = () => {
         if (confirm('データが削除されます。\nよろしいですか？')) {
-            document.getElementById('delete').submit();
+            axios
+                .post(`/questions/${ id }/delete`)
+                .then(response => {
+                    if (response.status === 200) {
+                        history.push("/questions/index", { question: "deleted", number: 1 });
+                    }
+                }).catch(error => {
+                    console.log(error);
+                });
         } else {
             window.alert('キャンセルしました');
             return false;
@@ -63,15 +69,19 @@ function Show() {
     
     return (
         <div className="container">
-            <Alert type={ parameter[0] } status={ parameter[1] }/>
+            <Alert
+                type="question"
+                status={ parameter.state && parameter.state.question }
+                info={ parameter.state && parameter.state.number }
+            />
             
             <Breadcrumbs page="mentor_question_show"/>
             
             <Typography component="div" align="center" sx={{ marginTop: 4 }} >
                 <Publish
                     question_id={ id }
-                    csrf_token={ csrf_token }
                     question={ question }
+                    setQuestion={ setQuestion } 
                     images={ images }
                     documents={ documents }
                     category={ categories[question.category] }
@@ -86,10 +96,7 @@ function Show() {
             </Typography>
             
             <Typography component="div" align="center" sx={{ marginTop: 1, marginBottom: 2 }} >
-                <form action={ `/questions/` + id + `/delete` } method="post" id="delete">
-                    <input type="hidden" name="_token" value={ csrf_token }/>
-                    <Button variant="contained" color="error" onClick={ deleteConfirm } startIcon={ <DeleteIcon /> }>削除する</Button>
-                </form>
+                <Button variant="contained" color="error" onClick={ deleteConfirm } startIcon={ <DeleteIcon /> }>削除する</Button>
             </Typography>
     
             <Parameters
@@ -123,8 +130,8 @@ function Show() {
             </Typography>
             
             <Typography component="div" align="center" sx={{ marginTop: 1, marginBottom: 2}} >
-                <Link to={ `/links/question/` + question.id }>
-                    <Button variant="contained" color="info" onClick={ deleteConfirm } startIcon={ <EditIcon /> }>編集する</Button>
+                <Link to={ `/links/question/` + id }>
+                    <Button variant="contained" color="info" startIcon={ <EditIcon /> }>編集する</Button>
                 </Link>
             </Typography>
                 

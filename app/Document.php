@@ -10,7 +10,7 @@ class Document extends Model
 {
     use SoftDeletes;
     
-    protected $fillable=['title','link'];
+    protected $fillable=['title', 'link', 'beginner', 'amature', 'master', 'all', 'user_id'];
     
     /**
      * リレーション関係

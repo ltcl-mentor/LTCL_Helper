@@ -42,11 +42,11 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
-
+        
         event(new Registered($user = $this->create($request->all())));
-
+        
         return $this->registered($request, $user)
-                        ?: redirect('/users/index?admin=success');
+                        ?: ["status" => 200];
     }
     
     /**
@@ -56,24 +56,24 @@ class RegisterController extends Controller
     {
         $this->publicValidator($request->all())->validate();
         
-        for($i=1;$i<=20;$i++){
-            if($request["name$i"]){
+        for($name_count = 0; $name_count < count($request["names"]); $name_count++){
+            if($request["names"][$name_count]){
                 $user = User::create([
-                    'name' => $request["name$i"],
+                    'name' => $request["names"][$name_count],
                     'password' => Hash::make($request['password']),
                     'is_admin' => null,
                 ]);
                 
                 Student::create([
-                    'name' => $request["name$i"],
+                    'name' => $request["names"][$name_count],
                     'password' => $request['password'],
                     'user_id' => $user->id,
                 ]);
             }
             
         }
-
-        return redirect('/users/index?public=success');
+        
+        return ["status" => 200];
     }
 
     /**
@@ -86,33 +86,14 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:8'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
     }
     
     protected function publicValidator(array $data)
     {
         return Validator::make($data, [
-            'name1' => ['string'],
-            'name2' => ['string'],
-            'name3' => ['string'],
-            'name4' => ['string'],
-            'name5' => ['string'],
-            'name6' => ['string'],
-            'name7' => ['string'],
-            'name8' => ['string'],
-            'name9' => ['string'],
-            'name10' => ['string'],
-            'name11' => ['string'],
-            'name12' => ['string'],
-            'name13' => ['string'],
-            'name14' => ['string'],
-            'name15' => ['string'],
-            'name16' => ['string'],
-            'name17' => ['string'],
-            'name18' => ['string'],
-            'name19' => ['string'],
-            'name20' => ['string'],
+            'names.*' => ['string'],
             'password' => ['required', 'string'],
         ]);
     }
