@@ -4,6 +4,7 @@ import axios from "axios";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import Bar from './Layout/Bar';
+import AccessError from './Error';
 import History from './Public/History/History';
 import Home from './Public/Home/Home';
 import PublicDocumentIndex from './Public/Document/Index/Index';
@@ -52,28 +53,28 @@ function Router() {
                 <Route key="home" path="/" exact component={ Home }/>
                 
                 {/* 質問履歴画面表示 */}
-                <Route path="/history" component={ History }/>
+                <Route path="/history" exact component={ History }/>
                 
                 {/* 公開中の参考記事一覧表示 */}
-                <Route path="/public/documents/index" component={ PublicDocumentIndex }/>
+                <Route path="/public/documents/index" exact component={ PublicDocumentIndex }/>
                 
                 {/* 公開中の質問一覧表示 */}
-                <Route path="/public/questions/index" component={ PublicQuestionIndex }/>
+                <Route path="/public/questions/index" exact component={ PublicQuestionIndex }/>
                 
                 {/* 受講生の質問投稿画面表示 */}
-                <Route path="/public/questions/create" component={ PublicQuestionCreate }/>
+                <Route path="/public/questions/create" exact component={ PublicQuestionCreate }/>
                 
                 {/* 質問詳細画面表示 */}
-                <Route path="/public/questions/:id" component={ PublicQuestionShow }/>
+                <Route path="/public/questions/:id" exact component={ PublicQuestionShow }/>
                 
                 {/* 絞り込み検索画面表示 */}
-                <Route path="/search/condition" component={ Condition }/>
+                <Route path="/search/condition" exact component={ Condition }/>
                 
                 {/* フリーワード検索画面表示 */}
-                <Route path="/search/freeword" component={ Freeword }/>
+                <Route path="/search/freeword" exact component={ Freeword }/>
                 
                 {/* お問い合わせ画面表示 */}
-                <Route path="/contact" component={ Contact }/>
+                <Route path="/contact" exact component={ Contact }/>
             </Switch>
         );
         
@@ -81,52 +82,52 @@ function Router() {
             admin_links = (
                 <Switch>
                     {/* メンター管理画面表示 */}
-                    <Route path="/mentor/top" component={ MentorTop }/>
+                    <Route path="/mentor/top" exact component={ MentorTop }/>
                     
                     {/* 記事一覧画面表示示 */}
-                    <Route path="/documents/index" component={ DocumentIndex }/>
+                    <Route path="/documents/index" exact component={ DocumentIndex }/>
                     
                     {/* 記事新規作成画面表示 */}
-                    <Route path="/documents/create" component={ DocumentCreate }/>
+                    <Route path="/documents/create" exact component={ DocumentCreate }/>
                     
                     {/* 記事編集画面表示 */}
-                    <Route path="/documents/:id/edit" component={ DocumentEdit }/>
+                    <Route path="/documents/:id/edit" exact component={ DocumentEdit }/>
                     
                     {/* 記事詳細画面表示 */}
-                    <Route path="/documents/:id" component={ DocumentShow }/>
+                    <Route path="/documents/:id" exact component={ DocumentShow }/>
                     
                     {/* 質問一覧画面表示 */}
-                    <Route path="/questions/index" component={ QuestionIndex }/>
+                    <Route path="/questions/index" exact component={ QuestionIndex }/>
                     
                     {/* 質問新規作成画面表示 */}
-                    <Route path="/questions/create" component={ QuestionCreate }/>
+                    <Route path="/questions/create" exact component={ QuestionCreate }/>
                     
                     {/* 質問編集画面表示 */}
-                    <Route path="/questions/:id/edit" component={ QuestionEdit }/>
+                    <Route path="/questions/:id/edit" exact component={ QuestionEdit }/>
                     
                     {/* 質問詳細画面表示 */}
-                    <Route path="/questions/:id" component={ QuestionShow }/>
+                    <Route path="/questions/:id" exact component={ QuestionShow }/>
                     
                     {/* 紐付け（単体質問と複数記事）一覧画面表示 */}
-                    <Route path="/links/question/index" component={ LinkFromQuestionIndex }/>
+                    <Route path="/links/question/index" exact component={ LinkFromQuestionIndex }/>
                     
                     {/* 紐付け（単体質問と複数記事）登録画面表示 */}
-                    <Route path="/links/question/:id" component={ LinkFromQuestionShow }/>
+                    <Route path="/links/question/:id" exact component={ LinkFromQuestionShow }/>
                     
                     {/* 紐付け（単体記事と複数質問）一覧画面表示 */}
-                    <Route path="/links/document/index" component={ LinkFromDocumentIndex }/>
+                    <Route path="/links/document/index" exact component={ LinkFromDocumentIndex }/>
                     
                     {/* 紐付け（単体記事と複数質問）登録画面表示 */}
-                    <Route path="/links/document/:id" component={ LinkFromDocumentShow }/>
+                    <Route path="/links/document/:id" exact component={ LinkFromDocumentShow }/>
                     
                     {/* ユーザ一覧画面表示 */}
-                    <Route path="/users/index" component={ UserIndex }/>
+                    <Route path="/users/index" exact component={ UserIndex }/>
                     
                     {/* 受講生登録画面表示 */}
-                    <Route path="/users/register/public" component={ UserRegisterPublic }/>
+                    <Route path="/users/register/public" exact component={ UserRegisterPublic }/>
                     
                     {/* 管理者登録画面表示 */}
-                    <Route path="/users/register/admin" component={ UserRegisterAdmin }/>
+                    <Route path="/users/register/admin" exact component={ UserRegisterAdmin }/>
                 </Switch>
             );
         }
@@ -137,6 +138,9 @@ function Router() {
             <Bar/>
             { user_links }
             { admin_links }
+            <switch>
+                <Route component={ AccessError }/>
+            </switch>
         </BrowserRouter>
     );
 }
