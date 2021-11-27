@@ -220,8 +220,8 @@ class ReactController extends Controller
     /**
      * Google Map APIのAPIキーの受け渡し
      */
-    public function getMapApiKey()
+    public function getEnvData()
     {
-        return env('GoogleMapsKey');
+        return ["key" => env('GoogleMapsKey'), "zoom" => env('ZoomLinksNote')];
     }
 }

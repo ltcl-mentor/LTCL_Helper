@@ -1,7 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import axios from "axios";
-import Typography from '@material-ui/core/Typography';
 import Grid from '@mui/material/Grid';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,17 +8,6 @@ import TableRow from '@mui/material/TableRow';
 import Divider from '@material-ui/core/Divider';
 
 function Location(props) {
-    const [map_api_key, setMapApiKey] = useState();
-    
-    useEffect(() => {
-        axios
-            .get(`/react/map`)
-            .then(response => {
-                setMapApiKey(response.data);
-            }).catch(error => {
-                console.log(error);
-            });
-    }, []);
     
     return (
         <Grid container spacing={2} justifyContent="center">
@@ -30,8 +17,8 @@ function Location(props) {
                     marginTop: 1,
                 }}
             >
-                { map_api_key &&
-                    <LoadScript googleMapsApiKey={ map_api_key }>
+                { props.map_key &&
+                    <LoadScript googleMapsApiKey={ props.map_key }>
                         <GoogleMap
                             mapContainerStyle={{ width: '300px', height: '300px' }}
                             center={{ lat: 35.6600511, lng: 139.6973113 }}

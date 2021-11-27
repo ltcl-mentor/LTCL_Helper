@@ -73,9 +73,12 @@ function Info(props) {
                         >
                             オンライン自習室
                         </TableCell>
-                        { props.collegeInfo.zoom.map((staff) => (
-                            <TableCell align="center">{ staff }</TableCell>
-                        )) }
+                        <TableCell align="center">
+                            { props.collegeInfo.zoom.map((staff) => (
+                                <div>{ staff }</div>
+                            )) }
+                            <a href={ props.zoom_link } target="_blank">zoomのリンク一覧</a>
+                        </TableCell>
                     </TableRow>
                 </TableBody>
             </Table>

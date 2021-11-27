@@ -16,6 +16,8 @@ import Location from './location';
 function Home() {
     const parameter = useLocation();
     const [user, setUser] = useState([]);
+    const [map_key, setMapKey] = useState();
+    const [zoom_link, setZoomLink] = useState();
     const [screen_width, setScreenWidth] = useState(window.innerWidth);
     
     window.addEventListener('resize', function() {
@@ -24,9 +26,18 @@ function Home() {
     
     useEffect(() => {
         axios
-            .get(`/react/user`)
+            .get("/react/user")
             .then(response => {
                 setUser(response.data);
+            }).catch(error => {
+                console.log(error);
+            });
+            
+        axios
+            .get("/react/env")
+            .then(response => {
+                setMapKey(response.data.key);
+                setZoomLink(response.data.zoom);
             }).catch(error => {
                 console.log(error);
             });
@@ -92,7 +103,9 @@ function Home() {
                                 校舎情報
                             </Typography>
                             
-                            <Clendar />
+                            <Clendar 
+                                zoom_link={ zoom_link }
+                            />
                         </Card>
                     </Grid>
                     
@@ -103,7 +116,10 @@ function Home() {
                         }}
                     >
                         <Card sx={{ marginBottom: 4 }}>
-                            <Location screen_width={ screen_width }/>
+                            <Location
+                                map_key={ map_key }
+                                screen_width={ screen_width }
+                            />
                         </Card>
                         
                         <Card sx={{ marginBottom: 4 }}>

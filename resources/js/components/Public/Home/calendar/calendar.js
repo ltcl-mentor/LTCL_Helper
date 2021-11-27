@@ -6,7 +6,7 @@ import CalendarPicker from '@mui/lab/CalendarPicker';
 import Typography from '@material-ui/core/Typography';
 import Info from './info';
 
-function Calendar() {
+function Calendar(props) {
     const [date, setDate] = useState(new Date());
     const [collegeInfo, setCollegeInfo] = useState([]);
     const [isDateClicked, setIsDateClicked] = useState(false);
@@ -29,6 +29,7 @@ function Calendar() {
             <Info 
                 collegeInfo={ collegeInfo }
                 isDateClicked={ isDateClicked }
+                zoom_link={ props.zoom_link }
             />
         );
         
