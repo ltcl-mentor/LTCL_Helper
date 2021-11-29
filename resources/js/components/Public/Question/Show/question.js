@@ -3,10 +3,16 @@ import Card from '@material-ui/core/Card';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 
+/*
+ * 質問表示
+ */
 function Question(props) {
     let image;
+    // 参考画像がない場合
     if (props.count === 0) {
         image = ('');
+    
+    // 参考画像がある場合
     } else {
         image = (
             <div>

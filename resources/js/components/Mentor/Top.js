@@ -10,6 +10,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAddAlt1';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Card from '@material-ui/core/Card';
 
 import Breadcrumbs from '../Breadcrumbs';
 
@@ -18,33 +19,34 @@ function Top() {
         <div class="container">
             <Breadcrumbs page="mentor_top"/>
             
-            <Box sx={{marginTop:2, marginBottom: 3}}>
-                <Typography
-                    variant="h4"
-                    component="div"
-                    align="left"
-                    sx={{
-                        marginTop: 4,
-                        marginBottom: 2,
-                    }}
-                >
-                    質問
-                </Typography>
-                
-                <Grid container spacing={2} sx={{ flexGrow: 1 }} >
-                    <Grid item >
-                        <Link to="/questions/index">
-                            <Button variant="contained" color="info" startIcon={ <ListIcon /> }>一覧</Button>
-                        </Link>
-                    </Grid>
+            <Card>
+                <Box sx={{marginTop:2, marginBottom: 3}}>
+                    <Typography
+                        variant="h4"
+                        component="div"
+                        align="left"
+                        sx={{
+                            marginTop: 4,
+                            marginBottom: 2,
+                        }}
+                    >
+                        質問
+                    </Typography>
                     
-                    <Grid item >
-                        <Link to="/questions/create">
-                            <Button variant="contained" color="info" startIcon={ <CreateIcon /> }>新規登録</Button>
-                        </Link>
+                    <Grid container spacing={2} sx={{ flexGrow: 1 }} >
+                        <Grid item >
+                            <Link to="/questions/index">
+                                <Button variant="contained" color="info" startIcon={ <ListIcon /> }>一覧</Button>
+                            </Link>
+                        </Grid>
+                        
+                        <Grid item >
+                            <Link to="/questions/create">
+                                <Button variant="contained" color="info" startIcon={ <CreateIcon /> }>新規登録</Button>
+                            </Link>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Box>
+                </Box>
             
             <Box sx={{marginTop:2, marginBottom: 3}}>
                 <Typography
@@ -135,6 +137,7 @@ function Top() {
                     </Grid>
                 </Grid>
             </Box>
+            </Card>
         </div>
     );
 }

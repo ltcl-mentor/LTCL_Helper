@@ -27,13 +27,13 @@ class College extends Model
         }
         
         // オンライン自習室担当の代入
-        if(count($datas['values'][$date]) < 30){
+        if(count($datas['values'][$date]) < 26){
             $college_datas['zoom'][] = "データ取得失敗。\nスタッフにご確認ください。";
-        }elseif(count($datas['values'][$date]) === 30){
-            $college_datas['zoom'][] = $datas['values'][$date][29] ?: null;
+        }elseif(count($datas['values'][$date]) === 26){
+            $college_datas['zoom'][] = $datas['values'][$date][26] ?: null;
         }else{
-            $college_datas['zoom'][] = $datas['values'][$date][29] ?: null;
-            $college_datas['zoom'][] = $datas['values'][$date][30] ?: null;
+            $college_datas['zoom'][] = $datas['values'][$date][26] ?: null;
+            $college_datas['zoom'][] = $datas['values'][$date][27] ?: null;
         }
         
         return $college_datas;

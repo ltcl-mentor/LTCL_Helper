@@ -12,14 +12,19 @@ import Comment from './comment';
 import Documents from './documents';
 import RelatedQuestions from './related-questions';
 
+/*
+ * 質問詳細画面(公開)のメインコンポーネント
+ */
 function Show() {
     const { id } = useParams();
     const [question, setQuestion] = useState([]);
     const [images, setImages] = useState([]);
     const [documents, setDocuments] = useState([]);
     const [relatedQuestions, setRelatedQuestions] = useState([]);
-
+    
+    // 画面描画時に実行
     useEffect(() => {
+        // ユーザの質問詳細画面の閲覧を記録
         axios
             .post(`/questions/record/${ id }`)
             .then(response => {
@@ -28,6 +33,7 @@ function Show() {
                 console.log(error);
             });
         
+        // 公開済みの全質問を取得
         axios
             .get(`/react/checked/question/${ id }`)
             .then(response => {
@@ -35,7 +41,8 @@ function Show() {
             }).catch(error => {
                 console.log(error);
             });
-            
+        
+        // 質問に該当する画像の取得
         axios
             .get(`/react/images/${ id }`)
             .then(response => {
@@ -43,7 +50,8 @@ function Show() {
             }).catch(error => {
                 console.log(error);
             });
-            
+        
+        // 質問に関連する全参考記事を取得
         axios
             .get(`/react/related/documents/${ id }`)
             .then(response => {
@@ -52,6 +60,7 @@ function Show() {
                 console.log(error);
             });
         
+        // この質問と同じカテゴリー、トピックの質問を取得
         axios
             .get(`/react/search/questions?category=${ 0 }&topic=${ 0 }`)
             .then(response => {

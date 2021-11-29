@@ -4,25 +4,32 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
+/*
+ * トピックの選択肢
+ */
 function Topic(props) {
     const [topic, setTopic] = useState(0);
     
+    // 画面描画時に実行
     useEffect(() => {
         if (props.IsCanceling) {
             props.setIsCanceling(false);
         }
     }, []);
     
+    // カテゴリーが変更されたら実行
     useEffect(() => {
         props.category === 0 ? setTopic(0) : setTopic(9);
     }, [props.category]);
     
+    // 選択されたトピック情報を取得
     const handleTopic = (event) => {
         setTopic(Number(event.target.value));
     };
-
+    
+    
     let topicForm;
-
+    // カテゴリーの選択がカリキュラムだった場合
     if (props.category === 0) {
         topicForm = (
             <FormControl component="fieldset">
@@ -39,6 +46,8 @@ function Topic(props) {
                 </RadioGroup>
             </FormControl>
         );
+    
+    //カテゴリーの選択が成果物だった場合
     } else if (props.category === 1) {
         topicForm = (
             <FormControl component="fieldset">
@@ -58,6 +67,7 @@ function Topic(props) {
     return (
         <div className="container">
             { props.isCanceling ? '' : props.setTopic(topic) }
+            
             { topicForm }
         </div>
     );

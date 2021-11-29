@@ -4,6 +4,9 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import FormLabel from '@material-ui/core/FormLabel';
 
+/*
+ * カリキュラム番号の選択肢
+ */
 function Selects(props) {
     
     const handleCurriculumNumber = (event) => {

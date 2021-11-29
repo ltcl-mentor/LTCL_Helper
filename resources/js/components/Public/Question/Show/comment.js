@@ -3,6 +3,9 @@ import Card from '@material-ui/core/Card';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 
+/*
+ * コメント表示
+ */
 function Comment(props) {
     
     return (

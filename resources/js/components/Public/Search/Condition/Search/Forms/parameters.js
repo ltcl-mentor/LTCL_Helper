@@ -6,6 +6,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Box from '@mui/material/Box';
 
+/*
+ * 絞り込みの条件を表示
+ */
 function Parameters(props) {
     return (
         <Box sx={{ minWidth: "400px", maxWidth: "400px", border: "1px solid black" }}>

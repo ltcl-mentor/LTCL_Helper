@@ -8,10 +8,14 @@ import Breadcrumbs from '../../../Breadcrumbs';
 import Curriculum from './curriculum';
 import Portfolio from './portfolio';
 
+/*
+ * 質問一覧(公開)のメインコンポーネント
+ */
 function Index() {
     const [questions, setQuestions] = useState([]);
     const [value, setValue] = React.useState(0);
     
+    //画面描画時に実行
     useEffect(() => {
         axios
             .get("/react/checked/questions")
@@ -22,13 +26,19 @@ function Index() {
             });
     }, []);
     
+    
+    // タブの切り替え
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
     
+    
     let tab_content;
+    // カリキュラムの一覧
     if (value === 0) {
         tab_content = ( <Curriculum questions={ questions }/> );
+    
+    //成果物の一覧
     } else {
         tab_content = ( <Portfolio questions={ questions }/> );
     }

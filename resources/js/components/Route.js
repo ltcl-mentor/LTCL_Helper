@@ -35,6 +35,7 @@ function Router() {
     const [user, setUser] = useState([]);
     
     useEffect(() => {
+        // ログインユーザー情報取得
         axios
             .get('/react/user')
             .then(response => {
@@ -45,8 +46,11 @@ function Router() {
     }, []);
     
     let user_links;
+    
     let admin_links;
+    
     if (user.length !== 0) {
+        // 一般ユーザがアクセスできURL
         user_links = (
             <Switch>
                 {/* トップ画面表示 */}
@@ -79,6 +83,7 @@ function Router() {
         );
         
         if (user.is_admin === "staff") {
+            // 管理者ユーザがアクセスできるURL
             admin_links = (
                 <Switch>
                     {/* メンター管理画面表示 */}
@@ -138,9 +143,10 @@ function Router() {
             <Bar/>
             { user_links }
             { admin_links }
-            <switch>
-                <Route component={ AccessError }/>
-            </switch>
+            {/*<switch>*/}
+                {/* 上記のURLに該当しないコンポーネントが呼ばれた際に出力 */}
+                {/*<Route path="/" component={ AccessError }/>*/}
+            {/*</switch>*/}
         </BrowserRouter>
     );
 }

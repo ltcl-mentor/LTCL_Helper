@@ -12,12 +12,19 @@ import Input from '@mui/material/Input';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 
+/*
+ * 検索内容の入力欄
+ */
 function Form(props) {
+    
+    // 検索ワードの入力内容を取得
     const handleFreeword = (event) => {
         // 入力に空白があれば"/"に置換
+        // 空白は半角でも全角でも良い
         props.setFreeword(event.target.value.replace(/\s+/g,'/'));
     };
     
+    // AND検索かOR検索かの選択内容取得
     const handleSearchType = (event) => {
         props.setSearchType(event.target.value);
     };
@@ -51,9 +58,9 @@ function Form(props) {
             <Paper
                 component="form"
                 sx={{
-                    p: '2px 4px',
-                    display: 'flex',
-                    alignItems: 'center',
+                    p: "2px 4px",
+                    display: "flex",
+                    alignItems: "center",
                     width: "90%",
                     minWidth: "350px",
                     margin: "0 auto", 
@@ -64,7 +71,7 @@ function Form(props) {
                     placeholder="検索ワードを入力してください。"
                     onChange={ (event) => handleFreeword(event) }
                 />
-                <IconButton sx={{ p: '10px' }}>
+                <IconButton sx={{ p: "10px" }}>
                     <SearchIcon />
                 </IconButton>
             </Paper>

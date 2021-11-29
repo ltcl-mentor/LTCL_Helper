@@ -52,7 +52,10 @@ function Curriculum() {
                         <Typography sx={{ width: '33%', flexShrink: 0 }}>
                             { topic.topic }
                         </Typography>
-                        <Typography sx={{ color: 'text.secondary' }}>公開：{ questions.filter(question => question.topic == topic.id && question.check === 1).length }、非公開：{ questions.filter(question => question.topic == topic.id && question.check === 0).length }</Typography>
+                        <Typography sx={{ color: 'text.secondary' }}>
+                            公開：{ questions.filter(question => question.topic == topic.id && (question.check === 1 || question.check === true)).length }、
+                            非公開：{ questions.filter(question => question.topic == topic.id && (question.check === 0 || question.check === false)).length }
+                        </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <List>

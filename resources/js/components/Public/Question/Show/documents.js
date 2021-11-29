@@ -8,10 +8,16 @@ import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
+/*
+ * 関連記事の一覧
+ */
 function Document(props) {
     let documents;
+    // 関連質問がなかった場合
     if (props.documents.filter(v=>v).length === 0) {
         documents = (<div className="empty_message">関連する記事はありません。</div>);
+        
+    // 関連質問があった場合
     } else {
         documents = props.documents.map((document) => {
             return (

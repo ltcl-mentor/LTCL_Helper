@@ -10,7 +10,11 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
+/*
+ * 成果物の質問一覧
+ */
 function Portfolio(props) {
+    const [expanded, setExpanded] = useState(false);
     const portfolio_topics = [
         {"id": 9, "topic": "マイグレーション"},
         {"id": 10, "topic": "リレーション"},
@@ -20,12 +24,14 @@ function Portfolio(props) {
         {"id": 14, "topic": "API"},
         {"id": 15, "topic": "デザイン"},
     ];
-    const [expanded, setExpanded] = React.useState(false);
     
+    
+    // アコーディオンの開閉
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
     
+    // アコーディオン
     const portfolio = portfolio_topics.map((topic) => {
         return (
             <Box sx={{paddingTop: 3, marginBottom: 3}}>

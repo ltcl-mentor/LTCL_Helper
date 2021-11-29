@@ -17,6 +17,9 @@ import Parameter from './Search/Forms/parameters';
 import SearchButton from './Search/searchButton';
 import Result from './Result/result';
 
+/*
+ * 絞り込み検索のメインコンポーネント
+ */
 function Condition() {
     const [category, setCategory] = useState('');
     const [topic, setTopic] = useState('');
@@ -32,26 +35,31 @@ function Condition() {
     ];
     const [activeStep, setActiveStep] = useState(0);
     const steps = [
-        "カテゴリーを選択する",
-        "トピックを選択する", 
-        "さらに絞り込む（任意）",
+        'カテゴリーを選択する',
+        'トピックを選択する', 
+        'さらに絞り込む（任意）',
     ];
     const [topicIsCanceling, setTopicIsCanceling] = useState(false);
     const [addtionalFormsIsCanceling, setAdditionalFormsIsCanceling] = useState(false);
     
+    // ステッパーを次に進める
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
     
+    // ステッパーを前に戻す
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
+        // 一旦検索結果を隠すためにfalseに変更
         setIsSearchButtonClicked(false);
     };
     
+    // ステッパーをリセット
     const handleReset = () => {
         setActiveStep(0);
     };
     
+    // ステッパーの内容
     const getStepContent = (step) => {
         switch (step) {
             case 0:

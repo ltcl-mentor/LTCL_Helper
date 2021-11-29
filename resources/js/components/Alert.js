@@ -5,31 +5,32 @@ import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
 import CloseIcon from '@material-ui/icons/Close';
 
+// postリクエストの処理が成功した際に画面上部に出力するメッセージ
 function AlertMessage(props) {
     const [open, setOpen] = useState(true);
     
-    let success_message;
+    let message;
     switch (props.type) {
         case "question":
             switch (props.status) {
                 case "created":
-                    success_message = <AlertTitle>質問を投稿しました。</AlertTitle>;
+                    message = <AlertTitle>質問を投稿しました。</AlertTitle>;
                     break;
                    
                 case "edited":
-                    success_message = <AlertTitle>質問を編集しました。</AlertTitle>;
+                    message = <AlertTitle>質問を編集しました。</AlertTitle>;
                     break;
                     
                 case "deleted":
-                    success_message = <AlertTitle>質問を{ props.info }件削除しました。</AlertTitle>;
+                    message = <AlertTitle>質問を{ props.info }件削除しました。</AlertTitle>;
                     break;
                    
                 case "published":
-                    success_message = <AlertTitle>質問を公開しました。</AlertTitle>;
+                    message = <AlertTitle>質問を公開しました。</AlertTitle>;
                     break;
                 
                 case "unpublished":
-                    success_message = <AlertTitle>質問を非公開にしました。</AlertTitle>;
+                    message = <AlertTitle>質問を非公開にしました。</AlertTitle>;
                     break;
             }
             break;
@@ -37,15 +38,15 @@ function AlertMessage(props) {
         case "document":
             switch (props.status) {
                 case "created":
-                    success_message = <AlertTitle>記事を投稿しました。</AlertTitle>;
+                    message = <AlertTitle>記事を投稿しました。</AlertTitle>;
                     break;
                 
                 case "edited":
-                    success_message = <AlertTitle>記事を編集しました。</AlertTitle>;
+                    message = <AlertTitle>記事を編集しました。</AlertTitle>;
                     break;
                     
                 case "deleted":
-                    success_message = <AlertTitle>記事を{ props.info }件削除しました。</AlertTitle>;
+                    message = <AlertTitle>記事を{ props.info }件削除しました。</AlertTitle>;
                     break;
             }
             break;
@@ -53,15 +54,15 @@ function AlertMessage(props) {
         case "link_from_question":
             switch (props.status) {
                 case "attached":
-                    success_message = <AlertTitle>関連記事を{ props.info }件設定しました。</AlertTitle>;
+                    message = <AlertTitle>関連記事を{ props.info }件設定しました。</AlertTitle>;
                     break;
                 
                 case "detached":
-                    success_message = <AlertTitle>関連記事を{ props.info }件解除しました。</AlertTitle>;
+                    message = <AlertTitle>関連記事を{ props.info }件解除しました。</AlertTitle>;
                     break;
                     
                 case "attached_and_detached":
-                    success_message = <AlertTitle>関連記事を{ props.info[0] }件設定、{ props.info[1] }件解除しました。</AlertTitle>;
+                    message = <AlertTitle>関連記事を{ props.info[0] }件設定、{ props.info[1] }件解除しました。</AlertTitle>;
                     break;
             }
             break;
@@ -69,15 +70,15 @@ function AlertMessage(props) {
         case "link_from_document":
             switch (props.status) {
                 case "attached":
-                    success_message = <AlertTitle>関連質問を{ props.info }件設定しました。</AlertTitle>;
+                    message = <AlertTitle>関連質問を{ props.info }件設定しました。</AlertTitle>;
                     break;
                 
                 case "detached":
-                    success_message = <AlertTitle>関連質問を{ props.info }件解除しました。</AlertTitle>;
+                    message = <AlertTitle>関連質問を{ props.info }件解除しました。</AlertTitle>;
                     break;
                     
                 case "attached_and_detached":
-                    success_message = <AlertTitle>関連質問を{ props.info[0] }件設定、{ props.info[1] }件解除しました。</AlertTitle>;
+                    message = <AlertTitle>関連質問を{ props.info[0] }件設定、{ props.info[1] }件解除しました。</AlertTitle>;
                     break;
             }
             break;
@@ -85,15 +86,15 @@ function AlertMessage(props) {
         case "user":
             switch (props.status) {
                 case "admin_created":
-                    success_message = <AlertTitle>ユーザ（管理者）を{ props.info }名追加しました。</AlertTitle>;
+                    message = <AlertTitle>ユーザ（管理者）を{ props.info }名追加しました。</AlertTitle>;
                     break;
                 
                 case "public_created":
-                    success_message = <AlertTitle>ユーザ（受講生）を{ props.info }名追加しました。</AlertTitle>;
+                    message = <AlertTitle>ユーザ（受講生）を{ props.info }名追加しました。</AlertTitle>;
                     break;
                     
                 case "deleted":
-                    success_message = <AlertTitle>ユーザID{ props.info }のデータを削除しました。</AlertTitle>;
+                    message = <AlertTitle>ユーザID{ props.info }のデータを削除しました。</AlertTitle>;
                     break;
             }
             break;
@@ -101,11 +102,11 @@ function AlertMessage(props) {
         case "info":
             switch (props.status) {
                 case "created":
-                    success_message = <AlertTitle>お知らせを追加しました。</AlertTitle>;
+                    message = <AlertTitle>お知らせを追加しました。</AlertTitle>;
                     break;
                     
                 case "deleted":
-                    success_message = <AlertTitle>お知らせを削除しました。</AlertTitle>;
+                    message = <AlertTitle>お知らせを削除しました。</AlertTitle>;
                     break;
             }
             break;
@@ -113,7 +114,7 @@ function AlertMessage(props) {
         case "contact":
             switch (props.status) {
                 case "created":
-                    success_message = <AlertTitle>お問い合わせを送信しました。</AlertTitle>;
+                    message = <AlertTitle>お問い合わせを送信しました。</AlertTitle>;
                     break;
             }
             break;
@@ -143,7 +144,7 @@ function AlertMessage(props) {
                             mb: 2, 
                         }}
                     >
-                        { success_message }
+                        { message }
                     </Alert>
                 </Collapse>
             }

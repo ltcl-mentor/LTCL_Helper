@@ -11,11 +11,16 @@ import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@mui/material/Grid';
 
+/*
+ * 絞り込みの検索結果の質問一覧
+ */
 function Questions(props) {
     const [questions, setQuestions] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     
+    // 画面描画時に実行
     useEffect(() => {
+        // 検索結果の質問取得
         axios
             .get(`/react/search/questions?category=${ props.category }&topic=${ props.topic }&curriculum_number=${ props.curriculum_number }&keyword=${ props.keyword }`)
             .then(response => {
@@ -25,10 +30,12 @@ function Questions(props) {
             });
     }, []);
     
+    // ペジネーションのページ番号がクリックされた際にページ変更
     const handlePageClick = (event, value) => {
         setCurrentPage(value);
     };
     
+    // 検索結果の質問一覧情報
     const list = questions.map((question) => {
         return (
             <div>
@@ -47,14 +54,19 @@ function Questions(props) {
         );
     });
     
+    
     let emptyMessage;
     let questionList;
     let pagination;
     
-    if (list.filter(v=>v).length === 0) {    //filterでlistに存在する空要素を排除し,その上で配列内の要素が何個あるかを判定。
+    // filterでlistに存在する空要素を排除し,その上で配列内の要素が何個あるかを判定
+    if (list.filter(v=>v).length === 0) {
+        // 検索結果がない場合に出力するメッセージ
         emptyMessage = ( <Typography align="center" variant="h6" component="div" >該当する質問がありません。</Typography> );
     } else {
+        // 検索結果一覧情報を1ページ10件に分割
         questionList = list.slice((currentPage - 1)*10, currentPage*10);
+        // ペジネーションの部分
         pagination = (
             <Pagination
                 count={ Math.floor(list.filter(v=>v).length/10) + 1 }

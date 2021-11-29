@@ -1,31 +1,31 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import {Link} from 'react-router-dom';
-import ReactPaginate from 'react-paginate';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Pagination from '@mui/material/Pagination';
 import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
 import Grid from '@mui/material/Grid';
 
+/*
+ * フリーワードの検索結果の質問一覧
+ */
 function Questions(props) {
     const [questions, setQuestions] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [isLoarding, setIsLording] = useState(false);
     
+    // 検索ワードや検索タイプに変更があった場合に実行
     useEffect(() => {
         if (props.freeword.trim().length !== 0) {
             // 日本語の検索内容入力時に一度エンコードする
             // コントローラー側でデコード
             const encodedFreeword = encodeURI(props.freeword);
             
-            setIsLording(true);
-            
+            // 検索結果の質問取得
             axios
                 .get(`/react/search/questions?searchType=${ props.searchType }&freeword=${ encodedFreeword }`)
                 .then(response => {
@@ -33,15 +33,15 @@ function Questions(props) {
                 }).catch(error => {
                     console.log(error);
                 });
-            
-            setIsLording(false);
         }
     }, [props.searchType, props.freeword]);
     
+    // ペジネーションのページ番号がクリックされた際にページ変更
     const handlePageClick = (event) => {
         setCurrentPage(event.selected);
     };
     
+    // 検索結果の質問一覧情報
     const list = questions.map((question) => {
         return (
             <div>
@@ -60,26 +60,27 @@ function Questions(props) {
         );
     });
     
+    
     let emptyMessage;
     let questionList;
     let pagination;
     
-    if (list.filter(v=>v).length === 0) {    //filterでlistに存在する空要素を排除し,その上で配列内の要素が何個あるかを判定。
+    // filterでlistに存在する空要素を排除し,その上で配列内の要素が何個あるかを判定
+    if (list.filter(v=>v).length === 0) {
+        // 検索結果がない場合に出力するメッセージ
         emptyMessage = ( <Typography align="center" variant="h6" component="div" >該当する質問がありません。</Typography> );
     } else {
-        if(isLoarding) {
-            emptyMessage = ( <CircularProgress color="secondary" /> );
-        } else {
-            questionList = list.slice((currentPage - 1)*10, currentPage*10);
-            pagination = (
-                <Pagination
-                    count={ Math.floor(list.filter(v=>v).length/10) + 1 }
-                    page={ currentPage }
-                    onChange={ handlePageClick }
-                    sx={{ display: "block" }}
-                />
-            );
-        }
+        // 検索結果一覧情報を1ページ10件に分割
+        questionList = list.slice((currentPage - 1)*10, currentPage*10);
+        // ペジネーションの部分
+        pagination = (
+            <Pagination
+                count={ Math.floor(list.filter(v=>v).length/10) + 1 }
+                page={ currentPage }
+                onChange={ handlePageClick }
+                sx={{ display: "block" }}
+            />
+        );
     }
     
     return (

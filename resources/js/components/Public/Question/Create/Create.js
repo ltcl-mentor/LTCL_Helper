@@ -13,6 +13,9 @@ import TopicForm from '../../Search/Condition/Search/Forms/topicForm';
 import CurriculumNumber from '../../Search/Condition/Search/Forms/additionalForms/curriculum-number/curriculum-number';
 import QuestionForm from '../../../Mentor/Question/Create/questionForm';
 
+/*
+ * 質問投稿(公開)のメインコンポーネント
+ */
 function Create() {
     const history = useHistory();
     const [clickCount, setClickCount] = useState(0);
@@ -24,19 +27,20 @@ function Create() {
     const [question_validation_error, setQuestionValidationError] = useState(0);
     const curriculum_numbers = [
         [
-            ["1-1-1"],
-            ["2-1-1"],
-            ["2-1-2"],
-            ["2-1-3"],
-            ["3-1-1"],
-            ["4-1-1", "4-1-2", "4-1-3", "4-1-4"],
-            ["5-1-1", "8-1-1", "8-2-1", "8-3-1", "8-4-1", "8-5-1", "8-6-1"],
-            ["6-1-1", "6-2-1"],
-            ["7-1-1"]
+            ['1-1-1'],
+            ['2-1-1'],
+            ['2-1-2'],
+            ['2-1-3'],
+            ['3-1-1'],
+            ['4-1-1', '4-1-2', '4-1-3', '4-1-4'],
+            ['5-1-1', '8-1-1', '8-2-1', '8-3-1', '8-4-1', '8-5-1', '8-6-1'],
+            ['6-1-1', '6-2-1'],
+            ['7-1-1']
         ],
-        ["成果物"]
+        ['成果物']
     ];
     
+    // 投稿実行
     const handleSubmit = () => {
         // カリキュラム番号のバリデーション
         // カリキュラム番号が選択されているか
@@ -44,6 +48,7 @@ function Create() {
             setCurriculumNumberValidationError(1);
             return false;
         }
+        
         // カテゴリーとトピックに対して適切なカリキュラム番号が選択されているか
         if (!(curriculum_numbers[Number(category)][Number(topic)].includes(curriculum_number))) {
             setCurriculumNumberValidationError(1);
@@ -53,8 +58,10 @@ function Create() {
         // 質問とコメントのバリデーション
         if (question.trim().length !== 0) {
             if (clickCount === 0) {
+                // 重複保存防止のためにクリック数をカウント
                 setClickCount(1);
                 
+                // 質問を送信
                 axios
                     .post("/questions/store/public", {
                         category: category,
@@ -64,6 +71,7 @@ function Create() {
                         comment: "メンターは入力お願いします。",
                     })
                     .then(response => {
+                        // 保存に成功したらHOMEに戻る
                         if (response.status === 200) {
                             history.push("/", { type: "question", status: "created" });
                         }

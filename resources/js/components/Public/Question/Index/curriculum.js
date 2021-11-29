@@ -10,7 +10,11 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
+/*
+ * カリキュラムの質問一覧
+ */
 function Curriculum(props) {
+    const [expanded, setExpanded] = useState(false);
     const curriculum_topics = [
         {"id": 0, "topic": "AWS"},
         {"id": 1, "topic": "HTML"},
@@ -22,12 +26,13 @@ function Curriculum(props) {
         {"id": 7, "topic": "DB"},
         {"id": 8, "topic": "Git&GitHub"}
     ];
-    const [expanded, setExpanded] = React.useState(false);
     
+    // アコーディオンの開閉
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
     
+    // アコーディオン
     const curriculum = curriculum_topics.map((topic) => {
         return (
             <Box sx={{paddingTop: 3, marginBottom: 3}}>
