@@ -143,10 +143,6 @@ function Router() {
             <Bar/>
             { user_links }
             { admin_links }
-            {/*<switch>*/}
-                {/* 上記のURLに該当しないコンポーネントが呼ばれた際に出力 */}
-                {/*<Route path="/" component={ AccessError }/>*/}
-            {/*</switch>*/}
         </BrowserRouter>
     );
 }
