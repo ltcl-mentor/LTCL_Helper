@@ -20,7 +20,7 @@ function Top() {
             <Breadcrumbs page="mentor_top"/>
             
             <Card>
-                <Box sx={{marginTop:2, marginBottom: 3}}>
+                <Box sx={{ margin: 2, marginBottom: 3, marginLeft: 2 }}>
                     <Typography
                         variant="h4"
                         component="div"
@@ -33,7 +33,7 @@ function Top() {
                         質問
                     </Typography>
                     
-                    <Grid container spacing={2} sx={{ flexGrow: 1 }} >
+                    <Grid container spacing={2} sx={{ flexGrow: 1, marginLeft: 2 }} >
                         <Grid item >
                             <Link to="/questions/index">
                                 <Button variant="contained" color="info" startIcon={ <ListIcon /> }>一覧</Button>
@@ -47,96 +47,96 @@ function Top() {
                         </Grid>
                     </Grid>
                 </Box>
-            
-            <Box sx={{marginTop:2, marginBottom: 3}}>
-                <Typography
-                    variant="h4"
-                    component="div"
-                    align="left"
-                    sx={{
-                        marginTop: 4,
-                        marginBottom: 2,
-                    }}
-                >
-                    関連記事
-                </Typography>
                 
-                <Grid container spacing={2} sx={{ flexGrow: 1 }} >
-                    <Grid item >
-                        <Link to="/documents/index">
-                            <Button variant="contained" color="success" startIcon={ <ListIcon /> }>一覧</Button>
-                        </Link>
-                    </Grid>
+                <Box sx={{ margin: 2, marginBottom: 3, marginLeft: 2 }}>
+                    <Typography
+                        variant="h4"
+                        component="div"
+                        align="left"
+                        sx={{
+                            marginTop: 4,
+                            marginBottom: 2,
+                        }}
+                    >
+                        関連記事
+                    </Typography>
                     
-                    <Grid item >
-                        <Link to="/documents/create">
-                            <Button variant="contained" color="success" startIcon={ <CreateIcon /> }>新規登録</Button>
-                        </Link>
+                    <Grid container spacing={2} sx={{ flexGrow: 1, marginLeft: 2  }} >
+                        <Grid item >
+                            <Link to="/documents/index">
+                                <Button variant="contained" color="success" startIcon={ <ListIcon /> }>一覧</Button>
+                            </Link>
+                        </Grid>
+                        
+                        <Grid item >
+                            <Link to="/documents/create">
+                                <Button variant="contained" color="success" startIcon={ <CreateIcon /> }>新規登録</Button>
+                            </Link>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Box>
-            
-            <Box sx={{marginTop:2, marginBottom: 3}}>
-                <Typography
-                    variant="h4"
-                    component="div"
-                    align="left"
-                    sx={{
-                        marginTop: 4,
-                        marginBottom: 2,
-                    }}
-                >
-                    記事と質問の紐付け
-                </Typography>
+                </Box>
                 
-                <Grid container spacing={2} sx={{ flexGrow: 1 }} >
-                    <Grid item >
-                        <Link to="/links/question/index">
-                            <Button variant="contained" color="secondary" startIcon={ <QuestionAnswerIcon /> }>質問から紐付け</Button>
-                        </Link>
-                    </Grid>
+                <Box sx={{ margin: 2, marginBottom: 3, marginLeft: 2 }}>
+                    <Typography
+                        variant="h4"
+                        component="div"
+                        align="left"
+                        sx={{
+                            marginTop: 4,
+                            marginBottom: 2,
+                        }}
+                    >
+                        記事と質問の紐付け
+                    </Typography>
                     
-                    <Grid item >
-                        <Link to="/links/document/index">
-                            <Button variant="contained" color="secondary" startIcon={ <DescriptionIcon /> }>記事から紐付け</Button>
-                        </Link>
+                    <Grid container spacing={2} sx={{ flexGrow: 1, marginLeft: 2  }} >
+                        <Grid item >
+                            <Link to="/links/question/index">
+                                <Button variant="contained" color="secondary" startIcon={ <QuestionAnswerIcon /> }>質問から紐付け</Button>
+                            </Link>
+                        </Grid>
+                        
+                        <Grid item >
+                            <Link to="/links/document/index">
+                                <Button variant="contained" color="secondary" startIcon={ <DescriptionIcon /> }>記事から紐付け</Button>
+                            </Link>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Box>
-    
-            <Box sx={{marginTop:2, marginBottom: 3}}>
-                <Typography
-                    variant="h4"
-                    component="div"
-                    align="left"
-                    sx={{
-                        marginTop: 4,
-                        marginBottom: 2,
-                    }}
-                >
-                    ユーザー名簿
-                </Typography>
+                </Box>
                 
-                <Grid container spacing={2} sx={{ flexGrow: 1 }} >
-                    <Grid item >
-                        <Link to="/users/index">
-                            <Button variant="contained" color="error" startIcon={ <ListIcon /> }>一覧</Button>
-                        </Link>
-                    </Grid>
+                <Box sx={{ margin: 2, marginBottom: 3, marginLeft: 2 }}>
+                    <Typography
+                        variant="h4"
+                        component="div"
+                        align="left"
+                        sx={{
+                            marginTop: 4,
+                            marginBottom: 2,
+                        }}
+                    >
+                        ユーザー名簿
+                    </Typography>
                     
-                    <Grid item >
-                        <Link to="/users/register/admin">
-                            <Button variant="contained" color="error" startIcon={ <PersonAddIcon /> }>管理者の登録</Button>
-                        </Link>
+                    <Grid container spacing={2} sx={{ flexGrow: 1, marginLeft: 2  }} >
+                        <Grid item >
+                            <Link to="/users/index">
+                                <Button variant="contained" color="error" startIcon={ <ListIcon /> }>一覧</Button>
+                            </Link>
+                        </Grid>
+                        
+                        <Grid item >
+                            <Link to="/users/register/admin">
+                                <Button variant="contained" color="error" startIcon={ <PersonAddIcon /> }>管理者の登録</Button>
+                            </Link>
+                        </Grid>
+                        
+                        <Grid item >
+                            <Link to="/users/register/public">
+                                <Button variant="contained" color="error" startIcon={ <PersonAddAltIcon /> }>受講生の登録</Button>
+                            </Link>
+                        </Grid>
                     </Grid>
-                    
-                    <Grid item >
-                        <Link to="/users/register/public">
-                            <Button variant="contained" color="error" startIcon={ <PersonAddAltIcon /> }>受講生の登録</Button>
-                        </Link>
-                    </Grid>
-                </Grid>
-            </Box>
+                </Box>
             </Card>
         </div>
     );
