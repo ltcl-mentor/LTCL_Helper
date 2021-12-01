@@ -59,6 +59,11 @@ class QuestionController extends Controller
         Slack::sendMessage($message);
     }
     
+    public function imageStore(Rrequest $request)
+    {
+        return $request;
+    }
+    
     /**
      * 公開中の質問一覧表示
      */
