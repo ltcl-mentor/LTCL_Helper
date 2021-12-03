@@ -32,17 +32,6 @@ function Index() {
         setValue(newValue);
     };
     
-    
-    let tab_content;
-    // カリキュラムの一覧
-    if (value === 0) {
-        tab_content = ( <Curriculum questions={ questions }/> );
-    
-    //成果物の一覧
-    } else {
-        tab_content = ( <Portfolio questions={ questions }/> );
-    }
-    
     return (
         <div className="container">
             <Breadcrumbs page="public_question_index"/>
@@ -54,7 +43,8 @@ function Index() {
                         <Tab label="成果物" />
                     </Tabs>
                 </Box>
-                { tab_content }
+                
+                { value === 0 ? <Curriculum questions={ questions }/> : <Portfolio questions={ questions }/> }
             </Box>
         </div>
     );

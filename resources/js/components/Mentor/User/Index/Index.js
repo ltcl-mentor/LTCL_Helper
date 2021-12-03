@@ -65,13 +65,6 @@ function Index() {
         setValue(newValue);
     };
     
-    let tab_content;
-    if (value === 0) {
-        tab_content = (<Students students={ students } setDeleteUserId={ setDeleteUserId }/>);
-    } else {
-        tab_content = (<Admins staffs={ staffs } setDeleteUserId={ setDeleteUserId }/>);
-    }
-    
     return (
         <div className="container">
             <Alert
@@ -90,7 +83,7 @@ function Index() {
             </Box>
             
             <Box sx={{ marginTop: 3 }}>
-                { tab_content }
+                { value === 0 ? <Students students={ students } setDeleteUserId={ setDeleteUserId }/> : <Admins staffs={ staffs } setDeleteUserId={ setDeleteUserId }/> }
             </Box>
         </div>
     );

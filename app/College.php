@@ -20,20 +20,20 @@ class College extends Model
         $college_datas['close'] = $datas['values'][$date][3] ?: null;
         
         // 校舎出勤メンターの代入
-        if($datas['values'][$date][17] !== ""){
-            $college_datas['staff'] = explode("\n", $datas['values'][$date][17], -1);
+        if($datas['values'][$date][18] !== ""){
+            $college_datas['staff'] = explode("\n", $datas['values'][$date][18], -1);
         }else{
             $college_datas['staff'][] = "本日校舎に出勤するメンターはいません。";
         }
         
         // オンライン自習室担当の代入
-        if(count($datas['values'][$date]) < 26){
+        if(count($datas['values'][$date]) < 27){
             $college_datas['zoom'][] = "データ取得失敗。\nスタッフにご確認ください。";
-        }elseif(count($datas['values'][$date]) === 26){
-            $college_datas['zoom'][] = $datas['values'][$date][26] ?: null;
-        }else{
-            $college_datas['zoom'][] = $datas['values'][$date][26] ?: null;
+        }elseif(count($datas['values'][$date]) === 27){
             $college_datas['zoom'][] = $datas['values'][$date][27] ?: null;
+        }else{
+            $college_datas['zoom'][] = $datas['values'][$date][27] ?: null;
+            $college_datas['zoom'][] = $datas['values'][$date][28] ?: null;
         }
         
         return $college_datas;
