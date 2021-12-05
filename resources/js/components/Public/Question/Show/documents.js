@@ -20,6 +20,7 @@ function Document(props) {
     // 関連質問があった場合
     } else {
         documents = props.documents.map((document) => {
+            console.log(document.beginner);
             return (
                 <Grid item >
                     <CardActionArea sx={{ width: "300px", height: "280px"}}>
@@ -32,9 +33,9 @@ function Document(props) {
                                 />
                                 <CardContent>
                                     { (document.beginner === 1 || document.beginner === true) ? <Chip variant="outlined" color="success" label="初心者向け" /> : "" }
-                                    { (document.amature === 1 || document.beginner === true) ? <Chip variant="outlined" color="primary" label="中級者向け" /> : "" }
-                                    { (document.master === 1 || document.beginner === true) ? <Chip variant="outlined" color="secondary" label="上級者向け" /> : "" }
-                                    { (document.all === 1 || document.beginner === true) ? <Chip variant="outlined" color="error" label="全員向け" /> : "" }
+                                    { (document.amature === 1 || document.amature === true) ? <Chip variant="outlined" color="primary" label="中級者向け" /> : "" }
+                                    { (document.master === 1 || document.master === true) ? <Chip variant="outlined" color="secondary" label="上級者向け" /> : "" }
+                                    { (document.all === 1 || document.all === true) ? <Chip variant="outlined" color="error" label="全員向け" /> : "" }
                                     <Typography gutterBottom variant="h6" component="div" align="center">
                                         { document.title }
                                     </Typography>
