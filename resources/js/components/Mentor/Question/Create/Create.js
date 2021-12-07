@@ -47,10 +47,26 @@ function Create() {
     ];
     const steps = ['基本情報の入力', '質問の入力', 'コメントの入力'];
     const [activeStep, setActiveStep] = useState(0);
-    // const [skipped, setSkipped] = React.useState(new Set());
     
     // ステッパーを次に進める
-    const handleNext = () => {
+    // ステップごとにバリデーションも実行
+    const handleNext = (step) => {
+        if (step === 0) {
+            // カリキュラム番号のバリデーション
+            // カリキュラム番号が選択されているか
+            if (!(curriculum_number)) {
+                setCurriculumNumberValidationError(1);
+                return false;
+            }
+            
+            // カテゴリーとトピックに対して適切なカリキュラム番号が選択されているか
+            if (!(curriculum_numbers[Number(category)][Number(topic)].includes(curriculum_number))) {
+                setCurriculumNumberValidationError(1);
+                return false;
+            }
+        } else if (step === 1) {
+            
+        }
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
     
@@ -65,18 +81,6 @@ function Create() {
     };
     
     const handleSubmit = () => {
-        // カリキュラム番号のバリデーション
-        // カリキュラム番号が選択されているか
-        if (!(curriculum_number)) {
-            setCurriculumNumberValidationError(1);
-            return false;
-        }
-        // カテゴリーとトピックに対して適切なカリキュラム番号が選択されているか
-        if (!(curriculum_numbers[Number(category)][Number(topic)].includes(curriculum_number))) {
-            setCurriculumNumberValidationError(1);
-            return false;
-        }
-        
         // 質問とコメントのバリデーション
         if (question.trim().length !== 0 && comment.trim().length !== 0) {
             if (clickCount === 0) {
@@ -224,10 +228,10 @@ function Create() {
             
             <Box sx={{ width: "70%", marginLeft: "15%" }}>
                 <Card sx={{ marginBottom: 2 }}>
-                    <Stepper activeStep={activeStep} sx={{ marginTop: 3 }}>
+                    <Stepper activeStep={ activeStep } sx={{ marginTop: 3 }}>
                         { steps.map((step, step_number) => {
                             return (
-                                <Step key={step_number}>
+                                <Step key={ step_number }>
                                     <StepLabel>{step}</StepLabel>
                                 </Step>
                             );
@@ -253,8 +257,8 @@ function Create() {
                             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                                 <Button
                                     color="inherit"
-                                    disabled={activeStep === 0}
-                                    onClick={handleBack}
+                                    disabled={ activeStep === 0 }
+                                    onClick={ handleBack }
                                     sx={{ mr: 1 }}
                                 >
                                     戻る
@@ -272,8 +276,8 @@ function Create() {
                             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                                 <Button
                                     color="inherit"
-                                    disabled={activeStep === 0}
-                                    onClick={handleBack}
+                                    disabled={ activeStep === 0 }
+                                    onClick={ handleBack }
                                     sx={{ mr: 1 }}
                                 >
                                     戻る
@@ -281,8 +285,8 @@ function Create() {
                                 
                                 <Box sx={{ flex: '1 1 auto' }} />
                                 
-                                <Button onClick={handleNext}>
-                                    {activeStep === steps.length - 1 ? '入力完了' : '次へ'}
+                                <Button onClick={ () => handleNext(activeStep) }>
+                                    { activeStep === steps.length - 1 ? '入力完了' : '次へ' }
                                 </Button>
                             </Box>
                         </React.Fragment>

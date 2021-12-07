@@ -145,7 +145,7 @@ function Preview(props) {
             component="div"
             sx={{
                 width: "80%",
-                height: "350px",
+                minHeight: "350px",
                 marginLeft: "10%",
                 paddingLeft: 1,
                 paddingRight: 1,
