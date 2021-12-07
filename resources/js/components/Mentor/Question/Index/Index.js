@@ -17,13 +17,6 @@ function Index() {
         setValue(newValue);
     };
     
-    let tab_content;
-    if (value === 0) {
-        tab_content = ( <Curriculum /> );
-    } else {
-        tab_content = ( <Portfolio /> );
-    }
-    
     return (
         <div class="container">
             <Alert
@@ -41,7 +34,8 @@ function Index() {
                         <Tab label="成果物" />
                     </Tabs>
                 </Box>
-                { tab_content }
+                
+                { value === 0 ? <Curriculum /> : <Portfolio /> }
             </Box>
         </div>
     );

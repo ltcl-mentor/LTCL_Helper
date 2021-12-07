@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth']], function () {
      * ログイン済みユーザーのみアクセス可能
      */
     Route::post('/questions/store/public', 'QuestionController@publicStore'); // 受講生の質問投稿処理
+    Route::post('/questions/image/store', 'QuestionController@imageStore'); // 質問の画像保存処理
     Route::post('/questions/record/{question}', 'QuestionController@recordShow'); // 質問詳細画面のユーザ閲覧履歴記録処理
     Route::post('/contact', 'ContactController@sendContactMessage'); // お問い合わせ内容送信処理
     // Route::get('/', 'HomeController@home'); // トップ画面表示

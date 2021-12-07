@@ -6,6 +6,9 @@ import SaveIcon from '@material-ui/icons/Save';
 import Typography from '@material-ui/core/Typography';
 import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
 
 import Breadcrumbs from '../../../Breadcrumbs';
 import TopicForm from '../../../Public/Search/Condition/Search/Forms/topicForm';
@@ -14,6 +17,9 @@ import QuestionForm from './questionForm';
 import CommentForm from './commentForm';
 import Category from '../../../Public/Search/Condition/Search/Forms/categoryForm';
 
+/*
+ * 質問投稿(メンター用)のメインコンポーネント
+ */
 function Create() {
     const history = useHistory();
     const [clickCount, setClickCount] = useState(0);
@@ -39,6 +45,24 @@ function Create() {
         ],
         ["成果物"]
     ];
+    const steps = ['基本情報の入力', '質問の入力', 'コメントの入力'];
+    const [activeStep, setActiveStep] = useState(0);
+    // const [skipped, setSkipped] = React.useState(new Set());
+    
+    // ステッパーを次に進める
+    const handleNext = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    };
+    
+    // ステッパーを前に戻す
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
+    
+    // ステッパーをリセット
+    const handleReset = () => {
+        setActiveStep(0);
+    };
     
     const handleSubmit = () => {
         // カリキュラム番号のバリデーション
@@ -91,20 +115,13 @@ function Create() {
         }
     };
     
-    let validation_message;
-    if (curriculum_number_validation_error === 1) {
-        validation_message = (<p className="errorMassage">カリキュラム番号を選択してください。</p>);
-    } else {
-        validation_message = ('');
-    }
-    
-    return (
-        <div className="container">
-            <Breadcrumbs page="mentor_question_create"/>
-            
-            <Box sx={{ width: "70%", marginLeft: "15%" }}>
-                <Card sx={{ marginBottom: 2 }}>
-                    <Typography
+    // ステッパーの内容
+    const getStepContent = (step) => {
+        switch (step) {
+            case 0:
+                return (
+                    <div>
+                        <Typography
                         variant="h5"
                         component="div"
                         sx={{
@@ -162,38 +179,114 @@ function Create() {
                         3. 該当カリキュラム番号の選択
                     </Typography>
                 
-                    { validation_message }
+                    { curriculum_number_validation_error === 1 && <p className="errorMassage">カリキュラム番号を選択してください。</p> }
                 
                     <CurriculumNumber
                         category={ category }
                         topic={ topic }
                         setCurriculumNumber={ setCurriculumNumber }
                     />
-                    
+                    </div>
+                );
+                
+            case 1:
+                return (
+                    <div>
                     <QuestionForm
                         question={ question }
                         setQuestion={ setQuestion }
                         question_validation_error={ question_validation_error }
+                        activeStep={ activeStep }
                     />
+                    </div>
+                );
                 
+            case 2:
+                return (
+                    <div>
+                    
                     <CommentForm
                         comment={ comment }
                         setComment={ setComment }
                         comment_validation_error={ comment_validation_error }
                     />
-                    
-                    <Typography
-                        align="center"
-                        component="div"
-                        sx={{
-                            marginTop: 4,
-                            marginBottom: 3,
-                        }}
-                    >
-                        <Button onClick={ handleSubmit } variant="contained" endIcon={<SaveIcon />}>
-                            登録する
-                        </Button>
-                    </Typography>
+                    </div>
+                );
+                
+            default:
+                return 'Unknown step';
+        }
+    };
+    
+    return (
+        <div className="container">
+            <Breadcrumbs page="mentor_question_create"/>
+            
+            <Box sx={{ width: "70%", marginLeft: "15%" }}>
+                <Card sx={{ marginBottom: 2 }}>
+                    <Stepper activeStep={activeStep} sx={{ marginTop: 3 }}>
+                        { steps.map((step, step_number) => {
+                            return (
+                                <Step key={step_number}>
+                                    <StepLabel>{step}</StepLabel>
+                                </Step>
+                            );
+                        })}
+                    </Stepper>
+                            
+                    { activeStep === steps.length ? (
+                        <React.Fragment>
+                            <Typography sx={{ mt: 2, mb: 1 }}>
+                                <Typography
+                                    align="center"
+                                    component="div"
+                                    sx={{
+                                        marginTop: 4,
+                                        marginBottom: 3,
+                                    }}
+                                >
+                                    <Button onClick={ handleSubmit } variant="contained" endIcon={<SaveIcon />}>
+                                        登録する
+                                    </Button>
+                                </Typography>
+                            </Typography>
+                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                                <Button
+                                    color="inherit"
+                                    disabled={activeStep === 0}
+                                    onClick={handleBack}
+                                    sx={{ mr: 1 }}
+                                >
+                                    戻る
+                                </Button>
+                                
+                                <Box sx={{ flex: '1 1 auto' }} />
+                                
+                                <Button onClick={handleReset}>Reset</Button>
+                            </Box>
+                        </React.Fragment>
+                    ) : (
+                        <React.Fragment>
+                            <Typography sx={{ mt: 2, mb: 1 }}>{ getStepContent(activeStep) }</Typography>
+                            
+                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                                <Button
+                                    color="inherit"
+                                    disabled={activeStep === 0}
+                                    onClick={handleBack}
+                                    sx={{ mr: 1 }}
+                                >
+                                    戻る
+                                </Button>
+                                
+                                <Box sx={{ flex: '1 1 auto' }} />
+                                
+                                <Button onClick={handleNext}>
+                                    {activeStep === steps.length - 1 ? '入力完了' : '次へ'}
+                                </Button>
+                            </Box>
+                        </React.Fragment>
+                    )}
                 </Card>
             </Box>
         </div>

@@ -183,11 +183,11 @@ function Condition() {
                         <Grid item sx={{ marginBottom: 4, marginTop: 4 }}>
                             <Box sx={{ width: "400px", maxWidth: "400px" }}>
                                 <Stepper activeStep={ activeStep }  orientation="vertical">
-                                    { steps.map((label, index) => (
-                                        <Step key={ label }>
-                                            <StepLabel>{ label }</StepLabel>
+                                    { steps.map((step, step_number) => (
+                                        <Step key={ step_number }>
+                                            <StepLabel>{ step }</StepLabel>
                                             <StepContent>
-                                                <Typography>{ getStepContent(index) }</Typography>
+                                                <Typography>{ getStepContent(step_number) }</Typography>
                                             </StepContent>
                                         </Step>
                                     ))}
