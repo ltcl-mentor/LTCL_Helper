@@ -20,7 +20,6 @@ function Document(props) {
     // 関連質問があった場合
     } else {
         documents = props.documents.map((document) => {
-            console.log(document.beginner);
             return (
                 <Grid item >
                     <CardActionArea sx={{ width: "300px", height: "280px"}}>

@@ -59,9 +59,14 @@ class QuestionController extends Controller
         Slack::sendMessage($message);
     }
     
-    public function imageStore(Rrequest $request)
+    public function imageStore(Request $request, Image $image)
     {
-        return $request;
+        // 画像に関する処理
+        $upload_image = $request->file('image');
+        if($upload_image){
+            $image_path = $image->imageCreate($upload_image, 0);
+            return $image_path;
+        }
     }
     
     /**

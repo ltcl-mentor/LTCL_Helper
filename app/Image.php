@@ -24,16 +24,28 @@ class Image extends Model
     /**
      * S3への画像データ保存処理
      */
-    public static function imageCreate($images, $question_id)
+    public static function imageCreate($image, $question_id)
     {
-        foreach($images as $image){
-            // バケットの`myprefix`フォルダへアップロード
-            $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
-            self::create([
-                // アップロードした画像のフルパスを取得
-                'image_path' => Storage::disk('s3')->url($path),
-                'question_id' => $question_id,
-            ]);
-        };
+        // バケットの`myprefix`フォルダへアップロード
+        $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
+        // アップロードした画像のフルパスを取得
+        $image_path = Storage::disk('s3')->url($path);
+        
+        // self::create([
+        //     'image_path' => Storage::disk('s3')->url($path),
+        //     'question_id' => $question_id,
+        // ]);
+        
+        return $image_path;
+        
+        // foreach($images as $image){
+        //     // バケットの`myprefix`フォルダへアップロード
+        //     $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
+        //     self::create([
+        //         // アップロードした画像のフルパスを取得
+        //         'image_path' => Storage::disk('s3')->url($path),
+        //         'question_id' => $question_id,
+        //     ]);
+        // };
     }
 }

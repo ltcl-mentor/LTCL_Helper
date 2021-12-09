@@ -33,7 +33,7 @@ function QuestionForm(props) {
         let selection_end = document.getElementById('question').selectionEnd;
         
         // 挿入位置の調整
-        if (props.question.slice(-2) === "\n") {
+        if (props.question.slice(-2) === '\n') {
             props.setQuestion(props.question.split(-2));
         }
         
@@ -47,7 +47,7 @@ function QuestionForm(props) {
         // 文字列の選択がされていなかった場合
         if (selection_start === selection_end) {
             // カーソル位置の直後に記号挿入
-            props.setQuestion(selection_before + "\n```\n \n```\n" + selection_after);
+            props.setQuestion(selection_before + '\n```\n \n```\n' + selection_after);
             
             // カーソル位置を```の間に
             setSelectionRange([selection_end + 6, selection_end + 6]);
@@ -55,7 +55,7 @@ function QuestionForm(props) {
         // 文字列の選択がされていた場合
         } else {
             // 選択部分の前後に記号挿入
-            props.setQuestion(selection_before + "\n```\n" + selection + "```\n" + selection_after);
+            props.setQuestion(selection_before + '\n```\n' + selection + '```\n' + selection_after);
             
             // カーソル位置をコードブロックの後ろに
             setSelectionRange([selection_end + 10, selection_end + 10]);
@@ -69,7 +69,7 @@ function QuestionForm(props) {
         let selection_end = document.getElementById('question').selectionEnd;
         
         // 挿入位置の調整
-        if (props.question.slice(-2) === "\n") {
+        if (props.question.slice(-2) === '\n') {
             props.setQuestion(props.question.split(-2));
         }
         
@@ -83,7 +83,7 @@ function QuestionForm(props) {
         // 文字列の選択がされていなかった場合
         if (selection_start === selection_end) {
             // カーソル位置の直後に記号挿入
-            props.setQuestion(selection_before + "\n* " + selection_after);
+            props.setQuestion(selection_before + '\n* ' + selection_after);
             
             // カーソル位置を* の後ろに
             setSelectionRange([selection_end + 3, selection_end + 3]);
@@ -91,7 +91,7 @@ function QuestionForm(props) {
         // 文字列の選択がされていた場合
         } else {
             // 選択部分の前後に記号挿入
-            props.setQuestion(selection_before + "\n* " + selection + "\n" + selection_after);
+            props.setQuestion(selection_before + '\n* ' + selection + '\n' + selection_after);
             
             // カーソル位置を箇条書きの後ろに
             setSelectionRange([selection_end + 5, selection_end + 5]);
@@ -164,7 +164,7 @@ function QuestionForm(props) {
                 <Tabs value={ value } onChange={ handleChange } aria-label="basic tabs example" centered>
                     <Tab label="入力" />
                     <Tab label="プレビュー" />
-                    <Tab label="画像" />
+                    <Tab label="画像添付" />
                 </Tabs>
                 
                 <Box sx={{ marginTop: 2 }}>
