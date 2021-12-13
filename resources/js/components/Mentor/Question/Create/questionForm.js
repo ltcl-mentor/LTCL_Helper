@@ -15,6 +15,9 @@ import Preview from './preview';
 function QuestionForm(props) {
     const [value, setValue] = useState(0);
     const [selectionRange, setSelectionRange] = useState(() => [0, 0]);
+    const [uploaded_images, setUploadedImages] = useState([]);
+    const [image, setImage] = useState('');
+    const [cursor, setCursor] = useState(0);
     
     // textareaの特定位置にカーソルを持っていきたいときに実行
     // setSelectionRangeに連動
@@ -25,6 +28,26 @@ function QuestionForm(props) {
         document.getElementById('question').setSelectionRange(selectionRange[0], selectionRange[1]);
     },[selectionRange]);
     
+    useEffect(() => {
+        if (image.length > 0) {
+            setValue(0);
+            
+             // カーソルの直前
+            let selection_before = props.question.substr(0, cursor);
+            // カーソルの直後
+            let selection_after = props.question.substr(cursor);
+        
+            // カーソル位置の直後に画像リンク挿入
+            props.setQuestion(selection_before + '<image link=' + image + '//>' + selection_after);
+        
+            // カーソル位置を画像の前に
+            setSelectionRange([cursor, cursor]);
+            
+            props.setUsedImages([...props.used_images, image]);
+            
+            setImage('');
+        }
+    }, [image]);
     
     // コードブロッック
     const handleCode = () => {
@@ -100,6 +123,7 @@ function QuestionForm(props) {
     
     // 質問の記録
     const handleQuestion = (event) => {
+        setCursor(document.getElementById('question').selectionStart);
         props.setQuestion(event.target.value);
     };
     
@@ -131,8 +155,8 @@ function QuestionForm(props) {
                     value={ props.question }
                     onChange={ (event) => handleQuestion(event) }
                     style={{ 
-                        width: "80%",
-                        marginLeft: "10%",
+                        width: "90%",
+                        marginLeft: "5%",
                         paddingTop:2,
                     }}
                     id="question"
@@ -142,7 +166,13 @@ function QuestionForm(props) {
     } else if (value === 1) {
         tab_content = (<Preview question={ props.question } />);
     } else if (value === 2) {
-        tab_content = (<Picture />);
+        tab_content = (
+            <Picture
+                setImage={ setImage }
+                images={ uploaded_images }
+                setImages={ setUploadedImages }
+            />
+        );
     }
     
     return (
@@ -160,8 +190,15 @@ function QuestionForm(props) {
             
             { props.question_validation_error === 1 && <p className="errorMassage">質問内容の入力は必須です。</p> }
             
-            <Box sx={{ marginTop: 4 }}>
-                <Tabs value={ value } onChange={ handleChange } aria-label="basic tabs example" centered>
+            <Box sx={{ marginTop: 4, width: "90%", marginLeft: "5%" }}>
+                <Tabs
+                    value={ value }
+                    onChange={ handleChange }
+                    aria-label="basic tabs example"
+                    variant={ window.innerWidth > 350 ? "fullWidth" : "scrollable"}
+                    scrollButtons={ false }
+                    centered
+                >
                     <Tab label="入力" />
                     <Tab label="プレビュー" />
                     <Tab label="画像添付" />

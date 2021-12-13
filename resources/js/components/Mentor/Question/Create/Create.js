@@ -23,6 +23,7 @@ import Category from '../../../Public/Search/Condition/Search/Forms/categoryForm
 function Create() {
     const history = useHistory();
     const [clickCount, setClickCount] = useState(0);
+    const [used_images, setUsedImages] = useState([]);
     const [category, setCategory] = useState(0);
     const [topic, setTopic] = useState(0);
     const [curriculum_number, setCurriculumNumber] = useState('');
@@ -47,6 +48,12 @@ function Create() {
     ];
     const steps = ['基本情報の入力', '質問の入力', 'コメントの入力'];
     const [activeStep, setActiveStep] = useState(0);
+    const [screen_width, setScreenWidth] = useState(window.innerWidth);
+    
+    // 画面幅を随時取得
+    window.addEventListener('resize', function() {
+        setScreenWidth(window.innerWidth);
+    });
     
     // ステッパーを次に進める
     // ステップごとにバリデーションも実行
@@ -93,6 +100,7 @@ function Create() {
                         curriculum_number: curriculum_number,
                         question: question,
                         comment: comment,
+                        images: used_images,
                     })
                     .then(response => {
                         if (response.status === 200) {
@@ -124,7 +132,7 @@ function Create() {
         switch (step) {
             case 0:
                 return (
-                    <div>
+                    <React.Fragment>
                         <Typography
                         variant="h5"
                         component="div"
@@ -190,31 +198,33 @@ function Create() {
                         topic={ topic }
                         setCurriculumNumber={ setCurriculumNumber }
                     />
-                    </div>
+                    </React.Fragment>
                 );
                 
             case 1:
                 return (
-                    <div>
+                    <React.Fragment>
                     <QuestionForm
                         question={ question }
                         setQuestion={ setQuestion }
                         question_validation_error={ question_validation_error }
                         activeStep={ activeStep }
+                        used_images={ used_images }
+                        setUsedImages={ setUsedImages }
                     />
-                    </div>
+                    </React.Fragment>
                 );
                 
             case 2:
                 return (
-                    <div>
+                    <React.Fragment>
                     
                     <CommentForm
                         comment={ comment }
                         setComment={ setComment }
                         comment_validation_error={ comment_validation_error }
                     />
-                    </div>
+                    </React.Fragment>
                 );
                 
             default:
@@ -226,7 +236,12 @@ function Create() {
         <div className="container">
             <Breadcrumbs page="mentor_question_create"/>
             
-            <Box sx={{ width: "70%", marginLeft: "15%" }}>
+            <Box
+                sx={{
+                    width: screen_width >= 540 ? "70%" : "96%",
+                    marginLeft: screen_width >= 540 ? "15%" : "2%",
+                }}
+            >
                 <Card sx={{ marginBottom: 2 }}>
                     <Stepper activeStep={ activeStep } sx={{ marginTop: 3 }}>
                         { steps.map((step, step_number) => {
