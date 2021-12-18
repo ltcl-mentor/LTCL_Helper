@@ -14,7 +14,7 @@ function Questions(props) {
             <ListItem button>
                 <Link to={ `public/questions/` + question.id } target="_blank" className="related_question">
                     <ListItemText
-                        primary={ question.question.length > 50 ? question.question.substr(0, 49) + '...' : question.question }
+                        primary={ question.title }
                     />
                 </Link>
             </ListItem>

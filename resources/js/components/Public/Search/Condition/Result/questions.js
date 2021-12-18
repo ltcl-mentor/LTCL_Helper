@@ -44,7 +44,7 @@ function Questions(props) {
                 <Link to={ `/public/questions/` + question.id } target="_blank">
                     <ListItem button>
                         <ListItemText
-                            primary={ question.question }
+                            primary={ question.title }
                         />
                     </ListItem>
                 </Link>

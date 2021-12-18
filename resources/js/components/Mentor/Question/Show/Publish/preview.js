@@ -49,9 +49,9 @@ function Preview(props) {
             <Grid container spacing={2} sx={{ flexGrow: 1 }}>
                 <Grid item sx={{ width: "70%" }}>
                     <Box>
-                        <Question 
-                            count={ props.images.filter(v=>v).length }
-                            images={ props.images }
+                        <Question
+                            title={ props.question.title }
+                            remarks={ props.question.remarks }
                             updated_at={ props.question.updated_at }
                             question={ props.question.question }
                         />

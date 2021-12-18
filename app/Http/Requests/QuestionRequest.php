@@ -27,8 +27,9 @@ class QuestionRequest extends FormRequest
             'category' => 'required',
             'topic' => 'required',
             'curriculum_number' => 'required|max:5',
+            'title' => 'required|max:50',
+            'remarks' => 'required|max:255',
             'question' => 'required|string',
-            'comment' => 'required|string',
         ];
     }
 }

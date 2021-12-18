@@ -9,7 +9,7 @@ import History from './Public/History/History';
 import Home from './Public/Home/Home';
 import PublicDocumentIndex from './Public/Document/Index/Index';
 import PublicQuestionIndex from './Public/Question/Index/Index';
-import PublicQuestionCreate from './Public/Question/Create/Create';
+import PublicQuestionCreate from './Public/Question/Create/Create/Create';
 import PublicQuestionShow from './Public/Question/Show/Show';
 import Condition from './Public/Search/Condition/Condition';
 import Freeword from './Public/Search/Freeword/Freeword';
@@ -21,7 +21,7 @@ import DocumentCreate from './Mentor/Document/Create/Create';
 import DocumentEdit from './Mentor/Document/Edit/Edit';
 import QuestionIndex from './Mentor/Question/Index/Index';
 import QuestionShow from './Mentor/Question/Show/Show';
-import QuestionCreate from './Mentor/Question/Create/Create';
+// import QuestionCreate from './Mentor/Question/Create/Create';
 import QuestionEdit from './Mentor/Question/Edit/Edit';
 import LinkFromQuestionIndex from './Mentor/Link/fromQuestion/Index/Index';
 import LinkFromQuestionShow from './Mentor/Link/fromQuestion/Show/Show';
@@ -105,7 +105,7 @@ function Router() {
                     <Route path="/questions/index" exact component={ QuestionIndex }/>
                     
                     {/* 質問新規作成画面表示 */}
-                    <Route path="/questions/create" exact component={ QuestionCreate }/>
+                    {/*<Route path="/questions/create" exact component={ QuestionCreate }/>*/}
                     
                     {/* 質問編集画面表示 */}
                     <Route path="/questions/:id/edit" exact component={ QuestionEdit }/>

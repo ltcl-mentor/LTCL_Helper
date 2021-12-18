@@ -19,7 +19,6 @@ function Show() {
     const { id } = useParams();
     const history = useHistory();
     const [question, setQuestion] = useState([]);
-    const [images, setImages] = useState([]);
     const [documents, setDocuments] = useState([]);
     const categories = ['カリキュラム', '成果物'];
     const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', 'マイグレーション', 'リレーション', 'Laravel拡張', '画像処理', 'Heroku環境', 'API', 'デザイン'];
@@ -29,14 +28,6 @@ function Show() {
             .get(`/react/question/${ id }`)
             .then(response => {
                 setQuestion(response.data);
-            }).catch(error => {
-                console.log(error);
-            });
-            
-        axios
-            .get(`/react/images/${ id }`)
-            .then(response => {
-                setImages(response.data);
             }).catch(error => {
                 console.log(error);
             });
@@ -81,8 +72,7 @@ function Show() {
                 <Publish
                     question_id={ id }
                     question={ question }
-                    setQuestion={ setQuestion } 
-                    images={ images }
+                    setQuestion={ setQuestion }
                     documents={ documents }
                     category={ categories[question.category] }
                     topic={ topics[question.topic] }
@@ -107,9 +97,9 @@ function Show() {
                 check={ question.check }
             />
             
-            <Question 
-                count={ images.filter(v=>v).length }
-                images={ images }
+            <Question
+                title={ question.title }
+                remarks={ question.remarks }
                 question={ question.question }
             />
             

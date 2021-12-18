@@ -17,9 +17,11 @@ class CreateQuestionsTable extends Migration
             $table->bigIncrements('id');
             $table->UnsignedTinyInteger('category');
             $table->UnsignedTinyInteger('topic');
-            $table->string('curriculum_number',10);
+            $table->string('curriculum_number', 5);
+            $table->string('title', 50);
+            $table->string('remarks', 255);
             $table->longtext('question');
-            $table->longtext('comment');
+            $table->tinyInteger('status');
             $table->boolean('check');
             $table->UnsignedBigInteger('user_id');
             $table->timestamps();

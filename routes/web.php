@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
     /**
      * ログイン済みユーザーのみアクセス可能
      */
-    Route::post('/questions/store/public', 'QuestionController@publicStore'); // 受講生の質問投稿処理
+    Route::post('/questions/store', 'QuestionController@store'); // 新規作成実行
     Route::post('/questions/image/store', 'QuestionController@imageStore'); // 質問の画像保存処理
     Route::post('/questions/record/{question}', 'QuestionController@recordShow'); // 質問詳細画面のユーザ閲覧履歴記録処理
     Route::post('/contact', 'ContactController@sendContactMessage'); // お問い合わせ内容送信処理
@@ -102,7 +102,6 @@ Route::group(['middleware' => ['auth']], function () {
         /**
          * 質問
          */
-        Route::post('/questions/store', 'QuestionController@store'); // 新規作成実行
         Route::post('/questions/{question}/check', 'QuestionController@check'); // 承認実行
         Route::post('/questions/{question}/uncheck', 'QuestionController@uncheck'); // 承認解除実行
         Route::post('/questions/{question}/update', 'QuestionController@update'); // 編集実行

@@ -61,7 +61,7 @@ function Curriculum(props) {
                                                 role="listitem"
                                                 button
                                             >
-                                                <ListItemText primary={ question.question } />
+                                                <ListItemText primary={ question.title } />
                                             </ListItem>
                                         </Link>
                                     );

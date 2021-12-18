@@ -30,41 +30,78 @@ class QuestionController extends Controller
     }
     
     /**
-     * 受講生用質問保存実行
+     * 新規作成実行
      */
-    public function publicStore(QuestionRequest $request, Question $question)
+    public function store(QuestionRequest $request, Question $question)
     {
         // 質問に関する処理
         $input['category'] = $request['category'];
         $input['topic'] = $request['topic'];
         $input['curriculum_number'] = $request['curriculum_number'];
+        $input['title'] = $request['title'];
+        $input['remarks'] = $request['remarks'];
         $input['question'] = $request['question'];
-        $input['comment'] = $request['comment'];
         
         $question->fill($input);
         
+        $question['status'] = 0;
         $question['check'] = false;
         $question['user_id'] = Auth::id();
         
         $question->save();
         
         // 画像に関する処理
-        // $pictures = $request->file('image');
-        // if($pictures){
-        //     Image::imageCreate($pictures, $question->id);
-        // }
+        // 画像は事前に保存されているので、実際に質問の中で使われていないものは削除
+        // 質問の中で利用されているものには質問のIDを記録
+        $image_paths = $request['images'];
+        
+        $delete_images = [];
+        
+        if(count(array_filter($image_paths)) !== 0){
+            foreach($image_paths as $path){
+                // 質問の中で対象の画像URLが使われていた場合
+                if(strpos($question->question, $path)){
+                    $image_data = Image::firstWhere('image_path', $path);
+                    $image_data->question_id = $question->id;
+                    $image_data->save();
+                    
+                // 質問の中で対象の画像URLが使われていなかった場合
+                } else {
+                    array_push($delete_images, $path);
+                }
+            }
+        }
+        
+        Image::imageDelete($delete_images);
+        
         
         // Slackへの通知
-        $message = "受講生によって質問が投稿されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $question->id;
-        Slack::sendMessage($message);
+        // データ作成者が受講生だった場合
+        if(Auth::user()->is_admin === null){
+            $message = "受講生によって質問が投稿されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $question->id;
+            Slack::sendMessage($message);
+        }
+        
+        return ["id" => $question->id, "is_admin" => Auth::user()->is_admin];
     }
     
+    
+    /**
+     * 画像保存処理
+     */
     public function imageStore(Request $request, Image $image)
     {
-        // 画像に関する処理
         $upload_image = $request->file('image');
+        
         if($upload_image){
-            $image_path = $image->imageCreate($upload_image, 0);
+            // リクエストに質問IDがあるか確認
+            array_key_exists('question_id', $request) ? $question_id = $request['question_id'] : $question_id = 0;
+            
+            // リクエストにコメントIDがあるか確認
+            array_key_exists('comment_id', $request) ? $comment_id = $request['comment_id'] : $comment_id = 0;
+            
+            $image_path = $image->imageCreate($upload_image, $question_id, $comment_id);
+            
             return $image_path;
         }
     }
@@ -87,36 +124,39 @@ class QuestionController extends Controller
     // }
     
     
+    /**
+     * 受講生用質問保存実行
+     */
+    // public function publicStore(QuestionRequest $request, Question $question)
+    // {
+    //     // 質問に関する処理
+    //     $input['category'] = $request['category'];
+    //     $input['topic'] = $request['topic'];
+    //     $input['curriculum_number'] = $request['curriculum_number'];
+    //     $input['question'] = $request['question'];
+    //     $input['comment'] = $request['comment'];
+        
+    //     $question->fill($input);
+        
+    //     $question['check'] = false;
+    //     $question['user_id'] = Auth::id();
+        
+    //     $question->save();
+        
+    //     // 画像に関する処理
+    //     // $pictures = $request->file('image');
+    //     // if($pictures){
+    //     //     Image::imageCreate($pictures, $question->id);
+    //     // }
+        
+    //     // Slackへの通知
+    //     $message = "受講生によって質問が投稿されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $question->id;
+    //     Slack::sendMessage($message);
+    // }
+    
+    
     
     /** 管理者用処理 */
-    
-    /**
-     * 新規作成実行
-     */
-    public function store(QuestionRequest $request, Question $question)
-    {
-        // 質問に関する処理
-        $input['category'] = $request['category'];
-        $input['topic'] = $request['topic'];
-        $input['curriculum_number'] = $request['curriculum_number'];
-        $input['question'] = $request['question'];
-        $input['comment'] = $request['comment'];
-        
-        $question->fill($input);
-        
-        $question['check'] = false;
-        $question['user_id'] = Auth::id();
-        
-        $question->save();
-        
-        // 画像に関する処理
-        // $pictures = $request->file('image');
-        // if($pictures){
-        //     Image::imageCreate($pictures, $question->id);
-        // }
-        
-        return ["id" => $question->id];
-    }
     
     /**
      * 編集実行
@@ -127,25 +167,51 @@ class QuestionController extends Controller
         $input['category'] = $request['category'];
         $input['topic'] = $request['topic'];
         $input['curriculum_number'] = $request['curriculum_number'];
+        $input['title'] = $request['title'];
+        $input['remarks'] = $request['remarks'];
         $input['question'] = $request['question'];
-        $input['comment'] = $request['comment'];
         
         $question->fill($input);
         
         $question->save();
         
-        // 画像に関する処理
-        // 画像の削除
-        // if($request['delete_id']){
-        //     $delete_images = Image::whereIn('id', $request['delete_id'])->get();
-        //     Image::imageDelete($delete_images);
-        // }
         
-        // 画像の登録
-        // $create_images = $request->file('image');
-        // if($create_images){
-        //     Image::imageCreate($create_images, $question->id);
-        // }
+        // 画像に関する処理
+        // 新規に追加された画像は事前に保存されているので、実際に質問の中で使われていないものを削除
+        $image_paths = $request['images'];
+        
+        // 質問の中で使われなくなった画像も削除するので、テーブルから取得して画像URLを追加
+        $used_images = Image::where('question_id', $question->id)->get(['image_path']);
+        
+        if(count($used_images) !== 0){
+            foreach($used_images as $used_image){
+                array_push($image_paths, $used_image->image_path);
+            }
+        }
+        
+        $delete_images = [];
+        
+        if(count(array_filter($image_paths)) !== 0){
+            foreach($image_paths as $path){
+                // 質問の中で対象の画像URLが使われていた場合
+                if(strpos($question->question, $path)){
+                    $image_data = Image::firstWhere('image_path', $path);
+                    $image_data->question_id = $question->id;
+                    $image_data->save();
+                    
+                // 質問の中で対象の画像URLが使われていなかった場合
+                } else {
+                    array_push($delete_images, $path);
+                }
+            }
+        }
+        
+        Image::imageDelete($delete_images);
+        
+        
+        // Slackへの通知
+        $message = Auth::user()->name . "によって質問が編集されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $question->id;
+        Slack::sendMessage($message);
         
         return ["id" => $question->id];
     }
@@ -155,16 +221,12 @@ class QuestionController extends Controller
      */
     public function delete(Question $question)
     {
-        // 画像の削除
-        $images = Image::where('question_id', $question->id)->get();
-        if($images){
-            Image::imageDelete($images);
-        }
-        
         // 質問の削除
         // 対象を論理削除
         $question->delete();
+        
         // 過去に論理削除されたデータの中で３ヶ月経過したものを物理削除
+        // 質問で利用された画像の削除はこちらで実行
         Question::questionForceDelete();
     }
     

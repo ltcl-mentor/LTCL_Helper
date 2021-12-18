@@ -18,7 +18,6 @@ import RelatedQuestions from './related-questions';
 function Show() {
     const { id } = useParams();
     const [question, setQuestion] = useState([]);
-    const [images, setImages] = useState([]);
     const [documents, setDocuments] = useState([]);
     const [relatedQuestions, setRelatedQuestions] = useState([]);
     
@@ -33,20 +32,11 @@ function Show() {
                 console.log(error);
             });
         
-        // 公開済みの全質問を取得
+        // 個別質問を取得
         axios
             .get(`/react/checked/question/${ id }`)
             .then(response => {
                 setQuestion(response.data);
-            }).catch(error => {
-                console.log(error);
-            });
-        
-        // 質問に該当する画像の取得
-        axios
-            .get(`/react/images/${ id }`)
-            .then(response => {
-                setImages(response.data);
             }).catch(error => {
                 console.log(error);
             });
@@ -83,9 +73,9 @@ function Show() {
             <Grid container spacing={2} sx={{ flexGrow: 1 }}>
                 <Grid item sx={{ width:"70%" }}>
                     <Box>
-                        <Question 
-                            count={ images.filter(v=>v).length }
-                            images={ images }
+                        <Question
+                            title={ question.title }
+                            remarks={ question.remarks }
                             updated_at={ question.updated_at }
                             question={ question.question }
                         />

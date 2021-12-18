@@ -4,13 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Document;
+use App\Image;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Question extends Model
 {
     use SoftDeletes;
     
-    protected $fillable=['category', 'topic', 'curriculum_number', 'question', 'comment', 'check', 'user_id'];
+    protected $fillable=['category', 'topic', 'curriculum_number', 'title', 'remarks', 'question', 'status', 'check', 'user_id'];
     
     static $category = ['カリキュラム', '成果物'];
     
@@ -64,11 +65,27 @@ class Question extends Model
     public static function questionForceDelete()
     {
         $deleted_questions = self::onlyTrashed()->get();
+        
         $today = date("Y-m-d H:i:s");
+        
         foreach($deleted_questions as $deleted_question){
             $month_diff = $deleted_question['deleted_at']->diffInMonths($today);
             // 論理削除されてから３ヶ月以上経過していた場合に物理削除を実行
             if($month_diff > 3){
+                // 関連画像の削除
+                $used_images = Image::where('question_id', $question->id)->get(['image_path']);
+                
+                $delete_images = [];
+                
+                if(count($used_images) !== 0){
+                    foreach($used_images as $used_image){
+                        array_push($delete_images, $used_image->image_path);
+                    }
+                }
+                
+                Image::imageDelete($delete_images);
+                
+                // 物理削除実行
                 $deleted_question->forceDelete();
             }
         }

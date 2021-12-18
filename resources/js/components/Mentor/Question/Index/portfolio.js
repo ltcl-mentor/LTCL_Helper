@@ -66,7 +66,7 @@ function Portfolio() {
                                                 button
                                             >
                                                 { question.check === 0 || question.check === false ? <Typography color="text.primary">（非公開）</Typography> : "" }
-                                                <ListItemText primary={ question.question } />
+                                                <ListItemText primary={ question.title } />
                                             </ListItem>
                                         </Link>
                                     );
