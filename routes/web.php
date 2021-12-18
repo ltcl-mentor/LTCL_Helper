@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('react/checked/questions', 'ReactController@getCheckedQuestions'); // 公開中の質問受け渡し
     Route::get('react/checked/question/{question}', 'ReactController@getCheckedQuestion'); // 公開中の個別質問データの受け渡し
     Route::get('react/images/{question_id}', 'ReactController@getImages'); // 質問に関連する画像の受け渡し
+    Route::get('react/all/documents', 'ReactController@getAllDocuments'); // 全記事受け渡し
     Route::get('react/related/documents/{question}', 'ReactController@getRelatedDocuments'); // 質問に紐づいている記事の受け渡し
     Route::get('react/user', 'ReactController@getUser'); // ログインユーザー受け渡し
     Route::get('react/weather', 'ReactController@getWeather'); // 今日の天気のデータ受け渡し
@@ -131,7 +132,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('react/questions/{document}', 'LinkController@getQuestionsFromDocument'); // 単体記事に関する質問データの受け渡し
         Route::get('react/curriculum/questions', 'ReactController@getCurriculumQuestions'); // カリキュラム範囲の質問受け渡し
         Route::get('react/portfolio/questions', 'ReactController@getPortfolioQuestions'); // 成果物範囲の質問受け渡し
-        Route::get('react/all/documents', 'ReactController@getAllDocuments'); // 全記事受け渡し
         Route::get('react/document/{document}', 'ReactController@getDocument'); // 個別記事データの受け渡し
         Route::get('react/documents/{question}', 'LinkController@getDocumentsFromQuestion'); // 単体質問に関する記事データの受け渡し
         Route::get('react/related/questions/{document}', 'ReactController@getRelatedQuestions'); // 記事に紐づいている質問の受け渡し

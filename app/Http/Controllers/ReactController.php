@@ -118,7 +118,16 @@ class ReactController extends Controller
      */
     public function getAlldocuments()
     {
-        return Document::All();
+        $documents = Document::get();
+        foreach($documents as $document){
+            if($document->beginner ===0){
+                $document->beginner = false;
+            }else{
+                $document->beginner = true;
+            }
+        }
+        
+        return $documents;
     }
     
     /**
