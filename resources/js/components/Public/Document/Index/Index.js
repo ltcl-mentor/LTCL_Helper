@@ -34,33 +34,40 @@ function Index() {
         var keyword_documents = [];
         // キーワードが未入力の場合
         if (keyword.trim().length === 0) {
-            setDocuments(default_documents);
+            keyword_documents = default_documents;
         } else {
             default_documents.map((doc) => {
                 doc.title.indexOf(keyword) !== -1 && keyword_documents.push(doc);
             });
-            setDocuments(keyword_documents);
         }
         
         var target_documents = [];
         // 対象者のいづれかが選択されていた場合
         if (beginner || amature || master || all) {
-            documents.map((doc) => {
+            keyword_documents.map((doc) => {
                 if (beginner) {
                     doc.beginner && target_documents.push(doc);
                 }
                 if (amature) {
-                    doc.amature && target_documents.push(doc);
+                    if (target_documents.indexOf(doc) === -1) {
+                        doc.amature && target_documents.push(doc);
+                    }
                 }
                 if (master) {
-                    doc.matser && target_documents.push(doc);
-                }
-                if (all) {
-                    doc.all && target_documents.push(doc);
+                    if (target_documents.indexOf(doc) === -1) {
+                        doc.matser && target_documents.push(doc);
+                    }
+                } else if (all) {
+                    if (target_documents.indexOf(doc) === -1) {
+                        doc.all && target_documents.push(doc);
+                    }
                 }
             });
             setDocuments(target_documents);
+        } else {
+            setDocuments(keyword_documents);
         }
+        
     },[keyword, beginner, amature, master, all]);
     
     const handleKeyword = (event) => {
