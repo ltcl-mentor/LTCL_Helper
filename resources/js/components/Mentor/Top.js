@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
+import axios from "axios";
 import Button from '@mui/material/Button';
 import CreateIcon from '@material-ui/icons/Create';
 import ListIcon from '@material-ui/icons/List';
@@ -11,10 +12,22 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
+import Badge from '@mui/material/Badge';
 
 import Breadcrumbs from '../Breadcrumbs';
 
 function Top() {
+    const [counts, setCounts] = useState([]);
+    
+    useEffect(() => {
+        axios
+            .get('/react/questions/counts')
+            .then(response => {
+                setCounts(response.data);
+            }).catch(error => {
+                console.log(error);
+            });
+    }, []);
     return (
         <div class="container">
             <Breadcrumbs page="mentor_top"/>
@@ -42,7 +55,17 @@ function Top() {
                         
                         <Grid item >
                             <Link to="">
-                                <Button variant="contained" color="info" startIcon={ <CreateIcon /> }>新規登録</Button>
+                                <Badge badgeContent={ counts.mentor } color="error">
+                                <Button variant="contained" color="info" startIcon={ <ListIcon /> }>メンターコメント待ち</Button>
+                                </Badge>
+                            </Link>
+                        </Grid>
+                        
+                        <Grid item >
+                            <Link to="">
+                                <Badge badgeContent={ counts.student } color="error">
+                                <Button variant="contained" color="info" startIcon={ <ListIcon /> }>受講生コメント待ち</Button>
+                                </Badge>
                             </Link>
                         </Grid>
                     </Grid>

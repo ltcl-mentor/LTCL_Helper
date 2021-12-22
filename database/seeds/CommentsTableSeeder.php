@@ -27,7 +27,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -37,7 +37,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -48,7 +48,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -58,7 +58,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -70,7 +70,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -80,7 +80,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -91,7 +91,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -102,7 +102,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -115,7 +115,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -126,7 +126,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -137,7 +137,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -147,7 +147,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -160,7 +160,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -174,7 +174,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -186,7 +186,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -196,7 +196,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -206,7 +206,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -218,7 +218,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -230,7 +230,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -242,7 +242,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -253,7 +253,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -263,7 +263,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -273,7 +273,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -283,7 +283,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -293,7 +293,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -303,7 +303,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -315,7 +315,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -325,7 +325,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -335,7 +335,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -350,7 +350,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -364,7 +364,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -374,7 +374,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -387,7 +387,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -400,7 +400,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -410,7 +410,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -420,7 +420,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -430,7 +430,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -440,7 +440,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -450,7 +450,7 @@ class CommentsTableSeeder extends Seeder
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
-            'is_mentor_commented' => false,
+            'is_mentor_commented' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);

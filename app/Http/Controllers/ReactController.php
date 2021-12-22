@@ -183,6 +183,26 @@ class ReactController extends Controller
         return $document->questions()->get();
     }
     
+    /**
+     * 未解決でメンターまたは受講生のコメント入力待ちの件数受け渡し
+     */
+    public function getQuestionCounts()
+    {
+        $unresolved_questions = Question::where('is_resolved', false)->get();
+        
+        $mentor_non_comment_count = 0;
+        $student_non_comment_count = 0;
+        
+        foreach($unresolved_questions as $question){
+            $mentor_non_comment_comments = Comment::where('question_id', $question->id)->where('is_mentor_commented', false)->get();
+            $student_non_comment_comments = Comment::where('question_id', $question->id)->where('is_mentor_commented', true)->get();
+            
+            $mentor_non_comment_count += count($mentor_non_comment_comments);
+            $student_non_comment_count += count($student_non_comment_comments);
+        }
+        
+        return ["mentor" => $mentor_non_comment_count, "student" => $student_non_comment_count];
+    }
     
     
     

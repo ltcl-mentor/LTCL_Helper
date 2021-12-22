@@ -132,6 +132,7 @@ Route::group(['middleware' => ['auth']], function () {
          * Reactでのデータ受け渡し
          */
         Route::get('react/all/questions', 'ReactController@getAllQuestions'); // 全質問受け渡し
+        Route::get('react/questions/counts', 'ReactController@getQuestionCounts'); // 未解決でメンターまたは受講生のコメント入力待ちの件数受け渡し
         Route::get('react/question/{question}', 'ReactController@getQuestion'); // 個別質問データの受け渡し
         Route::get('react/questions/{document}', 'LinkController@getQuestionsFromDocument'); // 単体記事に関する質問データの受け渡し
         Route::get('react/curriculum/questions', 'ReactController@getCurriculumQuestions'); // カリキュラム範囲の質問受け渡し
