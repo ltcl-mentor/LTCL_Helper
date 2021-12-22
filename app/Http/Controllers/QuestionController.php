@@ -106,6 +106,17 @@ class QuestionController extends Controller
     }
     
     /**
+     * 質問ステータス変更(質問解決)
+     */
+    public function resolved(Question $question)
+    {
+        $question->is_resolved = true;
+        $question->save();
+        
+        return $question->id;
+    }
+    
+    /**
      * 公開中の質問一覧表示
      */
     // public function publicIndex()

@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import axios from "axios";
+import React, {useState} from 'react';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import Accordion from '@material-ui/core/Accordion';
@@ -16,19 +15,7 @@ import Edit from './edit';
  */
 function Comments(props) {
     const [expanded, setExpanded] = useState(false);
-    const [user, setUser] = useState([]);
     const [edit_id, setEditId] = useState('');
-    
-    // 初回レンダー時に実行
-    useEffect(() => {
-        axios
-            .get("/react/user")
-            .then(response => {
-                setUser(response.data);
-            }).catch(error => {
-                console.log(error);
-            });
-    }, []);
     
     // アコーディオンの開閉
     const handleChange = (panel) => (event, isExpanded) => {
@@ -47,8 +34,8 @@ function Comments(props) {
                             target_student={ comment.target_student }
                             created_at={ comment.created_at }
                             is_staff={ comment.is_staff }
-                            user_id={ user.id }
-                            is_admin={ user.is_admin }
+                            user_id={ props.user_id }
+                            is_admin={ props.is_admin }
                             setEditId={ setEditId }
                             setCommentChanging={ props.setCommentChanging }
                         />
@@ -86,8 +73,8 @@ function Comments(props) {
                                                     target_student={ sub_comment.target_student }
                                                     created_at={ sub_comment.created_at }
                                                     is_staff={ sub_comment.is_staff }
-                                                    user_id={ user.id }
-                                                    is_admin={ user.is_admin }
+                                                    user_id={ props.user_id }
+                                                    is_admin={ props.is_admin }
                                                     setEdit={ setEditId }
                                                     setCommentChanging={ props.setCommentChanging }
                                                 />
@@ -104,7 +91,7 @@ function Comments(props) {
                                         );
                                     }) }
                                     
-                                    { (user.id === comment.target_student || user.is_admin === 'staff') && 
+                                    { (props.user_id === comment.target_student || props.is_admin === 'staff') && 
                                         <Create
                                             comment_id={ comment.id }
                                             type='add'
@@ -116,7 +103,7 @@ function Comments(props) {
                             </Accordion>
                         :
                             <React.Fragment>
-                                { (user.id === comment.target_student || user.is_admin === 'staff') && 
+                                { (props.user_id === comment.target_student || props.is_admin === 'staff') && 
                                     <Create
                                         comment_id={ comment.id }
                                         type='add'

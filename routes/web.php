@@ -31,7 +31,8 @@ Route::group(['middleware' => ['auth']], function () {
      */
     Route::post('/questions/store', 'QuestionController@store'); // 新規作成実行
     Route::post('/questions/image/store', 'QuestionController@imageStore'); // 質問の画像保存処理
-    Route::post('/questions/record/{question}', 'QuestionController@recordShow'); // 質問詳細画面のユーザ閲覧履歴記録処理
+    Route::post('/questions/{question}/record', 'QuestionController@recordShow'); // 質問詳細画面のユーザ閲覧履歴記録処理
+    Route::post('/questions/{question}/resolved', 'QuestionController@resolved'); // 質問のステータス変更処理(質問解決)
     Route::post('/comments/store', 'CommentController@store'); // 質問へのコメント保存処理
     Route::post('/comments/{comment}/update', 'CommentController@update'); // 質問へのコメント更新処理
     Route::post('/comments/{comment}/delete', 'CommentController@delete'); // 質問へのコメント削除処理

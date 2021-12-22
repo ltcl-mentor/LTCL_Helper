@@ -11,7 +11,6 @@ function Comment(props) {
     const history = useHistory();
     
     const deleteConfirm = () => {
-        console.log(999);
         if (confirm('コメントが削除されます。\nよろしいですか？')) {
             props.setCommentChanging(true);
             

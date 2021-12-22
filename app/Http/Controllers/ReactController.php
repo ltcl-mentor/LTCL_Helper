@@ -66,6 +66,12 @@ class ReactController extends Controller
     public function getCheckedQuestion(Question $question)
     {
         if($question->check == true){
+            if($question->is_resolved === 1){
+                $question->is_resolved = true;
+            }else{
+                $question->is_resolved = false;
+            }
+            
             // 1. メインコメント処理
             $main_comments = Comment::where('question_id', $question->id)->where('comment_id', 0)->orderBy('created_at', 'asc')->get();
             

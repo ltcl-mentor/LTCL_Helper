@@ -28,6 +28,10 @@ function Parameters(props) {
                         <TableCell align="center" component="th" scope="row">カリキュラム番号</TableCell>
                         <TableCell align="center">{ props.curriculum_number }</TableCell>
                     </TableRow>
+                    <TableRow>
+                        <TableCell align="center" component="th" scope="row">ステータス</TableCell>
+                        <TableCell align="center">{ props.is_resolved ? "解決済み" : "未解決" }</TableCell>
+                    </TableRow>
                 </TableBody>
             </Table>
         </Paper>
