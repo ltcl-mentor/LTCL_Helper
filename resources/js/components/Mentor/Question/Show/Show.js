@@ -46,7 +46,7 @@ function Show() {
         if (!(comment_changing)) {
             // 個別質問を取得
             axios
-                .get(`/react/checked/question/${ id }`)
+                .get(`/react/question/${ id }`)
                 .then(response => {
                     setQuestion(response.data);
                 }).catch(error => {
