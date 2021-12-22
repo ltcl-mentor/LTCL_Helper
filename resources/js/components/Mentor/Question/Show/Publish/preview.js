@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 
 import Parameters from '../../../../Public/Question/Show/parameters';
 import Question from '../../../../Public/Question/Show/question';
-import Comments from '../../../../Public/Question/Show/comments/comments';
+import Comments from './comments/comments';
 import Documents from '../../../../Public/Question/Show/documents';
 import RelatedQuestions from '../../../../Public/Question/Show/related-questions';
 

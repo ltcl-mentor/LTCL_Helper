@@ -47,13 +47,9 @@ class ReactController extends Controller
      */
     public function getQuestion(Question $question)
     {
-        if($question->is_resolved === 1 || $question->check === 1){
-            $question->is_resolved = true;
-            $question->check = true;
-        }elseif($question->is_resolved === 0 || $question->check === 0){
-            $question->is_resolved = false;
-            $question->check = true;
-        }
+        // ローカルで真偽値がきちんと出力されず0か1になってしまうので矯正
+        $question->is_resolved === 1 ? $question->is_resolved = true : $question->is_resolved = false;
+        $question->check === 1 ? $question->check = true : $question->check = false;
 
         $main_comments = Comment::where('question_id', $question->id)->where('comment_id', 0)->get();
 
