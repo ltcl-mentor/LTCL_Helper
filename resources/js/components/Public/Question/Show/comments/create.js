@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from "axios";
-import {useHistory} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import CreateIcon from '@material-ui/icons/Create';
 import Box from '@mui/material/Box';
@@ -10,7 +9,6 @@ import Grid from '@mui/material/Grid';
 import TextForm from '../../Create/Create/question-form/original-text-form/originalTextForm';
 
 function Create(props) {
-    const history = useHistory();
     const [open, setOpen] = useState(false);
     const [clickCount, setClickCount] = useState(0);
     const [comment, setComment] = useState('');
@@ -53,7 +51,6 @@ function Create(props) {
                         setOpen(false);
                         props.setCommentChanging(false);
                         setClickCount(0);
-                        history.push(`/public/questions/${ response.data.id }`, { type: "info", status: "created" });
                     }
                 }).catch(error => {
                     console.log(error);

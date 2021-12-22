@@ -8,12 +8,21 @@ import Paper from '@material-ui/core/Paper';
 
 function Parameters(props) {
     const [staffs, setStaffs] = useState([]);
+    const [students, setStudents] = useState([]);
     
     useEffect(() => {
         axios
             .get("/react/all/staffs")
             .then(response => {
                 setStaffs(response.data);
+            }).catch(error => {
+                console.log(error);
+            });
+            
+        axios
+            .get("/react/all/students")
+            .then(response => {
+                setStudents(response.data);
             }).catch(error => {
                 console.log(error);
             });
@@ -28,13 +37,14 @@ function Parameters(props) {
                 return staff.name;
             }
         });
-    }
-    
-    let isPublic;
-    if (props.check === 0 || props.check === false) {
-        isPublic = "非公開";
-    } else {
-        isPublic = "公開";
+        
+        if (!(author)) {
+            author = students.map((student) => {
+                if (student.id === props.user_id) {
+                    return student.name;
+                }
+            });
+        }
     }
     
     return (
@@ -63,7 +73,12 @@ function Parameters(props) {
                 
                     <TableRow>
                         <TableCell align="center" component="th" scope="row">公開状況</TableCell>
-                        <TableCell align="center">{ isPublic }</TableCell>
+                        <TableCell align="center">{ props.check ? "公開中" : "非公開" }</TableCell>
+                    </TableRow>
+                    
+                    <TableRow>
+                        <TableCell align="center" component="th" scope="row">ステータス</TableCell>
+                        <TableCell align="center">{ props.is_resolved ? "解決済み" : "未解決" }</TableCell>
                     </TableRow>
                 </TableBody>
             </Table>

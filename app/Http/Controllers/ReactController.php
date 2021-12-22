@@ -47,16 +47,36 @@ class ReactController extends Controller
      */
     public function getQuestion(Question $question)
     {
+        if($question->is_resolved === 1 || $question->check === 1){
+            $question->is_resolved = true;
+            $question->check = true;
+        }elseif($question->is_resolved === 0 || $question->check === 0){
+            $question->is_resolved = false;
+            $question->check = true;
+        }
+
         $main_comments = Comment::where('question_id', $question->id)->where('comment_id', 0)->get();
+
         if($main_comments){
             $sub_comments = [];
             foreach($main_comments as $main_comment){
+                // ローカルで真偽値がきちんと出力されず0か1になってしまうので矯正
+                $main_comment->correctBoolean();
+            
                 $comments = Comment::where('comment_id', $main_comment->id)->get();
+                
+                foreach($comments as $comment){
+                    // ローカルで真偽値がきちんと出力されず0か1になってしまうので矯正
+                    $comment->correctBoolean();
+                }
+                
                 $sub_comments[$main_comment->id] = $comments;
             }
         }
+
         $question['main_comments'] = $main_comments;
         $question['sub_comments'] = $sub_comments;
+
         return $question;
     }
     

@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
-import {useHistory} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -8,7 +7,6 @@ import Grid from '@mui/material/Grid';
 import TextForm from '../../Create/Create/question-form/original-text-form/originalTextForm';
 
 function Edit(props) {
-    const history = useHistory();
     const [clickCount, setClickCount] = useState(0);
     const [comment, setComment] = useState('');
     const [images, setImages] = useState([]);
@@ -35,7 +33,6 @@ function Edit(props) {
                         props.setCommentChanging(false);
                         props.setEditId('');
                         setClickCount(0);
-                        history.push(`/public/questions/${ response.data.id }`, { type: "comment", status: "edited" });
                     }
                 }).catch(error => {
                     console.log(error);

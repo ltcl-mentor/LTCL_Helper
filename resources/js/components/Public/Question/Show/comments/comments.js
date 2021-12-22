@@ -42,7 +42,7 @@ function Comments(props) {
                         
                         { edit_id === comment.id &&
                             <Edit
-                                setEdit={ setEditId }
+                                setEditId={ setEditId }
                                 comment={ comment.comment }
                                 comment_id={ comment.id }
                                 setCommentChanging={ props.setCommentChanging }
@@ -81,7 +81,7 @@ function Comments(props) {
                                                 
                                                 { edit_id === sub_comment.id &&
                                                     <Edit
-                                                        setEdit={ setEditId }
+                                                        setEditId={ setEditId }
                                                         comment={ sub_comment.comment }
                                                         comment_id={ sub_comment.id }
                                                         setCommentChanging={ props.setCommentChanging }

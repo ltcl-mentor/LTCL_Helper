@@ -177,7 +177,7 @@ class CommentController extends Controller
         }
         
         // メインコメントの関連画像の削除
-        $used_images = Image::where('_id', $question->id)->get(['image_path']);
+        $used_images = Image::where('comment_id', $comment->id)->get(['image_path']);
         
         if(count($used_images) !== 0){
             foreach($used_images as $used_image){

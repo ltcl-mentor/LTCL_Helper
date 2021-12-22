@@ -120,7 +120,7 @@ function Show() {
             
             <Breadcrumbs page="public_question_show"/>
             
-            { (question.length !== 0 && !(question.is_resolved) && question.user_id === user.id) &&
+            { (question.length !== 0 && !(question.is_resolved) && (question.user_id === user.id || user.is_admin === 'staff')) &&
                 <Typography component="div" align="center" sx={{ marginTop: 4, marginBottom: 3 }} >
                     <Button
                         variant="contained"

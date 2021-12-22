@@ -14,6 +14,13 @@ class UserController extends Controller
      */
     public function delete(User $user, Student $student)
     {
+        // 削除ユーザが作成した質問データの作成者カラムの値を０に変更
+        $created_questions = Question::where('user_id', $user->id)->get();
+        foreach($created_questions as $question){
+            $questioin->user_id = 0;
+            $question->save();
+        }
+        
         // 該当するstudentsテーブルのデータとquestion_userテーブル（質問閲覧履歴）データを削除
         User::userDelete($user);
         

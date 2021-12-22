@@ -11,7 +11,7 @@ import Breadcrumbs from '../../../Breadcrumbs';
 import Publish from './Publish/publish';
 import Parameters from './parameters';
 import Question from './question';
-import Comment from './comment';
+import Comments from '../../../Public/Question/Show/comments/comments';
 import Documents from '../../../Public/Question/Show/documents';
 
 function Show() {
@@ -20,6 +20,7 @@ function Show() {
     const history = useHistory();
     const [question, setQuestion] = useState([]);
     const [documents, setDocuments] = useState([]);
+    const [comment_changing, setCommentChanging] = useState(false);
     const categories = ['カリキュラム', '成果物'];
     const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', 'マイグレーション', 'リレーション', 'Laravel拡張', '画像処理', 'Heroku環境', 'API', 'デザイン'];
 
@@ -40,6 +41,19 @@ function Show() {
                 console.log(error);
             });
     }, []);
+    
+    useEffect(() => {
+        if (!(comment_changing)) {
+            // 個別質問を取得
+            axios
+                .get(`/react/checked/question/${ id }`)
+                .then(response => {
+                    setQuestion(response.data);
+                }).catch(error => {
+                    console.log(error);
+                });
+        }
+    }, [comment_changing]);
     
     const deleteConfirm = () => {
         if (confirm('データが削除されます。\nよろしいですか？')) {
@@ -103,8 +117,13 @@ function Show() {
                 question={ question.question }
             />
             
-            <Comment 
-                comment={ question.comment }
+            <Comments
+                main_comments={ question.main_comments }
+                sub_comments={ question.sub_comments }
+                question_id={ id }
+                setCommentChanging={ setCommentChanging }
+                user_id={ 0 }
+                is_admin='staff'
             />
     
             <Typography
