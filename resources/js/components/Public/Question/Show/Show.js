@@ -19,6 +19,7 @@ import RelatedQuestions from './related-questions';
  */
 function Show() {
     const { id } = useParams();
+    const [screen_width, setScreenWidth] = useState(window.innerWidth);
     const history = useHistory();
     const parameter = useLocation();
     const [question, setQuestion] = useState([]);
@@ -27,6 +28,11 @@ function Show() {
     const [user, setUser] = useState([]);
     const [comment_changing, setCommentChanging] = useState(false);
     const [question_changing, setQuestionChanging] = useState(false);
+    
+    // 画面幅を随時取得
+    window.addEventListener('resize', function() {
+        setScreenWidth(window.innerWidth);
+    });
     
     // 画面描画時に実行
     useEffect(() => {
@@ -140,7 +146,12 @@ function Show() {
             />
             
             <Grid container spacing={2} sx={{ flexGrow: 1 }}>
-                <Grid item sx={{ width:"70%" }}>
+                <Grid
+                    item
+                    sx={{
+                        width: screen_width > 1000 ? "65%" : "100%"
+                    }}
+                >
                     <Box>
                         <Question
                             title={ question.title }
@@ -176,7 +187,13 @@ function Show() {
                     </Box>
                 </Grid>
                 
-                <Grid item sx={{ width: "30%", minWidth: "300px" }}>
+                <Grid
+                    item
+                    sx={{
+                        width: screen_width > 1000 ? "35%" : "100%",
+                        minWidth: "300px"
+                    }}
+                >
                     <RelatedQuestions 
                         relatedQuestions={ relatedQuestions }
                     />
