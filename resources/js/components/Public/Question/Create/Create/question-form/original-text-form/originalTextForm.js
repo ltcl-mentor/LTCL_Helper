@@ -147,7 +147,7 @@ function TextForm(props) {
                 </Box>
                 
                 <TextareaAutosize
-                    placeholder="質問内容を入力"
+                    placeholder="テキストを入力"
                     minRows={15}
                     value={ props.text }
                     onChange={ (event) => handleText(event) }

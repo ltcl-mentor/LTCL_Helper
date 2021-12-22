@@ -64,4 +64,32 @@ class Document extends Model
             }
         }
     }
+    
+    /**
+     * ローカルで真偽値がきちんと出力されず0か1になってしまうので矯正して全件取得
+     */
+    public static function getCorrectBooleanDocuments()
+    {
+        $documents = self::get();
+        
+        foreach($documents as $document){
+            $document->beginner === 1 ? $document->beginner = true : $document->beginner = false;
+            $document->amature === 1 ? $document->amature = true : $document->amature = false;
+            $document->master === 1 ? $document->master = true : $document->master = false;
+            $document->all === 1 ? $document->all = true : $document->all = false;
+        }
+        
+        return $documents;
+    }
+    
+    /**
+     * 
+     */
+    public function correctBoolean()
+    {
+        $this->beginner === 1 ? $this->beginner = true : $this->beginner = false;
+        $this->amature === 1 ? $this->amature = true : $this->amature = false;
+        $this->master === 1 ? $this->master = true : $this->master = false;
+        $this->all === 1 ? $this->all = true : $this->all = false;
+    }
 }

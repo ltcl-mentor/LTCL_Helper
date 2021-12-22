@@ -41,7 +41,7 @@ function Top() {
                         </Grid>
                         
                         <Grid item >
-                            <Link to="/questions/create">
+                            <Link to="">
                                 <Button variant="contained" color="info" startIcon={ <CreateIcon /> }>新規登録</Button>
                             </Link>
                         </Grid>
@@ -117,7 +117,7 @@ function Top() {
                         ユーザー名簿
                     </Typography>
                     
-                    <Grid container spacing={2} sx={{ flexGrow: 1, marginLeft: 2  }} >
+                    <Grid container spacing={2} sx={{ flexGrow: 1, marginLeft: 2 }} >
                         <Grid item >
                             <Link to="/users/index">
                                 <Button variant="contained" color="error" startIcon={ <ListIcon /> }>一覧</Button>

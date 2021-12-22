@@ -34,7 +34,7 @@ class QuestionController extends Controller
      */
     public function store(QuestionRequest $request, Question $question)
     {
-        // 質問に関する処理
+        // 質問に関する保存処理
         $input['category'] = $request['category'];
         $input['topic'] = $request['topic'];
         $input['curriculum_number'] = $request['curriculum_number'];
@@ -55,9 +55,9 @@ class QuestionController extends Controller
         // 質問の中で利用されているものには質問のIDを記録
         $image_paths = $request['images'];
         
-        $delete_images = [];
-        
         if(count(array_filter($image_paths)) !== 0){
+            $delete_images = [];
+            
             foreach($image_paths as $path){
                 // 質問の中で対象の画像URLが使われていた場合
                 if(strpos($question->question, $path)){
@@ -70,10 +70,9 @@ class QuestionController extends Controller
                     array_push($delete_images, $path);
                 }
             }
+            
+            Image::imageDelete($delete_images);
         }
-        
-        Image::imageDelete($delete_images);
-        
         
         // Slackへの通知
         // データ作成者が受講生だった場合
@@ -163,7 +162,7 @@ class QuestionController extends Controller
      */
     public function update(QuestionRequest $request, Question $question)
     {
-        // 質問に関する処理
+        // 質問に関する更新処理
         $input['category'] = $request['category'];
         $input['topic'] = $request['topic'];
         $input['curriculum_number'] = $request['curriculum_number'];
@@ -189,9 +188,9 @@ class QuestionController extends Controller
             }
         }
         
-        $delete_images = [];
-        
         if(count(array_filter($image_paths)) !== 0){
+            $delete_images = [];
+            
             foreach($image_paths as $path){
                 // 質問の中で対象の画像URLが使われていた場合
                 if(strpos($question->question, $path)){
@@ -204,10 +203,9 @@ class QuestionController extends Controller
                     array_push($delete_images, $path);
                 }
             }
+            
+            Image::imageDelete($delete_images);
         }
-        
-        Image::imageDelete($delete_images);
-        
         
         // Slackへの通知
         $message = Auth::user()->name . "によって質問が編集されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $question->id;

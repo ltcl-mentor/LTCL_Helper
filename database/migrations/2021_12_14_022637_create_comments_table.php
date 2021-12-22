@@ -17,9 +17,10 @@ class CreateCommentsTable extends Migration
             $table->bigIncrements('id');
             $table->text('comment');
             $table->UnsignedBigInteger('question_id');
-            $table->UnsignedBigInteger('user_id');
-            $table->boolean('is_first');
             $table->UnsignedBigInteger('comment_id');
+            $table->UnsignedBigInteger('user_id');
+            $table->boolean('is_staff');
+            $table->boolean('is_mentor_commented')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -84,7 +84,7 @@ function Create() {
                 return false;
             }
             
-            // 質問とコメントのバリデーション
+            // 質問内容のバリデーション
             if (question.trim().length === 0) {
                 setQuestionValidationError(1);
                 return false;

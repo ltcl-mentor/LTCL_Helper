@@ -21,7 +21,7 @@ class CreateQuestionsTable extends Migration
             $table->string('title', 50);
             $table->string('remarks', 255);
             $table->longtext('question');
-            $table->tinyInteger('status');
+            $table->boolean('is_resolved');
             $table->boolean('check');
             $table->UnsignedBigInteger('user_id');
             $table->timestamps();

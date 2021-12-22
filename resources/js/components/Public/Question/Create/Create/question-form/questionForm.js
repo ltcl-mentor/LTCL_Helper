@@ -93,7 +93,6 @@ function QuestionForm(props) {
             <TextForm
                 text={ props.question }
                 setText={ props.setQuestion }
-                activeStep={ props.activeStep }
                 images={ props.images }
                 setImages={ props.setImages }
             />

@@ -8,11 +8,11 @@ import Box from '@mui/material/Box';
 import Breadcrumbs from '../../../Breadcrumbs';
 import Parameters from './parameters';
 import Question from './question';
-import Comment from './comment';
+import Comments from './comments/comments';
 import Documents from './documents';
 import RelatedQuestions from './related-questions';
 
-/*
+/**
  * 質問詳細画面(公開)のメインコンポーネント
  */
 function Show() {
@@ -20,6 +20,7 @@ function Show() {
     const [question, setQuestion] = useState([]);
     const [documents, setDocuments] = useState([]);
     const [relatedQuestions, setRelatedQuestions] = useState([]);
+    const [commentChanging, setCommentChanging] = useState(false) ;
     
     // 画面描画時に実行
     useEffect(() => {
@@ -60,6 +61,19 @@ function Show() {
             });
     }, []);
     
+    useEffect(() => {
+        if (!(commentChanging)) {
+            // 個別質問を取得
+            axios
+                .get(`/react/checked/question/${ id }`)
+                .then(response => {
+                    setQuestion(response.data);
+                }).catch(error => {
+                    console.log(error);
+                });
+        }
+    }, [commentChanging]);
+    
     return (
         <div className="container">
             <Breadcrumbs page="public_question_show"/>
@@ -80,8 +94,11 @@ function Show() {
                             question={ question.question }
                         />
                         
-                        <Comment 
-                            comment={ question.comment }
+                        <Comments
+                            main_comments={ question.main_comments }
+                            sub_comments={ question.sub_comments }
+                            question_id={ id }
+                            setCommentChanging={ setCommentChanging }
                         />
                         
                         <Typography

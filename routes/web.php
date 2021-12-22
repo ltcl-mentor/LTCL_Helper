@@ -32,6 +32,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/questions/store', 'QuestionController@store'); // 新規作成実行
     Route::post('/questions/image/store', 'QuestionController@imageStore'); // 質問の画像保存処理
     Route::post('/questions/record/{question}', 'QuestionController@recordShow'); // 質問詳細画面のユーザ閲覧履歴記録処理
+    Route::post('/comments/store', 'CommentController@store'); // 質問へのコメント保存処理
+    Route::post('/comments/{comment}/update', 'CommentController@update'); // 質問へのコメント更新処理
+    Route::post('/comments/{comment}/delete', 'CommentController@delete'); // 質問へのコメント削除処理
     Route::post('/contact', 'ContactController@sendContactMessage'); // お問い合わせ内容送信処理
     // Route::get('/', 'HomeController@home'); // トップ画面表示
     // Route::get('/search/condition', 'SearchController@search'); // 絞り込み検索画面表示

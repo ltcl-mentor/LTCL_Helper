@@ -11,6 +11,7 @@ use App\Image;
 use App\Info;
 use App\Weather;
 use App\College;
+use App\Comment;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -46,6 +47,16 @@ class ReactController extends Controller
      */
     public function getQuestion(Question $question)
     {
+        $main_comments = Comment::where('question_id', $question->id)->where('comment_id', 0)->get();
+        if($main_comments){
+            $sub_comments = [];
+            foreach($main_comments as $main_comment){
+                $comments = Comment::where('comment_id', $main_comment->id)->get();
+                $sub_comments[$main_comment->id] = $comments;
+            }
+        }
+        $question['main_comments'] = $main_comments;
+        $question['sub_comments'] = $sub_comments;
         return $question;
     }
     
@@ -55,6 +66,48 @@ class ReactController extends Controller
     public function getCheckedQuestion(Question $question)
     {
         if($question->check == true){
+            // 1. メインコメント処理
+            $main_comments = Comment::where('question_id', $question->id)->where('comment_id', 0)->orderBy('created_at', 'asc')->get();
+            
+            if($main_comments){
+                $sub_comments = [];
+                foreach($main_comments as $key => $main_comment){
+                    // ローカルで真偽値がきちんと出力されず0か1になってしまうので矯正
+                    $main_comment->correctBoolean();
+                    
+                    // コメントやり取りの主体となる受講生の特定
+                    if($key === 0){
+                        $target_student = $question->user_id;
+                    }else{
+                        // メインコメントの投稿者が受講生か判別
+                        if(!($main_comment->is_staff)){
+                            $target_student = $main_comment->user_id;
+                        }
+                    }
+                    
+                    
+                    // 2. リプライコメント処理
+                    $comments = Comment::where('comment_id', $main_comment->id)->orderBy('created_at', 'asc')->get();
+                    
+                    foreach($comments as $comment){
+                        // ローカルで真偽値がきちんと出力されず0か1になってしまうので矯正
+                        $comment->correctBoolean();
+                        
+                        // メインコメントのからコメントやり取りの主体となる受講生の特定ができていない場合
+                        if(!($target_student)){
+                            // リプライコメントの投稿者が受講生か判別
+                            if(User::isStudent($comment->user_id)){
+                                $target_student = $comment->user_id;
+                            }
+                        }
+                    }
+                    
+                    $sub_comments[$main_comment->id] = $comments;
+                    $main_comment->target_student = $target_student;
+                }
+            }
+            $question['main_comments'] = $main_comments;
+            $question['sub_comments'] = $sub_comments;
             return $question;
         }
         return null;
@@ -118,7 +171,7 @@ class ReactController extends Controller
      */
     public function getAlldocuments()
     {
-        return Document::get();
+        return Document::getCorrectBooleanDocuments();
     }
     
     /**
@@ -126,7 +179,7 @@ class ReactController extends Controller
      */
     public function getDocument(Document $document)
     {
-        return $document;
+        return $document->correctBoolean();
     }
     
     /**
@@ -134,7 +187,11 @@ class ReactController extends Controller
      */
     public function getRelatedDocuments(Question $question)
     {
-        return $question->documents()->get();
+        $documents = $question->documents()->get();
+        foreach($documents as $document){
+            $document->correctBoolean();
+        }
+        return $documents;
     }
     
     

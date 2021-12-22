@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 
 import Parameters from '../../../../Public/Question/Show/parameters';
 import Question from '../../../../Public/Question/Show/question';
-import Comment from '../../../../Public/Question/Show/comment';
+import Comments from '../../../../Public/Question/Show/comments/comments';
 import Documents from '../../../../Public/Question/Show/documents';
 import RelatedQuestions from '../../../../Public/Question/Show/related-questions';
 
@@ -56,8 +56,9 @@ function Preview(props) {
                             question={ props.question.question }
                         />
                         
-                        <Comment 
-                            comment={ props.question.comment }
+                        <Comments
+                            main_comments={ props.question.main_comments }
+                            sub_comments={ props.question.sub_comments }
                         />
                         
                         <Typography
