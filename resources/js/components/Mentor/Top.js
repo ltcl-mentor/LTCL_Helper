@@ -54,7 +54,7 @@ function Top() {
                         </Grid>
                         
                         <Grid item >
-                            <Link to="">
+                            <Link to="/questions/index/mentor_yet_comment">
                                 <Badge badgeContent={ counts.mentor } color="error">
                                 <Button variant="contained" color="info" startIcon={ <ListIcon /> }>メンターコメント待ち</Button>
                                 </Badge>
@@ -62,7 +62,7 @@ function Top() {
                         </Grid>
                         
                         <Grid item >
-                            <Link to="">
+                            <Link to="/questions/index/student_yet_comment">
                                 <Badge badgeContent={ counts.student } color="error">
                                 <Button variant="contained" color="info" startIcon={ <ListIcon /> }>受講生コメント待ち</Button>
                                 </Badge>

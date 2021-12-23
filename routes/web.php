@@ -54,7 +54,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('react/search/questions', 'ReactController@getSearchQuestions'); // 質問検索結果の受け渡し
     Route::get('react/checked/questions', 'ReactController@getCheckedQuestions'); // 公開中の質問受け渡し
     Route::get('react/checked/question/{question}', 'ReactController@getCheckedQuestion'); // 公開中の個別質問データの受け渡し
-    Route::get('react/images/{question_id}', 'ReactController@getImages'); // 質問に関連する画像の受け渡し
     Route::get('react/all/documents', 'ReactController@getAllDocuments'); // 全記事受け渡し
     Route::get('react/related/documents/{question}', 'ReactController@getRelatedDocuments'); // 質問に紐づいている記事の受け渡し
     Route::get('react/user', 'ReactController@getUser'); // ログインユーザー受け渡し
@@ -62,6 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('react/college/{year}/{month}/{date}', 'ReactController@getCollegeData'); // 校舎に関するデータ受け渡し
     Route::get('react/infos', 'ReactController@getInfos'); // お知らせのデータ受け渡し
     Route::get('react/env', 'ReactController@getEnvData'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
+    // Route::get('react/images/{question_id}', 'ReactController@getImages'); // 質問に関連する画像の受け渡し
     
     
     /**
@@ -129,17 +129,19 @@ Route::group(['middleware' => ['auth']], function () {
         
         
         /**
-         * Reactでのデータ受け渡し
+         * Reactでのデータ受け渡し（全て非同期）
          */
         Route::get('react/all/questions', 'ReactController@getAllQuestions'); // 全質問受け渡し
-        Route::get('react/questions/counts', 'ReactController@getQuestionCounts'); // 未解決でメンターまたは受講生のコメント入力待ちの件数受け渡し
         Route::get('react/question/{question}', 'ReactController@getQuestion'); // 個別質問データの受け渡し
+        Route::get('react/questions/counts', 'ReactController@getQuestionCounts'); // 未解決でメンターまたは受講生のコメント入力待ちの件数受け渡し
         Route::get('react/questions/{document}', 'LinkController@getQuestionsFromDocument'); // 単体記事に関する質問データの受け渡し
         Route::get('react/curriculum/questions', 'ReactController@getCurriculumQuestions'); // カリキュラム範囲の質問受け渡し
         Route::get('react/portfolio/questions', 'ReactController@getPortfolioQuestions'); // 成果物範囲の質問受け渡し
+        Route::get('react/questions/mentor_yet/{category}', 'ReactController@getMentorYetCommentQuestions'); // カテゴリーに応じたメンターコメント待ちの質問受け渡し
+        Route::get('react/questions/student_yet/{category}', 'ReactController@getStudentYetCommentQuestions'); // カテゴリーに応じた受講生コメント待ちの質問受け渡し
         Route::get('react/document/{document}', 'ReactController@getDocument'); // 個別記事データの受け渡し
         Route::get('react/documents/{question}', 'LinkController@getDocumentsFromQuestion'); // 単体質問に関する記事データの受け渡し
-        Route::get('react/related/questions/{document}', 'ReactController@getRelatedQuestions'); // 記事に紐づいている質問の受け渡し
+        Route::get('react/related/questions/{document}', 'ReactController@getRelatedQuestions'); // 記事に紐づいている質問の受け渡し（URLが紛らわしい）
         Route::get('react/all/staffs', 'ReactController@getAllStaffs'); // 全管理者受け渡し
         Route::get('react/all/students', 'ReactController@getAllStudents'); // 全受講生受け渡し
         Route::get('react/id', 'ReactController@getUserId'); // ログインユーザーid受け渡し

@@ -19,7 +19,9 @@ import DocumentIndex from './Mentor/Document/Index/Index';
 import DocumentShow from './Mentor/Document/Show/Show';
 import DocumentCreate from './Mentor/Document/Create/Create';
 import DocumentEdit from './Mentor/Document/Edit/Edit';
-import QuestionIndex from './Mentor/Question/Index/Index';
+import QuestionIndex from './Mentor/Question/Index/Index/Index';
+import QuestionMentorYetCommentIndex from './Mentor/Question/Index/yet-comment-index/fromMentor';
+import QuestionStudentYetCommentIndex from './Mentor/Question/Index/yet-comment-index/fromStudent';
 import QuestionShow from './Mentor/Question/Show/Show';
 // import QuestionCreate from './Mentor/Question/Create/Create';
 import QuestionEdit from './Mentor/Question/Edit/Edit';
@@ -103,6 +105,12 @@ function Router() {
                     
                     {/* 質問一覧画面表示 */}
                     <Route path="/questions/index" exact component={ QuestionIndex }/>
+                    
+                    {/* メンターコメント待ちの質問一覧画面表示 */}
+                    <Route path="/questions/index/mentor_yet_comment" exact component={ QuestionMentorYetCommentIndex }/>
+                    
+                    {/* 受講生コメント待ちの質問一覧画面表示 */}
+                    <Route path="/questions/index/student_yet_comment" exact component={ QuestionStudentYetCommentIndex }/>
                     
                     {/* 質問新規作成画面表示 */}
                     {/*<Route path="/questions/create" exact component={ QuestionCreate }/>*/}

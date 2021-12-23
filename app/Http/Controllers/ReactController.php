@@ -82,11 +82,8 @@ class ReactController extends Controller
     public function getCheckedQuestion(Question $question)
     {
         if($question->check == true){
-            if($question->is_resolved === 1){
-                $question->is_resolved = true;
-            }else{
-                $question->is_resolved = false;
-            }
+            // ローカルで真偽値がきちんと出力されず0か1になってしまうので矯正
+            $question->is_resolved === 1 ? $question->is_resolved = true : $question->is_resolved = false;
             
             // 1. メインコメント処理
             $main_comments = Comment::where('question_id', $question->id)->where('comment_id', 0)->orderBy('created_at', 'asc')->get();
@@ -184,24 +181,64 @@ class ReactController extends Controller
     }
     
     /**
+     * カテゴリーに応じたメンターコメント待ちの質問受け渡し
+     */
+    public function getMentorYetCommentQuestions($category)
+    {
+        $unresolved_questions = Question::where('category', $category)->where('is_resolved', false)->get();
+        
+        $mentor_yet_comment_questions = [];
+        
+        foreach($unresolved_questions as $question){
+            $mentor_yet_comments = Comment::where('question_id', $question->id)->where('is_mentor_commented', false)->get();
+            
+            if(count($mentor_yet_comments) !== 0){
+                array_push($mentor_yet_comment_questions, $question);
+            }
+        }
+        
+        return $mentor_yet_comment_questions;
+    }
+    
+    /**
+     * カテゴリーに応じた受講生コメント待ちの質問受け渡し
+     */
+    public function getStudentYetCommentQuestions($category)
+    {
+        $unresolved_questions = Question::where('category', $category)->where('is_resolved', false)->get();
+        
+        $student_yet_comment_questions = [];
+        
+        foreach($unresolved_questions as $question){
+            $student_yet_comments = Comment::where('question_id', $question->id)->where('is_mentor_commented', true)->get();
+            
+            if(count($student_yet_comments) !== 0){
+                array_push($student_yet_comment_questions, $question);
+            }
+        }
+        
+        return $student_yet_comment_questions;
+    }
+    
+    /**
      * 未解決でメンターまたは受講生のコメント入力待ちの件数受け渡し
      */
     public function getQuestionCounts()
     {
         $unresolved_questions = Question::where('is_resolved', false)->get();
         
-        $mentor_non_comment_count = 0;
-        $student_non_comment_count = 0;
+        $mentor_yet_comment_count = 0;
+        $student_yet_comment_count = 0;
         
         foreach($unresolved_questions as $question){
-            $mentor_non_comment_comments = Comment::where('question_id', $question->id)->where('is_mentor_commented', false)->get();
-            $student_non_comment_comments = Comment::where('question_id', $question->id)->where('is_mentor_commented', true)->get();
+            $mentor_yet_comments = Comment::where('question_id', $question->id)->where('is_mentor_commented', false)->get();
+            $student_yet_comments = Comment::where('question_id', $question->id)->where('is_mentor_commented', true)->get();
             
-            $mentor_non_comment_count += count($mentor_non_comment_comments);
-            $student_non_comment_count += count($student_non_comment_comments);
+            $mentor_yet_comment_count += count($mentor_yet_comments);
+            $student_yet_comment_count += count($student_yet_comments);
         }
         
-        return ["mentor" => $mentor_non_comment_count, "student" => $student_non_comment_count];
+        return ["mentor" => $mentor_yet_comment_count, "student" => $student_yet_comment_count];
     }
     
     
