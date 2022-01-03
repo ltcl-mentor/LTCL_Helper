@@ -21,7 +21,7 @@ function Index() {
     
     useEffect(() => {
         axios
-            .get("/react/all/documents")
+            .get("/react/documents/all")
             .then(response => {
                 setDefaultDocuments(response.data);
                 setDocuments(response.data);

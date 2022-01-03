@@ -22,7 +22,7 @@ function Questions(props) {
     useEffect(() => {
         // 検索結果の質問取得
         axios
-            .get(`/react/search/questions?category=${ props.category }&topic=${ props.topic }&curriculum_number=${ props.curriculum_number }&keyword=${ props.keyword }`)
+            .get(`/react/questions/search?category=${ props.category }&topic=${ props.topic }&curriculum_number=${ props.curriculum_number }&keyword=${ props.keyword }`)
             .then(response => {
                 setQuestions(response.data);
             }).catch(error => {

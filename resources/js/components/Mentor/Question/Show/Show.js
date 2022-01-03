@@ -34,7 +34,7 @@ function Show() {
             });
             
         axios
-            .get(`/react/related/documents/${ id }`)
+            .get(`/react/documents/related/${ id }`)
             .then(response => {
                 setDocuments(response.data);
             }).catch(error => {

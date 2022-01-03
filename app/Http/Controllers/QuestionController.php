@@ -44,7 +44,7 @@ class QuestionController extends Controller
         
         $question->fill($input);
         
-        $question['status'] = 0;
+        $question['is_resolved'] = 0;
         $question['check'] = false;
         $question['user_id'] = Auth::id();
         
@@ -92,16 +92,19 @@ class QuestionController extends Controller
     {
         $upload_image = $request->file('image');
         
-        if($upload_image){
-            // リクエストに質問IDがあるか確認
-            isset($request['question_id']) ? $question_id = $request['question_id'] : $question_id = 0;
-            
-            // リクエストにコメントIDがあるか確認
-            isset($request['question_id']) ? $comment_id = $request['comment_id'] : $comment_id = 0;
-            
-            $image_path = $image->imageCreate($upload_image, $question_id, $comment_id);
-            
-            return $image_path;
+        // 画像サイズが１MB以下であるか確認
+        if($upload_image.filesize() <= 1024*1024*1){
+            if($upload_image){
+                // リクエストに質問IDがあるか確認
+                isset($request['question_id']) ? $question_id = $request['question_id'] : $question_id = 0;
+                
+                // リクエストにコメントIDがあるか確認
+                isset($request['question_id']) ? $comment_id = $request['comment_id'] : $comment_id = 0;
+                
+                $image_path = $image->imageCreate($upload_image, $question_id, $comment_id);
+                
+                return $image_path;
+            }
         }
     }
     

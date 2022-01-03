@@ -27,7 +27,7 @@ function Questions(props) {
             
             // 検索結果の質問取得
             axios
-                .get(`/react/search/questions?searchType=${ props.searchType }&freeword=${ encodedFreeword }`)
+                .get(`/react/questions/search?searchType=${ props.searchType }&freeword=${ encodedFreeword }`)
                 .then(response => {
                     setQuestions(response.data);
                 }).catch(error => {

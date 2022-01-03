@@ -18,7 +18,7 @@ function Index() {
     
     useEffect(() => {
         axios
-            .get("/react/curriculum/questions")
+            .get("/react/questions/curriculum")
             .then(response => {
                 setCurriculumQuestions(response.data);
             }).catch(error => {
@@ -26,7 +26,7 @@ function Index() {
             });
             
         axios
-            .get("/react/portfolio/questions")
+            .get("/react/questions/portfolio")
             .then(response => {
                 setPortfolioQuestions(response.data);
             }).catch(error => {

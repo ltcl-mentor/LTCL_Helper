@@ -23,7 +23,7 @@ function Document() {
     
     useEffect(() => {
         axios
-            .get("/react/all/documents")
+            .get("/react/documents/all")
             .then(response => {
                 setDocuments(response.data);
             }).catch(error => {

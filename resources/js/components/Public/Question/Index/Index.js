@@ -18,7 +18,7 @@ function Index() {
     //画面描画時に実行
     useEffect(() => {
         axios
-            .get("/react/checked/questions")
+            .get("/react/questions/checked")
             .then(response => {
                 setQuestions(response.data);
             }).catch(error => {

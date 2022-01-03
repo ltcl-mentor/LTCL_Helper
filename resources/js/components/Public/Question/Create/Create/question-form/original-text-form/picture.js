@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from "axios";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -10,14 +10,27 @@ import Avatar from '@mui/material/Avatar';
 import FolderIcon from '@mui/icons-material/Folder';
 
 function Picture(props) {
+    // 画像のサイズ制限を1MBに設定
+    const limit_size = 1024*1024*1;
+    const [size_error, setSizeError] = useState(false);
     
     // 画像アップロード
     // 画像が選択された際に実行
     const imageSelected = () => {
+        // 画像サイズチェック
+        if (document.querySelector('input[type="file"]').files[0].size >limit_size) {
+            setSizeError(true);
+            return;
+        } else {
+            setSizeError(false);
+        }
+        
+        // ファイルの送信実行
         const data = new FormData();
+        const headers = { "content-type": "multipart/form-data" };
         
         data.append('image', document.querySelector('input[type="file"]').files[0]);
-        const headers = { "content-type": "multipart/form-data" };
+        
         axios
             .post("/questions/image/store", data, {headers})
             .then(response => {
@@ -37,11 +50,13 @@ function Picture(props) {
     return (
         <Box sx={{ textAlign: "center", marginTop: 3 }}>
             <label htmlFor="contained-button-file">
-                <input accept="image/*" id="contained-button-file" type="file" onChange={ imageSelected } hidden />
+                <input accept=".png, .jpg, .jpeg" id="contained-button-file" type="file" onChange={ imageSelected } hidden />
                 <Button variant="contained" component="span">
                     画像アップロード
                 </Button>
             </label>
+            
+            { size_error && <p>画像サイズが制限を超えています。</p>}
             
             <Box sx={{ width: "90%", paddingLeft: "5%" }}>
                 <List>

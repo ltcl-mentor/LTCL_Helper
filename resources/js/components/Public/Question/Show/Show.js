@@ -47,7 +47,7 @@ function Show() {
         
         // 個別質問を取得
         axios
-            .get(`/react/checked/question/${ id }`)
+            .get(`/react/question/checked/${ id }`)
             .then(response => {
                 setQuestion(response.data);
             }).catch(error => {
@@ -56,7 +56,7 @@ function Show() {
         
         // 質問に関連する全参考記事を取得
         axios
-            .get(`/react/related/documents/${ id }`)
+            .get(`/react/documents/related/${ id }`)
             .then(response => {
                 setDocuments(response.data);
             }).catch(error => {
@@ -65,7 +65,7 @@ function Show() {
         
         // この質問と同じカテゴリー、トピックの質問を取得
         axios
-            .get(`/react/search/questions?category=${ 0 }&topic=${ 0 }`)
+            .get(`/react/questions/search?category=${ 0 }&topic=${ 0 }`)
             .then(response => {
                 setRelatedQuestions(response.data);
             }).catch(error => {
@@ -86,7 +86,7 @@ function Show() {
         if (!(comment_changing)) {
             // 個別質問を取得
             axios
-                .get(`/react/checked/question/${ id }`)
+                .get(`/react/question/checked/${ id }`)
                 .then(response => {
                     setQuestion(response.data);
                 }).catch(error => {
