@@ -8,6 +8,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+/**
+ * 管理者一覧
+ */
 function Admins(props) {
     return (
         <Paper sx={{ margin: "0 auto", maxWidth: "700px" }}>
@@ -16,6 +19,7 @@ function Admins(props) {
                     <TableRow>
                         <TableCell align="center">ID</TableCell>
                         <TableCell align="center">名前</TableCell>
+                        <TableCell align="center">ステータス</TableCell>
                         <TableCell align="center">削除</TableCell>
                     </TableRow>
                 </TableHead>
@@ -25,6 +29,9 @@ function Admins(props) {
                             <TableRow>
                                 <TableCell align="center" component="th" scope="row">{ staff.id }</TableCell>
                                 <TableCell align="center">{ staff.name }</TableCell>
+                                <TableCell align="center">
+                                    { staff.lock ? <Button variant="contained" onClick={ () => props.setUnlockUserId(staff.id) }>ロック解除</Button> : '平常' }
+                                </TableCell>
                                 <TableCell align="center">
                                     <Button variant="contained" color="error" onClick={ (event) => props.setDeleteUserId(staff.id) } startIcon={ <DeleteIcon /> }>削除する</Button>
                                 </TableCell>

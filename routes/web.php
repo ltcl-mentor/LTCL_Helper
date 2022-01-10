@@ -17,7 +17,7 @@ Auth::routes([
     'register' => false, 
     'reset' => false,
 ]);
-
+Route::get('/lockout', 'Auth\LoginController@lockout');
 
 /**
  * コメントアウトしているルーティングはReact Routerに移行したので
@@ -121,8 +121,9 @@ Route::group(['middleware' => ['auth']], function () {
          * ユーザー
          */
         Route::post('/users/public/register', 'Auth\RegisterController@publicRegister'); // 受講生の新規作成実行
-        Route::post('/users/{user}/delete', 'UserController@delete'); // 削除実行
         Route::post('/users/admin/register', 'Auth\RegisterController@register'); // 管理者の新規作成実行
+        Route::post('/users/{user}/delete', 'UserController@delete'); // 削除実行
+        Route::post('/users/{user}/unlock', 'UserController@unlock'); // ユーザロック解除実行
         // Route::get('/users/index', 'UserController@index'); // 初期画面表示
         // Route::get('users/admin/register', 'Auth\RegisterController@showRegistrationForm')->name('register'); // 管理者の新規作成画面表示
         // Route::get('/users/public/register', 'Auth\RegisterController@showPublicRegistrationForm'); // 受講生の新規作成画面表示

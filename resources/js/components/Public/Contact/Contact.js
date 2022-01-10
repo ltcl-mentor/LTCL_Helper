@@ -29,7 +29,7 @@ function Contact() {
                     
                     axios
                         .post("/contact", {
-                            contact: contact,
+                            message: contact,
                         })
                         .then(response => {
                             if (response.status === 200) {

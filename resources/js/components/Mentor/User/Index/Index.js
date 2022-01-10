@@ -10,15 +10,21 @@ import Breadcrumbs from '../../../Breadcrumbs';
 import Students from './students';
 import Admins from './admins';
 
+/**
+ * ユーザ一覧のメインコンポーネント
+ */
 function Index() {
     const parameter = useLocation();
     const history = useHistory();
     const [staffs, setStaffs] = useState([]);
     const [students, setStudents] = useState([]);
     const [delete_user_id, setDeleteUserId] = useState();
+    const [unlock_user_id, setUnlockUserId] = useState();
     const [value, setValue] = React.useState(0);
     
+    // 画面描画時に実行
     useEffect(() => {
+        // 管理者一覧取得
         axios
             .get(`/react/all/staffs`)
             .then(response => {
@@ -27,6 +33,7 @@ function Index() {
                 console.log(error);
             });
             
+        // 受講生一覧取得
         axios
             .get(`/react/all/students`)
             .then(response => {
@@ -40,6 +47,7 @@ function Index() {
         }
     }, []);
     
+    // 削除実行
     useEffect(() => {
         if (delete_user_id) {
             if (confirm('データが削除されます。\nよろしいですか？')) {
@@ -60,6 +68,27 @@ function Index() {
             }
         }
     }, [delete_user_id]);
+    
+    // ユーザロック解除実行
+    useEffect(() => {
+        if (unlock_user_id) {
+            if (confirm('ユーザのロックを解除します。\nよろしいですか？')) {
+                axios
+                    .post(`/users/${ unlock_user_id }/unlock`)
+                    .then(response => {
+                        if (response.status === 200) {
+                            setStaffs(response.data.staffs);
+                            setStudents(response.data.students);
+                        }
+                    }).catch(error => {
+                        console.log(error);
+                    });
+            } else {
+                window.alert('キャンセルしました');
+                return false;
+            }
+        }
+    }, [unlock_user_id]);
     
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -83,7 +112,19 @@ function Index() {
             </Box>
             
             <Box sx={{ marginTop: 3 }}>
-                { value === 0 ? <Students students={ students } setDeleteUserId={ setDeleteUserId }/> : <Admins staffs={ staffs } setDeleteUserId={ setDeleteUserId }/> }
+                { value === 0 ? 
+                    <Students
+                        students={ students }
+                        setDeleteUserId={ setDeleteUserId }
+                        setUnlockUserId={ setUnlockUserId }
+                    />
+                : 
+                    <Admins
+                        staffs={ staffs }
+                        setDeleteUserId={ setDeleteUserId }
+                        setUnlockUserId={ setUnlockUserId }
+                    />
+                }
             </Box>
         </div>
     );

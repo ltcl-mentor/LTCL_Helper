@@ -7,6 +7,9 @@ import Button from '@mui/material/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import Typography from '@material-ui/core/Typography';
 
+/**
+ * 受講生情報入力フォーム
+ */
 function Forms(props) {
     const history = useHistory();
     const [clickCount, setClickCount] = useState(0);

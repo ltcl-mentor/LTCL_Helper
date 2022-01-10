@@ -6,6 +6,9 @@ import Grid from '@mui/material/Grid';
 import Breadcrumbs from '../../../../Breadcrumbs';
 import Forms from './forms';
 
+/**
+ * 受講生登録のメインコンポーネント
+ */
 function Public() {
     const [year, setYear] = useState('');
     const [month, setMonth] = useState('');

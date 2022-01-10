@@ -32,7 +32,6 @@
 </head>
 <body>
     <div id="app">
-        <!--<div id="Bar"></div>-->
         <main>
             @yield('content')
         </main>

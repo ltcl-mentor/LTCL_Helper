@@ -18,6 +18,7 @@ class CreateStudentsTable extends Migration
             $table->string('name');
             $table->string('password');
             $table->BigInteger('user_id');
+            $table->boolean('lock')->default(false);
             $table->timestamps();
         });
     }
