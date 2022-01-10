@@ -6,6 +6,9 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
+/**
+ * 対象者フォーム
+ */
 function Target(props) {
     const handleChange = (event) => {
         props.setTargets({

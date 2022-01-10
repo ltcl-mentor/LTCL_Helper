@@ -11,7 +11,7 @@ import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@mui/material/Grid';
 
-/*
+/**
  * 絞り込みの検索結果の質問一覧
  */
 function Questions(props) {

@@ -3,6 +3,9 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import Typography from '@material-ui/core/Typography';
 import Box from '@mui/material/Box';
 
+/**
+ * タイトルフォーム
+ */
 function Title(props) {
     const handleTitle = (event) => {
         props.setTitle(event.target.value);

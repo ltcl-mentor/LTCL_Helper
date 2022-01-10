@@ -10,7 +10,7 @@ import Comment from './comment';
 import Create from './create';
 import Edit from './edit';
 
-/*
+/**
  * コメント表示
  */
 function Comments(props) {

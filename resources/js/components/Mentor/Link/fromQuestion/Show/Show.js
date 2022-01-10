@@ -7,7 +7,10 @@ import Breadcrumbs from '../../../../Breadcrumbs';
 import Parameters from './parameters';
 import Links from './links';
 
-function Index() {
+/**
+ * 単体質問から関連記事への紐付け（詳細画面）のメインコンポーネント
+ */
+function Show() {
     const { id } = useParams();
     const parameter = useLocation();
     const history = useHistory();
@@ -19,7 +22,9 @@ function Index() {
     const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', 'マイグレーション', 'リレーション', 'Laravel拡張', '画像処理', 'Heroku環境', 'API', 'デザイン'];
     const [staffs, setStaffs] = useState([]);
     
+    // 画面描画時に実行
     useEffect(() => {
+        // 該当質問取得
         axios
             .get(`/react/question/${ id }`)
             .then(response => {
@@ -27,7 +32,8 @@ function Index() {
             }).catch(error => {
                 console.log(error);
             });
-            
+        
+        // 管理者一覧取得
         axios
             .get("/react/all/staffs")
             .then(response => {
@@ -37,6 +43,7 @@ function Index() {
             });
     }, []);
     
+    // 紐付けの保存
     const handleSubmit = () => {
         // フォーム送信と重複保存の防止
         if (clickCount === 0) {
@@ -108,4 +115,4 @@ function Index() {
     );
 }
 
-export default Index;
+export default Show;

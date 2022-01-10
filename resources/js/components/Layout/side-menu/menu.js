@@ -5,6 +5,9 @@ import Drawer from '@material-ui/core/Drawer';
 
 import Content from './content';
 
+/**
+ * サイドメニュー
+ */
 function Menu(props) {
     const [menu, setMenu] = useState(false);
     const [isLinkClicked, setIsLinkClicked] = useState(false);

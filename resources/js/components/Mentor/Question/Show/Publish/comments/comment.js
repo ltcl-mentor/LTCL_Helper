@@ -5,6 +5,9 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
+/**
+ * 個別のコメント表示(管理画面用)
+ */
 function Comment(props) {
     
     let comment = [];

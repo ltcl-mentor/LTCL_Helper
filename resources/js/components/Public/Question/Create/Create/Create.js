@@ -17,8 +17,8 @@ import QuestionForm from './question-form/questionForm';
 import Confirm from './confirm';
 import Category from '../../../Search/Condition/Search/Forms/categoryForm';
 
-/*
- * 質問投稿(メンター用)のメインコンポーネント
+/**
+ * 質問投稿のメインコンポーネント
  */
 function Create() {
     const history = useHistory();

@@ -9,9 +9,13 @@ import Link from '@mui/material/Link';
 import User from './user-icon';
 import Menu from './side-menu/menu'; 
 
+/**
+ * メニューバーのメインコンポーネント
+ */
 function Bar() {
     const [user, setUser] = useState([]);
     
+    // ログインユーザー情報取得
     useEffect(() => {
         axios
             .get(`/react/user`)

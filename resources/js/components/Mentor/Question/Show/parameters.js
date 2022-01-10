@@ -6,11 +6,17 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+/**
+ * 質問の基本データ
+ * （カテゴリー、トピック、作成者など）
+ */
 function Parameters(props) {
     const [staffs, setStaffs] = useState([]);
     const [students, setStudents] = useState([]);
     
+    // 画面描画時に実行
     useEffect(() => {
+        // 管理者一覧取得
         axios
             .get("/react/all/staffs")
             .then(response => {
@@ -18,7 +24,8 @@ function Parameters(props) {
             }).catch(error => {
                 console.log(error);
             });
-            
+        
+        // 受講生一覧取得
         axios
             .get("/react/all/students")
             .then(response => {

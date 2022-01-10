@@ -4,7 +4,7 @@ import Breadcrumbs from '../../../Breadcrumbs';
 import Form from './form';
 import Result from './Result/result';
 
-/*
+/**
  * フリーワード検索のメインコンポーネント
  */
 function Freeword() {

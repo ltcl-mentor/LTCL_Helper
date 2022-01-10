@@ -10,7 +10,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
-/*
+/**
  * カリキュラムの質問一覧
  */
 function Curriculum(props) {

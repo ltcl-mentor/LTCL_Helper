@@ -20,6 +20,9 @@ const style = {
   p: 4,
 };
 
+/**
+ * お知らせの追加
+ */
 function Create(props) {
     const history = useHistory();
     const [open, setOpen] = useState(false);

@@ -12,6 +12,9 @@ import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import Picture from './picture';
 import Preview from './preview';
 
+/**
+ * 自作入力フォームのメインコンポーネント
+ */
 function TextForm(props) {
     const [value, setValue] = useState(0);
     const [selectionRange, setSelectionRange] = useState(() => [0, 0]);

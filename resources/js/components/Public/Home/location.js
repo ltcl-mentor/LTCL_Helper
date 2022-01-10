@@ -7,6 +7,9 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import Divider from '@material-ui/core/Divider';
 
+/**
+ * 校舎位置情報
+ */
 function Location(props) {
     
     return (

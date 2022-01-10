@@ -8,7 +8,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-/*
+/**
  * 関連記事の一覧
  */
 function Document(props) {

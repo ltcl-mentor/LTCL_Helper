@@ -12,6 +12,9 @@ import Target from './target';
 import Title from './title';
 import URL from './link';
 
+/**
+ * 関連記事作成のメインコンポーネント
+ */
 function Create() {
     const history = useHistory();
     const [clickCount, setClickCount] = useState(0);

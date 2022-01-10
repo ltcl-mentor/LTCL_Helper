@@ -6,6 +6,9 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import Divider from '@material-ui/core/Divider';
 
+/**
+ * 校舎情報(データ表示)
+ */
 function Info(props) {
     
     let info;

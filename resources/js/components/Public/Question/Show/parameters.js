@@ -5,7 +5,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-/*
+/**
  * 質問の詳細情報
  */
 function Parameters(props) {

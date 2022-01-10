@@ -6,6 +6,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+/**
+ * 該当質問の基礎データ
+ */
 function Parameters(props) {
     
     let author;

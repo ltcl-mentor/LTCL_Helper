@@ -2,15 +2,16 @@ import React, {useState, useEffect} from 'react';
 import Fab from '@material-ui/core/Fab';
 import Box from '@mui/material/Box';
 
+/**
+ * 検索ボタン
+ */
 function SearchButton(props) {
-    const [isButtonClicked, setIsButtonClicked] = useState(false);
-    
     useEffect(() => {
-        setIsButtonClicked(false);
+        props.setIsSearchButtonClicked(false);
     }, [props.corriculum_number, props.keyword]);
     
     const handleClick = () => {
-        setIsButtonClicked(true);
+        props.setIsSearchButtonClicked(true);
     };
     
     let searchButton;
@@ -29,7 +30,6 @@ function SearchButton(props) {
     
     return(
         <div className="container">
-            { props.setIsSearchButtonClicked(isButtonClicked) }
             { searchButton }
         </div>
     );

@@ -11,6 +11,9 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
+/**
+ * カリキュラム関連質問の一覧(管理画面)
+ */
 function Curriculum(props) {
     const [expanded, setExpanded] = React.useState(false);
     const curriculum_topics = [
@@ -29,51 +32,49 @@ function Curriculum(props) {
         setExpanded(isExpanded ? panel : false);
     };
     
-    const curriculum = curriculum_topics.map((topic) => {
-        return (
-            <Box sx={{paddingTop: 3, marginBottom: 3}}>
-                <Accordion expanded={ expanded === topic.id } onChange={ handleChange(topic.id) }>
-                    <AccordionSummary
-                        expandIcon={ <ExpandMoreIcon /> }
-                        aria-controls="panel1bh-content"
-                        id="panel1bh-header"
-                    >
-                        <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                            { topic.topic }
-                        </Typography>
-                        <Typography sx={{ color: 'text.secondary' }}>
-                            公開：{ props.questions.filter(question => question.topic == topic.id && (question.check === 1 || question.check === true)).length }、
-                            非公開：{ props.questions.filter(question => question.topic == topic.id && (question.check === 0 || question.check === false)).length }
-                        </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <List>
-                            { props.questions.map((question) => {
-                                if (question.topic === topic.id) {
-                                    return (
-                                        <Link to={ `/questions/` + question.id }>
-                                            <ListItem
-                                                key={ question.id }
-                                                role="listitem"
-                                                button
-                                            >
-                                                { question.check === 0 || question.check === false ? <Typography color="text.primary">（非公開）</Typography> : "" }
-                                                <ListItemText primary={ question.title } />
-                                            </ListItem>
-                                        </Link>
-                                    );
-                                }
-                            })}
-                        </List>
-                    </AccordionDetails>
-                </Accordion>
-            </Box>
-        );
-    });
-    
     return (
         <div className="container">
-            { curriculum }
+            { curriculum_topics.map((topic) => {
+                return (
+                    <Box sx={{paddingTop: 3, marginBottom: 3}}>
+                        <Accordion expanded={ expanded === topic.id } onChange={ handleChange(topic.id) }>
+                            <AccordionSummary
+                                expandIcon={ <ExpandMoreIcon /> }
+                                aria-controls="panel1bh-content"
+                                id="panel1bh-header"
+                            >
+                                <Typography sx={{ width: '33%', flexShrink: 0 }}>
+                                    { topic.topic }
+                                </Typography>
+                                <Typography sx={{ color: 'text.secondary' }}>
+                                    公開：{ props.questions.filter(question => question.topic == topic.id && (question.check === 1 || question.check === true)).length }、
+                                    非公開：{ props.questions.filter(question => question.topic == topic.id && (question.check === 0 || question.check === false)).length }
+                                </Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <List>
+                                    { props.questions.map((question) => {
+                                        if (question.topic === topic.id) {
+                                            return (
+                                                <Link to={ `/questions/` + question.id }>
+                                                    <ListItem
+                                                        key={ question.id }
+                                                        role="listitem"
+                                                        button
+                                                    >
+                                                        { question.check === 0 || question.check === false ? <Typography color="text.primary">（非公開）</Typography> : "" }
+                                                        <ListItemText primary={ question.title } />
+                                                    </ListItem>
+                                                </Link>
+                                            );
+                                        }
+                                    })}
+                                </List>
+                            </AccordionDetails>
+                        </Accordion>
+                    </Box>
+                );
+            }) }
         </div>
     );
 }

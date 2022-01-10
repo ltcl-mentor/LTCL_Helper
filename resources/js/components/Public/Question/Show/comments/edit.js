@@ -6,6 +6,9 @@ import Grid from '@mui/material/Grid';
 
 import TextForm from '../../Create/Create/question-form/original-text-form/originalTextForm';
 
+/**
+ * コメント編集
+ */
 function Edit(props) {
     const [clickCount, setClickCount] = useState(0);
     const [comment, setComment] = useState('');
@@ -15,7 +18,7 @@ function Edit(props) {
         setComment(props.comment);
     }, []);
     
-    // 保存処理
+    // 更新処理
     const handleSubmit = () => {
         // 重複保存防止のために保存ボタンのクリック数をカウント
         // クリック数が0回の場合のみ保存実行

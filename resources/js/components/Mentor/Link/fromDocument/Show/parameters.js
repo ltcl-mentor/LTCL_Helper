@@ -6,10 +6,15 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+/**
+ * 該当記事の基礎データ
+ */
 function Parameters(props) {
     const [staffs, setStaffs] = useState([]);
     
+    // 画面描画時に実行
     useEffect(() => {
+        // 管理者一覧取得
         axios
             .get("/react/all/staffs")
             .then(response => {

@@ -10,13 +10,18 @@ import Breadcrumbs from '../../../../Breadcrumbs';
 import Curriculum from '../Index/curriculum';
 import Portfolio from '../Index/portfolio';
 
+/**
+ * 受講生からのコメント待ち質問の一覧のメインコンポーネント
+ */
 function Student() {
     const parameter = useLocation();
     const [value, setValue] = useState(0);
     const [curriculum_questions, setCurriculumQuestions] = useState([]);
     const [portfolio_questions, setPortfolioQuestions] = useState([]);
     
+    // 画面描画時に実行
     useEffect(() => {
+        // カリキュラム関連で該当する質問取得
         axios
             .get("/react/questions/student_yet/0")
             .then(response => {
@@ -24,7 +29,8 @@ function Student() {
             }).catch(error => {
                 console.log(error);
             });
-            
+        
+        // 成果物関連で該当する質問取得
         axios
             .get("/react/questions/student_yet/1")
             .then(response => {

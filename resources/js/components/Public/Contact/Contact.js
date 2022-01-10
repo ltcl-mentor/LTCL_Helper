@@ -10,12 +10,16 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 
 import Breadcrumbs from '../../Breadcrumbs';
 
+/**
+ * お問い合わせのメインコンポーネント
+ */
 function Contact() {
     const history = useHistory();
     const [clickCount, setClickCount] = useState(0);
     const [contact, setContact] = useState('');
     const [contact_validation_error, setContactValidationError] = useState(false);
     
+    // お問い合わせ送信
     const handleSubmit = () => {
         // 問い合わせのバリデーション
         if (contact.trim().length !== 0) {
@@ -44,6 +48,7 @@ function Contact() {
         }
     };
     
+    // お問い合わせ入力
     const handleContact = (event) => {
         setContact(event.target.value);
     };

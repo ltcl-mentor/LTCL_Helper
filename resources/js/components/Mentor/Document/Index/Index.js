@@ -15,13 +15,18 @@ import ListItemText from '@mui/material/ListItemText';
 import Alert from '../../../Alert';
 import Breadcrumbs from '../../../Breadcrumbs';
 
+/**
+ * 関連記事一覧(管理画面)のメインコンポーネント
+ */
 function Document() {
     const parameter = useLocation();
     const [documents, setDocuments] = useState([]);
     const [staffs, setStaffs] = useState([]);
     const [expanded, setExpanded] = React.useState(false);
     
+    // 画面描画時に実行
     useEffect(() => {
+        // 記事一覧取得
         axios
             .get("/react/documents/all")
             .then(response => {
@@ -30,6 +35,7 @@ function Document() {
                 console.log(error);
             });
         
+        // 管理者一覧取得
         axios
             .get("/react/all/staffs")
             .then(response => {

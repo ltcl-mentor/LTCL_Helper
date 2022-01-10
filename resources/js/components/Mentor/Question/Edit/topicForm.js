@@ -4,10 +4,14 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
+/**
+ * トピックフォーム
+ */
 function TopicForm(props) {
     const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', 'マイグレーション', 'リレーション', 'Laravel拡張', '画像処理', 'Heroku環境', 'API', 'デザイン'];
     const [mountCount, setMountCount] = useState(0);
     
+    // カテゴリーの値変更時に実行
     useEffect(() => {
         // 初回マウント時（編集ページを開いた直後）にsetTopicが動いてしまうと初期値が変更されしまうので、
         // 初回(mountCount = 1)だけ避けるようにmountCountを利用

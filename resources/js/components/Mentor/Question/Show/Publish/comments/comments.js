@@ -12,7 +12,7 @@ import Box from '@mui/material/Box';
 import Comment from './comment';
 
 /*
- * コメント表示
+ * コメント表示(管理画面)
  */
 function Comments(props) {
     const [expanded, setExpanded] = useState(false);

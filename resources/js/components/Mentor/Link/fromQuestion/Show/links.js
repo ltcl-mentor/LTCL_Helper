@@ -28,6 +28,9 @@ function intersection(a, b) {
     return a.filter((value) => b.indexOf(value) !== -1);
 }
 
+/**
+ * 紐付け処理
+ */
 function Link(props) {
     const [checked, setChecked] = useState([]);
     const [related_documents, setRelatedDocuments] = useState([]);
@@ -39,7 +42,9 @@ function Link(props) {
     const [expanded, setExpanded] = useState(false);
     const [whitchAccordion, setWhitchAccordion] = useState('');
     
+    // 画面描画時に実行
     useEffect(() => {
+        // 関連質問一覧取得
         axios
             .get(`/react/documents/${ props.id }`)
             .then(response => {
@@ -52,6 +57,7 @@ function Link(props) {
             });
     }, []);
     
+    // 紐付け登録と解除の要素切り替え
     useEffect(() => {
         let attach_id = [];
         let detach_id = [];

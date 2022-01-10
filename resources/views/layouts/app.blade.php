@@ -11,6 +11,10 @@
     
     <title>LTCL Helper</title>
     
+    <!--クローラー巡回拒否設定-->
+    <meta name="robots" content="noindex">
+    <meta name="robots" content="nofollow">
+    
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     {{--<script src="{{ asset('js/deleteConfirm.js') }}" defer></script>--}}

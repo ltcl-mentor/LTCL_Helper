@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
 import Grid from '@mui/material/Grid';
 
-/*
+/**
  * フリーワードの検索結果の質問一覧
  */
 function Questions(props) {

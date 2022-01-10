@@ -24,6 +24,9 @@ const style = {
   p: 4,
 };
 
+/**
+ * お知らせの一覧情報
+ */
 function Infos(props) {
     const history = useHistory();
     const [dates, setDates] = useState([]);
@@ -33,29 +36,34 @@ function Infos(props) {
     const [deleteInfo, setDeleteInfo] = useState();
     const [infoDeleting, setInfoDeleting] = useState(false);
     
+    // お知らせが追加、削除された際に実行
     useEffect(() => {
         if (!(props.infoChanging) || !(infoDeleting)) {
-        axios
-            .get(`/react/infos`)
-            .then(response => {
-                setInfos(response.data.infos);
-                setDates(response.data.dates);
-            }).catch(error => {
-                console.log(error);
-            });
+            // お知らせ全権取得
+            axios
+                .get(`/react/infos`)
+                .then(response => {
+                    setInfos(response.data.infos);
+                    setDates(response.data.dates);
+                }).catch(error => {
+                    console.log(error);
+                });
         }
     }, [props.infoChanging, infoDeleting]);
     
+    // モーダル開閉
     const handleOpen = () => setOpen(true);
     
     const handleClose = () => setOpen(false);
     
-    const handleDelete = (id, info) => {
+    // 削除実行対象特定
+    const handleDeleteTarget = (id, info) => {
         setDeleteId(id);
         setDeleteInfo(info);
     };
     
-    const handleSubmit = () =>{
+    // 削除実行
+    const handleDelete = () =>{
         setInfoDeleting(true);
         axios
             .post(`/informations/${ deleteId }/delete`)
@@ -94,7 +102,7 @@ function Infos(props) {
                             { infos[date].map((info) => (
                                 <ListItem key={`${date}-info`}>
                                     <ListItemText primary={ info.information } />
-                                    { props.is_admin ? <DeleteIcon onClick={ () => {handleOpen(), handleDelete(info.id, info.information)} }/> : ''}
+                                    { props.is_admin ? <DeleteIcon onClick={ () => {handleOpen(), handleDeleteTarget(info.id, info.information)} }/> : ''}
                                 </ListItem>
                             ))}
                         </ul>
@@ -124,7 +132,7 @@ function Infos(props) {
                     </Typography>
                     
                     <Typography align="center" sx={{ paddingTop:2 }}>
-                        <Button variant="contained" onClick={ handleSubmit }>削除</Button>
+                        <Button variant="contained" onClick={ handleDelete }>削除</Button>
                     </Typography>
                 </Box>
             </Modal>

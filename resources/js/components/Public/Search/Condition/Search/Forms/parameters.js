@@ -6,7 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Box from '@mui/material/Box';
 
-/*
+/**
  * 絞り込みの条件を表示
  */
 function Parameters(props) {

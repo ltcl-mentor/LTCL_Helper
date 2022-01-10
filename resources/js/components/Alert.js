@@ -5,7 +5,9 @@ import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
 import CloseIcon from '@material-ui/icons/Close';
 
-// postリクエストの処理が成功した際に画面上部に出力するメッセージ
+/**
+ * postリクエストの処理が成功した際に画面上部に出力するメッセージ
+ */
 function AlertMessage(props) {
     const [open, setOpen] = useState(true);
     

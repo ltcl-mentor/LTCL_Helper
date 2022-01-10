@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import Create from './create';
 import Infos from './infos';
 
+/**
+ * お知らせ
+ */
 function Information(props) {
     const [infoChanging, setInfoChanging] = useState(false);
     

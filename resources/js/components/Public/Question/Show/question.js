@@ -4,7 +4,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@mui/material/Grid';
 
-/*
+/**
  * 質問表示
  */
 function Question(props) {

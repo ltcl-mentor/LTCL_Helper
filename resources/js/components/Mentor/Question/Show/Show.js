@@ -14,6 +14,9 @@ import Question from './question';
 import Comments from '../../../Public/Question/Show/comments/comments';
 import Documents from '../../../Public/Question/Show/documents';
 
+/**
+ * 質問詳細(管理画面)のメインコンポーネント
+ */
 function Show() {
     const parameter = useLocation();
     const { id } = useParams();
@@ -23,8 +26,10 @@ function Show() {
     const [comment_changing, setCommentChanging] = useState(false);
     const categories = ['カリキュラム', '成果物'];
     const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', 'マイグレーション', 'リレーション', 'Laravel拡張', '画像処理', 'Heroku環境', 'API', 'デザイン'];
-
+    
+    // 画面描画時に実行
     useEffect(() => {
+        // 該当質問データ取得
         axios
             .get(`/react/question/${ id }`)
             .then(response => {
@@ -32,7 +37,8 @@ function Show() {
             }).catch(error => {
                 console.log(error);
             });
-            
+        
+        // 関連記事取得
         axios
             .get(`/react/documents/related/${ id }`)
             .then(response => {
@@ -42,6 +48,7 @@ function Show() {
             });
     }, []);
     
+    // コメント追加時の質問データ再取得
     useEffect(() => {
         if (!(comment_changing)) {
             // 個別質問を取得
@@ -55,6 +62,7 @@ function Show() {
         }
     }, [comment_changing]);
     
+    // 削除実行
     const deleteConfirm = () => {
         if (confirm('データが削除されます。\nよろしいですか？')) {
             axios

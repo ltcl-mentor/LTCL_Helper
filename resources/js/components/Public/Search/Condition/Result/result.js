@@ -1,7 +1,7 @@
 import React from 'react';
 import Questions from './questions';
 
-/*
+/**
  * 絞り込み検索の検索結果表示
  */
 function Result(props) {

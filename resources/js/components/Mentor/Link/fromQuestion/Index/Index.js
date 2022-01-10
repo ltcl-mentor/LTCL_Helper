@@ -6,6 +6,9 @@ import Box from '@material-ui/core/Box';
 import Breadcrumbs from '../../../../Breadcrumbs';
 import Questions from './questions';
 
+/**
+ * 単体質問から関連記事への紐付け（一覧画面）のメインコンポーネント
+ */
 function Index() {
     const [value, setValue] = React.useState(0);
     const curriculumTopics = [

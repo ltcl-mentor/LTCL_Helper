@@ -8,7 +8,7 @@ import Breadcrumbs from '../../../Breadcrumbs';
 import Curriculum from './curriculum';
 import Portfolio from './portfolio';
 
-/*
+/**
  * 質問一覧(公開)のメインコンポーネント
  */
 function Index() {
@@ -17,6 +17,7 @@ function Index() {
     
     //画面描画時に実行
     useEffect(() => {
+        // 公開されている質問を全権取得
         axios
             .get("/react/questions/checked")
             .then(response => {

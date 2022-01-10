@@ -12,7 +12,7 @@ import Input from '@mui/material/Input';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 
-/*
+/**
  * 検索内容の入力欄
  */
 function Form(props) {

@@ -28,6 +28,9 @@ function intersection(a, b) {
     return a.filter((value) => b.indexOf(value) !== -1);
 }
 
+/**
+ * 紐付け処理
+ */
 function Link(props) {
     const [checked, setChecked] = useState([]);
     const [related_questions, setRelatedQuestions] = useState([]);
@@ -57,7 +60,9 @@ function Link(props) {
         {"id": 15, "topic": "デザイン"},
     ];
     
+    // 画面描画時に実行
     useEffect(() => {
+        // 関連質問全件取得
         axios
             .get(`/react/questions/${ props.id }`)
             .then(response => {
@@ -70,6 +75,7 @@ function Link(props) {
             });
     }, []);
     
+    // 紐付け登録と解除の要素切り替え
     useEffect(() => {
         let attach_id = [];
         let detach_id = [];

@@ -12,12 +12,17 @@ import ListItemText from '@mui/material/ListItemText';
 
 import Breadcrumbs from '../../Breadcrumbs';
 
+/**
+ * 質問閲覧履歴のメインコンポーネント
+ */
 function History() {
     const [questions, setQuestions] = useState([]);
     const [expanded, setExpanded] = useState(false);
     const [two_week_days, setTwoWeekDays] = useState();
     
+    // 画面描画時に実行
     useEffect(() => {
+        // 直近2週間の日付取得
         const today = new Date();
         var days = [];
         
@@ -29,7 +34,9 @@ function History() {
         setTwoWeekDays(days);
     }, []);
     
+    // 画面描画時に実行
     useEffect(() => {
+        // ログインユーザの質問閲覧履歴取得
         axios
             .get("/react/history")
             .then(response => {
@@ -39,6 +46,7 @@ function History() {
             });
     }, []);
     
+    // アコーディオンの開閉
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };

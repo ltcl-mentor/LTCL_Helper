@@ -12,6 +12,9 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+/**
+ * 天気表示
+ */
 function Weather() {
     const [weather, setWeather] = useState([]);
     const weatherImages = {
@@ -26,7 +29,9 @@ function Weather() {
     };
     const [expanded, setExpanded] = useState(false);
     
+    // 画面描画時に実行
     useEffect(() => {
+        // 天気情報取得
         axios
             .get(`/react/weather`)
             .then(response => {
@@ -36,6 +41,7 @@ function Weather() {
             });
     }, []);
     
+    // アコーディオンの開閉
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };

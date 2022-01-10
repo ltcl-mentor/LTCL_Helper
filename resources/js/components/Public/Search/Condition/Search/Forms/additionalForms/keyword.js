@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Box from '@mui/material/Box';
 
-/*
+/**
  * キーワード入力欄
  */
 function Keyword(props) {

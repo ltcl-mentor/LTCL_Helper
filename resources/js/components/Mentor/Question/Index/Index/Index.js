@@ -10,13 +10,18 @@ import Breadcrumbs from '../../../../Breadcrumbs';
 import Curriculum from './curriculum';
 import Portfolio from './portfolio';
 
+/**
+ * 質問一覧(管理画面)のメインコンポーネント
+ */
 function Index() {
     const parameter = useLocation();
     const [value, setValue] = useState(0);
     const [curriculum_questions, setCurriculumQuestions] = useState([]);
     const [portfolio_questions, setPortfolioQuestions] = useState([]);
     
+    // 画面描画時に実行
     useEffect(() => {
+        // カリキュラム関連の質問取得
         axios
             .get("/react/questions/curriculum")
             .then(response => {
@@ -24,7 +29,8 @@ function Index() {
             }).catch(error => {
                 console.log(error);
             });
-            
+        
+        // 成果物関連の質問取得
         axios
             .get("/react/questions/portfolio")
             .then(response => {

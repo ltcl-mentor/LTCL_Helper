@@ -17,11 +17,11 @@ import Parameter from './Search/Forms/parameters';
 import SearchButton from './Search/searchButton';
 import Result from './Result/result';
 
-/*
+/**
  * 絞り込み検索のメインコンポーネント
  */
 function Condition() {
-    const [category, setCategory] = useState('');
+    const [category, setCategory] = useState(0);
     const [topic, setTopic] = useState('');
     const [curriculum_number, setCurriculumNumber] = useState('');
     const [keyword, setKeyword] = useState('');
@@ -57,6 +57,10 @@ function Condition() {
     // ステッパーをリセット
     const handleReset = () => {
         setActiveStep(0);
+        setCategory(0);
+        setTopic('');
+        setCurriculumNumber('');
+        setKeyword('');
     };
     
     // ステッパーの内容
@@ -66,6 +70,7 @@ function Condition() {
                 return (
                     <div>
                         <Category 
+                            category={ category }
                             setCategory={ setCategory }
                         />
                         
@@ -73,7 +78,7 @@ function Condition() {
                             <Button
                                 variant="contained"
                                 color="primary"
-                                onClick={ handleNext }
+                                onClick={ () => { handleNext(), setTopicIsCanceling(false) } }
                             >
                                 Next
                             </Button>
@@ -109,7 +114,7 @@ function Condition() {
                                     <Button
                                         variant="contained"
                                         color="primary"
-                                        onClick={ handleNext }
+                                        onClick={ () => { handleNext(), setAdditionalFormsIsCanceling(false) } }
                                     >
                                         Next
                                     </Button>

@@ -7,6 +7,9 @@ import Breadcrumbs from '../../../../Breadcrumbs';
 import Parameters from './parameters';
 import Links from './links';
 
+/**
+ * 単体記事から質問への紐付け（詳細画面）のメインコンポーネント
+ */
 function Index() {
     const { id } = useParams();
     const parameter = useLocation();
@@ -16,7 +19,9 @@ function Index() {
     const [attach_id, setAttachId] = useState([]);
     const [detach_id, setDetachId] = useState([]);
     
+    // 画面描画時に実行
     useEffect(() => {
+        // 該当記事データ取得
         axios
             .get(`/react/document/${ id }`)
             .then(response => {

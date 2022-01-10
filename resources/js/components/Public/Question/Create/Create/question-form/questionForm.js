@@ -5,6 +5,9 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 
 import TextForm from './original-text-form/originalTextForm';
 
+/**
+ * 質問タイトル、調べたこと、内容入力フォーム
+ */
 function QuestionForm(props) {
     const handleTitle = (event) => {
         props.setTitle(event.target.value);

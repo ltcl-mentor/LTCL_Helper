@@ -8,6 +8,9 @@ import Grid from '@mui/material/Grid';
 
 import TextForm from '../../Create/Create/question-form/original-text-form/originalTextForm';
 
+/**
+ * コメント新規作成
+ */
 function Create(props) {
     const [open, setOpen] = useState(false);
     const [clickCount, setClickCount] = useState(0);

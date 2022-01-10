@@ -12,6 +12,9 @@ import Target from '../Create/target';
 import Title from '../Create/title';
 import URL from '../Create/link';
 
+/**
+ * 関連記事詳細(管理画面)のメインコンポーネント
+ */
 function Edit() {
     const { id } = useParams();
     const history = useHistory();
@@ -27,7 +30,9 @@ function Edit() {
         all: false,
      });
     
+    // 該当記事取得
     useEffect(() => {
+        // 該当記事取得
         axios
             .get(`/react/document/${ id }`)
             .then(response => {

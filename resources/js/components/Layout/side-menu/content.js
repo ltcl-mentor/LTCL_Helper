@@ -13,6 +13,9 @@ import PostAdd from '@material-ui/icons/PostAdd';
 import ContactPhone from '@material-ui/icons/ContactPhone'; 
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
+/**
+ * サイトメニューの中身
+ */
 function Content(props) {
     const [isLinkClicked, setIsLinkClicked] = useState(false);
     

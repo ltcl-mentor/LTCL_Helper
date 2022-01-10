@@ -11,13 +11,18 @@ import Breadcrumbs from '../../../Breadcrumbs';
 import Parameters from './parameters';
 import Questions from './questions';
 
+/**
+ * 関連記事詳細(管理画面)のメインコンポーネント
+ */
 function Document() {
     const parameter = useLocation();
     const { id } = useParams();
     const history = useHistory();
     const [doc, setDoc] = useState([]);
     
+    // 画面描画時に実行
     useEffect(() => {
+        // 該当記事取得
         axios
             .get(`/react/document/${ id }`)
             .then(response => {

@@ -7,6 +7,9 @@ import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
+/**
+ * 質問公開のためのチェックフォーム
+ */
 function CheckForm(props) {
     const history = useHistory();
     const [check1, setCheck1] = useState(false);
@@ -37,6 +40,7 @@ function CheckForm(props) {
         }
     };
     
+    // 質問公開処理
     const handlePublish = () => {
         axios
             .post(`/questions/${ props.question_id }/check`)

@@ -6,6 +6,9 @@ import CalendarPicker from '@mui/lab/CalendarPicker';
 import Typography from '@material-ui/core/Typography';
 import Info from './info';
 
+/**
+ * 校舎情報(カレンダー)
+ */
 function Calendar(props) {
     const [date, setDate] = useState(new Date());
     const [collegeInfo, setCollegeInfo] = useState([]);
@@ -13,6 +16,7 @@ function Calendar(props) {
     const today = new Date();
     
     useEffect(() => {
+        // 指定された日付の校舎情報取得
         axios
             .get(`/react/college/${ date.getFullYear() }/${ date.getMonth() + 1 }/${ date.getDate() }`)
             .then(response => {

@@ -17,6 +17,9 @@ import CurriculumNumber from './Curriculum-number/curriculum-number';
 import QuestionForm from '../../../Public/Question/Create/Create/question-form/questionForm';
 import Confirm from '../../../Public/Question/Create/Create/confirm';
 
+/**
+ * 質問編集のメインコンポーネント
+ */
 function Edit() {
     const { id } = useParams();
     const history = useHistory();
@@ -56,7 +59,9 @@ function Edit() {
         setScreenWidth(window.innerWidth);
     });
     
+    // 画面描画時に実行
     useEffect(() => {
+        // 該当質問取得
         axios
             .get(`/react/question/${ id }`)
             .then(response => {

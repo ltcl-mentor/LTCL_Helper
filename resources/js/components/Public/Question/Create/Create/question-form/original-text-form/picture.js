@@ -9,6 +9,9 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import FolderIcon from '@mui/icons-material/Folder';
 
+/**
+ * 画像アップロード
+ */
 function Picture(props) {
     // 画像のサイズ制限を1MBに設定
     const limit_size = 1024*1024*1;

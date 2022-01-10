@@ -3,6 +3,9 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import Typography from '@material-ui/core/Typography';
 import Box from '@mui/material/Box';
 
+/**
+ * 記事URLフォーム
+ */
 function Link(props) {
     
     const handleLink = (event) => {

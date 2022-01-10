@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-/* 
+/**
  * Routejsに記述されていないURLにアクセスがあった場合に表示
  */
 function Error() {

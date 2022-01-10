@@ -1,6 +1,9 @@
 import React,{useState} from 'react';
 import Typography from '@material-ui/core/Typography';
 
+/**
+ * 入力した質問のプレビュー
+ */
 function Preview(props) {
     
     let preview = [];

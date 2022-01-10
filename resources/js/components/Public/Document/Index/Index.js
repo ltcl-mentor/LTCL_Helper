@@ -10,6 +10,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import Breadcrumbs from '../../../Breadcrumbs';
 import Documents from '../../Question/Show/documents';
 
+/**
+ * 参考記事一覧のメインコンポーネント
+ */
 function Index() {
     const [default_documents , setDefaultDocuments] = useState([]);
     const [documents , setDocuments] = useState([]);
@@ -19,7 +22,9 @@ function Index() {
     const [master, setMaster] = useState(false);
     const [all ,setAll] = useState(false);
     
+    // 画面描画時に実行
     useEffect(() => {
+        // 参考記事全権取得
         axios
             .get("/react/documents/all")
             .then(response => {
@@ -30,6 +35,7 @@ function Index() {
             });
     }, []);
     
+    // 対象者の指定が変更された場合に実行
     useEffect(() => {
         var keyword_documents = [];
         // キーワードが未入力の場合
@@ -70,11 +76,13 @@ function Index() {
         
     },[keyword, beginner, amature, master, all]);
     
+    // キーワード入力
     const handleKeyword = (event) => {
         // 入力に空白があれば"/"に置換
         setKeyword(event.target.value);
     };
     
+    // ボタンの表示切り替え
     const handleSelect = (whitch) => {
         switch (whitch) {
             case "beginner":

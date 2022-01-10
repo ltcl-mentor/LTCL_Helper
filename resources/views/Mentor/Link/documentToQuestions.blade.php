@@ -9,6 +9,7 @@
         <div>
             <a href="/mentor">管理ページ</a> > <a href="/links/index">紐付け一覧</a> > 記事から質問への紐付け
         </div>
+        
         <div class="table">
             <div class="cover"><h1 class="data">記事の概要</h1></div>
             <h2 class="columns">記事タイトル</h2>
@@ -18,6 +19,7 @@
                 <a href={{ $document->link }} target="_blank">{{ $document->link }}</a>
             </div>
         </div>
+        
         <div class="table">
             <div class="cover"><h1 class="relation">関連記事への紐付け</h1></div>
             <form action="/links/document/{{ $document->id }}" method="POST">

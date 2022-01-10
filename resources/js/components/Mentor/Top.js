@@ -16,10 +16,15 @@ import Badge from '@mui/material/Badge';
 
 import Breadcrumbs from '../Breadcrumbs';
 
+/**
+ * 管理画面のメインコンポーネント
+ */
 function Top() {
     const [counts, setCounts] = useState([]);
     
+    // 画面描画時に実行
     useEffect(() => {
+        // コメント待ちの質問のデータ数を取得
         axios
             .get('/react/questions/counts')
             .then(response => {
@@ -28,6 +33,7 @@ function Top() {
                 console.log(error);
             });
     }, []);
+    
     return (
         <div class="container">
             <Breadcrumbs page="mentor_top"/>

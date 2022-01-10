@@ -11,12 +11,16 @@ import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@mui/material/Grid';
 
-
+/**
+ * 関連質問
+ */
 function questions(props) {
     const [questions, setQuestions] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     
+    // 画面描画時に実行
     useEffect(() => {
+        // 関連質問取得
         axios
             .get(`/react/related/questions/${ props.id }`)
             .then(response => {

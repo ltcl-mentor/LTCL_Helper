@@ -3,6 +3,9 @@ import Typography from '@material-ui/core/Typography';
 
 import Parameters from '../../Show/parameters';
 
+/**
+ * 質問登録前の確認フォーム
+ */
 function QuestionConfirm(props) {
     
     let question = [];

@@ -27,14 +27,19 @@ const style = {
   overflow: 'scroll',
 };
 
+/**
+ * 質問公開・非公開処理
+ */
 function Publish(props) {
     const history = useHistory();
     const [open, setOpen] = useState(false);
     
+    // モーダルの開閉
     const handleOpen = () => setOpen(true);
     
     const handleClose = () => setOpen(false);
     
+    // 質問非公開処理
     const unpublishConfirm = () => {
         if (confirm('質問が非公開になります。\nよろしいですか？')) {
             axios

@@ -6,6 +6,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Typography from '@material-ui/core/Typography';
 
+/**
+ * ユーザイアコン
+ */
 function Icon(props) {
     const [anchorEl, setAnchorEl] = useState(null);
     

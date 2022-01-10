@@ -13,6 +13,9 @@ import Clendar from './calendar/calendar';
 import Weather from './weather';
 import Location from './location';
 
+/**
+ * トップ画面のメインコンポーネント
+ */
 function Home() {
     const parameter = useLocation();
     const [user, setUser] = useState([]);
@@ -20,11 +23,14 @@ function Home() {
     const [zoom_link, setZoomLink] = useState();
     const [screen_width, setScreenWidth] = useState(window.innerWidth);
     
+    // windowの幅が変化した際に随時取得
     window.addEventListener('resize', function() {
         setScreenWidth(window.innerWidth);
     });
     
+    // 画面描画時に実行
     useEffect(() => {
+        // ログインユーザ情報取得
         axios
             .get("/react/user")
             .then(response => {
@@ -32,7 +38,8 @@ function Home() {
             }).catch(error => {
                 console.log(error);
             });
-            
+        
+        // マップのAPIキーとZoomのリンク一覧へのURL取得
         axios
             .get("/react/env")
             .then(response => {

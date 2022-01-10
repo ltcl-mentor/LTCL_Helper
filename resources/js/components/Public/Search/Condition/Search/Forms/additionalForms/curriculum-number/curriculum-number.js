@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Selects from './select';
 import Box from '@mui/material/Box';
 
-/*
+/**
  * カリキュラム番号
  */
 function CrriculumNumber(props) {

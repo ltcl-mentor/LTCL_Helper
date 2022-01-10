@@ -10,12 +10,16 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
-
+/**
+ * 質問一覧
+ */
 function Questions(props) {
     const [questions, setQuestions] = useState([]);
     const [expanded, setExpanded] = React.useState(false);
     
+    // 画面描画時に実行
     useEffect(() => {
+        // 質問全件取得
         axios
             .get("/react/all/questions")
             .then(response => {

@@ -10,7 +10,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
-/*
+/**
  * 成果物の質問一覧
  */
 function Portfolio(props) {

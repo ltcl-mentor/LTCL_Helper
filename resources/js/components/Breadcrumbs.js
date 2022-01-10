@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
-/*
+/**
  * 各ページのパンくずリスト
  */
 function Breadcrumb(props){
