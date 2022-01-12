@@ -105,7 +105,6 @@ function Show() {
                 .then(response => {
                     if (response.status === 200) {
                         setQuestionChanging(false);
-                        history.push(`/public/questions/${ response.data.id }`, { type: "comment", status: "deleted" });
                     }
                 }).catch(error => {
                     console.log(error);

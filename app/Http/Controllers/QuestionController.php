@@ -113,9 +113,10 @@ class QuestionController extends Controller
      */
     public function resolved(Question $question)
     {
+        return $question;
         $question->is_resolved = true;
         $question->save();
-        
+        return $question;
         return $question->id;
     }
     
