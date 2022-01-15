@@ -17,9 +17,9 @@ class UsersTableSeeder extends Seeder
             'is_admin' => 'staff',
         ]);
         DB::table('users')->insert([
-            'name' => "わろた",
+            'name' => "受講生",
             'password' => Hash::make(ENV('seederPassword')),
-            'is_admin' => 'staff',
+            'is_admin' => '',
         ]);
     }
 }
