@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('is_admin')->nullable();
             $table->rememberToken();
             $table->boolean('lock')->default(false);
+            $table->unsignedInteger('question_count')->default(0);
             $table->timestamps();
         });
     }

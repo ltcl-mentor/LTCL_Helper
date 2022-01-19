@@ -164,14 +164,6 @@ class ReactController extends Controller
         return Question::where('category', 1)->get();
     }
     
-    /**
-     * 質問に関連する全画像の受け渡し
-     */
-    public function getImages($question_id)
-    {
-        return Image::where('question_id', $question_id)->get();
-    }
-    
     /** 
      * 個別記事に関連する全質問受け渡し
      */
@@ -240,6 +232,30 @@ class ReactController extends Controller
         
         return ["mentor" => $mentor_yet_comment_count, "student" => $student_yet_comment_count];
     }
+    
+    /**
+     * ログインユーザの質問一覧受け渡し
+     */
+    public function getMyQuestions()
+    {
+        $my_questions = Question::where('user_id', Auth::id())->get();
+        
+        foreach($my_questions as $question){
+            $student_yet_comments = Comment::where('question_id', $question->id)->where('is_mentor_commented', true)->get();
+            
+            $question->reply = count($student_yet_comments) !== 0 ? true : false;
+        }
+        
+        return $my_questions;
+    }
+    
+    // /**
+    //  * 質問に関連する全画像の受け渡し
+    //  */
+    // public function getImages($question_id)
+    // {
+    //     return Image::where('question_id', $question_id)->get();
+    // }
     
     
     
@@ -310,7 +326,28 @@ class ReactController extends Controller
      */
     public function getUser()
     {
-        return Auth::user();
+        $user = Auth::user();
+        
+        if($user->is_admin !== "staff"){
+            $student = Student::firstWhere('user_id', $user->id);
+            if($student){
+                $user->entry = "20" . substr($student->password, 4, 2) . "年" . substr($student->password, 4, 2) . "月";
+            }
+        }
+        
+        $unresolved_questions = Question::where('user_id', Auth::id())->where('is_resolved', false)->get();
+        
+        $student_yet_comment_count = 0;
+        
+        foreach($unresolved_questions as $question){
+            $student_yet_comments = Comment::where('question_id', $question->id)->where('is_mentor_commented', true)->get();
+            
+            $student_yet_comment_count += count($student_yet_comments);
+        }
+        
+        $user->reply_count = $student_yet_comment_count;
+        
+        return $user;
     }
     
     

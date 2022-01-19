@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import IconButton from '@mui/material/IconButton';
@@ -109,6 +110,10 @@ function AlertMessage(props) {
                     
                 case "deleted":
                     message = <AlertTitle>お知らせを削除しました。</AlertTitle>;
+                    break;
+                    
+                case "question":
+                    message = <AlertTitle>質問に返信コメントが返ってきています。<Link to="my_page">マイページ</Link>はこちら</AlertTitle>;
                     break;
             }
             break;

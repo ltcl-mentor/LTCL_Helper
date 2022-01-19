@@ -1,6 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import ReactDOM from 'react-dom';
-import axios from "axios";
+import React, {useContext} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -9,28 +7,21 @@ import Link from '@mui/material/Link';
 import User from './user-icon';
 import Menu from './side-menu/menu'; 
 
+import {LoginUser} from '../Route.js';
+
 /**
  * メニューバーのメインコンポーネント
  */
 function Bar() {
-    const [user, setUser] = useState([]);
     
     // ログインユーザー情報取得
-    useEffect(() => {
-        axios
-            .get(`/react/user`)
-            .then(response => {
-                setUser(response.data);
-            }).catch(error => {
-                console.log(error);
-            });
-    }, []);
+    const user = useContext(LoginUser);
     
     let user_icon;
     if (user.id) {
         user_icon = (
             <User 
-                user_name={ user.name }
+                user={ user }
             />
         );
     } else {
@@ -68,7 +59,3 @@ function Bar() {
 }
 
 export default Bar;
-
-// if (document.getElementById('Bar')) {
-//     ReactDOM.render(<Bar />, document.getElementById('Bar'));
-// }

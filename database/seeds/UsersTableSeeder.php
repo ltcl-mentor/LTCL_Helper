@@ -15,10 +15,11 @@ class UsersTableSeeder extends Seeder
             'name' => ENV('seederName'),
             'password' => Hash::make(ENV('seederPassword')),
             'is_admin' => 'staff',
+            'questioin_count' => 40,
         ]);
         DB::table('users')->insert([
             'name' => "受講生",
-            'password' => Hash::make(ENV('seederPassword')),
+            'password' => Hash::make(ENV('seederStudentPassword')),
             'is_admin' => '',
         ]);
     }

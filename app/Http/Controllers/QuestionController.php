@@ -50,6 +50,11 @@ class QuestionController extends Controller
         
         $question->save();
         
+        // 質問作成したユーザの質問作成数を変更
+        $user = Auth::user();
+        $user->question_count += 1;
+        $user->save();
+        
         // 画像に関する処理
         // 画像は事前に保存されているので、実際に質問の中で使われていないものは削除
         // 質問の中で利用されているものには質問のIDを記録
@@ -235,6 +240,11 @@ class QuestionController extends Controller
         // 質問の削除
         // 対象を論理削除
         $question->delete();
+        
+        // 質問作成したユーザの質問作成数を変更
+        $user = Auth::find($question->user_id);
+        $user->question_count += 1;
+        $user->save();
         
         // 過去に論理削除されたデータの中で３ヶ月経過したものを物理削除
         // 質問で利用された画像の削除はこちらで実行

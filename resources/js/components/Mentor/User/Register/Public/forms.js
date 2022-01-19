@@ -33,6 +33,7 @@ function Forms(props) {
                     }
                 }).catch(error => {
                     console.log(error);
+                    setClickCount(0);
                 });
         } else {
             return false;
@@ -48,7 +49,7 @@ function Forms(props) {
                 <div className="form-group row">
                     <label for="name" className="col-md-4 col-form-label text-md-right">name{ formCount }</label>
                     <div className="col-md-6">
-                        <input id={ `name` + formCount } type="text" className="form-control" name={ `name` + formCount } required autoComplete="name"/>
+                        <input id={ `name` + formCount } type="text" placeholder="受講生IDを入力" className="form-control" name={ `name` + formCount } required autoComplete="name"/>
                     </div>
                 </div>
             </Box>

@@ -24,7 +24,7 @@ function Show() {
     const parameter = useLocation();
     const [question, setQuestion] = useState([]);
     const [documents, setDocuments] = useState([]);
-    const [relatedQuestions, setRelatedQuestions] = useState([]);
+    const [related_questions, setRelatedQuestions] = useState([]);
     const [user, setUser] = useState([]);
     const [comment_changing, setCommentChanging] = useState(false);
     const [question_changing, setQuestionChanging] = useState(false);
@@ -194,7 +194,7 @@ function Show() {
                     }}
                 >
                     <RelatedQuestions 
-                        relatedQuestions={ relatedQuestions }
+                        related_questions={ related_questions }
                     />
                 </Grid>
             </Grid>

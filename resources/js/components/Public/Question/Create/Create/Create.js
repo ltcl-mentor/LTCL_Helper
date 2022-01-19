@@ -130,6 +130,7 @@ function Create() {
                     }
                 }).catch(error => {
                     console.log(error);
+                    setClickCount(0);
                 });
         } else {
             return false;

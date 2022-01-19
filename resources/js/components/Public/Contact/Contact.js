@@ -37,6 +37,7 @@ function Contact() {
                             }
                         }).catch(error => {
                             console.log(error);
+                            setClickCount(0);
                         });
                 }
             } else {

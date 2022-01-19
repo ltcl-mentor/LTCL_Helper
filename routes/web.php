@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('react/question/checked/{question}', 'ReactController@getCheckedQuestion'); // 公開中の個別質問データの受け渡し
     Route::get('react/questions/checked', 'ReactController@getCheckedQuestions'); // 公開中の質問受け渡し
     Route::get('react/questions/search', 'ReactController@getSearchQuestions'); // 質問検索結果の受け渡し
+    Route::get('react/questions/mine', 'ReactController@getMyQuestions'); // ログインユーザの質問一覧受け渡し
     Route::get('react/documents/all', 'ReactController@getAllDocuments'); // 全記事受け渡し
     Route::get('react/documents/related/{question}', 'ReactController@getRelatedDocuments'); // 質問に紐づいている記事の受け渡し
     Route::get('react/user', 'ReactController@getUser'); // ログインユーザー受け渡し

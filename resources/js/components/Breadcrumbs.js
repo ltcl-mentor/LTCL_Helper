@@ -14,8 +14,21 @@ function Breadcrumb(props){
     let link4;
     switch (props.page) {
         /* 公開部分 */
+        case "my_page":
+            link1 = (
+                <Typography color="text.primary">
+                    マイページ
+                </Typography>
+            );
+            break;
+            
         case "history":
             link1 = (
+                <Link underline="hover" to="/my_page">
+                    マイページ
+                </Link>
+            );
+            link2 = (
                 <Typography color="text.primary">
                     質問閲覧履歴
                 </Typography>

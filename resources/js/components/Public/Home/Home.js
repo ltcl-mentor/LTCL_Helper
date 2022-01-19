@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {useLocation} from 'react-router-dom';
 import axios from "axios";
 import Card from '@mui/material/Card';
@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
+import {LoginUser} from '../../Route.js';
 import Alert from '../../Alert';
 import Content from '../../Layout/side-menu/content';
 import Information from './information/information';
@@ -18,10 +19,12 @@ import Location from './location';
  */
 function Home() {
     const parameter = useLocation();
-    const [user, setUser] = useState([]);
     const [map_key, setMapKey] = useState();
     const [zoom_link, setZoomLink] = useState();
     const [screen_width, setScreenWidth] = useState(window.innerWidth);
+    
+    // ログインユーザー情報取得
+    const user = useContext(LoginUser);
     
     // windowの幅が変化した際に随時取得
     window.addEventListener('resize', function() {
@@ -30,14 +33,6 @@ function Home() {
     
     // 画面描画時に実行
     useEffect(() => {
-        // ログインユーザ情報取得
-        axios
-            .get("/react/user")
-            .then(response => {
-                setUser(response.data);
-            }).catch(error => {
-                console.log(error);
-            });
         
         // マップのAPIキーとZoomのリンク一覧へのURL取得
         axios
@@ -56,6 +51,13 @@ function Home() {
                 type={ parameter.state && parameter.state.type }
                 status={ parameter.state && parameter.state.status }
             />
+            
+            { user.reply_count > 0 &&
+                <Alert
+                    type="info"
+                    status="question"
+                />
+            }
             
             <Box
                 sx={{

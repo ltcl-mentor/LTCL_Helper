@@ -9,7 +9,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
  * 関連質問
  */
 function Questions(props) {
-    const related_question = props.relatedQuestions.map((question) => {
+    const related_question = props.related_questions.map((question) => {
         return (
             <ListItem button>
                 <Link to={ `public/questions/` + question.id } target="_blank" className="related_question">
@@ -22,7 +22,7 @@ function Questions(props) {
     });
     
     let no_related_questions;
-    if (props.relatedQuestions.length === 0) {
+    if (props.related_questions.length === 0) {
         no_related_questions = (
             <ListItem>
                 <ListItemText

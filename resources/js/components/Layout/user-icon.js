@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -39,7 +39,7 @@ function Icon(props) {
                     component="div"
                     sx={{ display: "inline-block" }}
                 >
-                    { props.user_name }
+                    { props.user.name }
                 </Typography>
                 
                 <AccountCircle />
@@ -61,11 +61,15 @@ function Icon(props) {
                 onClose={ handleClose }
             >
                 <MenuItem onClick={handleClose}>
-                    <a class="dropdown-item" onClick={ logout }>Logout</a>
+                    <a  onClick={ logout }>ログアウト</a>
                 </MenuItem>
                 
                 <MenuItem onClick={handleClose}>
                     <Link to="/history">質問閲覧履歴</Link>
+                </MenuItem>
+                
+                <MenuItem onClick={handleClose}>
+                    <Link to="/my_page">マイページ</Link>
                 </MenuItem>
             </Menu>
         </div>

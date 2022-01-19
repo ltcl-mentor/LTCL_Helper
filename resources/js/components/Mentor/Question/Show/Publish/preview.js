@@ -15,13 +15,13 @@ import RelatedQuestions from '../../../../Public/Question/Show/related-questions
  * 質問詳細(公開)のプレビュー
  */
 function Preview(props) {
-    const [relatedQuestions, setRelatedQuestions] = useState([]);
+    const [related_questions, setRelatedQuestions] = useState([]);
     
     // 画面描画時に取得
     useEffect(() => {
         // カテゴリー、トピックが同じ質問を取得
         axios
-            .get(`/react/search/questions?category=${ props.question.category }&topic=${ props.question.topic }`)
+            .get(`/react/questions/search?category=${ props.question.category }&topic=${ props.question.topic }`)
             .then(response => {
                 setRelatedQuestions(response.data);
             }).catch(error => {
@@ -86,7 +86,7 @@ function Preview(props) {
                 
                 <Grid item sx={{ width: "30%" }}>
                     <RelatedQuestions 
-                        relatedQuestions={ relatedQuestions }
+                        related_questions={ related_questions }
                     />
                 </Grid>
             </Grid>

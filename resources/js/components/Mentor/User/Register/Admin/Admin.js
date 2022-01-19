@@ -28,22 +28,35 @@ function Admin() {
                     }
                 }).catch(error => {
                     console.log(error);
+                    setClickCount(0);
                 });
         } else {
             return false;
         }
     };
     
+    // 登録フォームのデザインはLaravelのデフォルトのものを転用
     return (
         <div class="container">
             <Breadcrumbs page="mentor_admin_create"/>
             
             <Box sx={{ width: "70%", marginLeft: "15%" }}>
                 <Card sx={{ marginBottom: 2, paddingTop: 3 }}>
+                    <Typography
+                        align="center"
+                        component="div"
+                        sx={{
+                            marginTop: 4,
+                            marginBottom: 3,
+                            color: "red",
+                        }}
+                    >
+                        実名を登録しないでください！
+                    </Typography>
                     <div className="form-group row">
                         <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
                         <div className="col-md-6">
-                            <input id="name" type="text" className="form-control @error('name') is-invalid @enderror" name="name" required autocomplete="name" autofocus/>
+                            <input id="name" type="text" className="form-control" name="name" required autocomplete="name" autofocus/>
                         </div>
                     </div>
                         
@@ -51,7 +64,7 @@ function Admin() {
                         <label for="password" className="col-md-4 col-form-label text-md-right">Password</label>
                         
                         <div class="col-md-6">
-                            <input id="password" type="password" className="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"/>
+                            <input id="password" type="password" className="form-control" name="password" required autocomplete="new-password"/>
                         </div>
                     </div>
                     
