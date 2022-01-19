@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Comment;
 use App\Question;
 use App\Image;
+use App\Slack;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
