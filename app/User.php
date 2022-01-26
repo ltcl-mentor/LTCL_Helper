@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Question;
 use App\Student;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -45,6 +46,35 @@ class User extends Authenticatable
     public function questions()
     {
         return $this->belongsToMany('App\Question')->withPivot(['created_at'])->orderBy('pivot_created_at', 'desc');
+    }
+    
+    /**
+     * 質問作成者名取得
+     */
+    public static function getAuthorName($question_id)
+    {
+        $question = Question::find($question_id);
+        $author = self::find($question->user_id);
+        return $author->name;
+    }
+    
+    /**
+     * ログインユーザ情報取得
+     */
+    public static function getUser()
+    {
+        $user = Auth::user();
+        
+        if($user->is_admin !== "staff"){
+            $student = Student::firstWhere('user_id', $user->id);
+            if($student){
+                $user->entry = "20" . substr($student->password, 4, 2) . "年" . substr($student->password, 6, 2) . "月";
+            }
+        }
+        
+        $user->reply_count = Question::replyCheck();
+        
+        return $user;
     }
     
     /**

@@ -7,6 +7,7 @@ use App\Comment;
 use App\Question;
 use App\Image;
 use App\Slack;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
@@ -91,7 +92,11 @@ class CommentController extends Controller
         // データ作成者が受講生だった場合
         if(Auth::user()->is_admin === null){
             $message = "受講生によってコメントが入力されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $comment->question_id;
-            Slack::sendMessage($message);
+            Slack::sendMessage($message, "mentor");
+        // メンターだった場合
+        }elseif(Auth::user()->is_admin === "staff"){
+            $message = "@" . User::getAuthorName($comment->question_id) . "さん\nメンターによってコメントが入力されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/public/questions/" . $comment->question_id;
+            Slack::sendMessage($message, "student");
         }
         
         return ['id' => $comment->question_id];
@@ -103,9 +108,7 @@ class CommentController extends Controller
     public function update(Request $request, Comment $comment)
     {
         // コメントに関する更新処理
-        $input['comment'] = $request['comment'];
-        
-        $comment->fill($input);
+        $comment->comment = $request['comment'];
         
         $comment->save();
         
@@ -144,10 +147,14 @@ class CommentController extends Controller
         
         // Slackへの通知
         // データ作成者が受講生だった場合
-        if(Auth::user()->is_admin === null){
-            $message = "受講生によってコメントが更新されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $comment->question_id;
-            Slack::sendMessage($message);
-        }
+        // if(Auth::user()->is_admin === null){
+        //     $message = "受講生によってコメントが更新されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $comment->question_id;
+        //     Slack::sendMessage($message);
+        // // メンターだった場合
+        // }elseif(Auth::user()->is_admin === "staff"){
+        //     $message = "@" . User::getAuthorName($comment->question_id) . "さん\nメンターによってコメントが入力されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $comment->question_id;
+        //     Slack::sendMessage($message, "student");
+        // }
         
         return ['id' => $comment->question_id];
     }

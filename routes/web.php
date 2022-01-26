@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('react/weather', 'ReactController@getWeather'); // 今日の天気のデータ受け渡し
     Route::get('react/college/{year}/{month}/{date}', 'ReactController@getCollegeData'); // 校舎に関するデータ受け渡し
     Route::get('react/infos', 'ReactController@getInfos'); // お知らせのデータ受け渡し
-    Route::get('react/env', 'ReactController@getEnvData'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
+    Route::get('react/home', 'ReactController@getHomeData'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
     // Route::get('react/images/{question_id}', 'ReactController@getImages'); // 質問に関連する画像の受け渡し
     
     
@@ -135,10 +135,10 @@ Route::group(['middleware' => ['auth']], function () {
          */
         Route::get('react/all/questions', 'ReactController@getAllQuestions'); // 全質問受け渡し
         Route::get('react/question/{question}', 'ReactController@getQuestion'); // 個別質問データの受け渡し
-        Route::get('react/questions/counts', 'ReactController@getQuestionCounts'); // 未解決でメンターまたは受講生のコメント入力待ちの件数受け渡し
-        Route::get('react/questions/{document}', 'LinkController@getQuestionsFromDocument'); // 単体記事に関する質問データの受け渡し
+        Route::get('react/questions/counts', 'ReactController@getQuestionYetCounts'); // 未解決でメンターまたは受講生のコメント入力待ちの件数受け渡し
         Route::get('react/questions/curriculum', 'ReactController@getCurriculumQuestions'); // カリキュラム範囲の質問受け渡し
         Route::get('react/questions/portfolio', 'ReactController@getPortfolioQuestions'); // 成果物範囲の質問受け渡し
+        Route::get('react/questions/{document}', 'LinkController@getQuestionsFromDocument'); // 単体記事に関する質問データの受け渡し
         Route::get('react/questions/mentor_yet/{category}', 'ReactController@getMentorYetCommentQuestions'); // カテゴリーに応じたメンターコメント待ちの質問受け渡し
         Route::get('react/questions/student_yet/{category}', 'ReactController@getStudentYetCommentQuestions'); // カテゴリーに応じた受講生コメント待ちの質問受け渡し
         Route::get('react/document/{document}', 'ReactController@getDocument'); // 個別記事データの受け渡し

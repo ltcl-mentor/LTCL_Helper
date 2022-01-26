@@ -5,7 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Document;
 use App\Image;
+use App\Comment;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Question extends Model
 {
@@ -28,6 +30,22 @@ class Question extends Model
     public function users()
     {
         return $this->belongsToMany('App\User')->withTimestamps();
+    }
+    
+    /**
+     * ログインユーザの質問一覧取得
+     */
+    public static function getMyQuestions()
+    {
+        $my_questions = self::where('user_id', Auth::id())->get();
+        
+        foreach($my_questions as $question){
+            $student_yet_comments = Comment::where('question_id', $question->id)->where('is_mentor_commented', true)->get();
+            
+            $question->reply = count($student_yet_comments) !== 0 ? true : false;
+        }
+        
+        return $my_questions;
     }
     
     /**
@@ -149,5 +167,37 @@ class Question extends Model
         }
         
         return $results->orderBy('question', 'asc')->get();
+    }
+    
+    /**
+     * 受講生がコメントに未返信の質問の件数取得
+     */
+    public static function replyCheck()
+    {
+        $unresolved_questions = Self::where('user_id', Auth::id())->where('is_resolved', false)->get();
+        
+        $student_yet_comment_count = 0;
+        
+        foreach($unresolved_questions as $question){
+            $student_yet_comments = Comment::where('question_id', $question->id)->where('is_mentor_commented', true)->get();
+            
+            $student_yet_comment_count += count($student_yet_comments);
+        }
+        
+        return $student_yet_comment_count;
+    }
+    
+    /**
+     * 質問の解決率取得
+     */
+    public static function getAchievement()
+    {
+        // 公開済みの質問件数
+        $question_checked_count = Question::where('check', true)->count();
+        
+        // 後悔済みかつ解決済み質問件数
+        $question_resolved_count = Question::where('check', true)->where('is_resolved', true)->count();
+        
+        return ($question_resolved_count/$question_checked_count) * 100;
     }
 }

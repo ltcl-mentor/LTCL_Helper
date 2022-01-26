@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Create from './create';
 import Infos from './infos';
+import Typography from '@material-ui/core/Typography';
 
 /**
  * お知らせ
@@ -19,6 +20,17 @@ function Information(props) {
     
     return (
         <div>
+            <Typography 
+                variant="h6"
+                component="div"
+                align="center"
+                sx={{
+                    paddingTop: 3,
+                }}
+            >
+                現在の質問解決率：<font color="green">{ props.achievement }</font>%
+            </Typography>
+            
             { create_btn }
             
             <Infos

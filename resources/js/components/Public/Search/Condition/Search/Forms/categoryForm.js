@@ -8,14 +8,18 @@ import FormControl from '@material-ui/core/FormControl';
  * カテゴリー選択肢
  */
 function Category(props) {
+    const [category, setCategory] = useState(0);
+    
     const handleCategory = (event) => {
-        props.setCategory(Number(event.target.value));
+        setCategory(Number(event.target.value));
     };
         
     return (
         <div className="container">
+            { props.setCategory(category) }
+            
             <FormControl component="fieldset">
-                <RadioGroup row aria-label="category" name="category" value={ props.category } onChange={ (event) => handleCategory(event) }>
+                <RadioGroup row aria-label="category" name="category" value={ category } onChange={ (event) => handleCategory(event) }>
                     <FormControlLabel value={0} control={<Radio />} label="カリキュラム" />
                     <FormControlLabel value={1} control={<Radio />} label="成果物" />
                 </RadioGroup>

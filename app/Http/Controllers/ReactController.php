@@ -47,33 +47,7 @@ class ReactController extends Controller
      */
     public function getQuestion(Question $question)
     {
-        // ローカルで真偽値がきちんと出力されず0か1になってしまうので矯正
-        $question->is_resolved === 1 ? $question->is_resolved = true : $question->is_resolved = false;
-        $question->check === 1 ? $question->check = true : $question->check = false;
-
-        $main_comments = Comment::where('question_id', $question->id)->where('comment_id', 0)->get();
-
-        if($main_comments){
-            $sub_comments = [];
-            foreach($main_comments as $main_comment){
-                // ローカルで真偽値がきちんと出力されず0か1になってしまうので矯正
-                $main_comment->correctBoolean();
-            
-                $comments = Comment::where('comment_id', $main_comment->id)->get();
-                
-                foreach($comments as $comment){
-                    // ローカルで真偽値がきちんと出力されず0か1になってしまうので矯正
-                    $comment->correctBoolean();
-                }
-                
-                $sub_comments[$main_comment->id] = $comments;
-            }
-        }
-
-        $question['main_comments'] = $main_comments;
-        $question['sub_comments'] = $sub_comments;
-
-        return $question;
+        return Comment::setComment($question);
     }
     
     /**
@@ -82,53 +56,9 @@ class ReactController extends Controller
     public function getCheckedQuestion(Question $question)
     {
         if($question->check == true){
-            // ローカルで真偽値がきちんと出力されず0か1になってしまうので矯正
-            $question->is_resolved === 1 ? $question->is_resolved = true : $question->is_resolved = false;
-            
-            // 1. メインコメント処理
-            $main_comments = Comment::where('question_id', $question->id)->where('comment_id', 0)->orderBy('created_at', 'asc')->get();
-            
-            if($main_comments){
-                $sub_comments = [];
-                foreach($main_comments as $key => $main_comment){
-                    // ローカルで真偽値がきちんと出力されず0か1になってしまうので矯正
-                    $main_comment->correctBoolean();
-                    
-                    // コメントやり取りの主体となる受講生の特定
-                    if($key === 0){
-                        $target_student = $question->user_id;
-                    }else{
-                        // メインコメントの投稿者が受講生か判別
-                        if(!($main_comment->is_staff)){
-                            $target_student = $main_comment->user_id;
-                        }
-                    }
-                    
-                    
-                    // 2. リプライコメント処理
-                    $comments = Comment::where('comment_id', $main_comment->id)->orderBy('created_at', 'asc')->get();
-                    
-                    foreach($comments as $comment){
-                        // ローカルで真偽値がきちんと出力されず0か1になってしまうので矯正
-                        $comment->correctBoolean();
-                        
-                        // メインコメントのからコメントやり取りの主体となる受講生の特定ができていない場合
-                        if(!($target_student)){
-                            // リプライコメントの投稿者が受講生か判別
-                            if(User::isStudent($comment->user_id)){
-                                $target_student = $comment->user_id;
-                            }
-                        }
-                    }
-                    
-                    $sub_comments[$main_comment->id] = $comments;
-                    $main_comment->target_student = $target_student;
-                }
-            }
-            $question['main_comments'] = $main_comments;
-            $question['sub_comments'] = $sub_comments;
-            return $question;
+            return Comment::setComment($question);
         }
+        
         return null;
     }
     
@@ -182,9 +112,9 @@ class ReactController extends Controller
         $mentor_yet_comment_questions = [];
         
         foreach($unresolved_questions as $question){
-            $mentor_yet_comments = Comment::where('question_id', $question->id)->where('is_mentor_commented', false)->get();
+            $mentor_yet_comment_counts = Comment::where('question_id', $question->id)->where('is_mentor_commented', false)->count();
             
-            if(count($mentor_yet_comments) !== 0){
+            if($mentor_yet_comment_counts !== 0){
                 array_push($mentor_yet_comment_questions, $question);
             }
         }
@@ -215,7 +145,7 @@ class ReactController extends Controller
     /**
      * 未解決でメンターまたは受講生のコメント入力待ちの件数受け渡し
      */
-    public function getQuestionCounts()
+    public function getQuestionYetCounts()
     {
         $unresolved_questions = Question::where('is_resolved', false)->get();
         
@@ -238,15 +168,7 @@ class ReactController extends Controller
      */
     public function getMyQuestions()
     {
-        $my_questions = Question::where('user_id', Auth::id())->get();
-        
-        foreach($my_questions as $question){
-            $student_yet_comments = Comment::where('question_id', $question->id)->where('is_mentor_commented', true)->get();
-            
-            $question->reply = count($student_yet_comments) !== 0 ? true : false;
-        }
-        
-        return $my_questions;
+        return Question::getMyQuestions();
     }
     
     // /**
@@ -266,7 +188,7 @@ class ReactController extends Controller
      */
     public function getAlldocuments()
     {
-        return Document::getCorrectBooleanDocuments();
+        return Document::get();
     }
     
     /**
@@ -274,7 +196,7 @@ class ReactController extends Controller
      */
     public function getDocument(Document $document)
     {
-        return $document->correctBoolean();
+        return $document;
     }
     
     /**
@@ -282,11 +204,7 @@ class ReactController extends Controller
      */
     public function getRelatedDocuments(Question $question)
     {
-        $documents = $question->documents()->get();
-        foreach($documents as $document){
-            $document->correctBoolean();
-        }
-        return $documents;
+        return $question->documents()->get();
     }
     
     
@@ -326,28 +244,7 @@ class ReactController extends Controller
      */
     public function getUser()
     {
-        $user = Auth::user();
-        
-        if($user->is_admin !== "staff"){
-            $student = Student::firstWhere('user_id', $user->id);
-            if($student){
-                $user->entry = "20" . substr($student->password, 4, 2) . "年" . substr($student->password, 4, 2) . "月";
-            }
-        }
-        
-        $unresolved_questions = Question::where('user_id', Auth::id())->where('is_resolved', false)->get();
-        
-        $student_yet_comment_count = 0;
-        
-        foreach($unresolved_questions as $question){
-            $student_yet_comments = Comment::where('question_id', $question->id)->where('is_mentor_commented', true)->get();
-            
-            $student_yet_comment_count += count($student_yet_comments);
-        }
-        
-        $user->reply_count = $student_yet_comment_count;
-        
-        return $user;
+        return User::getUser();
     }
     
     
@@ -393,8 +290,9 @@ class ReactController extends Controller
     /**
      * Google Map APIのAPIキーの受け渡し
      */
-    public function getEnvData()
+    public function getHomeData()
     {
-        return ["key" => env('GoogleMapsKey'), "zoom" => env('ZoomLinksNote')];
+        $achievement = Question::getAchievement();
+        return ["key" => env('GoogleMapsKey'), "zoom" => env('ZoomLinksNote'), "achievement" => $achievement];
     }
 }
