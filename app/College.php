@@ -16,24 +16,24 @@ class College extends Model
         $datas = self::getCollegeApiData($year, $month);
         
         // 開校・閉館時間の代入
-        $college_datas['start'] = $datas['values'][$date][2] ?: null;
-        $college_datas['close'] = $datas['values'][$date][3] ?: null;
+        $college_datas['start'] = $datas['values'][$date][3] ?: null;
+        $college_datas['close'] = $datas['values'][$date][4] ?: null;
         
         // 校舎出勤メンターの代入
-        if($datas['values'][$date][18] !== ""){
-            $college_datas['staff'] = explode("\n", $datas['values'][$date][18], -1);
+        if($datas['values'][$date][5] !== ""){
+            $college_datas['staff'] = explode("\n", $datas['values'][$date][5], -1);
         }else{
             $college_datas['staff'][] = "本日校舎に出勤するメンターはいません。";
         }
         
         // オンライン自習室担当の代入
-        if(count($datas['values'][$date]) < 27){
+        if(count($datas['values'][$date]) < 6){
             $college_datas['zoom'][] = "データ取得失敗。\nスタッフにご確認ください。";
-        }elseif(count($datas['values'][$date]) === 27){
-            $college_datas['zoom'][] = $datas['values'][$date][27] ?: null;
+        }elseif($datas['values'][$date][6] === "なし" && $datas['values'][$date][7] === "なし"){
+            $college_datas['zoom'][] = "本日オンライン質問部屋はありません。\n質問のある方はSlackにて出勤メンターへ連絡してください。";
         }else{
-            $college_datas['zoom'][] = $datas['values'][$date][27] ?: null;
-            $college_datas['zoom'][] = $datas['values'][$date][28] ?: null;
+            $college_datas['zoom'][] = $datas['values'][$date][6] ?: null;
+            $college_datas['zoom'][] = $datas['values'][$date][7] ?: null;
         }
         
         return $college_datas;
