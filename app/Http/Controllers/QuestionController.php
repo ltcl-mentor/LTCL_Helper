@@ -118,8 +118,7 @@ class QuestionController extends Controller
      */
     public function resolved(Question $question)
     {
-        $question->is_resolved = true;
-        $question->save();
+        $question->fill(['is_resolved' => true])->save();
         return $question;
     }
     
@@ -256,8 +255,7 @@ class QuestionController extends Controller
      */
     public function check(Question $question)
     {
-        $question['check'] = true;
-        $question->save();
+        $question->fill(['check' => true])->save();
         return $question;
     }
     
@@ -266,8 +264,7 @@ class QuestionController extends Controller
      */
     public function uncheck(Question $question)
     {
-        $question['check'] = false;
-        $question->save();
+        $question->fill(['check' => false])->save();
         return $question;
     }
     
