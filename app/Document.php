@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Question;
+use App\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Document extends Model
@@ -63,6 +64,22 @@ class Document extends Model
                 $deleted_document->forceDelete();
             }
         }
+    }
+    
+    /**
+     * 参考記事作成者情報を追加
+     */
+    public function setAuthor()
+    {
+        $author = User::find($this->user_id);
+        
+        if($author){
+            $this->author = $author->name;
+        }else{
+            $this->author = "削除済みユーザー";
+        }
+        
+        return $this;
     }
     
     /**

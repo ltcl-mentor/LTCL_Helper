@@ -97,7 +97,7 @@ function Show() {
                 category={ categories[question.category] }
                 topic={ topics[question.topic] }
                 curriculum_number={ question.curriculum_number }
-                author={ question.user_id }
+                author={ question.author }
                 check={ question.check }
                 question={ question.question }
                 comment={ question.comment }

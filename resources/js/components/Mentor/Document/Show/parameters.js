@@ -10,28 +10,6 @@ import Paper from '@material-ui/core/Paper';
  * 記事の基本情報
  */
 function Parameters(props) {
-    const [staffs, setStaffs] = useState([]);
-    
-    useEffect(() => {
-        axios
-            .get("/react/all/staffs")
-            .then(response => {
-                setStaffs(response.data);
-            }).catch(error => {
-                console.log(error);
-            });
-    }, []);
-    
-    let author;
-    if (props.author === 0) {
-        author = "削除済みユーザー";
-    } else {
-        author = staffs.map((staff) => {
-            if (staff.id === props.author) {
-                return staff.name;
-            }
-        });
-    }
     
     let targets = "";
     props.targets.map((target) => {
@@ -65,7 +43,7 @@ function Parameters(props) {
                     
                     <TableRow>
                         <TableCell align="center" component="th" scope="row">作成者</TableCell>
-                        <TableCell align="center">{ author }</TableCell>
+                        <TableCell align="center">{ props.author }</TableCell>
                     </TableRow>
                 </TableBody>
             </Table>

@@ -11,17 +11,6 @@ import Paper from '@material-ui/core/Paper';
  */
 function Parameters(props) {
     
-    let author;
-    if (props.author === 0) {
-        author = "削除済みユーザー";
-    } else {
-        author = props.staffs.map((staff) => {
-            if (staff.id === props.author) {
-                return staff.name;
-            }
-        });
-    }
-    
     let isPublic;
     if (props.check === 0) {
         isPublic = "非公開";
@@ -50,7 +39,7 @@ function Parameters(props) {
                     
                     <TableRow>
                         <TableCell align="center" component="th" scope="row">作成者</TableCell>
-                        <TableCell align="center">{ author }</TableCell>
+                        <TableCell align="center">{ props.author }</TableCell>
                     </TableRow>
                 
                     <TableRow>

@@ -78,7 +78,7 @@ function Document() {
                     doc.all ? "全員" : false,
                 ] }
                 link={ doc.link }
-                author={ doc.user_id }
+                author={ doc.author }
             />
             
             <div>

@@ -47,7 +47,9 @@ class ReactController extends Controller
      */
     public function getQuestion(Question $question)
     {
-        return Comment::setComment($question);
+        $questionWithAuthor = $question->setAuthor();
+        
+        return Comment::setComment($questionWithAuthor);
     }
     
     /**
@@ -196,7 +198,7 @@ class ReactController extends Controller
      */
     public function getDocument(Document $document)
     {
-        return $document;
+        return $document->setAuthor();
     }
     
     /**

@@ -10,14 +10,31 @@ import Divider from '@material-ui/core/Divider';
  * 校舎情報(データ表示)
  */
 function Info(props) {
+    const [timeout, setTimeout] = useState(false);
+    
+    useEffect(() => {
+        if (props.resError) {
+            setTimeout(true);
+        } else {
+            setTimeout(false);
+        }
+    },[props.resError]);
     
     let info;
     if (!(props.isDateClicked)) {
-        info = (
-            <Typography align="center" variant="h7" component="div" sx={{ paddingTop: 2, paddingBottom: 5 }}>
-                データの読み込み中です。
-            </Typography>
-        );
+        if (timeout) {
+            info = (
+                <Typography align="center" variant="h7" component="div" sx={{ paddingTop: 2, paddingBottom: 5 }}>
+                    データの読み込みに失敗しました。再度お試しいただくか、メンターに直接ご確認ください。
+                </Typography>
+            );
+        } else {
+            info = (
+                <Typography align="center" variant="h7" component="div" sx={{ paddingTop: 2, paddingBottom: 5 }}>
+                    データの読み込み中です。
+                </Typography>
+            );
+        }
     } else {
         info = (
             <Table sx={{ minWidth: 370, paddingBottom: 5 }} aria-label="simple table">

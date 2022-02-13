@@ -13,26 +13,33 @@ function Calendar(props) {
     const [date, setDate] = useState(new Date());
     const [collegeInfo, setCollegeInfo] = useState([]);
     const [isDateClicked, setIsDateClicked] = useState(false);
+    const [resError, setResError] = useState(false);
     const today = new Date();
     
     useEffect(() => {
-        // 指定された日付の校舎情報取得
-        axios
-            .get(`/react/college/${ date.getFullYear() }/${ date.getMonth() + 1 }/${ date.getDate() }`)
-            .then(response => {
-                setCollegeInfo(response.data);
-                setIsDateClicked(true);
-            }).catch(error => {
-                console.log(error);
-            });
+        setResError(false);
+        
+        if ( (date.getMonth() >= today.getMonth() - 1) && (date.getMonth() <= today.getMonth()) ) {
+            // 指定された日付の校舎情報取得
+            axios
+                .get(`/react/college/${ date.getFullYear() }/${ date.getMonth() + 1 }/${ date.getDate() }`)
+                .then(response => {
+                    setCollegeInfo(response.data);
+                    setIsDateClicked(true);
+                }).catch(error => {
+                    setResError(true);
+                    console.log(error);
+                });
+        }
     }, [date]);
     
     let info;
-    if ( (date.getMonth() >= today.getMonth() - 1) && (date.getMonth() <= today.getMonth() + 1) ) {
+    if ( (date.getMonth() >= today.getMonth() - 1) && (date.getMonth() <= today.getMonth()) ) {
         info = (
             <Info 
                 collegeInfo={ collegeInfo }
                 isDateClicked={ isDateClicked }
+                resError={ resError }
                 zoom_link={ props.zoom_link }
             />
         );
@@ -40,7 +47,7 @@ function Calendar(props) {
     } else {
         info = (
             <Typography align="center" variant="h7" component="div" sx={{ paddingTop: 2 }}>
-                確認可能なのは先月、今月、来月の情報のみです。<br />
+                確認可能なのは先月、今月の情報のみです。<br />
                 もう一度日付を選択し直してください。
             </Typography>
         );

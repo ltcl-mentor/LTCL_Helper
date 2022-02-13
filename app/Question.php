@@ -195,9 +195,33 @@ class Question extends Model
         // 公開済みの質問件数
         $question_checked_count = Question::where('check', true)->count();
         
-        // 後悔済みかつ解決済み質問件数
+        // 公開済みの質問が０件の場合
+        if ($question_checked_count === 0)
+        {
+            return 0;
+        }
+        
+        // 公開済みかつ解決済み質問件数
         $question_resolved_count = Question::where('check', true)->where('is_resolved', true)->count();
         
-        return ($question_resolved_count/$question_checked_count) * 100;
+        $ratio = $question_resolved_count/$question_checked_count * 100;
+        
+        return round($ratio ,0);
+    }
+    
+    /**
+     * 質問作成者情報を追加
+     */
+    public function setAuthor()
+    {
+        $author = User::find($this->user_id);
+        
+        if($author){
+            $this->author = $author->name;
+        }else{
+            $this->author = "削除済みユーザー";
+        }
+        
+        return $this;
     }
 }

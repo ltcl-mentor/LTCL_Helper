@@ -77,10 +77,14 @@ function Edit() {
             });
     }, []);
     
-    // カリキュラム番号の初期値が変更されたvategory、topicと対応していなくても
+    let load_count;
+    // カリキュラム番号の初期値が変更されたcategory、topicと対応していなくても
     // 更新ができてしまうのでその対策
     useEffect(() => {
-        setCurriculumNumber('');
+        if (load_count > 0) {
+            setCurriculumNumber('');
+        }
+        load_count += 1;
     }, [category, topic]);
     
     // ステッパーを次に進める
@@ -235,11 +239,11 @@ function Edit() {
                             3. 該当カリキュラム番号の選択
                         </Typography>
                     
-                        { curriculum_number_validation_error === 1 && <p className="errorMassage">カリキュラム番号を選択してください。</p> }
-                    
                         <CurriculumNumber
+                            topic={ topic }
                             setCurriculumNumber={ setCurriculumNumber }
                             curriculum_number={ curriculum_number }
+                            old_topic={ old_data.topic }
                             old_curriculum_number={ old_data.curriculum_number }
                             curriculum_number_validation_error={ curriculum_number_validation_error }
                             curriculum_numbers={ curriculum_numbers[Number(category)][Number(topic)] }

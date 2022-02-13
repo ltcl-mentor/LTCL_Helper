@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Question;
 
 class Comment extends Model
 {
@@ -17,6 +18,15 @@ class Comment extends Model
     //         $this->is_staff = false;
     //     }
     // }
+    
+    /**
+     * リレーション
+     */
+    public function getQestionTitle()
+    {
+        $question = Question::find($this->question_id);
+        return $question->title;
+    }
     
     /**
      * 個別質問へのコメント付加処理

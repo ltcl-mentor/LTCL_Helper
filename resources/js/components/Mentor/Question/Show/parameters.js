@@ -11,48 +11,6 @@ import Paper from '@material-ui/core/Paper';
  * （カテゴリー、トピック、作成者など）
  */
 function Parameters(props) {
-    const [staffs, setStaffs] = useState([]);
-    const [students, setStudents] = useState([]);
-    
-    // 画面描画時に実行
-    useEffect(() => {
-        // 管理者一覧取得
-        axios
-            .get("/react/all/staffs")
-            .then(response => {
-                setStaffs(response.data);
-            }).catch(error => {
-                console.log(error);
-            });
-        
-        // 受講生一覧取得
-        axios
-            .get("/react/all/students")
-            .then(response => {
-                setStudents(response.data);
-            }).catch(error => {
-                console.log(error);
-            });
-    }, []);
-    
-    let author;
-    if (props.user_id === 0) {
-        author = "削除済みユーザー";
-    } else {
-        author = staffs.map((staff) => {
-            if (staff.id === props.user_id) {
-                return staff.name;
-            }
-        });
-        
-        if (!(author)) {
-            author = students.map((student) => {
-                if (student.id === props.user_id) {
-                    return student.name;
-                }
-            });
-        }
-    }
     
     return (
         <Paper sx={{ marginBottom: 2 }}>
@@ -75,7 +33,7 @@ function Parameters(props) {
                     
                     <TableRow>
                         <TableCell align="center" component="th" scope="row">作成者</TableCell>
-                        <TableCell align="center">{ author }</TableCell>
+                        <TableCell align="center">{ props.author }</TableCell>
                     </TableRow>
                 
                     <TableRow>
