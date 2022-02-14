@@ -47,7 +47,7 @@ function Create() {
             ["6-1-1", "6-2-1"],
             ["7-1-1"]
         ],
-        ["成果物"]
+        [["成果物"]]
     ];
     
     // 画面幅を随時取得
@@ -67,9 +67,16 @@ function Create() {
             }
             
             // カテゴリーとトピックに対して適切なカリキュラム番号が選択されているか
-            if (!(curriculum_numbers[Number(category)][Number(topic)].includes(curriculum_number))) {
-                setCurriculumNumberValidationError(1);
-                return false;
+            if (category === 0) {
+                if (!(curriculum_numbers[Number(category)][Number(topic)].includes(curriculum_number))) {
+                    setCurriculumNumberValidationError(1);
+                    return false;
+                }
+            } else if (category === 1) {
+                if (!(curriculum_numbers[1][0].includes(curriculum_number))) {
+                    setCurriculumNumberValidationError(1);
+                    return false;
+                }
             }
         } else if (step === 1) {
             // タイトルのバリデーション
