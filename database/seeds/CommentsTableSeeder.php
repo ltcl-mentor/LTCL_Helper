@@ -65,7 +65,7 @@ class CommentsTableSeeder extends Seeder
         DB::table('comments')->insert([
             'comment' => "placeholderは入力欄に入力して欲しい情報の具体例や内容を表示するために用い、valueは最初から入力欄に初期値を入力した状態で表示したい時に用います。\n"
                         ."いずれにせよ入力欄に文字が表示されますが、placeholderは入力値ではないのでデータの登録時にその内容が反映されることはなく、反対にvalueで書いた内容は特に変更を加えずにフォームを送信すればそのまま入力データとして登録されます。\n"
-                        ."oldメソッドに関しては登録時のデータの動きなど細かい理解が必要になるので下のの参考記事を読んでみてください。",
+                        ."oldメソッドに関しては登録時のデータの動きなど細かい理解が必要になるので下の参考記事を読んでみてください。",
             'question_id' => 6,
             'user_id' => 1,
             'is_staff' => true,
@@ -75,7 +75,7 @@ class CommentsTableSeeder extends Seeder
             'updated_at' => new DateTime(),
         ]);
         DB::table('comments')->insert([
-            'comment' => "ディレクトリに関して復習しましょう。この場合blog/blogというようにblogディレクトリの中にサ再度blogディレクトリを作成してしまっています。削除しましょう。",
+            'comment' => "ディレクトリに関して復習しましょう。この場合blog/blogというようにblogディレクトリの中に再度blogディレクトリを作成してしまっています。削除しましょう。",
             'question_id' => 7,
             'user_id' => 1,
             'is_staff' => true,
@@ -155,7 +155,7 @@ class CommentsTableSeeder extends Seeder
             'comment' => "Laravelのアプリが生成するURLがhttpsではなくhttpになってしまうことで起こるエラーです。\n"
                         ."対策として、App\Providers\AppServiceProvider クラスの boot() に\n"
                         ."\$this->app['request']->server->set('HTTPS','on');\n"
-                        ."をセットすることで解決できます。Googleでプレビューしている生徒さんはご確認ください！",
+                        ."をセットすることで解決できます。Google　Chromeでプレビューしている生徒さんはご確認ください！",
             'question_id' => 14,
             'user_id' => 1,
             'is_staff' => true,
@@ -191,7 +191,7 @@ class CommentsTableSeeder extends Seeder
             'updated_at' => new DateTime(),
         ]);
         DB::table('comments')->insert([
-            'comment' => "ファイルを一度保存してからリロードしてください",
+            'comment' => "ファイルをきちんと保存できているか確認し、リロードしてみてください。",
             'question_id' => 17,
             'user_id' => 1,
             'is_staff' => true,
@@ -235,9 +235,8 @@ class CommentsTableSeeder extends Seeder
             'updated_at' => new DateTime(),
         ]);
         DB::table('comments')->insert([
-            'comment' => "一度PHP実行環境のセットアップを最初からやり直しましょう。\n"
-                        ."多くの方がターミナル上でのファイル編集の部分で躓いているようなので、3-1で学習したVimの操作方法をしっかり復習をしてください。\n"
-                        ."Normalモード、Insertモード、Visualモードを使い分けられるようにしましょう！",
+            'comment' => "rootユーザーから新規ユーザー(dbuser)に権限を与えなくてはいけないので、rootユーザーでDBに入り直してから実行してください。\n"
+                        ."また、rootユーザーと新規ユーザーの違いを復習しておきましょう。",
             'question_id' => 21,
             'user_id' => 1,
             'is_staff' => true,
@@ -247,8 +246,7 @@ class CommentsTableSeeder extends Seeder
             'updated_at' => new DateTime(),
         ]);
         DB::table('comments')->insert([
-            'comment' => "rootユーザーから新規ユーザー(dbuser)に権限を与えなくてはいけないので、rootユーザーでDBに入り直してから実行してください。\n"
-                        ."また、rootユーザーと新規ユーザーの違いを復習しておきましょう。",
+            'comment' => "IDEの対象行に出ている赤バツにカーソルを合わせてエラー内容を確認しましょう。【syntax error】はプログラミングの構文エラーを指します。",
             'question_id' => 22,
             'user_id' => 1,
             'is_staff' => true,
@@ -258,7 +256,7 @@ class CommentsTableSeeder extends Seeder
             'updated_at' => new DateTime(),
         ]);
         DB::table('comments')->insert([
-            'comment' => "IDEの対象行に出ている赤バツにカーソルを合わせてエラー内容を確認しましょう。【syntax error】はプログラミングの構文エラーを指します。",
+            'comment' => "シーダのファイル名クラス名が正しく指定されているか確認しましょう。\nDatabaseSeeder.phpで呼び出すクラス名は〇〇TableSeederになります。",
             'question_id' => 23,
             'user_id' => 1,
             'is_staff' => true,
@@ -268,7 +266,7 @@ class CommentsTableSeeder extends Seeder
             'updated_at' => new DateTime(),
         ]);
         DB::table('comments')->insert([
-            'comment' => "シーダのファイル名クラス名が正しく指定されているか確認しましょう。\nDatabaseSeeder.phpで呼び出すクラス名は〇〇TableSeederになります。",
+            'comment' => "今回の場合モデル内のメソッドが不完全であったためコントローラー内で返り値を受け取れていなかったようです。\nメソッドの使い方を復習しましょう。解答は写真に記載してあります。",
             'question_id' => 24,
             'user_id' => 1,
             'is_staff' => true,
@@ -278,28 +276,8 @@ class CommentsTableSeeder extends Seeder
             'updated_at' => new DateTime(),
         ]);
         DB::table('comments')->insert([
-            'comment' => "今回の場合モデル内のメソッドが不完全であったためコントローラー内で返り値をを受け取れていなかったようです。\nメソッドの使い方を復習しましょう。解答は写真に記載してあります。",
-            'question_id' => 25,
-            'user_id' => 1,
-            'is_staff' => true,
-            'comment_id' => 0,
-            'is_mentor_commented' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-        ]);
-        DB::table('comments')->insert([
-            'comment' => "indexはpostsテーブルの情報を用いたビューになるので、https://〜〜〜/posts にしておいた方が、テーブルが増えた時にわかりやすいかな、と思います。ですが、laravelを起動したときにアクセスされるのは、https://〜〜〜/ になります(いわゆるトップページ)。なので、起動するたび毎回URLの末尾にpostsを打つ必要があり少し面倒かなとも感じます。ご自分でindexが表示されるURLをわかっているならば、使いやすいほうでいいと思います。",
-            'question_id' => 26,
-            'user_id' => 1,
-            'is_staff' => true,
-            'comment_id' => 0,
-            'is_mentor_commented' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-        ]);
-        DB::table('comments')->insert([
             'comment' => "パスワードを入力するときは画面に文字はでません。そのまま正しいパスワードを入力し、Enterを押せばログインできます。",
-            'question_id' => 27,
+            'question_id' => 25,
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
@@ -311,27 +289,7 @@ class CommentsTableSeeder extends Seeder
             'comment' => "No packages marked for updateとはアップデートできるパッケージがないとの意味になります。\n"
                         ."よってこれはエラーではなく、すでにgitが最新版になっているということなのでそのまま進めて構いません。\n"
                         ."エラー文をしっかり読むまたは、検索する癖をつけましょう。",
-            'question_id' => 28,
-            'user_id' => 1,
-            'is_staff' => true,
-            'comment_id' => 0,
-            'is_mentor_commented' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-        ]);
-        DB::table('comments')->insert([
-            'comment' => "DBにデータが複数入っていない可能性があります。Mysqlに入ってデータを確認しましょう。",
-            'question_id' => 29,
-            'user_id' => 1,
-            'is_staff' => true,
-            'comment_id' => 0,
-            'is_mentor_commented' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-        ]);
-        DB::table('comments')->insert([
-            'comment' => "画像のように下にシートを追加するとlink選択時シート名が出てきます。",
-            'question_id' => 30,
+            'question_id' => 26,
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
@@ -346,7 +304,43 @@ class CommentsTableSeeder extends Seeder
                             ."②クラス内の記述\n"
                             ."③ファイルが保存されているか\n"
                         ."です。",
-            'question_id' => 31,
+            'question_id' => 27,
+            'user_id' => 1,
+            'is_staff' => true,
+            'comment_id' => 0,
+            'is_mentor_commented' => true,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        DB::table('comments')->insert([
+            'comment' => "アプリプレビュー時、cloud9特有のエラーが起きてしまうことがあるようです。解決方法として下記の記事の方法を実践してください。",
+            'question_id' => 28,
+            'user_id' => 1,
+            'is_staff' => true,
+            'comment_id' => 0,
+            'is_mentor_commented' => true,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        DB::table('comments')->insert([
+            'comment' => "次の点を確認しましょう。\n"
+                        ."①viewのファイル名正しいか\n"
+                        ."②routeを記載する順番が正しいか\n"
+                        ."③コントローラーでviewに必要なデータが渡せているか(with()のところ)④<a>タグないのURLが正しいか",
+            'question_id' => 29,
+            'user_id' => 1,
+            'is_staff' => true,
+            'comment_id' => 0,
+            'is_mentor_commented' => true,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        DB::table('comments')->insert([
+            'comment' => "エラー分ではpostsフォルダのeditというファイルが見つからないと言われているので、次の点を確認しましょう。\n"
+                        ."①viewの階層は正しいか\n"
+                        ."②コントローラー内のview()が正しいURLを参照しているか\n"
+                        ."③viewのファイル名が正しいか",
+            'question_id' => 30,
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
@@ -360,43 +354,7 @@ class CommentsTableSeeder extends Seeder
                         ."②IAMユーザーにS3へのアクセス権が割り振られているか\n"
                         ."③config/filesystems.php内の記述は正しいか\n"
                         ."④S3のバケットにおいてアクセス権限を全てオフにしているか",
-            'question_id' => 1,
-            'user_id' => 1,
-            'is_staff' => true,
-            'comment_id' => 0,
-            'is_mentor_commented' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-        ]);
-        DB::table('comments')->insert([
-            'comment' => "アプリプレビュー時、cloud9特有のエラーが起きてしまうことがあるようです。解決方法として下記の記事の方法を実践してください。",
-            'question_id' => 32,
-            'user_id' => 1,
-            'is_staff' => true,
-            'comment_id' => 0,
-            'is_mentor_commented' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-        ]);
-        DB::table('comments')->insert([
-            'comment' => "次の点を確認しましょう。\n"
-                        ."①viewのファイル名正しいか\n"
-                        ."②routeを記載する順番が正しいか\n"
-                        ."③コントローラーでviewに必要なデータが渡せているか(with()のところ)④<a>タグないのURLが正しいか",
-            'question_id' => 33,
-            'user_id' => 1,
-            'is_staff' => true,
-            'comment_id' => 0,
-            'is_mentor_commented' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-        ]);
-        DB::table('comments')->insert([
-            'comment' => "次の点を確認しましょう。\n"
-                        ."①viewの階層は正しいか\n"
-                        ."②コントローラー内のview()が正しいURLを参照しているか\n"
-                        ."③viewのファイル名が正しいか",
-            'question_id' => 34,
+            'question_id' => 31,
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
@@ -406,69 +364,41 @@ class CommentsTableSeeder extends Seeder
         ]);
         DB::table('comments')->insert([
             'comment' => "419エラーはLaravelのpost通信エラーになります。\nこの場合フォーム内でのCSRFトークンの記述忘れが考えられるので、確認してみましょう。",
+            'question_id' => 32,
+            'user_id' => 1,
+            'is_staff' => true,
+            'comment_id' => 0,
+            'is_mentor_commented' => true,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        DB::table('comments')->insert([
+            'comment' => "Laravelのpプロジェクト作成時にバージョンを指定しないと最新のバージョン8で作成されてしまいます。\nバージョン８の場合、メソッドやコードの書き方がカリキュラムのものと異なる場合があるためバージョン6をお勧めします。",
+            'question_id' => 33,
+            'user_id' => 1,
+            'is_staff' => true,
+            'comment_id' => 0,
+            'is_mentor_commented' => true,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        DB::table('comments')->insert([
+            'comment' => "linkタグでcssファイルの参照がうまくできていない可能性があります。\nhtmlファイルに対してcssファイルがどの階層にあるのか確認し、パスを修正しましょう。",
+            'question_id' => 34,
+            'user_id' => 1,
+            'is_staff' => true,
+            'comment_id' => 0,
+            'is_mentor_commented' => true,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        DB::table('comments')->insert([
+            'comment' => "jsの対象となるタグにきちんとidが設定されているか確認しましょう。",
             'question_id' => 35,
             'user_id' => 1,
             'is_staff' => true,
             'comment_id' => 0,
             'is_mentor_commented' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-        ]);
-        DB::table('comments')->insert([
-            'comment' => "次のNotePMを参考にしてみてください",
-            'question_id' => 36,
-            'user_id' => 1,
-            'is_staff' => true,
-            'comment_id' => 0,
-            'is_mentor_commented' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-        ]);
-        DB::table('comments')->insert([
-            'comment' => "次の点を確認しましょう。\n①deleteメソッドにおいて削除後にリダイレクトするためにルーティングを設定しているか\n②フォーム内にCSRFとメソッドの設定はされているか",
-            'question_id' => 37,
-            'user_id' => 1,
-            'is_staff' => true,
-            'comment_id' => 0,
-            'is_mentor_commented' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-        ]);
-        DB::table('comments')->insert([
-            'comment' => "Laravelのバージョンを確認しましょう。最新のバージョン8の場合カリキュラムのものと異なる場合があるためバージョン6をお勧めします。",
-            'question_id' => 38,
-            'user_id' => 1,
-            'is_staff' => true,
-            'comment_id' => 0,
-            'is_mentor_commented' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-        ]);
-        DB::table('comments')->insert([
-            'comment' => "linkタグでcssファイルの参照がうまくできていない可能性があります。\nhtmlファイルに対してcssファイルがどの階層にあるのか確認しましょう。",
-            'question_id' => 39,
-            'user_id' => 1,
-            'is_staff' => true,
-            'comment_id' => 0,
-            'is_mentor_commented' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-        ]);
-        DB::table('comments')->insert([
-            'comment' => "ちょっと長めのテストデータ。\nあああああああああああああああああああああああああああああああああああああああああああああああああ",
-            'question_id' => 40,
-            'user_id' => 1,
-            'is_staff' => true,
-            'comment_id' => 1,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-        ]);
-        DB::table('comments')->insert([
-            'comment' => "ちょっと長めのテストデータ。\niiiiiiiiiiiiあああああああああああああああああああああああああああああああああああああああ",
-            'question_id' => 41,
-            'user_id' => 1,
-            'is_staff' => true,
-            'comment_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);

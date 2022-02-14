@@ -12,6 +12,7 @@ use App\History;
 use App\Slack;
 use Storage;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 
 class QuestionController extends Controller
 {
@@ -98,7 +99,11 @@ class QuestionController extends Controller
         $upload_image = $request->file('image');
         
         // 画像サイズが１MB以下であるか確認
-        if($upload_image.filesize() <= 1024*1024*1){
+        $validator = Validator::make($upload_image, [
+            'file' => 'required|max:1024'
+        ]);
+        
+        if($validator->fails()){
             if($upload_image){
                 // リクエストに質問IDがあるか確認
                 isset($request['question_id']) ? $question_id = $request['question_id'] : $question_id = 0;
