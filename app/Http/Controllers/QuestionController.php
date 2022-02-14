@@ -99,8 +99,8 @@ class QuestionController extends Controller
         $upload_image = $request->file('image');
         
         // 画像サイズが１MB以下であるか確認
-        $validator = Validator::make($upload_image, [
-            'file' => 'required|max:1024'
+        $validator = Validator::make($request->all(), [
+            'image' => 'required|max:1024'
         ]);
         
         if($validator->fails()){
