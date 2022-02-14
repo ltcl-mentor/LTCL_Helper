@@ -139,19 +139,6 @@ function Breadcrumb(props){
             );
             break;
             
-        case "mentor_question_create":
-            link1 = (
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-            );
-            link2 = (
-                <Typography color="text.primary">
-                    質問投稿
-                </Typography>
-            );
-            break;
-            
         case "mentor_question_edit":
             link1 = (
                 <Link underline="hover" to="/mentor/top">
