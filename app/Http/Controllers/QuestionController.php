@@ -104,17 +104,19 @@ class QuestionController extends Controller
         ]);
         
         if($validator->fails()){
-            if($upload_image){
-                // リクエストに質問IDがあるか確認
-                isset($request['question_id']) ? $question_id = $request['question_id'] : $question_id = 0;
-                
-                // リクエストにコメントIDがあるか確認
-                isset($request['question_id']) ? $comment_id = $request['comment_id'] : $comment_id = 0;
-                
-                $image_path = $image->imageCreate($upload_image, $question_id, $comment_id);
-                
-                return $image_path;
-            }
+            return false;
+        }
+        
+        if($upload_image){
+            // リクエストに質問IDがあるか確認
+            isset($request['question_id']) ? $question_id = $request['question_id'] : $question_id = 0;
+            
+            // リクエストにコメントIDがあるか確認
+            isset($request['question_id']) ? $comment_id = $request['comment_id'] : $comment_id = 0;
+            
+            $image_path = $image->imageCreate($upload_image, $question_id, $comment_id);
+            
+            return $image_path;
         }
     }
     
