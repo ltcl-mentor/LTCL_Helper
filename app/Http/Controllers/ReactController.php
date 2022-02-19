@@ -30,7 +30,7 @@ class ReactController extends Controller
         return Question::conditionSearch(
             // 絞り込み検索用
             $request->category, $request->topic, $request->curriculum_number, $request->keyword, 
-            // キーワード検索用
+            // フリーワード検索用
             $request->searchType, urldecode($request->freeword));
     }
     

@@ -108,6 +108,7 @@ Route::group(['middleware' => ['auth']], function () {
         /**
          * 質問
          */
+        Route::get('/questions/export', 'QuestionController@questionsExport');
         Route::post('/questions/{question}/check', 'QuestionController@check'); // 承認実行
         Route::post('/questions/{question}/uncheck', 'QuestionController@uncheck'); // 承認解除実行
         Route::post('/questions/{question}/update', 'QuestionController@update'); // 編集実行
@@ -125,6 +126,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/users/admin/register', 'Auth\RegisterController@register'); // 管理者の新規作成実行
         Route::post('/users/{user}/delete', 'UserController@delete'); // 削除実行
         Route::post('/users/{user}/unlock', 'UserController@unlock'); // ユーザロック解除実行
+        // Route::get('/users/sheets', 'UserController@getSheets');
         // Route::get('/users/index', 'UserController@index'); // 初期画面表示
         // Route::get('users/admin/register', 'Auth\RegisterController@showRegistrationForm')->name('register'); // 管理者の新規作成画面表示
         // Route::get('/users/public/register', 'Auth\RegisterController@showPublicRegistrationForm'); // 受講生の新規作成画面表示
@@ -153,5 +155,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/{any}', function(){
         return view('react');
     })->where('any', '.*');
-});    
+});
 

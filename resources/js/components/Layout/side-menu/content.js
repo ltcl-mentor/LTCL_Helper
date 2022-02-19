@@ -162,7 +162,7 @@ function Content(props) {
                     <Link to={ menu.url } onClick={ () => setIsLinkClicked(true) }>
                         <ListItem button key={ menu.menu }>
                             <ListItemIcon sx={{ paddingLeft: 4 }}>
-                                { menu === "質問投稿" ? <PostAdd /> : <ContactPhone /> }
+                                { menu.menu === "質問投稿" ? <PostAdd /> : <ContactPhone /> }
                             </ListItemIcon>
                             <ListItemText primary={ menu.menu } sx={{ paddingLeft: 2 }}/>
                         </ListItem>

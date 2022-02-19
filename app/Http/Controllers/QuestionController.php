@@ -275,6 +275,78 @@ class QuestionController extends Controller
         return $question;
     }
     
+    
+    /**
+     * 質問の定期出力(csv)
+     */
+    public static function questionsExport()
+    {
+        $headers = [ //ヘッダー情報
+            'Content-type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=questionExport.csv',
+            'Pragma' => 'no-cache',
+            'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires' => '0',
+        ];
+ 
+        $callback = function()
+        {
+            //ファイル作成
+            $createCsvFile = fopen('php://output', 'w');
+            
+            //1行目の情報
+            $columns = [
+                'category',
+                'topic',
+                'curriculum_number',
+                'title',
+                'remarks',
+                'question',
+                'author',
+                'created_at',
+                'updated_at',
+            ];
+            
+            //文字化け対策
+            mb_convert_variables('SJIS-win', 'UTF-8', $columns);
+            
+            //1行目の情報を追記
+            fputcsv($createCsvFile, $columns);
+            
+            //データベースからデータ取得
+            $questions = Question::orderBy('created_at', 'DESC')->take(100)->get();
+            
+            //データを1行ずつ回す
+            foreach ($questions as $question) {
+                $author = User::find($question->user_id);
+                $csv = [
+                    $question->category,
+                    $question->topic,
+                    $question->curriculum_number,
+                    $question->title,
+                    $question->remarks,
+                    $question->question,
+                    $author->name,
+                    $question->created_at,
+                    $question->updated_at,
+                ];
+                
+                //文字化け対策
+                mb_convert_variables('SJIS-win', 'UTF-8', $csv);
+                
+                //ファイルに追記する
+                fputcsv($createCsvFile, $csv);
+            }
+            
+            //ファイル閉じる
+            fclose($createCsvFile);
+            
+        };
+        
+        //実行
+        return response()->stream($callback, 200, $headers);
+    }
+    
     /**
      * 初期画面表示
      */

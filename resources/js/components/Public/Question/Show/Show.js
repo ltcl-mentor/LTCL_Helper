@@ -20,7 +20,6 @@ import RelatedQuestions from './related-questions';
 function Show() {
     const { id } = useParams();
     const [screen_width, setScreenWidth] = useState(window.innerWidth);
-    const history = useHistory();
     const parameter = useLocation();
     const [question, setQuestion] = useState([]);
     const [documents, setDocuments] = useState([]);
@@ -63,15 +62,6 @@ function Show() {
                 console.log(error);
             });
         
-        // この質問と同じカテゴリー、トピックの質問を取得
-        axios
-            .get(`/react/questions/search?category=${ 0 }&topic=${ 0 }`)
-            .then(response => {
-                setRelatedQuestions(response.data);
-            }).catch(error => {
-                console.log(error);
-            });
-        
         // ログインユーザ情報を取得
         axios
             .get("/react/user")
@@ -95,6 +85,18 @@ function Show() {
         }
     }, [comment_changing, question_changing]);
     
+    useEffect(() => {
+        if (question) {
+        // この質問と同じカテゴリー、トピックの質問を取得
+        axios
+            .get(`/react/questions/search?category=${ question.category }&topic=${ question.topic }`)
+            .then(response => {
+                setRelatedQuestions(response.data);
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+    }, [question]);
     
     const handleResolved = () => {
         if (confirm('一度解決扱いにすると今後変更できません。\nよろしいですか？')) {

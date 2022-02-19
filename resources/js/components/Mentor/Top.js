@@ -166,6 +166,28 @@ function Top() {
                         </Grid>
                     </Grid>
                 </Box>
+                
+                <Box sx={{ margin: 2, marginBottom: 3, marginLeft: 2 }}>
+                    <Typography
+                        variant="h4"
+                        component="div"
+                        align="left"
+                        sx={{
+                            marginTop: 4,
+                            marginBottom: 2,
+                        }}
+                    >
+                        質問データ出力
+                    </Typography>
+                    
+                    <Grid container spacing={2} sx={{ flexGrow: 1, marginLeft: 2 }} >
+                        <Grid item >
+                            <a href="/questions/export">
+                                <Button variant="contained" color="warning" startIcon={ <ListIcon /> }>直近の質問を100件出力</Button>
+                            </a>
+                        </Grid>
+                    </Grid>
+                </Box>
             </Card>
         </div>
     );
