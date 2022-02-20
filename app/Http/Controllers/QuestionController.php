@@ -10,6 +10,7 @@ use App\User;
 use App\Image;
 use App\History;
 use App\Slack;
+use App\Export;
 use Storage;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -81,11 +82,14 @@ class QuestionController extends Controller
         }
         
         // Slackへの通知
-        // データ作成者が受講生だった場合
+        // データ作成者が受講生だった場合のみ
         if(Auth::user()->is_admin === null){
             $message = "受講生によって質問が投稿されました。\n「". $question->title ."」\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $question->id;
             Slack::sendMessage($message, "mentor");
         }
+        
+        // csv出力チェック
+        Question::exportCheck();
         
         return ["id" => $question->id, "is_admin" => Auth::user()->is_admin];
     }
@@ -288,23 +292,43 @@ class QuestionController extends Controller
             'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
             'Expires' => '0',
         ];
- 
-        $callback = function()
+        
+        // データベースからデータ取得
+        // 質問の総数と出力済み件数取得
+        $question_count = Question::count();
+        $exported_question_count = Export::sum('export_size');
+        
+        // 未出力件数取得
+        $yet_exported_question_count = $question_count - $exported_question_count;
+        
+        // 未出力件数分のデータを出力
+        $questions = Question::orderBy('created_at', 'DESC')->skip($exported_question_count)->take($yet_exported_question_count)->get();
+        
+        // 出力記録データ生成(出力件数を記録)
+        Export::create(['export_size' => $yet_exported_question_count]);
+        
+        // ファイル生成処理
+        $callback = function() use ($questions)
         {
             //ファイル作成
             $createCsvFile = fopen('php://output', 'w');
             
             //1行目の情報
             $columns = [
+                'id',
                 'category',
                 'topic',
                 'curriculum_number',
                 'title',
                 'remarks',
                 'question',
+                'is_resolved',
+                'check',
+                'user_id',
                 'author',
                 'created_at',
                 'updated_at',
+                'deleted_at',
             ];
             
             //文字化け対策
@@ -313,22 +337,24 @@ class QuestionController extends Controller
             //1行目の情報を追記
             fputcsv($createCsvFile, $columns);
             
-            //データベースからデータ取得
-            $questions = Question::orderBy('created_at', 'DESC')->take(100)->get();
-            
             //データを1行ずつ回す
             foreach ($questions as $question) {
                 $author = User::find($question->user_id);
                 $csv = [
+                    $question->id,
                     $question->category,
                     $question->topic,
                     $question->curriculum_number,
                     $question->title,
                     $question->remarks,
                     $question->question,
+                    $question->is_resolved,
+                    $question->check,
+                    $question->user_id,
                     $author->name,
                     $question->created_at,
                     $question->updated_at,
+                    $question->deleted_at,
                 ];
                 
                 //文字化け対策

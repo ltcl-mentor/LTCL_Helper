@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Document;
 use App\Image;
 use App\Comment;
+use App\Export;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +14,7 @@ class Question extends Model
 {
     use SoftDeletes;
     
-    protected $fillable=['category', 'topic', 'curriculum_number', 'title', 'remarks', 'question', 'is_resolved', 'check', 'user_id'];
+    protected $fillable = ['category', 'topic', 'curriculum_number', 'title', 'remarks', 'question', 'is_resolved', 'check', 'user_id'];
     
     static $category = ['カリキュラム', '成果物'];
     
@@ -233,7 +234,7 @@ class Question extends Model
     {
         $unresolved_questions = Self::where('check', true)->where('is_resolved', false)->get();
         $unresolved_questions_count = count($unresolved_questions);
-        if($unresolved_questions_count=== 0){
+        if($unresolved_questions_count === 0){
             Slack::sendMessage('未解決の質問はありません。', 'mentor');
         }else{
             $unresolved_questions_list = "";
@@ -241,6 +242,20 @@ class Question extends Model
                 $unresolved_questions_list .= "https://stark-cliffs-73338.herokuapp.com/public/questions/" . $question->id . "\n";
             }
             Slack::sendMessage("未解決の質問が" . $unresolved_questions_count . "件あります。\n" . $unresolved_questions_list, 'mentor');
+        }
+    }
+    
+    /**
+     * CSV出力の告知
+     * 前回のCSV出力から規定数の質問が新規に追加された場合にSlackへ通知
+     */
+    public static function exportCheck()
+    {
+        $question_count = Question::count();
+        $exported_question_count = Export::sum('export_size');
+        
+        if($question_count - $exported_question_count >= 95){
+            Slack::sendMessage("前回のCSV出力から新たに95件の質問が追加されました。\nmasterアカウントからCSV出力を実行してバックアップを保管してください。", 'mentor');
         }
     }
 }

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
 import axios from "axios";
 import Button from '@mui/material/Button';
@@ -14,6 +14,7 @@ import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
 import Badge from '@mui/material/Badge';
 
+import {LoginUser} from '../Route.js';
 import Breadcrumbs from '../Breadcrumbs';
 
 /**
@@ -33,6 +34,9 @@ function Top() {
                 console.log(error);
             });
     }, []);
+    
+    // ログインユーザー情報取得
+    const user = useContext(LoginUser);
     
     return (
         <div class="container">
@@ -167,27 +171,29 @@ function Top() {
                     </Grid>
                 </Box>
                 
-                <Box sx={{ margin: 2, marginBottom: 3, marginLeft: 2 }}>
-                    <Typography
-                        variant="h4"
-                        component="div"
-                        align="left"
-                        sx={{
-                            marginTop: 4,
-                            marginBottom: 2,
-                        }}
-                    >
-                        質問データ出力
-                    </Typography>
-                    
-                    <Grid container spacing={2} sx={{ flexGrow: 1, marginLeft: 2 }} >
-                        <Grid item >
-                            <a href="/questions/export">
-                                <Button variant="contained" color="warning" startIcon={ <ListIcon /> }>直近の質問を100件出力</Button>
-                            </a>
+                { (user.name === "master" && user.id === 1) &&
+                    <Box sx={{ margin: 2, marginBottom: 3, marginLeft: 2 }}>
+                        <Typography
+                            variant="h4"
+                            component="div"
+                            align="left"
+                            sx={{
+                                marginTop: 4,
+                                marginBottom: 2,
+                            }}
+                        >
+                            質問データ出力
+                        </Typography>
+                        
+                        <Grid container spacing={2} sx={{ flexGrow: 1, marginLeft: 2 }} >
+                            <Grid item >
+                                <a href="/questions/export">
+                                    <Button variant="contained" color="warning" startIcon={ <ListIcon /> }>直近の質問をCSV出力</Button>
+                                </a>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </Box>
+                    </Box>
+                }
             </Card>
         </div>
     );
