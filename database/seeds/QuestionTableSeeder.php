@@ -434,8 +434,8 @@ class QuestionTableSeeder extends Seeder
         DB::table('questions')->insert([
             'id' => 31,
             'category' => 0,
-            'topic' => 7,
-            'curriculum_number' => '6-1-1',
+            'topic' => 13,
+            'curriculum_number' => '成果物',
             'title' => 'S3の設定がうまくいきません。',
             'remarks' => '公式ドキュメントなどは参照してみましたが、理解できませんでした。',
             'question' => "画像を保存するためAWSのクラウドサービスS3を使用していますが、設定がうまくいきません。",

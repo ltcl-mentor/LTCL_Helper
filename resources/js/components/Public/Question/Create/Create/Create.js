@@ -37,17 +37,23 @@ function Create() {
     const [question_validation_error, setQuestionValidationError] = useState(0);
     const curriculum_numbers = [
         [
-            ["1-1-1"],
-            ["2-1-1"],
-            ["2-1-2"],
-            ["2-1-3"],
-            ["3-1-1"],
-            ["4-1-1", "4-1-2", "4-1-3", "4-1-4"],
-            ["5-1-1", "8-1-1", "8-2-1", "8-3-1", "8-4-1", "8-5-1", "8-6-1"],
-            ["6-1-1", "6-2-1"],
-            ["7-1-1"]
+            ['1-1-1'],
+            ['2-1-1'],
+            ['2-1-2'],
+            ['2-1-3'],
+            ['3-1-1'],
+            ['4-1-1', '4-1-2', '4-1-3', '4-1-4'],
+            ['5-1-1', '8-1-1', '8-2-1', '8-3-1', '8-4-1', '8-5-1', '8-6-1'],
+            ['6-1-1', '6-2-1'],
+            ['7-1-1'],
+            ['9-1-1'],
+            ['9-2-1'],
         ],
-        [["成果物"]]
+        [
+            ['9-3-1', '成果物'],
+            ['9-4-1', '成果物'],
+            ['成果物'],
+        ]
     ];
     
     // 画面幅を随時取得
@@ -68,14 +74,26 @@ function Create() {
             
             // カテゴリーとトピックに対して適切なカリキュラム番号が選択されているか
             if (category === 0) {
-                if (!(curriculum_numbers[Number(category)][Number(topic)].includes(curriculum_number))) {
+                if (!(curriculum_numbers[0][Number(topic)].includes(curriculum_number))) {
                     setCurriculumNumberValidationError(1);
                     return false;
                 }
             } else if (category === 1) {
-                if (!(curriculum_numbers[1][0].includes(curriculum_number))) {
-                    setCurriculumNumberValidationError(1);
-                    return false;
+                if (topic === 11) {
+                    if (!(curriculum_numbers[1][0].includes(curriculum_number))) {
+                        setCurriculumNumberValidationError(1);
+                        return false;
+                    }
+                } else if (topic === 12) {
+                    if (!(curriculum_numbers[1][1].includes(curriculum_number))) {
+                        setCurriculumNumberValidationError(1);
+                        return false;
+                    }
+                } else {
+                    if (!(curriculum_numbers[1][2].includes(curriculum_number))) {
+                        setCurriculumNumberValidationError(1);
+                        return false;
+                    }
                 }
             }
         } else if (step === 1) {

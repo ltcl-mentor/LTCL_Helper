@@ -25,7 +25,9 @@ function Curriculum(props) {
         {"id": 5, "topic": "PHP"},
         {"id": 6, "topic": "Laravel"},
         {"id": 7, "topic": "DB"},
-        {"id": 8, "topic": "Git&GitHub"}
+        {"id": 8, "topic": "Git&GitHub"},
+        {"id": 9, "topic": "マイグレーション"},
+        {"id": 10, "topic": "リレーション"},
     ];
     
     const handleChange = (panel) => (event, isExpanded) => {

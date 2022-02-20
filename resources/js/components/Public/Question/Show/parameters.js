@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
  */
 function Parameters(props) {
     const categories = ['カリキュラム', '成果物'];
-    const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', '環境構築', '設計図', 'デプロイ', 'API'];
+    const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', 'マイグレーション', 'リレーション', '認証・認可機能', 'API', '画像処理', 'Heroku環境', 'デザイン'];
     
     return (
         <Paper sx={{ marginBottom: 2 }}>

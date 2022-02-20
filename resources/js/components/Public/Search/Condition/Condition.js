@@ -29,9 +29,9 @@ function Condition() {
     const categories = ['カリキュラム', '成果物'];
     const topics = [
         // カリキュラムのトピック
-        'AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'データベース', 'Git&GitHub',
+        'AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'データベース', 'Git&GitHub', 'マイグレーション', 'リレーション',
         // 成果物のトピック
-        'マイグレーション', 'リレーション', 'Laravel拡張', '画像処理', 'Heroku環境', 'API', 'デザイン'
+        '認証・認可機能', 'API', '画像処理', 'Heroku環境', 'デザイン'
     ];
     const [activeStep, setActiveStep] = useState(0);
     const steps = [

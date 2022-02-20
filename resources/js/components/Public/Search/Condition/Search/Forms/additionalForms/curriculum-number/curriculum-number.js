@@ -17,19 +17,25 @@ function CrriculumNumber(props) {
             ['4-1-1', '4-1-2', '4-1-3', '4-1-4'],
             ['5-1-1', '8-1-1', '8-2-1', '8-3-1', '8-4-1', '8-5-1', '8-6-1'],
             ['6-1-1', '6-2-1'],
-            ['7-1-1']
+            ['7-1-1'],
+            ['9-1-1'],
+            ['9-2-1'],
         ],
         [
+            ['9-3-1', '成果物'],
+            ['9-4-1', '成果物'],
             ['成果物'],
         ]
     ];
     
     // カテゴリーとトピックが変更されたら実行
     useEffect(() => {
-        if (props.category === 0 && props.topic <= 8) {
+        if (props.category === 0 && props.topic <= 10) {
             setCurriculumNumbers(curriculum_numbers_array[Number(props.category)][Number(props.topic)]);
-        } else if (props.category === 1 && props.topic >= 9) {
-            setCurriculumNumbers(curriculum_numbers_array[Number(props.category)][0]);
+        } else if (props.category === 1 && props.topic >= 11) {
+            props.topic === 11 && setCurriculumNumbers(curriculum_numbers_array[Number(props.category)][0]);
+            props.topic === 12 && setCurriculumNumbers(curriculum_numbers_array[Number(props.category)][1]);
+            props.topic >= 13 && setCurriculumNumbers(curriculum_numbers_array[Number(props.category)][2]);
         } else {
             setCurriculumNumbers(curriculum_numbers_array[0][0]);
         }

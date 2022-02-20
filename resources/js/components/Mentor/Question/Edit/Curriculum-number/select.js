@@ -9,7 +9,6 @@ import FormLabel from '@material-ui/core/FormLabel';
  */
 function Selects(props) {
     const handleCurriculumNumber = (event) => {
-        console.log('aaa');
         if (event.target.value === "") {
             props.setCurriculumNumber(props.old_curriculum_number);
         } else {

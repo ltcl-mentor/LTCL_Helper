@@ -8,7 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
  * トピックフォーム
  */
 function TopicForm(props) {
-    const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', 'マイグレーション', 'リレーション', 'Laravel拡張', '画像処理', 'Heroku環境', 'API', 'デザイン'];
+    const topics = ['AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'DB', 'Git&GitHub', 'マイグレーション', 'リレーション', '認証・認可機能', 'API', '画像処理', 'Heroku環境', 'デザイン'];
     const [mountCount, setMountCount] = useState(0);
     
     // カテゴリーの値変更時に実行
@@ -17,11 +17,7 @@ function TopicForm(props) {
         // 初回(mountCount = 1)だけ避けるようにmountCountを利用
         setMountCount(mountCount+1);
         if(mountCount !== 1){
-            if(props.category === 0){
-                props.setTopic(0);
-            }else{
-                props.setTopic(9);
-            }
+            props.category === 0 ? props.setTopic(0) : props.setTopic(11);
         }
     }, [props.category]);
     
@@ -44,6 +40,8 @@ function TopicForm(props) {
                         <FormControlLabel value={6} control={ <Radio /> } label="Laravel" />
                         <FormControlLabel value={7} control={ <Radio /> } label="データベース" />
                         <FormControlLabel value={8} control={ <Radio /> } label="Git&GitHub" />
+                        <FormControlLabel value={9} control={ <Radio /> } label="マイグレーション" />
+                        <FormControlLabel value={10} control={ <Radio /> } label="リレーション" />
                     </RadioGroup>
                 </FormControl>
             </div>
@@ -53,12 +51,10 @@ function TopicForm(props) {
             <div className="portfolio">
                 <FormControl component="fieldset">
                     <RadioGroup row aria-label="topic" name="post[topic]" value={ Number(props.topic) } onChange={(event) => { handleTopic(event) }}>
-                        <FormControlLabel value={9} control={ <Radio /> } label="マイグレーション" />
-                        <FormControlLabel value={10} control={ <Radio /> } label="リレーション" />
-                        <FormControlLabel value={11} control={ <Radio /> } label="Laravel拡張" />
-                        <FormControlLabel value={12} control={ <Radio /> } label="画像処理" />
-                        <FormControlLabel value={13} control={ <Radio /> } label="Heroku環境" />
-                        <FormControlLabel value={14} control={ <Radio /> } label="API" />
+                        <FormControlLabel value={11} control={ <Radio /> } label="認証・認可機能" />
+                        <FormControlLabel value={12} control={ <Radio /> } label="API" />
+                        <FormControlLabel value={13} control={ <Radio /> } label="画像処理" />
+                        <FormControlLabel value={14} control={ <Radio /> } label="Heroku環境" />
                         <FormControlLabel value={15} control={ <Radio /> } label="デザイン" />
                     </RadioGroup>
                 </FormControl>
