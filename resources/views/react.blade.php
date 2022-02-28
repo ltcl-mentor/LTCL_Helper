@@ -1,3 +1,4 @@
+<!-- Reactのcomponent達を大枠のデザインに反映するよう -->
 @extends('layouts.app')
 
 @section('content')

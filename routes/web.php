@@ -17,6 +17,8 @@ Auth::routes([
     'register' => false, 
     'reset' => false,
 ]);
+
+// ユーザーロックアウト画面
 Route::get('/lockout', 'Auth\LoginController@lockout');
 
 /**
