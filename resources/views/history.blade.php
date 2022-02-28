@@ -1,3 +1,4 @@
+// 閲覧履歴（何の？）
 @extends('layouts.app')
 
 @section('content')
