@@ -97,7 +97,7 @@ function Info(props) {
                             { props.collegeInfo.zoom.map((staff) => (
                                 <div>{ staff }</div>
                             )) }
-                            <a href={ props.zoom_link } target="_blank">zoomのリンク一覧</a>
+                            <a href={ props.zoom_link } target="_blank">zoomリンク</a>
                         </TableCell>
                     </TableRow>
                 </TableBody>

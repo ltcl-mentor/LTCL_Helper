@@ -45,7 +45,7 @@ function QuestionForm(props) {
                 </Typography>
             
                  <TextareaAutosize
-                    placeholder="質問タイトルを入力"
+                    placeholder="例：CSSファイルが反映されません。"
                     minRows={2}
                     value={ props.title }
                     onChange={ (event) => handleTitle(event) }
@@ -70,7 +70,7 @@ function QuestionForm(props) {
                 </Typography>
                 
                 <TextareaAutosize
-                    placeholder="調べたことを入力"
+                    placeholder="例：以下のサイトでCSSの呼び出し方を確認しました。\nhttp://~"
                     minRows={4}
                     value={ props.remarks }
                     onChange={ (event) => handleRemarks(event) }
