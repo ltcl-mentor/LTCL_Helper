@@ -43,14 +43,11 @@ class QuestionController extends Controller
         $input['title'] = $request['title'];
         $input['remarks'] = $request['remarks'];
         $input['question'] = $request['question'];
+        $input['is_resolved'] = 0;
+        $input['check'] = false;
+        $input['user_id'] = Auth::id();
         
-        $question->fill($input);
-        
-        $question['is_resolved'] = 0;
-        $question['check'] = false;
-        $question['user_id'] = Auth::id();
-        
-        $question->save();
+        $question->fill($input)->save();
         
         // 質問作成したユーザの質問作成数を変更
         $user = Auth::user();
@@ -198,10 +195,7 @@ class QuestionController extends Controller
         $input['remarks'] = $request['remarks'];
         $input['question'] = $request['question'];
         
-        $question->fill($input);
-        
-        $question->save();
-        
+        $question->fill($input)->save();
         
         // 画像に関する処理
         // 新規に追加された画像は事前に保存されているので、実際に質問の中で使われていないものを削除

@@ -114,7 +114,7 @@ class Question extends Model
      * 質問の検索
      * 「絞り込み」「キーザード」共通
      */
-    public static function conditionSearch($category, $topic, $curriculum_number, $keyword, $searchType, $freeword)
+    public static function search($category, $topic, $curriculum_number, $keyword, $searchType, $freeword)
     {
         if($freeword){
             // フリーワード検索
@@ -234,6 +234,7 @@ class Question extends Model
     {
         $unresolved_questions = Self::where('check', true)->where('is_resolved', false)->get();
         $unresolved_questions_count = count($unresolved_questions);
+        
         if($unresolved_questions_count === 0){
             Slack::sendMessage('未解決の質問はありません。', 'mentor');
         }else{

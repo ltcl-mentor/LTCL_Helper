@@ -27,7 +27,7 @@ class ReactController extends Controller
      */
     public function getSearchQuestions(Request $request)
     {
-        return Question::conditionSearch(
+        return Question::search(
             // 絞り込み検索用
             $request->category, $request->topic, $request->curriculum_number, $request->keyword, 
             // フリーワード検索用
