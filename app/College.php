@@ -55,4 +55,24 @@ class College extends Model
         
         return json_decode($response->getBody(), true);
     }
+    
+    /**
+     * 出勤メンター通知
+     * 平日14時、休日12時にslackへ通知
+     */
+    public static function informSlack()
+    {
+        // $unresolved_questions = Self::where('check', true)->where('is_resolved', false)->get();
+        // $unresolved_questions_count = count($unresolved_questions);
+        // if($unresolved_questions_count === 0){
+        //     Slack::sendMessage('未解決の質問はありません。', 'mentor');
+        // }else{
+        //     $unresolved_questions_list = "";
+        //     foreach($unresolved_questions as $question){
+        //         $unresolved_questions_list .= "https://stark-cliffs-73338.herokuapp.com/public/questions/" . $question->id . "\n";
+        //     }
+        //     Slack::sendMessage("未解決の質問が" . $unresolved_questions_count . "件あります。\n" . $unresolved_questions_list, 'mentor');
+        // }
+        dd(Self::getCollegeData('2022', '3', '21')['staff']);
+    }
 }
