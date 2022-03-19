@@ -150,7 +150,7 @@ function TextForm(props) {
                 </Box>
                 
                 <TextareaAutosize
-                    placeholder="テキストを入力"
+                    placeholder="どのような手順を行なった結果エラーが出たのか、どんなエラーが出たかなどを写真などを利用して具体的に入力してください。"
                     minRows={15}
                     value={ props.text }
                     onChange={ (event) => handleText(event) }
