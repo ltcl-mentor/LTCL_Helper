@@ -11,6 +11,7 @@ import Divider from '@material-ui/core/Divider';
  */
 function Info(props) {
     const [timeout, setTimeout] = useState(false);
+    const [isZoom, setZoom] = useState(false);
     
     useEffect(() => {
         if (props.resError) {
@@ -18,7 +19,16 @@ function Info(props) {
         } else {
             setTimeout(false);
         }
-    },[props.resError]);
+        
+        if (props.collegeInfo.zoom) {
+            setZoom(true);
+        }
+    },[props.resError, props.collegeInfo.zoom]);
+    
+    let zoom;
+    if (isZoom) {
+        zoom = <a href={ props.zoom_link } target="_blank">zoomリンク</a>;
+    }
     
     let info;
     // if (!(props.isDateClicked)) {
@@ -73,7 +83,29 @@ function Info(props) {
     //                     </TableCell>
     //                     <TableCell align="center">
     //                         { props.collegeInfo.staff.map((staff) => (
-    //                             <div>{ staff }</div>
+    //                             <div key={staff}>{ staff }</div>
+    //                         )) }
+    //                     </TableCell>
+    //                 </TableRow>
+                    
+    //                 <TableRow
+    //                     key='college'
+    //                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+    //                 >
+    //                     <TableCell
+    //                         component="th"
+    //                         scope="row"
+    //                         align="center"
+    //                         sx={{
+    //                             textAlign: "center",
+    //                             minWidth: "150Px",
+    //                         }}
+    //                     >
+    //                         オンライン出勤メンター
+    //                     </TableCell>
+    //                     <TableCell align="center">
+    //                         { props.collegeInfo.online_staff.map((staff) => (
+    //                             <div key={staff}>{ staff }</div>
     //                         )) }
     //                     </TableCell>
     //                 </TableRow>
@@ -91,13 +123,11 @@ function Info(props) {
     //                             minWidth: "150Px",
     //                         }}
     //                     >
-    //                         オンライン自習室
+    //                         オンライン質問部屋
     //                     </TableCell>
     //                     <TableCell align="center">
-    //                         { props.collegeInfo.zoom.map((staff) => (
-    //                             <div>{ staff }</div>
-    //                         )) }
-    //                         <a href={ props.zoom_link } target="_blank">zoomリンク</a>
+    //                         <div>{ props.collegeInfo.zoom.message }</div>
+    //                         {zoom}
     //                     </TableCell>
     //                 </TableRow>
     //             </TableBody>

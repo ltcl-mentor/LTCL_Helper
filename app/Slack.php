@@ -13,10 +13,12 @@ class Slack extends Model
     {
         $client = new \GuzzleHttp\Client();
         
-        if($target === "mentor"){
+        if ($target === "mentor") {
             $url = env('Slack_URL');
-        }elseif($target === "student"){
+        } elseif ($target === "student") {
             $url = env('Slack_Student_URL');
+        } elseif ($target === "attendance") {
+            $url = env('Slack_URL'); // 今後は「メンター出勤状況」のチャンネルURLに変える
         }
         
         $response = $client->request(
