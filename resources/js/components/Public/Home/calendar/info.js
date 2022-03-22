@@ -20,10 +20,10 @@ function Info(props) {
             setTimeout(false);
         }
         
-        if (props.collegeInfo.zoom) {
+        if (props.zoom_exist) {
             setZoom(true);
         }
-    },[props.resError, props.collegeInfo.zoom]);
+    },[props.resError, props.zoom_exist]);
     
     let zoom;
     if (isZoom) {
@@ -136,14 +136,12 @@ function Info(props) {
     // }
     info = (
         <Typography align="center" variant="h7" component="div" sx={{ paddingTop: 2, paddingBottom: 5 }}>
-            データの読み込みに失敗しました。再度お試しいただくか、メンターに直接ご確認ください。
+            データの読み込みに失敗しました。<br/>再度お試しいただくか、メンターに直接ご確認ください。
         </Typography>
     );
 
     return (
         <div>
-            <Divider />
-            
             { info }
         </div>
     );

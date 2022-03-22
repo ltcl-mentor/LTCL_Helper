@@ -96,7 +96,7 @@ class College extends Model
         } elseif ($online_time['exist'] == "なし") {
             $message .= "*本日は、出勤しているメンターが少ないため、オンライン校舎は開校しておりません。*\n質問のある方は、<#C01JZMKS1K7> または、<#C029T2EBGC9> チャンネルにてご質問ください。";
         }
-
+        // dd($message);
         Slack::sendMessage($message, 'attendance');
     }
     
@@ -123,7 +123,7 @@ class College extends Model
                     $times = substr($times, 1);
                 }
                 
-                $array[$i] = explode("　", $staff)[0] . " (" . $times . ")";
+                $array[$i] = $i+1 . ". " . explode("　", $staff)[0] . " (" . $times . ")";
             }
         }else{
             switch($status) {

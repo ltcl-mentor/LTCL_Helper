@@ -6,8 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Question;
+use App\User;
 use App\Student;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -96,4 +99,58 @@ class User extends Authenticatable
         $data->delete();
     }
     
+    /**
+     * スプレッドシートから受講生情報を取得
+     */
+    public static function getStudentsApiData()
+    {
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://sheets.googleapis.com/v4/spreadsheets/'. env('GoogleSheetsStudentsID') .'/values/アプリ未登録ID';
+        
+        $response = $client->request(
+            'GET',
+            $url,
+            ['query' => ['key' => env('GoogleSheetsKey'), 'majorDimension' => 'COLUMNS']]
+        );
+        
+        return json_decode($response->getBody(), true);
+    }
+    
+    public static function getClient(){
+		$client = new Google_Client();
+        $client->setAuthConfig(storage_path('credentials.json'));
+        $client->setScopes([Google_Service_Sheets::SPREADSHEETS]);
+		$client->setApplicationName('Google Sheets');
+        return  new Google_Service_Sheets($client);
+    }
+    
+    /**
+     * 受講生情報をテーブルに追加
+     */
+    public static function registerStudents()
+    {
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://sheets.googleapis.com/v4/spreadsheets/' . env('GoogleSheetsStudentsID') . '/values:batchUpdate';
+        $date = new Carbon();
+        $datas = self::getStudentsApiData();
+        
+        // 受講生ID
+        $students = $datas['values'][7];
+        array_splice($students, 0, 2);
+        $password = 'ltcl' . $date->year%100 . sprintf('%02d', $date->month);
+        
+        // for ($name_count = 0; $name_count < count($students); $name_count++){
+        //     $user = User::create([
+        //         'name' => $students[$name_count],
+        //         'password' => Hash::make($password),
+        //         'is_admin' => null,
+        //     ]);
+                
+        //     Student::create([
+        //         'name' => $students[$name_count],
+        //         'password' => $password,
+        //         'user_id' => $user->id,
+        //     ]);
+        // }
+    }
 }
