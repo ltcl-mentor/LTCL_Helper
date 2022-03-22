@@ -15,7 +15,7 @@ function Selects(props) {
 
     const MenuItems = props.curriculum_numbers.map((curriculum_number) => {
         return (
-            <MenuItem value={ curriculum_number }>{ curriculum_number }</MenuItem>
+            <MenuItem value={ curriculum_number } key={curriculum_number}>{ curriculum_number }</MenuItem>
         );
     });
     

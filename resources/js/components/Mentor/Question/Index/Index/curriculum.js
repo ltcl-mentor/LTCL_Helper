@@ -38,7 +38,7 @@ function Curriculum(props) {
         <div className="container">
             { curriculum_topics.map((topic) => {
                 return (
-                    <Box sx={{paddingTop: 3, marginBottom: 3}}>
+                    <Box sx={{paddingTop: 3, marginBottom: 3}} key={topic.topic}>
                         <Accordion expanded={ expanded === topic.id } onChange={ handleChange(topic.id) }>
                             <AccordionSummary
                                 expandIcon={ <ExpandMoreIcon /> }
@@ -58,7 +58,7 @@ function Curriculum(props) {
                                     { props.questions.map((question) => {
                                         if (question.topic === topic.id) {
                                             return (
-                                                <Link to={ `/questions/` + question.id }>
+                                                <Link to={ `/questions/` + question.id } key={question.id}>
                                                     <ListItem
                                                         key={ question.id }
                                                         role="listitem"

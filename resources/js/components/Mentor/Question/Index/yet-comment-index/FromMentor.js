@@ -45,7 +45,7 @@ function Mentor() {
     };
     
     return (
-        <div class="container">
+        <div className="container">
             <Alert
                 type="question"
                 status={ parameter.state && parameter.state.question }

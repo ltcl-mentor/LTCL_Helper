@@ -37,7 +37,7 @@ function Curriculum(props) {
     // アコーディオン
     const curriculum = curriculum_topics.map((topic) => {
         return (
-            <Box sx={{paddingTop: 3, marginBottom: 3}}>
+            <Box sx={{paddingTop: 3, marginBottom: 3}} key={topic.topic}>
                 <Accordion
                     expanded={ expanded === topic.id }
                     onChange={ handleChange(topic.id) }
@@ -57,7 +57,7 @@ function Curriculum(props) {
                             { props.questions.map((question) => {
                                 if (question.topic === topic.id) {
                                     return (
-                                        <Link to={ `/public/questions/` + question.id }>
+                                        <Link to={ `/public/questions/` + question.id } key={question.title}>
                                             <ListItem
                                                 key={ question.id }
                                                 role="listitem"

@@ -162,6 +162,7 @@ function Link(props) {
                     <Accordion
                         expanded={ expanded === topic.id && upOrDown === whitchAccordion }
                         onChange={ handleChange(topic.id, upOrDown) }
+                        key={topic.topic}
                     >
                         <AccordionSummary
                             expandIcon={ <ExpandMoreIcon /> }

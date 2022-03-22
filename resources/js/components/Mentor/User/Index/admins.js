@@ -26,7 +26,7 @@ function Admins(props) {
                 <TableBody>
                     { props.staffs.map((staff) => {
                         return (
-                            <TableRow>
+                            <TableRow key={staff.id}>
                                 <TableCell align="center" component="th" scope="row">{ staff.id }</TableCell>
                                 <TableCell align="center">{ staff.name }</TableCell>
                                 <TableCell align="center">

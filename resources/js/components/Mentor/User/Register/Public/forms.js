@@ -45,9 +45,9 @@ function Forms(props) {
     let forms = [];
     for (formCount = 1; formCount <= props.number; formCount++) {
         forms.push(
-            <Box sx={{ marginTop: 3 }}>
+            <Box sx={{ marginTop: 3 }} key={formCount}>
                 <div className="form-group row">
-                    <label for="name" className="col-md-4 col-form-label text-md-right">name{ formCount }</label>
+                    <label htmlFor="name" className="col-md-4 col-form-label text-md-right">name{ formCount }</label>
                     <div className="col-md-6">
                         <input id={ `name` + formCount } type="text" placeholder="受講生IDを入力" className="form-control" name={ `name` + formCount } required autoComplete="name"/>
                     </div>

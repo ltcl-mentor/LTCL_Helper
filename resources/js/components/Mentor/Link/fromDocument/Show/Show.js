@@ -71,7 +71,7 @@ function Index() {
     };
     
     return (
-        <div class="container">
+        <div className="container">
             <Alert
                 type="link_from_document"
                 status={ parameter.state && parameter.state.link }

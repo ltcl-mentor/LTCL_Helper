@@ -105,7 +105,7 @@ function Weather() {
                             <TableBody>
                                 { weather.hourly.map((hourly_data) => (
                                     <TableRow
-                                        key={ hourly_data.main }
+                                        key={ hourly_data.temp }
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell component="th" scope="row">{ hourly_data.time }</TableCell>

@@ -39,7 +39,7 @@ function Location(props) {
                 <Table sx={{ minWidth: 300, paddingBottom: 5 }} aria-label="simple table">
                     <TableBody>
                         <TableRow
-                            key='time'
+                            key='time1'
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell
@@ -58,7 +58,7 @@ function Location(props) {
                             </TableCell>
                         </TableRow>
                         <TableRow
-                            key='time'
+                            key='time2'
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell

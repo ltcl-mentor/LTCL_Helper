@@ -14,7 +14,7 @@ function Index() {
     };
     
     return (
-        <div class="container">
+        <div className="container">
             <Breadcrumbs page="mentor_link_document_index"/>
             
             <Box sx={{ width: '95%', marginTop: 3 }}>

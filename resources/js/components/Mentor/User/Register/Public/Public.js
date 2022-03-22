@@ -66,7 +66,7 @@ function Public() {
                         </Grid>
                         
                         <Grid item>
-                            <select onChange={ (event) => handleNumber(event) } require>
+                            <select onChange={ (event) => handleNumber(event) } required>
                                 <option value="">選択してください。</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>

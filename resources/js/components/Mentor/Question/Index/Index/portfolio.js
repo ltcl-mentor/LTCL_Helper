@@ -31,7 +31,7 @@ function Portfolio(props) {
         <div className="container">
             { portfolio_topics.map((topic) => {
                 return (
-                    <Box sx={{paddingTop: 3, marginBottom: 3}}>
+                    <Box sx={{paddingTop: 3, marginBottom: 3}} key={topic.topic}>
                         <Accordion expanded={ expanded === topic.id } onChange={ handleChange(topic.id) }>
                             <AccordionSummary
                                 expandIcon={ <ExpandMoreIcon /> }
@@ -51,7 +51,7 @@ function Portfolio(props) {
                                     { props.questions.map((question) => {
                                         if (question.topic === topic.id) {
                                             return (
-                                                <Link to={ `/questions/` + question.id }>
+                                                <Link to={ `/questions/` + question.id } key={question.id}>
                                                     <ListItem
                                                         key={ question.id }
                                                         role="listitem"

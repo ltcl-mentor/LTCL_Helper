@@ -21,7 +21,7 @@ function Document(props) {
     } else {
         documents = props.documents.map((document) => {
             return (
-                <Grid item >
+                <Grid item key={document.title}>
                     <CardActionArea sx={{ width: "300px", height: "280px"}}>
                         <a href={ document.link } target="_blank">
                             <Card sx={{ width: "300px", height: "280px"}}>

@@ -37,7 +37,7 @@ function Admin() {
     
     // 登録フォームのデザインはLaravelのデフォルトのものを転用
     return (
-        <div class="container">
+        <div className="container">
             <Breadcrumbs page="mentor_admin_create"/>
             
             <Box sx={{ width: "70%", marginLeft: "15%" }}>
@@ -54,25 +54,25 @@ function Admin() {
                         実名を登録しないでください！
                     </Typography>
                     <div className="form-group row">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
+                        <label htmlFor="name" className="col-md-4 col-form-label text-md-right">Name</label>
                         <div className="col-md-6">
-                            <input id="name" type="text" className="form-control" name="name" required autocomplete="name" autofocus/>
+                            <input id="name" type="text" className="form-control" name="name" required autoComplete="name" autoFocus/>
                         </div>
                     </div>
                         
-                    <div class="form-group row">
-                        <label for="password" className="col-md-4 col-form-label text-md-right">Password</label>
+                    <div className="form-group row">
+                        <label htmlFor="password" className="col-md-4 col-form-label text-md-right">Password</label>
                         
-                        <div class="col-md-6">
-                            <input id="password" type="password" className="form-control" name="password" required autocomplete="new-password"/>
+                        <div className="col-md-6">
+                            <input id="password" type="password" className="form-control" name="password" required autoComplete="new-password"/>
                         </div>
                     </div>
                     
-                    <div class="form-group row">
-                        <label for="password-confirm" className="col-md-4 col-form-label text-md-right">Confirm Password</label>
+                    <div className="form-group row">
+                        <label htmlFor="password-confirm" className="col-md-4 col-form-label text-md-right">Confirm Password</label>
                         
-                        <div class="col-md-6">
-                            <input id="password-confirm" type="password" className="form-control" name="password_confirmation" required autocomplete="new-password"/>
+                        <div className="col-md-6">
+                            <input id="password-confirm" type="password" className="form-control" name="password_confirmation" required autoComplete="new-password"/>
                         </div>
                     </div>
                     

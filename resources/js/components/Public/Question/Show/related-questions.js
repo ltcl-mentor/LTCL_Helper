@@ -10,9 +10,8 @@ import ListSubheader from '@material-ui/core/ListSubheader';
  */
 function Questions(props) {
     const related_question = props.related_questions.map((question) => {
-        console.log(question.id);
         return (
-            <ListItem button>
+            <ListItem button key={question.title}>
                 <Link to={ '/public/questions/' + question.id } target="_blank" className="related_question">
                     <ListItemText
                         primary={ question.title }

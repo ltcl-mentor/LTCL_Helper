@@ -104,7 +104,7 @@ function Content(props) {
             
             <List>
                 { searchMenu.map((menu) => (
-                    <Link to={ menu.url } onClick={ () => setIsLinkClicked(true) }>
+                    <Link key={ menu.url } to={ menu.url } onClick={ () => setIsLinkClicked(true) }>
                         <ListItem button key={ menu.menu }>
                             <ListItemIcon sx={{ paddingLeft: 4 }}>
                                 <Search />
@@ -132,7 +132,7 @@ function Content(props) {
             
             <List>
                 { itemMenu.map((menu) => (
-                    <Link to={ menu.url } onClick={ () => setIsLinkClicked(true) }>
+                    <Link key={ menu.url } to={ menu.url } onClick={ () => setIsLinkClicked(true) }>
                         <ListItem button key={ menu.menu }>
                             <ListItemIcon sx={{ paddingLeft: 4 }}>
                                <Description />
@@ -159,7 +159,7 @@ function Content(props) {
             </Typography>
             <List>
                 { formMenu.map((menu) => (
-                    <Link to={ menu.url } onClick={ () => setIsLinkClicked(true) }>
+                    <Link key={ menu.url } to={ menu.url } onClick={ () => setIsLinkClicked(true) }>
                         <ListItem button key={ menu.menu }>
                             <ListItemIcon sx={{ paddingLeft: 4 }}>
                                 { menu.menu === "質問投稿" ? <PostAdd /> : <ContactPhone /> }

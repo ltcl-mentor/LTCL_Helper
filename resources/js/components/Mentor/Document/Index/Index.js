@@ -52,7 +52,7 @@ function Document() {
     
     const document = staffs.map((staff) => {
         return (
-            <Accordion expanded={ expanded === staff.id } onChange={ handleChange(staff.id) } sx={{ marginBottom: 3 }}>
+            <Accordion expanded={ expanded === staff.id } onChange={ handleChange(staff.id) } sx={{ marginBottom: 3 }} key={staff.name}>
                 <AccordionSummary
                     expandIcon={ <ExpandMoreIcon /> }
                     aria-controls="panel1bh-content"

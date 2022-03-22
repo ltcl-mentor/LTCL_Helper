@@ -35,7 +35,7 @@ function Questions(props) {
     
     const question = props.topics.map((topic) => {
         return (
-            <Accordion expanded={ expanded === topic.id } onChange={handleChange(topic.id)} sx={{ marginTop: 3 }}>
+            <Accordion expanded={ expanded === topic.id } onChange={handleChange(topic.id)} sx={{ marginTop: 3 }} key={topic.topic}>
                 <AccordionSummary
                     expandIcon={ <ExpandMoreIcon /> }
                     aria-controls="panel1bh-content"
@@ -51,7 +51,7 @@ function Questions(props) {
                         { questions.map((question) => {
                             if (question.topic === topic.id) {
                                 return (
-                                    <Link to={ `/links/question/` + question.id }>
+                                    <Link to={ `/links/question/` + question.id } key={question.id}>
                                         <ListItem
                                             key={ question.id }
                                             role="listitem"

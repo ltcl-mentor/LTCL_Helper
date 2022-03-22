@@ -37,9 +37,8 @@ function Students(props) {
                 <TableBody>
                     { props.students.length !== 0 &&
                         props.students.map((student, index) => {
-                        console.log(student.lock)
                             return (
-                                <TableRow>
+                                <TableRow key={student.id}>
                                     <TableCell align="center" component="th" scope="row">{ student.id }</TableCell>
                                     <TableCell align="center">{ student.name }</TableCell>
                                     <TableCell align="center">

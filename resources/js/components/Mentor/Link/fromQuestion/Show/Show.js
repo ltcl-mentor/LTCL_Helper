@@ -84,7 +84,7 @@ function Show() {
     };
     
     return (
-        <div class="container">
+        <div className="container">
             <Alert
                 type="link_from_question"
                 status={ parameter.state && parameter.state.link }

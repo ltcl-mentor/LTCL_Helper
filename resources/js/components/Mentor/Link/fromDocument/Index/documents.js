@@ -39,7 +39,7 @@ function Documents(props) {
     
     const list = staffs.map((staff) => {
         return (
-            <Accordion expanded={ expanded === staff.id } onChange={ handleChange(staff.id) } sx={{ marginTop: 3 }}>
+            <Accordion expanded={ expanded === staff.id } onChange={ handleChange(staff.id) } sx={{ marginTop: 3 }} key={staff.name}>
                 <AccordionSummary
                     expandIcon={ <ExpandMoreIcon /> }
                     aria-controls="panel1bh-content"
@@ -63,7 +63,7 @@ function Documents(props) {
                                 
                                 if (targets[props.target]) {
                                     return (
-                                        <Link to={ `/links/document/` + document.id }>
+                                        <Link to={ `/links/document/` + document.id } key={document.id}>
                                             <ListItem
                                                 key={ document.id }
                                                 role="listitem"

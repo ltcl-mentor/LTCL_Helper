@@ -139,18 +139,21 @@ class User extends Authenticatable
         array_splice($students, 0, 2);
         $password = 'ltcl' . $date->year%100 . sprintf('%02d', $date->month);
         
-        // for ($name_count = 0; $name_count < count($students); $name_count++){
-        //     $user = User::create([
-        //         'name' => $students[$name_count],
-        //         'password' => Hash::make($password),
-        //         'is_admin' => null,
-        //     ]);
+        foreach($students as $student) {
+            // 値があるかつ登録されていないユーザーのみ追加
+            if ($student != "" && !User::where('name', $student)->exists()) {
+                $user = User::create([
+                    'name' => $student,
+                    'password' => Hash::make($password),
+                    'is_admin' => null,
+                ]);
                 
-        //     Student::create([
-        //         'name' => $students[$name_count],
-        //         'password' => $password,
-        //         'user_id' => $user->id,
-        //     ]);
-        // }
+                Student::create([
+                    'name' => $student,
+                    'password' => $password,
+                    'user_id' => $user->id,
+                ]);
+            }
+        }
     }
 }

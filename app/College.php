@@ -96,7 +96,7 @@ class College extends Model
         } elseif ($online_time['exist'] == "なし") {
             $message .= "*本日は、出勤しているメンターが少ないため、オンライン校舎は開校しておりません。*\n質問のある方は、<#C01JZMKS1K7> または、<#C029T2EBGC9> チャンネルにてご質問ください。";
         }
-        // dd($message);
+
         Slack::sendMessage($message, 'attendance');
     }
     
@@ -110,13 +110,14 @@ class College extends Model
             $staffs = explode("\n", $datas['values'][$date][$num], -1);
             
             // メンターと出勤時間を出力
-            for($i=0; $i < count($staffs); $i++) {
-                $staff = $staffs[$i];
-                $j = 14; // メンター数が変動した場合修正箇所
-                while($staff != $datas['values'][0][$j]) {
-                    $j++;
+            $i=0;
+            foreach($staffs as $staff) {
+                for ($j=14; $j < 34; $j++) { // メンター数が変動した場合修正。Max20人想定
+                    if ($staff == $datas['values'][0][$j]) {
+                        $times = implode(',', explode("\n", $datas['values'][$date][$j]));
+                        break;
+                    }
                 }
-                $times = implode(',', explode("\n", $datas['values'][$date][$j]));
                 
                 // オンライン出勤の場合、時間先頭のアスタリスク削除
                 if ($status == "online" && substr($times, 0, 1) == "*") {
@@ -124,6 +125,7 @@ class College extends Model
                 }
                 
                 $array[$i] = $i+1 . ". " . explode("　", $staff)[0] . " (" . $times . ")";
+                $i++;
             }
         }else{
             switch($status) {

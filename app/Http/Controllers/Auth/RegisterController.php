@@ -56,21 +56,20 @@ class RegisterController extends Controller
     {
         $this->publicValidator($request->all())->validate();
         
-        for($name_count = 0; $name_count < count($request["names"]); $name_count++){
-            if($request["names"][$name_count]){
+        foreach ($request['names'] as $student) {
+            if($student && !User::where('name', $student)->exists()){
                 $user = User::create([
-                    'name' => $request["names"][$name_count],
+                    'name' => $student,
                     'password' => Hash::make($request['password']),
                     'is_admin' => null,
                 ]);
                 
                 Student::create([
-                    'name' => $request["names"][$name_count],
+                    'name' => $student,
                     'password' => $request['password'],
                     'user_id' => $user->id,
                 ]);
             }
-            
         }
         
         return ["status" => 200];

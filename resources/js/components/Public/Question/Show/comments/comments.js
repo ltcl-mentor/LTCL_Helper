@@ -26,7 +26,7 @@ function Comments(props) {
         <React.Fragment>
             { props.main_comments && props.main_comments.map((comment) => {
                 return (
-                    <Card sx={{ marginBottom: 2 }}>
+                    <Card sx={{ marginBottom: 2 }} key={comment.comment}>
                     
                         <Comment
                             comment_id={ comment.id }
@@ -66,7 +66,7 @@ function Comments(props) {
                                 <AccordionDetails>
                                     { props.sub_comments[comment.id].map((sub_comment) => {
                                         return (
-                                            <React.Fragment>
+                                            <React.Fragment key={sub_comment.comment}>
                                                 <Comment
                                                     comment_id={ sub_comment.id }
                                                     comment={ sub_comment.comment }
