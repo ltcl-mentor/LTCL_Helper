@@ -25,14 +25,6 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('command:report')->dailyAt('22:00');
-        
-        /**
-         * メンター出勤状況通知
-         * 平日：14時
-         * 休日：12時
-         **/
-        $schedule->command('command:inform')->at('14:00')->weekdays();
-        $schedule->command('command:inform')->at('12:00')->weekends();
     }
 
     /**

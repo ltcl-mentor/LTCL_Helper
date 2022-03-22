@@ -22,54 +22,18 @@ class College extends Model
         $college_datas['close'] = $datas['values'][$date][4] ?: null;
         
         // 校舎出勤メンターの代入
-        if($datas['values'][$date][5] !== ""){
-            $staffs = explode("\n", $datas['values'][$date][5], -1);
-            
-            // メンターと出勤時間を出力
-            for($i=0; $i < count($staffs); $i++) {
-                $staff = $staffs[$i];
-                $j = 11;
-                while($staff != $datas['values'][0][$j]) {
-                    $j++;
-                }
-                $times = implode(',', explode("\n", $datas['values'][$date][$j]));
-                $college_datas['staff'][$i] = $staff . " (" . $times . ")";
-            }
-        }else{
-            $college_datas['staff'][] = "本日校舎に出勤するメンターはいません。";
-        }
+        $college_datas['staff'] = self::inputStaff("college", 5, $date, $datas);
         
         // オンライン出勤メンターの代入
-        if($datas['values'][$date][8] !== ""){
-            $staffs = explode("\n", $datas['values'][$date][8], -1);
-            
-            // メンターと出勤時間を出力
-            for($i=0; $i < count($staffs); $i++) {
-                $staff = $staffs[$i];
-                $j = 12;
-                while($staff != $datas['values'][0][$j]) {
-                    $j++;
-                }
-                $times = implode(',', explode("\n", $datas['values'][$date][$j]));
-                
-                // オンライン出勤時間先頭のアスタリスク削除
-                if (substr($times, 0, 1) == "*") {
-                    $times = substr($times, 1);
-                }
-                $college_datas['online_staff'][$i] = $staff . " (" . $times . ")";
-            }
-        }else{
-            $college_datas['online_staff'][] = "本日オンライン出勤するメンターはいません。";
-        }
+        $college_datas['online_staff'] = self::inputStaff("online", 7, $date, $datas);
         
         // オンライン校舎の代入
         if ($datas['values'][$date][9] == "なし") {
             $college_datas['zoom']['message'] = "本日オンライン質問部屋はありません。\n質問のある方はSlackにて出勤メンターへ連絡してください。";
-            $college_datas['zoom']['exist'] = false;
-        } else {
-            $college_datas['zoom']['message'] = $datas['values'][$date][9];
-            $college_datas['zoom']['exist'] = true;
+        } elseif ($datas['values'][$date][9] == "あり") {
+            $college_datas['zoom']['message'] = $datas['values'][$date][10];
         }
+        $college_datas['zoom']['exist'] = $datas['values'][$date][9];
         
         // オンライン自習室担当の代入
         // if(count($datas['values'][$date]) < 6){
@@ -111,28 +75,67 @@ class College extends Model
         $message = "";
         
         // 出勤メンター(校舎)
-        $message .= "本日の出勤メンター（校舎）\n";
+        $message .= "*■本日の出勤メンター（校舎）*\n";
         $staffs = Self::getCollegeData($date->year, $date->month, $date->day)["staff"];
         foreach($staffs as $staff) {
             $message .= $staff . "\n";
         }
         
         // 出勤メンター(オンライン)
-        $message .= "\n本日の出勤メンター（オンライン）\n";
+        $message .= "\n*■本日の出勤メンター（オンライン）*\n";
         $online_staffs = Self::getCollegeData($date->year, $date->month, $date->day)["online_staff"];
-        for ($i=0; $i < count($online_staffs); $i++) {
-            $message .= $online_staffs[$i] . "\n";
+        foreach($online_staffs as $staff) {
+            $message .= $staff . "\n";
         }
         
         // オンライン校舎
-        $message .= "\n本日のオンライン校舎（質問部屋）\n";
+        $message .= "\n*■本日のオンライン校舎（質問部屋）*\n";
         $online_time = Self::getCollegeData($date->year, $date->month, $date->day)["zoom"];
-        if ($online_time['exist']) {
-            $message .= "質問部屋・開校時間帯：" . $online_time['message']. "\n" . env('ZoomLinksNote');
-        } else {
-            $message .= "本日は、出勤しているメンターが少ないため、オンライン校舎は開校しておりません。\n質問のある方は、#ltcl-カリキュラム質問 または、#ltcl-成果物質問 チャンネルにてご質問ください。";
+        if ($online_time['exist'] == "あり") {
+            $message .= "開校時間はアプリからご確認ください。";
+        } elseif ($online_time['exist'] == "なし") {
+            $message .= "*本日は、出勤しているメンターが少ないため、オンライン校舎は開校しておりません。*\n質問のある方は、<#C01JZMKS1K7> または、<#C029T2EBGC9> チャンネルにてご質問ください。";
         }
 
         Slack::sendMessage($message, 'attendance');
+    }
+    
+    /**
+     * メンター、出勤時間代入
+     **/
+    public static function inputStaff($status, $num, $date, $datas) {
+        $array = [];
+        
+        if($datas['values'][$date][$num] !== ""){
+            $staffs = explode("\n", $datas['values'][$date][$num], -1);
+            
+            // メンターと出勤時間を出力
+            for($i=0; $i < count($staffs); $i++) {
+                $staff = $staffs[$i];
+                $j = 14; // メンター数が変動した場合修正箇所
+                while($staff != $datas['values'][0][$j]) {
+                    $j++;
+                }
+                $times = implode(',', explode("\n", $datas['values'][$date][$j]));
+                
+                // オンライン出勤の場合、時間先頭のアスタリスク削除
+                if ($status == "online" && substr($times, 0, 1) == "*") {
+                    $times = substr($times, 1);
+                }
+                
+                $array[$i] = explode("　", $staff)[0] . " (" . $times . ")";
+            }
+        }else{
+            switch($status) {
+                case "online":
+                    $array[0] = "本日オンライン出勤するメンターはいません。";
+                    break;
+                case "college":
+                    $array[0] = "本日校舎に出勤するメンターはいません。";
+                    break;
+            }
+        }
+
+        return $array;
     }
 }
