@@ -18,7 +18,7 @@ class Slack extends Model
         } elseif ($target === "student") {
             $url = env('Slack_Student_URL');
         } elseif ($target === "attendance") {
-            $url = env('Slack_URL'); // 今後は「メンター出勤状況」のチャンネルURLに変える
+            $url = env('Slack_Mentor_Attendance_URL');
         }
         
         $response = $client->request(

@@ -92,11 +92,11 @@ class College extends Model
         $message .= "\n*■本日のオンライン校舎（質問部屋）*\n";
         $online_time = Self::getCollegeData($date->year, $date->month, $date->day)["zoom"];
         if ($online_time['exist'] == "あり") {
-            $message .= "開校時間はアプリからご確認ください。";
+            $message .= "開校時間は追ってメンターより連絡します:woman-bowing:";
         } elseif ($online_time['exist'] == "なし") {
             $message .= "*本日は、出勤しているメンターが少ないため、オンライン校舎は開校しておりません。*\n質問のある方は、<#C01JZMKS1K7> または、<#C029T2EBGC9> チャンネルにてご質問ください。";
         }
-
+        
         Slack::sendMessage($message, 'attendance');
     }
     
@@ -130,10 +130,10 @@ class College extends Model
         }else{
             switch($status) {
                 case "online":
-                    $array[0] = "本日オンライン出勤するメンターはいません。";
+                    $array[0] = "オンライン出勤メンターなし";
                     break;
                 case "college":
-                    $array[0] = "本日校舎に出勤するメンターはいません。";
+                    $array[0] = "校舎出勤メンターなし。";
                     break;
             }
         }
