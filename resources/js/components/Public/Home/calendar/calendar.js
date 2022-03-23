@@ -27,7 +27,7 @@ function Calendar(props) {
                 .then(response => {
                     setCollegeInfo(response.data);
                     setIsDateClicked(true);
-                    const exist = response.data.zoom.exist === "あり" ? true : false;
+                    const exist = response.data.zoom.exist == "あり" ? true : false;
                     setZoomExist(exist);
                 }).catch(error => {
                     setResError(true);

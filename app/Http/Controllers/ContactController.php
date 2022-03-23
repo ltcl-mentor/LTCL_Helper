@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Slack;
+use App\User;
 
 class ContactController extends Controller
 {
@@ -14,6 +15,15 @@ class ContactController extends Controller
     public function sendContactMessage(Request $request)
     {
         $user = Auth::user()->name;
+        $users = User::getStudentsApiData()["values"];
+        array_splice($users, 0, 2);
+        
+        foreach($users as $student) {
+            if ($student[7] == $user) {
+                $user = $student[5] . "(ID：" . $student[7] . ")";
+                break;
+            }
+        }
         
         $message = $user . "さんから次のような問い合わせがありました。\n----------------\n" . $request['message'] . "\n----------------";
         

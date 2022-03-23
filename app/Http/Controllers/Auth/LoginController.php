@@ -99,6 +99,20 @@ class LoginController extends Controller
     protected function sendLockoutResponse(Request $request)
     {
         $user = User::firstWhere('name', $request->name);
+        $user_name = $user->name;
+        
+        // 受講生の場合、スプレッドシートから取ってきた名前を通知
+        $users = User::getStudentsApiData()["values"];
+        array_splice($users, 0, 2);
+        
+        if ($user->is_admin == null) {
+            foreach($users as $student) {
+                if ($student[7] == $user_name) {
+                    $user_name = $student[5] . "(ID：" . $student[7] . ")";
+                    break;
+                }
+            }
+        }
         
         // 入力されたnameに該当するユーザデータが存在した場合にロック
         if($user !== null){
@@ -113,8 +127,8 @@ class LoginController extends Controller
                 $student->save();
             }
             
-            $message = "ユーザがロックされました。\n該当ユーザ：" . $user->name;
-            Slack::sendMessage($message);
+            $message = "ユーザがロックされました。\n該当ユーザ：" . $user_name . "さん";
+            Slack::sendMessage($message, "mentor");
             
             $this->clearLoginAttempts($request);
             

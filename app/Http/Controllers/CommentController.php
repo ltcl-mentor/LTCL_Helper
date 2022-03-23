@@ -89,13 +89,24 @@ class CommentController extends Controller
         }
         
         // Slackへの通知
+        // 受講生の場合、スプレッドシートから取ってきた名前を通知
+        $users = User::getStudentsApiData()["values"];
+        array_splice($users, 0, 2);
+        
         // データ作成者が受講生だった場合
         if(Auth::user()->is_admin === null){
             $message = "受講生によってコメントが入力されました。\n「". $comment->getQestionTitle() ."」\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $comment->question_id;
             Slack::sendMessage($message, "mentor");
         // メンターだった場合
         }elseif(Auth::user()->is_admin === "staff"){
-            $message = "@" . User::getAuthorName($comment->question_id) . "さん\nメンターによってコメントが入力されました。\n「". $comment->getQestionTitle() ."」\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/public/questions/" . $comment->question_id;
+            $user_name = User::getAuthorName($comment->question_id);
+            foreach($users as $student) {
+                if ($student[7] == $user_name) {
+                    $user_name = $student[5] . "(ID：" . $student[7] . ")";
+                    break;
+                }
+            }
+            $message = "@" . $user_name . "さん\nメンターによってコメントが入力されました。\n「". $comment->getQestionTitle() ."」\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/public/questions/" . $comment->question_id;
             Slack::sendMessage($message, "student");
         }
         

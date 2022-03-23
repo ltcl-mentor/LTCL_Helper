@@ -100,9 +100,9 @@ class User extends Authenticatable
     }
     
     /**
-     * スプレッドシートから受講生情報を取得
+     * スプレッドシートから未登録の受講生情報を取得
      */
-    public static function getStudentsApiData()
+    public static function getUnRegisterApiData()
     {
         $client = new \GuzzleHttp\Client();
         $url = 'https://sheets.googleapis.com/v4/spreadsheets/'. env('GoogleSheetsStudentsID') .'/values/アプリ未登録ID';
@@ -116,12 +116,21 @@ class User extends Authenticatable
         return json_decode($response->getBody(), true);
     }
     
-    public static function getClient(){
-		$client = new Google_Client();
-        $client->setAuthConfig(storage_path('credentials.json'));
-        $client->setScopes([Google_Service_Sheets::SPREADSHEETS]);
-		$client->setApplicationName('Google Sheets');
-        return  new Google_Service_Sheets($client);
+    /**
+     * スプレッドシートから受講生情報を取得
+     */
+    public static function getStudentsApiData()
+    {
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://sheets.googleapis.com/v4/spreadsheets/'. env('GoogleSheetsStudentsID') .'/values/ID';
+        
+        $response = $client->request(
+            'GET',
+            $url,
+            ['query' => ['key' => env('GoogleSheetsKey'), 'majorDimension' => 'ROWS']]
+        );
+        
+        return json_decode($response->getBody(), true);
     }
     
     /**
@@ -129,10 +138,8 @@ class User extends Authenticatable
      */
     public static function registerStudents()
     {
-        $client = new \GuzzleHttp\Client();
-        $url = 'https://sheets.googleapis.com/v4/spreadsheets/' . env('GoogleSheetsStudentsID') . '/values:batchUpdate';
         $date = new Carbon();
-        $datas = self::getStudentsApiData();
+        $datas = self::getUnRegisterApiData();
         
         // 受講生ID
         $students = $datas['values'][7];
@@ -140,6 +147,7 @@ class User extends Authenticatable
         $password = 'ltcl' . $date->year%100 . sprintf('%02d', $date->month);
         
         foreach($students as $student) {
+            
             // 値があるかつ登録されていないユーザーのみ追加
             if ($student != "" && !User::where('name', $student)->exists()) {
                 $user = User::create([

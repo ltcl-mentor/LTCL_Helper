@@ -19,14 +19,10 @@ function Info(props) {
         } else {
             setTimeout(false);
         }
-        
-        if (props.zoom_exist) {
-            setZoom(true);
-        }
-    },[props.resError, props.zoom_exist]);
+    },[props.resError]);
     
     let zoom;
-    if (isZoom) {
+    if (props.zoom_exist) {
         zoom = <a href={ props.zoom_link } target="_blank">zoomリンク</a>;
     }
     
