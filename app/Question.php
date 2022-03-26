@@ -140,7 +140,7 @@ class Question extends Model
                 
                 // 複数の検索ワードの全てに該当するものを選出
                 foreach($noEmptyFreewords as $searchWord){
-                    $basic_data->where('question', 'ilike', '%'.$searchWord.'%' );
+                    $basic_data->where('question', 'ilike', '%'.$searchWord.'%');
                 };
                 $results = $basic_data;
             }
