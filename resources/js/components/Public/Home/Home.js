@@ -115,7 +115,7 @@ function Home() {
                                     width: "90%",
                                 }}
                             >
-                                校舎info
+                                校舎情報
                             </Typography>
                             
                             <Clendar 
