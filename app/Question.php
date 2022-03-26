@@ -131,7 +131,7 @@ class Question extends Model
                             foreach ($noEmptyFreewords as $searchFreeword) {
                                 $where = (!$i) ? 'whereRaw' : 'orWhereRaw';
                                 $i++;
-                                $query->$where("LOWER(`question`) LIKE  "{?}"  ",['%'.trim(strtolower($searchFreeword)).'%']);
+                                $query->$where("LOWER(`question`) LIKE '%l%' ");
                             }
                         });
             }else{
