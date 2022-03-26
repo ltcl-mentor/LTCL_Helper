@@ -70,6 +70,10 @@ function Form(props) {
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="検索ワードを入力してください。"
                     onChange={ (event) => handleFreeword(event) }
+                    onKeyDown={ (event) => {
+                        if (event.key === 'Enter')
+                            event.preventDefault();
+                    }}
                 />
                 <IconButton sx={{ p: "10px" }}>
                     <SearchIcon />
