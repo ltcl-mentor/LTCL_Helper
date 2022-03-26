@@ -129,9 +129,9 @@ class Question extends Model
                         ->where(function ($query) use ($noEmptyFreewords) {
                             $i = 0;
                             foreach ($noEmptyFreewords as $searchFreeword) {
-                                $where = (!$i) ? 'whereRaw' : 'orWhereRaw';
+                                $where = (!$i) ? 'where' : 'orWhere';
                                 $i++;
-                                $query->$where("LOWER('question') LIKE '%l%' ");
+                                $query->$where('question', 'like', '%'.$searchFreeword.'%');
                             }
                         });
             }else{
@@ -140,7 +140,7 @@ class Question extends Model
                 
                 // 複数の検索ワードの全てに該当するものを選出
                 foreach($noEmptyFreewords as $searchWord){
-                    $basic_data->whereRaw("LOWER('question') LIKE '%' || ? || '%' ",[trim(strtolower($searchWord))]);
+                    $basic_data->where('question', 'LIKE', '%'.$searchWord.'%');
                 };
                 $results = $basic_data;
             }
