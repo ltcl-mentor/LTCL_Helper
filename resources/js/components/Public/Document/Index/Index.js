@@ -43,7 +43,7 @@ function Index() {
             keyword_documents = default_documents;
         } else {
             default_documents.map((doc) => {
-                doc.title.indexOf(keyword) !== -1 && keyword_documents.push(doc);
+                doc.title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1 && keyword_documents.push(doc);
             });
         }
         
@@ -123,6 +123,10 @@ function Index() {
                             sx={{ ml: 1, flex: 1 }}
                             placeholder="キーワードを入力してください。"
                             onChange={ (event) => handleKeyword(event) }
+                            onKeyDown={ (event) => {
+                                if (event.key === 'Enter')
+                                event.preventDefault();
+                            }}
                         />
                         <IconButton sx={{ p: '10px' }}>
                             <SearchIcon />
