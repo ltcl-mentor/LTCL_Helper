@@ -37,8 +37,8 @@ function Questions(props) {
     }, [props.searchType, props.freeword]);
     
     // ペジネーションのページ番号がクリックされた際にページ変更
-    const handlePageClick = (event) => {
-        setCurrentPage(event.selected);
+    const handlePageClick = (event, index) => {
+        setCurrentPage(index);
     };
     
     // 検索結果の質問一覧情報
@@ -72,6 +72,7 @@ function Questions(props) {
     } else {
         // 検索結果一覧情報を1ページ10件に分割
         questionList = list.slice((currentPage - 1)*10, currentPage*10);
+    
         // ペジネーションの部分
         pagination = (
             <Pagination
@@ -82,6 +83,8 @@ function Questions(props) {
             />
         );
     }
+    
+    
     
     return (
         <Card sx={{ marginTop: 4, marginBottom:4 }}>
