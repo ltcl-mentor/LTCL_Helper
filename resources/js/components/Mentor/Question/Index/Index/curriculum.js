@@ -28,6 +28,8 @@ function Curriculum(props) {
         {"id": 8, "topic": "Git&GitHub"},
         {"id": 9, "topic": "マイグレーション"},
         {"id": 10, "topic": "リレーション"},
+        {"id": 11, "topic": "認証・認可機能(カリキュラム)"},
+        {"id": 12, "topic": "API(カリキュラム)"},
     ];
     
     const handleChange = (panel) => (event, isExpanded) => {

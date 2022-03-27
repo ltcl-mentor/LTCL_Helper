@@ -48,10 +48,14 @@ function Create() {
             ['7-1-1'],
             ['9-1-1'],
             ['9-2-1'],
+            // 以下追加箇所
+            ['9-3-1'],
+            ['9-4-1'],
         ],
         [
-            ['9-3-1', '成果物'],
-            ['9-4-1', '成果物'],
+            // 以下変更箇所
+            // ['9-3-1', '成果物'],
+            // ['9-4-1', '成果物'],
             ['成果物'],
         ]
     ];
@@ -79,21 +83,9 @@ function Create() {
                     return false;
                 }
             } else if (category === 1) {
-                if (topic === 11) {
-                    if (!(curriculum_numbers[1][0].includes(curriculum_number))) {
-                        setCurriculumNumberValidationError(1);
-                        return false;
-                    }
-                } else if (topic === 12) {
-                    if (!(curriculum_numbers[1][1].includes(curriculum_number))) {
-                        setCurriculumNumberValidationError(1);
-                        return false;
-                    }
-                } else {
-                    if (!(curriculum_numbers[1][2].includes(curriculum_number))) {
-                        setCurriculumNumberValidationError(1);
-                        return false;
-                    }
+                if (!(curriculum_numbers[1][0].includes(curriculum_number))) {
+                    setCurriculumNumberValidationError(1);
+                    return false;
                 }
             }
         } else if (step === 1) {
