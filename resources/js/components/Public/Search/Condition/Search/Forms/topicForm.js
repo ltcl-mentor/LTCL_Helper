@@ -19,7 +19,7 @@ function Topic(props) {
     
     // カテゴリーが変更されたら実行
     useEffect(() => {
-        props.category === 0 ? setTopic(0) : setTopic(13);
+        props.category === 0 ? setTopic(0) : setTopic(14);
     }, [props.category]);
     
     // 選択されたトピック情報を取得
@@ -47,6 +47,7 @@ function Topic(props) {
                     <FormControlLabel value={10} control={ <Radio /> } label="リレーション" />
                     <FormControlLabel value={11} control={ <Radio /> } label="認証・認可機能(カリキュラム)" />
                     <FormControlLabel value={12} control={ <Radio /> } label="API(カリキュラム)" />
+                    <FormControlLabel value={13} control={ <Radio /> } label="その他(カリキュラム)" />
                 </RadioGroup>
             </FormControl>
         );
@@ -56,11 +57,12 @@ function Topic(props) {
         topicForm = (
             <FormControl component="fieldset">
                 <RadioGroup row aria-label="topic" name="topic" value={ topic } onChange={ (event) => handleTopic(event) }>
-                    <FormControlLabel value={13} control={ <Radio /> } label="認証・認可機能(成果物)" />
-                    <FormControlLabel value={14} control={ <Radio /> } label="API(成果物)" />
-                    <FormControlLabel value={15} control={ <Radio /> } label="画像処理" />
-                    <FormControlLabel value={16} control={ <Radio /> } label="Heroku環境" />
-                    <FormControlLabel value={17} control={ <Radio /> } label="デザイン" />
+                    <FormControlLabel value={14} control={ <Radio /> } label="認証・認可機能(成果物)" />
+                    <FormControlLabel value={15} control={ <Radio /> } label="API(成果物)" />
+                    <FormControlLabel value={16} control={ <Radio /> } label="画像処理" />
+                    <FormControlLabel value={17} control={ <Radio /> } label="Heroku環境" />
+                    <FormControlLabel value={18} control={ <Radio /> } label="デザイン" />
+                    <FormControlLabel value={19} control={ <Radio /> } label="その他(成果物)" />
                 </RadioGroup>
             </FormControl>
         );

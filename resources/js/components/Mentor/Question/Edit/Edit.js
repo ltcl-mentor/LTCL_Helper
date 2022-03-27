@@ -50,11 +50,13 @@ function Edit() {
             ['7-1-1'],
             ['9-1-1'],
             ['9-2-1'],
+            ['9-3-1'],
+            ['9-4-1'],
+            ['その他'],
         ],
         [
-            ['9-3-1', '成果物'],
-            ['9-4-1', '成果物'],
             ['成果物'],
+            ['その他']
         ]
     ];
     
@@ -109,18 +111,14 @@ function Edit() {
                     return false;
                 }
             } else if (category === 1) {
-                if (topic === 11) {
-                    if (!(curriculum_numbers[1][0].includes(curriculum_number))) {
-                        setCurriculumNumberValidationError(1);
-                        return false;
-                    }
-                } else if (topic === 12) {
+                // 以下変更箇所
+                if (topic === 19) {
                     if (!(curriculum_numbers[1][1].includes(curriculum_number))) {
                         setCurriculumNumberValidationError(1);
                         return false;
                     }
                 } else {
-                    if (!(curriculum_numbers[1][2].includes(curriculum_number))) {
+                    if (!(curriculum_numbers[1][0].includes(curriculum_number))) {
                         setCurriculumNumberValidationError(1);
                         return false;
                     }

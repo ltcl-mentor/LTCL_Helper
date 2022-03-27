@@ -10,12 +10,15 @@ function CrriculumNumber(props) {
     
     // カテゴリーとトピックが変更されたら実行
     useEffect(() => {
-        if (props.category === 0 && props.topic <= 10) {
+        // 以下変更箇所
+        if (props.category === 0 && props.topic <= 13) {
             setCurriculumNumbers(props.curriculum_numbers[Number(props.category)][Number(props.topic)]);
-        } else if (props.category === 1 && props.topic >= 11) {
-            props.topic === 11 && setCurriculumNumbers(props.curriculum_numbers[Number(props.category)][0]);
-            props.topic === 12 && setCurriculumNumbers(props.curriculum_numbers[Number(props.category)][1]);
-            props.topic >= 13 && setCurriculumNumbers(props.curriculum_numbers[Number(props.category)][2]);
+        } else if (props.category === 1 && props.topic >= 14) {
+            if (props.topic == 19) {
+                setCurriculumNumbers(props.curriculum_numbers[Number(props.category)][1]);
+            } else {
+                setCurriculumNumbers(props.curriculum_numbers[Number(props.category)][0]);
+            }
         } else {
             setCurriculumNumbers(props.curriculum_numbers[0][0]);
         }

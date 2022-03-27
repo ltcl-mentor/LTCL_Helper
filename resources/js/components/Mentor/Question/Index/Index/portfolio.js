@@ -16,11 +16,12 @@ import ListItemText from '@mui/material/ListItemText';
 function Portfolio(props) {
     const [expanded, setExpanded] = React.useState(false);
     const portfolio_topics = [
-        {"id": 13, "topic": "認証・認可機能(成果物)"},
-        {"id": 14, "topic": "API(成果物)"},
-        {"id": 15, "topic": "画像処理"},
-        {"id": 16, "topic": "Heroku環境"},
-        {"id": 17, "topic": "デザイン"},
+        {"id": 14, "topic": "認証・認可機能(成果物)"},
+        {"id": 15, "topic": "API(成果物)"},
+        {"id": 16, "topic": "画像処理"},
+        {"id": 17, "topic": "Heroku環境"},
+        {"id": 18, "topic": "デザイン"},
+        {"id": 19, "topic": "その他(成果物)"},
     ];
     
     const handleChange = (panel) => (event, isExpanded) => {
