@@ -29,9 +29,9 @@ function Condition() {
     const categories = ['カリキュラム', '成果物'];
     const topics = [
         // カリキュラムのトピック
-        'AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'データベース', 'Git&GitHub', 'マイグレーション', 'リレーション',
+        'AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'データベース', 'Git&GitHub', 'マイグレーション', 'リレーション','認証・認可機能(カリキュラム)','API(カリキュラム)',
         // 成果物のトピック
-        '認証・認可機能', 'API', '画像処理', 'Heroku環境', 'デザイン'
+        '認証・認可機能(成果物)', 'API(成果物)', '画像処理', 'Heroku環境', 'デザイン'
     ];
     const [activeStep, setActiveStep] = useState(0);
     const steps = [
@@ -199,39 +199,38 @@ function Condition() {
                                 </Stepper>
                                 
                                 { activeStep === steps.length && (
-                                    <Box sx={{ marginTop: 4 }}>
-                                        <Grid container spacing={2}>
-                                            <Grid item>
-                                                <Button
-                                                    variant="outlined"
-                                                    onClick={ handleBack }
-                                                    color="secondary"
-                                                >
-                                                    戻る
-                                                </Button>
-                                            </Grid>
+                                    <React.Fragment>
+                                        <Box sx={{ marginTop: 4 }}>
+                                            <Grid container spacing={2}>
+                                                <Grid item>
+                                                    <Button
+                                                        variant="outlined"
+                                                        onClick={ handleBack }
+                                                        color="secondary"
+                                                    >
+                                                        Back
+                                                    </Button>
+                                                </Grid>
                                             
-                                            <Grid item>
-                                                <Button
-                                                    variant="contained"
-                                                    onClick={ handleReset }
-                                                    color="primary"
-                                                >
-                                                    検索条件をリセット
-                                                </Button>
+                                                <Grid item>
+                                                    <Button
+                                                        variant="contained"
+                                                        onClick={ handleReset }
+                                                        color="primary"
+                                                    >
+                                                        検索条件をリセット
+                                                    </Button>
+                                                </Grid>
                                             </Grid>
-                                        </Grid>
-                                    </Box>
-                                )}
-                                
-                                { activeStep === steps.length && (
-                                    <SearchButton
-                                        category={ category }
-                                        topic={ topic }
-                                        curriculum_number={ curriculum_number }
-                                        keyword={ keyword }
-                                        setIsSearchButtonClicked={ setIsSearchButtonClicked }
-                                    />
+                                        </Box>
+                                        <SearchButton
+                                            category={ category }
+                                            topic={ topic }
+                                            curriculum_number={ curriculum_number }
+                                            keyword={ keyword }
+                                            setIsSearchButtonClicked={ setIsSearchButtonClicked }
+                                        />
+                                    </React.Fragment>
                                 )}
                             </Box>
                         </Grid>
