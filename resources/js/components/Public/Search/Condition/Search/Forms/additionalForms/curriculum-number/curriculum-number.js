@@ -21,19 +21,25 @@ function CrriculumNumber(props) {
             ['9-1-1'],
             ['9-2-1'],
             ['9-3-1'],
-            ['9-4-1']
+            ['9-4-1'],
+            ['その他'],
         ],
         [
             ['成果物'],
+            ['その他'],
         ]
     ];
     
     // カテゴリーとトピックが変更されたら実行
     useEffect(() => {
-        if (props.category === 0 && props.topic <= 12) {
+        if (props.category === 0 && props.topic <= 13) {
             setCurriculumNumbers(curriculum_numbers_array[Number(props.category)][Number(props.topic)]);
-        } else if (props.category === 1 && props.topic >= 13) {
-            setCurriculumNumbers(curriculum_numbers_array[Number(props.category)][0]);
+        } else if (props.category === 1 && props.topic >= 14) {
+            if (props.topic == 19) {
+                setCurriculumNumbers(curriculum_numbers_array[Number(props.category)][1]);
+            } else {
+                setCurriculumNumbers(curriculum_numbers_array[Number(props.category)][0]);
+            }
         } else {
             setCurriculumNumbers(curriculum_numbers_array[0][0]);
         }

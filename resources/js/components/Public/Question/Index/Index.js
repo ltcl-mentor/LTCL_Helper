@@ -17,7 +17,7 @@ function Index() {
     
     //画面描画時に実行
     useEffect(() => {
-        // 公開されている質問を全権取得
+        // 公開されている質問を全件取得
         axios
             .get("/react/questions/checked")
             .then(response => {
@@ -26,7 +26,6 @@ function Index() {
                 console.log(error);
             });
     }, []);
-    
     
     // タブの切り替え
     const handleChange = (event, newValue) => {

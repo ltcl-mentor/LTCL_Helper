@@ -139,9 +139,9 @@ class QuestionTableSeeder extends Seeder
         ]);
         DB::table('questions')->insert([
             'id' => 10,
-            'category' => 1,
-            'topic' => 9,
-            'curriculum_number' => '成果物',
+            'category' => 0,
+            'topic' => 6,
+            'curriculum_number' => '8-1-1',
             'title' => '（画像なしで保留）',
             'remarks' => 'test',
             'question' => "Modelとマイグレーションファイルを作成ができません。",
@@ -322,7 +322,7 @@ class QuestionTableSeeder extends Seeder
         DB::table('questions')->insert([
             'id' => 23,
             'category' => 1,
-            'topic' => 9,
+            'topic' => 19,
             'curriculum_number' => '成果物',
             'title' => 'Seederが実行されません。',
             'remarks' => 'カリキュラムや公式ドキュメントで実行コマンドは確認しました。',
@@ -433,8 +433,8 @@ class QuestionTableSeeder extends Seeder
         ]);
         DB::table('questions')->insert([
             'id' => 31,
-            'category' => 0,
-            'topic' => 13,
+            'category' => 1,
+            'topic' => 16,
             'curriculum_number' => '成果物',
             'title' => 'S3の設定がうまくいきません。',
             'remarks' => '公式ドキュメントなどは参照してみましたが、理解できませんでした。',
@@ -501,7 +501,5 @@ class QuestionTableSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
-        
-        // 7月1日以降から
     }
 }
