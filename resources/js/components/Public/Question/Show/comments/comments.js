@@ -75,7 +75,7 @@ function Comments(props) {
                                                     is_staff={ sub_comment.is_staff }
                                                     user_id={ props.user_id }
                                                     is_admin={ props.is_admin }
-                                                    setEdit={ setEditId }
+                                                    setEditId={ setEditId }
                                                     setCommentChanging={ props.setCommentChanging }
                                                 />
                                                 

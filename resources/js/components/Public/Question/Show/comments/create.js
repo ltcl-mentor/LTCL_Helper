@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import axios from "axios";
 import Button from '@mui/material/Button';
 import CreateIcon from '@material-ui/icons/Create';
@@ -12,6 +13,7 @@ import TextForm from '../../Create/Create/question-form/original-text-form/origi
  * コメント新規作成
  */
 function Create(props) {
+    const history = useHistory();
     const [open, setOpen] = useState(false);
     const [clickCount, setClickCount] = useState(0);
     const [comment, setComment] = useState('');
@@ -54,6 +56,7 @@ function Create(props) {
                         setOpen(false);
                         props.setCommentChanging(false);
                         setClickCount(0);
+                        history.push("/questions/" + response.data.id, {comment: 'post'});
                     }
                 }).catch(error => {
                     console.log(error);

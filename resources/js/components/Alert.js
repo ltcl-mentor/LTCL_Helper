@@ -125,6 +125,18 @@ function AlertMessage(props) {
                     break;
             }
             break;
+        case "comment":
+            switch(props.status) {
+                case "post":
+                    message = <AlertTitle>コメントを投稿しました。</AlertTitle>;
+                    break;
+                case "updated":
+                    message = <AlertTitle>コメントが編集されました。</AlertTitle>;
+                    break;
+                case "deleted":
+                    message = <AlertTitle>コメントを削除しました。</AlertTitle>;
+                    break;
+            }
     }
     
     return (

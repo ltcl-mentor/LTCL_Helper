@@ -94,6 +94,11 @@ function Show() {
                 info={ parameter.state && parameter.state.number }
             />
             
+            <Alert
+                type="comment"
+                status={ parameter.state && parameter.state.comment }
+            />
+            
             <Breadcrumbs page="mentor_question_show"/>
             
             <Typography component="div" align="center" sx={{ marginTop: 4 }} >
