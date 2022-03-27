@@ -252,7 +252,7 @@ class QuestionController extends Controller
         $question->delete();
         
         // 質問作成したユーザの質問作成数を変更
-        $user = Auth::find($question->user_id);
+        $user = User::where('id', $question->user_id)->first();
         $user->question_count += 1;
         $user->save();
         
