@@ -72,4 +72,8 @@ class Comment extends Model
         
         return $question;
     }
+    
+    public function question() {
+        return $this->belongsTo('App\Question');
+    }
 }

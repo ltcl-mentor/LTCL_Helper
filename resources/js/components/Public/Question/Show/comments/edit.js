@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
 import axios from "axios";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -10,6 +11,7 @@ import TextForm from '../../Create/Create/question-form/original-text-form/origi
  * コメント編集
  */
 function Edit(props) {
+    const history = useHistory();
     const [clickCount, setClickCount] = useState(0);
     const [comment, setComment] = useState('');
     const [images, setImages] = useState([]);
@@ -36,6 +38,7 @@ function Edit(props) {
                         props.setCommentChanging(false);
                         props.setEditId('');
                         setClickCount(0);
+                        history.push("/questions/" + response.data.id, {comment: 'updated'});
                     }
                 }).catch(error => {
                     console.log(error);

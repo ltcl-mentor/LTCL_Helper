@@ -158,14 +158,14 @@ class CommentController extends Controller
         
         // Slackへの通知
         // データ作成者が受講生だった場合
-        // if(Auth::user()->is_admin === null){
-        //     $message = "受講生によってコメントが更新されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $comment->question_id;
-        //     Slack::sendMessage($message);
-        // // メンターだった場合
-        // }elseif(Auth::user()->is_admin === "staff"){
-        //     $message = "@" . User::getAuthorName($comment->question_id) . "さん\nメンターによってコメントが入力されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $comment->question_id;
-        //     Slack::sendMessage($message, "student");
-        // }
+        if(Auth::user()->is_admin === null){
+            $message = "受講生によってコメントが更新されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $comment->question_id;
+            Slack::sendMessage($message);
+        // メンターだった場合
+        }elseif(Auth::user()->is_admin === "staff"){
+            $message = "@" . User::getAuthorName($comment->question_id) . "さん\nメンターによってコメントが入力されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $comment->question_id;
+            Slack::sendMessage($message, "student");
+        }
         
         return ['id' => $comment->question_id];
     }
@@ -176,6 +176,7 @@ class CommentController extends Controller
     public function delete(Comment $comment)
     {
         $delete_images = [];
+        $question_id = $comment->question()->first()->id;
         
         // 対象コメントがメインコメントかリプライコメントか判別
         // メインコメントだった場合は関連するリプライコメントを削除した後にメインコメントの削除
@@ -213,5 +214,7 @@ class CommentController extends Controller
         // // 過去に論理削除されたデータの中で３ヶ月経過したものを物理削除
         // // 質問で利用された画像の削除はこちらで実行
         // Question::questionForceDelete();
+        
+        return ['id' => $question_id];
     }
 }
