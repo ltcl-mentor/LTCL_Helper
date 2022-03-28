@@ -89,17 +89,21 @@ class College extends Model
         $message = "";
         
         // 出勤メンター(校舎)
-        $message .= "*■本日の出勤メンター（校舎）*\n";
-        $staffs = Self::getCollegeData($date->year, $date->month, $date->day)["staff"];
-        foreach($staffs as $staff) {
-            $message .= $staff . "\n";
+        if (Self::getCollegeData($date->year, $date->month, $date->day)["staff"][0]) {
+            $message .= "*■本日の出勤メンター（校舎）*\n";
+            $staffs = Self::getCollegeData($date->year, $date->month, $date->day)["staff"];
+            foreach($staffs as $staff) {
+                $message .= $staff . "\n";
+            }
         }
         
         // 出勤メンター(オンライン)
-        $message .= "\n*■本日の出勤メンター（オンライン）*\n";
-        $online_staffs = Self::getCollegeData($date->year, $date->month, $date->day)["online_staff"];
-        foreach($online_staffs as $staff) {
-            $message .= $staff . "\n";
+        if (Self::getCollegeData($date->year, $date->month, $date->day)["online_staff"][0]) {
+            $message .= "\n*■本日の出勤メンター（オンライン）*\n";
+            $online_staffs = Self::getCollegeData($date->year, $date->month, $date->day)["online_staff"];
+            foreach($online_staffs as $staff) {
+                $message .= $staff . "\n";
+            }
         }
         
         // オンライン校舎
