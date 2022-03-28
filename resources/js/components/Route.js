@@ -6,6 +6,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Bar from './Layout/Bar';
 import AccessError from './Error';
 import MyPage from './Public/User/MyPage';
+import MyQuestion from './Public/User/QuestionShow';
 import History from './Public/History/History';
 import Home from './Public/Home/Home';
 import PublicDocumentIndex from './Public/Document/Index/Index';
@@ -62,6 +63,9 @@ function Router() {
                 
                 {/* ユーザマイページ表示 */}
                 <Route path="/my_page" exact component={ MyPage }/>
+                
+                {/* ユーザマイページ質問詳細表示 */}
+                <Route path="/my_page/questions/:id" exact component={ MyQuestion }/>
                 
                 {/* 質問履歴画面表示 */}
                 <Route path="/history" exact component={ History }/>

@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth']], function () {
      * 以下のurlはreact上で非同期通信として利用
      */
     Route::get('react/history', 'HomeController@getHistory'); // ログインユーザの閲覧した質問のデータ受け渡し
+    Route::get('react/question/mypage/{question}', 'ReactController@getMyQuestion'); // 公開中の個別質問データの受け渡し
     Route::get('react/question/checked/{question}', 'ReactController@getCheckedQuestion'); // 公開中の個別質問データの受け渡し
     Route::get('react/questions/checked', 'ReactController@getCheckedQuestions'); // 公開中の質問受け渡し
     Route::get('react/questions/search', 'ReactController@getSearchQuestions'); // 質問検索結果の受け渡し

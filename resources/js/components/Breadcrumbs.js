@@ -22,6 +22,19 @@ function Breadcrumb(props){
             );
             break;
             
+        case "my_page_question":
+            link1 = (
+                <Link underline="hover" to="/my_page">
+                    マイページ
+                </Link>
+            );
+            link2 = (
+                <Typography color="text.primary">
+                    質問詳細
+                </Typography>
+            );
+            break;
+            
         case "history":
             link1 = (
                 <Link underline="hover" to="/my_page">
