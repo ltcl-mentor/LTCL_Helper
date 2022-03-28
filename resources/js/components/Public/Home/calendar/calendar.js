@@ -27,9 +27,8 @@ function Calendar(props) {
                 .then(response => {
                     setCollegeInfo(response.data);
                     setIsDateClicked(true);
-                    const zoom = response.data.zoom.exist;
                     const existInfo = {
-                        zoom: zoom,
+                        zoom: response.data.zoom.exist,
                         collegeStaff: response.data.staff[0] ? true : false,
                         onlineStaff: response.data.online_staff[0] ? true : false,
                     };
