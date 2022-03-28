@@ -11,7 +11,6 @@ import TableRow from '@mui/material/TableRow';
  */
 function Info(props) {
     const [timeout, setTimeout] = useState(false);
-    const [isZoom, setZoom] = useState(false);
     
     useEffect(() => {
         if (props.resError) {
@@ -22,10 +21,10 @@ function Info(props) {
     },[props.resError]);
     
     let zoom;
-    if (props.zoom_exist) {
+    if (props.exists.zoom) {
         zoom = <a href={ props.zoom_link } target="_blank">zoomリンク</a>;
     }
-    
+
     let info;
     if (!(props.isDateClicked)) {
         if (timeout) {
@@ -62,6 +61,7 @@ function Info(props) {
                         <TableCell align="center">{ props.collegeInfo.start } 〜 { props.collegeInfo.close }</TableCell>
                     </TableRow>
                     
+                    {props.exists.collegeStaff &&
                     <TableRow
                         key='college'
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -83,7 +83,9 @@ function Info(props) {
                             )) }
                         </TableCell>
                     </TableRow>
+                    }
                     
+                    {props.exists.onlineStaff &&
                     <TableRow
                         key='online_college'
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -105,6 +107,7 @@ function Info(props) {
                             )) }
                         </TableCell>
                     </TableRow>
+                    }
                     
                     <TableRow
                         key='zoom'

@@ -14,7 +14,7 @@ function Calendar(props) {
     const [collegeInfo, setCollegeInfo] = useState([]);
     const [isDateClicked, setIsDateClicked] = useState(false);
     const [resError, setResError] = useState(false);
-    const [zoom_exist, setZoomExist] = useState(false);
+    const [exists, setExists] = useState({});
     const today = new Date();
     
     useEffect(() => {
@@ -27,8 +27,13 @@ function Calendar(props) {
                 .then(response => {
                     setCollegeInfo(response.data);
                     setIsDateClicked(true);
-                    const exist = response.data.zoom.exist == "あり" ? true : false;
-                    setZoomExist(exist);
+                    const zoom = response.data.zoom.exist;
+                    const existInfo = {
+                        zoom: zoom,
+                        collegeStaff: response.data.staff[0] ? true : false,
+                        onlineStaff: response.data.online_staff[0] ? true : false,
+                    };
+                    setExists(existInfo);
                 }).catch(error => {
                     setResError(true);
                     console.log(error);
@@ -44,7 +49,7 @@ function Calendar(props) {
                 isDateClicked={ isDateClicked }
                 resError={ resError }
                 zoom_link={ props.zoom_link }
-                zoom_exist={ zoom_exist }
+                exists={ exists }
             />
         );
         
