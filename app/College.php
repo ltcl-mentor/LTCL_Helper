@@ -13,6 +13,7 @@ class College extends Model
      */
     public static function getCollegeData($year, $month, $date)
     {
+        $today = Carbon::today();
         $college_datas = [];
         
         $datas = self::getCollegeApiData($year, $month);
@@ -33,7 +34,20 @@ class College extends Model
         } elseif ($datas['values'][$date][9] == "あり") {
             $college_datas['zoom']['message'] = $datas['values'][$date][10];
         }
-        $college_datas['zoom']['exist'] = $datas['values'][$date][9];
+        
+        // オンライン校舎のzoomリンクを掲載するかどうか
+        // 当日しか見えないようにする
+        if ($today->year == $year && $today->month == $month && $today->day == $date) {
+            // 出勤メンターが3人以上で校舎を開校するとき
+            if ($college_datas['zoom']['exist'] = $datas['values'][$date][9] == "あり") {
+                $college_datas['zoom']['exist'] = true;
+            } else {
+                $college_datas['zoom']['exist'] = false;
+            }
+        } else {
+            $college_datas['zoom']['exist'] = false;
+            $college_datas['zoom']['message'] = "zoomリンクは当日しか見れません。";
+        }
         
         // オンライン自習室担当の代入
         // if(count($datas['values'][$date]) < 6){
@@ -71,7 +85,7 @@ class College extends Model
      */
     public static function informSlack()
     {
-        $date = new Carbon();
+        $date = Carbon::today();
         $message = "";
         
         // 出勤メンター(校舎)
@@ -91,9 +105,9 @@ class College extends Model
         // オンライン校舎
         $message .= "\n*■本日のオンライン校舎（質問部屋）*\n";
         $online_time = Self::getCollegeData($date->year, $date->month, $date->day)["zoom"];
-        if ($online_time['exist'] == "あり") {
+        if ($online_time['exist']) {
             $message .= "開校時間は追ってメンターより連絡します:woman-bowing:";
-        } elseif ($online_time['exist'] == "なし") {
+        } else {
             $message .= "*本日は、出勤しているメンターが少ないため、オンライン校舎は開校しておりません。*\n質問のある方は、<#C01JZMKS1K7> または、<#C029T2EBGC9> チャンネルにてご質問ください。";
         }
         
@@ -130,10 +144,10 @@ class College extends Model
         }else{
             switch($status) {
                 case "online":
-                    $array[0] = "オンライン出勤メンターなし";
+                    $array[0] = false;
                     break;
                 case "college":
-                    $array[0] = "校舎出勤メンターなし。";
+                    $array[0] = false;
                     break;
             }
         }
