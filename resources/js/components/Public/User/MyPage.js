@@ -121,7 +121,7 @@ function MyPage(props) {
                                                 }
                                             </TableCell>
                                             <TableCell key={question.id} align="left">
-                                                <Link to={ `/public/questions/` + question.id }>
+                                                <Link to={'/my_page/questions/' + question.id}>
                                                     { question.title.substring(0,50) + "..." }
                                                 </Link>
                                             </TableCell>

@@ -65,6 +65,14 @@ class ReactController extends Controller
     }
     
     /**
+     * マイページの質問データの受け渡し
+     */
+    public function getMyQuestion(Question $question)
+    {
+        return Comment::setComment($question);
+    }
+    
+    /**
      * 公開中の全質問受け渡し
      */
     public function getCheckedQuestions()
