@@ -33,6 +33,8 @@ import LinkFromDocumentShow from './Mentor/Link/fromDocument/Show/Show';
 import UserIndex from './Mentor/User/Index/Index';
 import UserRegisterPublic from './Mentor/User/Register/Public/Public';
 import UserRegisterAdmin from './Mentor/User/Register/Admin/Admin';
+import EventIndex from './Mentor/Event/Index/Index';
+import EventRegister from './Mentor/Event/Create/Create';
 
 export const LoginUser = createContext();
 
@@ -150,6 +152,15 @@ function Router() {
                     
                     {/* 管理者登録画面表示 */}
                     <Route path="/users/register/admin" exact component={ UserRegisterAdmin }/>
+                    
+                    {/* イベント一覧画面表示 */}
+                    <Route path="/events/index" exact component={ EventIndex }/>
+                    
+                    {/* イベント登録画面表示 */}
+                    <Route path="/events/register" exact component={ EventRegister }/>
+                    
+                    {/* イベント編集画面表示 */}
+                    <Route path="/events/register/:id" exact component={ EventRegister }/>
                 </Switch>
             );
         }

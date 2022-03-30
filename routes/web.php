@@ -134,6 +134,12 @@ Route::group(['middleware' => ['auth']], function () {
         // Route::get('users/admin/register', 'Auth\RegisterController@showRegistrationForm')->name('register'); // 管理者の新規作成画面表示
         // Route::get('/users/public/register', 'Auth\RegisterController@showPublicRegistrationForm'); // 受講生の新規作成画面表示
         
+        /**
+         * イベント 
+         */
+        Route::post('/events/store', 'HomeController@storeEvent'); // イベントの新規作成実行
+        Route::post('/events/{event}/update', 'HomeController@updateEvent'); // イベントの編集
+        Route::post('/events/{event}/delete', 'HomeController@deleteEvent'); // イベントの編集
         
         /**
          * Reactでのデータ受け渡し（全て非同期）
@@ -151,6 +157,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('react/related/questions/{document}', 'ReactController@getRelatedQuestions'); // 記事に紐づいている質問の受け渡し（URLが紛らわしい）
         Route::get('react/all/staffs', 'ReactController@getAllStaffs'); // 全管理者受け渡し
         Route::get('react/all/students', 'ReactController@getAllStudents'); // 全受講生受け渡し
+        Route::get('react/events', 'ReactController@getAllEvents'); // イベントの受け渡し
+        Route::get('react/event/{event}', 'ReactController@getOneEvent'); // イベントの受け渡し
+        Route::get('react/reaction', 'ReactController@getReaction'); // slackのリアクション参考サイトのURL受け渡し
         Route::get('react/id', 'ReactController@getUserId'); // ログインユーザーid受け渡し
         // Route::get('react/unapproved/questions', 'ReactController@getUnapprovedQuestions'); // 未承認質問受け渡し（未使用？）
     });

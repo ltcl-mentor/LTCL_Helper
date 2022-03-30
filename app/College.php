@@ -81,7 +81,7 @@ class College extends Model
     
     /**
      * 出勤メンター通知
-     * 平日14時、休日12時にslackへ通知
+     * 毎日12時にslackへ通知
      */
     public static function informSlack()
     {

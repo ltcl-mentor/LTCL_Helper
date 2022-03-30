@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import axios from "axios";
 import Button from '@mui/material/Button';
 import CreateIcon from '@material-ui/icons/Create';
@@ -13,14 +13,17 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
 import Badge from '@mui/material/Badge';
+import EventIcon from '@mui/icons-material/Event';
 
 import {LoginUser} from '../Route.js';
+import Alert from '../Alert';
 import Breadcrumbs from '../Breadcrumbs';
 
 /**
  * 管理画面のメインコンポーネント
  */
 function Top() {
+    const parameter = useLocation();
     const [counts, setCounts] = useState([]);
     
     // 画面描画時に実行
@@ -41,6 +44,11 @@ function Top() {
     return (
         <div className="container">
             <Breadcrumbs page="mentor_top"/>
+            
+            <Alert
+                type={ parameter.state && parameter.state.type }
+                status={ parameter.state && parameter.state.status }
+            />
             
             <Card>
                 <Box sx={{ margin: 2, marginBottom: 3, marginLeft: 2 }}>
@@ -166,6 +174,34 @@ function Top() {
                         <Grid item >
                             <Link to="/users/register/public">
                                 <Button variant="contained" color="error" startIcon={ <PersonAddAltIcon /> }>受講生の登録</Button>
+                            </Link>
+                        </Grid>
+                    </Grid>
+                </Box>
+                
+                <Box sx={{ margin: 2, marginBottom: 3, marginLeft: 2 }}>
+                    <Typography
+                        variant="h4"
+                        component="div"
+                        align="left"
+                        sx={{
+                            marginTop: 4,
+                            marginBottom: 2,
+                        }}
+                    >
+                        イベント
+                    </Typography>
+                    
+                    <Grid container spacing={2} sx={{ flexGrow: 1, marginLeft: 2 }} >
+                        <Grid item >
+                            <Link to="/events/index">
+                                <Button variant="contained" color="warning" startIcon={ <ListIcon /> }>一覧</Button>
+                            </Link>
+                        </Grid>
+                        
+                        <Grid item >
+                            <Link to="/events/register">
+                                <Button variant="contained" color="warning" startIcon={ <EventIcon /> }>イベントの追加</Button>
                             </Link>
                         </Grid>
                     </Grid>

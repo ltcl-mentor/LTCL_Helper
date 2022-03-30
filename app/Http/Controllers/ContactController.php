@@ -26,7 +26,7 @@ class ContactController extends Controller
         }
         
         $message = $user . "さんから次のような問い合わせがありました。\n----------------\n" . $request['message'] . "\n----------------";
-        
+
         Slack::sendMessage($message, "mentor");
     }
     
