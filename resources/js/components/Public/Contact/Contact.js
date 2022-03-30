@@ -15,6 +15,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 import Breadcrumbs from '../../Breadcrumbs';
 
+
 /**
  * お問い合わせのメインコンポーネント
  */
@@ -22,13 +23,14 @@ function Contact() {
     const history = useHistory();
     const [clickCount, setClickCount] = useState(0);
     const [contact, setContact] = useState('');
-    const [contact_validation_error, setContactValidationError] = useState(false);
     const [category, setCategory] = useState('');
+    const [contact_validation_error, setContactValidationError] = useState(false);
+    const [contact_category_validation_error, setContactCategoryValidationError] = useState(false);
     
     // お問い合わせ送信
     const handleSubmit = () => {
         // 問い合わせのバリデーション
-        if (contact.trim().length !== 0) {
+        if ((contact.trim().length !== 0) && (category !== "")) {
             if (clickCount === 0) {
                 console.log(category+contact);
                 if (window.confirm('お問合せを送信します。よろしいですか？')) {
@@ -51,8 +53,16 @@ function Contact() {
                 return false;
             }
         } else {
-            setContactValidationError(true);
-            return false;
+            //本文のバリデーション
+            if (contact.trim().length === 0) {
+                setContactValidationError(true);
+            }
+            
+            //カテゴリーのバリデーション
+            if (category.trim().length === 0) {
+                setContactCategoryValidationError(true);
+                return false;
+            }
         }
     };
     
@@ -66,12 +76,8 @@ function Contact() {
         setCategory('カテゴリー：' + event.target.value + '\n');
     };
     
-    let validation_message;
-    if (contact_validation_error === true) {
-        validation_message = <p className="errorMassage">お問い合わせ内容を入力してください。</p>;
-    } else {
-        validation_message = ('');
-    }
+    const categoryList = ["バグ修正依頼", "就活相談", "その他"];
+    
     
     return (
         <div className="container">
@@ -90,22 +96,20 @@ function Contact() {
                         お問合せ内容
                     </Typography>
                     
-                    <Box sx={{ textAlign: "center", marginTop: 4 }}>
-                        <FormControl sx={{ textAlign: "center", marginTop: 4 }}>
-                            <FormLabel component="legend">お問合せカテゴリー</FormLabel>
+                    <Box>
+                    <Box sx={{ marginLeft: '10%',  marginTop: 4 }}>
+                        <FormControl>
+                            <FormLabel>お問合せカテゴリー</FormLabel>
                             <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
+                                labelId="contact-category-label"
+                                id="contact-category-select"
                                 onChange={ (event) => handleCategory(event) }
                             >
-                                <MenuItem value={ 'バグ修正依頼' } key={ 1 }>バグ修正依頼</MenuItem>
-                                <MenuItem value={ '就活相談' } key={ 2 }>就活相談</MenuItem>
-                                <MenuItem value={ 'その他' } key={ 3 }>その他</MenuItem>
+                                {categoryList.map((val, index) => <MenuItem value={val} key={index}>{val}</MenuItem>)}
                             </Select>
                         </FormControl>
+                        { contact_category_validation_error === true && <Typography className="errorMassage" sx={{color: 'red'}}>お問合せカテゴリーを選んでください。</Typography> }
                     </Box>
-                    
-                    { validation_message }
                     
                     <Box sx={{ textAlign: "center", marginTop: 4 }}>
                         <TextareaAutosize 
@@ -119,6 +123,8 @@ function Contact() {
                                 paddingTop:2,
                             }}
                         />
+                        { contact_validation_error === true && <Typography className="errorMassage" sx={{color: 'red'}}>お問合せ内容を入力してください。</Typography> }
+                    </Box>
                     </Box>
                     
                     <Typography
