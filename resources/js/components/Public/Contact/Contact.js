@@ -7,6 +7,11 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import FormLabel from '@material-ui/core/FormLabel';
+
 
 import Breadcrumbs from '../../Breadcrumbs';
 
@@ -18,18 +23,20 @@ function Contact() {
     const [clickCount, setClickCount] = useState(0);
     const [contact, setContact] = useState('');
     const [contact_validation_error, setContactValidationError] = useState(false);
+    const [category, setCategory] = useState('');
     
     // お問い合わせ送信
     const handleSubmit = () => {
         // 問い合わせのバリデーション
         if (contact.trim().length !== 0) {
             if (clickCount === 0) {
+                console.log(category+contact);
                 if (window.confirm('お問合せを送信します。よろしいですか？')) {
                     setClickCount(1);
                     
                     axios
                         .post("/contact", {
-                            message: contact,
+                            message: category + contact,
                         })
                         .then(response => {
                             if (response.status === 200) {
@@ -52,6 +59,11 @@ function Contact() {
     // お問い合わせ入力
     const handleContact = (event) => {
         setContact(event.target.value);
+    };
+    
+    // お問合せカテゴリーの変更
+    const handleCategory = (event) => {
+        setCategory('カテゴリー：' + event.target.value + '\n');
     };
     
     let validation_message;
@@ -77,6 +89,21 @@ function Contact() {
                     >
                         お問合せ内容
                     </Typography>
+                    
+                    <Box sx={{ textAlign: "center", marginTop: 4 }}>
+                        <FormControl sx={{ textAlign: "center", marginTop: 4 }}>
+                            <FormLabel component="legend">お問合せカテゴリー</FormLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                onChange={ (event) => handleCategory(event) }
+                            >
+                                <MenuItem value={ 'バグ修正依頼' } key={ 1 }>バグ修正依頼</MenuItem>
+                                <MenuItem value={ '就活相談' } key={ 2 }>就活相談</MenuItem>
+                                <MenuItem value={ 'その他' } key={ 3 }>その他</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Box>
                     
                     { validation_message }
                     
