@@ -147,8 +147,10 @@ a {
  */
 
 abbr[title] {
-  text-decoration: underline; /* 2 */
-  text-decoration: underline dotted; /* 2 */
+  /*text-decoration: underline;*/
+  /*text-decoration: underline dotted;*/
+  text-decoration: none; /* 2 */
+  text-decoration: none dotted; /* 2 */
 }
 
 /**

@@ -12,6 +12,7 @@ use App\Info;
 use App\Weather;
 use App\College;
 use App\Comment;
+use App\Event;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -285,15 +286,39 @@ class ReactController extends Controller
      */
     public function getInfos(Info $info)
     {
-        // infosテーブルの全日付を取得（重複はなし）
-        $infos['dates'] = $info->groupBy('date')->orderBy('date', 'desc')->pluck('date');
+        // infosテーブルの本日以降の日付を取得（重複はなし）
+        $infos['dates'] = $info->groupBy('date')->orderBy('date', 'desc')->where('date', '>=', Carbon::now()->format('Y-m-d'))->pluck('date');
         
         // 各日付のデータを取得して配列に代入
         foreach($infos['dates'] as $date){
-            $infos['infos'][$date] = $info->where('date', $date)->select('id', 'information')->get();
+            $infos['infos'][$date] = $info->where('date', $date)->select('id', 'information', 'targets', 'body', 'slackDate')->get();
         }
         
         return $infos;
+    }
+    
+    /**
+     * 全イベントの受け渡し
+     */
+    public function getAllEvents()
+    {
+        return Event::get();
+    }
+    
+    /**
+     * 個別イベントの受け渡し
+     */
+    public function getOneEvent(Event $event)
+    {
+        return $event;
+    }
+    
+    /**
+     * slackリアクションの参考サイトの受け渡し
+     */
+    public function getReaction()
+    {
+        return env('slackEmoji');
     }
     
     
@@ -303,6 +328,7 @@ class ReactController extends Controller
     public function getHomeData()
     {
         $achievement = Question::getAchievement();
-        return ["key" => env('GoogleMapsKey'), "zoom" => env('ZoomLinksNote'), "achievement" => $achievement];
+        $events = Event::get();
+        return ["key" => env('GoogleMapsKey'), "zoom" => env('ZoomLinksNote'), "achievement" => $achievement, "events" => $events];
     }
 }

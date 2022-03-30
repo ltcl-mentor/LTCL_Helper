@@ -125,6 +125,7 @@ function AlertMessage(props) {
                     break;
             }
             break;
+            
         case "comment":
             switch(props.status) {
                 case "post":
@@ -135,6 +136,19 @@ function AlertMessage(props) {
                     break;
                 case "deleted":
                     message = <AlertTitle>コメントを削除しました。</AlertTitle>;
+                    break;
+            }
+        
+        case "event":
+            switch(props.status) {
+                case "store":
+                    message = <AlertTitle>イベントが追加されました。</AlertTitle>;
+                    break;
+                case "update":
+                    message = <AlertTitle>イベントが編集されました。</AlertTitle>;
+                    break;
+                case "delete":
+                    message = <AlertTitle>イベントを削除しました。</AlertTitle>;
                     break;
             }
     }

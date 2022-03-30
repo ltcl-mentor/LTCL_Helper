@@ -171,6 +171,17 @@ a:hover{
     
 }
 
+.link {
+    margin-left: 10%;
+    margin-top: 5px;
+    color: #0058B3;
+    cursor: pointer;
+}
+
+.events {
+    margin-bottom: 15px;
+}
+
 /*=================================
     以下レスポンシブ対応CSS
     750px幅で適応

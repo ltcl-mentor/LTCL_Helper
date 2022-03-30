@@ -347,6 +347,32 @@ function Breadcrumb(props){
                 </Typography>
             );
             break;
+            
+        case "mentor_event_index":
+            link1 = (
+                <Link underline="hover" to="/mentor/top">
+                    メンタートップ
+                </Link>
+            );
+            link2 = (
+                <Typography color="text.primary">
+                    イベント一覧
+                </Typography>
+            );
+            break;
+            
+        case "mentor_event_create":
+            link1 = (
+                <Link underline="hover" to="/mentor/top">
+                    メンタートップ
+                </Link>
+            );
+            link2 = (
+                <Typography color="text.primary">
+                    イベント作成
+                </Typography>
+            );
+            break;
     }
     
     return (
