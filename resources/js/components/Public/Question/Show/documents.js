@@ -7,6 +7,7 @@ import Chip from '@mui/material/Chip';
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import '../../../../../../public/css/Search/show.css';
 
 /**
  * 関連記事の一覧

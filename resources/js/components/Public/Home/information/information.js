@@ -14,6 +14,7 @@ function Information(props) {
         create_btn=(
             <Create
                 setInfoChanging={ setInfoChanging }
+                events={ props.events }
             />
         );
     }

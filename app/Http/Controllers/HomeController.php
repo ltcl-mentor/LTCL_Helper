@@ -9,6 +9,7 @@ use App\User;
 use App\Image;
 use App\History;
 use App\Info;
+use App\Event;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -48,7 +49,11 @@ class HomeController extends Controller
     public function storeInfo(Info $info, Request $request)
     {
         $input['information'] = $request['info'];
+        $input['body'] = $request['body'];
+        $input['targets'] = implode("/", $request['target']);
+        $input['slack'] = $request['slack'];
         $input['date'] = $request['date'];
+        $input['slackDate'] = $request['slackDate'];
         $info->fill($input)->save();
     }
     
@@ -58,6 +63,31 @@ class HomeController extends Controller
     public function deleteInfo(Info $info)
     {
         $info->delete();
+    }
+    
+    /**
+     * イベント追加処理
+     */
+    public function storeEvent(Request $request, Event $event) {
+        $input['name'] = $request['name'];
+        $input['template'] = $request['template'];
+        $event->fill($input)->save();
+    }
+    
+    /**
+     * イベント編集処理
+     */
+    public function updateEvent(Request $request, Event $event) {
+        $event->name = $request['name'];
+        $event->template = $request['template'];
+        $event->save();
+    }
+    
+    /**
+     * イベント削除処理
+     */
+    public function deleteEvent(Event $event) {
+        $event->delete();
     }
     
     /**

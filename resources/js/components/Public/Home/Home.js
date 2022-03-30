@@ -22,6 +22,7 @@ function Home() {
     const [map_key, setMapKey] = useState();
     const [zoom_link, setZoomLink] = useState();
     const [achievement, setAchievement] = useState();
+    const [events, setEvents] = useState([]);
     const [screen_width, setScreenWidth] = useState(window.innerWidth);
     
     // ログインユーザー情報取得
@@ -36,13 +37,14 @@ function Home() {
     useEffect(() => {
         
         // Home画面に必要なデータ取得
-        // マップのAPIキー、Zoomのリンク一覧へのURL、質問解決率
+        // マップのAPIキー、Zoomのリンク一覧へのURL、質問解決率、イベント一覧
         axios
             .get("/react/home")
             .then(response => {
                 setMapKey(response.data.key);
                 setZoomLink(response.data.zoom);
                 setAchievement(response.data.achievement);
+                setEvents(response.data.events);
             }).catch(error => {
                 console.log(error);
             });
@@ -103,6 +105,7 @@ function Home() {
                             <Information
                                 is_admin={ user.is_admin }
                                 achievement={ achievement }
+                                events={ events }
                             />
                             
                             <Typography
