@@ -7,8 +7,14 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import FormLabel from '@material-ui/core/FormLabel';
+
 
 import Breadcrumbs from '../../Breadcrumbs';
+
 
 /**
  * お問い合わせのメインコンポーネント
@@ -17,19 +23,22 @@ function Contact() {
     const history = useHistory();
     const [clickCount, setClickCount] = useState(0);
     const [contact, setContact] = useState('');
+    const [category, setCategory] = useState('');
     const [contact_validation_error, setContactValidationError] = useState(false);
+    const [contact_category_validation_error, setContactCategoryValidationError] = useState(false);
     
     // お問い合わせ送信
     const handleSubmit = () => {
         // 問い合わせのバリデーション
-        if (contact.trim().length !== 0) {
+        if ((contact.trim().length !== 0) && (category !== "")) {
             if (clickCount === 0) {
+                console.log(category+contact);
                 if (window.confirm('お問合せを送信します。よろしいですか？')) {
                     setClickCount(1);
                     
                     axios
                         .post("/contact", {
-                            message: contact,
+                            message: category + contact,
                         })
                         .then(response => {
                             if (response.status === 200) {
@@ -44,8 +53,16 @@ function Contact() {
                 return false;
             }
         } else {
-            setContactValidationError(true);
-            return false;
+            //本文のバリデーション
+            if (contact.trim().length === 0) {
+                setContactValidationError(true);
+            }
+            
+            //カテゴリーのバリデーション
+            if (category.trim().length === 0) {
+                setContactCategoryValidationError(true);
+                return false;
+            }
         }
     };
     
@@ -54,12 +71,13 @@ function Contact() {
         setContact(event.target.value);
     };
     
-    let validation_message;
-    if (contact_validation_error === true) {
-        validation_message = <p className="errorMassage">お問い合わせ内容を入力してください。</p>;
-    } else {
-        validation_message = ('');
-    }
+    // お問合せカテゴリーの変更
+    const handleCategory = (event) => {
+        setCategory('カテゴリー：' + event.target.value + '\n');
+    };
+    
+    const categoryList = ["バグ修正依頼", "就活相談", "その他"];
+    
     
     return (
         <div className="container">
@@ -78,7 +96,20 @@ function Contact() {
                         お問合せ内容
                     </Typography>
                     
-                    { validation_message }
+                    <Box>
+                    <Box sx={{ marginLeft: '10%',  marginTop: 4 }}>
+                        <FormControl>
+                            <FormLabel>お問合せカテゴリー</FormLabel>
+                            <Select
+                                labelId="contact-category-label"
+                                id="contact-category-select"
+                                onChange={ (event) => handleCategory(event) }
+                            >
+                                {categoryList.map((val, index) => <MenuItem value={val} key={index}>{val}</MenuItem>)}
+                            </Select>
+                        </FormControl>
+                        { contact_category_validation_error === true && <Typography className="errorMassage" sx={{color: 'red'}}>お問合せカテゴリーを選んでください。</Typography> }
+                    </Box>
                     
                     <Box sx={{ textAlign: "center", marginTop: 4 }}>
                         <TextareaAutosize 
@@ -92,6 +123,8 @@ function Contact() {
                                 paddingTop:2,
                             }}
                         />
+                        { contact_validation_error === true && <Typography className="errorMassage" sx={{color: 'red'}}>お問合せ内容を入力してください。</Typography> }
+                    </Box>
                     </Box>
                     
                     <Typography
