@@ -43,10 +43,13 @@ class CommentController extends Controller
         // メインコメントデータかつメンターがコメントを入力した場合
         if($comment->comment_id === 0 && $comment->is_staff === true){
             $comment['is_mentor_commented'] = true;
+            $question = Question::where('id', $comment->question_id)->first()->name;
+            $user_name = User::where('id', $question->user_id)->first();
         
         // メインコメントデータかつ受講生がコメントを入力した場合
         }elseif($comment->comment_id === 0 && $comment->is_staff === false){
             $comment['is_mentor_commented'] = false;
+            $user_name = Auth::user()->name;
             
         // リプライコメントデータの場合
         }else{
@@ -54,10 +57,12 @@ class CommentController extends Controller
             // メンターがコメントを入力した場合
             if($comment->is_staff === true){
                 $main_comment['is_mentor_commented'] = true;
+                $user_name = User::where('id', $main_comment->user_id)->first()->name;
                 
             // 受講生がコメントを入力した場合
             }elseif($comment->is_staff === false){
                 $main_comment['is_mentor_commented'] = false;
+                $user_name = Auth::user()->name;
             }
             $main_comment->save();
         }
@@ -89,24 +94,14 @@ class CommentController extends Controller
         }
         
         // Slackへの通知
-        // 受講生の場合、スプレッドシートから取ってきた名前を通知
-        $users = User::getStudentsApiData()["values"];
-        array_splice($users, 0, 2);
-        
+        $user_name = User::getStudentName($user_name);
         // データ作成者が受講生だった場合
         if(Auth::user()->is_admin === null){
-            $message = "受講生によってコメントが入力されました。\n「". $comment->getQestionTitle() ."」\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $comment->question_id;
+            $message = "受講生 " . $user_name . "さんによってコメントが入力されました。\n「". $comment->getQestionTitle() ."」\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $comment->question_id;
             Slack::sendMessage($message, "mentor");
         // メンターだった場合
         }elseif(Auth::user()->is_admin === "staff"){
-            $user_name = User::getAuthorName($comment->question_id);
-            foreach($users as $student) {
-                if ($student[7] == $user_name) {
-                    $user_name = $student[5] . "(ID：" . $student[7] . ")";
-                    break;
-                }
-            }
-            $message = "@" . $user_name . "さん\nメンターによってコメントが入力されました。\n「". $comment->getQestionTitle() ."」\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/public/questions/" . $comment->question_id;
+            $message = "@" . $user_name . "\nメンターによってコメントが入力されました。\n「". $comment->getQestionTitle() ."」\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/public/questions/" . $comment->question_id;
             Slack::sendMessage($message, "student");
         }
         
@@ -159,11 +154,14 @@ class CommentController extends Controller
         // Slackへの通知
         // データ作成者が受講生だった場合
         if(Auth::user()->is_admin === null){
-            $message = "受講生によってコメントが更新されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $comment->question_id;
+            $user_name = Auth::user()->name;
+            $message = "受講生 " . $user_name . "さんによってコメントが更新されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $comment->question_id;
             Slack::sendMessage($message);
         // メンターだった場合
         }elseif(Auth::user()->is_admin === "staff"){
-            $message = "@" . User::getAuthorName($comment->question_id) . "さん\nメンターによってコメントが入力されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $comment->question_id;
+            $comment_author = User::where('id', $comment->user_id)->first()->name;
+            $user_name = User::getStudentName($comment_author);
+            $message = "@" . $user_name . "\nメンターによってコメントが入力されました。\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $comment->question_id;
             Slack::sendMessage($message, "student");
         }
         

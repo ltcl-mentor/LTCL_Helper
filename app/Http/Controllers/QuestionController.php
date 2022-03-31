@@ -84,7 +84,7 @@ class QuestionController extends Controller
         // Slackへの通知
         // データ作成者が受講生だった場合のみ
         if(Auth::user()->is_admin === null){
-            $message = "受講生によって質問が投稿されました。\n「". $question->title ."」\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $question->id;
+            $message = "受講生 " . User::getStudentName(Auth::user()->name) . "さんによって質問が投稿されました。\n「". $question->title ."」\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $question->id;
             Slack::sendMessage($message, "mentor");
         }
         
@@ -236,7 +236,10 @@ class QuestionController extends Controller
         }
         
         // Slackへの通知
-        $message = Auth::user()->name . "によって質問が編集されました。\n「". $question->title ."」\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $question->id;
+        if(Auth::user()->is_admin === null){
+            $message = "受講生 " . User::getStudentName(Auth::user()->name) . "さんによって質問が編集されました。\n「". $question->title ."」\n以下のリンクから確認してください。\nhttps://stark-cliffs-73338.herokuapp.com/questions/" . $question->id;
+            Slack::sendMessage($message, "mentor");
+        }
         Slack::sendMessage($message, "mentor");
         
         return ["id" => $question->id];

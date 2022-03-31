@@ -100,6 +100,24 @@ class User extends Authenticatable
     }
     
     /**
+     * スプレッドシートのID一覧から受講生名を取得
+     */
+    public static function getStudentName($user_name)
+    {
+        $users = self::getStudentsApiData()["values"];
+        array_splice($users, 0, 2);
+        
+        foreach($users as $student) {
+            if ($student[7] == $user_name) {
+                $user_name = $student[5] . "(ID：" . $student[7] . ")";
+                break;
+            }
+        }
+        
+        return $user_name;
+    }
+    
+    /**
      * スプレッドシートから未登録の受講生情報を取得
      */
     public static function getUnRegisterApiData()
