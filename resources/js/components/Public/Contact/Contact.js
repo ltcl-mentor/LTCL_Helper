@@ -32,7 +32,6 @@ function Contact() {
         // 問い合わせのバリデーション
         if ((contact.trim().length !== 0) && (category !== "")) {
             if (clickCount === 0) {
-                console.log(category+contact);
                 if (window.confirm('お問合せを送信します。よろしいですか？')) {
                     setClickCount(1);
                     
