@@ -100,7 +100,7 @@ class User extends Authenticatable
     }
     
     /**
-     * スプレッドシートのID一覧から受講生名を取得
+     * スプレッドシートのID一覧から受講生名を取得（特定の受講生）
      */
     public static function getStudentName($user_name)
     {
@@ -118,6 +118,27 @@ class User extends Authenticatable
     }
     
     /**
+     * スプレッドシートのID一覧から受講生名を取得（全受講生）
+     */
+    public static function getAllStudentsName()
+    {
+        $users = self::getStudentsApiData()["values"];
+        array_splice($users, 0, 2);
+        $students = Student::orderBy('password', 'asc')->get();
+        
+        // 受講生名追加
+        $all_students = [];
+        foreach($students as $student) {
+            $key = array_search($student->name, array_column($users, 7));
+            if ($key !== false) {
+                $student['student_name'] = $users[$key][5];
+            }
+        }
+        
+        return $students;
+    }
+    
+    /**
      * スプレッドシートから未登録の受講生情報を取得
      */
     public static function getUnRegisterApiData()
@@ -128,7 +149,7 @@ class User extends Authenticatable
         $response = $client->request(
             'GET',
             $url,
-            ['query' => ['key' => env('GoogleSheetsKey'), 'majorDimension' => 'COLUMNS']]
+            ['query' => ['key' => env('GoogleSheetsKey'), 'majorDimension' => 'ROWS']]
         );
         
         return json_decode($response->getBody(), true);
@@ -159,23 +180,23 @@ class User extends Authenticatable
         $date = new Carbon();
         $datas = self::getUnRegisterApiData();
         
-        // 受講生ID
-        $students = $datas['values'][7];
+        // 受講生情報取得
+        $students = $datas['values'];
         array_splice($students, 0, 2);
-        $password = 'ltcl' . $date->year%100 . sprintf('%02d', $date->month);
         
         foreach($students as $student) {
-            
+            $password = 'ltcl' . substr($student[1], 2) . sprintf('%02d', $student[2]);
+
             // 値があるかつ登録されていないユーザーのみ追加
-            if ($student != "" && !User::where('name', $student)->exists()) {
+            if ($student[7] != "" && !User::where('name', $student[7])->exists()) {
                 $user = User::create([
-                    'name' => $student,
+                    'name' => $student[7],
                     'password' => Hash::make($password),
                     'is_admin' => null,
                 ]);
                 
                 Student::create([
-                    'name' => $student,
+                    'name' => $student[7],
                     'password' => $password,
                     'user_id' => $user->id,
                 ]);

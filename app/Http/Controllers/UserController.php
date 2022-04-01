@@ -27,7 +27,7 @@ class UserController extends Controller
         
         return [
             'staffs' => User::where('is_admin','staff')->get(),
-            'students' => Student::orderBy('password', 'asc')->get(),
+            'students' => User::getAllStudentsName(),
         ];
     }
     
