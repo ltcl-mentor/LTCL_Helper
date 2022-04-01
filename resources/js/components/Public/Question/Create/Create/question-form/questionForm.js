@@ -30,19 +30,22 @@ function QuestionForm(props) {
                 4. 質問内容を入力
             </Typography>
             
-            { props.question_validation_error === 1 && <p className="errorMassage">入力は必須です。</p> }
+            { props.question_validation_error === 1 && <Typography className="errorMassage">入力は必須です。</Typography> }
             
             <Box sx={{ width: "90%", marginLeft: "5%" }}>
-                <Typography
-                    variant="h7"
-                    component="div"
-                    sx={{
-                        marginTop: 4,
-                        marginLeft: 4,
-                    }}
-                >
-                    質問タイトル（50字以内）
-                </Typography>
+                <Box sx={{display:'flex'}}>
+                    <Typography
+                        variant="h7"
+                        component="div"
+                        sx={{
+                            marginTop: 4,
+                            marginLeft: 4,
+                        }}
+                    >
+                        質問タイトル（50字以内）
+                    </Typography>
+                    { props.question_validation_error.title === 1 && <Typography variant="h7" component="div" sx={{ marginTop: 4, marginRight: '10%', color:'red'}}>入力は必須です。</Typography> }
+                </Box>
             
                  <TextareaAutosize
                     placeholder="例：CSSファイルが反映されません。"
@@ -58,16 +61,19 @@ function QuestionForm(props) {
             </Box>
             
             <Box sx={{ width: "90%", marginLeft: "5%" }}>
-                <Typography
-                    variant="h7"
-                    component="div"
-                    sx={{
-                        marginTop: 4,
-                        marginLeft: 4,
-                    }}
-                >
-                    調べたこと（参考にしたサイトURLなども記載）
-                </Typography>
+                <Box sx={{display:'flex'}}>
+                    <Typography
+                        variant="h7"
+                        component="div"
+                        sx={{
+                            marginTop: 4,
+                            marginLeft: 4,
+                        }}
+                    >
+                        調べたこと（参考にしたサイトURLなども記載）
+                    </Typography>
+                    { props.question_validation_error.serach === 1 && <Typography variant="h7" component="div" sx={{ marginTop: 4, marginRight: '10%', color:'red'}}>入力は必須です。</Typography> }
+                </Box>
                 
                 <TextareaAutosize
                     placeholder="例：以下のサイトでCSSの呼び出し方を確認しました。\nhttp://~"
@@ -81,16 +87,18 @@ function QuestionForm(props) {
                     }}
                 />
                 
-                <Typography
-                    variant="h7"
-                    component="div"
-                    sx={{
-                        marginTop: 4,
-                        marginLeft: 4,
-                    }}
-                >
-                    質問の具体的な内容（試したことなど）
-                </Typography>
+                <Box sx={{display:'flex'}}>
+                    <Typography
+                        variant="h7"
+                        component="div"
+                        sx={{
+                            marginTop: 4,
+                            marginLeft: 4,
+                        }}
+                    >
+                        質問の具体的な内容（試したことなど）
+                    </Typography>
+                </Box>
             </Box>
             
             <TextForm
@@ -98,6 +106,7 @@ function QuestionForm(props) {
                 setText={ props.setQuestion }
                 images={ props.images }
                 setImages={ props.setImages }
+                validationKey={props.question_validation_error.content}
             />
         </React.Fragment>
     );

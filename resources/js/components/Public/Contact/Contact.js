@@ -84,46 +84,50 @@ function Contact() {
             
             <Box sx={{ width: "70%", marginLeft: "15%" }}>
                 <Card sx={{ marginBottom: 2 }}>
-                    <Typography
-                        variant="h5"
-                        component="div"
-                        sx={{
-                            marginTop: 4,
-                            marginLeft: 2,
-                        }}
-                    >
-                        お問合せ内容
-                    </Typography>
-                    
                     <Box>
-                    <Box sx={{ marginLeft: '10%',  marginTop: 4 }}>
-                        <FormControl>
-                            <FormLabel>お問合せカテゴリー</FormLabel>
-                            <Select
-                                labelId="contact-category-label"
-                                id="contact-category-select"
-                                onChange={ (event) => handleCategory(event) }
-                            >
-                                {categoryList.map((val, index) => <MenuItem value={val} key={index}>{val}</MenuItem>)}
-                            </Select>
-                        </FormControl>
-                        { contact_category_validation_error === true && <Typography className="errorMassage" sx={{color: 'red'}}>お問合せカテゴリーを選んでください。</Typography> }
-                    </Box>
-                    
-                    <Box sx={{ textAlign: "center", marginTop: 4 }}>
-                        <TextareaAutosize 
-                            name="message"
-                            placeholder="お問合せ内容を入力してください。"
-                            minRows={8}
-                            value={ contact }
-                            onChange={ (event) => handleContact(event) }
-                            style={{ 
-                                width: "80%",
-                                paddingTop:2,
+                        <Typography
+                            variant="h5"
+                            component="div"
+                            sx={{
+                                marginTop: 4,
+                                marginBottom: 4,
+                                marginLeft: '10%',
                             }}
-                        />
-                        { contact_validation_error === true && <Typography className="errorMassage" sx={{color: 'red'}}>お問合せ内容を入力してください。</Typography> }
-                    </Box>
+                        >
+                            お問合せ内容
+                        </Typography>
+                        { contact_category_validation_error === true && <Typography className="errorMassage" sx={{color: 'red', textAlign:'start', marginLeft: '10%', marginBottom:1}}>お問合せカテゴリーを選んでください。</Typography> }
+                        <Box sx={{ marginLeft: '10%' , display:'flex'}}>
+                            <FormControl sx={{width: "70%"}}>
+                                <Box sx={{display:'flex'}}>
+                                    <FormLabel component='legend' sx={{paddingTop:'3%'}}>お問合せカテゴリー</FormLabel>
+                                    <Select
+                                        labelId="contact-category-label"
+                                        id="contact-category-select"
+                                        onChange={ (event) => handleCategory(event) }
+                                        label=""
+                                        sx={{width: "80%", marginRight:"30%"}}
+                                    >
+                                        {categoryList.map((val, index) => <MenuItem value={val} key={index}>{val}</MenuItem>)}
+                                    </Select>
+                                </Box>
+                            </FormControl>
+                        </Box>
+                        
+                        <Box sx={{ textAlign: "center", marginTop: 4 }}>
+                        { contact_validation_error === true && <Typography className="errorMassage" sx={{textAlign: 'start', color: 'red', marginLeft:'10%', marginBottom:1}}>お問合せ内容を入力してください。</Typography> }
+                            <TextareaAutosize 
+                                name="message"
+                                placeholder="お問合せ内容を入力してください。"
+                                minRows={8}
+                                value={ contact }
+                                onChange={ (event) => handleContact(event) }
+                                style={{ 
+                                    width: "80%",
+                                    paddingTop:2,
+                                }}
+                            />
+                        </Box>
                     </Box>
                     
                     <Typography

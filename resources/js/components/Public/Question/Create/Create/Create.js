@@ -34,7 +34,11 @@ function Create() {
     const [title, setTitle] = useState('');
     const [remarks, setRemarks] = useState('');
     const [question, setQuestion] = useState('');
-    const [question_validation_error, setQuestionValidationError] = useState(0);
+    const [question_validation_error, setQuestionValidationError] = useState({
+        title: 0,
+        serach: 0,
+        content: 0,
+    });
     const curriculum_numbers = [
         [
             ['1-1-1'],
@@ -94,23 +98,31 @@ function Create() {
                 }
             }
         } else if (step === 1) {
+            let validationKey = {title:0, search:0, question:0, isNext:true}
             // タイトルのバリデーション
             if (title.trim().length === 0) {
-                setQuestionValidationError(1);
-                return false;
+                validationKey.title = 1;
+                validationKey.isNext = false;
             }
             
             // 調べたことのバリデーション
             if (remarks.trim().length === 0) {
-                setQuestionValidationError(1);
-                return false;
+                validationKey.serach = 1;
+                validationKey.isNext = false;
             }
             
             // 質問内容のバリデーション
             if (question.trim().length === 0) {
-                setQuestionValidationError(1);
+                validationKey.content = 1;
+                validationKey.isNext = false;
+            }
+            
+            //バリデーションエラーが出た場合は処理を止める
+            if (validationKey.isNext === false){
+                setQuestionValidationError({ ...validationKey });
                 return false;
             }
+            
         }
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
@@ -223,12 +235,11 @@ function Create() {
                             3. 該当カリキュラム番号の選択
                         </Typography>
                     
-                        { curriculum_number_validation_error === 1 && <p className="errorMassage">カリキュラム番号を選択してください。</p> }
-                    
                         <CurriculumNumber
                             category={ category }
                             topic={ topic }
                             setCurriculumNumber={ setCurriculumNumber }
+                            curriculum_number_validation_error={ curriculum_number_validation_error}
                         />
                     </React.Fragment>
                 );
