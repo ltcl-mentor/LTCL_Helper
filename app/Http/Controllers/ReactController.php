@@ -235,7 +235,8 @@ class ReactController extends Controller
      */
     public function getAllStudents()
     {
-        return Student::orderBy('password', 'asc')->get();
+        $students = User::getAllStudentsName();
+        return $students;
     }
     
     

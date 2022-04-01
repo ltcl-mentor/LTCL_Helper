@@ -28,6 +28,7 @@ function Students(props) {
                 <TableHead>
                     <TableRow>
                         <TableCell align="center">ID</TableCell>
+                        <TableCell align="center">受講生ID</TableCell>
                         <TableCell align="center">名前</TableCell>
                         <TableCell align="center">パスワード</TableCell>
                         <TableCell align="center">ステータス</TableCell>
@@ -41,6 +42,7 @@ function Students(props) {
                                 <TableRow key={student.id}>
                                     <TableCell align="center" component="th" scope="row">{ student.id }</TableCell>
                                     <TableCell align="center">{ student.name }</TableCell>
+                                    <TableCell align="center">{ student.student_name }</TableCell>
                                     <TableCell align="center">
                                         <Button variant="text" onClick={ () => revealPass(index) }>
                                             { pass_number === index ? student.password : 'パスワード' }
