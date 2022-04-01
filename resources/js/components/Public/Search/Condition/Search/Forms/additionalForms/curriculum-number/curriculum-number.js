@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Selects from './select';
 import Box from '@mui/material/Box';
+import Typography from '@material-ui/core/Typography';
 
 /**
  * カリキュラム番号
@@ -50,6 +51,7 @@ function CrriculumNumber(props) {
             <Selects
                 setCurriculumNumber={ props.setCurriculumNumber }
                 curriculum_numbers={ curriculum_numbers }
+                curriculum_number_validation_error={props.curriculum_number_validation_error}
             />
         </Box>
     );

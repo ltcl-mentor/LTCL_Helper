@@ -148,7 +148,7 @@ function TextForm(props) {
                             <FormatListNumberedIcon />
                         </ToggleButton>*/}
                 </Box>
-                
+                { props.validationKey === 1 && <Typography variant="h7" sx={{ color:'red', marginLeft: '5%'}}>入力は必須です。</Typography> }
                 <TextareaAutosize
                     placeholder="どのような手順を行なった結果エラーが出たのか、どんなエラーが出たかなどを写真などを利用して具体的に入力してください。"
                     minRows={15}
