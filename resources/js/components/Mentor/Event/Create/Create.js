@@ -32,7 +32,7 @@ function Create() {
     const history = useHistory();
     const [link, setLink] = useState('');
     const [name, setName] = useState([]);
-    const [template, setTemplate] = useState([]);
+    const [template, setTemplate] = useState('');
     const [errorName, setErrorName] = useState(false);
     const [errorNameMessage, setErrorNameMessage] = useState('');
     const [errorTemplate, setErrorTemplate] = useState(false);
@@ -88,15 +88,25 @@ function Create() {
     }, []);
     
     const submit = () => {
+        let validationKey = false;
         // バリデーションチェック
         // 名前が入力されていない時
         if (name.length === 0) {
-            return false;
+            validationKey = true;
+            setErrorName(true);
+            setErrorNameMessage('イベント名を入力してください');
         }
         
         // 通知テンプレートを設定していない時
         if (template.trim().length === 0) {
-            return false;
+            validationKey = true;
+            setErrorTemplate(true);
+            console.log('error')
+            setErrorTemplateMessage('テンプレートを入力してください');
+        }
+        
+        if (validationKey) {
+            return false
         }
         
         if (id === undefined) { // 新規作成の場合

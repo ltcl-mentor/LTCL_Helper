@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
+import TextField from '@mui/material/TextField';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -56,6 +57,13 @@ function SelectTarget(props) {
     const theme = useTheme();
 
     const handleChange = (event) => {
+        if (event.target.value.length === 0) {
+            props.setValidationError({...props.validationError, target: true});
+            props.setValidationMessage({...props.validationMessage, target:"対象を選択してください"})
+        } else {
+            props.setValidationError({...props.validationError, target: false});
+            props.setValidationMessage({...props.validationMessage, target:""})
+        }
         const { target: { value } } = event;
         props.setTarget(typeof value === 'string' ? value.split(',') : value);
     };
@@ -63,10 +71,12 @@ function SelectTarget(props) {
     return (
         <div>
             <FormControl sx={style}>
-                <InputLabel id="demo-multiple-chip-label">対象</InputLabel>
-                <Select
-                    labelId="demo-multiple-chip-label"
+                <TextField
+                    label='対象'
                     id="demo-multiple-chip"
+                    select
+                    error={ props.validationError.target }
+                    helperText={ props.validationMessage }
                     multiple
                     value={props.target}
                     onChange={handleChange}
@@ -89,7 +99,7 @@ function SelectTarget(props) {
                             {tar}
                         </MenuItem>
                     ))}
-                </Select>
+                </TextField>
             </FormControl>
         </div>
     );
