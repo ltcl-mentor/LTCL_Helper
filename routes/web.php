@@ -14,7 +14,7 @@
 // registerページのデフォルトルーティングを無効化
 // registerは下部で個別に定義
 Auth::routes([
-    'register' => false, 
+    'register' => false,
     'reset' => false,
 ]);
 
@@ -25,9 +25,9 @@ Route::get('/lockout', 'Auth\LoginController@lockout');
  * コメントアウトしているルーティングはReact Routerに移行したので
  * resources/js/components/Route.js
  * を確認してください
- */ 
+ */
 Route::group(['middleware' => ['auth']], function () {
-    
+
     /**
      * ログイン済みユーザーのみアクセス可能
      */
@@ -47,8 +47,8 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::get('/documents/index/public', 'DocumentController@publicIndex'); // 公開中の参考記事一覧表示
     // Route::get('/history', 'HomeController@history'); // 履歴画面表示
     // Route::get('/contact/create', 'ContactController@create'); // お問い合わせ画面表示
-    
-    
+
+
     /**
      * 以下のurlはreact上で非同期通信として利用
      */
@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('react/question/checked/{question}', 'ReactController@getCheckedQuestion'); // 公開中の個別質問データの受け渡し
     Route::get('react/questions/checked', 'ReactController@getCheckedQuestions'); // 公開中の質問受け渡し
     Route::get('react/questions/search', 'ReactController@getSearchQuestions'); // 質問検索結果の受け渡し
+    Route::get('react/questions/search/paginate', 'ReactController@getSearchQuestionsPaginate'); // 質問検索結果の受け渡しのペじネーション
     Route::get('react/questions/mine', 'ReactController@getMyQuestions'); // ログインユーザの質問一覧受け渡し
     Route::get('react/documents/all', 'ReactController@getAllDocuments'); // 全記事受け渡し
     Route::get('react/documents/related/{question}', 'ReactController@getRelatedDocuments'); // 質問に紐づいている記事の受け渡し
@@ -66,26 +67,26 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('react/infos', 'ReactController@getInfos'); // お知らせのデータ受け渡し
     Route::get('react/home', 'ReactController@getHomeData'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
     // Route::get('react/images/{question_id}', 'ReactController@getImages'); // 質問に関連する画像の受け渡し
-    
-    
+
+
     /**
      *  管理者権限を持っているユーザーのみがアクセス可能
      */
     Route::group(['middleware' => ['administrator']], function () {
-        
+
         /**
          *  トップ画面
          */
         Route::post('/informations/store', 'HomeController@storeInfo'); // お知らせの登録
         Route::post('/informations/{info}/delete', 'HomeController@deleteInfo'); // お知らせの削除
-        
-        
+
+
         /**
          * 管理画面表示
          */
         // Route::get('/mentor', 'HomeController@mentorTop'); // メンター管理画面表示
-        
-        
+
+
         /**
          * 参考記事
          */
@@ -96,9 +97,9 @@ Route::group(['middleware' => ['auth']], function () {
         // Route::get('/documents/create', 'DocumentController@create'); // 新規作成画面表示
         // Route::get('/documents/{document}', 'DocumentController@show'); // 詳細画面表示
         // Route::get('/documents/{document}/edit', 'DocumentController@edit'); // 編集画面表示
-        
-        
-        /** 
+
+
+        /**
          * 質問と参考記事の紐付け
          */
         Route::post('/links/document/{document}', 'LinkController@linkQuestionsFromDocument'); // 紐付け実行(記事：質問＝１：多)
@@ -106,8 +107,8 @@ Route::group(['middleware' => ['auth']], function () {
         // Route::get('/links/index', 'LinkController@index'); // 初期画面表示
         // Route::get('/links/document/{document}', 'LinkController@getDocumentToQuestions'); // 新規作成画面表示(記事：質問＝１：多)
         // Route::get('/links/question/{question}', 'LinkController@getQuestionToDocuments'); // 新規作成画面表示(記事：質問＝多：1)
-        
-        
+
+
         /**
          * 質問
          */
@@ -120,8 +121,8 @@ Route::group(['middleware' => ['auth']], function () {
         // Route::get('/questions/create', 'QuestionController@create'); // 新規作成画面表示
         // Route::get('/questions/{question}', 'QuestionController@show'); // 詳細画面表示
         // Route::get('/questions/{question}/edit', 'QuestionController@edit'); // 編集画面表示
-        
-        
+
+
         /**
          * ユーザー
          */
@@ -133,14 +134,14 @@ Route::group(['middleware' => ['auth']], function () {
         // Route::get('/users/index', 'UserController@index'); // 初期画面表示
         // Route::get('users/admin/register', 'Auth\RegisterController@showRegistrationForm')->name('register'); // 管理者の新規作成画面表示
         // Route::get('/users/public/register', 'Auth\RegisterController@showPublicRegistrationForm'); // 受講生の新規作成画面表示
-        
+
         /**
-         * イベント 
+         * イベント
          */
         Route::post('/events/store', 'HomeController@storeEvent'); // イベントの新規作成実行
         Route::post('/events/{event}/update', 'HomeController@updateEvent'); // イベントの編集
         Route::post('/events/{event}/delete', 'HomeController@deleteEvent'); // イベントの編集
-        
+
         /**
          * Reactでのデータ受け渡し（全て非同期）
          */
@@ -163,7 +164,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('react/id', 'ReactController@getUserId'); // ログインユーザーid受け渡し
         // Route::get('react/unapproved/questions', 'ReactController@getUnapprovedQuestions'); // 未承認質問受け渡し（未使用？）
     });
-    
+
     Route::get('/{any}', function(){
         return view('react');
     })->where('any', '.*');
