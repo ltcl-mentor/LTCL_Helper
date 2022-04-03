@@ -51,7 +51,8 @@ function CrriculumNumber(props) {
             <Selects
                 setCurriculumNumber={ props.setCurriculumNumber }
                 curriculum_numbers={ curriculum_numbers }
-                curriculum_number_validation_error={props.curriculum_number_validation_error}
+                curriculumNumberValidationError={props.curriculumNumberValidationError}
+                curriculumNumberValidationMessage={ props.curriculumNumberValidationMessage }
             />
         </Box>
     );

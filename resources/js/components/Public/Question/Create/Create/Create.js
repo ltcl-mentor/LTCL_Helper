@@ -30,15 +30,21 @@ function Create() {
     const [category, setCategory] = useState(0);
     const [topic, setTopic] = useState(0);
     const [curriculum_number, setCurriculumNumber] = useState('');
-    const [curriculum_number_validation_error, setCurriculumNumberValidationError] = useState(0);
+    const [curriculumNumberValidationError, setCurriculumNumberValidationError] = useState(false);
+    const [curriculumNumberValidationMessage, setCurriculumNumberValidationMessage] = useState('');
     const [title, setTitle] = useState('');
     const [remarks, setRemarks] = useState('');
     const [question, setQuestion] = useState('');
-    const [question_validation_error, setQuestionValidationError] = useState({
-        title: 0,
-        serach: 0,
-        content: 0,
+    const [questionValidationError, setQuestionValidationError] = useState({
+        title: '',
+        serach: '',
+        content: '',
     });
+    const [questionValidationMessage, setQuestionValidationMessage] = useState({
+        titleErrorMessage: '',
+        serachErrorMessage: '',
+        contentErrorMessage: '',
+    })
     const curriculum_numbers = [
         [
             ['1-1-1'],
@@ -72,54 +78,64 @@ function Create() {
     const handleNext = (step) => {
         if (step === 0) {
             // カリキュラム番号のバリデーション
+            let validationMessage = "カリキュラム番号を選択してください";
             // カリキュラム番号が選択されているか
             if (!(curriculum_number)) {
-                setCurriculumNumberValidationError(1);
+                setCurriculumNumberValidationError(true);
+                setCurriculumNumberValidationMessage(validationMessage);
                 return false;
             }
             
             // カテゴリーとトピックに対して適切なカリキュラム番号が選択されているか
             if (category === 0) {
                 if (!(curriculum_numbers[0][Number(topic)].includes(curriculum_number))) {
-                    setCurriculumNumberValidationError(1);
+                    setCurriculumNumberValidationError(true);
+                    setCurriculumNumberValidationMessage(validationMessage);
                     return false;
                 }
             } else if (category === 1) {
                 if (topic === 19) {
                     if (!(curriculum_numbers[1][1].includes(curriculum_number))) {
-                        setCurriculumNumberValidationError(1);
+                        setCurriculumNumberValidationError(true);
+                        setCurriculumNumberValidationMessage(validationMessage);
                         return false;
                     }
                 } else {
                     if (!(curriculum_numbers[1][0].includes(curriculum_number))) {
-                        setCurriculumNumberValidationError(1);
+                        setCurriculumNumberValidationError(true);
+                        setCurriculumNumberValidationMessage(validationMessage);
                         return false;
                     }
                 }
             }
         } else if (step === 1) {
             let validationKey = {title:0, search:0, question:0, isNext:true}
+            let validationMessage = {titleErrorMessage:'', serachErrorMessage:'', contentErrorMessage:''}
             // タイトルのバリデーション
             if (title.trim().length === 0) {
-                validationKey.title = 1;
+                validationKey.title = true;
                 validationKey.isNext = false;
+                validationMessage.titleErrorMessage = "タイトルを入力してください"
             }
             
             // 調べたことのバリデーション
             if (remarks.trim().length === 0) {
-                validationKey.serach = 1;
+                validationKey.serach = true;
                 validationKey.isNext = false;
+                validationMessage.serachErrorMessage = "調べたことを入力してください"
             }
             
             // 質問内容のバリデーション
             if (question.trim().length === 0) {
-                validationKey.content = 1;
+                validationKey.content = true;
                 validationKey.isNext = false;
+                validationMessage.contentErrorMessage = "質問内容を入力してください"
             }
             
             //バリデーションエラーが出た場合は処理を止める
             if (validationKey.isNext === false){
                 setQuestionValidationError({ ...validationKey });
+                setQuestionValidationMessage({ ...validationMessage });
                 return false;
             }
             
@@ -239,7 +255,8 @@ function Create() {
                             category={ category }
                             topic={ topic }
                             setCurriculumNumber={ setCurriculumNumber }
-                            curriculum_number_validation_error={ curriculum_number_validation_error}
+                            curriculumNumberValidationError={ curriculumNumberValidationError}
+                            curriculumNumberValidationMessage={ curriculumNumberValidationMessage }
                         />
                     </React.Fragment>
                 );
@@ -254,7 +271,8 @@ function Create() {
                             setTitle={ setTitle }
                             remarks={ remarks }
                             setRemarks={ setRemarks }
-                            question_validation_error={ question_validation_error }
+                            question_validation_error={ questionValidationError }
+                            questionValidationMessage={ questionValidationMessage }
                             activeStep={ activeStep }
                             images={ images }
                             setImages={ setImages }

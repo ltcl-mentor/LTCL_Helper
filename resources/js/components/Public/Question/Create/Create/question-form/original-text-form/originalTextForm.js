@@ -8,6 +8,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import CodeIcon from '@mui/icons-material/Code';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import TextField from '@mui/material/TextField';
 
 import Picture from './picture';
 import Preview from './preview';
@@ -148,10 +149,13 @@ function TextForm(props) {
                             <FormatListNumberedIcon />
                         </ToggleButton>*/}
                 </Box>
-                { props.validationKey === 1 && <Typography variant="h7" sx={{ color:'red', marginLeft: '5%'}}>入力は必須です。</Typography> }
-                <TextareaAutosize
-                    placeholder="どのような手順を行なった結果エラーが出たのか、どんなエラーが出たかなどを写真などを利用して具体的に入力してください。"
-                    minRows={15}
+                <TextField
+                    placeholder="何を行ったのか、どんなエラーが出たかなどを写真等を利用して具体的に入力してください。"
+                    label="質問の具体的な内容（試したことなど）"
+                    error={props.validationKey}
+                    helperText={props.validationMessage}
+                    multiline
+                    rows={15}
                     value={ props.text }
                     onChange={ (event) => handleText(event) }
                     style={{ 
