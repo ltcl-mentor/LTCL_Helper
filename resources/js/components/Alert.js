@@ -151,6 +151,16 @@ function AlertMessage(props) {
                     message = <AlertTitle>イベントを削除しました。</AlertTitle>;
                     break;
             }
+            
+        case "backup":
+            switch(props.status) {
+                case "question":
+                    message = <AlertTitle>質問のバックアップ復元が完了しました。</AlertTitle>;
+                    break;
+                case "student":
+                    message = <AlertTitle>受講生のバックアップ復元が完了しました。</AlertTitle>;
+                    break;
+            }
     }
     
     return (

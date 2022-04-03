@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\User;
 
-class registerStudents extends Command
+class RegisterStudents extends Command
 {
     /**
      * The name and signature of the console command.
@@ -38,6 +38,6 @@ class registerStudents extends Command
      */
     public function handle()
     {
-        User::registerStudents();
+        User::registerStudents(0);
     }
 }

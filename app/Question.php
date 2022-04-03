@@ -7,6 +7,7 @@ use App\Document;
 use App\Image;
 use App\Comment;
 use App\Export;
+use App\Question;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
@@ -312,6 +313,63 @@ class Question extends Model
 
         if($question_count - $exported_question_count >= 95){
             Slack::sendMessage("前回のCSV出力から新たに95件の質問が追加されました。\nmasterアカウントからCSV出力を実行してバックアップを保管してください。", 'mentor');
+        }
+    }
+    
+    /**
+     * スプレッドシートから質問情報を取得
+     */
+    public static function getQuestionsApiData()
+    {
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://sheets.googleapis.com/v4/spreadsheets/'. env('GoogleSheetsReferenceQuestionID') .'/values/未登録質問リスト';
+        
+        $response = $client->request(
+            'GET',
+            $url,
+            ['query' => ['key' => env('GoogleSheetsKey'), 'majorDimension' => 'ROWS']]
+        );
+        
+        return json_decode($response->getBody(), true);
+    }
+     
+    /**
+     * 質問一括登録
+     */
+    public static function bulkRegistration()
+    {
+        $questions = self::getQuestionsApiData()['values'];
+        array_splice($questions, 0, 2);
+
+        foreach($questions as $question) {
+            // 質問がなければ追加処理をストップ
+            if (!isset($question[5])) {
+                break;
+            }
+            
+            // questionsテーブルに挿入したいデータがあるかチェック
+            $question_exist = Question::where([
+                ['category', '=', intval($question[2])],
+                ['topic', '=', intval($question[3])],
+                ['curriculum_number', '=', $question[4]],
+                ['title', '=', $question[5]],
+            ])->exists();
+            
+            // テーブル内に挿入したいデータと被りがない場合は追加
+            // 現在はquestionsテーブルに入れるのみ
+            if (!$question_exist) {
+                $add_question = Question::create([
+                    'category' => $question[2],
+                    'topic' => $question[3],
+                    'curriculum_number' => $question[4],
+                    'title' => $question[5],
+                    'remarks' => $question[6],
+                    'question' => $question[7],
+                    'is_resolved' => $question[8],
+                    'check' => $question[9],
+                    'user_id' => $question[10],
+                ]);
+            }
         }
     }
 }
