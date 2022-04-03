@@ -328,10 +328,10 @@ class QuestionController extends Controller
                 'is_resolved',
                 'check',
                 'user_id',
-                'author',
                 'created_at',
                 'updated_at',
                 'deleted_at',
+                'author',
             ];
             
             //文字化け対策
@@ -354,10 +354,10 @@ class QuestionController extends Controller
                     $question->is_resolved,
                     $question->check,
                     $question->user_id,
-                    $author->name,
                     $question->created_at,
                     $question->updated_at,
                     $question->deleted_at,
+                    $author->name,
                 ];
                 
                 //文字化け対策
@@ -374,6 +374,11 @@ class QuestionController extends Controller
         
         //実行
         return response()->stream($callback, 200, $headers);
+    }
+    
+    public static function backup() {
+        Question::bulkRegistration();
+        return;
     }
     
     /**

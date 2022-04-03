@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {Link, useLocation} from 'react-router-dom';
+import {Link, useLocation, useHistory} from 'react-router-dom';
 import axios from "axios";
 import Button from '@mui/material/Button';
 import CreateIcon from '@material-ui/icons/Create';
@@ -23,6 +23,7 @@ import Breadcrumbs from '../Breadcrumbs';
  * 管理画面のメインコンポーネント
  */
 function Top() {
+    const history = useHistory();
     const parameter = useLocation();
     const [counts, setCounts] = useState([]);
     
@@ -37,6 +38,32 @@ function Top() {
                 console.log(error);
             });
     }, []);
+    
+    const backupQuestion = () => {
+        if (window.confirm('質問のバックアップを復元しますか？')) {
+            axios
+                .post('/questions/backup')
+                .then(response => {
+                    if (response.status === 200) history.push("/mentor/top", {type: 'backup', status: 'question'});
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+    };
+    
+    const backupStudent = () => {
+        if (window.confirm('受講生を一括登録しますか？')) {
+            axios
+                .post('/users/backup')
+                .then(response => {
+                    if (response.status === 200) history.push("/mentor/top", {type: 'backup', status: 'student'});
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+    };
     
     // ログインユーザー情報取得
     const user = useContext(LoginUser);
@@ -226,6 +253,14 @@ function Top() {
                                 <a href="/questions/export">
                                     <Button variant="contained" color="warning" startIcon={ <ListIcon /> }>直近の質問をCSV出力</Button>
                                 </a>
+                            </Grid>
+                            
+                            <Grid item >
+                                <Button onClick={() => backupQuestion()} variant="contained" color="warning" startIcon={ <ListIcon /> }>質問一括登録</Button>
+                            </Grid>
+                            
+                            <Grid item >
+                                <Button onClick={() => backupStudent()} variant="contained" color="warning" startIcon={ <ListIcon /> }>受講生一括登録</Button>
                             </Grid>
                         </Grid>
                     </Box>

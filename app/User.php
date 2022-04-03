@@ -175,10 +175,15 @@ class User extends Authenticatable
     /**
      * 受講生情報をテーブルに追加
      */
-    public static function registerStudents()
+    public static function registerStudents(int $frag)
     {
         $date = new Carbon();
-        $datas = self::getUnRegisterApiData();
+        
+        if ($frag == 0) { // 未登録IDの受講生を追加
+            $datas = self::getUnRegisterApiData();
+        } else {
+            $datas = self::getStudentsApiData();
+        }
         
         // 受講生情報取得
         $students = $datas['values'];
