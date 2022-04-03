@@ -223,7 +223,7 @@ class Question extends Model
             }
         }
 
-        return $results->orderBy('question', 'asc')->paginate(2);
+        return $results->orderBy('question', 'asc')->paginate();
     }
 
     /**
