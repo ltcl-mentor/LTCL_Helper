@@ -1,0 +1,39 @@
+body {
+  background-color: white;
+}
+
+.college_info {
+  background-color: #eee;
+  padding-top: 16px;
+}
+
+.college_info div.css-1n2mv2k {
+  justify-content: space-evenly;
+}
+
+.college_info div.css-mvmu1r {
+  justify-content: space-evenly;
+  margin: 10px 0;
+}
+
+.information {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.information span.MuiTypography-root.MuiTypography-body1.MuiListItemText-primary.css-10hburv-MuiTypography-root {
+  font-size: 20px;
+}
+
+.footer {
+  background-color: #b39ddb;
+  padding-top: 16px;
+}
+
+span.MuiTabs-indicator.css-11yukd5-MuiTabs-indicator {
+  color: #771AF8;
+}
+
+button.css-1susg9h-MuiButtonBase-root-MuiTab-root.Mui-selected {
+  color: #771AF8;
+}

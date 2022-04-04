@@ -46,18 +46,8 @@ class College extends Model
             }
         } else {
             $college_datas['zoom']['exist'] = false;
-            $college_datas['zoom']['message'] = "zoomリンクは当日しか見れません。";
+            $college_datas['zoom']['message'] = "zoomリンクは当日しか\n見れません。";
         }
-        
-        // オンライン自習室担当の代入
-        // if(count($datas['values'][$date]) < 6){
-        //     $college_datas['zoom'][] = "データ取得失敗。\nスタッフにご確認ください。";
-        // }elseif($datas['values'][$date][6] === "なし" && $datas['values'][$date][7] === "なし"){
-        //     $college_datas['zoom'][] = "本日オンライン質問部屋はありません。\n質問のある方はSlackにて出勤メンターへ連絡してください。";
-        // }else{
-        //     $college_datas['zoom'][] = $datas['values'][$date][6] ?: null;
-        //     $college_datas['zoom'][] = $datas['values'][$date][7] ?: null;
-        // }
         
         return $college_datas;
     }

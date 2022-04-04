@@ -283,7 +283,6 @@ class ReactController extends Controller
 
     /**
      * URLで指定された日付の校舎情報受け渡し
-     * 'react/college/{year}/{month}/{date}'
      */
     public function getCollegeData($year, $month, $date)
     {
@@ -303,7 +302,7 @@ class ReactController extends Controller
         foreach($infos['dates'] as $date){
             $infos['infos'][$date] = $info->where('date', $date)->select('id', 'information', 'targets', 'body', 'slackDate')->get();
         }
-
+        
         return $infos;
     }
 
@@ -337,8 +336,8 @@ class ReactController extends Controller
      */
     public function getHomeData()
     {
-        $achievement = Question::getAchievement();
+        // $achievement = Question::getAchievement();
         $events = Event::get();
-        return ["key" => env('GoogleMapsKey'), "zoom" => env('ZoomLinksNote'), "achievement" => $achievement, "events" => $events];
+        return ["key" => env('GoogleMapsKey'), "zoom" => env('ZoomLinksNote'), "events" => $events];
     }
 }

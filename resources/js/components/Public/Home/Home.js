@@ -1,70 +1,90 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {useLocation} from 'react-router-dom';
-import axios from "axios";
-import Card from '@mui/material/Card';
+import React, { useState, useEffect, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
+import '../../../../../public/css/Public/top.css';
+// import axios from "axios";
+
 import Typography from '@material-ui/core/Typography';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+// import Card from '@mui/material/Card';
+// import Box from '@mui/material/Box';
+// import Grid from '@mui/material/Grid';
+
+import Alert from '../../Alert';
 
 import {LoginUser} from '../../Route.js';
-import Alert from '../../Alert';
-import Content from '../../Layout/side-menu/content';
-import Information from './information/information';
-import Clendar from './calendar/calendar';
-import Weather from './weather';
-import Location from './location';
+import TabPanel from './tabpanel';
+// import Content from '../../Layout/side-menu/content';
+// import Information from './information/information';
+// import Clendar from './calendar/calendar';
+// import Weather from './weather';
+// import Location from './location';
+
+const style = {
+    width: '100%',
+    pr: 0,
+    pl: 0,
+};
+
 
 /**
  * トップ画面のメインコンポーネント
  */
 function Home() {
     const parameter = useLocation();
-    const [map_key, setMapKey] = useState();
-    const [zoom_link, setZoomLink] = useState();
-    const [achievement, setAchievement] = useState();
-    const [events, setEvents] = useState([]);
-    const [screen_width, setScreenWidth] = useState(window.innerWidth);
+    // const [map_key, setMapKey] = useState();
+    // const [zoom_link, setZoomLink] = useState();
+    // const [achievement, setAchievement] = useState();
+    // const [events, setEvents] = useState([]);
+    // const [screen_width, setScreenWidth] = useState(window.innerWidth);
     
     // ログインユーザー情報取得
     const user = useContext(LoginUser);
     
-    // windowの幅が変化した際に随時取得
-    window.addEventListener('resize', function() {
-        setScreenWidth(window.innerWidth);
-    });
+    // // windowの幅が変化した際に随時取得
+    // window.addEventListener('resize', function() {
+    //     setScreenWidth(window.innerWidth);
+    // });
     
-    // 画面描画時に実行
-    useEffect(() => {
+    // // 画面描画時に実行
+    // useEffect(() => {
         
-        // Home画面に必要なデータ取得
-        // マップのAPIキー、Zoomのリンク一覧へのURL、質問解決率、イベント一覧
-        axios
-            .get("/react/home")
-            .then(response => {
-                setMapKey(response.data.key);
-                setZoomLink(response.data.zoom);
-                setAchievement(response.data.achievement);
-                setEvents(response.data.events);
-            }).catch(error => {
-                console.log(error);
-            });
-    }, []);
+    //     // Home画面に必要なデータ取得
+    //     // マップのAPIキー、Zoomのリンク一覧へのURL、質問解決率、イベント一覧
+    //     axios
+    //         .get("/react/home")
+    //         .then(response => {
+    //             setMapKey(response.data.key);
+    //             setZoomLink(response.data.zoom);
+    //             setAchievement(response.data.achievement);
+    //             setEvents(response.data.events);
+    //         }).catch(error => {
+    //             console.log(error);
+    //         });
+    // }, []);
     
     return (
-        <div className="container">
+        <div className={style}>
+        {/*<div className="container">*/}
+        
+            {/* アラート */}
             <Alert
                 type={ parameter.state && parameter.state.type }
                 status={ parameter.state && parameter.state.status }
             />
-            
-            { user.reply_count > 0 &&
+            {user.reply_count > 0 &&
                 <Alert
                     type="info"
                     status="question"
                 />
             }
             
-            <Box
+            {/* タブ */}
+            <TabPanel />
+            
+            <Typography component="div" align="center" sx={{ fontWeight: 'bold', fontSize: 20, pt: 1, pb: 1 }}>
+                レバテックカレッジ
+            </Typography>
+            
+            {/*<Box
                 sx={{
                     marginTop: 3,
                 }}
@@ -145,7 +165,7 @@ function Home() {
                         </Card>
                     </Grid>
                 </Grid>
-            </Box>
+            </Box>*/}
         </div>
     );
 }
