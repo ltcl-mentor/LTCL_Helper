@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-import Top from './top/top';
+import Top from './Top/top';
+import QA from './Q&A/qa';
 
 const Panel = (props) => {
     const { children, value, index, ...other } = props;
@@ -29,9 +30,9 @@ const Panel = (props) => {
 };
 
 Panel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
 };
 
 const a11yProps = (index) => {
@@ -46,7 +47,7 @@ const a11yProps = (index) => {
  * タブパネル
  */
 const TabPanel = () => {
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState(1);
     
     // タブ切り替え用
     const handleChange = (event, newValue) => {
@@ -70,7 +71,7 @@ const TabPanel = () => {
                 <Top />
             </Panel>
             <Panel value={value} index={1}>
-                Q&A表示
+                <QA />
             </Panel>
         </Box>
     );

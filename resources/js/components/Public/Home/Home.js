@@ -28,7 +28,7 @@ const style = {
 /**
  * トップ画面のメインコンポーネント
  */
-function Home() {
+const Home = () => {
     const parameter = useLocation();
     // const [map_key, setMapKey] = useState();
     // const [zoom_link, setZoomLink] = useState();

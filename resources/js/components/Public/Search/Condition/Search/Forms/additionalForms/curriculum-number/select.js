@@ -24,7 +24,7 @@ function Selects(props) {
     
     return (
         <Box className="curriculum_number_box">
-            <FormControl  sx={{ width:'50%'}}>
+            <FormControl  sx={{ width:'50%' }}>
                 <TextField
                     label="カリキュラム番号"
                     id="demo-simple-select"
@@ -34,7 +34,6 @@ function Selects(props) {
                     onChange={ (event) => handleCurriculumNumber(event) }
                     style={{ 
                         width: "70%",
-                        marginLeft: "5%",
                         paddingTop:2,
                     }}
                 >

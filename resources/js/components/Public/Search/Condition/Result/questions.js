@@ -77,7 +77,7 @@ function Questions(props) {
     }
     
     return (
-        <Card sx={{ marginTop: 4, marginBottom:4 }}>
+        <Card sx={{ marginTop: 4, marginBottom:4, width: '96%' }}>
             <Typography
                 variant="h7"
                 component="div"

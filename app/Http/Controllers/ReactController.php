@@ -32,16 +32,23 @@ class ReactController extends Controller
             // 絞り込み検索用
             $request->category, $request->topic, $request->curriculum_number, $request->keyword,
             // フリーワード検索用
-            $request->searchType, urldecode($request->freeword));
+            $request->searchType, urldecode($request->freeword)
+        );
     }
 
+    /**
+     * 質問検索結果の受け渡し
+     * 「絞り込み」と「フリーワード」両方に対応
+     * ペジネーションで受け渡す
+     */
     public function getSearchQuestionsPaginate(Request $request)
     {
         return Question::conditionSearchPaginate(
-        // 絞り込み検索用
+            // 絞り込み検索用
             $request->category, $request->topic, $request->curriculum_number, $request->keyword,
             // フリーワード検索用
-            $request->searchType, urldecode($request->freeword));
+            $request->searchType, urldecode($request->freeword)
+        );
     }
 
     /**
@@ -339,5 +346,31 @@ class ReactController extends Controller
         // $achievement = Question::getAchievement();
         $events = Event::get();
         return ["key" => env('GoogleMapsKey'), "zoom" => env('ZoomLinksNote'), "events" => $events];
+    }
+    
+    /**
+     * 各トピックの質問数を取得
+     */
+    public function getQuestionArticle() 
+    {
+        $curriculum_questions = [];
+        $project_questions = [];
+        $questions = array_count_values(Question::where('check', 1)->pluck('topic')->all());
+        
+        // 質問カウント
+        for ($i=0; $i <= 19; $i++) {
+            $question_count = 0;
+            if (array_key_exists($i, $questions)) {
+                $question_count = $questions[$i];
+            }
+            
+            if ($i <= 13) { // カリキュラム
+                array_push($curriculum_questions, ['topic' => $i, 'questions' => $question_count]);
+            } else { // 成果物
+                array_push($project_questions, ['topic' => $i, 'questions' => $question_count]);
+            }
+        }
+        
+        return ['curriculum' => $curriculum_questions, "project" => $project_questions];
     }
 }
