@@ -20,6 +20,7 @@ class DocumentTableSeeder extends Seeder
             'amature' => false,
             'master' => false,
             'all' => false,
+            'category' => 1,
         ]);
         DB::table('documents')->insert([
             'id' => 2,
@@ -30,6 +31,7 @@ class DocumentTableSeeder extends Seeder
             'amature' => false,
             'master' => false,
             'all' => false,
+            'category' => 13,
         ]);
         DB::table('documents')->insert([
             'id' => 3,
@@ -40,6 +42,7 @@ class DocumentTableSeeder extends Seeder
             'amature' => true,
             'master' => false,
             'all' => false,
+            'category' => 5,
         ]);
         DB::table('documents')->insert([
             'id' => 4,
@@ -50,6 +53,7 @@ class DocumentTableSeeder extends Seeder
             'amature' => false,
             'master' => false,
             'all' => false,
+            'category' => 6,
         ]);
         DB::table('documents')->insert([
             'id' => 5,
@@ -60,6 +64,7 @@ class DocumentTableSeeder extends Seeder
             'amature' => false,
             'master' => false,
             'all' => false,
+            'category' => 13,
         ]);
         DB::table('documents')->insert([
             'id' => 6,
@@ -70,6 +75,7 @@ class DocumentTableSeeder extends Seeder
             'amature' => false,
             'master' => false,
             'all' => false,
+            'category' => 1,
         ]);
         DB::table('documents')->insert([
             'id' => 7,
@@ -80,6 +86,7 @@ class DocumentTableSeeder extends Seeder
             'amature' => false,
             'master' => false,
             'all' => false,
+            'category' => 6,
         ]);
         DB::table('documents')->insert([
             'id' => 8,
@@ -90,6 +97,7 @@ class DocumentTableSeeder extends Seeder
             'amature' => false,
             'master' => false,
             'all' => false,
+            'category' => 13,
         ]);
         DB::table('documents')->insert([
             'id' => 9,
@@ -100,6 +108,7 @@ class DocumentTableSeeder extends Seeder
             'amature' => false,
             'master' => false,
             'all' => false,
+            'category' => 6,
         ]);
         DB::table('documents')->insert([
             'id' => 10,
@@ -110,6 +119,7 @@ class DocumentTableSeeder extends Seeder
             'amature' => true,
             'master' => false,
             'all' => false,
+            'category' => 9,
         ]);
         DB::table('documents')->insert([
             'id' => 11,
@@ -120,6 +130,7 @@ class DocumentTableSeeder extends Seeder
             'amature' => true,
             'master' => false,
             'all' => false,
+            'category' => 5,
         ]);
         DB::table('documents')->insert([
             'id' => 12,
@@ -130,6 +141,7 @@ class DocumentTableSeeder extends Seeder
             'amature' => false,
             'master' => false,
             'all' => false,
+            'category' => 6,
         ]);
         DB::table('documents')->insert([
             'id' => 13,
@@ -140,6 +152,7 @@ class DocumentTableSeeder extends Seeder
             'amature' => false,
             'master' => false,
             'all' => true,
+            'category' => 13,
         ]);
         DB::table('documents')->insert([
             'id' => 14,
@@ -150,6 +163,7 @@ class DocumentTableSeeder extends Seeder
             'amature' => true,
             'master' => false,
             'all' => false,
+            'category' => 13,
         ]);
     }
 }

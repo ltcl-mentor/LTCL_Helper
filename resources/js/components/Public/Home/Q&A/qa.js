@@ -178,6 +178,9 @@ const QA = () => {
                                                 <Typography component="div" align="center" variant="h7" sx={{ mt: 2 }}>
                                                     質問 {topic.questions}件
                                                 </Typography>
+                                                <Typography component="div" align="center" variant="h7" sx={{ mb: 2 }}>
+                                                    記事 {topic.documents}件
+                                                </Typography>
                                             </CardActionArea>
                                         </Card>
                                     </Grid>
@@ -197,6 +200,9 @@ const QA = () => {
                                                 </Typography>
                                                 <Typography component="div" align="center" variant="h7" sx={{ mt: 2 }}>
                                                     質問 {topic.questions}件
+                                                </Typography>
+                                                <Typography component="div" align="center" variant="h7" sx={{ mb: 2 }}>
+                                                    記事 {topic.documents}件
                                                 </Typography>
                                             </CardActionArea>
                                         </Card>
