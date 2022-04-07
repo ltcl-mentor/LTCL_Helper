@@ -198,24 +198,18 @@ const Condition = () => {
         <div className="condition">
         
             {/* カテゴリー */}
-            <Grid container sx={{ justifyContent: 'space-between' }}>
-                <Grid item xs={7}>
-                    <Typography sx={{ fontWeight: 'bold', fontSize: 20 }}>
-                        1. カテゴリー
-                        <span style={styleSpan}>どちらか1つを選択してください</span>
-                    </Typography>
-                </Grid>
+            <Typography sx={{ fontWeight: 'bold', fontSize: 20 }}>
+                1. カテゴリー
+                <span style={styleSpan}>どちらか1つを選択してください</span>
+            </Typography>
                 
-                {/* 検索リセット */}
-                <Grid item xs={3}>
-                    <Typography onClick={() => handleCanceling()} sx={{ fontSize: 18, textDecoration: 'underline', cursor: 'pointer', '&:hover': { opacity: 0.7 } }}>
-                        検索条件をリセット
-                    </Typography>
-                </Grid>
-            </Grid>
+            {/* 検索リセット */}
+            <Typography align="right" onClick={() => handleCanceling()} sx={{ fontSize: 18, textDecoration: 'underline', cursor: 'pointer', '&:hover': { opacity: 0.7 } }}>
+                検索条件をリセット
+            </Typography>
             
             {/* カテゴリー選択欄 */}
-            <Stack direction="row" sx={{ width: '40%', m: '15px 0' }}>
+            <Stack direction="row" sx={{ width: '40%', m: 0 }}>
                 {curriculum}
                 {project}
             </Stack>

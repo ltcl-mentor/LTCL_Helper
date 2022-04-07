@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnToInfosTable extends Migration
+class AddCategoryColumnToDocumentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class AddColumnToInfosTable extends Migration
      */
     public function up()
     {
-        Schema::table('infos', function (Blueprint $table) {
-            $table->text('body')->nullable();
-            $table->text('targets')->nullable();
-            $table->text('slack')->nullable();
-            $table->date('slackDate')->nullable();
+        Schema::table('documents', function (Blueprint $table) {
+            $table->UnsignedTinyInteger('category')->nullable();
         });
     }
 

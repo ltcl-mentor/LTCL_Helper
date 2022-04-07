@@ -27,6 +27,10 @@ const style = {
     overflow: 'scroll'
 };
 
+const styleUl = {
+    paddingLeft: '16px'
+};
+
 /**
  * お知らせの一覧情報
  */
@@ -118,7 +122,7 @@ const Infos = (props) => {
             >
                 { dates.map((date) => (
                     <li key={ date }>
-                        <ul>
+                        <ul style={styleUl}>
                             <ListSubheader sx={{ pl: 0, pt: 2, lineHeight: 2 }}>{ date }</ListSubheader>
                             { infos[date].map((info) => (
                                 <ListItem key={`${date}-info`} sx={{ p: 0 }}>
