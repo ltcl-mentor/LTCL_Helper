@@ -14,8 +14,8 @@ function Keyword(props) {
     };
     
     return (
-        <Box sx={{ textAlign: "center", marginTop: 4, marginBottom: 3 }}>
-            <TextField id="standard-basic" label="キーワード" onChange={ (event) => handleKeyword(event) } />
+        <Box sx={{ textAlign: "left", marginTop: 1, marginBottom: 3 }}>
+            <TextField id="standard-basic" label="キーワード" onChange={ (event) => handleKeyword(event) } sx={{ width: '450px' }} />
             { props.isCanceling ? '' : props.setKeyword(keyword) }
         </Box>
     );

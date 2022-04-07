@@ -31,7 +31,7 @@ function Condition() {
         // カリキュラムのトピック
         'AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'データベース', 'Git&GitHub', 'マイグレーション', 'リレーション', '認証・認可機能(カリキュラム)', 'API(カリキュラム)', 'その他(カリキュラム)',
         // 成果物のトピック
-        '認証・認可機能(成果物)', 'API(成果物)', '画像処理', 'Heroku環境', 'デザイン', 'その他(成果物)'
+        '認証・認可機能(成果物)', 'API(成果物)', '画像処理', 'Heroku環境', 'デザイン', 'その他(せいかb)'
     ];
     const [activeStep, setActiveStep] = useState(0);
     const steps = [

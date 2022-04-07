@@ -28,8 +28,6 @@ class AddColumnToInfosTable extends Migration
      */
     public function down()
     {
-        Schema::table('infos', function (Blueprint $table) {
-            //
-        });
+        //
     }
 }

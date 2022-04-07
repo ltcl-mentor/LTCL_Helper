@@ -57,6 +57,11 @@ class UserController extends Controller
         ];
     }
     
+    public static function backup() {
+        User::registerStudents(1);
+        return;
+    }
+    
     /**
      * 初期画面表示
      */

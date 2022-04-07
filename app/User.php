@@ -51,6 +51,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Question')->withPivot(['created_at'])->orderBy('pivot_created_at', 'desc');
     }
     
+    public function student()
+    {
+        return $this->hasOne('App\Student');
+    }
+    
     /**
      * 質問作成者名取得
      */
@@ -200,6 +205,27 @@ class User extends Authenticatable
                     'password' => $password,
                     'user_id' => $user->id,
                 ]);
+            }
+        }
+    }
+    
+    public static function deleteGraduates()
+    {
+        // 4ヶ月前の年月を取得し、文字列のフォーマットを整える
+        $three_month_ago = new Carbon("-4 month");
+        $formated_year_and_month = $three_month_ago->format('ym');
+        $deletion_target = "ltcl" . $formated_year_and_month;
+        
+        $users_data = Self::get();
+
+        foreach($users_data as $user_data)
+        {
+            if(Hash::check($deletion_target, $user_data->password)){
+                $user_data->delete();
+                $user_data->student()->delete();
+                logger("data was deleted");
+            }else{
+                logger("doesn't match");   
             }
         }
     }

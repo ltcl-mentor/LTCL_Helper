@@ -32,16 +32,23 @@ class ReactController extends Controller
             // 絞り込み検索用
             $request->category, $request->topic, $request->curriculum_number, $request->keyword,
             // フリーワード検索用
-            $request->searchType, urldecode($request->freeword));
+            $request->searchType, urldecode($request->freeword)
+        );
     }
 
+    /**
+     * 質問検索結果の受け渡し
+     * 「絞り込み」と「フリーワード」両方に対応
+     * ペジネーションで受け渡す
+     */
     public function getSearchQuestionsPaginate(Request $request)
     {
         return Question::conditionSearchPaginate(
-        // 絞り込み検索用
+            // 絞り込み検索用
             $request->category, $request->topic, $request->curriculum_number, $request->keyword,
             // フリーワード検索用
-            $request->searchType, urldecode($request->freeword));
+            $request->searchType, urldecode($request->freeword)
+        );
     }
 
     /**
@@ -292,7 +299,6 @@ class ReactController extends Controller
 
     /**
      * URLで指定された日付の校舎情報受け渡し
-     * 'react/college/{year}/{month}/{date}'
      */
     public function getCollegeData($year, $month, $date)
     {
@@ -312,7 +318,7 @@ class ReactController extends Controller
         foreach($infos['dates'] as $date){
             $infos['infos'][$date] = $info->where('date', $date)->select('id', 'information', 'targets', 'body', 'slackDate')->get();
         }
-
+        
         return $infos;
     }
 
@@ -346,8 +352,41 @@ class ReactController extends Controller
      */
     public function getHomeData()
     {
-        $achievement = Question::getAchievement();
+        // $achievement = Question::getAchievement();
         $events = Event::get();
-        return ["key" => env('GoogleMapsKey'), "zoom" => env('ZoomLinksNote'), "achievement" => $achievement, "events" => $events];
+        return ["key" => env('GoogleMapsKey'), "zoom" => env('ZoomLinksNote'), "events" => $events];
+    }
+    
+    /**
+     * 各トピックの質問数と関連記事数を取得
+     */
+    public function getQuestionArticle() 
+    {
+        $curriculum_questions = [];
+        $project_questions = [];
+        $questions = array_count_values(Question::where('check', 1)->pluck('topic')->all());
+        $documents = array_count_values(Document::pluck('category')->all());
+        
+        // 質問、関連記事カウント
+        for ($i=0; $i <= 19; $i++) {
+            $question_count = 0;
+            $document_count = 0;
+            
+            if (array_key_exists($i, $questions)) {
+                $question_count = $questions[$i];
+            }
+            
+            if (array_key_exists($i, $documents)) {
+                $document_count = $documents[$i];
+            }
+            
+            if ($i <= 13) {  // カリキュラム
+                array_push($curriculum_questions, ['topic' => $i, 'questions' => $question_count, 'documents' => $document_count]);
+            } else {         // 成果物
+                array_push($project_questions, ['topic' => $i, 'questions' => $question_count, 'documents' => $document_count]);
+            }
+        }
+        
+        return ['curriculum' => $curriculum_questions, "project" => $project_questions];
     }
 }

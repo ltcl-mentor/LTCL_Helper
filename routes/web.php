@@ -66,6 +66,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('react/college/{year}/{month}/{date}', 'ReactController@getCollegeData'); // 校舎に関するデータ受け渡し
     Route::get('react/infos', 'ReactController@getInfos'); // お知らせのデータ受け渡し
     Route::get('react/home', 'ReactController@getHomeData'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
+    Route::get('react/index', 'ReactController@getQuestionArticle'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
     // Route::get('react/images/{question_id}', 'ReactController@getImages'); // 質問に関連する画像の受け渡し
 
 
@@ -113,6 +114,7 @@ Route::group(['middleware' => ['auth']], function () {
          * 質問
          */
         Route::get('/questions/export', 'QuestionController@questionsExport');
+        Route::post('/questions/backup', 'QuestionController@backup'); // 質問一括登録（バックアップ復元用）
         Route::post('/questions/{question}/check', 'QuestionController@check'); // 承認実行
         Route::post('/questions/{question}/uncheck', 'QuestionController@uncheck'); // 承認解除実行
         Route::post('/questions/{question}/update', 'QuestionController@update'); // 編集実行
@@ -126,6 +128,7 @@ Route::group(['middleware' => ['auth']], function () {
         /**
          * ユーザー
          */
+        Route::post('/users/backup', 'UserController@backup'); // 受講生一括登録（バックアップ復元用）
         Route::post('/users/public/register', 'Auth\RegisterController@publicRegister'); // 受講生の新規作成実行
         Route::post('/users/admin/register', 'Auth\RegisterController@register'); // 管理者の新規作成実行
         Route::post('/users/{user}/delete', 'UserController@delete'); // 削除実行

@@ -64,6 +64,9 @@ function Router() {
                 {/* トップ画面表示 */}
                 <Route key="home" path="/" exact component={ Home }/>
                 
+                {/* ユーザマイページ表示
+                <Route path="/topic/:id" exact component={ MyPage }/>*/}
+                
                 {/* ユーザマイページ表示 */}
                 <Route path="/my_page" exact component={ MyPage }/>
                 
