@@ -160,7 +160,7 @@ const QA = () => {
         <React.Fragment>
 
             {/* 検索部分 */}
-            <Card variant="outlined" sx={{ width: '90%', m: '16px auto 0', p: 0 }}>
+            <Card variant="outlined" sx={{ width: '70%', m: '16px auto 0', p: 0 }}>
         
                 {/* 検索タブ */}
                 <Stack direction="row">
