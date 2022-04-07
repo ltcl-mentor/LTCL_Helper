@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Card from '@mui/material/Card';
 import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -16,32 +15,6 @@ import { CardActionArea } from '@mui/material';
 
 import Freeword from './search/freeword/freeword';
 import Condition from './search/condition/condition';
-
-const Panel = (props) => {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`simple-tabpanel-${index}`}
-            aria-labelledby={`simple-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Box>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
-        </div>
-    );
-};
-
-Panel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
-};
 
 const PurpleButton = styled(Button)(({ theme }) => ({
     color: 'white',
@@ -87,7 +60,7 @@ const a11yProps = (index) => {
  */
 const QA = () => {
     const history = useHistory();
-    const [searchValue, setSearchValue] = useState(1);
+    const [searchValue, setSearchValue] = useState(0);
     const [indexValue, setIndexValue] = useState(0);
     const [curriculum, setCurriculum] = useState([]);
     const [project, setProject] = useState([]);
@@ -106,7 +79,7 @@ const QA = () => {
     // 個別質問ページ
     const toTopic = (topic_number) => {
         history.push(`/topic/${topic_number}`);
-    }
+    };
     
     let freewordButton;
     let conditionButton;
@@ -119,6 +92,57 @@ const QA = () => {
         freewordButton = <GrayButton onClick={() => setSearchValue(0)} variant="contained">フリーワード検索</GrayButton>;
         conditionButton = <PurpleButton onClick={() => setSearchValue(1)} variant="contained">絞り込み検索</PurpleButton>;
         search = <Condition />;
+    }
+    
+    let component;
+    if (indexValue == 0) {
+        component = (
+            <Grid container>
+                {curriculum.map((topic, index) => {
+                    return(
+                        <Grid item xs={2.4} sx={{ height: '150px' }} key={topic.topic}>
+                            <Card sx={{ width: '160px', height: '90%', m: 'auto', cursor: 'pointer', p: 0 }}>
+                                <CardActionArea onClick={() => toTopic(topic.topic)} sx={{ height: '100%' }}>
+                                    <Typography align="center" gutterBottom variant={index == 9 ? "h7" : "h6"} component="div" sx={{ mt: index==9 && '7px' }}>
+                                        {topics[index]}
+                                    </Typography>
+                                    <Typography component="div" align="center" variant="h7" sx={{ mt: 2 }}>
+                                        質問 {topic.questions}件
+                                    </Typography>
+                                    <Typography component="div" align="center" variant="h7" sx={{ mb: 2 }}>
+                                        記事 {topic.documents}件
+                                    </Typography>
+                                </CardActionArea>
+                            </Card>
+                        </Grid>
+                    );
+                })}
+            </Grid>
+        );
+    } else {
+        component = (
+            <Grid container sx={{ justifyContent: 'center' }}>
+                {project.map((topic, index) => {
+                    return(
+                        <Grid item xs={(index == 1 || index == 4) ? 2.8 : 4} sx={{ height: '150px'}} key={topic.topic}>
+                            <Card className={`card-${index}`} sx={{ width: '160px', height: '90%', cursor: 'pointer', p: 0 }}>
+                                <CardActionArea onClick={() => toTopic(topic.topic)} sx={{ height: '100%' }}>
+                                    <Typography align="center" gutterBottom variant="h6" component="div">
+                                        {topics[index+14]}
+                                    </Typography>
+                                    <Typography component="div" align="center" variant="h7" sx={{ mt: 2 }}>
+                                        質問 {topic.questions}件
+                                    </Typography>
+                                    <Typography component="div" align="center" variant="h7" sx={{ mb: 2 }}>
+                                        記事 {topic.documents}件
+                                    </Typography>
+                                </CardActionArea>
+                            </Card>
+                        </Grid>
+                    );
+                })}
+            </Grid>
+        );
     }
     
     useEffect(() => {
@@ -165,52 +189,7 @@ const QA = () => {
                             <Tab label="成果物" {...a11yProps(1)} sx={{ fontSize: 20, fontWeight: 'bold' }} />
                         </Tabs>
                     </Box>
-                    <Panel value={indexValue} index={0}>
-                        <Grid container>
-                            {curriculum.map((topic, index) => {
-                                return(
-                                    <Grid item xs={2.4} sx={{ height: '150px' }} key={topic.topic}>
-                                        <Card sx={{ width: '160px', height: '90%', m: 'auto', cursor: 'pointer', p: 0 }}>
-                                            <CardActionArea onClick={() => toTopic(topic.topic)} sx={{ height: '100%' }}>
-                                                <Typography align="center" gutterBottom variant={index == 9 ? "h7" : "h6"} component="div" sx={{ mt: index==9 && '7px' }}>
-                                                    {topics[index]}
-                                                </Typography>
-                                                <Typography component="div" align="center" variant="h7" sx={{ mt: 2 }}>
-                                                    質問 {topic.questions}件
-                                                </Typography>
-                                                <Typography component="div" align="center" variant="h7" sx={{ mb: 2 }}>
-                                                    記事 {topic.documents}件
-                                                </Typography>
-                                            </CardActionArea>
-                                        </Card>
-                                    </Grid>
-                                );
-                            })}
-                        </Grid>
-                    </Panel>
-                    <Panel value={indexValue} index={1}>
-                        <Grid container sx={{ justifyContent: 'center' }}>
-                            {project.map((topic, index) => {
-                                return(
-                                    <Grid item xs={(index == 1 || index == 4) ? 2.8 : 4} sx={{ height: '150px'}} key={topic.topic}>
-                                        <Card className={`card-${index}`} sx={{ width: '160px', height: '90%', cursor: 'pointer', p: 0 }}>
-                                            <CardActionArea onClick={() => toTopic(topic.topic)} sx={{ height: '100%' }}>
-                                                <Typography align="center" gutterBottom variant="h6" component="div">
-                                                    {topics[index+14]}
-                                                </Typography>
-                                                <Typography component="div" align="center" variant="h7" sx={{ mt: 2 }}>
-                                                    質問 {topic.questions}件
-                                                </Typography>
-                                                <Typography component="div" align="center" variant="h7" sx={{ mb: 2 }}>
-                                                    記事 {topic.documents}件
-                                                </Typography>
-                                            </CardActionArea>
-                                        </Card>
-                                    </Grid>
-                                );
-                            })}
-                        </Grid>
-                    </Panel>
+                    {component}
                 </Box>
             </div>
         </React.Fragment>

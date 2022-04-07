@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
-import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import { Link, useHistory } from 'react-router-dom';
+
+import Button from '@mui/material/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Typography from '@material-ui/core/Typography';
 
 /**
- * ユーザイアコン
+ * ユーザアイコン
  */
-function Icon(props) {
+const Icon = (props) => {
+    const history = useHistory();
     const [anchorEl, setAnchorEl] = useState(null);
     
     const handleMenu = (event) => {
@@ -20,19 +21,30 @@ function Icon(props) {
         setAnchorEl(null);
     };
     
+    const mypage = () => {
+        setAnchorEl(null);
+        history.push('/my_page');
+    };
+    
+    const historyIndex = () => {
+        setAnchorEl(null);
+        history.push('/history');
+    };
+    
     const logout = () => {
         document.getElementById('logout-form').submit();
     };
     
     return (
         <div>
-            <IconButton
+            <Button
                 size="large"
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={ handleMenu }
                 color="inherit"
+                sx={{ mr: 1 }}
             >
                 <Typography
                     variant="h6"
@@ -41,39 +53,37 @@ function Icon(props) {
                 >
                     { props.user.name }
                 </Typography>
-                
-                <AccountCircle />
-            </IconButton>
+            </Button>
             
             <Menu
                 id="menu-appbar"
                 anchorEl={ anchorEl }
                 anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                    vertical: 'top',
+                    horizontal: 'right',
                 }}
                 keepMounted
                 transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                    vertical: 'top',
+                    horizontal: 'right',
                 }}
                 open={ Boolean(anchorEl) }
                 onClose={ handleClose }
             >
-                <MenuItem onClick={handleClose}>
-                    <a  onClick={ logout }>ログアウト</a>
+                <MenuItem onClick={() => mypage()}>
+                    マイページ
+                </MenuItem>
+                
+                <MenuItem onClick={() => historyIndex()}>
+                    質問閲覧履歴
                 </MenuItem>
                 
                 <MenuItem onClick={handleClose}>
-                    <Link to="/history">質問閲覧履歴</Link>
-                </MenuItem>
-                
-                <MenuItem onClick={handleClose}>
-                    <Link to="/my_page">マイページ</Link>
+                    <a onClick={ logout }>ログアウト</a>
                 </MenuItem>
             </Menu>
         </div>
     );
-}
+};
 
 export default Icon;
