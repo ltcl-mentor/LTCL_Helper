@@ -49,6 +49,7 @@ class QuestionController extends Controller
         $question['is_resolved'] = 0;
         $question['check'] = false;
         $question['user_id'] = Auth::id();
+        logger($question);
         
         $question->save();
         
