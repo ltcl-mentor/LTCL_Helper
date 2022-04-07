@@ -222,9 +222,18 @@ class ReactController extends Controller
     /**
      * 個別質問に関連する全記事受け渡し
      */
-    public function getRelatedDocuments(Question $question)
+    public function getRelatedDocuments(Question $question, Request $request)
     {
-        return $question->documents()->get();
+        $questions_id = $request->input('questionsId');
+        //質問一覧全ての関連記事をとってきたい場合
+        if($questions_id) {
+                $question = Question::with('documents')->whereIn('id', $questions_id)->get();
+            return $question;
+        } 
+        //個別質問の関連記事をとってくる場合
+        else {
+         return $question->documents()->get();
+        }
     }
 
 
