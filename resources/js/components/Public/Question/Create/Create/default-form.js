@@ -9,6 +9,7 @@ import Stack from "@mui/material/Stack";
 import Topic from "../../../Home/Q&A/search/condition/form/topicForm";
 import CurriculumNumber from "../../../Home/Q&A/search/condition/form/curriculum-number";
 import QuestionForm from "./question-form/questionForm";
+import Breadcrumbs from '../../../../Breadcrumbs';
 
 const styleSpan = {
     fontWeight: "normal",
@@ -181,16 +182,9 @@ const DefaultForm = () => {
     }, [category, topic, curriculum_number, keyword]);
 
     return (
-        <div className="condition">
-            <Typography
-                component="div"
-                sx={{
-                    marginTop: 4,
-                    marginLeft: 2
-                }}
-            >
-                Top / 質問投稿画面
-            </Typography>
+        <div>
+            <Breadcrumbs page="public_question_create"/>
+            
             <Typography
                 variant="h5"
                 component="div"
