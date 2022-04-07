@@ -231,16 +231,17 @@ class ReactController extends Controller
      */
     public function getRelatedDocuments(Question $question, Request $request)
     {
-        $questions_id = $request->input('questionsId');
-        //質問一覧全ての関連記事をとってきたい場合
-        if($questions_id) {
-                $question = Question::with('documents')->whereIn('id', $questions_id)->get();
-            return $question;
-        } 
-        //個別質問の関連記事をとってくる場合
-        else {
-         return $question->documents()->get();
-        }
+        
+        return $question->documents()->get();
+    }
+    
+    /**
+     * topicごとの全記事受け渡し
+     */
+    public function getRelatedDocumentsPaginate($category)
+    {
+        $document = Document::where('category', $category);
+        return $document->paginate(9);
     }
 
 

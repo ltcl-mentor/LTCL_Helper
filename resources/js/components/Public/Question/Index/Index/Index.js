@@ -6,7 +6,9 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
+import Button from '@mui/material/Button';
 
+import '../../../../../../../public/css/Public/question_index.css';
 import Breadcrumbs from '../../../../Breadcrumbs';
 import Questions from './questions';
 import Article from './article';
@@ -17,7 +19,14 @@ import Article from './article';
 function Index() {
     const { id } = useParams();
     const [value, setValue] = React.useState(0);
-    const [documents, setDocuments] = useState([]);
+    const [documents, setDocuments] = useState({
+        eventList: [],
+        activePage: 1,
+        itemsCountPerPage: 1,
+        totalItemsCount: 1,
+        pageRangeDisplayed: 10,
+        lastPage: 0,
+    });
     const topics = [
         // カリキュラムのトピック
         'AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'データベース', 'Git&GitHub', 'マイグレーション', 'リレーション', '認証・認可機能(カリキュラム)', 'API(カリキュラム)', 'その他(カリキュラム)',
@@ -40,8 +49,6 @@ function Index() {
         }
     //画面描画時に実行
     useEffect(() => {
-        let questionsId = [];
-        const queries = {questionsId: questionsId};
         // 公開されている質問を全件取得
         axios
             .get(`/react/questions/search/paginate?category=${ val }&topic=${ id }`)
@@ -55,27 +62,25 @@ function Index() {
                         pageRangeDisplayed: 10,
                         lastPage: response.data.last_page,
                     });
-                response.data.data.map((question) => {
-                    questionsId.push(question.id)
-                })
-                
-                // 質問に関連する全参考記事を取得
-            axios
-                .get(`/react/documents/related/${ id }`, {params: queries})
-                .then(response => {
-                    console.log(response);
-                    let documentsData = []
-                    response.data.map((data) => {
-                        documentsData.push(...data.documents);
-                    })
-                    setDocuments(documentsData);
-                    console.log(documentsData)
-                }).catch(error => {
-                    console.log(error);
-                });
             }).catch(error => {
                 console.log(error);
             });
+            
+        // 質問に関連する全参考記事を取得
+        axios
+            .get(`/react/documents/related/paginate/${ id }`)
+            .then(response => {
+                setDocuments({
+                    eventList: response.data.data,
+                    itemsCountPerPage: response.data.per_page,
+                    totalItemsCount: response.data.total,
+                    currentPage: response.data.current_page,
+                    pageRangeDisplayed: 10,
+                    lastPage: response.data.last_page,
+                });
+            }).catch(error => {
+                console.log(error);
+            });            
             
     }, []);
     
@@ -104,6 +109,9 @@ function Index() {
                 </Box>
                 
                 { value === 0 ? <Questions questions={ questions } setQuestions={ setQuestions } category={ id } /> : <Article category={ id } documents={ documents } setDocuments={ setDocuments }/> }
+                <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                    <Button  component={Link} to="/?page=qa">Q&Aに戻る</Button>
+                </Box>
             </Box>
         </div>
     );

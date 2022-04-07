@@ -1,24 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import {useParams, useHistory, Link} from 'react-router-dom';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Box from '@material-ui/core/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import Card from '@material-ui/core/Card';
 import axios from "axios";
 import Grid from '@mui/material/Grid';
-import Divider from '@material-ui/core/Divider';
 import Pagination from '@mui/material/Pagination';
 
 /**
  * カリキュラムの質問一覧
  */
-function Curriculum(props) {
+function Questions(props) {
     
     const [currentPage, setCurrentPage] = useState(1);
     const questions = props.questions;
@@ -109,4 +103,4 @@ function Curriculum(props) {
     );
 }
 
-export default Curriculum;
+export default Questions;

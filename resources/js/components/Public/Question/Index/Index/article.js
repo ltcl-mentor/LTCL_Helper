@@ -1,14 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Box from '@material-ui/core/Box';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 import axios from "axios";
 import Grid from '@mui/material/Grid';
 import Chip from '@mui/material/Chip';
@@ -21,24 +13,60 @@ import Input from '@mui/material/Input';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@mui/material/Button';
+import Pagination from '@mui/material/Pagination';
 
-function Portfolio(props) {
+function Article(props) {
     
     const [keyword, setKeyword] = useState('');
     const [beginner, setBeginner] = useState(false);
     const [amature, setAmature] = useState(false);
     const [master, setMaster] = useState(false);
     const [all ,setAll] = useState(false);
-    const [documents , setDocuments] = useState([]); 
+    const [documents , setDocuments] = useState({
+        eventList: [],
+        activePage: 1,
+        itemsCountPerPage: 1,
+        totalItemsCount: 1,
+        pageRangeDisplayed: 9,
+        lastPage: 0,
+    });
+    
+    const handlePageClick = (event, index) => {
+        // 検索結果の質問取得
+        axios
+            .get(`/react/documents/related/paginate/${ props.category }&page=${index}`)
+            .then(response => {
+                setDocuments({
+                    eventList: response.data.data,
+                    itemsCountPerPage: response.data.per_page,
+                    totalItemsCount: response.data.total,
+                    currentPage: response.data.current_page,
+                    pageRangeDisplayed: 10,
+                    lastPage: response.data.last_page,
+                });
+            }).catch(error => {
+                console.log(error);
+            });
+    };
     
     let documentsList;
+    let pagination;
     // 関連質問がなかった場合
-    if (props.documents.filter(v=>v).length === 0) {
+    if (props.documents.eventList.filter(v=>v).length === 0) {
         documentsList = (<div className="empty_message">関連する記事はありません。</div>);
         
     // 関連質問があった場合
     } else {
-        documentsList = documents.map((document) => {
+        // ペジネーションの部分
+        pagination = (
+            <Pagination
+                count={ documents.lastPage }
+                page={ documents.currentPage }
+                onChange={ handlePageClick }
+                sx={{ display: "block" }}
+            />
+        );
+        documentsList = documents.eventList.map((document) => {
             return (
                 <Grid item key={document.title}>
                     <CardActionArea sx={{ width: "300px", height: "280px"}}>
@@ -74,9 +102,9 @@ function Portfolio(props) {
         var keyword_documents = [];
         // キーワードが未入力の場合
         if (keyword.trim().length === 0) {
-            keyword_documents = props.documents;
+            keyword_documents = props.documents.eventList;
         } else {
-            default_documents.map((doc) => {
+            props.documents.eventList.map((doc) => {
                 doc.title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1 && keyword_documents.push(doc);
             });
         }
@@ -103,9 +131,9 @@ function Portfolio(props) {
                     }
                 }
             });
-            setDocuments(target_documents);
+            setDocuments({...props.documents, eventList: target_documents});
         } else {
-            setDocuments(keyword_documents);
+            setDocuments({...props.documents, eventList: keyword_documents});
         }
         
     },[keyword, beginner, amature, master, all]);
@@ -210,9 +238,14 @@ function Portfolio(props) {
             <Grid container spacing={2} sx={{ flexGrow: 1 }} justifyContent="center" >
                 { documentsList }
             </Grid>
+            <Grid container justifyContent="center" sx={{ marginTop: 1, marginBottom: 2 }}>
+                <Grid item>
+                    { pagination }
+                </Grid>
+            </Grid>
         </Box>
         </div>
     );
 }
 
-export default Portfolio;
+export default Article;
