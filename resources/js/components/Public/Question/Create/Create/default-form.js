@@ -9,7 +9,7 @@ import Stack from "@mui/material/Stack";
 import Topic from "../../../Home/Q&A/search/condition/form/topicForm";
 import CurriculumNumber from "../../../Home/Q&A/search/condition/form/curriculum-number";
 import QuestionForm from "./question-form/questionForm";
-import Breadcrumbs from '../../../../Breadcrumbs';
+import QuestionConfirm from "./confirm";
 
 const styleSpan = {
     fontWeight: "normal",
@@ -52,12 +52,13 @@ const WhiteButton = styled(Button)(({ theme }) => ({
  */
 const DefaultForm = () => {
     const history = useHistory();
-
+    const [clickCount, setClickCount] = useState(0);
     const [category, setCategory] = useState(0);
     const [topic, setTopic] = useState(0);
     const [curriculum_number, setCurriculumNumber] = useState("");
     const [keyword, setKeyword] = useState("");
     const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
 
     const topics = [
         // カリキュラムのトピック
@@ -177,139 +178,177 @@ const DefaultForm = () => {
         history.push("/");
     };
 
+    const handleConfirmPage = () => {
+        setShowConfirm(!showConfirm);
+    };
+
     useEffect(() => {
         setIsSearchButtonClicked(false);
     }, [category, topic, curriculum_number, keyword]);
 
     return (
         <div>
-            <Breadcrumbs page="public_question_create"/>
-            
-            <Typography
-                variant="h5"
-                component="div"
-                sx={{
-                    marginTop: 4,
-                    marginBottom: 10,
-                    fontSize: 30,
-                    color: "#771af8",
-                    fontWeight: "bold"
-                }}
-            >
-                質問投稿画面
-            </Typography>
-            {/* カテゴリー */}
-            <Grid
-                container
-                sx={{
-                    justifyContent: "space-between"
-                }}
-            >
-                <Grid item xs={7}>
+            {showConfirm ? (
+                <QuestionConfirm
+                    category={category}
+                    topic={topic}
+                    curriculum_number={curriculum_number}
+                    title={title}
+                    remarks={remarks}
+                    question={question}
+                    images={images}
+                    handleConfirmPage={handleConfirmPage}
+                    handleSubmit={handleSubmit}
+                />
+            ) : (
+                <div className="condition">
+                    <Typography
+                        component="div"
+                        sx={{
+                            marginTop: 4,
+                            marginLeft: 2
+                        }}
+                    >
+                        Top / 質問投稿画面
+                    </Typography>
+                    <Typography
+                        variant="h5"
+                        component="div"
+                        sx={{
+                            marginTop: 4,
+                            marginBottom: 10,
+                            fontSize: 30,
+                            color: "#771af8",
+                            fontWeight: "bold"
+                        }}
+                    >
+                        質問投稿画面
+                    </Typography>
+                    {/* カテゴリー */}
+                    <Grid
+                        container
+                        sx={{
+                            justifyContent: "space-between"
+                        }}
+                    >
+                        <Grid item xs={7}>
+                            <Typography
+                                sx={{
+                                    fontWeight: "bold",
+                                    fontSize: 20
+                                }}
+                            >
+                                カテゴリー
+                                <span style={styleSpan}>
+                                    どちらか1つを選択してください
+                                </span>
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                    {/* カテゴリー選択欄 */}
+                    <Stack
+                        direction="row"
+                        sx={{
+                            width: "40%",
+                            m: "15px 0"
+                        }}
+                    >
+                        {curriculum}
+                        {project}
+                    </Stack>
+                    {/* トピック */}
                     <Typography
                         sx={{
                             fontWeight: "bold",
-                            fontSize: 20
+                            fontSize: 20,
+                            mt: 6
                         }}
                     >
-                        カテゴリー
+                        トピック
                         <span style={styleSpan}>
-                            どちらか1つを選択してください
+                            以下の選択肢から1つを選択してください
                         </span>
                     </Typography>
-                </Grid>
-            </Grid>
-            {/* カテゴリー選択欄 */}
-            <Stack direction="row" sx={{ width: "40%", m: "15px 0" }}>
-                {curriculum}
-                {project}
-            </Stack>
-            {/* トピック */}
-            <Typography
-                sx={{
-                    fontWeight: "bold",
-                    fontSize: 20,
-                    mt: 6
-                }}
-            >
-                トピック
-                <span style={styleSpan}>
-                    以下の選択肢から1つを選択してください
-                </span>
-            </Typography>
-            <Topic
-                category={category}
-                topic={topic}
-                setTopic={setTopic}
-                topics={topics}
-            />
-            {/* カリキュラム番号 */}
-            <Typography
-                sx={{
-                    fontWeight: "bold",
-                    fontSize: 20,
-                    mt: 4
-                }}
-            >
-                カリキュラム番号
-                <span style={styleSpan}>
-                    以下の選択肢から1つを選択してください
-                </span>
-            </Typography>
-            <CurriculumNumber
-                category={category}
-                topic={topic}
-                setCurriculumNumber={setCurriculumNumber}
-            />
-            <QuestionForm
-                question={question}
-                setQuestion={setQuestion}
-                title={title}
-                setTitle={setTitle}
-                remarks={remarks}
-                setRemarks={setRemarks}
-                question_validation_error={questionValidationError}
-                questionValidationMessage={questionValidationMessage}
-                activeStep={activeStep}
-                images={images}
-                setImages={setImages}
-            />
-            <div style={{ textAlign: "center" }}>
-                <Button
-                    variant="outlined"
-                    style={{
-                        color: "#771af8",
-                        border: "2px solid #771af8",
-                        fontWeight: "bold",
-                        minWidth: 150,
-                        maxWidth: 200,
-                        marginBottom: 5,
-                        fontSize: 15
-                    }}
-                >
-                    確認する
-                </Button>
-            </div>
-            <div
-                style={{
-                    textAlign: "center",
-                    marginTop: 5,
-                    marginBottom: 30
-                }}
-            >
-                <Button
-                    variant="text"
-                    onClick={handleBackTopPage}
-                    style={{
-                        color: "black",
-                        minWidth: 150,
-                        maxWidth: 200,
-                        marginBottom: 5
-                    }}
-                >
-                    Topに戻る
-                </Button>
-            </div>
+                    <Topic
+                        category={category}
+                        topic={topic}
+                        setTopic={setTopic}
+                        topics={topics}
+                    />
+                    {/* カリキュラム番号 */}
+                    <Typography
+                        sx={{
+                            fontWeight: "bold",
+                            fontSize: 20,
+                            mt: 4
+                        }}
+                    >
+                        カリキュラム番号
+                        <span style={styleSpan}>
+                            以下の選択肢から1つを選択してください
+                        </span>
+                    </Typography>
+                    <CurriculumNumber
+                        category={category}
+                        topic={topic}
+                        setCurriculumNumber={setCurriculumNumber}
+                    />
+                    <QuestionForm
+                        question={question}
+                        setQuestion={setQuestion}
+                        title={title}
+                        setTitle={setTitle}
+                        remarks={remarks}
+                        setRemarks={setRemarks}
+                        question_validation_error={questionValidationError}
+                        questionValidationMessage={questionValidationMessage}
+                        activeStep={activeStep}
+                        images={images}
+                        setImages={setImages}
+                    />
+                    <div
+                        style={{
+                            textAlign: "center"
+                        }}
+                    >
+                        <Button
+                            variant="outlined"
+                            onClick={handleConfirmPage}
+                            style={{
+                                color: "#771af8",
+                                border: "2px solid #771af8",
+                                fontWeight: "bold",
+                                minWidth: 150,
+                                maxWidth: 200,
+                                marginBottom: 5,
+                                fontSize: 15
+                            }}
+                        >
+                            確認する
+                        </Button>
+                    </div>
+                    <div
+                        style={{
+                            textAlign: "center",
+                            marginTop: 5,
+                            marginBottom: 30
+                        }}
+                    >
+                        <Button
+                            variant="text"
+                            onClick={handleBackTopPage}
+                            style={{
+                                color: "black",
+                                minWidth: 150,
+                                maxWidth: 200,
+                                marginBottom: 5
+                            }}
+                        >
+                            Topに戻る
+                        </Button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
