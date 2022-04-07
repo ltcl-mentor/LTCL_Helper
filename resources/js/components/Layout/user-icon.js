@@ -6,6 +6,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Typography from '@material-ui/core/Typography';
 
+const style = {
+    color: '#771AF8'
+};
+
 /**
  * ユーザアイコン
  */
@@ -79,7 +83,7 @@ const Icon = (props) => {
                 </MenuItem>
                 
                 <MenuItem onClick={handleClose}>
-                    <a onClick={ logout }>ログアウト</a>
+                    <a style={style} onClick={ logout }>ログアウト</a>
                 </MenuItem>
             </Menu>
         </div>

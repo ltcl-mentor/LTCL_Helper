@@ -34,7 +34,7 @@ const Form = (props) => {
                     backgroundColor: "#ECE9E9",
                 }}
             >
-                <Typography align="left" variant="h7" component="div" sx={{ pl: '10%' }} >
+                <Typography align="left" variant="h7" component="div" sx={{ width: '565px', m: '0 auto' }}>
                     複数のワードを入力する際はスペース（半角・全角どちらでも可）で分けてください。<br/>
                     OR検索：（複数のワード検索時）いずれかの検索ワードにヒットする検索結果を表示<br/>
                     AND検索：（複数のワード検索時）すべての検索ワードにヒットする検索結果を表示
