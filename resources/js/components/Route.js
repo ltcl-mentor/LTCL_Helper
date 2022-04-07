@@ -80,7 +80,7 @@ function Router() {
                 <Route path="/public/documents/index" exact component={ PublicDocumentIndex }/>
                 
                 {/* 公開中の質問をカテゴリー毎に表示 */}
-                <Route path="/public/questions/index/:category" exact component={ PublicQuestionIndexIndex }/>
+                <Route path="/topic/:id" exact component={ PublicQuestionIndexIndex }/>
                 
                 {/* 公開中の質問一覧表示 */}
                 <Route path="/public/questions/index" exact component={ PublicQuestionIndex }/>

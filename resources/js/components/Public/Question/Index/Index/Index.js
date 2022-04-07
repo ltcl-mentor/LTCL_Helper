@@ -15,7 +15,7 @@ import Article from './article';
  * 質問一覧(公開)のメインコンポーネント
  */
 function Index() {
-    const { category } = useParams();
+    const { id } = useParams();
     const [value, setValue] = React.useState(0);
     const [documents, setDocuments] = useState([]);
     const topics = [
@@ -33,7 +33,7 @@ function Index() {
         lastPage: 0,
     });
     let val = 3;
-    if (category < 14) {
+    if (id < 14) {
             val = 0;
         } else {
             val = 1;
@@ -44,7 +44,7 @@ function Index() {
         const queries = {questionsId: questionsId};
         // 公開されている質問を全件取得
         axios
-            .get(`/react/questions/search/paginate?category=${ val }&topic=${ category }`)
+            .get(`/react/questions/search/paginate?category=${ val }&topic=${ id }`)
             .then(response => {
                 console.log(response.data);
                 setQuestions({
@@ -61,7 +61,7 @@ function Index() {
                 
                 // 質問に関連する全参考記事を取得
             axios
-                .get(`/react/documents/related/${ category }`, {params: queries})
+                .get(`/react/documents/related/${ id }`, {params: queries})
                 .then(response => {
                     console.log(response);
                     let documentsData = []
@@ -91,7 +91,7 @@ function Index() {
             
             <Box marginBottom={1} sx={{ display: 'flex', justifyContent: 'flex-start'}}>
                 <Card sx={{  width: '140px', height: '140px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                    <Typography sx={{fontSize:"25px" }}>{topics[category]}</Typography>
+                    <Typography sx={{fontSize:"25px" }}>{topics[id]}</Typography>
                 </Card>
             </Box>
             
@@ -103,7 +103,7 @@ function Index() {
                     </Tabs>
                 </Box>
                 
-                { value === 0 ? <Questions questions={ questions } setQuestions={ setQuestions } category={ category } /> : <Article category={ category } documents={ documents } setDocuments={ setDocuments }/> }
+                { value === 0 ? <Questions questions={ questions } setQuestions={ setQuestions } category={ id } /> : <Article category={ id } documents={ documents } setDocuments={ setDocuments }/> }
             </Box>
         </div>
     );
