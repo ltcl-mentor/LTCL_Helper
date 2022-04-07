@@ -63,3 +63,12 @@ div.MuiFormControl-root.MuiTextField-root.css-1u3bzj6-MuiFormControl-root-MuiTex
 .card-1, .card-4 {
   margin: 0 auto;
 }
+
+a, a:hover {
+  color: #771AF8;
+}
+
+.mypage {
+  width: 85%;
+  margin: 0 auto;
+}
