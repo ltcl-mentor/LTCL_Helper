@@ -185,8 +185,7 @@ function TextForm(props) {
                     value={props.text}
                     onChange={event => handleText(event)}
                     style={{
-                        width: "90%",
-                        marginLeft: "5%",
+                        width: "100%",
                         paddingTop: 2
                     }}
                     id="text"
@@ -207,7 +206,7 @@ function TextForm(props) {
 
     return (
         <div>
-            <Box sx={{ marginTop: 2, width: "90%", marginLeft: "5%" }}>
+            <Box sx={{ marginTop: 2, width: "100%" }}>
                 <Tabs
                     value={value}
                     onChange={handleChange}
@@ -223,7 +222,7 @@ function TextForm(props) {
                     <Tab label="プレビュー" />
                 </Tabs>
 
-                <Box sx={{ marginTop: 2 }}>{tab_content}</Box>
+                <Box sx={{ marginTop: 2, marginBottom: 5 }}>{tab_content}</Box>
             </Box>
         </div>
     );
