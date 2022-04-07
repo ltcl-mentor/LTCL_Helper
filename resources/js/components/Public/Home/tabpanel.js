@@ -1,39 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
+import {useMountedState} from 'react-use';
 
-import Typography from '@material-ui/core/Typography';
 import Box from '@mui/material/Box';
-import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
 import Top from './Top/top';
 import QA from './Q&A/qa';
-
-const Panel = (props) => {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`simple-tabpanel-${index}`}
-            aria-labelledby={`simple-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Box>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
-        </div>
-    );
-};
-
-Panel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
-};
 
 const a11yProps = (index) => {
     return {
@@ -47,12 +21,40 @@ const a11yProps = (index) => {
  * タブパネル
  */
 const TabPanel = () => {
-    const [value, setValue] = useState(1);
+    const isMounted = useMountedState();
+    const history = useHistory();
+    const search = useLocation().search.split('=')[1];
+    const [value, setValue] = useState(0);
+    
+    let component;
+    if (value == 0) {
+        component = <Top />;
+    } else {
+        component = <QA />;
+    }
     
     // タブ切り替え用
     const handleChange = (event, newValue) => {
-        setValue(newValue);
+        if (newValue == 0) {
+            history.push('/?page=top');
+        } else {
+            history.push('/?page=qa');
+        }
     };
+    
+    useEffect(() => {
+        if (isMounted()) {
+            if (typeof search == 'undefined') {
+                setValue(0);
+            } else {
+                if (search == "top") {
+                    setValue(0);
+                } else if (search == "qa") {
+                    setValue(1);
+                }
+            }
+        }
+    }, [search]);
     
     return (
         <Box sx={{ width: '100%' }}>
@@ -67,12 +69,7 @@ const TabPanel = () => {
                     <Tab label="Q&A" {...a11yProps(1)} sx={{ fontSize: 24 }} />
                 </Tabs>
             </Box>
-            <Panel value={value} index={0}>
-                <Top />
-            </Panel>
-            <Panel value={value} index={1}>
-                <QA />
-            </Panel>
+            {component}
         </Box>
     );
 };
