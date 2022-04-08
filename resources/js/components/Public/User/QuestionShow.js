@@ -32,6 +32,7 @@ function QuestionShow() {
     window.addEventListener("resize", function() {
         setScreenWidth(window.innerWidth);
     });
+    console.log(question);
 
     // 画面描画時に実行
     useEffect(() => {
