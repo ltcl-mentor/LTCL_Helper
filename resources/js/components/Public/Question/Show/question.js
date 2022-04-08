@@ -238,7 +238,8 @@ function Question(props) {
                     sx={{
                         marginTop: 3,
                         borderBottom: "1px solid gray",
-                        fontWeight: "bold"
+                        fontWeight: "bold",
+                        padding: 1
                     }}
                 >
                     調べたこと
@@ -262,7 +263,8 @@ function Question(props) {
                     sx={{
                         marginTop: 4,
                         borderBottom: "1px solid gray",
-                        fontWeight: "bold"
+                        fontWeight: "bold",
+                        padding: 1
                     }}
                 >
                     試したこと、分からないこと

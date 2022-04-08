@@ -203,12 +203,14 @@ function QuestionShow() {
                         />
 
                         <Typography
-                            variant="h4"
+                            variant="h6"
                             component="div"
-                            align="center"
                             sx={{
-                                marginTop: 4,
-                                marginBottom: 2
+                                marginTop: 3,
+                                padding: 1,
+                                borderBottom: "1px solid gray",
+                                fontWeight: "bold",
+                                marginX: "5%"
                             }}
                         >
                             参考記事
@@ -219,15 +221,7 @@ function QuestionShow() {
                 )}
             </Box>
 
-            {/* <Grid
-                item
-                sx={{
-                    width: screen_width > 1000 ? "35%" : "100%",
-                    minWidth: "300px"
-                }}
-            >
-                <RelatedQuestions related_questions={related_questions} />
-            </Grid> */}
+            <RelatedQuestions related_questions={related_questions} />
         </div>
     );
 }
