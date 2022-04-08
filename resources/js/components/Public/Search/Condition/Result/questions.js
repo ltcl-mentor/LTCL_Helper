@@ -24,6 +24,7 @@ function Questions(props) {
         axios
             .get(`/react/questions/search?category=${ props.category }&topic=${ props.topic }&curriculum_number=${ props.curriculum_number }&keyword=${ props.keyword }`)
             .then(response => {
+                console.log(`/react/questions/search?category=${ props.category }&topic=${ props.topic }&curriculum_number=${ props.curriculum_number }&keyword=${ props.keyword }`);
                 setQuestions(response.data);
             }).catch(error => {
                 console.log(error);
