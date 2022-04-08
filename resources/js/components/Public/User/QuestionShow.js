@@ -120,7 +120,7 @@ function QuestionShow() {
     };
 
     return (
-        <div className="container">
+        <div>
             <Alert
                 type="question"
                 status={parameter.state && parameter.state.question}
@@ -158,67 +158,61 @@ function QuestionShow() {
                     </Typography>
                 )}
 
-            <Parameters
+            {/* <Parameters
                 category={question.category}
                 topic={question.topic}
                 curriculum_number={question.curriculum_number}
                 is_resolved={question.is_resolved}
-            />
+            /> */}
 
-            <Grid container spacing={2} sx={{ flexGrow: 1 }}>
-                <Grid
-                    item
-                    sx={{
-                        width: screen_width > 1000 ? "65%" : "100%"
-                    }}
-                >
-                    <Box>
-                        <Question
-                            title={question.title}
-                            remarks={question.remarks}
-                            updated_at={question.updated_at}
-                            question={question.question}
+            <Box>
+                <Question
+                    title={question.title}
+                    remarks={question.remarks}
+                    updated_at={question.updated_at}
+                    question={question.question}
+                    category={question.category}
+                    topic={question.topic}
+                    curriculum_number={question.curriculum_number}
+                />
+
+                {question.check == 1 && (
+                    <React.Fragment>
+                        <Comments
+                            main_comments={question.main_comments}
+                            sub_comments={question.sub_comments}
+                            question_id={id}
+                            setCommentChanging={setCommentChanging}
+                            user_id={user.id}
+                            is_admin={user.is_admin}
                         />
 
-                        {question.check == 1 && (
-                            <React.Fragment>
-                                <Comments
-                                    main_comments={question.main_comments}
-                                    sub_comments={question.sub_comments}
-                                    question_id={id}
-                                    setCommentChanging={setCommentChanging}
-                                    user_id={user.id}
-                                    is_admin={user.is_admin}
-                                />
+                        <Typography
+                            variant="h4"
+                            component="div"
+                            align="center"
+                            sx={{
+                                marginTop: 4,
+                                marginBottom: 2
+                            }}
+                        >
+                            参考記事
+                        </Typography>
 
-                                <Typography
-                                    variant="h4"
-                                    component="div"
-                                    align="center"
-                                    sx={{
-                                        marginTop: 4,
-                                        marginBottom: 2
-                                    }}
-                                >
-                                    参考記事
-                                </Typography>
+                        <Documents documents={documents} />
+                    </React.Fragment>
+                )}
+            </Box>
 
-                                <Documents documents={documents} />
-                            </React.Fragment>
-                        )}
-                    </Box>
-                </Grid>
-
-                <Grid
-                    item
-                    sx={{
-                        width: screen_width > 1000 ? "35%" : "100%",
-                        minWidth: "300px"
-                    }}
-                >
-                    <RelatedQuestions related_questions={related_questions} />
-                </Grid>
-            </Grid>
+            {/* <Grid
+                item
+                sx={{
+                    width: screen_width > 1000 ? "35%" : "100%",
+                    minWidth: "300px"
+                }}
+            >
+                <RelatedQuestions related_questions={related_questions} />
+            </Grid> */}
         </div>
     );
 }

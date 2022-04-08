@@ -123,12 +123,6 @@ const DefaultForm = () => {
     const [remarks, setRemarks] = useState("");
     const [activeStep, setActiveStep] = useState(0);
     const [images, setImages] = useState([]);
-    console.log("topic", topic);
-    console.log("curriculumNum", curriculum_number);
-    console.log("title", title);
-    console.log("remarks", remarks);
-    console.log("question", question);
-    console.log("images", images);
 
     let curriculum;
     let project;
