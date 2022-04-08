@@ -58,8 +58,9 @@ const a11yProps = (index) => {
 /**
  * Q&A画面
  */
-const QA = () => {
+const QA = (props) => {
     const history = useHistory();
+    const [achievement, setAchievment] = useState(0);
     const [searchValue, setSearchValue] = useState(0);
     const [indexValue, setIndexValue] = useState(0);
     const [curriculum, setCurriculum] = useState([]);
@@ -151,13 +152,28 @@ const QA = () => {
             .then(response => {
                 setCurriculum(response.data.curriculum);
                 setProject(response.data.project);
+                setAchievment(response.data.achievement);
             }).catch(error => {
                 console.log(error);
             });
     }, []);
-    
+    console.log(props.is_admin);
     return (
         <React.Fragment>
+            
+            {props.is_admin != null &&
+                <Typography 
+                    variant="h5"
+                    component="div"
+                    align="center"
+                    sx={{
+                        paddingTop: 3,
+                        fontWeight: 'bold',
+                    }}
+                >
+                    現在の質問解決率：<font color="purple">{ achievement }</font>%
+                </Typography>
+            }
 
             {/* 検索部分 */}
             <Card variant="outlined" sx={{ width: '70%', m: '16px auto 0', p: 0 }}>

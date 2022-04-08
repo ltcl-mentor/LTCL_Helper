@@ -353,7 +353,6 @@ class ReactController extends Controller
      */
     public function getHomeData()
     {
-        // $achievement = Question::getAchievement();
         $events = Event::get();
         return ["key" => env('GoogleMapsKey'), "zoom" => env('ZoomLinksNote'), "events" => $events];
     }
@@ -363,6 +362,7 @@ class ReactController extends Controller
      */
     public function getQuestionArticle() 
     {
+        $achievement = Question::getAchievement();
         $curriculum_questions = [];
         $project_questions = [];
         $questions = array_count_values(Question::where('check', 1)->pluck('topic')->all());
@@ -388,6 +388,6 @@ class ReactController extends Controller
             }
         }
         
-        return ['curriculum' => $curriculum_questions, "project" => $project_questions];
+        return ['curriculum' => $curriculum_questions, "project" => $project_questions, 'achievement' => $achievement];
     }
 }
