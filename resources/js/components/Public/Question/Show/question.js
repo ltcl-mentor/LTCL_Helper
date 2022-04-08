@@ -3,6 +3,7 @@ import Card from "@material-ui/core/Card";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@mui/material/Grid";
+import Box from "@material-ui/core/Box";
 
 /**
  * 質問表示
@@ -192,24 +193,32 @@ function Question(props) {
 
     return (
         <React.Fragment>
-            <Avatar
-                alt="Student"
-                src="/images/pose_english_shrug_man.png"
+            <Box
                 sx={{
-                    marginTop: 3,
-                    marginLeft: 3
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginX: "5%"
                 }}
-            />
+            >
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <Avatar
+                        alt="Student"
+                        src="/images/pose_english_shrug_man.png"
+                    />
 
-            <Typography variant="h7" component="div">
-                受講生 &nbsp; {props.updated_at}
-            </Typography>
+                    <Typography variant="h7" component="div">
+                        受講生 &nbsp; {props.updated_at}
+                    </Typography>
+                </Box>
 
-            <Typography variant="h7" component="div">
-                {categories[props.category]}&nbsp; /&nbsp; {topics[props.topic]}
-                &nbsp; /&nbsp;
-                {props.curriculum_number}&nbsp;
-            </Typography>
+                <Typography variant="h7" component="div">
+                    {categories[props.category]}&nbsp; /&nbsp;{" "}
+                    {topics[props.topic]}
+                    &nbsp; /&nbsp;
+                    {props.curriculum_number}&nbsp;
+                </Typography>
+            </Box>
 
             <Typography
                 variant="h4"
