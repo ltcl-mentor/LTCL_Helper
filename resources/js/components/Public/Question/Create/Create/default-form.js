@@ -47,6 +47,21 @@ const WhiteButton = styled(Button)(({ theme }) => ({
     }
 }));
 
+const ConfirmButton = styled(Button)(({ theme }) => ({
+    variant: "outlined",
+    color: "#771af8",
+    border: "2px solid #771af8",
+    fontWeight: "bold",
+    minWidth: 150,
+    maxWidth: 200,
+    marginBottom: 5,
+    fontSize: 15,
+    "&:hover": {
+        backgroundColor: "#771AF8",
+        color: "white"
+    }
+}));
+
 /**
  * 絞り込み検索
  */
@@ -311,21 +326,9 @@ const DefaultForm = () => {
                             textAlign: "center"
                         }}
                     >
-                        <Button
-                            variant="outlined"
-                            onClick={handleConfirmPage}
-                            style={{
-                                color: "#771af8",
-                                border: "2px solid #771af8",
-                                fontWeight: "bold",
-                                minWidth: 150,
-                                maxWidth: 200,
-                                marginBottom: 5,
-                                fontSize: 15
-                            }}
-                        >
+                        <ConfirmButton onClick={handleConfirmPage}>
                             確認する
-                        </Button>
+                        </ConfirmButton>
                     </div>
                     <div
                         style={{
