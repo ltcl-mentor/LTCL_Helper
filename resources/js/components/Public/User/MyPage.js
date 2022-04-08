@@ -186,8 +186,11 @@ const MyPage = (props) => {
                                             </TableCell>
                                             <TableCell align="left">
                                                 <Link to={'/my_page/questions/' + question.id} style={{ color: 'black' }}>
-                                                    { question.title }
-                                                    {/* question.title.substring(0,70) + "..." */}
+                                                    {question.title.length > 31 ?
+                                                        question.title.substring(0,30) + "..."
+                                                    :
+                                                        question.title
+                                                    }
                                                 </Link>
                                             </TableCell>
                                             <TableCell align="center">
