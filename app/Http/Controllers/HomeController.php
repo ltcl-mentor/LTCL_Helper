@@ -22,7 +22,7 @@ class HomeController extends Controller
     public function getHistory()
     {
         $user = Auth::user();
-        $questions = $user->questions()->get();
+        $questions = $user->questions()->paginate(20);
         // アクセス履歴の情報を質問に付随させる
         foreach($questions as $question){
             $question['whenClicked'] = $question->pivot->created_at;
