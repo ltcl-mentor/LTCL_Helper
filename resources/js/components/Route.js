@@ -1,40 +1,41 @@
 import React, { useState, useEffect, createContext } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
-import Bar from "./Layout/Bar";
-import AccessError from "./Error";
-import MyPage from "./Public/User/MyPage";
-import MyQuestion from "./Public/User/QuestionShow";
-import History from "./Public/History/History";
-import Home from "./Public/Home/Home";
-import PublicDocumentIndex from "./Public/Document/Index/Index";
-import PublicQuestionIndex from "./Public/Question/Index/Index";
-import PublicQuestionCreate from "./Public/Question/Create/Create/Create";
-import PublicQuestionShow from "./Public/Question/Show/Show";
-import Condition from "./Public/Search/Condition/Condition";
-import Freeword from "./Public/Search/Freeword/Freeword";
-import Contact from "./Public/Contact/Contact";
-import MentorTop from "./Mentor/Top";
-import DocumentIndex from "./Mentor/Document/Index/Index";
-import DocumentShow from "./Mentor/Document/Show/Show";
-import DocumentCreate from "./Mentor/Document/Create/Create";
-import DocumentEdit from "./Mentor/Document/Edit/Edit";
-import QuestionIndex from "./Mentor/Question/Index/Index/Index";
-import QuestionMentorYetCommentIndex from "./Mentor/Question/Index/yet-comment-index/FromMentor";
-import QuestionStudentYetCommentIndex from "./Mentor/Question/Index/yet-comment-index/FromStudent";
-import QuestionShow from "./Mentor/Question/Show/Show";
-import QuestionEdit from "./Mentor/Question/Edit/Edit";
-import LinkFromQuestionIndex from "./Mentor/Link/fromQuestion/Index/Index";
-import LinkFromQuestionShow from "./Mentor/Link/fromQuestion/Show/Show";
-import LinkFromDocumentIndex from "./Mentor/Link/fromDocument/Index/Index";
-import LinkFromDocumentShow from "./Mentor/Link/fromDocument/Show/Show";
-import UserIndex from "./Mentor/User/Index/Index";
-import UserRegisterPublic from "./Mentor/User/Register/Public/Public";
-import UserRegisterAdmin from "./Mentor/User/Register/Admin/Admin";
-import EventIndex from "./Mentor/Event/Index/Index";
-import EventRegister from "./Mentor/Event/Create/Create";
+import Bar from './Layout/Bar';
+import AccessError from './Error';
+import MyPage from './Public/User/MyPage';
+import MyQuestion from './Public/User/QuestionShow';
+import History from './Public/History/History';
+import Home from './Public/Home/Home';
+import PublicDocumentIndex from './Public/Document/Index/Index';
+import PublicQuestionIndex from './Public/Question/Index/Index';
+import PublicQuestionIndexIndex from './Public/Question/Index/Index/Index';
+import PublicQuestionCreate from './Public/Question/Create/Create/Create';
+import PublicQuestionShow from './Public/Question/Show/Show';
+import Condition from './Public/Search/Condition/Condition';
+import Freeword from './Public/Search/Freeword/Freeword';
+import Contact from './Public/Contact/Contact';
+import MentorTop from './Mentor/Top';
+import DocumentIndex from './Mentor/Document/Index/Index';
+import DocumentShow from './Mentor/Document/Show/Show';
+import DocumentCreate from './Mentor/Document/Create/Create';
+import DocumentEdit from './Mentor/Document/Edit/Edit';
+import QuestionIndex from './Mentor/Question/Index/Index/Index';
+import QuestionMentorYetCommentIndex from './Mentor/Question/Index/yet-comment-index/FromMentor';
+import QuestionStudentYetCommentIndex from './Mentor/Question/Index/yet-comment-index/FromStudent';
+import QuestionShow from './Mentor/Question/Show/Show';
+import QuestionEdit from './Mentor/Question/Edit/Edit';
+import LinkFromQuestionIndex from './Mentor/Link/fromQuestion/Index/Index';
+import LinkFromQuestionShow from './Mentor/Link/fromQuestion/Show/Show';
+import LinkFromDocumentIndex from './Mentor/Link/fromDocument/Index/Index';
+import LinkFromDocumentShow from './Mentor/Link/fromDocument/Show/Show';
+import UserIndex from './Mentor/User/Index/Index';
+import UserRegisterPublic from './Mentor/User/Register/Public/Public';
+import UserRegisterAdmin from './Mentor/User/Register/Admin/Admin';
+import EventIndex from './Mentor/Event/Index/Index';
+import EventRegister from './Mentor/Event/Create/Create';
 
 export const LoginUser = createContext();
 
@@ -81,12 +82,12 @@ function Router() {
                 <Route path="/history" exact component={History} />
 
                 {/* 公開中の参考記事一覧表示 */}
-                <Route
-                    path="/public/documents/index"
-                    exact
-                    component={PublicDocumentIndex}
-                />
 
+                <Route path="/public/documents/index" exact component={ PublicDocumentIndex }/>
+                
+                {/* 公開中の質問をカテゴリー毎に表示 */}
+                <Route path="/topic/:id" exact component={ PublicQuestionIndexIndex }/>
+                
                 {/* 公開中の質問一覧表示 */}
                 <Route
                     path="/public/questions/index"

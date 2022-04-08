@@ -229,9 +229,19 @@ class ReactController extends Controller
     /**
      * 個別質問に関連する全記事受け渡し
      */
-    public function getRelatedDocuments(Question $question)
+    public function getRelatedDocuments(Question $question, Request $request)
     {
+        
         return $question->documents()->get();
+    }
+    
+    /**
+     * topicごとの全記事受け渡し
+     */
+    public function getRelatedDocumentsPaginate($category)
+    {
+        $document = Document::where('category', $category);
+        return $document->paginate(9);
     }
 
 

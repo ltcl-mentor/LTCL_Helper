@@ -39,7 +39,7 @@ class Question extends Model
      */
     public static function getMyQuestions()
     {
-        $my_questions = self::where('user_id', Auth::id())->get();
+        $my_questions = self::where('user_id', Auth::id())->paginate(20);
 
         foreach($my_questions as $question){
             $student_yet_comments = Comment::where('question_id', $question->id)->where('is_mentor_commented', true)->get();

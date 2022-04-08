@@ -13,6 +13,9 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
+import Pagination from '@mui/material/Pagination';
+import Box from '@material-ui/core/Box';
+
 
 import {LoginUser} from '../../Route.js';
 import Breadcrumbs from '../../Breadcrumbs';
@@ -28,7 +31,15 @@ const style = {
  */
 const MyPage = (props) => {
     const history = useHistory();
-    const [questions, setQuestions] = useState([]);
+    // const [questions, setQuestions] = useState([]);
+    const [questions, setQuestions] = useState({
+        eventList: [],
+        currentPage: 1,
+        itemsCountPerPage: 1,
+        totalItemsCount: 1,
+        pageRangeDisplayed: 9,
+        lastPage: 0,
+    });
     // const [page, setPage] = useState(0);
     // const [rowsPerPage, setRowsPerPage] = useState(10);
     
@@ -43,7 +54,16 @@ const MyPage = (props) => {
         axios
             .get('/react/questions/mine')
             .then(response => {
-                setQuestions(response.data);
+                console.log(response.data);
+                // setQuestions(response.data);
+                setQuestions({
+                    eventList: response.data.data,
+                    itemsCountPerPage: response.data.per_page,
+                    totalItemsCount: response.data.total,
+                    currentPage: response.data.current_page,
+                    pageRangeDisplayed: 10,
+                    lastPage: response.data.last_page,
+                });
             }).catch(error => {
                 console.log(error);
             });
@@ -60,6 +80,35 @@ const MyPage = (props) => {
     //     setRowsPerPage(+event.target.value);
     //     setPage(0);
     // };
+    
+    const handlePageClick = (event, index) => {
+        // 検索結果の質問取得
+        axios
+            .get(`/react/questions/mine?page=${index}`)
+            .then(response => {
+                setQuestions({
+                    eventList: response.data.data,
+                    itemsCountPerPage: response.data.per_page,
+                    totalItemsCount: response.data.total,
+                    currentPage: response.data.current_page,
+                    pageRangeDisplayed: 10,
+                    lastPage: response.data.last_page,
+                });
+            }).catch(error => {
+                console.log(error);
+            });
+    };
+    
+    let pagination;
+    
+    pagination = (
+            <Pagination
+                count={ questions.lastPage }
+                page={ questions.currentPage }
+                onChange={ handlePageClick }
+                sx={{ display: "block" }}
+            />
+        );
     
     return (
         <div className="mypage">
@@ -101,7 +150,7 @@ const MyPage = (props) => {
             <Grid container sx={{ justifyContent: 'space-between' }}>
                 <Grid item>
                     <Typography sx={{ fontSize: '20px', fontWeight: 'bold', marginTop: 1, marginBottom: 3 }}>
-                        質問投稿履歴<span style={style}>全{questions.length}件</span>
+                        質問投稿履歴<span style={style}>全{questions.totalItemsCount}件</span>
                     </Typography>
                 </Grid>
                 <Grid item>
@@ -122,7 +171,8 @@ const MyPage = (props) => {
                 <TableContainer sx={{ /*maxHeight: 440*/ }}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableBody>
-                            {questions
+                            {//questions
+                            questions.eventList
                                 // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((question) => {
                                     return (
@@ -174,6 +224,11 @@ const MyPage = (props) => {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />*/}
             </Paper>
+            <Grid container justifyContent="center" sx={{ marginTop: 2, marginBottom: 2 }}>
+                    <Grid item>
+                        { pagination }
+                    </Grid>
+                </Grid>
             
             <div
                 style={{

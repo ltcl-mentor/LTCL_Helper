@@ -35,7 +35,8 @@ span.MuiTabs-indicator.css-11yukd5-MuiTabs-indicator {
 }
 
 button.css-1susg9h-MuiButtonBase-root-MuiTab-root.Mui-selected, 
-button.css-f5r76o-MuiButtonBase-root-MuiTab-root.Mui-selected {
+button.css-f5r76o-MuiButtonBase-root-MuiTab-root.Mui-selected,
+button.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected{
   color: #771AF8;
 }
 
