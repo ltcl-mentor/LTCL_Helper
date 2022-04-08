@@ -6,12 +6,29 @@ import CreateIcon from "@material-ui/icons/Create";
 import Box from "@mui/material/Box";
 import Card from "@material-ui/core/Card";
 import Grid from "@mui/material/Grid";
+import { styled } from "@mui/material/styles";
 
 import TextForm from "../../Create/Create/question-form/original-text-form/originalTextForm";
 
 /**
  * コメント新規作成
  */
+
+const CommentButton = styled(Button)(({ theme }) => ({
+    variant: "outlined",
+    color: "#771af8",
+    border: "2px solid #771af8",
+    fontWeight: "bold",
+    minWidth: 150,
+    maxWidth: 200,
+    marginBottom: 5,
+    fontSize: 15,
+    "&:hover": {
+        backgroundColor: "#771AF8",
+        color: "white"
+    }
+}));
+
 function Create(props) {
     const history = useHistory();
     const [open, setOpen] = useState(false);
@@ -122,18 +139,16 @@ function Create(props) {
             ) : (
                 <Box sx={{ textAlign: "center", marginBottom: 2 }}>
                     {props.type === "create" ? (
-                        <Button
-                            variant="contained"
-                            color="info"
+                        <CommentButton
                             startIcon={<CreateIcon />}
                             onClick={handleOpen}
                         >
                             新規にコメントを追加
-                        </Button>
+                        </CommentButton>
                     ) : (
                         <Button
                             variant="text"
-                            color="info"
+                            sx={{ color: "#771af8" }}
                             onClick={handleOpen}
                         >
                             コメントに返信
