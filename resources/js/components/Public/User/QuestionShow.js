@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-
+import { useHistory } from "react-router-dom";
 import Alert from "../../Alert";
 import Breadcrumbs from "../../Breadcrumbs";
 import Parameters from "../Question/Show/parameters";
@@ -18,6 +18,7 @@ import RelatedQuestions from "../Question/Show/related-questions";
  * 質問詳細画面(マイページ)のメインコンポーネント
  */
 function QuestionShow() {
+    const history = useHistory();
     const { id } = useParams();
     const [screen_width, setScreenWidth] = useState(window.innerWidth);
     const parameter = useLocation();
@@ -118,6 +119,9 @@ function QuestionShow() {
             window.alert("キャンセルしました");
             return false;
         }
+    };
+    const handleBackQuestionShow = () => {
+        history.push("/public/questions/index");
     };
 
     return (
@@ -222,6 +226,20 @@ function QuestionShow() {
             </Box>
 
             <RelatedQuestions related_questions={related_questions} />
+
+            <Box style={{ textAlign: "center" }}>
+                <Button
+                    variant="text"
+                    onClick={handleBackQuestionShow}
+                    sx={{
+                        margin: "3%",
+                        borderBottom: "1px solid #771af8",
+                        color: "#771af8"
+                    }}
+                >
+                    質問一覧に戻る
+                </Button>
+            </Box>
         </div>
     );
 }
