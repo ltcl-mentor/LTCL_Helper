@@ -14,6 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@mui/material/Button';
 import Pagination from '@mui/material/Pagination';
+import InputBase from '@mui/material/InputBase';
 
 function Article(props) {
     
@@ -68,8 +69,8 @@ function Article(props) {
         );
         documentsList = documents.eventList.map((document) => {
             return (
-                <Grid item key={document.title}>
-                    <CardActionArea sx={{ width: "300px", height: "280px"}}>
+                <Grid item key={document.title} >
+                    <CardActionArea sx={{ width: "300px", height: "280px" }}>
                         <a href={ document.link } target="_blank">
                             <Card sx={{ width: "300px", height: "280px"}}>
                                 <CardActionArea sx={{display:'flex', justifyContent: 'center'}}>
@@ -172,30 +173,42 @@ function Article(props) {
         <div>
         
         <Grid container spacing={2} sx={{ flexGrow: 1, marginBottom: 3 , marginTop: 3}} justifyContent="center">
-            <Grid item sx={{ width: "100%" }}>
-                <Paper
-                    component="form"
-                    sx={{
-                        p: '2px 4px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        width: "40%",
-                        minWidth: "350px",
-                        margin: "0 auto", }}
-                >
-                    <Input
-                        sx={{ ml: 1, flex: 1 }}
-                        placeholder="キーワードを入力してください。"
-                        onChange={ (event) => handleKeyword(event) }
-                        onKeyDown={ (event) => {
-                            if (event.key === 'Enter')
-                            event.preventDefault();
+            <Grid container spacing={1} sx={{ mb: 7 }}>
+                <Grid item xs={8}>
+                    <Paper
+                        component="form"
+                        sx={{
+                            p: "4px",
+                            display: "flex",
+                            alignItems: "center",
+                            width: "70%",
+                            ml: "auto", 
                         }}
-                    />
-                    <IconButton sx={{ p: '10px' }}>
-                        <SearchIcon />
-                    </IconButton>
-                </Paper>
+                    >
+                        <InputBase
+                            sx={{ ml: 1, flex: 1 }}
+                            placeholder="検索ワードを入力してください"
+                            inputProps={{ 'aria-label': 'search word' }}
+                            onChange={ (event) => handleKeyword(event) }
+                            onKeyDown={ (event) => {if (event.key === 'Enter') event.preventDefault(); }}
+                        />
+                    </Paper>
+                </Grid> 
+                <Grid item xs={2}>
+                    <Button 
+                        variant="contained" 
+                        startIcon={<SearchIcon />} 
+                        sx={{ 
+                            backgroundColor: '#771AF8', 
+                            color: 'white', 
+                            height: '100%', 
+                            '&:hover': {
+                                backgroundColor: '#6633CC' 
+                            } 
+                        }}
+                    >
+                    </Button>
+                </Grid>
             </Grid>
             <Grid item >
                 <Button
@@ -235,7 +248,7 @@ function Article(props) {
             </Grid>
         </Grid>
         <Box sx={{marginTop:2, marginBottom: 3}}>
-            <Grid container spacing={2} sx={{ flexGrow: 1 }} justifyContent="center" >
+            <Grid container spacing={2} sx={{ flexGrow: 1 }} justifyContent="flex-start" >
                 { documentsList }
             </Grid>
             <Grid container justifyContent="center" sx={{ marginTop: 1, marginBottom: 2 }}>
