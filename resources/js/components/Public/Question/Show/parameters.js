@@ -111,7 +111,11 @@ function Parameters(props) {
                             画像挿入
                         </PurpleCell>
                         <GrayCell align="center">
-                            {<img src={props.images[0]} />}
+                            {props.images.length === 0 ? (
+                                "なし"
+                            ) : (
+                                <img src={props.images[0]} />
+                            )}
                         </GrayCell>
                     </TableRow>
                 </TableBody>

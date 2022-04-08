@@ -1,12 +1,27 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-
+import { styled } from "@mui/material/styles";
 import Parameters from "../../Show/parameters";
 
 /**
  * 質問登録前の確認フォーム
  */
+const ConfirmButton = styled(Button)(({ theme }) => ({
+    variant: "outlined",
+    color: "#771af8",
+    border: "2px solid #771af8",
+    fontWeight: "bold",
+    minWidth: 150,
+    maxWidth: 200,
+    marginBottom: 5,
+    fontSize: 15,
+    "&:hover": {
+        backgroundColor: "#771AF8",
+        color: "white"
+    }
+}));
+
 function QuestionConfirm(props) {
     let question = [];
     if (props.question) {
@@ -200,21 +215,9 @@ function QuestionConfirm(props) {
             />
 
             <div style={{ textAlign: "center", marginTop: 50 }}>
-                <Button
-                    variant="outlined"
-                    onClick={props.handleSubmit}
-                    style={{
-                        color: "#771af8",
-                        border: "2px solid #771af8",
-                        fontWeight: "bold",
-                        minWidth: 150,
-                        maxWidth: 200,
-                        marginBottom: 5,
-                        fontSize: 15
-                    }}
-                >
+                <ConfirmButton onClick={props.handleSubmit}>
                     投稿する
-                </Button>
+                </ConfirmButton>
             </div>
             <div
                 style={{
