@@ -24,7 +24,7 @@ function Article(props) {
     const [all ,setAll] = useState(false);
     const [documents , setDocuments] = useState({
         eventList: [],
-        activePage: 1,
+        currentPage: 1,
         itemsCountPerPage: 1,
         totalItemsCount: 1,
         pageRangeDisplayed: 9,
@@ -34,7 +34,7 @@ function Article(props) {
     const handlePageClick = (event, index) => {
         // 検索結果の質問取得
         axios
-            .get(`/react/documents/related/paginate/${ props.category }&page=${index}`)
+            .get(`/react/documents/related/paginate/${ props.category }?page=${index}`)
             .then(response => {
                 setDocuments({
                     eventList: response.data.data,
