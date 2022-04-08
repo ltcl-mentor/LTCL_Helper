@@ -13,8 +13,9 @@ const Create = () => {
         <React.Fragment>
             <Box
                 sx={{
-                    width: screen_width >= 800 ? "80%" : "96%",
-                    marginLeft: screen_width >= 800 ? "10%" : "2%"
+                    width: screen_width >= 800 ? "90%" : "96%",
+                    marginLeft: screen_width >= 800 ? "5%" : "2%",
+                    marginRight: screen_width >= 800 ? "5%" : "2%"
                 }}
             >
                 <DefaultForm />
