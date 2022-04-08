@@ -18,6 +18,7 @@ import RelatedQuestions from "./related-questions";
  * 質問詳細画面(公開)のメインコンポーネント
  */
 function Show() {
+    const history = useHistory();
     const { id } = useParams();
     const [screen_width, setScreenWidth] = useState(window.innerWidth);
     const parameter = useLocation();
@@ -127,17 +128,21 @@ function Show() {
             return false;
         }
     };
+    const handleBackQuestionShow = () => {
+        history.push("/public/questions/index");
+    };
 
     return (
-        <div className="container">
+        <div>
             <Alert
                 type="question"
                 status={parameter.state && parameter.state.question}
                 info={parameter.state && parameter.state.number}
             />
 
-            <Breadcrumbs page="public_question_show" />
-
+            <div style={{ marginLeft: "3%" }}>
+                <Breadcrumbs page="public_question_show" />
+            </div>
             {question.length !== 0 &&
                 !question.is_resolved &&
                 (question.user_id === user.id || user.is_admin === "staff") && (
@@ -163,56 +168,53 @@ function Show() {
                 is_resolved={ question.is_resolved }
             /> */}
 
-            <Grid container spacing={2} sx={{ flexGrow: 1 }}>
-                <Grid
-                    item
+            <Box>
+                <Question
+                    title={question.title}
+                    remarks={question.remarks}
+                    updated_at={question.updated_at}
+                    question={question.question}
+                />
+
+                <Comments
+                    main_comments={question.main_comments}
+                    sub_comments={question.sub_comments}
+                    question_id={id}
+                    setCommentChanging={setCommentChanging}
+                    user_id={user.id}
+                    is_admin={user.is_admin}
+                />
+
+                <Typography
+                    variant="h6"
+                    component="div"
                     sx={{
-                        width: screen_width > 1000 ? "65%" : "100%"
+                        marginTop: 3,
+                        padding: 1,
+                        borderBottom: "1px solid gray",
+                        fontWeight: "bold",
+                        marginX: "5%"
                     }}
                 >
-                    <Box>
-                        <Question
-                            title={question.title}
-                            remarks={question.remarks}
-                            updated_at={question.updated_at}
-                            question={question.question}
-                        />
+                    参考記事
+                </Typography>
+                <Documents documents={documents} />
+            </Box>
 
-                        <Comments
-                            main_comments={question.main_comments}
-                            sub_comments={question.sub_comments}
-                            question_id={id}
-                            setCommentChanging={setCommentChanging}
-                            user_id={user.id}
-                            is_admin={user.is_admin}
-                        />
-
-                        <Typography
-                            variant="h4"
-                            component="div"
-                            align="center"
-                            sx={{
-                                marginTop: 4,
-                                marginBottom: 2
-                            }}
-                        >
-                            参考記事
-                        </Typography>
-
-                        <Documents documents={documents} />
-                    </Box>
-                </Grid>
-
-                <Grid
-                    item
+            <RelatedQuestions related_questions={related_questions} />
+            <Box style={{ textAlign: "center" }}>
+                <Button
+                    variant="text"
+                    onClick={handleBackQuestionShow}
                     sx={{
-                        width: screen_width > 1000 ? "35%" : "100%",
-                        minWidth: "300px"
+                        margin: "3%",
+                        borderBottom: "1px solid #771af8",
+                        color: "#771af8"
                     }}
                 >
-                    <RelatedQuestions related_questions={related_questions} />
-                </Grid>
-            </Grid>
+                    質問一覧に戻る
+                </Button>
+            </Box>
         </div>
     );
 }
