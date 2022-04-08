@@ -25,17 +25,6 @@ const Information = (props) => {
     
     return (
         <div className="information">
-           {/* <Typography 
-                variant="h6"
-                component="div"
-                align="center"
-                sx={{
-                    paddingTop: 3,
-                }}
-            >
-                現在の質問解決率：<font color="green">{ props.achievement }</font>%
-            </Typography>*/}
-            
             <Grid columns={16} container sx={{ width: '80%', ml: 'auto', mr: 'auto' }}>
                 <Grid xs={8} item>
                     <Typography component="div" sx={{ color: '#771AF8', fontWeight: 'bold', fontSize: 24, pl: 2 }}>
@@ -53,6 +42,6 @@ const Information = (props) => {
             </Grid>
         </div>
     );
-}
+};
 
 export default Information;

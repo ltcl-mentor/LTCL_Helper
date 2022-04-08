@@ -20,7 +20,7 @@ const a11yProps = (index) => {
 /**
  * タブパネル
  */
-const TabPanel = () => {
+const TabPanel = (props) => {
     const isMounted = useMountedState();
     const history = useHistory();
     const search = useLocation().search.split('=')[1];
@@ -30,7 +30,7 @@ const TabPanel = () => {
     if (value == 0) {
         component = <Top />;
     } else {
-        component = <QA />;
+        component = <QA is_admin={props.is_admin} />;
     }
     
     // タブ切り替え用

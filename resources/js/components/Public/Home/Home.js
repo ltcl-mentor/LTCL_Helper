@@ -78,7 +78,7 @@ const Home = () => {
             }
             
             {/* タブ */}
-            <TabPanel />
+            <TabPanel is_admin={user.is_admin} />
             
             <Typography component="div" align="center" sx={{ fontWeight: 'bold', fontSize: 20, pt: 1, pb: 1 }}>
                 レバテックカレッジ
