@@ -127,9 +127,23 @@ function QuestionShow() {
                 status={parameter.state && parameter.state.question}
                 info={parameter.state && parameter.state.number}
             />
-
-            <Breadcrumbs page="my_page_question" />
-
+            <div style={{ marginLeft: "3%" }}>
+                <Breadcrumbs page="my_page_question" />
+            </div>
+            <Typography
+                variant="h5"
+                component="div"
+                sx={{
+                    marginTop: 4,
+                    marginBottom: 5,
+                    marginLeft: "3%",
+                    fontSize: 30,
+                    color: "#771af8",
+                    fontWeight: "bold"
+                }}
+            >
+                質問投稿画面
+            </Typography>
             {question.check == 0 && (
                 <Typography
                     component="div"

@@ -193,96 +193,93 @@ function Question(props) {
 
     return (
         <React.Fragment>
-            <Box
-                sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    marginX: "5%"
-                }}
-            >
-                <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <Avatar
-                        alt="Student"
-                        src="/images/pose_english_shrug_man.png"
-                    />
+            <Box sx={{ width: "90%", marginX: "5%" }}>
+                <Box
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between"
+                    }}
+                >
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <Avatar
+                            alt="Student"
+                            src="/images/pose_english_shrug_man.png"
+                        />
+
+                        <Typography variant="h7" component="div">
+                            受講生 &nbsp; {props.updated_at}
+                        </Typography>
+                    </Box>
 
                     <Typography variant="h7" component="div">
-                        受講生 &nbsp; {props.updated_at}
+                        {categories[props.category]}&nbsp; /&nbsp;
+                        {topics[props.topic]}
+                        &nbsp; /&nbsp;
+                        {props.curriculum_number}&nbsp;
                     </Typography>
                 </Box>
 
-                <Typography variant="h7" component="div">
-                    {categories[props.category]}&nbsp; /&nbsp;{" "}
-                    {topics[props.topic]}
-                    &nbsp; /&nbsp;
-                    {props.curriculum_number}&nbsp;
+                <Typography
+                    variant="h4"
+                    component="div"
+                    sx={{
+                        marginTop: 4,
+                        fontSize: 30,
+                        fontWeight: "bold"
+                    }}
+                >
+                    {props.title}
+                </Typography>
+
+                <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{
+                        marginTop: 3,
+                        borderBottom: "1px solid gray",
+                        fontWeight: "bold"
+                    }}
+                >
+                    調べたこと
+                </Typography>
+
+                <Typography
+                    variant="h5"
+                    component="div"
+                    sx={{
+                        marginTop: 1,
+                        padding: 2,
+                        marginBottom: 2
+                    }}
+                >
+                    {props.remarks}
+                </Typography>
+
+                <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{
+                        marginTop: 4,
+                        borderBottom: "1px solid gray",
+                        fontWeight: "bold"
+                    }}
+                >
+                    試したこと、分からないこと
+                </Typography>
+
+                <Typography
+                    variant="h5"
+                    component="div"
+                    sx={{
+                        marginTop: 1,
+                        padding: 2,
+                        marginBottom: 2
+                    }}
+                >
+                    {question}
                 </Typography>
             </Box>
-
-            <Typography
-                variant="h4"
-                component="div"
-                sx={{
-                    marginTop: 4,
-                    width: "90%",
-                    marginLeft: "5%"
-                }}
-            >
-                {props.title}
-            </Typography>
-
-            <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                    marginTop: 3,
-                    width: "90%",
-                    marginLeft: "5%",
-                    borderBottom: "1px solid gray"
-                }}
-            >
-                調べたこと
-            </Typography>
-
-            <Typography
-                variant="h5"
-                component="div"
-                sx={{
-                    marginTop: 1,
-                    width: "84%",
-                    marginLeft: "8%"
-                }}
-            >
-                {props.remarks}
-            </Typography>
-
-            <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                    marginTop: 4,
-                    width: "90%",
-                    marginLeft: "5%",
-                    borderBottom: "1px solid gray"
-                }}
-            >
-                試したこと、分からないこと
-            </Typography>
-
-            <Typography
-                variant="h5"
-                component="div"
-                sx={{
-                    marginTop: 1,
-                    padding: 2,
-                    width: "90%",
-                    marginLeft: "5%",
-                    marginBottom: 2
-                }}
-            >
-                {question}
-            </Typography>
         </React.Fragment>
     );
 }
