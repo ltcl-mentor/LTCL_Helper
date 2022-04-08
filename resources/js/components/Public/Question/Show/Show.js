@@ -156,12 +156,12 @@ function Show() {
                     </Typography>
                 )}
 
-            <Parameters
-                category={question.category}
-                topic={question.topic}
-                curriculum_number={question.curriculum_number}
-                is_resolved={question.is_resolved}
-            />
+            {/* <Parameters 
+                category={ question.category }
+                topic={ question.topic }
+                curriculum_number={ question.curriculum_number }
+                is_resolved={ question.is_resolved }
+            /> */}
 
             <Grid container spacing={2} sx={{ flexGrow: 1 }}>
                 <Grid
