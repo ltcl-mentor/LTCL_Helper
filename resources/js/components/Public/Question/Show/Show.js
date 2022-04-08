@@ -174,6 +174,9 @@ function Show() {
                     remarks={question.remarks}
                     updated_at={question.updated_at}
                     question={question.question}
+                    category={question.category}
+                    topic={question.topic}
+                    curriculum_number={question.curriculum_number}
                 />
 
                 <Comments
