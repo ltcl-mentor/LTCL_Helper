@@ -1,25 +1,41 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from "axios";
-import {Link} from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
+import Grid from '@mui/material/Grid';
+// import TablePagination from '@mui/material/TablePagination';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import AddIcon from '@mui/icons-material/Add';
+import Button from '@mui/material/Button';
 
 import {LoginUser} from '../../Route.js';
 import Breadcrumbs from '../../Breadcrumbs';
 
+const style = {
+  fontWeight: 'normal',
+  paddingLeft: '20px',
+};
+
+
 /**
  * ユーザマイページのメインコンポーネント
  */
-function MyPage(props) {
+const MyPage = (props) => {
+    const history = useHistory();
     const [questions, setQuestions] = useState([]);
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(10);
+    // const [page, setPage] = useState(0);
+    // const [rowsPerPage, setRowsPerPage] = useState(10);
+    
+    // Topページに戻る
+    const handleBackTopPage = () => {
+        history.push("/");
+    };
     
     // 画面描画時に実行
     useEffect(() => {
@@ -36,94 +52,111 @@ function MyPage(props) {
     // ログインユーザー情報取得
     const user = useContext(LoginUser);
     
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
+    // const handleChangePage = (event, newPage) => {
+    //     setPage(newPage);
+    // };
     
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
+    // const handleChangeRowsPerPage = (event) => {
+    //     setRowsPerPage(+event.target.value);
+    //     setPage(0);
+    // };
     
     return (
-        <div className="container">
+        <div className="mypage">
             <Breadcrumbs page="my_page"/>
-             
-            <Paper sx={{ marginBottom: 2 }}>
+            
+            <Typography sx={{ fontSize: '24px', color: '#771AF8', fontWeight: 'bold' }}>
+                受講生用マイページ
+            </Typography>
+            
+            {/* 基本情報 */}
+            <Typography sx={{ fontSize: '20px', fontWeight: 'bold', marginTop: 4, marginBottom: 3 }}>
+                基本情報
+            </Typography>
+            <Paper sx={{ boxShadow: 'none', borderRadius: 0, marginBottom: 6 }}>
                 <Table>
                     <TableBody>
                         <TableRow>
-                            <TableCell align="center" component="th" scope="row">ユーザID</TableCell>
-                            <TableCell align="center">{ user.name }</TableCell>
+                            <TableCell align="center" component="th" scope="row" sx={{ width: '50%', fontWeight: 'bold', fontSize: '20px', backgroundColor: '#C299FF', color: 'white' }}>
+                                ユーザID
+                            </TableCell>
+                            <TableCell align="center" sx={{ width: '50%', fontSize: '20px', backgroundColor: '#EEEEEE' }}>
+                                { user.name }
+                            </TableCell>
                         </TableRow>
                             
                         <TableRow>
-                            <TableCell align="center" component="th" scope="row">ユーザタイプ</TableCell>
-                            <TableCell align="center">{ user.is_admin ? "管理者" : "受講生" }</TableCell>
-                        </TableRow>
-                        
-                        { !(user.is_admin) &&
-                            <TableRow>
-                                <TableCell align="center" component="th" scope="row">入学</TableCell>
-                                <TableCell align="center">{ user.entry }</TableCell>
-                            </TableRow>
-                        }
-                            
-                        <TableRow>
-                            <TableCell align="center" component="th" scope="row">アカウント作成日</TableCell>
-                            <TableCell align="center">{ user.created_at }</TableCell>
-                        </TableRow>
-                        
-                        <TableRow>
-                            <TableCell align="center" component="th" scope="row">質問投稿数</TableCell>
-                            <TableCell align="center">{ user.question_count }件</TableCell>
+                            <TableCell align="center" component="th" scope="row" sx={{ width: '50%', fontWeight: 'bold', fontSize: '20px', backgroundColor: '#C299FF', color: 'white' }}>
+                                入学月
+                            </TableCell>
+                            <TableCell align="center" sx={{ width: '50%', fontSize: '20px', backgroundColor: '#EEEEEE' }}>
+                                { user.entry }
+                            </TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
             </Paper>
             
-            <Paper sx={{ width: '100%' }}>
-                <TableContainer sx={{ maxHeight: 440 }}>
+            {/* 質問投稿履歴 */}
+            <Grid container sx={{ justifyContent: 'space-between' }}>
+                <Grid item>
+                    <Typography sx={{ fontSize: '20px', fontWeight: 'bold', marginTop: 1, marginBottom: 3 }}>
+                        質問投稿履歴<span style={style}>全{questions.length}件</span>
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <Button
+                        size='large' 
+                        variant="text" 
+                        endIcon={<AddIcon />} 
+                        sx={{ color: '#771AF8', fontSize: '20px', fontWeight: 'bold', pt: '5px', ml: 'auto' }}
+                    >
+                        <Link to='/public/questions/create'>
+                            質問する
+                        </Link>
+                    </Button>
+                </Grid>
+            </Grid>
+            
+            <Paper>
+                <TableContainer sx={{ /*maxHeight: 440*/ }}>
                     <Table stickyHeader aria-label="sticky table">
-                        <TableHead stickyHeader>
-                            <TableRow>
-                                <TableCell align="center">Comment</TableCell>
-                                <TableCell align="center">Release</TableCell>
-                                <TableCell align="center">Resolution</TableCell>
-                                <TableCell align="center">Question</TableCell>
-                            </TableRow>
-                        </TableHead>
                         <TableBody>
                             {questions
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((question) => {
                                     return (
-                                        <TableRow hover role="checkbox" tabIndex={-1} key={question.id}>
-                                            <TableCell key={question.id} align="center">
-                                                { question.reply ?
-                                                    <font color="red">返信可</font>
-                                                :
-                                                    "返信待ち"
+                                        <TableRow hover role="checkbox" tabIndex={-1} key={`id-${question.id}:${question.created_at}`}>
+                                            <TableCell align="center">
+                                                { question.is_resolved ?
+                                                    <font color="green">解決済み</font>
+                                                : 
+                                                    <font color="red">未解決</font>
                                                 }
                                             </TableCell>
-                                            <TableCell key={question.id} align="center">
+                                            <TableCell align="left">
+                                                <Link to={'/my_page/questions/' + question.id} style={{ color: 'black' }}>
+                                                    { question.title }
+                                                    {/* question.title.substring(0,70) + "..." */}
+                                                </Link>
+                                            </TableCell>
+                                            <TableCell align="center">
                                                 { question.check ?
                                                     <font color="blue">公開中</font>
                                                 :
                                                     <font color="red">非公開</font>
                                                 }
                                             </TableCell>
-                                            <TableCell key={question.id} align="center">
-                                                { question.is_resolved ?
-                                                    <font color="green">解決済み</font>
-                                                : 
-                                                    "未解決" 
+                                            <TableCell align="center">
+                                                { question.reply ?
+                                                    <Link to={'/my_page/questions/' + question.id}>
+                                                        <font color="red">返信可</font>
+                                                    </Link>
+                                                :
+                                                    <Link to={'/my_page/questions/' + question.id}>
+                                                        <font>返信待ち</font>
+                                                    </Link>
                                                 }
-                                            </TableCell>
-                                            <TableCell key={question.id} align="left">
-                                                <Link to={'/my_page/questions/' + question.id}>
-                                                    { question.title.substring(0,50) + "..." }
-                                                </Link>
                                             </TableCell>
                                         </TableRow>
                                     );
@@ -131,7 +164,7 @@ function MyPage(props) {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <TablePagination
+                {/*<TablePagination
                     rowsPerPageOptions={[10, 25, 100]}
                     component="div"
                     count={questions.length}
@@ -139,10 +172,31 @@ function MyPage(props) {
                     page={page}
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
-                />
+                />*/}
             </Paper>
+            
+            <div
+                style={{
+                    textAlign: "center",
+                    marginTop: 5,
+                    marginBottom: 30
+                }}
+            >
+                <Button
+                    variant="text"
+                    onClick={handleBackTopPage}
+                    style={{
+                        color: "black",
+                        minWidth: 150,
+                        maxWidth: 200,
+                        marginBottom: 5
+                    }}
+                >
+                    Topに戻る
+                </Button>
+            </div>
         </div>
     );
-}
+};
 
 export default MyPage;

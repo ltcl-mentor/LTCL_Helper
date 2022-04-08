@@ -1,12 +1,14 @@
 import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
+
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
+
 
 /**
  * 各ページのパンくずリスト
  */
-function Breadcrumb(props){
+const Breadcrumb = (props) => {
     
     let link1;
     let link2;
@@ -48,21 +50,21 @@ function Breadcrumb(props){
             );
             break;
             
-        case "freeword":
-            link1 = (
-                <Typography color="text.primary">
-                    フリーワード検索
-                </Typography>
-            );
-            break;
+        // case "freeword":
+        //     link1 = (
+        //         <Typography color="text.primary">
+        //             フリーワード検索
+        //         </Typography>
+        //     );
+        //     break;
             
-        case "condition":
-            link1 = (
-                <Typography color="text.primary">
-                    絞り込み検索
-                </Typography>
-            );
-            break;
+        // case "condition":
+        //     link1 = (
+        //         <Typography color="text.primary">
+        //             絞り込み検索
+        //         </Typography>
+        //     );
+        //     break;
             
         case "contact":
             link1 = (
@@ -83,7 +85,7 @@ function Breadcrumb(props){
         case "public_question_create":
             link1 = (
                 <Typography color="text.primary">
-                    質問投稿
+                    質問投稿画面
                 </Typography>
             );
             break;
@@ -376,9 +378,9 @@ function Breadcrumb(props){
     }
     
     return (
-        <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4 }}>
+        <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: 4, fontSize: '20px' }}>
             <Link underline="hover" to="/">
-                HOME
+                Top
             </Link>
             
             { link1 }
@@ -390,6 +392,6 @@ function Breadcrumb(props){
             { link4 }
         </Breadcrumbs>
     );
-}
+};
 
 export default Breadcrumb;
