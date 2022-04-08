@@ -61,6 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('react/questions/mine', 'ReactController@getMyQuestions'); // ログインユーザの質問一覧受け渡し
     Route::get('react/documents/all', 'ReactController@getAllDocuments'); // 全記事受け渡し
     Route::get('react/documents/related/{question}', 'ReactController@getRelatedDocuments'); // 質問に紐づいている記事の受け渡し
+    Route::get('react/documents/related/paginate/{category}', 'ReactController@getRelatedDocumentsPaginate'); // カテゴリーに紐づいている記事の受け渡し
     Route::get('react/user', 'ReactController@getUser'); // ログインユーザー受け渡し
     Route::get('react/weather', 'ReactController@getWeather'); // 今日の天気のデータ受け渡し
     Route::get('react/college/{year}/{month}/{date}', 'ReactController@getCollegeData'); // 校舎に関するデータ受け渡し

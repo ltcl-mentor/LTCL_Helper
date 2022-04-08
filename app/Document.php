@@ -22,6 +22,15 @@ class Document extends Model
     }
     
     /**
+     * 関連記事一覧をペジネーションで取得する
+     */
+     public function getDocumentPagenate($keyword) {
+         if($keyword) {
+             $results = self::where('title', 'like', '%'.$keyword.'%');
+         }
+     }
+    
+    /**
      * 実行対象の記事データに関連する質問の全ID取得
      */
     public function getRelatedQuestionsIds(){

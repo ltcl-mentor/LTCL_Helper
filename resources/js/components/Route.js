@@ -11,6 +11,7 @@ import History from './Public/History/History';
 import Home from './Public/Home/Home';
 import PublicDocumentIndex from './Public/Document/Index/Index';
 import PublicQuestionIndex from './Public/Question/Index/Index';
+import PublicQuestionIndexIndex from './Public/Question/Index/Index/Index';
 import PublicQuestionCreate from './Public/Question/Create/Create/Create';
 import PublicQuestionShow from './Public/Question/Show/Show';
 import Condition from './Public/Search/Condition/Condition';
@@ -77,6 +78,9 @@ function Router() {
                 
                 {/* 公開中の参考記事一覧表示 */}
                 <Route path="/public/documents/index" exact component={ PublicDocumentIndex }/>
+                
+                {/* 公開中の質問をカテゴリー毎に表示 */}
+                <Route path="/topic/:id" exact component={ PublicQuestionIndexIndex }/>
                 
                 {/* 公開中の質問一覧表示 */}
                 <Route path="/public/questions/index" exact component={ PublicQuestionIndex }/>
