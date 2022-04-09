@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@mui/material/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-
+import Box from "@mui/material/Box";
 import Alert from "../../../Alert";
 import Breadcrumbs from "../../../Breadcrumbs";
 import Publish from "./Publish/publish";
@@ -13,11 +13,13 @@ import Parameters from "./parameters";
 import Question from "./question";
 import Comments from "../../../Public/Question/Show/comments/comments";
 import Documents from "../../../Public/Question/Show/documents";
+import RelatedQuestions from "../../../Public/Question/Show/related-questions";
 
 /**
  * 質問詳細(管理画面)のメインコンポーネント
  */
 function Show() {
+    const [related_questions, setRelatedQuestions] = useState([]);
     const parameter = useLocation();
     const { id } = useParams();
     const history = useHistory();
@@ -49,7 +51,21 @@ function Show() {
         "デザイン",
         "その他(成果物)"
     ];
-
+    useEffect(() => {
+        if (question) {
+            // この質問と同じカテゴリー、トピックの質問を取得
+            axios
+                .get(
+                    `/react/questions/search?category=${question.category}&topic=${question.topic}`
+                )
+                .then(response => {
+                    setRelatedQuestions(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+    }, [question]);
     // 画面描画時に実行
     useEffect(() => {
         // 該当質問データ取得
@@ -192,12 +208,14 @@ function Show() {
             />
 
             <Typography
-                variant="h4"
+                variant="h6"
                 component="div"
-                align="center"
                 sx={{
-                    marginTop: 4,
-                    marginBottom: 2
+                    marginTop: 3,
+                    padding: 1,
+                    borderBottom: "1px solid gray",
+                    fontWeight: "bold",
+                    marginX: "5%"
                 }}
             >
                 関連記事
@@ -218,8 +236,15 @@ function Show() {
                     </Button>
                 </Link>
             </Typography>
-
-            <Documents documents={documents} />
+            <Box
+                sx={{
+                    marginTop: 3,
+                    padding: 1
+                }}
+            >
+                <Documents documents={documents} />
+            </Box>
+            <RelatedQuestions related_questions={related_questions} />
         </div>
     );
 }
