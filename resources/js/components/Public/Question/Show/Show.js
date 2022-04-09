@@ -129,7 +129,7 @@ function Show() {
         }
     };
     const handleBackQuestionShow = () => {
-        history.push("/public/questions/index");
+        history.push(`/topic/${question.topic}`);
     };
 
     return (
