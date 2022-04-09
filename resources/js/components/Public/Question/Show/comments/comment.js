@@ -244,7 +244,7 @@ function Comment(props) {
                                     props.setEditId(props.comment_id)
                                 }
                             >
-                                edit
+                                編集
                             </Button>
                         </Grid>
 
@@ -256,7 +256,7 @@ function Comment(props) {
                                 color="secondary"
                                 onClick={deleteConfirm}
                             >
-                                delete
+                                削除
                             </Button>
                         </Grid>
                     </Grid>
