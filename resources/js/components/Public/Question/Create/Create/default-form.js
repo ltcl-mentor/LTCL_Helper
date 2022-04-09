@@ -74,7 +74,6 @@ const DefaultForm = () => {
     const [keyword, setKeyword] = useState("");
     const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
-    const [isNext, setIsNext] = useState(false);
 
     const topics = [
         // カリキュラムのトピック
@@ -124,12 +123,6 @@ const DefaultForm = () => {
     const [remarks, setRemarks] = useState("");
     const [activeStep, setActiveStep] = useState(0);
     const [images, setImages] = useState([]);
-    console.log("category", category);
-    console.log("topic", topic);
-    console.log("curriculum_number", curriculum_number);
-    console.log("title", title);
-    console.log("remarks", remarks);
-    console.log("question", question);
 
     let curriculum;
     let project;
@@ -194,17 +187,6 @@ const DefaultForm = () => {
         history.push("/");
     };
 
-    const handleConfirmPage = () => {
-        handleValidate();
-        if (isNext === true) {
-            setShowConfirm(!showConfirm);
-        }
-    };
-
-    const handleValidate = () => {
-        validateCurriculumNumber();
-        validateQuestions();
-    };
     const validateCurriculumNumber = () => {
         // カリキュラム番号のバリデーション;
         let validationMessage = "カリキュラム番号を選択してください";
@@ -238,12 +220,26 @@ const DefaultForm = () => {
         }
         if (question.trim().length === 0) {
             validateKey.content = true;
-            validateMessage.contentErrorMessage = "質問内容を入力してください";
+            validateKey.contentErrorMessage = "質問内容を入力してください";
         }
         setQuestionValidationError(validateKey);
         setQuestionValidationMessage(validateMessage);
     };
-    console.log(questionValidationMessage);
+    const handleValidate = () => {
+        validateCurriculumNumber();
+        validateQuestions();
+        if (
+            questionValidationError.title == false &&
+            questionValidationError.serach == false &&
+            questionValidationError.content == false
+        ) {
+            setShowConfirm(true);
+        }
+    };
+
+    const handleConfirmPage = () => {
+        handleValidate();
+    };
 
     useEffect(() => {
         setIsSearchButtonClicked(false);
