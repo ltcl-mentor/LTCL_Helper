@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-
+import { useHistory } from "react-router-dom";
 import Alert from "../../Alert";
 import Breadcrumbs from "../../Breadcrumbs";
 import Parameters from "../Question/Show/parameters";
@@ -18,6 +18,7 @@ import RelatedQuestions from "../Question/Show/related-questions";
  * 質問詳細画面(マイページ)のメインコンポーネント
  */
 function QuestionShow() {
+    const history = useHistory();
     const { id } = useParams();
     const [screen_width, setScreenWidth] = useState(window.innerWidth);
     const parameter = useLocation();
@@ -32,6 +33,7 @@ function QuestionShow() {
     window.addEventListener("resize", function() {
         setScreenWidth(window.innerWidth);
     });
+    console.log(question);
 
     // 画面描画時に実行
     useEffect(() => {
@@ -118,6 +120,9 @@ function QuestionShow() {
             return false;
         }
     };
+    const handleBackQuestionShow = () => {
+        history.push("/public/questions/index");
+    };
 
     return (
         <div>
@@ -126,9 +131,23 @@ function QuestionShow() {
                 status={parameter.state && parameter.state.question}
                 info={parameter.state && parameter.state.number}
             />
-
-            <Breadcrumbs page="my_page_question" />
-
+            <div style={{ marginLeft: "3%" }}>
+                <Breadcrumbs page="my_page_question" />
+            </div>
+            <Typography
+                variant="h5"
+                component="div"
+                sx={{
+                    marginTop: 4,
+                    marginBottom: 5,
+                    marginLeft: "3%",
+                    fontSize: 30,
+                    color: "#771af8",
+                    fontWeight: "bold"
+                }}
+            >
+                質問投稿画面
+            </Typography>
             {question.check == 0 && (
                 <Typography
                     component="div"
@@ -188,12 +207,14 @@ function QuestionShow() {
                         />
 
                         <Typography
-                            variant="h4"
+                            variant="h6"
                             component="div"
-                            align="center"
                             sx={{
-                                marginTop: 4,
-                                marginBottom: 2
+                                marginTop: 3,
+                                padding: 1,
+                                borderBottom: "1px solid gray",
+                                fontWeight: "bold",
+                                marginX: "5%"
                             }}
                         >
                             参考記事
@@ -204,15 +225,21 @@ function QuestionShow() {
                 )}
             </Box>
 
-            {/* <Grid
-                item
-                sx={{
-                    width: screen_width > 1000 ? "35%" : "100%",
-                    minWidth: "300px"
-                }}
-            >
-                <RelatedQuestions related_questions={related_questions} />
-            </Grid> */}
+            <RelatedQuestions related_questions={related_questions} />
+
+            <Box style={{ textAlign: "center" }}>
+                <Button
+                    variant="text"
+                    onClick={handleBackQuestionShow}
+                    sx={{
+                        margin: "3%",
+                        borderBottom: "1px solid #771af8",
+                        color: "#771af8"
+                    }}
+                >
+                    質問一覧に戻る
+                </Button>
+            </Box>
         </div>
     );
 }

@@ -1,180 +1,173 @@
-.box{
-    margin:0 auto;
-    width:100%;
+.box {
+    margin: 0 auto;
+    width: 100%;
 }
 
-.title{
+.title {
     text-align: center;
-    padding:10px;
+    padding: 10px;
     margin: 50px 0;
 }
 
-.related_title{
+.related_title {
     text-align: center;
     font-size: 30px;
-    padding:10px 0; 
-    background:#6cb2ebc7;
+    padding: 10px 0;
+    background: #6cb2ebc7;
     color: #fff;
 }
 
-a:hover{
+a:hover {
     text-decoration: none;
 }
 
-
 /*質問の概要に関する部分*/
-.realated_documents_wrap{
+.realated_documents_wrap {
     margin-bottom: 30px;
 }
 
 /*記事の概要に関する部分*/
-.documents{
+.documents {
     margin: 0 auto;
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
 }
 
-.document{
-    border:1px solid black;
-    display:inline-block;
-    width:300px;
-    height:300px;
-    margin:10px;
+.document {
+    border: 1px solid black;
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    margin: 10px;
     vertical-align: top;
-    box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.5);
 }
 
-.document_img{
+.document_img {
     height: 150px;
     width: 100%;
 }
 
-.document_title{
+.document_title {
     font-size: 20px;
-    width:90%;
-    margin:0 auto;
+    width: 90%;
+    margin: 0 auto;
     background-color: #fff;
     text-align: center;
 }
 
-.noDocument{
+.noDocument {
     text-align: center;
     font-size: 30px;
     margin-top: 20px;
 }
 
-.sp{
+.sp {
     display: block;
 }
 
-.cards{
+.cards {
     width: 70%;
 }
 
-.demolist{
+.demolist {
     margin-left: 2%;
     width: 28%;
     max-height: 600px;
     overflow: scroll;
-    background:#fff;
+    background: #fff;
 }
 
-.list_title{
+.list_title {
     text-align: center;
     font-size: 25px;
 }
 
-.related_question{
+.related_question {
     width: 100%;
     font-size: 30px;
-    display:block;
+    display: block;
     text-overflow: ellipsis;
 }
 
-.QA_card{
+.QA_card {
     margin-bottom: 30px;
 }
 
-.QA_table{
-    margin-bottom:50px; 
+.QA_table {
+    margin-bottom: 50px;
 }
 
-.wrapper{
+.wrapper {
     display: flex;
     align-items: flex-start;
 }
 
-.MuiCard-root{
-    padding:15px; 
+.MuiCard-root {
+    padding: 15px;
 }
 
-.Avatar_catch{
+.Avatar_catch {
     width: 70px;
     height: 70px;
 }
 
-.Avatar-wrap{
+.Avatar-wrap {
     display: flex;
     align-items: center;
 }
 
-.Avatar-wrap p{
+.Avatar-wrap p {
     margin-bottom: 0;
 }
 
-.Avatar-detail-wrap{
-    margin:0; 
+.Avatar-detail-wrap {
+    margin: 0;
 }
 
-.Avatar_name{
-    font-size: 20px;   
+.Avatar_name {
+    font-size: 20px;
 }
 
-.Avatar_date{
+.Avatar_date {
     color: #6c757d;
 }
 
-.QA_textblock{
-    padding:20px;
+.QA_textblock {
+    padding: 20px;
     margin: 0;
     line-height: 1.7;
     white-space: pre-wrap;
 }
 
-.MuiAvatar-img{
+.MuiAvatar-img {
     object-fit: contain;
 }
 
-.image{
+.image {
     height: 150px;
     width: 200px;
 }
 
-.empty_message{
-    width: 100%;
-    text-align: center;
-}
-
-.related_question_itme{
+.related_question_itme {
     /*border-bottom: none;*/
-    border-bottom:solid 1px rgba(0, 0, 0, 0.08);
-    padding:25px; 
+    border-bottom: solid 1px rgba(0, 0, 0, 0.08);
+    padding: 25px;
 }
 
-.related_question_itme:last-child{
+.related_question_itme:last-child {
     border-bottom: none;
 }
 
-.MuiListItem-gutters{
+.MuiListItem-gutters {
     padding: 0;
-    
 }
 
 .link {
     margin-left: 10%;
     margin-top: 5px;
-    color: #0058B3;
+    color: #0058b3;
     cursor: pointer;
 }
 
@@ -188,50 +181,48 @@ a:hover{
 =================================*/
 
 @media screen and (max-width: 750px) {
-    
-    .sp{
+    .sp {
         display: block;
     }
-    
-    .pc{
+
+    .pc {
         display: none;
     }
-    
-    .title{
-        margin:20px 0; 
-        padding:0;
+
+    .title {
+        margin: 20px 0;
+        padding: 0;
         font-size: 1.75rem;
     }
-	
-    .wrapper{
+
+    .wrapper {
         display: block;
     }
-    
-    .cards{
+
+    .cards {
         width: 100%;
     }
-    
+
     /* sp版ではスライドに設定（暫定的） */
-    .documents{
+    .documents {
         justify-content: space-around;
     }
-    
-    .document_img{
+
+    .document_img {
         height: 150px;
     }
-    
-    .demolist{
+
+    .demolist {
         width: 100%;
         margin: 0;
-        border:none;
-        
+        border: none;
     }
-    
-    .MuiListSubheader-root{
+
+    .MuiListSubheader-root {
         color: #fff;
     }
-    
-    .related_title{
+
+    .related_title {
         font-size: 20px;
     }
 }
