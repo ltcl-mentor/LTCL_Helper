@@ -29,6 +29,20 @@ const CommentButton = styled(Button)(({ theme }) => ({
     }
 }));
 
+const PostButton = styled(Button)(({ theme }) => ({
+    variant: "outlined",
+    color: "#771af8",
+    border: "2px solid #771af8",
+    fontWeight: "bold",
+    minWidth: 100,
+    maxWidth: 150,
+    marginBottom: 5,
+    fontSize: 15,
+    "&:hover": {
+        backgroundColor: "#771AF8",
+        color: "white"
+    }
+}));
 function Create(props) {
     const history = useHistory();
     const [open, setOpen] = useState(false);
@@ -97,28 +111,14 @@ function Create(props) {
 
             <Grid container spacing={2} justifyContent="center">
                 <Grid item>
-                    <Button
-                        variant="contained"
-                        color="info"
-                        onClick={handleClose}
-                    >
-                        キャンセル
-                    </Button>
+                    <PostButton onClick={handleClose}>キャンセル</PostButton>
                 </Grid>
 
                 <Grid item>
                     {comment.trim().length === 0 ? (
-                        <Button variant="outlined" color="info">
-                            投稿
-                        </Button>
+                        <PostButton>投稿</PostButton>
                     ) : (
-                        <Button
-                            variant="contained"
-                            color="info"
-                            onClick={handleSubmit}
-                        >
-                            投稿
-                        </Button>
+                        <PostButton onClick={handleSubmit}>投稿</PostButton>
                     )}
                 </Grid>
             </Grid>
