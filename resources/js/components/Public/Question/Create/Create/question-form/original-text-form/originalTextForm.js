@@ -206,7 +206,7 @@ function TextForm(props) {
 
     return (
         <div>
-            <Box sx={{ marginTop: 2, width: "90%", marginX: "5%" }}>
+            <Box sx={{ marginTop: 2 }}>
                 <Tabs
                     value={value}
                     onChange={handleChange}
