@@ -127,7 +127,7 @@ function Create(props) {
 
     let form;
     if (props.type === "create") {
-        form = <Card sx={{ padding: 2 }}>{form_content}</Card>;
+        form = <div sx={{ padding: 2 }}>{form_content}</div>;
     } else {
         form = form_content;
     }

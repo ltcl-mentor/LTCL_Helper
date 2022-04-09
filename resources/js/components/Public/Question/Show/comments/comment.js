@@ -222,7 +222,7 @@ function Comment(props) {
 
                     <Grid item sx={{ marginTop: 4 }}>
                         <Typography variant="h7" component="div">
-                            {props.is_staff ? "メンター" : "受講生"} &nbsp;{" "}
+                            {props.is_staff ? "メンター" : "受講生"} &nbsp;
                             {props.created_at}
                         </Typography>
                     </Grid>
