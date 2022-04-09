@@ -145,15 +145,7 @@ function Create(props) {
                         >
                             新規にコメントを追加
                         </CommentButton>
-                    ) : (
-                        <Button
-                            variant="text"
-                            sx={{ color: "#771af8" }}
-                            onClick={handleOpen}
-                        >
-                            コメントに返信
-                        </Button>
-                    )}
+                    ) : null}
                 </Box>
             )}
         </React.Fragment>

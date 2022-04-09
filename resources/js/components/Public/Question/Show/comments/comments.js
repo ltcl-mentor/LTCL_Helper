@@ -29,6 +29,7 @@ function Comments(props) {
                 marginBottom: 2,
                 marginX: "8%",
                 border: "none",
+                padding: 2,
                 borderLeft: "3px solid #771af8"
             };
         } else {
