@@ -74,6 +74,7 @@ const DefaultForm = () => {
     const [keyword, setKeyword] = useState("");
     const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
+    const [isNext, setIsNext] = useState(false);
 
     const topics = [
         // カリキュラムのトピック
@@ -110,9 +111,9 @@ const DefaultForm = () => {
     ] = useState("");
     const [question, setQuestion] = useState("");
     const [questionValidationError, setQuestionValidationError] = useState({
-        title: "",
-        serach: "",
-        content: ""
+        title: false,
+        serach: false,
+        content: false
     });
     const [questionValidationMessage, setQuestionValidationMessage] = useState({
         titleErrorMessage: "",
@@ -123,6 +124,12 @@ const DefaultForm = () => {
     const [remarks, setRemarks] = useState("");
     const [activeStep, setActiveStep] = useState(0);
     const [images, setImages] = useState([]);
+    console.log("category", category);
+    console.log("topic", topic);
+    console.log("curriculum_number", curriculum_number);
+    console.log("title", title);
+    console.log("remarks", remarks);
+    console.log("question", question);
 
     let curriculum;
     let project;
@@ -188,8 +195,55 @@ const DefaultForm = () => {
     };
 
     const handleConfirmPage = () => {
-        setShowConfirm(!showConfirm);
+        handleValidate();
+        if (isNext === true) {
+            setShowConfirm(!showConfirm);
+        }
     };
+
+    const handleValidate = () => {
+        validateCurriculumNumber();
+        validateQuestions();
+    };
+    const validateCurriculumNumber = () => {
+        // カリキュラム番号のバリデーション;
+        let validationMessage = "カリキュラム番号を選択してください";
+        // カリキュラム番号が選択されているか
+        if (!curriculum_number) {
+            setCurriculumNumberValidationError(true);
+            setCurriculumNumberValidationMessage(validationMessage);
+            return false;
+        }
+    };
+
+    const validateQuestions = () => {
+        let validateKey = {
+            title: false,
+            serach: false,
+            content: false
+        };
+        let validateMessage = {
+            titleErrorMessage: "",
+            serachErrorMessage: "",
+            contentErrorMessage: ""
+        };
+        if (title.trim().length === 0) {
+            validateKey.title = true;
+            validateMessage.titleErrorMessage =
+                "質問タイトルを入力してください";
+        }
+        if (remarks.trim().length === 0) {
+            validateKey.serach = true;
+            validateMessage.serachErrorMessage = "調べたことを入力してください";
+        }
+        if (question.trim().length === 0) {
+            validateKey.content = true;
+            validateMessage.contentErrorMessage = "質問内容を入力してください";
+        }
+        setQuestionValidationError(validateKey);
+        setQuestionValidationMessage(validateMessage);
+    };
+    console.log(questionValidationMessage);
 
     useEffect(() => {
         setIsSearchButtonClicked(false);
@@ -301,6 +355,12 @@ const DefaultForm = () => {
                         category={category}
                         topic={topic}
                         setCurriculumNumber={setCurriculumNumber}
+                        curriculumNumberValidationError={
+                            curriculumNumberValidationError
+                        }
+                        curriculumNumberValidationMessage={
+                            curriculumNumberValidationMessage
+                        }
                     />
                     <QuestionForm
                         question={question}
