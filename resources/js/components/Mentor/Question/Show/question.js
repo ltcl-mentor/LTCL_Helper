@@ -202,6 +202,7 @@ function Question(props) {
                     <Avatar
                         alt="Student"
                         src="/images/pose_english_shrug_man.png"
+                        sx={{ marginRight: 2 }}
                     />
 
                     <Typography variant="h7" component="div">

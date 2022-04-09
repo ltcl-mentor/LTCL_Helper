@@ -1,5 +1,4 @@
 import React from "react";
-import Card from "@material-ui/core/Card";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@mui/material/Grid";
@@ -204,6 +203,7 @@ function Question(props) {
                     <Avatar
                         alt="Student"
                         src="/images/pose_english_shrug_man.png"
+                        sx={{ marginRight: 2 }}
                     />
 
                     <Typography variant="h7" component="div">
