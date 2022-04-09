@@ -33,7 +33,6 @@ function QuestionShow() {
     window.addEventListener("resize", function() {
         setScreenWidth(window.innerWidth);
     });
-    console.log(question);
 
     // 画面描画時に実行
     useEffect(() => {
@@ -121,7 +120,7 @@ function QuestionShow() {
         }
     };
     const handleBackQuestionShow = () => {
-        history.push("/public/questions/index");
+        history.push(`/topic/${question.topic}`);
     };
 
     return (
