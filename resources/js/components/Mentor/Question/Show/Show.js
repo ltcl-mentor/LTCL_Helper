@@ -111,7 +111,7 @@ function Show() {
     };
 
     return (
-        <div className="container">
+        <div>
             <Alert
                 type="question"
                 status={parameter.state && parameter.state.question}
@@ -122,8 +122,9 @@ function Show() {
                 type="comment"
                 status={parameter.state && parameter.state.comment}
             />
-
-            <Breadcrumbs page="mentor_question_show" />
+            <div style={{ marginLeft: "3%" }}>
+                <Breadcrumbs page="mentor_question_show" />
+            </div>
 
             <Typography component="div" align="center" sx={{ marginTop: 4 }}>
                 <Publish
@@ -174,7 +175,11 @@ function Show() {
             <Question
                 title={question.title}
                 remarks={question.remarks}
+                updated_at={question.updated_at}
                 question={question.question}
+                category={question.category}
+                topic={question.topic}
+                curriculum_number={question.curriculum_number}
             />
 
             <Comments
