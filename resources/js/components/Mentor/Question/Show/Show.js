@@ -206,36 +206,41 @@ function Show() {
                 user_id={0}
                 is_admin="staff"
             />
+            <Box>
+                <Typography
+                    align="right"
+                    sx={{
+                        marginRight: "5%"
+                    }}
+                >
+                    <Link to={`/links/question/` + id}>
+                        <Button
+                            sx={{
+                                color: "#771AF8",
+                                textDecoration: "underline",
+                                marginBottom: "-5%",
+                                fontSize: 18,
+                                fontWeight: "bold"
+                            }}
+                        >
+                            記事登録
+                        </Button>
+                    </Link>
+                </Typography>
+                <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{
+                        borderBottom: "1px solid gray",
+                        fontWeight: "bold",
+                        padding: 1,
+                        marginX: "5%"
+                    }}
+                >
+                    参考記事
+                </Typography>
+            </Box>
 
-            <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                    marginTop: 3,
-                    padding: 1,
-                    borderBottom: "1px solid gray",
-                    fontWeight: "bold",
-                    marginX: "5%"
-                }}
-            >
-                関連記事
-            </Typography>
-
-            <Typography
-                component="div"
-                align="center"
-                sx={{ marginTop: 1, marginBottom: 2 }}
-            >
-                <Link to={`/links/question/` + id}>
-                    <Button
-                        variant="contained"
-                        color="info"
-                        startIcon={<EditIcon />}
-                    >
-                        編集する
-                    </Button>
-                </Link>
-            </Typography>
             <Box
                 sx={{
                     marginTop: 3,
