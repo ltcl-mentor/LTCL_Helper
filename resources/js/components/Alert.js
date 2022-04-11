@@ -89,7 +89,7 @@ function AlertMessage(props) {
         case "user":
             switch (props.status) {
                 case "admin_created":
-                    message = <AlertTitle>ユーザ（管理者）を{ props.info }名追加しました。</AlertTitle>;
+                    message = <AlertTitle>ユーザ（管理者）を追加しました。</AlertTitle>;
                     break;
                 
                 case "public_created":
@@ -98,6 +98,10 @@ function AlertMessage(props) {
                     
                 case "deleted":
                     message = <AlertTitle>ユーザID{ props.info }のデータを削除しました。</AlertTitle>;
+                    break;
+                    
+                case "unlock":
+                    message = <AlertTitle>ユーザID{ props.info }のロックを解除しました。</AlertTitle>;
                     break;
             }
             break;

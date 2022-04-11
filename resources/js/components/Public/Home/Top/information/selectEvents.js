@@ -16,8 +16,8 @@ const MenuProps = {
     },
 };
 const style = {
-    minWidth: "40%",
-    marginLeft: "10%",
+    width: "50%",
+    marginTop: 1,
 };
 
 /**
@@ -30,27 +30,27 @@ const SelectEvents = (props) => {
     };
 
     return (
-            <FormControl sx={style}>
-                <InputLabel id="demo-multiple-name-label">イベント</InputLabel>
-                <Select
-                    labelId="demo-multiple-name-label"
-                    id="demo-multiple-name"
-                    value={props.event}
-                    onChange={handleChange}
-                    input={<OutlinedInput label="Name" />}
-                    MenuProps={MenuProps}
-                >
-                    {props.events.map(event => (
-                        <MenuItem
-                            key={event.name}
-                            value={event}
-                        >
-                            {event.name}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
+        <FormControl sx={style}>
+            <InputLabel id="demo-multiple-name-label">イベント</InputLabel>
+            <Select
+                labelId="demo-multiple-name-label"
+                id="demo-multiple-name"
+                value={props.event}
+                onChange={handleChange}
+                input={<OutlinedInput label="Name" />}
+                MenuProps={MenuProps}
+            >
+                {props.events.map(event => (
+                    <MenuItem
+                        key={event.name}
+                        value={event}
+                    >
+                        {event.name}
+                    </MenuItem>
+                ))}
+            </Select>
+        </FormControl>
     );
-}
+};
 
 export default SelectEvents;

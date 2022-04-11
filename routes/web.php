@@ -160,9 +160,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('react/document/{document}', 'ReactController@getDocument'); // 個別記事データの受け渡し
         Route::get('react/documents/{question}', 'LinkController@getDocumentsFromQuestion'); // 単体質問に関する記事データの受け渡し
         Route::get('react/related/questions/{document}', 'ReactController@getRelatedQuestions'); // 記事に紐づいている質問の受け渡し（URLが紛らわしい）
-        Route::get('react/all/staffs', 'ReactController@getAllStaffs'); // 全管理者受け渡し
-        Route::get('react/all/students', 'ReactController@getAllStudents'); // 全受講生受け渡し
-        Route::get('react/events', 'ReactController@getAllEvents'); // イベントの受け渡し
+        // Route::get('react/all/staffs', 'ReactController@getAllStaffs'); // 全管理者受け渡し
+        // Route::get('react/all/students', 'ReactController@getAllStudents'); // 全受講生受け渡し
+        // Route::get('react/events', 'ReactController@getAllEvents'); // イベントの受け渡し
+        Route::get('react/mentor', 'ReactController@getAllMentorInfo'); // イベントの受け渡し
         Route::get('react/event/{event}', 'ReactController@getOneEvent'); // イベントの受け渡し
         Route::get('react/reaction', 'ReactController@getReaction'); // slackのリアクション参考サイトのURL受け渡し
         Route::get('react/id', 'ReactController@getUserId'); // ログインユーザーid受け渡し

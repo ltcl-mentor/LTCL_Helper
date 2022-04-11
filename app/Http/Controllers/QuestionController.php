@@ -289,14 +289,6 @@ class QuestionController extends Controller
      */
     public static function questionsExport()
     {
-        $headers = [ //ヘッダー情報
-            'Content-type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename=questionExport.csv',
-            'Pragma' => 'no-cache',
-            'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
-            'Expires' => '0',
-        ];
-        
         // データベースからデータ取得
         // 質問の総数と出力済み件数取得
         $question_count = Question::count();
@@ -304,6 +296,18 @@ class QuestionController extends Controller
         
         // 未出力件数取得
         $yet_exported_question_count = $question_count - $exported_question_count;
+        
+        if ($yet_exported_question_count == 0) {
+            return redirect('/?page=manage');
+        }
+        
+        $headers = [ //ヘッダー情報
+            'Content-type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=questionExport.csv',
+            'Pragma' => 'no-cache',
+            'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires' => '0',
+        ];
         
         // 未出力件数分のデータを出力
         $questions = Question::orderBy('created_at', 'DESC')->skip($exported_question_count)->take($yet_exported_question_count)->get();

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
@@ -15,6 +15,7 @@ import { CardActionArea } from '@mui/material';
 
 import Freeword from './search/freeword/freeword';
 import Condition from './search/condition/condition';
+import { LoginUser } from '../../../Route';
 
 const PurpleButton = styled(Button)(({ theme }) => ({
     color: 'white',
@@ -60,6 +61,7 @@ const a11yProps = (index) => {
  */
 const QA = (props) => {
     const history = useHistory();
+    const user = useContext(LoginUser);
     const [achievement, setAchievment] = useState(0);
     const [searchValue, setSearchValue] = useState(0);
     const [indexValue, setIndexValue] = useState(0);
@@ -157,11 +159,10 @@ const QA = (props) => {
                 console.log(error);
             });
     }, []);
-    console.log(props.is_admin);
+
     return (
         <React.Fragment>
-            
-            {props.is_admin != null &&
+            {user.is_admin == 'staff' &&
                 <Typography 
                     variant="h5"
                     component="div"

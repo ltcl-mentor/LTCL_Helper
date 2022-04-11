@@ -251,19 +251,19 @@ class ReactController extends Controller
     /**
      * 全管理者受け渡し
      */
-    public function getAllStaffs()
-    {
-        return User::where('is_admin','staff')->get();
-    }
+    // public function getAllStaffs()
+    // {
+    //     return User::where('is_admin','staff')->get();
+    // }
 
     /**
      * 全受講生受け渡し
      */
-    public function getAllStudents()
-    {
-        $students = User::getAllStudentsName();
-        return $students;
-    }
+    // public function getAllStudents()
+    // {
+    //     $students = User::getAllStudentsName();
+    //     return $students;
+    // }
 
 
 
@@ -310,25 +310,30 @@ class ReactController extends Controller
     /**
      * 記録されているお知らせの受け渡し
      */
-    public function getInfos(Info $info)
+    public function getInfos()
     {
-        // infosテーブルの本日以降の日付を取得（重複はなし）
-        $infos['dates'] = $info->groupBy('date')->orderBy('date', 'desc')->where('date', '>=', Carbon::now()->format('Y-m-d'))->pluck('date');
-
-        // 各日付のデータを取得して配列に代入
-        foreach($infos['dates'] as $date){
-            $infos['infos'][$date] = $info->where('date', $date)->select('id', 'information', 'targets', 'body', 'slackDate')->get();
-        }
-        
-        return $infos;
+        $infos = Info::getInfo();
+        return ["infos" => $infos, "events" => Event::get()];
     }
 
     /**
      * 全イベントの受け渡し
      */
-    public function getAllEvents()
+    // public function getAllEvents()
+    // {
+    //     return Event::get();
+    // }
+    
+    /**
+     * 管理画面へイベント、受講生、スタッフ情報を受け渡す
+     */
+    public function getAllMentorInfo()
     {
-        return Event::get();
+        $events = Event::get();
+        $staffs = User::where('is_admin','staff')->get();
+        $students = User::getAllStudentsName();
+        
+        return compact('events', 'staffs', 'students');
     }
 
     /**
