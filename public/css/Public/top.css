@@ -73,3 +73,8 @@ a, a:hover {
   width: 70%;
   margin: 0 auto;
 }
+
+.manage {
+  width: 90%;
+  margin: 30px auto;
+}

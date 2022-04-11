@@ -20,8 +20,7 @@ const MenuProps = {
     },
 };
 const style = {
-    width: "80%",
-    marginLeft: "10%",
+    width: "50%",
 };
 
 // 入学月が変わった場合の変更箇所
@@ -71,9 +70,7 @@ const SelectTarget = (props) => {
     return (
         <div>
             <FormControl sx={style}>
-                <TextField
-                    label='対象'
-                    id="demo-multiple-chip"
+                <Select
                     select
                     error={ props.validationError.target }
                     helperText={ props.validationMessage }
@@ -99,10 +96,10 @@ const SelectTarget = (props) => {
                             {tar}
                         </MenuItem>
                     ))}
-                </TextField>
+                </Select>
             </FormControl>
         </div>
     );
-}
+};
 
 export default SelectTarget;

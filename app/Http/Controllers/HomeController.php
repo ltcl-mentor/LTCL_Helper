@@ -62,6 +62,7 @@ class HomeController extends Controller
         $input['date'] = $request['date'];
         $input['slackDate'] = $request['slackDate'];
         $info->fill($input)->save();
+        return Info::getInfo();
     }
     
     /**
@@ -70,6 +71,7 @@ class HomeController extends Controller
     public function deleteInfo(Info $info)
     {
         $info->delete();
+        return Info::getInfo();
     }
     
     /**
@@ -79,6 +81,7 @@ class HomeController extends Controller
         $input['name'] = $request['name'];
         $input['template'] = $request['template'];
         $event->fill($input)->save();
+        return Event::get();
     }
     
     /**
@@ -88,6 +91,7 @@ class HomeController extends Controller
         $event->name = $request['name'];
         $event->template = $request['template'];
         $event->save();
+        return Event::get();
     }
     
     /**
@@ -95,6 +99,7 @@ class HomeController extends Controller
      */
     public function deleteEvent(Event $event) {
         $event->delete();
+        return Event::get();
     }
     
     /**
