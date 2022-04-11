@@ -91,7 +91,7 @@ function Comments(props) {
                                             }
                                         )}
 
-                                        <Box
+                                        {/* <Box
                                             sx={{
                                                 textAlign: "center",
                                                 marginBottom: 2
@@ -100,21 +100,20 @@ function Comments(props) {
                                             <Button variant="text" color="info">
                                                 コメントに返信
                                             </Button>
-                                        </Box>
+                                        </Box> */}
                                     </AccordionDetails>
                                 </Accordion>
-                            ) : (
-                                <Box
-                                    sx={{
-                                        textAlign: "center",
-                                        marginBottom: 2
-                                    }}
-                                >
-                                    <Button variant="text" color="info">
-                                        コメントに返信
-                                    </Button>
-                                </Box>
-                            )}
+                            ) : // <Box
+                            //     sx={{
+                            //         textAlign: "center",
+                            //         marginBottom: 2
+                            //     }}
+                            // >
+                            //     <Button variant="text" color="info">
+                            //         コメントに返信
+                            //     </Button>
+                            // </Box>
+                            null}
                         </Card>
                     );
                 })}
