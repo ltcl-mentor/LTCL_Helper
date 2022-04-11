@@ -15,7 +15,6 @@ const Selects = props => {
         props.setCurriculumNumber(event.target.value);
     };
 
-    console.log(props.curriculum_number);
     const MenuItems = props.items.map(item => {
         return (
             <MenuItem value={item} key={item}>
@@ -23,7 +22,6 @@ const Selects = props => {
             </MenuItem>
         );
     });
-    console.log(props.old_curriculum_number);
     return (
         <Box className="curriculum_number_box">
             <FormControl sx={{ width: "50%" }}>

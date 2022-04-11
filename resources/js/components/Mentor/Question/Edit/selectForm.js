@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Topic from "../../../Public/Home/Q&A/search/condition/form/topicForm";
 import CurriculumNumber from "./Curriculum-number/curriculum-number";
+import QuestionForm from "../../../Public/Question/Create/Create/question-form/questionForm";
 
 const styleSpan = {
     fontWeight: "normal",
@@ -50,6 +51,7 @@ const selectForm = () => {
     const [old_data, setOldData] = useState([]);
     const [category, setCategory] = useState(0);
     const [topic, setTopic] = useState(0);
+    const [activeStep, setActiveStep] = useState(0);
     const [curriculum_number, setCurriculumNumber] = useState("");
     const [
         curriculum_number_validation_error,
@@ -57,7 +59,17 @@ const selectForm = () => {
     ] = useState(0);
     const [remarks, setRemarks] = useState("");
     const [question, setQuestion] = useState("");
-    const [title, setTitle] = useState("");
+    const [title, setTitle] = useState("テスト");
+    const [questionValidationError, setQuestionValidationError] = useState({
+        title: false,
+        serach: false,
+        content: false
+    });
+    const [questionValidationMessage, setQuestionValidationMessage] = useState({
+        titleErrorMessage: "",
+        serachErrorMessage: "",
+        contentErrorMessage: ""
+    });
     const topics = [
         // カリキュラムのトピック
         "AWS",
@@ -82,6 +94,7 @@ const selectForm = () => {
         "デザイン",
         "その他(成果物)"
     ];
+    const [images, setImages] = useState([]);
 
     let curriculum;
     let project;
@@ -122,6 +135,7 @@ const selectForm = () => {
                 console.log(error);
             });
     }, []);
+    console.log(title);
     return (
         <div>
             <Breadcrumbs page="mentor_question_edit" id={id} />
@@ -209,6 +223,19 @@ const selectForm = () => {
                 curriculum_number_validation_error={
                     curriculum_number_validation_error
                 }
+            />
+            <QuestionForm
+                question={question}
+                setQuestion={setQuestion}
+                title={title}
+                setTitle={setTitle}
+                remarks={remarks}
+                setRemarks={setRemarks}
+                question_validation_error={questionValidationError}
+                questionValidationMessage={questionValidationMessage}
+                activeStep={activeStep}
+                images={images}
+                setImages={setImages}
             />
         </div>
     );
