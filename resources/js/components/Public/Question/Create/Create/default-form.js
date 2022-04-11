@@ -241,6 +241,10 @@ const DefaultForm = () => {
         handleValidate();
     };
 
+    const backInputPage = () => {
+        setShowConfirm(false);
+    };
+
     useEffect(() => {
         setIsSearchButtonClicked(false);
     }, [category, topic, curriculum_number, keyword]);
@@ -256,7 +260,7 @@ const DefaultForm = () => {
                     remarks={remarks}
                     question={question}
                     images={images}
-                    handleConfirmPage={handleConfirmPage}
+                    handleConfirmPage={backInputPage}
                     handleSubmit={handleSubmit}
                 />
             ) : (

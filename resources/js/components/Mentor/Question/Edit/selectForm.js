@@ -9,6 +9,7 @@ import Stack from "@mui/material/Stack";
 import Topic from "../../../Public/Home/Q&A/search/condition/form/topicForm";
 import CurriculumNumber from "./Curriculum-number/curriculum-number";
 import QuestionForm from "../../../Public/Question/Create/Create/question-form/questionForm";
+import QuestionConfirm from "../../../Public/Question/Create/Create/confirm";
 
 const styleSpan = {
     fontWeight: "normal",
@@ -46,8 +47,24 @@ const WhiteButton = styled(Button)(({ theme }) => ({
     }
 }));
 
+const ConfirmButton = styled(Button)(({ theme }) => ({
+    variant: "outlined",
+    color: "#771af8",
+    border: "2px solid #771af8",
+    fontWeight: "bold",
+    minWidth: 150,
+    maxWidth: 200,
+    marginBottom: 5,
+    fontSize: 15,
+    "&:hover": {
+        backgroundColor: "#771AF8",
+        color: "white"
+    }
+}));
+
 const selectForm = () => {
     const { id } = useParams();
+    const history = useHistory();
     const [old_data, setOldData] = useState([]);
     const [category, setCategory] = useState(0);
     const [topic, setTopic] = useState(0);
@@ -95,6 +112,7 @@ const selectForm = () => {
         "その他(成果物)"
     ];
     const [images, setImages] = useState([]);
+    const [showConfirm, setShowConfirm] = useState(false);
 
     let curriculum;
     let project;
@@ -135,7 +153,100 @@ const selectForm = () => {
                 console.log(error);
             });
     }, []);
-    console.log(title);
+
+    const handleSubmit = () => {
+        // 重複保存防止のために保存ボタンのクリック数をカウント
+        // クリック数が0回の場合のみ保存実行
+        if (clickCount == 0) {
+            setClickCount(1);
+
+            axios
+                .post(`/questions/${id}/update`, {
+                    category: category,
+                    topic: topic,
+                    curriculum_number: curriculum_number,
+                    title: title,
+                    remarks: remarks,
+                    question: question,
+                    images: images
+                })
+                .then(response => {
+                    if (response.status === 200) {
+                        history.push(`/questions/${response.data.id}`, {
+                            question: "edited"
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    setClickCount(0);
+                });
+        } else {
+            return false;
+        }
+    };
+
+    const validateCurriculumNumber = () => {
+        // カリキュラム番号のバリデーション;
+        let validationMessage = "カリキュラム番号を選択してください";
+        // カリキュラム番号が選択されているか
+        if (!curriculum_number) {
+            setCurriculumNumberValidationError(true);
+            setCurriculumNumberValidationMessage(validationMessage);
+            return false;
+        }
+    };
+
+    const validateQuestions = () => {
+        let validateKey = {
+            title: false,
+            serach: false,
+            content: false
+        };
+        let validateMessage = {
+            titleErrorMessage: "",
+            serachErrorMessage: "",
+            contentErrorMessage: ""
+        };
+        if (title.trim().length === 0) {
+            validateKey.title = true;
+            validateMessage.titleErrorMessage =
+                "質問タイトルを入力してください";
+        }
+        if (remarks.trim().length === 0) {
+            validateKey.serach = true;
+            validateMessage.serachErrorMessage = "調べたことを入力してください";
+        }
+        if (question.trim().length === 0) {
+            validateKey.content = true;
+            validateKey.contentErrorMessage = "質問内容を入力してください";
+        }
+        setQuestionValidationError(validateKey);
+        setQuestionValidationMessage(validateMessage);
+    };
+    const handleValidate = () => {
+        validateCurriculumNumber();
+        validateQuestions();
+        if (
+            questionValidationError.title == false &&
+            questionValidationError.serach == false &&
+            questionValidationError.content == false
+        ) {
+            setShowConfirm(true);
+        }
+    };
+
+    const handleConfirmPage = () => {
+        handleValidate();
+    };
+
+    const backInputPage = () => {
+        setShowConfirm(false);
+    };
+
+    const handleBackTopPage = () => {
+        history.push("/mentor/top");
+    };
     return (
         <div>
             <Breadcrumbs page="mentor_question_edit" id={id} />
@@ -152,91 +263,136 @@ const selectForm = () => {
             >
                 質問編集画面
             </Typography>
-            <Grid
-                container
-                sx={{
-                    justifyContent: "space-between"
-                }}
-            >
-                <Grid item xs={7}>
+            {showConfirm ? (
+                <QuestionConfirm
+                    category={category}
+                    topic={topic}
+                    curriculum_number={curriculum_number}
+                    title={title}
+                    remarks={remarks}
+                    question={question}
+                    images={images}
+                    handleConfirmPage={backInputPage}
+                    handleSubmit={handleSubmit}
+                />
+            ) : (
+                <div>
+                    <Grid
+                        container
+                        sx={{
+                            justifyContent: "space-between"
+                        }}
+                    >
+                        <Grid item xs={7}>
+                            <Typography
+                                sx={{
+                                    fontWeight: "bold",
+                                    fontSize: 20
+                                }}
+                            >
+                                カテゴリー
+                                <span style={styleSpan}>
+                                    どちらか1つを選択してください
+                                </span>
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                    {/* カテゴリー選択欄 */}
+                    <Stack
+                        direction="row"
+                        sx={{
+                            width: "40%",
+                            m: "15px 0"
+                        }}
+                    >
+                        {curriculum}
+                        {project}
+                    </Stack>
                     <Typography
                         sx={{
                             fontWeight: "bold",
-                            fontSize: 20
+                            fontSize: 20,
+                            mt: 6
                         }}
                     >
-                        カテゴリー
+                        トピック
                         <span style={styleSpan}>
-                            どちらか1つを選択してください
+                            以下の選択肢から1つを選択してください
                         </span>
                     </Typography>
-                </Grid>
-            </Grid>
-            {/* カテゴリー選択欄 */}
-            <Stack
-                direction="row"
-                sx={{
-                    width: "40%",
-                    m: "15px 0"
-                }}
-            >
-                {curriculum}
-                {project}
-            </Stack>
-            <Typography
-                sx={{
-                    fontWeight: "bold",
-                    fontSize: 20,
-                    mt: 6
-                }}
-            >
-                トピック
-                <span style={styleSpan}>
-                    以下の選択肢から1つを選択してください
-                </span>
-            </Typography>
-            <Topic
-                category={category}
-                topic={topic}
-                setTopic={setTopic}
-                topics={topics}
-            />
-            <Typography
-                sx={{
-                    fontWeight: "bold",
-                    fontSize: 20,
-                    mt: 4
-                }}
-            >
-                カリキュラム番号
-                <span style={styleSpan}>
-                    以下の選択肢から1つを選択してください
-                </span>
-            </Typography>
-            <CurriculumNumber
-                category={category}
-                topic={topic}
-                setCurriculumNumber={setCurriculumNumber}
-                curriculum_number={curriculum_number}
-                old_topic={old_data.topic}
-                old_curriculum_number={old_data.curriculum_number}
-                curriculum_number_validation_error={
-                    curriculum_number_validation_error
-                }
-            />
-            <QuestionForm
-                question={question}
-                setQuestion={setQuestion}
-                title={title}
-                setTitle={setTitle}
-                remarks={remarks}
-                setRemarks={setRemarks}
-                question_validation_error={questionValidationError}
-                questionValidationMessage={questionValidationMessage}
-                activeStep={activeStep}
-                images={images}
-                setImages={setImages}
-            />
+                    <Topic
+                        category={category}
+                        topic={topic}
+                        setTopic={setTopic}
+                        topics={topics}
+                    />
+                    <Typography
+                        sx={{
+                            fontWeight: "bold",
+                            fontSize: 20,
+                            mt: 4
+                        }}
+                    >
+                        カリキュラム番号
+                        <span style={styleSpan}>
+                            以下の選択肢から1つを選択してください
+                        </span>
+                    </Typography>
+                    <CurriculumNumber
+                        category={category}
+                        topic={topic}
+                        setCurriculumNumber={setCurriculumNumber}
+                        curriculum_number={curriculum_number}
+                        old_topic={old_data.topic}
+                        old_curriculum_number={old_data.curriculum_number}
+                        curriculum_number_validation_error={
+                            curriculum_number_validation_error
+                        }
+                    />
+                    <QuestionForm
+                        question={question}
+                        setQuestion={setQuestion}
+                        title={title}
+                        setTitle={setTitle}
+                        remarks={remarks}
+                        setRemarks={setRemarks}
+                        question_validation_error={questionValidationError}
+                        questionValidationMessage={questionValidationMessage}
+                        activeStep={activeStep}
+                        images={images}
+                        setImages={setImages}
+                    />
+                    <div
+                        style={{
+                            textAlign: "center"
+                        }}
+                    >
+                        <ConfirmButton onClick={handleConfirmPage}>
+                            確認する
+                        </ConfirmButton>
+                    </div>
+                    <div
+                        style={{
+                            textAlign: "center",
+                            marginTop: 5,
+                            marginBottom: 30
+                        }}
+                    >
+                        <Button
+                            variant="text"
+                            onClick={handleBackTopPage}
+                            style={{
+                                color: "black",
+                                minWidth: 150,
+                                maxWidth: 200,
+                                marginBottom: 5
+                            }}
+                        >
+                            メンターTopに戻る
+                        </Button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
