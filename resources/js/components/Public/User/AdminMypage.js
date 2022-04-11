@@ -198,7 +198,23 @@ const MyPage = (props) => {
                 管理者用マイページ
             </Typography>
             
-            <BasicInformation user = {user}/>
+            <Typography sx={{ fontSize: '20px', fontWeight: 'bold', marginTop: 4, marginBottom: 3 }}>
+                基本情報
+            </Typography>
+            <Paper sx={{ boxShadow: 'none', borderRadius: 0, marginBottom: 6 }}>
+                <Table>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell align="center" component="th" scope="row" sx={{ width: '50%', fontWeight: 'bold', fontSize: '20px', backgroundColor: '#C299FF', color: 'white' }}>
+                                ユーザID
+                            </TableCell>
+                            <TableCell align="center" sx={{ width: '50%', fontSize: '20px', backgroundColor: '#EEEEEE' }}>
+                                { user.name }
+                            </TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </Paper>
             
             <div
                 style={{
