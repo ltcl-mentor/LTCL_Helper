@@ -57,6 +57,9 @@ function Preview(props) {
                     remarks={props.question.remarks}
                     updated_at={props.question.updated_at}
                     question={props.question.question}
+                    category={props.question.category}
+                    topic={props.question.topic}
+                    curriculum_number={props.question.curriculum_number}
                 />
 
                 <Comments
