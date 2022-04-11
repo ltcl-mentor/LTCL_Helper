@@ -30,6 +30,11 @@ const Icon = (props) => {
         history.push('/my_page');
     };
     
+    const adminMypage = () => {
+        setAnchorEl(null);
+        history.push('/Admin_my_page');
+    };
+    
     const historyIndex = () => {
         setAnchorEl(null);
         history.push('/history');
@@ -74,17 +79,29 @@ const Icon = (props) => {
                 open={ Boolean(anchorEl) }
                 onClose={ handleClose }
             >
-                <MenuItem onClick={() => mypage()}>
+                {props.user.is_admin ? (
+                    <div><MenuItem onClick={() => adminMypage()}>
                     マイページ
-                </MenuItem>
-                
-                <MenuItem onClick={() => historyIndex()}>
-                    質問閲覧履歴
-                </MenuItem>
-                
-                <MenuItem onClick={handleClose}>
-                    <a style={style} onClick={ logout }>ログアウト</a>
-                </MenuItem>
+                    </MenuItem>
+                    
+                    <MenuItem onClick={handleClose}>
+                        <a style={style} onClick={ logout }>ログアウト</a>
+                    </MenuItem></div>
+                ) :
+                (
+                    <div><MenuItem onClick={() => mypage()}>
+                    マイページ
+                    </MenuItem>
+                    
+                    <MenuItem onClick={() => historyIndex()}>
+                        質問閲覧履歴
+                    </MenuItem>
+                    
+                    <MenuItem onClick={handleClose}>
+                        <a style={style} onClick={ logout }>ログアウト</a>
+                    </MenuItem></div>
+                )
+                }
             </Menu>
         </div>
     );

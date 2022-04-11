@@ -16,7 +16,7 @@ import Button from '@mui/material/Button';
 import Pagination from '@mui/material/Pagination';
 import Box from '@material-ui/core/Box';
 
-
+import BasicInformation from './Mypage/basicInformation.js'
 import {LoginUser} from '../../Route.js';
 import Breadcrumbs from '../../Breadcrumbs';
 
@@ -118,33 +118,7 @@ const MyPage = (props) => {
                 受講生用マイページ
             </Typography>
             
-            {/* 基本情報 */}
-            <Typography sx={{ fontSize: '20px', fontWeight: 'bold', marginTop: 4, marginBottom: 3 }}>
-                基本情報
-            </Typography>
-            <Paper sx={{ boxShadow: 'none', borderRadius: 0, marginBottom: 6 }}>
-                <Table>
-                    <TableBody>
-                        <TableRow>
-                            <TableCell align="center" component="th" scope="row" sx={{ width: '50%', fontWeight: 'bold', fontSize: '20px', backgroundColor: '#C299FF', color: 'white' }}>
-                                ユーザID
-                            </TableCell>
-                            <TableCell align="center" sx={{ width: '50%', fontSize: '20px', backgroundColor: '#EEEEEE' }}>
-                                { user.name }
-                            </TableCell>
-                        </TableRow>
-                            
-                        <TableRow>
-                            <TableCell align="center" component="th" scope="row" sx={{ width: '50%', fontWeight: 'bold', fontSize: '20px', backgroundColor: '#C299FF', color: 'white' }}>
-                                入学月
-                            </TableCell>
-                            <TableCell align="center" sx={{ width: '50%', fontSize: '20px', backgroundColor: '#EEEEEE' }}>
-                                { user.entry }
-                            </TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            </Paper>
+            <BasicInformation user = {user}/>
             
             {/* 質問投稿履歴 */}
             <Grid container sx={{ justifyContent: 'space-between' }}>

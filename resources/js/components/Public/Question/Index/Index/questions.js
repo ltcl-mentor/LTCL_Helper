@@ -44,7 +44,7 @@ function Questions(props) {
         // 検索結果の質問一覧情報
     const list = questions.eventList.map((question) => {
         return (
-            <div>
+            <div key={question.id}>
                 
 
                 <Link to={ `/public/questions/` + question.id } target="_blank">
