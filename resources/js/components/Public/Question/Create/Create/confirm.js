@@ -183,15 +183,6 @@ function QuestionConfirm(props) {
     return (
         <div calssName="container">
             <Typography
-                component="div"
-                sx={{
-                    marginTop: 4,
-                    marginLeft: 2
-                }}
-            >
-                Top / 質問投稿画面 / 確認画面
-            </Typography>
-            <Typography
                 variant="h5"
                 component="div"
                 sx={{
