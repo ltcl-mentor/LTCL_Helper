@@ -14,6 +14,9 @@ import TextField from '@mui/material/TextField';
 import SelectEvents from './selectEvents';
 import SelectTarget from './selectTarget';
 
+const today = new Date();
+const dateStr = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+
 
 /**
  * お知らせの追加
@@ -23,7 +26,7 @@ const Create = (props) => {
     const [info, setInfo] = useState('');
     const [body, setBody] = useState('');
     const [slack, setSlack] = useState('');
-    const [date, setDate] = useState('');
+    const [date, setDate] = useState(dateStr);
     const [slackDate, setSlackDate] = useState('');
     const [target, setTarget] = useState([]);
     const [validationMessage, setValidationMessage] = useState({
@@ -50,6 +53,7 @@ const Create = (props) => {
     
     const handleChange = (event) => {
         setChecked(event.target.checked);
+        setSlackDate(dateStr);
         if (!event.target.checked) {
             setSlack('');
             setSlackDate('');

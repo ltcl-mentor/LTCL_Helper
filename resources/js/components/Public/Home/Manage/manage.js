@@ -97,18 +97,34 @@ const Manage = () => {
                 <Grid container sx={{ width: '65%', m: '30px auto' }}>
                     {contents.map((content, index) => {
                         return (
-                            <Grid item sx={{ height: '150px', width: '33%' }} key={content.content}>
-                                <Card sx={{ width: '90%', height: '90%', cursor: 'pointer', p: 0, m: 'auto' }} onClick={content.onClick}>
+                            <Grid item sx={{ width: '33%' }} key={content.content}>
+                                <Card 
+                                    sx={{ 
+                                        width: '90%', 
+                                        m: '0 auto 16px', 
+                                        position: 'relative', 
+                                        cursor: 'pointer', 
+                                        '&:before': {
+                                            content: '""', 
+                                            pt: '100%', 
+                                            display: 'block'
+                                        }
+                                    }} 
+                                    onClick={content.onClick}
+                                >
                                     <Typography 
-                                        align="center"
-                                        variant="h6"
-                                        component="div"
-                                        sx={{
-                                            height: '100%',
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            justifyContent: 'center',
-                                            alignItems: 'center'
+                                        align="center" 
+                                        variant="h5" 
+                                        component="div" 
+                                        sx={{ 
+                                            position: 'absolute',
+                                            top: 0, left: 0, 
+                                            p: '10px', m: 0, 
+                                            width: '100%', height: '100%', 
+                                            display: 'flex', 
+                                            flexDirection: 'column', 
+                                            justifyContent: 'center', 
+                                            alignItems: 'center' 
                                         }}
                                     >
                                         {content.content}
@@ -128,9 +144,36 @@ const Manage = () => {
             <Grid container sx={{ width: '65%', m: '30px auto' }}>
                 {events.map((event, index) => {
                     return(
-                        <Grid item sx={{ height: '150px', width: '33%' }} key={`id${event.id}-${event.name}`}>
-                            <Card sx={{ width: '90%', height: '90%', cursor: 'pointer', p: 0, m: 'auto' }} onClick={() => {handleOpen("show_event"), setEvent(event)}}>
-                                <Typography align="center" variant="h5" component="div" sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                        <Grid item sx={{ width: '33%' }} key={`id${event.id}-${event.name}`}>
+                            <Card 
+                                sx={{ 
+                                    width: '90%', 
+                                    m: '0 auto 16px', 
+                                    position: 'relative', 
+                                    cursor: 'pointer', 
+                                    '&:before': {
+                                        content: '""', 
+                                        pt: '100%', 
+                                        display: 'block'
+                                    }
+                                }} 
+                                onClick={() => {handleOpen("show_event"), setEvent(event)}}
+                            >
+                                <Typography 
+                                    align="center" 
+                                    variant="h5" 
+                                    component="div" 
+                                    sx={{ 
+                                        position: 'absolute',
+                                        top: 0, left: 0, 
+                                        p: '10px', m: 0, 
+                                        width: '100%', height: '100%', 
+                                        display: 'flex', 
+                                        flexDirection: 'column', 
+                                        justifyContent: 'center', 
+                                        alignItems: 'center' 
+                                    }}
+                                >
                                     {event.name}
                                 </Typography>
                             </Card>
