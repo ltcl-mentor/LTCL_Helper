@@ -6,6 +6,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Bar from './Layout/Bar';
 import AccessError from './Error';
 import MyPage from './Public/User/MyPage';
+import AdminMyPage from './Public/User/AdminMypage';
 import MyQuestion from './Public/User/QuestionShow';
 import History from './Public/History/History';
 import Home from './Public/Home/Home';
@@ -124,6 +125,10 @@ function Router() {
             // 管理者ユーザがアクセスできるURL
             admin_links = (
                 <Switch>
+                
+                    {/* 管理者ユーザマイページ表示 */}
+                    <Route path="/Admin_my_page" exact component={AdminMyPage} />
+                    
                     {/* メンター管理画面表示 */}
                     <Route path="/mentor/top" exact component={MentorTop} />
 
