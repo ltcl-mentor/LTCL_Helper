@@ -198,6 +198,7 @@ const selectForm = () => {
         }
     };
 
+    // 質問内容のバリデーション
     const validateQuestions = () => {
         let validateKey = {
             title: false,
@@ -237,10 +238,12 @@ const selectForm = () => {
         }
     };
 
+    // 確認ボタンを押した際にテキストフィールドのバリデーションを行う
     const handleConfirmPage = () => {
         handleValidate();
     };
 
+    // 入力ページへ戻るための関数
     const backInputPage = () => {
         setShowConfirm(false);
     };
