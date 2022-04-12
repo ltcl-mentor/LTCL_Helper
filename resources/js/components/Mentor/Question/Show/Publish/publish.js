@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import PublicIcon from "@material-ui/icons/Public";
 import PublicOffIcon from "@material-ui/icons/PublicOff";
 import Alert from "@mui/material/Alert";
-
+import CancelIcon from "@mui/icons-material/Cancel";
 import Preview from "./preview";
 import CheckForm from "./checkForm";
 
@@ -99,7 +99,15 @@ function Publish(props) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <button onClick={handleClose}>×</button>
+                    <Button
+                        onClick={handleClose}
+                        startIcon={<CancelIcon />}
+                        sx={{
+                            color: "red",
+                            marginLeft: "95%",
+                            marginBottom: "5%"
+                        }}
+                    ></Button>
                     <Alert severity="error">
                         これは公開時のプレビューです。まだ公開処理は完了していません。
                     </Alert>
