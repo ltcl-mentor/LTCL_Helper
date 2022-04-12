@@ -143,17 +143,48 @@ function Show() {
             <div style={{ marginLeft: "3%" }}>
                 <Breadcrumbs page="mentor_question_show" />
             </div>
-            <Typography component="div" align="center" sx={{ marginTop: 4 }}>
-                <Publish
-                    question_id={id}
-                    question={question}
-                    setQuestion={setQuestion}
-                    documents={documents}
-                    category={categories[question.category]}
-                    topic={topics[question.topic]}
-                />
-            </Typography>
-            <Typography component="div" align="center" sx={{ marginTop: 1 }}>
+
+            <Box
+                sx={{
+                    display: "flex",
+                    width: "90%",
+                    margin: "4%",
+                    justifyContent: "center",
+                    position: "relative"
+                }}
+            >
+                <Box sx={{ position: "absolute" }}>
+                    <Publish
+                        question_id={id}
+                        question={question}
+                        setQuestion={setQuestion}
+                        documents={documents}
+                        category={categories[question.category]}
+                        topic={topics[question.topic]}
+                    />
+                </Box>
+
+                <Box sx={{ position: "absolute", right: "-2%" }}>
+                    <Link to={`/questions/` + id + `/edit`}>
+                        <Button
+                            variant="text"
+                            sx={{ color: "#771AF8", fontSize: 20 }}
+                        >
+                            編集
+                        </Button>
+                    </Link>
+                    /
+                    <Button
+                        variant="text"
+                        sx={{ color: "#771AF8", fontSize: 20 }}
+                        onClick={deleteConfirm}
+                    >
+                        削除
+                    </Button>
+                </Box>
+            </Box>
+
+            {/* <Typography component="div" align="center" sx={{ marginTop: 1 }}>
                 <Link to={`/questions/` + id + `/edit`}>
                     <Button
                         variant="contained"
@@ -177,7 +208,7 @@ function Show() {
                 >
                     削除する
                 </Button>
-            </Typography>
+            </Typography> */}
             {/* <Parameters
                 category={ categories[question.category] }
                 topic={ topics[question.topic] }
