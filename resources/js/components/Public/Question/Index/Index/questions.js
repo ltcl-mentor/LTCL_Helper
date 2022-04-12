@@ -13,7 +13,7 @@ import Pagination from '@mui/material/Pagination';
  * カリキュラムの質問一覧
  */
 function Questions(props) {
-    
+
     const [currentPage, setCurrentPage] = useState(1);
     const questions = props.questions;
     const handlePageClick = (event, index) => {
@@ -27,7 +27,6 @@ function Questions(props) {
         axios
             .get(`/react/questions/search/paginate?category=${ val }&topic=${ props.category }&page=${index}`)
             .then(response => {
-                console.log(response.data);
                 props.setQuestions({
                     eventList: response.data.data,
                     itemsCountPerPage: response.data.per_page,
@@ -40,12 +39,12 @@ function Questions(props) {
             console.log(error);
             });
     };
-    
+
         // 検索結果の質問一覧情報
     const list = questions.eventList.map((question) => {
         return (
             <div key={question.id}>
-                
+
 
                 <Link to={ `/public/questions/` + question.id } target="_blank">
                     <ListItem button>
@@ -55,11 +54,11 @@ function Questions(props) {
                     </ListItem>
                 </Link>
 
-                
+
             </div>
         );
     });
-    
+
     let emptyMessage;
     let questionList;
     let pagination;
@@ -82,8 +81,8 @@ function Questions(props) {
             />
         );
     }
-    
-    
+
+
     return (
         <Box>
             <Box>

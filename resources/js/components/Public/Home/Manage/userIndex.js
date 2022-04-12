@@ -15,6 +15,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import IconButton from '@mui/material/IconButton';
+import Pagination from "@mui/material/Pagination";
 
 // モーダルのCSS設定
 const style = {
@@ -38,7 +39,7 @@ const UserIndex = (props) => {
     const [pass_number, setPassNumber] = useState('');
     const [open, setOpen] = useState(false);
     const [deleteuser, setDeleteuser] = useState('');
-    
+
     // パスワード表示
     const revealPass = (number) => {
         if (pass_number === number) {
@@ -47,7 +48,7 @@ const UserIndex = (props) => {
             setPassNumber(number);
         }
     };
-    
+
     // ユーザー削除
     // 後でconfirmを変えたい
     const deleteUser = () => {
@@ -65,7 +66,7 @@ const UserIndex = (props) => {
                 console.log(error);
             });
     };
-    
+
     // ユーザーロック解除実行
     const unlockUser = (id) => {
         if (confirm('ユーザのロックを解除します。\nよろしいですか？')) {
@@ -85,7 +86,7 @@ const UserIndex = (props) => {
             return false;
         }
     };
-    
+
     let tablehead;
     let tablebody;
     if (props.type == "student") {
@@ -97,7 +98,7 @@ const UserIndex = (props) => {
         );
         tablebody = (
             <React.Fragment>
-                {props.users.map((user, index) => {
+                {props.users.eventList.map((user, index) => {
                     return (
                         <TableRow key={user.id} sx={{ backgroundColor: '#EEEEEE' }}>
                             <TableCell align="center" component="th" scope="row">{ user.id }</TableCell>
@@ -126,7 +127,7 @@ const UserIndex = (props) => {
     } else {
         tablebody = (
             <React.Fragment>
-                {props.users.map(user => {
+                {props.users.eventList.map(user => {
                     return (
                         <TableRow key={user.id} sx={{ backgroundColor: '#EEEEEE' }}>
                             <TableCell align="center" component="th" scope="row">{ user.id }</TableCell>
@@ -147,7 +148,52 @@ const UserIndex = (props) => {
             </React.Fragment>
         );
     }
-    
+
+    const handlePageClick = (event, index) => {
+        axios
+            .get(`/react/mentor?page=${index}`)
+            .then(response => {
+                props.setStaffs({
+                    eventList: response.data.staffs.data,
+                    itemsCountPerPage: response.data.staffs.per_page,
+                    totalItemsCount: response.data.staffs.total,
+                    currentPage: response.data.staffs.current_page,
+                    pageRangeDisplayed: 10,
+                    lastPage: response.data.staffs.last_page,
+                });
+            }).catch(error => {
+            console.log(error);
+        });
+    };
+
+    const handlePageClickStudent = (event, index) => {
+        axios
+            .get(`/react/mentor?page=${index}`)
+            .then(response => {
+                props.setStudents({
+                    eventList: response.data.students.data,
+                    itemsCountPerPage: response.data.students.per_page,
+                    totalItemsCount: response.data.students.total,
+                    currentPage: response.data.students.current_page,
+                    pageRangeDisplayed: 10,
+                    lastPage: response.data.students.last_page,
+                });
+            }).catch(error => {
+            console.log(error);
+        });
+    };
+
+    let pagination;
+
+    pagination = (
+        <Pagination
+            count={ props.users.lastPage }
+            page={ props.users.currentPage }
+            onChange={ (props.type == 'staff') ? handlePageClick : handlePageClickStudent}
+            sx={{ display: "block" }}
+        />
+    );
+
     return (
         <React.Fragment>
             <Paper sx={{ boxShadow: 'none', borderRadius: 0, marginBottom: 6, width: '70%', margin: '0 auto' }}>
@@ -169,8 +215,11 @@ const UserIndex = (props) => {
                         {tablebody}
                     </TableBody>
                 </Table>
+                <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 2}}>
+                    {pagination}
+                </Box>
             </Paper>
-            
+
             {/* 削除モーダル */}
             <Modal
                 open={open}

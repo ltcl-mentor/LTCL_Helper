@@ -42,7 +42,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
+
     /**
      * リレーション関係
      */
@@ -50,12 +50,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Question')->withPivot(['created_at'])->orderBy('pivot_created_at', 'desc');
     }
-    
+
     public function student()
     {
         return $this->hasOne('App\Student');
     }
-    
+
     /**
      * 質問作成者名取得
      */
@@ -65,45 +65,45 @@ class User extends Authenticatable
         $author = self::find($question->user_id);
         return $author->name;
     }
-    
+
     /**
      * ログインユーザ情報取得
      */
     public static function getUser()
     {
         $user = Auth::user();
-        
+
         if($user->is_admin !== "staff"){
             $student = Student::firstWhere('user_id', $user->id);
             if($student){
                 $user->entry = "20" . substr($student->password, 4, 2) . "年" . substr($student->password, 6, 2) . "月";
             }
         }
-        
+
         $user->reply_count = Question::replyCheck();
-        
+
         return $user;
     }
-    
+
     /**
      * 削除対象のユーザに関連するstudentsテーブルのデータとquestion_userテーブル（質問閲覧履歴）データを削除
      */
     public static function userDelete($data)
     {
         Student::where('user_id', $data->id)->delete();
-        
+
         $data->questions()->detach();
-        
+
         $related_questions = Question::where('user_id', $data->id)->get();
-        
+
         foreach($related_questions as $related_question){
             $related_question['user_id'] = 0;
             $related_question->save();
         }
-        
+
         $data->delete();
     }
-    
+
     /**
      * スプレッドシートのID一覧から受講生名を取得（特定の受講生）
      */
@@ -111,17 +111,17 @@ class User extends Authenticatable
     {
         $users = self::getStudentsApiData()["values"];
         array_splice($users, 0, 2);
-        
+
         foreach($users as $student) {
             if ($student[7] == $user_name) {
                 $user_name = $student[5] . "(ID：" . $student[7] . ")";
                 break;
             }
         }
-        
+
         return $user_name;
     }
-    
+
     /**
      * スプレッドシートのID一覧から受講生名を取得（全受講生）
      */
@@ -129,8 +129,8 @@ class User extends Authenticatable
     {
         $users = self::getStudentsApiData()["values"];
         array_splice($users, 0, 2);
-        $students = Student::orderBy('password', 'asc')->get();
-        
+        $students = Student::orderBy('password', 'asc')->paginate(10);
+
         // 受講生名追加
         $all_students = [];
         foreach($students as $student) {
@@ -139,10 +139,10 @@ class User extends Authenticatable
                 $student['student_name'] = $users[$key][5];
             }
         }
-        
+
         return $students;
     }
-    
+
     /**
      * スプレッドシートから未登録の受講生情報を取得
      */
@@ -150,16 +150,16 @@ class User extends Authenticatable
     {
         $client = new \GuzzleHttp\Client();
         $url = 'https://sheets.googleapis.com/v4/spreadsheets/'. env('GoogleSheetsStudentsID') .'/values/アプリ未登録ID';
-        
+
         $response = $client->request(
             'GET',
             $url,
             ['query' => ['key' => env('GoogleSheetsKey'), 'majorDimension' => 'ROWS']]
         );
-        
+
         return json_decode($response->getBody(), true);
     }
-    
+
     /**
      * スプレッドシートから受講生情報を取得
      */
@@ -167,16 +167,16 @@ class User extends Authenticatable
     {
         $client = new \GuzzleHttp\Client();
         $url = 'https://sheets.googleapis.com/v4/spreadsheets/'. env('GoogleSheetsStudentsID') .'/values/ID';
-        
+
         $response = $client->request(
             'GET',
             $url,
             ['query' => ['key' => env('GoogleSheetsKey'), 'majorDimension' => 'ROWS']]
         );
-        
+
         return json_decode($response->getBody(), true);
     }
-    
+
     /**
      * 受講生情報をテーブルに追加
      */
@@ -184,11 +184,11 @@ class User extends Authenticatable
     {
         $date = new Carbon();
         $datas = self::getUnRegisterApiData();
-        
+
         // 受講生情報取得
         $students = $datas['values'];
         array_splice($students, 0, 2);
-        
+
         foreach($students as $student) {
             $password = 'ltcl' . substr($student[1], 2) . sprintf('%02d', $student[2]);
 
@@ -199,7 +199,7 @@ class User extends Authenticatable
                     'password' => Hash::make($password),
                     'is_admin' => null,
                 ]);
-                
+
                 Student::create([
                     'name' => $student[7],
                     'password' => $password,
@@ -208,14 +208,14 @@ class User extends Authenticatable
             }
         }
     }
-    
+
     public static function deleteGraduates()
     {
         // 4ヶ月前の年月を取得し、文字列のフォーマットを整える
         $three_month_ago = new Carbon("-4 month");
         $formated_year_and_month = $three_month_ago->format('ym');
         $deletion_target = "ltcl" . $formated_year_and_month;
-        
+
         $users_data = Self::get();
 
         foreach($users_data as $user_data)
@@ -225,7 +225,7 @@ class User extends Authenticatable
                 $user_data->student()->delete();
                 logger("data was deleted");
             }else{
-                logger("doesn't match");   
+                logger("doesn't match");
             }
         }
     }
