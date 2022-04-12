@@ -126,6 +126,9 @@ function Show() {
         }
     };
 
+    const backQuestionIndex = () => {
+        history.push("/questions/index");
+    };
     return (
         <div>
             <Alert
@@ -133,7 +136,6 @@ function Show() {
                 status={parameter.state && parameter.state.question}
                 info={parameter.state && parameter.state.number}
             />
-
             <Alert
                 type="comment"
                 status={parameter.state && parameter.state.comment}
@@ -141,7 +143,6 @@ function Show() {
             <div style={{ marginLeft: "3%" }}>
                 <Breadcrumbs page="mentor_question_show" />
             </div>
-
             <Typography component="div" align="center" sx={{ marginTop: 4 }}>
                 <Publish
                     question_id={id}
@@ -152,7 +153,6 @@ function Show() {
                     topic={topics[question.topic]}
                 />
             </Typography>
-
             <Typography component="div" align="center" sx={{ marginTop: 1 }}>
                 <Link to={`/questions/` + id + `/edit`}>
                     <Button
@@ -164,7 +164,6 @@ function Show() {
                     </Button>
                 </Link>
             </Typography>
-
             <Typography
                 component="div"
                 align="center"
@@ -179,7 +178,6 @@ function Show() {
                     削除する
                 </Button>
             </Typography>
-
             {/* <Parameters
                 category={ categories[question.category] }
                 topic={ topics[question.topic] }
@@ -197,7 +195,6 @@ function Show() {
                 topic={question.topic}
                 curriculum_number={question.curriculum_number}
             />
-
             <Comments
                 main_comments={question.main_comments}
                 sub_comments={question.sub_comments}
@@ -240,7 +237,6 @@ function Show() {
                     参考記事
                 </Typography>
             </Box>
-
             <Box
                 sx={{
                     marginTop: 3,
@@ -250,6 +246,27 @@ function Show() {
                 <Documents documents={documents} />
             </Box>
             <RelatedQuestions related_questions={related_questions} />
+            <div
+                style={{
+                    textAlign: "center",
+                    marginTop: "3%",
+                    marginBottom: "5%"
+                }}
+            >
+                <Button
+                    variant="text"
+                    onClick={backQuestionIndex}
+                    sx={{
+                        color: "#771AF8",
+                        textDecoration: "underline",
+                        marginBottom: "-5%",
+                        fontSize: 18,
+                        fontWeight: "bold"
+                    }}
+                >
+                    質問一覧に戻る
+                </Button>
+            </div>
         </div>
     );
 }

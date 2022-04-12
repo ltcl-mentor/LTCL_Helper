@@ -146,6 +146,6 @@ const Info = (props) => {
             { info }
         </React.Fragment>
     );
-}
+};
 
 export default Info;

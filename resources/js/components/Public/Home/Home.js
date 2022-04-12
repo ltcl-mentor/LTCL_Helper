@@ -69,6 +69,7 @@ const Home = () => {
             <Alert
                 type={ parameter.state && parameter.state.type }
                 status={ parameter.state && parameter.state.status }
+                info={ parameter.state && parameter.state.info }
             />
             {user.reply_count > 0 &&
                 <Alert

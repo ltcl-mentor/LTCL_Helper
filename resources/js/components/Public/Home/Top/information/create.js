@@ -1,12 +1,12 @@
 import React, {useState, useEffect, useRef} from 'react';
 import axios from "axios";
 import {useHistory} from 'react-router-dom';
-import '../../../../../../../public/css/Search/show.css';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import IconButton from '@mui/material/IconButton';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
@@ -14,31 +14,19 @@ import TextField from '@mui/material/TextField';
 import SelectEvents from './selectEvents';
 import SelectTarget from './selectTarget';
 
-// モーダルのCSS設定
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width:'50%',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-    maxHeight: '80%',
-    overflow: 'scroll'
-};
+const today = new Date();
+const dateStr = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+
 
 /**
  * お知らせの追加
  */
 const Create = (props) => {
     const history = useHistory();
-    const [open, setOpen] = useState(false);
     const [info, setInfo] = useState('');
     const [body, setBody] = useState('');
     const [slack, setSlack] = useState('');
-    const [date, setDate] = useState('');
+    const [date, setDate] = useState(dateStr);
     const [slackDate, setSlackDate] = useState('');
     const [target, setTarget] = useState([]);
     const [validationMessage, setValidationMessage] = useState({
@@ -63,25 +51,16 @@ const Create = (props) => {
     const [eventInfo, setEventInfo] = useState([{id: '', name: '', template: ''}]);
     const events = props.events;
     
-    const handleOpen = () => setOpen(true);
-    
-    const handleClose = () => {
-        setOpen(false);
-        setInfo('');
-        setBody('');
-        setSlack('');
-        setTarget([]);
-        setChecked(false);
-    };
-    
     const handleChange = (event) => {
         setChecked(event.target.checked);
+        setSlackDate(dateStr);
         if (!event.target.checked) {
             setSlack('');
+            setSlackDate('');
         }
     };
     
-    //タイトルのvalue変更、バリデーション
+    // タイトルのvalue変更、バリデーション
     const handleInfo = (event) => {
         if (event.target.value.length === 0) {
             setValidationError({...validationError, title: true});
@@ -92,7 +71,7 @@ const Create = (props) => {
         setInfo(event.target.value);
     };
     
-    //お知らせ詳細のvalue変更、バリデーション
+    // お知らせ詳細のvalue変更、バリデーション
     const handleBody = (event) => {
         if (event.target.value.length === 0) {
             setValidationError({...validationError, body: true});
@@ -104,6 +83,7 @@ const Create = (props) => {
         setBody(event.target.value);
     };
     
+    // Slackテンプレートの入力
     const handleSlack = (event) => {
         if (event.target.value.length === 0) {
             setValidationError({...validationError, slackBody: true});
@@ -115,11 +95,13 @@ const Create = (props) => {
         setSlack(event.target.value);
     };
     
+    // 日付の選択
     const handleDate = (event) => {
         setValidationError({...validationError, date: false});
         setDate(event.target.value);
     };
     
+    // slack通知日の選択
     const handleSlackDate = (event) => {
         setSlackDateValidationError(false);
         setSlackDate(event.target.value);
@@ -132,24 +114,24 @@ const Create = (props) => {
     const renderFlgRef = useRef(false);
     
     useEffect(() => {
-    if(renderFlgRef.current) {
-      setSlack(eventInfo.template);
-    } else {
-      renderFlgRef.current = true;
-    }
-  }, [eventInfo]);
+        if(renderFlgRef.current) {
+            setSlack(eventInfo.template);
+        } else {
+            renderFlgRef.current = true;
+        }
+    }, [eventInfo]);
+    
     
     const submit = () => {
         // バリデーションチェック
-        
         let errorMessage = {
-        title: "",
-        body: "",
-        target: "",
-        date: "",
-        slackBody: "",
-        slackDate: "",
-    };
+            title: "",
+            body: "",
+            target: "",
+            date: "",
+            slackBody: "",
+            slackDate: "",
+        };
         
         let validationKey = {
             isNext: true,
@@ -210,7 +192,6 @@ const Create = (props) => {
             return false;
         }
         
-        props.setInfoChanging(true);
         axios
             .post("/informations/store", {
                 info: info,
@@ -222,7 +203,6 @@ const Create = (props) => {
             })
             .then(response => {
                 if (response.status === 200) {
-                    setOpen(false);
                     setInfo('');
                     setBody('');
                     setSlack('');
@@ -230,8 +210,10 @@ const Create = (props) => {
                     setSlackDate('');
                     setDate('');
                     setChecked(false);
-                    props.setInfoChanging(false);
-                    history.push("/", { type: "info", status: "created" });
+                    props.setInfos(response.data.infos);
+                    props.setDates(response.data.dates);
+                    props.onClose();
+                    history.push("/?page=top", { type: "info", status: "created" });
                 }
             }).catch(error => {
                 console.log(error);
@@ -267,121 +249,134 @@ const Create = (props) => {
     
     return (
         <React.Fragment>
-            <Button sx={{ verticalAlign: 'top' }}onClick={ handleOpen }>お知らせを追加する</Button>
+            <IconButton onClick={() => props.onClose()} sx={{ color: 'red', ml: '95%' }}>
+                <HighlightOffIcon />
+            </IconButton>
+            <Typography align="center" component="div" sx={{ color: '#771AF8', fontSize: '24px', fontWeight: 'bold' }}>
+                お知らせの追加
+            </Typography>
             
-            <Modal
-                open={ open }
-                onClose={ handleClose }
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={ style }>
-                    <Typography align="center" sx={{ paddingTop:2 }} variant="h4">
-                        お知らせの入力
+            <Box sx={{ width: "80%", m: '50px auto 0' }}>
+                <Typography component="div" sx={{ color: '#666666', fontSize: '20px', fontWeight: 'bold' }}>
+                    タイトル
+                </Typography>
+                <TextField
+                    label="タイトル"
+                    placeholder="250文字以内"
+                    multiline
+                    error={ validationError.title }
+                    helperText={ validationMessage.title }
+                    value={ info }
+                    onChange={ (event) => handleInfo(event) }
+                    sx={{  width: "100%", mt: 1 }}
+                />
+                <Typography align="right" sx={{ fontSize: 13 }}>
+                    { info.trim().length }文字
+                </Typography>
+                
+                <Typography component="div" sx={{ color: '#666666', fontSize: '20px', fontWeight: 'bold' }}>
+                    お知らせ詳細
+                </Typography>
+                <TextField
+                    label="お知らせ詳細"
+                    multiline
+                    rows={4}
+                    error={ validationError.body }
+                    helperText={ validationMessage.body }
+                    value={ body }
+                    onChange={ (event) => handleBody(event) }
+                    sx={{ width: "100%", mt: 1 }}
+                />
+                
+                <Typography component="div" sx={{ color: '#666666', fontSize: '20px', fontWeight: 'bold', mt: 2, mb: 1 }}>
+                    対象者
+                </Typography>
+                <SelectTarget 
+                    validationMessage={ validationMessage.target } 
+                    validationError={validationError} 
+                    setValidationError={setValidationError} 
+                    setValidationMessage={setValidationMessage} 
+                    target={target} 
+                    setTarget={setTarget}
+                />
+                
+                <Typography component="div" sx={{ color: '#666666', fontSize: '20px', fontWeight: 'bold', mt: 2 }}>
+                    公開日
+                    <Typography component="span" sx={{ pl: 1, color: 'red', fontSize: '14px' }}>
+                        本日以前を選択したお知らせは表示されません。
                     </Typography>
-                    
-                    <TextField
-                        label="お知らせタイトル"
-                        placeholder="お知らせを簡潔に記載(250文字以内)"
-                        multiline
-                        rows={2}
-                        error={ validationError.title }
-                        helperText={ validationMessage.title }
-                        value={ info }
-                        onChange={ (event) => handleInfo(event) }
+                </Typography>
+                {/*<input type="date" onChange={ handleDate }/>*/}
+                <TextField
+                    label="公開日"
+                    type="date"
+                    value={date}
+                    onChange={(event) => handleDate(event)}
+                    sx={{ width: "50%", mt: 1 }}
+                />
+                
+                <FormControlLabel sx={{ width: "100%" }} control={<Checkbox checked={checked} onChange={handleChange}/>} label="slackに通知する" />
+                {checked &&
+                    <React.Fragment>
+                        <Typography component="div" sx={{ color: '#666666', fontSize: '20px', fontWeight: 'bold', mt: 1 }}>
+                            Slack通知メッセージ
+                        </Typography>
+                        <TextField
+                            label="slackへの通知メッセージを記載"
+                            multiline
+                            rows={4}
+                            error={ validationError.slackBody }
+                            helperText={ validationMessage.slackBody}
+                            value={ slack }
+                            onChange={ (event) => handleSlack(event) }
+                            sx={{ width: "100%" }}
+                        />
+                        <Typography component="div" sx={{ fontSize: '16px', mt: 2, color: '#666666' }}>
+                            以下からテンプレートを選択できます。
+                        </Typography>
+                        <div className="events">
+                            <SelectEvents event={eventInfo} setEvent={setEventInfo} events={events} />
+                            <Button sx={{ mt: 2, ml: 2 }} onClick={() => sameMessage()}>お知らせ詳細と同じにする</Button>
+                        </div>
+                        
+                        <Typography component="div" sx={{ color: '#666666', fontSize: '20px', fontWeight: 'bold', mt: 1 }}>
+                            通知日の設定
+                        </Typography>
+                        <Typography component="div" sx={{ color: 'red', fontSize: '14px' }}>
+                            設定日の13時に通知されます。急ぎの場合は手動で通知してください。
+                        </Typography>
+                        <TextField
+                            label="slack通知日"
+                            type="date"
+                            value={slackDate}
+                            onChange={(event) => handleSlackDate(event)}
+                            sx={{ width: "50%", mt: 1 }}
+                        />
+                        <Typography sx={{color:'red'}}>{validationMessage.slackDate}</Typography>
+                    </React.Fragment>
+                }
+                { validation_message }
+                
+                <Typography align="center" sx={{ paddingTop:2 }}>
+                    <Button
+                        onClick={() => submit()}
+                        variant="outlined"
                         sx={{ 
-                            width: "80%",
-                            marginLeft: "10%",
-                            marginTop:4,
+                            color: '#771AF8',
+                            border: '1px solid #771AF8',
+                            '&:hover': { 
+                                color: 'white', 
+                                backgroundColor: '#771AF8',
+                                border: '1px solid #771AF8',
+                            }
                         }}
-                    />
-                    <Typography align="right" sx={{ fontSize: 13,  width: "80%", marginLeft: "10%" }}>
-                        { info.trim().length }文字
-                    </Typography>
-                    
-                    <TextField
-                        label="お知らせ詳細"
-                        placeholder="お知らせの詳細を記載"
-                        multiline
-                        rows={4}
-                        error={ validationError.body }
-                        helperText={ validationMessage.body }
-                        value={ body }
-                        onChange={ (event) => handleBody(event) }
-                        sx={{ 
-                            width: "80%",
-                            marginLeft: "10%",
-                            marginTop:4,
-                        }}
-                    />
-                    
-                    <Typography align="center" sx={{ paddingTop:2 }} variant="h6">
-                        対象者
-                    </Typography>
-                    <SelectTarget 
-                        validationMessage={ validationMessage.target } 
-                        validationError={validationError} 
-                        setValidationError={setValidationError} 
-                        setValidationMessage={setValidationMessage} 
-                        target={target} 
-                        setTarget={setTarget}
-                    />
-                    
-                    <FormControlLabel sx={{ width: "80%", marginLeft: "10%" }} control={<Checkbox checked={checked} onChange={handleChange}/>} label="slackに通知する" />
-                    {checked &&
-                        <React.Fragment>
-                        <Typography align="center" sx={{ paddingTop:2 }} variant="h6">
-                        Slack通知メッセージ
-                    </Typography>
-                            <div className="events">
-                                <SelectEvents event={eventInfo} setEvent={setEventInfo} events={events} />
-                                <Button sx={{ mt: 1, ml: 2 }} onClick={() => sameMessage()}>お知らせ詳細と同じにする</Button>
-                            </div>
-                            
-                            <TextField
-                                label="slackへの通知メッセージを記載"
-                                multiline
-                                rows={4}
-                                error={ validationError.slackBody }
-                                helperText={ validationMessage.slackBody}
-                                value={ slack }
-                                onChange={ (event) => handleSlack(event) }
-                                sx={{ 
-                                    width: "80%",
-                                    marginLeft: "10%",
-                                }}
-                            />
-                            <Typography align="center" sx={{ paddingTop:2 }} variant="h6">
-                                通知日の設定
-                            </Typography>
-                            <Typography align="center" sx={{ paddingTop:2 }}>
-                                <p>設定日の13時に通知されます。<br/>急ぎの場合は手動で通知してください。</p>
-                                <input type="date" onChange={ handleSlackDate }/>
-                                <Typography sx={{color:'red'}}>{validationMessage.slackDate}</Typography>
-                            </Typography>
-                        </React.Fragment>
-                    }
-                    
-                    <Typography align="center" sx={{ paddingTop:2 }} variant="h6">
-                        公開日の設定
-                    </Typography>
-                    <Box sx={{textAlign: "center"}}>
-                        <Typography color="error">本日以前のお知らせは表示されませんので<br/>ご注意ください</Typography>
-                        <input type="date" onChange={ handleDate }/>
-                        <Typography sx={{color:'red'}}>{validationMessage.date}</Typography>
-                    </Box>
-                    { validation_message }
-                    
-                    <Typography align="center" sx={{ paddingTop:2 }}>
-                        <Button variant="contained" onClick={ submit }>保存</Button>
-                    </Typography>
-                    <Typography align="center" sx={{ paddingTop:2 }}>
-                        <Button variant="outlined" onClick={ handleClose }>戻る</Button>
-                    </Typography>
-                </Box>
-            </Modal>
+                    >
+                        登録する
+                    </Button>
+                </Typography>
+            </Box>
         </React.Fragment>
     );
-}
+};
 
 export default Create;

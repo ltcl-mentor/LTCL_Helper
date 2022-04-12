@@ -46,7 +46,7 @@ class RegisterController extends Controller
         event(new Registered($user = $this->create($request->all())));
         
         return $this->registered($request, $user)
-                        ?: ["status" => 200];
+                        ?: ["status" => 200, "students" => User::getAllStudentsName(), "staffs" => User::where('is_admin','staff')->get()];
     }
     
     /**
@@ -72,7 +72,7 @@ class RegisterController extends Controller
             }
         }
         
-        return ["status" => 200];
+        return ["status" => 200, "students" => User::getAllStudentsName(), "staffs" => User::where('is_admin','staff')->get()];
     }
 
     /**

@@ -10,6 +10,7 @@ use App\Image;
 use App\History;
 use App\Info;
 use App\Event;
+use App\Comment;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -23,6 +24,12 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $questions = $user->questions()->paginate(20);
+        
+        foreach($questions as $question){
+            $student_yet_comments = Comment::where('question_id', $question->id)->where('is_mentor_commented', true)->get();
+
+            $question->reply = count($student_yet_comments) !== 0 ? true : false;
+        }
         // アクセス履歴の情報を質問に付随させる
         foreach($questions as $question){
             $question['whenClicked'] = $question->pivot->created_at;
@@ -55,6 +62,7 @@ class HomeController extends Controller
         $input['date'] = $request['date'];
         $input['slackDate'] = $request['slackDate'];
         $info->fill($input)->save();
+        return Info::getInfo();
     }
     
     /**
@@ -63,6 +71,7 @@ class HomeController extends Controller
     public function deleteInfo(Info $info)
     {
         $info->delete();
+        return Info::getInfo();
     }
     
     /**
@@ -72,6 +81,7 @@ class HomeController extends Controller
         $input['name'] = $request['name'];
         $input['template'] = $request['template'];
         $event->fill($input)->save();
+        return Event::get();
     }
     
     /**
@@ -81,6 +91,7 @@ class HomeController extends Controller
         $event->name = $request['name'];
         $event->template = $request['template'];
         $event->save();
+        return Event::get();
     }
     
     /**
@@ -88,6 +99,7 @@ class HomeController extends Controller
      */
     public function deleteEvent(Event $event) {
         $event->delete();
+        return Event::get();
     }
     
     /**

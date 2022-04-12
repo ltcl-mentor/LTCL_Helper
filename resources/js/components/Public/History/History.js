@@ -68,6 +68,7 @@ function History() {
                     pageRangeDisplayed: 10,
                     lastPage: response.data.last_page,
                 });
+                console.log(response.data.data);
             }).catch(error => {
                 console.log(error);
             });
@@ -225,7 +226,7 @@ function History() {
     return (
         <div className="container">
             <Breadcrumbs page="history"/>
-            <Typography sx={{color: '#771AF8', marginBottom: 3}} variant="h3">質問閲覧履歴</Typography>
+            <Typography sx={{ fontSize: '24px', color: '#771AF8', fontWeight: 'bold' }}>質問閲覧履歴</Typography>
             {  histories }
             <Grid container justifyContent="center" sx={{ marginTop: 1, marginBottom: 2 }}>
                 <Grid item>

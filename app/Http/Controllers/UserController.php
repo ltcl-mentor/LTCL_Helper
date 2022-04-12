@@ -58,8 +58,10 @@ class UserController extends Controller
     }
     
     public static function backup() {
-        User::registerStudents(1);
-        return;
+        User::registerStudents();
+        $students = User::getAllStudentsName();
+        
+        return compact('students');
     }
     
     /**
