@@ -65,6 +65,7 @@ const ConfirmButton = styled(Button)(({ theme }) => ({
 const selectForm = () => {
     const { id } = useParams();
     const history = useHistory();
+    const [clickCount, setClickCount] = useState(0);
     const [old_data, setOldData] = useState([]);
     const [category, setCategory] = useState(0);
     const [topic, setTopic] = useState(0);
