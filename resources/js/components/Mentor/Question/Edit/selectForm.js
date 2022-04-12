@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Breadcrumbs from "../../../Breadcrumbs";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-
-import Topic from "../../../Home/Q&A/search/condition/form/topicForm";
-import CurriculumNumber from "../../../Home/Q&A/search/condition/form/curriculum-number";
-import QuestionForm from "./question-form/questionForm";
-import QuestionConfirm from "./confirm";
+import Topic from "../../../Public/Home/Q&A/search/condition/form/topicForm";
+import CurriculumNumber from "./Curriculum-number/curriculum-number";
+import QuestionForm from "../../../Public/Question/Create/Create/question-form/questionForm";
+import QuestionConfirm from "../../../Public/Question/Create/Create/confirm";
 
 const styleSpan = {
     fontWeight: "normal",
@@ -62,19 +62,32 @@ const ConfirmButton = styled(Button)(({ theme }) => ({
     }
 }));
 
-/**
- * 絞り込み検索
- */
-const DefaultForm = () => {
+const selectForm = () => {
+    const { id } = useParams();
     const history = useHistory();
     const [clickCount, setClickCount] = useState(0);
+    const [old_data, setOldData] = useState([]);
     const [category, setCategory] = useState(0);
     const [topic, setTopic] = useState(0);
+    const [activeStep, setActiveStep] = useState(0);
     const [curriculum_number, setCurriculumNumber] = useState("");
-    const [keyword, setKeyword] = useState("");
-    const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
-    const [showConfirm, setShowConfirm] = useState(false);
-
+    const [
+        curriculum_number_validation_error,
+        setCurriculumNumberValidationError
+    ] = useState(0);
+    const [remarks, setRemarks] = useState("");
+    const [question, setQuestion] = useState("");
+    const [title, setTitle] = useState("テスト");
+    const [questionValidationError, setQuestionValidationError] = useState({
+        title: false,
+        serach: false,
+        content: false
+    });
+    const [questionValidationMessage, setQuestionValidationMessage] = useState({
+        titleErrorMessage: "",
+        serachErrorMessage: "",
+        contentErrorMessage: ""
+    });
     const topics = [
         // カリキュラムのトピック
         "AWS",
@@ -99,30 +112,8 @@ const DefaultForm = () => {
         "デザイン",
         "その他(成果物)"
     ];
-
-    const [
-        curriculumNumberValidationError,
-        setCurriculumNumberValidationError
-    ] = useState(false);
-    const [
-        curriculumNumberValidationMessage,
-        setCurriculumNumberValidationMessage
-    ] = useState("");
-    const [question, setQuestion] = useState("");
-    const [questionValidationError, setQuestionValidationError] = useState({
-        title: false,
-        serach: false,
-        content: false
-    });
-    const [questionValidationMessage, setQuestionValidationMessage] = useState({
-        titleErrorMessage: "",
-        serachErrorMessage: "",
-        contentErrorMessage: ""
-    });
-    const [title, setTitle] = useState("");
-    const [remarks, setRemarks] = useState("");
-    const [activeStep, setActiveStep] = useState(0);
     const [images, setImages] = useState([]);
+    const [showConfirm, setShowConfirm] = useState(false);
 
     let curriculum;
     let project;
@@ -145,14 +136,33 @@ const DefaultForm = () => {
             <PurpleButton onClick={() => setCategory(1)}>成果物</PurpleButton>
         );
     }
+
+    useEffect(() => {
+        // 該当質問取得
+        axios
+            .get(`/react/question/${id}`)
+            .then(response => {
+                setOldData(response.data);
+                setCategory(response.data.category);
+                setTopic(response.data.topic);
+                setCurriculumNumber(response.data.curriculum_number);
+                setTitle(response.data.title);
+                setRemarks(response.data.remarks);
+                setQuestion(response.data.question);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
+
     const handleSubmit = () => {
         // 重複保存防止のために保存ボタンのクリック数をカウント
         // クリック数が0回の場合のみ保存実行
-        if (clickCount === 0) {
+        if (clickCount == 0) {
             setClickCount(1);
 
             axios
-                .post("/questions/store", {
+                .post(`/questions/${id}/update`, {
                     category: category,
                     topic: topic,
                     curriculum_number: curriculum_number,
@@ -163,15 +173,9 @@ const DefaultForm = () => {
                 })
                 .then(response => {
                     if (response.status === 200) {
-                        if (response.data.is_admin === "staff") {
-                            history.push(`/questions/${response.data.id}`, {
-                                question: "created"
-                            });
-                        } else {
-                            history.push(`/`, {
-                                question: "created"
-                            });
-                        }
+                        history.push(`/questions/${response.data.id}`, {
+                            question: "edited"
+                        });
                     }
                 })
                 .catch(error => {
@@ -181,10 +185,6 @@ const DefaultForm = () => {
         } else {
             return false;
         }
-    };
-
-    const handleBackTopPage = () => {
-        history.push("/");
     };
 
     const validateCurriculumNumber = () => {
@@ -245,12 +245,25 @@ const DefaultForm = () => {
         setShowConfirm(false);
     };
 
-    useEffect(() => {
-        setIsSearchButtonClicked(false);
-    }, [category, topic, curriculum_number, keyword]);
-
+    const handleBackTopPage = () => {
+        history.push("/mentor/top");
+    };
     return (
         <div>
+            <Breadcrumbs page="mentor_question_edit" id={id} />
+            <Typography
+                variant="h5"
+                component="div"
+                sx={{
+                    marginTop: 4,
+                    marginBottom: 10,
+                    fontSize: 30,
+                    color: "#771af8",
+                    fontWeight: "bold"
+                }}
+            >
+                質問編集画面
+            </Typography>
             {showConfirm ? (
                 <QuestionConfirm
                     category={category}
@@ -264,30 +277,7 @@ const DefaultForm = () => {
                     handleSubmit={handleSubmit}
                 />
             ) : (
-                <div className="condition">
-                    <Typography
-                        component="div"
-                        sx={{
-                            marginTop: 4,
-                            marginLeft: 2
-                        }}
-                    >
-                        Top / 質問投稿画面
-                    </Typography>
-                    <Typography
-                        variant="h5"
-                        component="div"
-                        sx={{
-                            marginTop: 4,
-                            marginBottom: 10,
-                            fontSize: 30,
-                            color: "#771af8",
-                            fontWeight: "bold"
-                        }}
-                    >
-                        質問投稿画面
-                    </Typography>
-                    {/* カテゴリー */}
+                <div>
                     <Grid
                         container
                         sx={{
@@ -319,7 +309,6 @@ const DefaultForm = () => {
                         {curriculum}
                         {project}
                     </Stack>
-                    {/* トピック */}
                     <Typography
                         sx={{
                             fontWeight: "bold",
@@ -338,7 +327,6 @@ const DefaultForm = () => {
                         setTopic={setTopic}
                         topics={topics}
                     />
-                    {/* カリキュラム番号 */}
                     <Typography
                         sx={{
                             fontWeight: "bold",
@@ -355,11 +343,11 @@ const DefaultForm = () => {
                         category={category}
                         topic={topic}
                         setCurriculumNumber={setCurriculumNumber}
-                        curriculumNumberValidationError={
-                            curriculumNumberValidationError
-                        }
-                        curriculumNumberValidationMessage={
-                            curriculumNumberValidationMessage
+                        curriculum_number={curriculum_number}
+                        old_topic={old_data.topic}
+                        old_curriculum_number={old_data.curriculum_number}
+                        curriculum_number_validation_error={
+                            curriculum_number_validation_error
                         }
                     />
                     <QuestionForm
@@ -401,7 +389,7 @@ const DefaultForm = () => {
                                 marginBottom: 5
                             }}
                         >
-                            Topに戻る
+                            メンターTopに戻る
                         </Button>
                     </div>
                 </div>
@@ -410,4 +398,4 @@ const DefaultForm = () => {
     );
 };
 
-export default DefaultForm;
+export default selectForm;
