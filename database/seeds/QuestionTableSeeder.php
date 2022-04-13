@@ -24,6 +24,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 2,
@@ -37,7 +38,8 @@ class QuestionTableSeeder extends Seeder
             'check' => false,
             'user_id' => 1,
             'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
+            'updated_at' => new DateTime(),    
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 3,
@@ -52,6 +54,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,            
         ]);
         DB::table('questions')->insert([
             'id' => 4,
@@ -66,6 +69,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,           
         ]);
         DB::table('questions')->insert([
             'id' => 5,
@@ -80,6 +84,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 6,
@@ -94,6 +99,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 7,
@@ -108,6 +114,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 8,
@@ -122,6 +129,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 9,
@@ -136,6 +144,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 10,
@@ -150,6 +159,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 11,
@@ -164,6 +174,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 12,
@@ -178,6 +189,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 13,
@@ -192,6 +204,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 14,
@@ -206,6 +219,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' =>15,
@@ -220,6 +234,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 16,
@@ -234,6 +249,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 17,
@@ -248,6 +264,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 18,
@@ -262,6 +279,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 19,
@@ -276,6 +294,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 20,
@@ -290,6 +309,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 21,
@@ -304,6 +324,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 22,
@@ -318,6 +339,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 23,
@@ -332,6 +354,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 24,
@@ -346,6 +369,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 25,
@@ -360,6 +384,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 26,
@@ -374,6 +399,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 27,
@@ -388,6 +414,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 28,
@@ -402,6 +429,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 29,
@@ -416,6 +444,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 30,
@@ -430,6 +459,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 31,
@@ -444,6 +474,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 32,
@@ -458,6 +489,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 33,
@@ -472,6 +504,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 34,
@@ -486,6 +519,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
         DB::table('questions')->insert([
             'id' => 35,
@@ -500,6 +534,7 @@ class QuestionTableSeeder extends Seeder
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'status' => 0,
         ]);
     }
 }
