@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { styled } from "@mui/material/styles";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-
 import Topic from "../../../Home/Q&A/search/condition/form/topicForm";
 import CurriculumNumber from "../../../Home/Q&A/search/condition/form/curriculum-number";
 import QuestionForm from "./question-form/questionForm";
@@ -33,6 +31,29 @@ const DefaultForm = () => {
     const [keyword, setKeyword] = useState("");
     const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
+    const [
+        curriculumNumberValidationError,
+        setCurriculumNumberValidationError
+    ] = useState(false);
+    const [
+        curriculumNumberValidationMessage,
+        setCurriculumNumberValidationMessage
+    ] = useState("");
+    const [question, setQuestion] = useState("");
+    const [questionValidationError, setQuestionValidationError] = useState({
+        title: false,
+        search: false,
+        content: false
+    });
+    const [questionValidationMessage, setQuestionValidationMessage] = useState({
+        titleErrorMessage: "",
+        searchErrorMessage: "",
+        contentErrorMessage: ""
+    });
+    const [title, setTitle] = useState("");
+    const [remarks, setRemarks] = useState("");
+    const [activeStep, setActiveStep] = useState(0);
+    const [images, setImages] = useState([]);
 
     const topics = [
         // カリキュラムのトピック
@@ -59,30 +80,6 @@ const DefaultForm = () => {
         "その他(成果物)"
     ];
 
-    const [
-        curriculumNumberValidationError,
-        setCurriculumNumberValidationError
-    ] = useState(false);
-    const [
-        curriculumNumberValidationMessage,
-        setCurriculumNumberValidationMessage
-    ] = useState("");
-    const [question, setQuestion] = useState("");
-    const [questionValidationError, setQuestionValidationError] = useState({
-        title: false,
-        search: false,
-        content: false
-    });
-    const [questionValidationMessage, setQuestionValidationMessage] = useState({
-        titleErrorMessage: "",
-        searchErrorMessage: "",
-        contentErrorMessage: ""
-    });
-    const [title, setTitle] = useState("");
-    const [remarks, setRemarks] = useState("");
-    const [activeStep, setActiveStep] = useState(0);
-    const [images, setImages] = useState([]);
-
     let curriculum;
     let project;
     if (category == 0) {
@@ -104,6 +101,7 @@ const DefaultForm = () => {
             <PurpleButton onClick={() => setCategory(1)}>成果物</PurpleButton>
         );
     }
+
     const handleSubmit = () => {
         // 重複保存防止のために保存ボタンのクリック数をカウント
         // クリック数が0回の場合のみ保存実行
