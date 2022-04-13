@@ -10,6 +10,9 @@ import Topic from "../../../Public/Home/Q&A/search/condition/form/topicForm";
 import CurriculumNumber from "./Curriculum-number/curriculum-number";
 import QuestionForm from "../../../Public/Question/Create/Create/question-form/questionForm";
 import QuestionConfirm from "../../../Public/Question/Create/Create/confirm";
+import ConfirmButton from "../../../Atom/Button/ConfirmButton";
+import PurpleButton from "../../../Atom/Button/PurpleButton";
+import WhiteButton from "../../../Atom/Button/WhiteButton";
 
 const styleSpan = {
     fontWeight: "normal",
@@ -17,50 +20,6 @@ const styleSpan = {
     marginLeft: "20px",
     fontSize: 18
 };
-
-const PurpleButton = styled(Button)(({ theme }) => ({
-    color: "white",
-    fontSize: 18,
-    width: "50%",
-    boxShadow: "none",
-    backgroundColor: "#771AF8",
-    border: "1px solid black",
-    fontWeight: "bold",
-    "&:hover": {
-        backgroundColor: "#6633CC",
-        boxShadow: "none",
-        color: "white"
-    }
-}));
-
-const WhiteButton = styled(Button)(({ theme }) => ({
-    color: "black",
-    fontSize: 18,
-    width: "50%",
-    boxShadow: "none",
-    backgroundColor: "white",
-    border: "1px solid black",
-    "&:hover": {
-        backgroundColor: "#EEEEEE",
-        boxShadow: "none",
-        color: "black"
-    }
-}));
-
-const ConfirmButton = styled(Button)(({ theme }) => ({
-    variant: "outlined",
-    color: "#771af8",
-    border: "2px solid #771af8",
-    fontWeight: "bold",
-    minWidth: 150,
-    maxWidth: 200,
-    marginBottom: 5,
-    fontSize: 15,
-    "&:hover": {
-        backgroundColor: "#771AF8",
-        color: "white"
-    }
-}));
 
 const selectForm = () => {
     const { id } = useParams();
