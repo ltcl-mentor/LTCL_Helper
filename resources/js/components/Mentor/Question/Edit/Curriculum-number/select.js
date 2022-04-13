@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
@@ -10,7 +10,7 @@ import TextField from "@mui/material/TextField";
  * カリキュラム番号の選択肢
  */
 
-const Selects = props => {
+const Selects = React.memo(props => {
     const handleCurriculumNumber = event => {
         props.setCurriculumNumber(event.target.value);
     };
@@ -22,6 +22,18 @@ const Selects = props => {
             </MenuItem>
         );
     });
+
+    // 編集前のトピックと選択しているトピックが一致している時だけ、編集前に選択していたカリキュラム番号を選択済み状態にする
+    const DefaultCurriculumNumber = old_curriculum_number => {
+        if (props.old_topic === props.topic) {
+            return (
+                <MenuItem value={old_curriculum_number}>
+                    {old_curriculum_number}
+                </MenuItem>
+            );
+        }
+    };
+
     return (
         <Box className="curriculum_number_box">
             <FormControl sx={{ width: "50%" }}>
@@ -36,18 +48,13 @@ const Selects = props => {
                     }}
                     select
                 >
-                    {props.old_curriculum_number === props.curriculum_number ? (
-                        <MenuItem value={props.curriculum_number}>
-                            {props.old_curriculum_number}
-                        </MenuItem>
-                    ) : null}
-
+                    {DefaultCurriculumNumber(props.curriculum_number)}
                     {MenuItems}
                 </TextField>
             </FormControl>
         </Box>
     );
-};
+});
 // function Selects(props) {
 //     const handleCurriculumNumber = (event) => {
 //         if (event.target.value === "") {

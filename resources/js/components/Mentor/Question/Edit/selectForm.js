@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { styled } from "@mui/material/styles";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Breadcrumbs from "../../../Breadcrumbs";
@@ -39,14 +38,16 @@ const selectForm = () => {
     const [title, setTitle] = useState("テスト");
     const [questionValidationError, setQuestionValidationError] = useState({
         title: false,
-        serach: false,
+        search: false,
         content: false
     });
     const [questionValidationMessage, setQuestionValidationMessage] = useState({
         titleErrorMessage: "",
-        serachErrorMessage: "",
+        searchErrorMessage: "",
         contentErrorMessage: ""
     });
+    const [images, setImages] = useState([]);
+    const [showConfirm, setShowConfirm] = useState(false);
     const topics = [
         // カリキュラムのトピック
         "AWS",
@@ -71,8 +72,6 @@ const selectForm = () => {
         "デザイン",
         "その他(成果物)"
     ];
-    const [images, setImages] = useState([]);
-    const [showConfirm, setShowConfirm] = useState(false);
 
     let curriculum;
     let project;
@@ -154,6 +153,8 @@ const selectForm = () => {
             setCurriculumNumberValidationError(true);
             setCurriculumNumberValidationMessage(validationMessage);
             return false;
+        } else {
+            return true;
         }
     };
 
@@ -161,12 +162,12 @@ const selectForm = () => {
     const validateQuestions = () => {
         let validateKey = {
             title: false,
-            serach: false,
+            search: false,
             content: false
         };
         let validateMessage = {
             titleErrorMessage: "",
-            serachErrorMessage: "",
+            searchErrorMessage: "",
             contentErrorMessage: ""
         };
         if (title.trim().length === 0) {
@@ -175,31 +176,37 @@ const selectForm = () => {
                 "質問タイトルを入力してください";
         }
         if (remarks.trim().length === 0) {
-            validateKey.serach = true;
-            validateMessage.serachErrorMessage = "調べたことを入力してください";
+            validateKey.search = true;
+            validateMessage.searchErrorMessage = "調べたことを入力してください";
         }
         if (question.trim().length === 0) {
             validateKey.content = true;
-            validateKey.contentErrorMessage = "質問内容を入力してください";
+            validateMessage.contentErrorMessage = "質問内容を入力してください";
         }
         setQuestionValidationError(validateKey);
         setQuestionValidationMessage(validateMessage);
-    };
-    const handleValidate = () => {
-        validateCurriculumNumber();
-        validateQuestions();
+
         if (
-            questionValidationError.title == false &&
-            questionValidationError.serach == false &&
-            questionValidationError.content == false
+            validateKey.title == false &&
+            validateKey.search == false &&
+            validateKey.content == false
         ) {
-            setShowConfirm(true);
+            return true;
+        } else {
+            return false;
         }
     };
 
     // 確認ボタンを押した際にテキストフィールドのバリデーションを行う
     const handleConfirmPage = () => {
-        handleValidate();
+        const curriculum_number_error_check = validateCurriculumNumber();
+        const question_form_error_check = validateQuestions();
+        if (
+            curriculum_number_error_check === true &&
+            question_form_error_check === true
+        ) {
+            setShowConfirm(true);
+        }
     };
 
     // 入力ページへ戻るための関数
@@ -210,6 +217,7 @@ const selectForm = () => {
     const handleBackTopPage = () => {
         history.push("/mentor/top");
     };
+
     return (
         <div>
             <Breadcrumbs page="mentor_question_edit" id={id} />
