@@ -156,15 +156,6 @@ function Show() {
                     position: "relative"
                 }}
             >
-                <Box sx={{ position: "absolute", right: -10, bottom: 10 }}>
-                    <SelectStatus
-                        id={id}
-                        status={status}
-                        setStatus={setStatus}
-                        responseStatus={question["status"]}
-                    />
-                </Box>
-
                 <Box sx={{ position: "absolute" }}>
                     <Publish
                         question_id={id}
@@ -236,6 +227,10 @@ function Show() {
                 category={question.category}
                 topic={question.topic}
                 curriculum_number={question.curriculum_number}
+                id={id}
+                status={status}
+                setStatus={setStatus}
+                responseStatus={question["status"]}
             />
             <Comments
                 main_comments={question.main_comments}

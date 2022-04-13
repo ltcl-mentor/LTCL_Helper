@@ -2,6 +2,7 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Box from "@mui/material/Box";
 import Avatar from "@material-ui/core/Avatar";
+import SelectStatus from "../../../Atom/Select/SelectStatus";
 
 /**
  * 質問表示
@@ -217,17 +218,29 @@ function Question(props) {
                     {props.curriculum_number}&nbsp;
                 </Typography>
             </Box>
-            <Typography
-                variant="h4"
-                component="div"
-                sx={{
-                    marginTop: 4,
-                    fontSize: 30,
-                    fontWeight: "bold"
-                }}
-            >
-                {props.title}
-            </Typography>
+
+            <Box sx={{ display: "fex", position: "relative" }}>
+                <Typography
+                    variant="h4"
+                    component="div"
+                    sx={{
+                        marginTop: 4,
+                        fontSize: 30,
+                        fontWeight: "bold"
+                    }}
+                >
+                    {props.title}
+                </Typography>
+                <Box sx={{ position: "absolute", right: 0, margin: 2 }}>
+                    <SelectStatus
+                        id={props.id}
+                        status={props.status}
+                        setStatus={props.setStatus}
+                        responseStatus={props.responseStatus}
+                    />
+                </Box>
+            </Box>
+
             <Typography
                 variant="h6"
                 component="div"
