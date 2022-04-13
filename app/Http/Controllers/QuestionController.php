@@ -133,6 +133,16 @@ class QuestionController extends Controller
         $question->fill(['is_resolved' => true])->save();
         return $question;
     }
+
+    /**     
+     *  質問のステータス変更処理（未対応、対応中、解決済み、要対応）
+    */
+    public function status(Request $request,Question $question)
+    {
+        $new_status = $request["status"];
+        $question->fill(["status" => $new_status])->save();
+        return response()->json(["test" => $question]);
+    }
     
     /**
      * 公開中の質問一覧表示
