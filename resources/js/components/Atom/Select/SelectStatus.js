@@ -23,10 +23,14 @@ const SelectStatus = React.memo(props => {
         const data = {
             status: props.status
         };
-        axios
-            .post(`/questions/${props.id}/status`, data)
-            .then(response => console.log(response.data))
-            .catch(error => console.log(error));
+
+        // 初回レンダリングではstatusの更新処理を行わないように条件分岐を設定
+        if (props.responseStatus != undefined) {
+            axios
+                .post(`/questions/${props.id}/status`, data)
+                .then(response => console.log(response.data.text))
+                .catch(error => console.log(error));
+        }
     }, [props.status]);
 
     return (
