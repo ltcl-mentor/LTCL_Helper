@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
-import DefaultForm from "./default-form";
+import DefaultForm from "./selectForm";
 
 /**
  * 質問投稿のメインコンポーネント
