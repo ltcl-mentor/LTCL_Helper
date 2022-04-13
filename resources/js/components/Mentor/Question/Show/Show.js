@@ -14,6 +14,7 @@ import Question from "./question";
 import Comments from "../../../Public/Question/Show/comments/comments";
 import Documents from "../../../Public/Question/Show/documents";
 import RelatedQuestions from "../../../Public/Question/Show/related-questions";
+import SelectStatus from "../../../Atom/Select/SelectStatus";
 
 /**
  * 質問詳細(管理画面)のメインコンポーネント
@@ -24,6 +25,7 @@ function Show() {
     const { id } = useParams();
     const history = useHistory();
     const [question, setQuestion] = useState([]);
+    const [status, setStatus] = useState(0);
     const [documents, setDocuments] = useState([]);
     const [comment_changing, setCommentChanging] = useState(false);
     const categories = ["カリキュラム", "成果物"];
@@ -73,6 +75,7 @@ function Show() {
             .get(`/react/question/${id}`)
             .then(response => {
                 setQuestion(response.data);
+                setStatus(response.data["status"]);
             })
             .catch(error => {
                 console.log(error);
@@ -153,6 +156,14 @@ function Show() {
                     position: "relative"
                 }}
             >
+                <Box sx={{ position: "absolute", right: -10, bottom: 10 }}>
+                    <SelectStatus
+                        id={id}
+                        status={status}
+                        setStatus={setStatus}
+                    />
+                </Box>
+
                 <Box sx={{ position: "absolute" }}>
                     <Publish
                         question_id={id}
@@ -163,7 +174,6 @@ function Show() {
                         topic={topics[question.topic]}
                     />
                 </Box>
-
                 <Box sx={{ position: "absolute", right: "-2%" }}>
                     <Link to={`/questions/` + id + `/edit`}>
                         <Button
