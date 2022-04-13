@@ -86,9 +86,9 @@ function QuestionForm(props) {
                 <TextField
                     placeholder="例：以下のサイトでCSSの呼び出し方を確認しました。\nhttp://~"
                     label="調べたこと（参考にしたサイトURLなども記載）"
-                    error={props.question_validation_error.serach}
+                    error={props.question_validation_error.search}
                     helperText={
-                        props.questionValidationMessage.serachErrorMessage
+                        props.questionValidationMessage.searchErrorMessage
                     }
                     multiline
                     rows={4}
