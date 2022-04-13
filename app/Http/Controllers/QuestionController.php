@@ -48,6 +48,7 @@ class QuestionController extends Controller
         
         $question['is_resolved'] = 0;
         $question['check'] = false;
+        $question["status"] = 0;
         $question['user_id'] = Auth::id();
         logger($question);
         
@@ -141,7 +142,7 @@ class QuestionController extends Controller
     {
         $new_status = $request["status"];
         $question->fill(["status" => $new_status])->save();
-        return response()->json(["test" => $question]);
+        return response()->json(["text" => "Status has been changed."]);
     }
     
     /**

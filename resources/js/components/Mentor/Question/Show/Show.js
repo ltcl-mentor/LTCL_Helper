@@ -161,6 +161,7 @@ function Show() {
                         id={id}
                         status={status}
                         setStatus={setStatus}
+                        responseStatus={question["status"]}
                     />
                 </Box>
 
