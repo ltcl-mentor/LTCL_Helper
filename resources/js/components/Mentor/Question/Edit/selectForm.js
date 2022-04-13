@@ -5,13 +5,13 @@ import Typography from "@material-ui/core/Typography";
 import Breadcrumbs from "../../../Breadcrumbs";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-import Topic from "../../../Public/Home/Q&A/search/condition/form/topicForm";
 import CurriculumNumber from "./Curriculum-number/curriculum-number";
 import QuestionForm from "../../../Public/Question/Create/Create/question-form/questionForm";
 import QuestionConfirm from "../../../Public/Question/Create/Create/confirm";
 import ConfirmButton from "../../../Atom/Button/ConfirmButton";
 import PurpleButton from "../../../Atom/Button/PurpleButton";
 import WhiteButton from "../../../Atom/Button/WhiteButton";
+import TopicForm from "./topicForm";
 
 const styleSpan = {
     fontWeight: "normal",
@@ -30,12 +30,16 @@ const selectForm = () => {
     const [activeStep, setActiveStep] = useState(0);
     const [curriculum_number, setCurriculumNumber] = useState("");
     const [
-        curriculum_number_validation_error,
+        curriculumNumberValidationError,
         setCurriculumNumberValidationError
     ] = useState(0);
+    const [
+        curriculumNumberValidationMessage,
+        setCurriculumNumberValidationMessage
+    ] = useState("");
     const [remarks, setRemarks] = useState("");
     const [question, setQuestion] = useState("");
-    const [title, setTitle] = useState("テスト");
+    const [title, setTitle] = useState("");
     const [questionValidationError, setQuestionValidationError] = useState({
         title: false,
         search: false,
@@ -144,7 +148,6 @@ const selectForm = () => {
             return false;
         }
     };
-
     const validateCurriculumNumber = () => {
         // カリキュラム番号のバリデーション;
         let validationMessage = "カリキュラム番号を選択してください";
@@ -291,10 +294,11 @@ const selectForm = () => {
                             以下の選択肢から1つを選択してください
                         </span>
                     </Typography>
-                    <Topic
+                    <TopicForm
                         category={category}
                         topic={topic}
                         setTopic={setTopic}
+                        setCurriculumNumber={setCurriculumNumber}
                         topics={topics}
                     />
                     <Typography
@@ -316,8 +320,11 @@ const selectForm = () => {
                         curriculum_number={curriculum_number}
                         old_topic={old_data.topic}
                         old_curriculum_number={old_data.curriculum_number}
-                        curriculum_number_validation_error={
-                            curriculum_number_validation_error
+                        curriculumNumberValidationError={
+                            curriculumNumberValidationError
+                        }
+                        curriculumNumberValidationMessage={
+                            curriculumNumberValidationMessage
                         }
                     />
                     <QuestionForm

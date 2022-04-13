@@ -4,13 +4,13 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-import Topic from "../../../Home/Q&A/search/condition/form/topicForm";
 import CurriculumNumber from "../../../Home/Q&A/search/condition/form/curriculum-number";
 import QuestionForm from "./question-form/questionForm";
 import QuestionConfirm from "./confirm";
 import PurpleButton from "../../../../Atom/Button/PurpleButton";
 import WhiteButton from "../../../../Atom/Button/WhiteButton";
 import ConfirmButton from "../../../../Atom/Button/ConfirmButton";
+import TopicForm from "./topicForm";
 
 const styleSpan = {
     fontWeight: "normal",
@@ -213,6 +213,7 @@ const DefaultForm = () => {
     useEffect(() => {
         setIsSearchButtonClicked(false);
     }, [category, topic, curriculum_number, keyword]);
+    console.log("num", curriculum_number);
 
     return (
         <div>
@@ -297,10 +298,11 @@ const DefaultForm = () => {
                             以下の選択肢から1つを選択してください
                         </span>
                     </Typography>
-                    <Topic
+                    <TopicForm
                         category={category}
                         topic={topic}
                         setTopic={setTopic}
+                        setCurriculumNumber={setCurriculumNumber}
                         topics={topics}
                     />
                     {/* カリキュラム番号 */}

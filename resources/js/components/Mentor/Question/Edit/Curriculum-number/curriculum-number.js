@@ -54,8 +54,11 @@ function CurriculumNumber(props) {
                     curriculum_number={props.curriculum_number}
                     old_topic={props.old_topic}
                     old_curriculum_number={props.old_curriculum_number}
-                    curriculum_number_validation_error={
-                        props.curriculum_number_validation_error
+                    curriculumNumberValidationError={
+                        props.curriculumNumberValidationError
+                    }
+                    curriculumNumberValidationMessage={
+                        props.curriculumNumberValidationMessage
                     }
                     items={curriculum_numbers}
                 />
