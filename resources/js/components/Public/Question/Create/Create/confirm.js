@@ -1,28 +1,14 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { styled } from "@mui/material/styles";
 import Parameters from "../../Show/parameters";
+import ConfirmButton from "../../../../Atom/Button/ConfirmButton";
 
 /**
  * 質問登録前の確認フォーム
  */
-const ConfirmButton = styled(Button)(({ theme }) => ({
-    variant: "outlined",
-    color: "#771af8",
-    border: "2px solid #771af8",
-    fontWeight: "bold",
-    minWidth: 150,
-    maxWidth: 200,
-    marginBottom: 5,
-    fontSize: 15,
-    "&:hover": {
-        backgroundColor: "#771AF8",
-        color: "white"
-    }
-}));
 
-function QuestionConfirm(props) {
+const QuestionConfirm = props => {
     let question = [];
     if (props.question) {
         // 最後の文が認識されないのを防止する
@@ -232,6 +218,6 @@ function QuestionConfirm(props) {
             </div>
         </div>
     );
-}
+};
 
 export default QuestionConfirm;

@@ -1,21 +1,5 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useParams, useHistory } from "react-router-dom";
-import Button from "@mui/material/Button";
-import SaveIcon from "@material-ui/icons/Save";
-import Typography from "@material-ui/core/Typography";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
-import Card from "@material-ui/core/Card";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-
-import Breadcrumbs from "../../../Breadcrumbs";
-import Category from "./categoryForm";
-import TopicForm from "./topicForm";
-import CurriculumNumber from "./Curriculum-number/curriculum-number";
-import QuestionForm from "../../../Public/Question/Create/Create/question-form/questionForm";
-import Confirm from "../../../Public/Question/Create/Create/confirm";
 import SelectForm from "./selectForm";
 
 /**

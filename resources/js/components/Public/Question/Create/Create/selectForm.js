@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { styled } from "@mui/material/styles";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-
-import Topic from "../../../Home/Q&A/search/condition/form/topicForm";
 import CurriculumNumber from "../../../Home/Q&A/search/condition/form/curriculum-number";
 import QuestionForm from "./question-form/questionForm";
 import QuestionConfirm from "./confirm";
 import PurpleButton from "../../../../Atom/Button/PurpleButton";
 import WhiteButton from "../../../../Atom/Button/WhiteButton";
 import ConfirmButton from "../../../../Atom/Button/ConfirmButton";
+import TopicForm from "./topicForm";
 
 const styleSpan = {
     fontWeight: "normal",
@@ -33,6 +31,29 @@ const DefaultForm = () => {
     const [keyword, setKeyword] = useState("");
     const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
+    const [
+        curriculumNumberValidationError,
+        setCurriculumNumberValidationError
+    ] = useState(false);
+    const [
+        curriculumNumberValidationMessage,
+        setCurriculumNumberValidationMessage
+    ] = useState("");
+    const [question, setQuestion] = useState("");
+    const [questionValidationError, setQuestionValidationError] = useState({
+        title: false,
+        search: false,
+        content: false
+    });
+    const [questionValidationMessage, setQuestionValidationMessage] = useState({
+        titleErrorMessage: "",
+        searchErrorMessage: "",
+        contentErrorMessage: ""
+    });
+    const [title, setTitle] = useState("");
+    const [remarks, setRemarks] = useState("");
+    const [activeStep, setActiveStep] = useState(0);
+    const [images, setImages] = useState([]);
 
     const topics = [
         // カリキュラムのトピック
@@ -59,30 +80,6 @@ const DefaultForm = () => {
         "その他(成果物)"
     ];
 
-    const [
-        curriculumNumberValidationError,
-        setCurriculumNumberValidationError
-    ] = useState(false);
-    const [
-        curriculumNumberValidationMessage,
-        setCurriculumNumberValidationMessage
-    ] = useState("");
-    const [question, setQuestion] = useState("");
-    const [questionValidationError, setQuestionValidationError] = useState({
-        title: false,
-        serach: false,
-        content: false
-    });
-    const [questionValidationMessage, setQuestionValidationMessage] = useState({
-        titleErrorMessage: "",
-        serachErrorMessage: "",
-        contentErrorMessage: ""
-    });
-    const [title, setTitle] = useState("");
-    const [remarks, setRemarks] = useState("");
-    const [activeStep, setActiveStep] = useState(0);
-    const [images, setImages] = useState([]);
-
     let curriculum;
     let project;
     if (category == 0) {
@@ -104,6 +101,7 @@ const DefaultForm = () => {
             <PurpleButton onClick={() => setCategory(1)}>成果物</PurpleButton>
         );
     }
+
     const handleSubmit = () => {
         // 重複保存防止のために保存ボタンのクリック数をカウント
         // クリック数が0回の場合のみ保存実行
@@ -154,18 +152,20 @@ const DefaultForm = () => {
             setCurriculumNumberValidationError(true);
             setCurriculumNumberValidationMessage(validationMessage);
             return false;
+        } else {
+            return true;
         }
     };
 
     const validateQuestions = () => {
         let validateKey = {
             title: false,
-            serach: false,
+            search: false,
             content: false
         };
         let validateMessage = {
             titleErrorMessage: "",
-            serachErrorMessage: "",
+            searchErrorMessage: "",
             contentErrorMessage: ""
         };
         if (title.trim().length === 0) {
@@ -174,30 +174,36 @@ const DefaultForm = () => {
                 "質問タイトルを入力してください";
         }
         if (remarks.trim().length === 0) {
-            validateKey.serach = true;
-            validateMessage.serachErrorMessage = "調べたことを入力してください";
+            validateKey.search = true;
+            validateMessage.searchErrorMessage = "調べたことを入力してください";
         }
         if (question.trim().length === 0) {
             validateKey.content = true;
-            validateKey.contentErrorMessage = "質問内容を入力してください";
+            validateMessage.contentErrorMessage = "質問内容を入力してください";
         }
         setQuestionValidationError(validateKey);
         setQuestionValidationMessage(validateMessage);
-    };
-    const handleValidate = () => {
-        validateCurriculumNumber();
-        validateQuestions();
+
         if (
-            questionValidationError.title == false &&
-            questionValidationError.serach == false &&
-            questionValidationError.content == false
+            validateKey.title == false &&
+            validateKey.search == false &&
+            validateKey.content == false
         ) {
-            setShowConfirm(true);
+            return true;
+        } else {
+            return false;
         }
     };
 
     const handleConfirmPage = () => {
-        handleValidate();
+        const curriculum_number_error_check = validateCurriculumNumber();
+        const question_form_error_check = validateQuestions();
+        if (
+            curriculum_number_error_check === true &&
+            question_form_error_check === true
+        ) {
+            setShowConfirm(true);
+        }
     };
 
     const backInputPage = () => {
@@ -207,6 +213,7 @@ const DefaultForm = () => {
     useEffect(() => {
         setIsSearchButtonClicked(false);
     }, [category, topic, curriculum_number, keyword]);
+    console.log("num", curriculum_number);
 
     return (
         <div>
@@ -291,10 +298,11 @@ const DefaultForm = () => {
                             以下の選択肢から1つを選択してください
                         </span>
                     </Typography>
-                    <Topic
+                    <TopicForm
                         category={category}
                         topic={topic}
                         setTopic={setTopic}
+                        setCurriculumNumber={setCurriculumNumber}
                         topics={topics}
                     />
                     {/* カリキュラム番号 */}
