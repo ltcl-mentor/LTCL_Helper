@@ -186,7 +186,7 @@ const TopicForm = props => {
 
     return (
         <div>
-            <p>変更前：{topics[props.old_topic]}</p>
+            {/* <p>変更前：{topics[props.old_topic]}</p> */}
             {topic}
         </div>
     );
