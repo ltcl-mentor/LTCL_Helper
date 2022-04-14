@@ -28,6 +28,30 @@ function Show() {
     const [user, setUser] = useState([]);
     const [comment_changing, setCommentChanging] = useState(false);
     const [question_changing, setQuestionChanging] = useState(false);
+    const topics = [
+        // カリキュラム
+        "AWS",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "サーバー",
+        "PHP",
+        "Laravel",
+        "DB",
+        "Git&GitHub",
+        "マイグレーション",
+        "リレーション",
+        "認証・認可機能(カリキュラム)",
+        "API(カリキュラム)",
+        "その他(カリキュラム)",
+        // 成果物
+        "認証・認可機能(成果物)",
+        "API(成果物)",
+        "画像処理",
+        "Heroku環境",
+        "デザイン",
+        "その他(成果物)"
+    ];
 
     // 画面幅を随時取得
     window.addEventListener("resize", function() {
@@ -144,7 +168,11 @@ function Show() {
             />
 
             <div style={{ marginLeft: "3%" }}>
-                <Breadcrumbs page="public_question_show" />
+                <Breadcrumbs
+                    page="public_question_show"
+                    topic={question["topic"]}
+                    topic_title={topics[question["topic"]]}
+                />
             </div>
             {question.length !== 0 &&
                 !question.is_resolved &&
