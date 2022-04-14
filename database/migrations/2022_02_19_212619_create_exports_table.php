@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateExportsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    // CSV出力
     public function up()
     {
         Schema::create('exports', function (Blueprint $table) {

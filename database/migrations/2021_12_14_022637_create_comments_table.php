@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCommentsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    // 質問のコメント
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
@@ -20,9 +16,12 @@ class CreateCommentsTable extends Migration
             $table->UnsignedBigInteger('comment_id');
             $table->UnsignedBigInteger('user_id');
             $table->boolean('is_staff');
-            $table->boolean('is_mentor_commented')->nullable();
+            $table->boolean('is_mentor_commented')->nullable(); // メンターが返信したかどうか
             $table->timestamps();
             $table->softDeletes();
+            
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

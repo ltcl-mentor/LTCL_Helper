@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateDocumentsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    // 関連記事
     public function up()
     {
         Schema::create('documents', function (Blueprint $table) {
@@ -22,8 +18,11 @@ class CreateDocumentsTable extends Migration
             $table->boolean('master');
             $table->boolean('all');
             $table->unsignedBigInteger('user_id');
+            $table->UnsignedTinyInteger('category')->nullable();
             $table->timestamps();
             $table->softDeletes();
+            
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
             'is_admin' => 'staff',
         ]);
         DB::table('users')->insert([
-            'name' => "student",
+            'name' => "test-user",
             'password' => Hash::make(ENV('seederStudentPassword')),
             'is_admin' => '',
         ]);

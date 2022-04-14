@@ -22,6 +22,22 @@ class Comment extends Model
     /**
      * リレーション
      */
+    public function images() {
+        return $this->hasMany('App\Image');
+    }
+    
+    public function question() {
+        return $this->belongsTo('App\Question');
+    }
+    
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+    
+    // public function comment() {
+    //     return $this->belongsTo('App\Comment');
+    // }
+     
     public function getQestionTitle()
     {
         $question = Question::find($this->question_id);
@@ -71,9 +87,5 @@ class Comment extends Model
         $question['sub_comments'] = $sub_comments;
         
         return $question;
-    }
-    
-    public function question() {
-        return $this->belongsTo('App\Question');
     }
 }
