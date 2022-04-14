@@ -39,57 +39,57 @@ const UserRegister = (props) => {
     const handleYear = (event) => {
         setYear(event.target.value);
     };
-    
+
     const handleMonth = (event) => {
         setMonth(event.target.value);
     };
-    
+
     const handleNumber = (event) => {
         setNumber(event.target.value);
     };
-    
+
     const handleSubmitAdmin = () => {
         setErrorName('');
         setErrorPassword('');
         setErrorConfirmPassword('');
-        
+
         if (clickCount === 0) {
             setClickCount(1);
             const name = document.getElementById('name').value;
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('password-confirm').value;
             error = 0;
-            
+
             // バリデーション
             // パスワード不一致
             if (password !== confirmPassword) {
                 setErrorPassword('パスワードが一致しません。');
                 error++;
             }
-            
+
             // 名前が空欄
             if (name.length == 0) {
                 setErrorName('名前を入力してください。');
                 error++;
             }
-            
+
             // パスワードが空欄
             if (password.length < 8) {
                 setErrorPassword('パスワードは8文字以上を入力してください。');
                 error++;
             }
-            
+
             // 確認用パスワードが空欄
             if (confirmPassword.length < 8) {
                 setErrorConfirmPassword('パスワード(確認)は8文字以上を入力してください。');
                 error++;
             }
-            
+
             if (error > 0) {
                 setClickCount(0);
                 return false;
             }
-            
+
             axios
                 .post("/users/admin/register", {
                     name: name,
@@ -97,8 +97,22 @@ const UserRegister = (props) => {
                 })
                 .then(response => {
                     if (response.status === 200) {
-                        props.setStudents(response.data.students);
-                        props.setStaffs(response.data.staffs);
+                        props.setStudents({
+                            eventList: response.data.students.data,
+                            itemsCountPerPage: response.data.students.per_page,
+                            totalItemsCount: response.data.students.total,
+                            currentPage: response.data.students.current_page,
+                            pageRangeDisplayed: 10,
+                            lastPage: response.data.students.last_page,
+                        });
+                        props.setStaffs({
+                            eventList: response.data.staffs.data,
+                            itemsCountPerPage: response.data.staffs.per_page,
+                            totalItemsCount: response.data.staffs.total,
+                            currentPage: response.data.staffs.current_page,
+                            pageRangeDisplayed: 10,
+                            lastPage: response.data.staffs.last_page,
+                        });
                         setClickCount(0);
                         props.onClose();
                         history.push("/?page=manage", {type: "user", status: 'admin_created'});
@@ -111,7 +125,7 @@ const UserRegister = (props) => {
             return false;
         }
     };
-    
+
     let component;
     if (props.value == 0) {
         component = (
@@ -119,7 +133,7 @@ const UserRegister = (props) => {
                 <Typography align="center" component="div" sx={{ color: '#771AF8', fontSize: '20px', fontWeight: 'bold' }}>
                     受講生の登録
                 </Typography>
-                
+
                 <Card sx={{ width: '80%', m: '40px auto', boxShadow: 'none', backgroundColor: "#ECE9E9" }}>
                     <FormControl sx={{ width: '28%' }} size="small">
                         <Grid container>
@@ -193,12 +207,12 @@ const UserRegister = (props) => {
                         </Grid>
                     </FormControl>
                 </Card>
-                
+
                 <Forms
                     password={'ltcl' + year%100 + ('0' + month).slice(-2)}
                     number={number}
-                    onClose={ props.onClose } 
-                    setStudents={props.setStudents} 
+                    onClose={ props.onClose }
+                    setStudents={props.setStudents}
                     setStaffs={props.setStaffs}
                 />
             </React.Fragment>
@@ -209,7 +223,7 @@ const UserRegister = (props) => {
                 <Typography align="center" component="div" sx={{ color: '#771AF8', fontSize: '20px', fontWeight: 'bold' }}>
                     管理者の登録
                 </Typography>
-                
+
                 <Table sx={{ width: '80%', m: '10px auto 0' }}>
                     <TableRow>
                         <TableCell sx={{ borderBottom: 'white', width: '180px', fontWeight: 'bold', color: '#666666', fontSize: '18px', verticalAlign: 'bottom' }}>ユーザー名</TableCell>
@@ -218,7 +232,7 @@ const UserRegister = (props) => {
                                 実名を登録しないでください！
                             </Typography>
                             <input id="name" type="text" className="form-control" name="name" required autoComplete="name" autoFocus/>
-                            {errorName.length > 0 && 
+                            {errorName.length > 0 &&
                                 <Typography component="div" sx={{ color: "red", fontSize: '14px' }}>
                                     {errorName}
                                 </Typography>
@@ -229,7 +243,7 @@ const UserRegister = (props) => {
                         <TableCell sx={{ borderBottom: 'white', width: '180px', fontWeight: 'bold', color: '#666666', fontSize: '18px' }}>パスワード</TableCell>
                         <TableCell sx={{ borderBottom: 'white' }}>
                             <input id="password" type="password" className="form-control" name="password" required autoComplete="new-password"/>
-                            {errorPassword.length > 0 && 
+                            {errorPassword.length > 0 &&
                                 <Typography component="div" sx={{ color: "red", fontSize: '14px' }}>
                                     {errorPassword}
                                 </Typography>
@@ -240,7 +254,7 @@ const UserRegister = (props) => {
                         <TableCell sx={{ borderBottom: 'white', width: '180px', fontWeight: 'bold', color: '#666666', fontSize: '18px' }}>パスワード(確認)</TableCell>
                         <TableCell sx={{ borderBottom: 'white' }}>
                             <input id="password-confirm" type="password" className="form-control" name="password_confirmation" required autoComplete="new-password"/>
-                            {errorConfirmPassword.length > 0 && 
+                            {errorConfirmPassword.length > 0 &&
                                 <Typography component="div" sx={{ color: "red", fontSize: '14px' }}>
                                     {errorConfirmPassword}
                                 </Typography>
@@ -248,16 +262,16 @@ const UserRegister = (props) => {
                         </TableCell>
                     </TableRow>
                 </Table>
-                
+
                 <Typography align="center" component="div" sx={{ marginTop: 4, marginBottom: 3 }}>
                     <Button
                         onClick={() => handleSubmitAdmin()}
                         variant="outlined"
-                        sx={{ 
+                        sx={{
                             color: '#771AF8',
                             border: '1px solid #771AF8',
-                            '&:hover': { 
-                                color: 'white', 
+                            '&:hover': {
+                                color: 'white',
                                 backgroundColor: '#771AF8',
                                 border: '1px solid #771AF8',
                             }
@@ -269,7 +283,7 @@ const UserRegister = (props) => {
             </React.Fragment>
         );
     }
-    
+
     return (
         <React.Fragment>
             <IconButton onClick={() => props.onClose()} sx={{ color: 'red', ml: '95%' }}>

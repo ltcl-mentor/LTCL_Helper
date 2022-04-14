@@ -47,7 +47,11 @@ class ReactController extends Controller
             // 絞り込み検索用
             $request->category, $request->topic, $request->curriculum_number, $request->keyword,
             // フリーワード検索用
-            $request->searchType, urldecode($request->freeword)
+            $request->searchType, urldecode($request->freeword),
+            //管理者か確認
+            $request->admin,
+            //ステータスを取得
+            $request->status
         );
     }
 

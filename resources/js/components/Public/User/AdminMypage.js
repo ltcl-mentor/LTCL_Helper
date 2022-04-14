@@ -42,23 +42,23 @@ const MyPage = (props) => {
     const [two_week_days, setTwoWeekDays] = useState();
     const [todayData, setTodayData] = useState('');
     const history = useHistory();
-    
+
     // 画面描画時に実行
     useEffect(() => {
         // 直近2週間の日付取得
         const today = new Date();
         const todayDataString = (today.getFullYear() + `-` + ('0' + (today.getMonth() + 1)).slice(-2) + `-` + (`0` + today.getDate()).slice(-2));
         var days = [];
-        
+
         for (let day_count = 0; day_count <= 14; day_count++) {
             const day = new Date(today.getFullYear(), today.getMonth(), today.getDate() - day_count);
             days.push(day.getFullYear() + `-` + ('0' + (day.getMonth() + 1)).slice(-2) + `-` + (`0` + day.getDate()).slice(-2));
         }
-        
+
         setTodayData(todayDataString);
         setTwoWeekDays(days);
     }, []);
-    
+
     // 画面描画時に実行
     useEffect(() => {
         // ログインユーザの質問閲覧履歴取得
@@ -78,7 +78,7 @@ const MyPage = (props) => {
                 console.log(error);
             });
     }, []);
-    
+
     let histories;
     let flag = true;
     if (two_week_days) {
@@ -89,11 +89,11 @@ const MyPage = (props) => {
             return (
                 <Box sx={{marginBottom: 6}}>
                     <Box>
-                            { todayData == day ? 
-                            <Typography sx={{ width: '33%', flexShrink: 0 , marginBottom: 2}} variant='h5'>今日（{day}）</Typography>: 
+                            { todayData == day ?
+                            <Typography sx={{ width: '33%', flexShrink: 0 , marginBottom: 2}} variant='h5'>今日（{day}）</Typography>:
                             <Typography sx={{ width: '33%', flexShrink: 0 , marginBottom: 2}} variant='h5'>{day}</Typography>
                             }
-                        
+
                     </Box>
                     <Paper>
                     <TableContainer sx={{ marginBottom: 2 }}>
@@ -107,12 +107,12 @@ const MyPage = (props) => {
                                                     <TableCell align="center">
                                                         { question.is_resolved ?
                                                             <font color="green">解決済み</font>
-                                                        : 
+                                                        :
                                                             <font color="red">未解決</font>
                                                         }
                                                     </TableCell>
                                                     <TableCell align="left" sx={{width: '60%'}}>
-                                                        <Link to={'/my_page/questions/' + question.id} style={{ color: 'black' }} >
+                                                        <Link to={'/questions/' + question.id} style={{ color: 'black' }} >
                                                             {question.title.length > 31 ?
                                                                 question.title.substring(0,30) + "..."
                                                             :
@@ -140,7 +140,7 @@ const MyPage = (props) => {
                                                     </TableCell>
                                                 </TableRow>
                                             );
-                                    
+
                                 }
                                 })}
                                 {flag &&<TableRow hover role="checkbox" tabIndex={-1} ><TableCell align="left" ><Typography sx={{marginLeft: '5%'}}>閲覧履歴はありません</Typography></TableCell></TableRow>}
@@ -152,7 +152,7 @@ const MyPage = (props) => {
                 )}}
         })
     }
-    
+
     const handlePageClick = (event, index) => {
         // 検索結果の質問取得
         axios
@@ -170,9 +170,9 @@ const MyPage = (props) => {
                 console.log(error);
             });
     };
-    
+
     let pagination;
-    
+
     pagination = (
             <Pagination
                 count={ questions.lastPage }
@@ -181,23 +181,23 @@ const MyPage = (props) => {
                 sx={{ display: "block" }}
             />
         );
-    
+
     // Topページに戻る
     const handleBackTopPage = () => {
         history.push("/");
     };
-    
+
     // ログインユーザー情報取得
     const user = useContext(LoginUser);
-    
+
     return (
         <div className="mypage">
             <Breadcrumbs page="my_page"/>
-            
+
             <Typography sx={{ fontSize: '24px', color: '#771AF8', fontWeight: 'bold' }}>
                 管理者用マイページ
             </Typography>
-            
+
             <Typography sx={{ fontSize: '20px', fontWeight: 'bold', marginTop: 4, marginBottom: 3 }}>
                 基本情報
             </Typography>
@@ -215,14 +215,14 @@ const MyPage = (props) => {
                     </TableBody>
                 </Table>
             </Paper>
-            
+
             <div
                 style={{
                     marginTop: 5,
                     marginBottom: 30
                 }}
             >
-            
+
             <Typography sx={{ fontSize: '24px', color: '#771AF8', fontWeight: 'bold' , marginBottom: 3}}>質問閲覧履歴</Typography>
             {  histories }
             <Grid container justifyContent="center" sx={{ marginTop: 1, marginBottom: 2 }}>

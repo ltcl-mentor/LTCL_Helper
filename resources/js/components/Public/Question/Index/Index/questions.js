@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {useParams, useHistory, Link} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -8,25 +8,41 @@ import ListItemText from '@mui/material/ListItemText';
 import axios from "axios";
 import Grid from '@mui/material/Grid';
 import Pagination from '@mui/material/Pagination';
+import {LoginUser} from "../../../../Route";
+import Button from "@material-ui/core/Button";
+import FormControl from "@material-ui/core/FormControl";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@material-ui/core/MenuItem";
 
 /**
  * カリキュラムの質問一覧
  */
 function Questions(props) {
-
+    const user = useContext(LoginUser);
     const [currentPage, setCurrentPage] = useState(1);
+    const status = props.status;
+    const setStatus = props.setStatus;
     const questions = props.questions;
+    let val;
+    if (props.category < 14) {
+        val = 0
+    } else {
+        val = 1
+    }
+
     const handlePageClick = (event, index) => {
-        let val;
-        if (props.category < 14) {
-            val = 0
-        } else {
-            val = 1
+        let questionsUrl;
+        if(user.is_admin){
+            questionsUrl = `/react/questions/search/paginate?category=${ val }&topic=${ props.category }&admin=true&page=${index}&status=${status}`;
+        }else{
+            questionsUrl = `/react/questions/search/paginate?category=${ val }&topic=${ props.category }&page=${index}`;
         }
+
         // 検索結果の質問取得
         axios
-            .get(`/react/questions/search/paginate?category=${ val }&topic=${ props.category }&page=${index}`)
+            .get(questionsUrl)
             .then(response => {
+                console.log(response.data);
                 props.setQuestions({
                     eventList: response.data.data,
                     itemsCountPerPage: response.data.per_page,
@@ -40,16 +56,68 @@ function Questions(props) {
             });
     };
 
+    function handleStatus(event) {
+        let questionsUrl;
+        if(user.is_admin){
+            questionsUrl = `/react/questions/search/paginate?category=${ val }&topic=${ props.category }&admin=true&status=${event.target.value}`;
+        }
+        setStatus(event.target.value);
+        axios
+            .get(questionsUrl)
+            .then(response => {
+                console.log(response.data);
+                props.setQuestions({
+                    eventList: response.data.data,
+                    itemsCountPerPage: response.data.per_page,
+                    totalItemsCount: response.data.total,
+                    currentPage: response.data.current_page,
+                    pageRangeDisplayed: 10,
+                    lastPage: response.data.last_page,
+                });
+            }).catch(error => {
+            console.log(error);
+        });
+    }
+
         // 検索結果の質問一覧情報
     const list = questions.eventList.map((question) => {
+        let check;
+        if (question.check) {
+            check = <Button　variant="outlined" color="success">公開中</Button>;
+        } else {
+            check = <Button　variant="outlined" sx={{borderColor:'gray', color:'gray'}}>非公開</Button>;
+        }
+
+        let status;
+        if (question.status == 0) {
+            status = <Button　variant="contained" sx={{marginLeft: 2}}>未対応</Button>;
+        } else if (question.status == 1) {
+            status = <Button　variant="outlined" color="success" sx={{marginLeft: 2}}>対応中</Button>;
+        } else if (question.status == 2) {
+            status = <Button　variant="outlined" color="inherit" sx={{marginLeft: 2}}>解決済</Button>;
+        } else if (question.status == 3) {
+            status = <Button　variant="contained" color="error" sx={{marginLeft: 2}}>要対応</Button>;
+        }
+
+        let questionLink
+        if (user.is_admin) {
+            questionLink = `/questions/` + question.id;
+        } else {
+            questionLink = `/public/questions/` + question.id;
+        }
+
         return (
             <div key={question.id}>
-
-
-                <Link to={ `/public/questions/` + question.id } target="_blank">
-                    <ListItem button>
+                <Link to={ questionLink } target="_blank">
+                    <ListItem button sx={{display: 'flex', textAlign: 'flex-start'}}>
                         <ListItemText
-                            primary={<Typography　variant="body1" style={{ color: 'black' }}>{question.title}</Typography>}
+                            primary={
+                                <Box sx={{display: 'flex'}}>
+                                    {user.is_admin && check}
+                                    {user.is_admin && status}
+                                    <Typography　variant="body1" style={{ color: 'black' }} sx={{marginLeft: 2, marginTop: 0.7}}>{question.title}</Typography>
+                                </Box>
+                            }
                         />
                     </ListItem>
                 </Link>
@@ -83,12 +151,31 @@ function Questions(props) {
     }
 
 
+
     return (
         <Box>
-            <Box>
+            <Box sx={{display: 'flex'}}>
                 <List>
                     { questionList }
                 </List>
+                <FormControl  sx={{ width:'20%', marginLeft: 'auto' , marginTop: 2}}>
+                    <TextField
+                        label="質問を絞り込む"
+                        id="demo-simple-select"
+                        select
+                        onChange={ (event) => handleStatus(event) }
+                        style={{
+                            width: "100%",
+                            paddingTop:2,
+                        }}
+                    >
+                        <MenuItem value={ 4 } >全て表示</MenuItem>
+                        <MenuItem value={ 0 } >未対応</MenuItem>
+                        <MenuItem value={ 1 } >対応中</MenuItem>
+                        <MenuItem value={ 2 } >解決済</MenuItem>
+                        <MenuItem value={ 3 } >要対応</MenuItem>
+                    </TextField>
+                </FormControl>
             </Box>
 
             <Grid container justifyContent="center" sx={{ marginTop: 1, marginBottom: 2 }}>

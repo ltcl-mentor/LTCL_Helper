@@ -27,7 +27,7 @@ const Forms = (props) => {
                 names.push(name);
             }
         }
-        
+
         if (clickCount === 0) {
             setClickCount(1);
             axios
@@ -38,8 +38,22 @@ const Forms = (props) => {
                 .then(response => {
                     if (response.status === 200) {
                         setClickCount(0);
-                        props.setStudents(response.data.students);
-                        props.setStaffs(response.data.staffs);
+                        props.setStudents({
+                            eventList: response.data.students.data,
+                            itemsCountPerPage: response.data.students.per_page,
+                            totalItemsCount: response.data.students.total,
+                            currentPage: response.data.students.current_page,
+                            pageRangeDisplayed: 10,
+                            lastPage: response.data.students.last_page,
+                        });
+                        props.setStaffs({
+                            eventList: response.data.staffs.data,
+                            itemsCountPerPage: response.data.staffs.per_page,
+                            totalItemsCount: response.data.staffs.total,
+                            currentPage: response.data.staffs.current_page,
+                            pageRangeDisplayed: 10,
+                            lastPage: response.data.staffs.last_page,
+                        });
                         props.onClose();
                         history.push("/?page=manage", {type: "user", status: 'public_created', info: props.number});
                     }
@@ -50,9 +64,9 @@ const Forms = (props) => {
         } else {
             return false;
         }
-        
+
     };
-    
+
     let formCount;
     let forms = [];
     for (formCount = 1; formCount <= props.number; formCount++) {
@@ -65,21 +79,21 @@ const Forms = (props) => {
                     </div>
                 </div>
             </Box>
-        ); 
+        );
     }
-    
+
     return (
         <Box sx={{ width: "70%", marginLeft: "15%" }}>
             {(props.number && props.password.length === 8) &&
                 <React.Fragment>
                     { forms }
-                    
-                    {error.length > 0 && 
+
+                    {error.length > 0 &&
                         <Typography align="center" component="div" sx={{ color: "red", fontSize: '14px' }}>
                             {error}
                         </Typography>
                     }
-                        
+
                     <Typography
                         align="center"
                         component="div"
@@ -92,11 +106,11 @@ const Forms = (props) => {
                             <Button
                                 onClick={() => handleSubmitStudents()}
                                 variant="outlined"
-                                sx={{ 
+                                sx={{
                                     color: '#771AF8',
                                     border: '1px solid #771AF8',
-                                    '&:hover': { 
-                                        color: 'white', 
+                                    '&:hover': {
+                                        color: 'white',
                                         backgroundColor: '#771AF8',
                                         border: '1px solid #771AF8',
                                     }
