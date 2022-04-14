@@ -49,7 +49,7 @@ const Manage = () => {
     });
     const user = useContext(LoginUser);
     const contents = [
-        {content: <a style={{ color: 'black' }} href="/questions/export">直近の質問を<br/>CSV出力</a>, onClick: ''},
+        {content: <a style={{ color: 'black' }} href="/questions/export">直近の質問を<br/>CSV出力</a>},
         {content: "質問一括登録", onClick: () => backupQuestion()},
         {content: "受講生\n一括登録", onClick: () => backupStudent()},
     ];
@@ -90,7 +90,14 @@ const Manage = () => {
                 .post('/users/backup')
                 .then(response => {
                     if (response.status === 200) {
-                        setStudents(response.data.students);
+                        setStudents({
+                            eventList: response.data.students.data,
+                            itemsCountPerPage: response.data.students.per_page,
+                            totalItemsCount: response.data.students.total,
+                            currentPage: response.data.students.current_page,
+                            pageRangeDisplayed: 10,
+                            lastPage: response.data.students.last_page,
+                        });
                         history.push("/?page=manage", { type: "backup", status: "student" });
                     }
                 })
@@ -207,7 +214,6 @@ const Manage = () => {
     let component;
     if (value == 0) {
         if (students.eventList.length !== 0) {
-            console.log('0')
             component = (
                 <UserIndex users={students} account={user.id == 1 && user.name == "master" ? "master" : ""} type="student" setStudents={setStudents} setStaffs={setStaffs} />
             );
@@ -219,7 +225,6 @@ const Manage = () => {
             );
         }
     } else {
-        console.log('not 0')
         if (staffs.eventList.length > 0) {
             component = (
                 <UserIndex users={staffs} account={user.id == 1 && user.name == "master" ? "master" : ""} type="staff" setStudents={setStudents} setStaffs={setStaffs} />

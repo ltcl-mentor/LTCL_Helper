@@ -28,7 +28,7 @@ const TabPanel = () => {
     const history = useHistory();
     const search = useLocation().search.split('=')[1];
     const [value, setValue] = useState(0);
-    
+
     let component;
     if (value == 0) {
         component = <Top />;
@@ -37,7 +37,7 @@ const TabPanel = () => {
     } else if (value == 2) {
         component = <Manage />;
     }
-    
+
     // タブ切り替え用
     const handleChange = (event, newValue) => {
         if (newValue == 0) {
@@ -48,7 +48,7 @@ const TabPanel = () => {
             history.push('/?page=manage');
         }
     };
-    
+
     useEffect(() => {
         if (isMounted()) {
             if (typeof search == 'undefined') {
@@ -64,7 +64,7 @@ const TabPanel = () => {
             }
         }
     }, [search]);
-    
+
     return (
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'white', paddingLeft: 10 }}>

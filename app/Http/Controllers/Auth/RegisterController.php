@@ -35,27 +35,27 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    
+
     /**
      * 管理者の新規作成実行（デフォルトのものからログイン処理を削除、redirectを指定）
      */
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
-        
+
         event(new Registered($user = $this->create($request->all())));
-        
+
         return $this->registered($request, $user)
-                        ?: ["status" => 200, "students" => User::getAllStudentsName(), "staffs" => User::where('is_admin','staff')->get()];
+                        ?: ["status" => 200, "students" => User::getAllStudentsName(), "staffs" => User::where('is_admin','staff')->paginate(10)];
     }
-    
+
     /**
      * 受講生の新規作成実行
      */
     public function publicRegister(Request $request)
     {
         $this->publicValidator($request->all())->validate();
-        
+
         foreach ($request['names'] as $student) {
             if($student && !User::where('name', $student)->exists()){
                 $user = User::create([
@@ -63,7 +63,7 @@ class RegisterController extends Controller
                     'password' => Hash::make($request['password']),
                     'is_admin' => null,
                 ]);
-                
+
                 Student::create([
                     'name' => $student,
                     'password' => $request['password'],
@@ -71,8 +71,8 @@ class RegisterController extends Controller
                 ]);
             }
         }
-        
-        return ["status" => 200, "students" => User::getAllStudentsName(), "staffs" => User::where('is_admin','staff')->get()];
+
+        return ["status" => 200, "students" => User::getAllStudentsName(), "staffs" => User::where('is_admin','staff')->paginate(10)];
     }
 
     /**
@@ -88,7 +88,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8'],
         ]);
     }
-    
+
     protected function publicValidator(array $data)
     {
         return Validator::make($data, [
@@ -111,8 +111,8 @@ class RegisterController extends Controller
             'is_admin' => 'staff',
         ]);
     }
-    
-    
+
+
     /**
      * 管理者の新規作成画面表示
      */
@@ -120,7 +120,7 @@ class RegisterController extends Controller
     // {
     //     return view('Mentor.User.register');
     // }
-    
+
     /**
      * 受講生の新規作成画面表示
      */
@@ -128,7 +128,7 @@ class RegisterController extends Controller
     // {
     //     return view('Mentor.User.publicRegister');
     // }
-    
+
     /**
      * Create a new controller instance.
      *
@@ -138,6 +138,6 @@ class RegisterController extends Controller
     // {
     //     $this->middleware('guest');
     // }
-    
-    
+
+
 }

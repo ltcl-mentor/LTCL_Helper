@@ -171,7 +171,7 @@ class Question extends Model
         return $results->orderBy('question', 'asc')->get();
     }
 
-    public static function conditionSearchPaginate($category, $topic, $curriculum_number, $keyword, $searchType, $freeword)
+    public static function conditionSearchPaginate($category, $topic, $curriculum_number, $keyword, $searchType, $freeword, $admin, $status)
     {
         if($freeword){
             // フリーワード検索
@@ -219,7 +219,36 @@ class Question extends Model
             }elseif($keyword){
                 $results = $basic_data->where('question', 'ilike', '%'.$keyword.'%');
 
-            }else{
+            }elseif($admin){
+                if ($status==4) {
+                    //全質問を表示させる場合
+                    $results = self::where('category', $category)
+                        ->where('topic', $topic)
+                        ->orderBy('question', 'asc')
+                        ->paginate(10);
+                    //返信があるかどうかを判別
+                    foreach($results as $result){
+                        $student_yet_comments = Comment::where('question_id', $result->id)->where('is_mentor_commented', true)->get();
+
+                        $result->reply = count($student_yet_comments) !== 0 ? true : false;
+                    }
+                    return $results;
+                } else {
+                    //ステータス毎に表示する場合
+                    $results = self::where('category', $category)
+                        ->where('status', $status)
+                        ->where('topic', $topic)
+                        ->orderBy('question', 'asc')
+                        ->paginate(10);;
+                    //返信があるかどうかを判別
+                    foreach($results as $result){
+                        $student_yet_comments = Comment::where('question_id', $result->id)->where('is_mentor_commented', true)->get();
+
+                        $result->reply = count($student_yet_comments) !== 0 ? true : false;
+                    }
+                    return $results;
+                }
+            } else{
                 $results = $basic_data;
             }
         }
@@ -315,7 +344,7 @@ class Question extends Model
             Slack::sendMessage("前回のCSV出力から新たに95件の質問が追加されました。\nmasterアカウントからCSV出力を実行してバックアップを保管してください。", 'mentor');
         }
     }
-    
+
     /**
      * スプレッドシートから質問情報を取得
      */
@@ -323,16 +352,16 @@ class Question extends Model
     {
         $client = new \GuzzleHttp\Client();
         $url = 'https://sheets.googleapis.com/v4/spreadsheets/'. env('GoogleSheetsReferenceQuestionID') .'/values/未登録質問リスト';
-        
+
         $response = $client->request(
             'GET',
             $url,
             ['query' => ['key' => env('GoogleSheetsKey'), 'majorDimension' => 'ROWS']]
         );
-        
+
         return json_decode($response->getBody(), true);
     }
-     
+
     /**
      * 質問一括登録
      */
@@ -346,7 +375,7 @@ class Question extends Model
             if (!isset($question[5])) {
                 break;
             }
-            
+
             // questionsテーブルに挿入したいデータがあるかチェック
             $question_exist = Question::where([
                 ['category', '=', intval($question[2])],
@@ -354,7 +383,7 @@ class Question extends Model
                 ['curriculum_number', '=', $question[4]],
                 ['title', '=', $question[5]],
             ])->exists();
-            
+
             // テーブル内に挿入したいデータと被りがない場合は追加
             // 現在はquestionsテーブルに入れるのみ
             if (!$question_exist) {
