@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateDocumentQuestionTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    // 質問と関連記事の中間テーブル
     public function up()
     {
         Schema::create('document_question', function (Blueprint $table) {
@@ -18,6 +14,9 @@ class CreateDocumentQuestionTable extends Migration
             $table->unsignedBigInteger('document_id');
             $table->unsignedBigInteger('question_id');
             $table->timestamps();
+            
+            $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
         });
     }
 

@@ -55,6 +55,20 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Student');
     }
+    
+    public function documents()
+    {
+        return $this->hasMany('App\Document');
+    }
+    
+    public function images()
+    {
+        return $this->hasMany('App\Image');
+    }
+    
+    public function comments() {
+        return $this->hasMany('App\Comment');
+    }
 
     /**
      * 質問作成者名取得

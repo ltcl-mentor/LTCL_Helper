@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateEventsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    // イベント管理
     public function up()
     {
         Schema::create('events', function (Blueprint $table) {

@@ -48,7 +48,7 @@ class DocumentQuestionTableSeeder extends Seeder
             'updated_at' => new DateTime(),
         ]);
         DB::table('document_question')->insert([
-            'document_id' => 34,
+            'document_id' => 14,
             'question_id' => 2,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),

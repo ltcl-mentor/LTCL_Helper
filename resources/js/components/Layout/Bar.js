@@ -100,7 +100,7 @@ const Bar = () => {
                             <Typography color="inherit">質問する</Typography>
                         }
                     >
-                        <IconButton sx={{ '&:hover': { color: '#771AF8' } }} size="large" component={Link} to={'/'}>
+                        <IconButton sx={{ '&:hover': { color: '#771AF8' } }} size="large" component={Link} to={'/public/questions/create'}>
                             <AddIcon fontSize="inherit" />
                         </IconButton>
                     </QuestionTooltip>

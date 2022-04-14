@@ -31,7 +31,16 @@ class Question extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User')->withTimestamps();
+        return $this->belongsTo('App\User')->withTimestamps();
+    }
+    
+    public function images()
+    {
+        return $this->hasMany('App\Image');
+    }
+    
+    public function comments() {
+        return $this->hasMany('App\Comment');
     }
 
     /**

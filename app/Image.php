@@ -11,6 +11,21 @@ class Image extends Model
     protected $fillable=['image_path', 'question_id', 'comment_id', 'user_id'];
     
     /**
+     * リレーション関係
+     */
+    public function question() {
+        return $this->belongsTo('App\Question');
+    }
+    
+    public function comment() {
+        return $this->belongsTo('App\Comment');
+    }
+    
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+    
+    /**
      * 画像データ削除処理
      */
     public static function imageDelete($image_paths)

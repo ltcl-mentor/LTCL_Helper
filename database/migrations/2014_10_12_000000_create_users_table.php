@@ -6,20 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    // ユーザー
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('password');
-            $table->string('is_admin')->nullable();
+            $table->string('is_admin')->nullable(); // 管理者かどうか
             $table->rememberToken();
-            $table->boolean('lock')->default(false);
+            $table->boolean('lock')->default(false); // ロック中のユーザーかどうか
             $table->unsignedInteger('question_count')->default(0);
             $table->timestamps();
         });

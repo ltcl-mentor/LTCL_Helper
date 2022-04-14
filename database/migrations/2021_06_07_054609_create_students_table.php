@@ -6,20 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateStudentsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    // 受講生
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('password');
-            $table->BigInteger('user_id');
+            $table->UnsignedBigInteger('user_id');
             $table->boolean('lock')->default(false);
             $table->timestamps();
+            
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

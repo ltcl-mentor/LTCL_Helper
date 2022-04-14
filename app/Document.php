@@ -21,6 +21,10 @@ class Document extends Model
         return $this->belongsToMany('App\Question');
     }
     
+    public function user() {
+        return $this->belongsTo('App\User')->withTimestamps();
+    }
+    
     /**
      * 関連記事一覧をペジネーションで取得する
      */
