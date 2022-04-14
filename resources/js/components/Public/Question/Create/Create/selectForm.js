@@ -11,6 +11,7 @@ import PurpleButton from "../../../../Atom/Button/PurpleButton";
 import WhiteButton from "../../../../Atom/Button/WhiteButton";
 import ConfirmButton from "../../../../Atom/Button/ConfirmButton";
 import TopicForm from "./topicForm";
+import Breadcrumb from "../../../../Breadcrumbs";
 
 const styleSpan = {
     fontWeight: "normal",
@@ -213,7 +214,6 @@ const DefaultForm = () => {
     useEffect(() => {
         setIsSearchButtonClicked(false);
     }, [category, topic, curriculum_number, keyword]);
-    console.log("num", curriculum_number);
 
     return (
         <div>
@@ -231,15 +231,9 @@ const DefaultForm = () => {
                 />
             ) : (
                 <div className="condition">
-                    <Typography
-                        component="div"
-                        sx={{
-                            marginTop: 4,
-                            marginLeft: 2
-                        }}
-                    >
-                        Top / 質問投稿画面
-                    </Typography>
+                    <div style={{ marginLeft: "-3%" }}>
+                        <Breadcrumb page="public_question_create" />
+                    </div>
                     <Typography
                         variant="h5"
                         component="div"
