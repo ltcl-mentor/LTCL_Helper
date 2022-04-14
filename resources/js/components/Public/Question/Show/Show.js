@@ -156,7 +156,7 @@ function Show() {
     //     history.push(`/topic/${question.topic}`);
     // };
     const handleBackQuestionShow = () => {
-        history.push("/public/questions/index");
+        history.push(`/topic/${question["topic"]}`);
     };
 
     return (
@@ -247,7 +247,7 @@ function Show() {
                         borderRadius: 0
                     }}
                 >
-                    質問一覧に戻る
+                    {topics[question["topic"]]}質問一覧に戻る
                 </Button>
             </Box>
         </div>
