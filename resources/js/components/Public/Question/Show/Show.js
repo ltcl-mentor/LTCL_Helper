@@ -128,8 +128,11 @@ function Show() {
             return false;
         }
     };
+    // const handleBackQuestionShow = () => {
+    //     history.push(`/topic/${question.topic}`);
+    // };
     const handleBackQuestionShow = () => {
-        history.push(`/topic/${question.topic}`);
+        history.push("/public/questions/index");
     };
 
     return (
@@ -212,7 +215,8 @@ function Show() {
                     sx={{
                         margin: "3%",
                         borderBottom: "1px solid #771af8",
-                        color: "#771af8"
+                        color: "#771af8",
+                        borderRadius: 0
                     }}
                 >
                     質問一覧に戻る
