@@ -3,13 +3,14 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Typography from "@material-ui/core/Typography";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import ConfirmButton from "../../../Atom/Button/ConfirmButton";
+import CancelIcon from "@mui/icons-material/Cancel";
+import IconButton from "@mui/material/IconButton";
 
 const style = {
     position: "absolute",
@@ -76,6 +77,19 @@ const addRelatedQuestion = React.memo(props => {
         <div>
             <Modal open={props.open} onClose={props.handleOpen}>
                 <Box sx={style}>
+                    <IconButton
+                        variant="text"
+                        sx={{
+                            color: "red",
+                            position: "absolute",
+                            right: 5,
+                            top: 5
+                        }}
+                        onClick={props.handleOpen}
+                    >
+                        <CancelIcon />
+                    </IconButton>
+
                     <Typography
                         variant="h5"
                         component="div"
@@ -141,7 +155,6 @@ const addRelatedQuestion = React.memo(props => {
                             <span style={styleSpan}>複数選択可</span>
                         </Typography>
                     </Box>
-
                     <Box>
                         <FormGroup
                             sx={{
