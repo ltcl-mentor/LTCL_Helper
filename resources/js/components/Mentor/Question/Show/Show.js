@@ -15,6 +15,7 @@ import Comments from "../../../Public/Question/Show/comments/comments";
 import Documents from "../../../Public/Question/Show/documents";
 import RelatedQuestions from "../../../Public/Question/Show/related-questions";
 import SelectStatus from "../../../Atom/Select/SelectStatus";
+import AddRelatedQuestion from "../../Link/modal/addRelatedQuestion";
 
 /**
  * 質問詳細(管理画面)のメインコンポーネント
@@ -28,6 +29,7 @@ function Show() {
     const [status, setStatus] = useState(0);
     const [documents, setDocuments] = useState([]);
     const [comment_changing, setCommentChanging] = useState(false);
+    const [open, setOpen] = useState(false);
     const categories = ["カリキュラム", "成果物"];
     const topics = [
         // カリキュラム
@@ -115,7 +117,7 @@ function Show() {
             .catch(error => {
                 console.log(error);
             });
-    }, [])
+    }, []);
 
     // 削除実行
     const deleteConfirm = () => {
@@ -142,6 +144,11 @@ function Show() {
     const backQuestionIndex = () => {
         history.push("/questions/index");
     };
+
+    const handleOpen = () => {
+        setOpen(!open);
+    };
+
     return (
         <div>
             <Alert
@@ -153,8 +160,13 @@ function Show() {
                 type="comment"
                 status={parameter.state && parameter.state.comment}
             />
+
             <div style={{ marginLeft: "3%" }}>
-                <Breadcrumbs page={`mentor_question_show_${parameter.location}`} topic={question.topic} topic_title={topics[question.topic]}/>
+                <Breadcrumbs
+                    page={`mentor_question_show`}
+                    topic={question.topic}
+                    topic_title={topics[question.topic]}
+                />
             </div>
 
             <Box
@@ -250,6 +262,12 @@ function Show() {
                 user_id={0}
                 is_admin="staff"
             />
+            <AddRelatedQuestion
+                open={open}
+                handleOpen={handleOpen}
+                question_id={id}
+            />
+
             <Box>
                 <Typography
                     align="right"
@@ -257,7 +275,19 @@ function Show() {
                         marginRight: "5%"
                     }}
                 >
-                    <Link to={`/links/question/` + id}>
+                    <Button
+                        sx={{
+                            color: "#771AF8",
+                            textDecoration: "underline",
+                            marginBottom: "-5%",
+                            fontSize: 18,
+                            fontWeight: "bold"
+                        }}
+                        onClick={handleOpen}
+                    >
+                        記事登録
+                    </Button>
+                    {/* <Link to={`/links/question/` + id}>
                         <Button
                             sx={{
                                 color: "#771AF8",
@@ -269,7 +299,7 @@ function Show() {
                         >
                             記事登録
                         </Button>
-                    </Link>
+                    </Link> */}
                 </Typography>
                 <Typography
                     variant="h6"

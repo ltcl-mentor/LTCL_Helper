@@ -42,7 +42,8 @@ class DocumentController extends Controller
         $input['user_id'] = Auth::id();
         
         $document->fill($input)->save();
-        
+        logger($document);
+
         return ["id" => $document->id];
     }
     
@@ -58,9 +59,9 @@ class DocumentController extends Controller
         $input['amature'] = $request['targets']['amature'];
         $input['master'] = $request['targets']['master'];
         $input['all'] = $request['targets']['all'];
-        
+
         $document->fill($input)->save();
-        
+
         return ["id" => $document->id];
     }
     

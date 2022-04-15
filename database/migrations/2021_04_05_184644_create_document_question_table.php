@@ -13,8 +13,9 @@ class CreateDocumentQuestionTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('document_id');
             $table->unsignedBigInteger('question_id');
-            $table->timestamps();
-            
+            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
+              
             $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade');
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
         });

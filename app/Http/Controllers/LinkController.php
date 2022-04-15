@@ -127,6 +127,16 @@ class LinkController extends Controller
             "detach_count" => count($detach_id), 
         ];
     }
+
+    /**
+     * 記事と質問を一対一で紐付け
+     * 新デザイン案で使用する関数
+     */
+    public function linkDocumentToQuestion(Request $request,Question $question, Document $document)
+    {
+        $question->documents()->attach($request["document_id"]);
+        return ["text" => "attached"];
+    }
     
     
     /**

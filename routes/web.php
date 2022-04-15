@@ -107,6 +107,8 @@ Route::group(['middleware' => ['auth']], function () {
          */
         Route::post('/links/document/{document}', 'LinkController@linkQuestionsFromDocument'); // 紐付け実行(記事：質問＝１：多)
         Route::post('/links/question/{question}', 'LinkController@linkDocumentsFromQuestion'); // 紐付け実行(記事：質問＝多：1)
+
+        Route::post('/link/question/{question}', 'LinkController@linkDocumentToQuestion');
         // Route::get('/links/index', 'LinkController@index'); // 初期画面表示
         // Route::get('/links/document/{document}', 'LinkController@getDocumentToQuestions'); // 新規作成画面表示(記事：質問＝１：多)
         // Route::get('/links/question/{question}', 'LinkController@getQuestionToDocuments'); // 新規作成画面表示(記事：質問＝多：1)
