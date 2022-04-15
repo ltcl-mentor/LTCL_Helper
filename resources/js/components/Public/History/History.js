@@ -37,23 +37,23 @@ function History() {
     const [expanded, setExpanded] = useState(false);
     const [two_week_days, setTwoWeekDays] = useState();
     const [todayData, setTodayData] = useState('');
-    
+
     // 画面描画時に実行
     useEffect(() => {
         // 直近2週間の日付取得
         const today = new Date();
         const todayDataString = (today.getFullYear() + `-` + ('0' + (today.getMonth() + 1)).slice(-2) + `-` + (`0` + today.getDate()).slice(-2));
         var days = [];
-        
+
         for (let day_count = 0; day_count <= 14; day_count++) {
             const day = new Date(today.getFullYear(), today.getMonth(), today.getDate() - day_count);
             days.push(day.getFullYear() + `-` + ('0' + (day.getMonth() + 1)).slice(-2) + `-` + (`0` + day.getDate()).slice(-2));
         }
-        
+
         setTodayData(todayDataString);
         setTwoWeekDays(days);
     }, []);
-    
+
     // 画面描画時に実行
     useEffect(() => {
         // ログインユーザの質問閲覧履歴取得
@@ -73,12 +73,12 @@ function History() {
                 console.log(error);
             });
     }, []);
-    
+
     // // アコーディオンの開閉
     // const handleChange = (panel) => (event, isExpanded) => {
     //     setExpanded(isExpanded ? panel : false);
     // };
-    
+
     // let histories;
     // if (two_week_days) {
     //     histories = two_week_days.map((day) => {
@@ -98,7 +98,7 @@ function History() {
     //                         { questions.map((question) => {
     //                             if (question.whenClicked.substr( 0, 10 ) === day) {
     //                                 const time = question.whenClicked.substr(11).split('.');
-                                    
+
     //                                 return (
     //                                     <Link to={ `/public/questions/` + question.id }>
     //                                         <ListItem
@@ -119,22 +119,22 @@ function History() {
     //         );
     //     });
     // }
-    
+
     let histories;
     let flag = true;
     if (two_week_days) {
         histories = two_week_days.map((day) => {
             flag = true;
             if(questions.eventList[0]) {
-            if((day === questions.eventList[0].whenClicked.substr(0, 10)) || day === questions.eventList[questions.eventList.length-1].whenClicked.substr(0, 10)) {
+            if((day <= questions.eventList[0].whenClicked.substr(0, 10)) && day >= questions.eventList[questions.eventList.length-1].whenClicked.substr(0, 10)) {
             return (
                 <Box sx={{marginBottom: 6}}>
                     <Box>
-                            { todayData == day ? 
-                            <Typography sx={{ width: '33%', flexShrink: 0 , marginBottom: 2}} variant='h5'>今日（{day}）</Typography>: 
+                            { todayData == day ?
+                            <Typography sx={{ width: '33%', flexShrink: 0 , marginBottom: 2}} variant='h5'>今日（{day}）</Typography>:
                             <Typography sx={{ width: '33%', flexShrink: 0 , marginBottom: 2}} variant='h5'>{day}</Typography>
                             }
-                        
+
                     </Box>
                     <Paper>
                     <TableContainer sx={{ marginBottom: 2 }}>
@@ -148,7 +148,7 @@ function History() {
                                                     <TableCell align="center">
                                                         { question.is_resolved ?
                                                             <font color="green">解決済み</font>
-                                                        : 
+                                                        :
                                                             <font color="red">未解決</font>
                                                         }
                                                     </TableCell>
@@ -181,7 +181,7 @@ function History() {
                                                     </TableCell>
                                                 </TableRow>
                                             );
-                                    
+
                                 }
                                 })}
                                 {flag &&<TableRow hover role="checkbox" tabIndex={-1} ><TableCell align="left" ><Typography sx={{marginLeft: '5%'}}>閲覧履歴はありません</Typography></TableCell></TableRow>}
@@ -193,7 +193,7 @@ function History() {
                 )}}
         })
     }
-    
+
     const handlePageClick = (event, index) => {
         // 検索結果の質問取得
         axios
@@ -211,9 +211,9 @@ function History() {
                 console.log(error);
             });
     };
-    
+
     let pagination;
-    
+
     pagination = (
             <Pagination
                 count={ questions.lastPage }
@@ -222,7 +222,7 @@ function History() {
                 sx={{ display: "block" }}
             />
         );
-    
+
     return (
         <div className="container">
             <Breadcrumbs page="history"/>

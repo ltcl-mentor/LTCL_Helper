@@ -63,7 +63,9 @@ function Show() {
         // ユーザの質問詳細画面の閲覧を記録
         axios
             .post(`/questions/${id}/record`)
-            .then(response => {})
+            .then(response => {
+                console.log('記録したよ')
+            })
             .catch(error => {
                 console.log(error);
             });
@@ -192,7 +194,7 @@ function Show() {
                     </Typography>
                 )}
 
-            {/* <Parameters 
+            {/* <Parameters
                 category={ question.category }
                 topic={ question.topic }
                 curriculum_number={ question.curriculum_number }

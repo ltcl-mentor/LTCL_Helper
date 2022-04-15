@@ -107,6 +107,16 @@ function Show() {
         }
     }, [comment_changing]);
 
+    useEffect(() => {
+        // ユーザの質問詳細画面の閲覧を記録
+        axios
+            .post(`/questions/${id}/record`)
+            .then(response => {})
+            .catch(error => {
+                console.log(error);
+            });
+    }, [])
+
     // 削除実行
     const deleteConfirm = () => {
         if (confirm("データが削除されます。\nよろしいですか？")) {
@@ -144,7 +154,7 @@ function Show() {
                 status={parameter.state && parameter.state.comment}
             />
             <div style={{ marginLeft: "3%" }}>
-                <Breadcrumbs page="mentor_question_show" />
+                <Breadcrumbs page={`mentor_question_show_${parameter.location}`} topic={question.topic} topic_title={topics[question.topic]}/>
             </div>
 
             <Box

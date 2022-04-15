@@ -141,6 +141,29 @@ const Breadcrumb = props => {
             link3 = <Typography color="text.primary">質問詳細</Typography>;
             break;
 
+        case "mentor_question_show_mypage":
+            link1 = (
+                <Link underline="hover" to="/admin_my_page">
+                    マイページ
+                </Link>
+            );
+            link2 = <Typography color="text.primary">質問詳細</Typography>;
+            break;
+
+        case "mentor_question_show_question":
+            link1 = (
+                <Link underline="hover" to="/?page=qa">
+                    Q&A
+                </Link>
+            );
+            link2 = (
+                <Link underline="hover" to={`/topic/${props.topic}`}>
+                    {props.topic_title}
+                </Link>
+            );
+            link3 = <Typography color="text.primary">質問詳細</Typography>;
+            break;
+
         case "mentor_question_edit":
             link1 = (
                 <Link underline="hover" to="/mentor/top">
