@@ -48,7 +48,7 @@ const MyPage = (props) => {
         // 直近2週間の日付取得
         const today = new Date();
         const todayDataString = (today.getFullYear() + `-` + ('0' + (today.getMonth() + 1)).slice(-2) + `-` + (`0` + today.getDate()).slice(-2));
-        var days = [];
+        let days = [];
 
         for (let day_count = 0; day_count <= 14; day_count++) {
             const day = new Date(today.getFullYear(), today.getMonth(), today.getDate() - day_count);
@@ -85,7 +85,7 @@ const MyPage = (props) => {
         histories = two_week_days.map((day) => {
             flag = true;
             if(questions.eventList[0]) {
-            if((day === questions.eventList[0].whenClicked.substr(0, 10)) || day === questions.eventList[questions.eventList.length-1].whenClicked.substr(0, 10)) {
+            if((day <= questions.eventList[0].whenClicked.substr(0, 10)) && day >= questions.eventList[questions.eventList.length-1].whenClicked.substr(0, 10)) {
             return (
                 <Box sx={{marginBottom: 6}}>
                     <Box>
@@ -112,7 +112,7 @@ const MyPage = (props) => {
                                                         }
                                                     </TableCell>
                                                     <TableCell align="left" sx={{width: '60%'}}>
-                                                        <Link to={'/questions/' + question.id} style={{ color: 'black' }} >
+                                                        <Link to={{pathname: `/questions/${question.id}`, location: 'mypage'}} style={{ color: 'black' }}>
                                                             {question.title.length > 31 ?
                                                                 question.title.substring(0,30) + "..."
                                                             :
@@ -129,11 +129,11 @@ const MyPage = (props) => {
                                                     </TableCell>
                                                     <TableCell align="center">
                                                         { question.reply ?
-                                                            <Link to={'/my_page/questions/' + question.id}>
+                                                            <Link to={{pathname: `/questions/${question.id}`, location: 'mypage'}}>
                                                                 <font color="red">返信可</font>
                                                             </Link>
                                                         :
-                                                            <Link to={'/my_page/questions/' + question.id}>
+                                                            <Link to={{pathname: `/questions/${question.id}`, location: 'mypage'}}>
                                                                 <font>返信待ち</font>
                                                             </Link>
                                                         }

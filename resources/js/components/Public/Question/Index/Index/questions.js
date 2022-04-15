@@ -108,7 +108,8 @@ function Questions(props) {
 
         return (
             <div key={question.id}>
-                <Link to={ questionLink } target="_blank">
+
+                <Link to={{pathname: questionLink, location: 'question'}} /*target="_blank"*/>
                     <ListItem button sx={{display: 'flex', textAlign: 'flex-start'}}>
                         <ListItemText
                             primary={
@@ -130,6 +131,28 @@ function Questions(props) {
     let emptyMessage;
     let questionList;
     let pagination;
+    let selector;
+
+    if (user.is_admin) {
+        selector = (<FormControl  sx={{ width:'20%', marginLeft: 'auto' , marginTop: 2}}>
+            <TextField
+                label="質問を絞り込む"
+                id="demo-simple-select"
+                select
+                onChange={ (event) => handleStatus(event) }
+                style={{
+                    width: "100%",
+                    paddingTop:2,
+                }}
+            >
+                <MenuItem value={ 4 } >全て表示</MenuItem>
+                <MenuItem value={ 0 } >未対応</MenuItem>
+                <MenuItem value={ 1 } >対応中</MenuItem>
+                <MenuItem value={ 2 } >解決済</MenuItem>
+                <MenuItem value={ 3 } >要対応</MenuItem>
+            </TextField>
+        </FormControl>)
+    }
 
     // filterでlistに存在する空要素を排除し,その上で配列内の要素が何個あるかを判定
     if (list.filter(v=>v).length === 0) {
@@ -158,24 +181,7 @@ function Questions(props) {
                 <List>
                     { questionList }
                 </List>
-                <FormControl  sx={{ width:'20%', marginLeft: 'auto' , marginTop: 2}}>
-                    <TextField
-                        label="質問を絞り込む"
-                        id="demo-simple-select"
-                        select
-                        onChange={ (event) => handleStatus(event) }
-                        style={{
-                            width: "100%",
-                            paddingTop:2,
-                        }}
-                    >
-                        <MenuItem value={ 4 } >全て表示</MenuItem>
-                        <MenuItem value={ 0 } >未対応</MenuItem>
-                        <MenuItem value={ 1 } >対応中</MenuItem>
-                        <MenuItem value={ 2 } >解決済</MenuItem>
-                        <MenuItem value={ 3 } >要対応</MenuItem>
-                    </TextField>
-                </FormControl>
+                {selector}
             </Box>
 
             <Grid container justifyContent="center" sx={{ marginTop: 1, marginBottom: 2 }}>
