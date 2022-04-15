@@ -31,6 +31,31 @@ const styleSpan = {
 };
 
 const addRelatedQuestion = props => {
+    const [title, setTitle] = useState("");
+    const [link, setLink] = useState("");
+    const [beginner, setBeginner] = useState(false);
+    const [amature, setAmature] = useState(false);
+    const [master, setMaster] = useState(false);
+    const [all, setAll] = useState(false);
+
+    const handleChangeBeginner = () => {
+        setBeginner(!beginner);
+        setAll(false);
+    };
+    const handleChangeAmature = () => {
+        setAmature(!amature);
+        setAll(false);
+    };
+    const handleChangeMaster = () => {
+        setMaster(!master);
+        setAll(false);
+    };
+    const handleChangeAll = () => {
+        setAll(!all);
+        setBeginner(false);
+        setAmature(false);
+        setMaster(false);
+    };
     return (
         <div>
             <Modal open={props.open} onClose={props.handleOpen}>
@@ -111,21 +136,29 @@ const addRelatedQuestion = props => {
                                 sx={{ px: 1 }}
                                 control={<Checkbox />}
                                 label="初心者"
+                                checked={beginner}
+                                onChange={handleChangeBeginner}
                             />
                             <FormControlLabel
                                 control={<Checkbox />}
                                 label="中級者"
                                 sx={{ px: 1 }}
+                                checked={amature}
+                                onChange={handleChangeAmature}
                             />
                             <FormControlLabel
                                 control={<Checkbox />}
                                 label="上級者"
                                 sx={{ px: 1 }}
+                                checked={master}
+                                onChange={handleChangeMaster}
                             />
                             <FormControlLabel
                                 control={<Checkbox />}
                                 label="全員必読"
                                 sx={{ px: 1 }}
+                                checked={all}
+                                onChange={handleChangeAll}
                             />
                         </FormGroup>
                     </Box>
