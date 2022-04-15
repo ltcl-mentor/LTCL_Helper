@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
@@ -30,7 +30,7 @@ const styleSpan = {
     fontSize: 14
 };
 
-const addRelatedQuestion = props => {
+const addRelatedQuestion = React.memo(props => {
     const [title, setTitle] = useState("");
     const [link, setLink] = useState("");
     const [beginner, setBeginner] = useState(false);
@@ -56,6 +56,22 @@ const addRelatedQuestion = props => {
         setAmature(false);
         setMaster(false);
     };
+
+    const handleSubmit = () => {
+        axios
+            .post("/documents/store", {
+                title: title,
+                link: link,
+                targets: {
+                    beginner: beginner,
+                    amature: amature,
+                    master: master,
+                    all: all
+                }
+            })
+            .then(response => console.log("done"));
+    };
+
     return (
         <div>
             <Modal open={props.open} onClose={props.handleOpen}>
@@ -89,6 +105,7 @@ const addRelatedQuestion = props => {
                         <TextField
                             label="記事のタイトルを入力"
                             variant="outlined"
+                            onChange={e => setTitle(e.target.value)}
                             fullWidth
                         />
                         <Typography
@@ -109,6 +126,7 @@ const addRelatedQuestion = props => {
                             label="記事のURLを入力"
                             variant="outlined"
                             fullWidth
+                            onChange={e => setLink(e.target.value)}
                         />
                         <Typography
                             sx={{
@@ -163,12 +181,14 @@ const addRelatedQuestion = props => {
                         </FormGroup>
                     </Box>
                     <Box sx={{ my: 5, textAlign: "center" }}>
-                        <ConfirmButton>登録する</ConfirmButton>
+                        <ConfirmButton onClick={handleSubmit}>
+                            登録する
+                        </ConfirmButton>
                     </Box>
                 </Box>
             </Modal>
         </div>
     );
-};
+});
 
 export default addRelatedQuestion;
