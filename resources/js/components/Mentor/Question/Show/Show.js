@@ -160,6 +160,8 @@ function Show() {
                 type="comment"
                 status={parameter.state && parameter.state.comment}
             />
+            <Alert type="link_from_question" status={parameter} />
+
             <div style={{ marginLeft: "3%" }}>
                 <Breadcrumbs
                     page={`mentor_question_show`}

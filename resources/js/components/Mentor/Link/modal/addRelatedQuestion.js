@@ -13,6 +13,7 @@ import Checkbox from "@mui/material/Checkbox";
 import ConfirmButton from "../../../Atom/Button/ConfirmButton";
 import CancelIcon from "@mui/icons-material/Cancel";
 import IconButton from "@mui/material/IconButton";
+import AlertMessage from "../../../Alert";
 
 const style = {
     position: "absolute",

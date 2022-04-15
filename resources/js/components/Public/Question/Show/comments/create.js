@@ -127,7 +127,7 @@ function Create(props) {
 
     let form;
     if (props.type === "create") {
-        form = <div sx={{ padding: 2 }}>{form_content}</div>;
+        form = <Box sx={{ padding: 2, mx: "5%" }}>{form_content}</Box>;
     } else {
         form = form_content;
     }

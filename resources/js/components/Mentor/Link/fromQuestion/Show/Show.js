@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 
-import Alert from "../../../../Alert";
 import Breadcrumbs from "../../../../Breadcrumbs";
 import Parameters from "./parameters";
 import Links from "./links";
@@ -126,11 +125,7 @@ function Show() {
 
     return (
         <div className="container">
-            <Alert
-                type="link_from_question"
-                status={parameter.state && parameter.state.link}
-                info={parameter.state && parameter.state.number}
-            />
+            <AlertMessag type="link_from_question" status="attached" />
 
             <Breadcrumbs page="mentor_link_question_show" />
 
