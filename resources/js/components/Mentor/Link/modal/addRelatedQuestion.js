@@ -271,9 +271,11 @@ const addRelatedQuestion = React.memo(props => {
                                     checked={all}
                                     onChange={handleChangeAll}
                                 />
-                                <FormHelperText>
-                                    対象者を選択してください
-                                </FormHelperText>
+                                {textValidationError.target ? (
+                                    <FormHelperText>
+                                        対象者を選択してください
+                                    </FormHelperText>
+                                ) : null}
                             </FormGroup>
                         </FormControl>
                     </Box>
