@@ -135,7 +135,7 @@ class LinkController extends Controller
     public function linkDocumentToQuestion(Request $request,Question $question, Document $document)
     {
         $question->documents()->attach($request["document_id"]);
-        return ["test" => "test"];
+        return ["text" => "attached"];
     }
     
     

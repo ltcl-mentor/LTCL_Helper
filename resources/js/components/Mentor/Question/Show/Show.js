@@ -29,7 +29,7 @@ function Show() {
     const [status, setStatus] = useState(0);
     const [documents, setDocuments] = useState([]);
     const [comment_changing, setCommentChanging] = useState(false);
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     const categories = ["カリキュラム", "成果物"];
     const topics = [
         // カリキュラム

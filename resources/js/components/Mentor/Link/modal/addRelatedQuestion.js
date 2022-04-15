@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
@@ -17,10 +17,10 @@ const style = {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "50%",
+    width: "60%",
     bgcolor: "background.paper",
     py: 4,
-    px: 15,
+    px: 20,
     m: 4
 };
 
@@ -32,6 +32,7 @@ const styleSpan = {
 };
 
 const addRelatedQuestion = React.memo(props => {
+    const history = useHistory();
     const [isClicked, setIsClicked] = useState(0);
     const [title, setTitle] = useState("");
     const [link, setLink] = useState("");
@@ -61,6 +62,7 @@ const addRelatedQuestion = React.memo(props => {
 
     const handleSubmit = () => {
         setIsClicked(1);
+        props.handleOpen();
         if (isClicked === 0) {
             axios
                 .post("/documents/store", {
@@ -74,12 +76,15 @@ const addRelatedQuestion = React.memo(props => {
                     }
                 })
                 .then(response => {
-                    console.log(response.data);
-                    axios
-                        .post(`/link/question/${props.question_id}`, {
-                            document_id: response.data.id
-                        })
-                        .then(response => console.log("done"));
+                    if (response.status === 200) {
+                        axios
+                            .post(`/link/question/${props.question_id}`, {
+                                document_id: response.data.id
+                            })
+                            .then(response => {
+                                console.log(response.data.text);
+                            });
+                    }
                 })
                 .catch(error => {
                     console.log(error);
