@@ -5,8 +5,10 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Typography from "@material-ui/core/Typography";
+import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import FormHelperText from "@mui/material/FormHelperText";
 import Checkbox from "@mui/material/Checkbox";
 import ConfirmButton from "../../../Atom/Button/ConfirmButton";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -33,13 +35,22 @@ const styleSpan = {
 
 const addRelatedQuestion = React.memo(props => {
     const history = useHistory();
-    const [isClicked, setIsClicked] = useState(0);
     const [title, setTitle] = useState("");
     const [link, setLink] = useState("");
     const [beginner, setBeginner] = useState(false);
     const [amature, setAmature] = useState(false);
     const [master, setMaster] = useState(false);
     const [all, setAll] = useState(false);
+
+    const [textValidationError, setTextValidationError] = useState({
+        title: false,
+        link: false,
+        target: false
+    });
+    const [
+        textValidationErrorMessage,
+        setTextValidationErrorMessage
+    ] = useState({ title: "", link: "" });
 
     const handleChangeBeginner = () => {
         setBeginner(!beginner);
@@ -60,10 +71,54 @@ const addRelatedQuestion = React.memo(props => {
         setMaster(false);
     };
 
+    const handleValidate = () => {
+        let validateKey = {
+            title: false,
+            link: false,
+            target: false
+        };
+        let validateMessage = {
+            title: "",
+            link: ""
+        };
+
+        if (title.trim().length === 0) {
+            validateKey.title = true;
+            validateMessage.title = "タイトルを入力してください";
+        }
+        if (link.trim().length === 0) {
+            validateKey.link = true;
+            validateMessage.link = "URLを入力してください";
+        }
+        if (
+            beginner === false &&
+            amature === false &&
+            master === false &&
+            all === false
+        ) {
+            validateKey.target = true;
+        }
+
+        setTextValidationError(validateKey);
+        setTextValidationErrorMessage(validateMessage);
+
+        if (
+            validateKey.title === false &&
+            validateKey.link === false &&
+            validateKey.target === false
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     const handleSubmit = () => {
-        setIsClicked(1);
-        props.handleOpen();
-        if (isClicked === 0) {
+        const error_check = handleValidate();
+
+        if (error_check === true) {
+            props.handleOpen();
+
             axios
                 .post("/documents/store", {
                     title: title,
@@ -136,6 +191,8 @@ const addRelatedQuestion = React.memo(props => {
                             タイトル
                         </Typography>
                         <TextField
+                            error={textValidationError["title"]}
+                            helperText={textValidationErrorMessage["title"]}
                             label="記事のタイトルを入力"
                             variant="outlined"
                             onChange={e => setTitle(e.target.value)}
@@ -156,6 +213,8 @@ const addRelatedQuestion = React.memo(props => {
                             </span>
                         </Typography>
                         <TextField
+                            error={textValidationError["link"]}
+                            helperText={textValidationErrorMessage["link"]}
                             label="記事のURLを入力"
                             variant="outlined"
                             fullWidth
@@ -175,42 +234,47 @@ const addRelatedQuestion = React.memo(props => {
                         </Typography>
                     </Box>
                     <Box>
-                        <FormGroup
-                            sx={{
-                                display: "flex",
-                                flexDirection: "row",
-                                ml: "15%"
-                            }}
-                        >
-                            <FormControlLabel
-                                sx={{ px: 1 }}
-                                control={<Checkbox />}
-                                label="初心者"
-                                checked={beginner}
-                                onChange={handleChangeBeginner}
-                            />
-                            <FormControlLabel
-                                control={<Checkbox />}
-                                label="中級者"
-                                sx={{ px: 1 }}
-                                checked={amature}
-                                onChange={handleChangeAmature}
-                            />
-                            <FormControlLabel
-                                control={<Checkbox />}
-                                label="上級者"
-                                sx={{ px: 1 }}
-                                checked={master}
-                                onChange={handleChangeMaster}
-                            />
-                            <FormControlLabel
-                                control={<Checkbox />}
-                                label="全員必読"
-                                sx={{ px: 1 }}
-                                checked={all}
-                                onChange={handleChangeAll}
-                            />
-                        </FormGroup>
+                        <FormControl error={textValidationError["target"]}>
+                            <FormGroup
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    ml: "15%"
+                                }}
+                            >
+                                <FormControlLabel
+                                    sx={{ px: 1 }}
+                                    control={<Checkbox />}
+                                    label="初級者"
+                                    checked={beginner}
+                                    onChange={handleChangeBeginner}
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox />}
+                                    label="中級者"
+                                    sx={{ px: 1 }}
+                                    checked={amature}
+                                    onChange={handleChangeAmature}
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox />}
+                                    label="上級者"
+                                    sx={{ px: 1 }}
+                                    checked={master}
+                                    onChange={handleChangeMaster}
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox />}
+                                    label="全員必読"
+                                    sx={{ px: 1 }}
+                                    checked={all}
+                                    onChange={handleChangeAll}
+                                />
+                                <FormHelperText>
+                                    対象者を選択してください
+                                </FormHelperText>
+                            </FormGroup>
+                        </FormControl>
                     </Box>
                     <Box sx={{ my: 5, textAlign: "center" }}>
                         <ConfirmButton onClick={handleSubmit}>
