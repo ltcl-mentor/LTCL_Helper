@@ -32,6 +32,7 @@ const styleSpan = {
 };
 
 const addRelatedQuestion = React.memo(props => {
+    const [isClicked, setIsClicked] = useState(0);
     const [title, setTitle] = useState("");
     const [link, setLink] = useState("");
     const [beginner, setBeginner] = useState(false);
@@ -59,18 +60,21 @@ const addRelatedQuestion = React.memo(props => {
     };
 
     const handleSubmit = () => {
-        axios
-            .post("/documents/store", {
-                title: title,
-                link: link,
-                targets: {
-                    beginner: beginner,
-                    amature: amature,
-                    master: master,
-                    all: all
-                }
-            })
-            .then(response => console.log("done"));
+        setIsClicked(1);
+        if (isClicked === 0) {
+            axios
+                .post("/documents/store", {
+                    title: title,
+                    link: link,
+                    targets: {
+                        beginner: beginner,
+                        amature: amature,
+                        master: master,
+                        all: all
+                    }
+                })
+                .then(response => console.log("done"));
+        }
     };
 
     return (
