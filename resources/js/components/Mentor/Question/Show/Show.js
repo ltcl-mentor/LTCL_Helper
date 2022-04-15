@@ -261,7 +261,11 @@ function Show() {
                 user_id={0}
                 is_admin="staff"
             />
-            <AddRelatedQuestion open={open} handleOpen={handleOpen} />
+            <AddRelatedQuestion
+                open={open}
+                handleOpen={handleOpen}
+                question_id={id}
+            />
 
             <Box>
                 <Typography

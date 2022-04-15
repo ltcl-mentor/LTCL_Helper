@@ -73,7 +73,17 @@ const addRelatedQuestion = React.memo(props => {
                         all: all
                     }
                 })
-                .then(response => console.log("done"));
+                .then(response => {
+                    console.log(response.data);
+                    axios
+                        .post(`/link/question/${props.question_id}`, {
+                            document_id: response.data.id
+                        })
+                        .then(response => console.log("done"));
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         }
     };
 
