@@ -1,25 +1,24 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+import React, { useEffect, useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
-import Typography from '@material-ui/core/Typography';
-import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import Typography from "@material-ui/core/Typography";
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
-import { LoginUser } from '../../../Route';
-import UserIndex from './userIndex';
-import Modals from '../modal';
+import { LoginUser } from "../../../Route";
+import UserIndex from "./userIndex";
+import Modals from "../modal";
 
-const a11yProps = (index) => {
+const a11yProps = index => {
     return {
         id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
+        "aria-controls": `simple-tabpanel-${index}`
     };
 };
-
 
 /**
  * 管理
@@ -37,7 +36,7 @@ const Manage = () => {
         itemsCountPerPage: 1,
         totalItemsCount: 1,
         pageRangeDisplayed: 10,
-        lastPage: 0,
+        lastPage: 0
     });
     const [staffs, setStaffs] = useState({
         eventList: [],
@@ -45,13 +44,21 @@ const Manage = () => {
         itemsCountPerPage: 1,
         totalItemsCount: 1,
         pageRangeDisplayed: 10,
-        lastPage: 0,
+        lastPage: 0
     });
     const user = useContext(LoginUser);
     const contents = [
-        {content: <a style={{ color: 'black' }} href="/questions/export">直近の質問を<br/>CSV出力</a>},
-        {content: "質問一括登録", onClick: () => backupQuestion()},
-        {content: "受講生\n一括登録", onClick: () => backupStudent()},
+        {
+            content: (
+                <a style={{ color: "black" }} href="/questions/export">
+                    直近の質問を
+                    <br />
+                    CSV出力
+                </a>
+            )
+        },
+        { content: "質問一括登録", onClick: () => backupQuestion() },
+        { content: "受講生\n一括登録", onClick: () => backupStudent() }
     ];
 
     // タブ切り替え用
@@ -59,7 +66,7 @@ const Manage = () => {
         setValue(newValue);
     };
 
-    const handleOpen = (type) => {
+    const handleOpen = type => {
         setOpen(true);
         setType(type);
     };
@@ -70,12 +77,15 @@ const Manage = () => {
     };
 
     const backupQuestion = () => {
-        if (window.confirm('質問のバックアップを復元しますか？')) {
+        if (window.confirm("質問のバックアップを復元しますか？")) {
             axios
-                .post('/questions/backup')
+                .post("/questions/backup")
                 .then(response => {
                     if (response.status === 200) {
-                        history.push("/?page=manage", { type: "backup", status: "question" });
+                        history.push("/?page=manage", {
+                            type: "backup",
+                            status: "question"
+                        });
                     }
                 })
                 .catch(error => {
@@ -85,9 +95,9 @@ const Manage = () => {
     };
 
     const backupStudent = () => {
-        if (window.confirm('受講生を一括登録しますか？')) {
+        if (window.confirm("受講生を一括登録しますか？")) {
             axios
-                .post('/users/backup')
+                .post("/users/backup")
                 .then(response => {
                     if (response.status === 200) {
                         setStudents({
@@ -96,9 +106,12 @@ const Manage = () => {
                             totalItemsCount: response.data.students.total,
                             currentPage: response.data.students.current_page,
                             pageRangeDisplayed: 10,
-                            lastPage: response.data.students.last_page,
+                            lastPage: response.data.students.last_page
                         });
-                        history.push("/?page=manage", { type: "backup", status: "student" });
+                        history.push("/?page=manage", {
+                            type: "backup",
+                            status: "student"
+                        });
                     }
                 })
                 .catch(error => {
@@ -111,24 +124,31 @@ const Manage = () => {
     if (user.id == 1 && user.name === "master") {
         master = (
             <React.Fragment>
-                <Typography component="div" sx={{ color: '#771AF8', fontWeight: 'bold', fontSize: 24 }}>
+                <Typography
+                    component="div"
+                    sx={{ color: "#771AF8", fontWeight: "bold", fontSize: 24 }}
+                >
                     データ出力・一括登録
                 </Typography>
 
-                <Grid container sx={{ width: '65%', m: '30px auto' }}>
+                <Grid container sx={{ width: "65%", m: "30px auto" }}>
                     {contents.map((content, index) => {
                         return (
-                            <Grid item sx={{ width: '33%' }} key={content.content}>
+                            <Grid
+                                item
+                                sx={{ width: "33%" }}
+                                key={content.content}
+                            >
                                 <Card
                                     sx={{
-                                        width: '90%',
-                                        m: '0 auto 16px',
-                                        position: 'relative',
-                                        cursor: 'pointer',
-                                        '&:before': {
+                                        width: "90%",
+                                        m: "0 auto 16px",
+                                        position: "relative",
+                                        cursor: "pointer",
+                                        "&:before": {
                                             content: '""',
-                                            pt: '100%',
-                                            display: 'block'
+                                            pt: "100%",
+                                            display: "block"
                                         }
                                     }}
                                     onClick={content.onClick}
@@ -138,14 +158,17 @@ const Manage = () => {
                                         variant="h5"
                                         component="div"
                                         sx={{
-                                            position: 'absolute',
-                                            top: 0, left: 0,
-                                            p: '10px', m: 0,
-                                            width: '100%', height: '100%',
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            justifyContent: 'center',
-                                            alignItems: 'center'
+                                            position: "absolute",
+                                            top: 0,
+                                            left: 0,
+                                            p: "10px",
+                                            m: 0,
+                                            width: "100%",
+                                            height: "100%",
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "center",
+                                            alignItems: "center"
                                         }}
                                     >
                                         {content.content}
@@ -162,37 +185,46 @@ const Manage = () => {
     let eventComponent;
     if (events.length > 0) {
         eventComponent = (
-            <Grid container sx={{ width: '65%', m: '30px auto' }}>
+            <Grid container sx={{ width: "65%", m: "30px auto" }}>
                 {events.map((event, index) => {
-                    return(
-                        <Grid item sx={{ width: '33%' }} key={`id${event.id}-${event.name}`}>
+                    return (
+                        <Grid
+                            item
+                            sx={{ width: "33%" }}
+                            key={`id${event.id}-${event.name}`}
+                        >
                             <Card
                                 sx={{
-                                    width: '90%',
-                                    m: '0 auto 16px',
-                                    position: 'relative',
-                                    cursor: 'pointer',
-                                    '&:before': {
+                                    width: "90%",
+                                    m: "0 auto 16px",
+                                    position: "relative",
+                                    cursor: "pointer",
+                                    "&:before": {
                                         content: '""',
-                                        pt: '100%',
-                                        display: 'block'
+                                        pt: "100%",
+                                        display: "block"
                                     }
                                 }}
-                                onClick={() => {handleOpen("show_event"), setEvent(event)}}
+                                onClick={() => {
+                                    handleOpen("show_event"), setEvent(event);
+                                }}
                             >
                                 <Typography
                                     align="center"
                                     variant="h5"
                                     component="div"
                                     sx={{
-                                        position: 'absolute',
-                                        top: 0, left: 0,
-                                        p: '10px', m: 0,
-                                        width: '100%', height: '100%',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        justifyContent: 'center',
-                                        alignItems: 'center'
+                                        position: "absolute",
+                                        top: 0,
+                                        left: 0,
+                                        p: "10px",
+                                        m: 0,
+                                        width: "100%",
+                                        height: "100%",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        justifyContent: "center",
+                                        alignItems: "center"
                                     }}
                                 >
                                     {event.name}
@@ -205,7 +237,11 @@ const Manage = () => {
         );
     } else {
         eventComponent = (
-            <Typography align="center" component="div" sx={{ fontSize: 20, mb: 5, mt: 2 }}>
+            <Typography
+                align="center"
+                component="div"
+                sx={{ fontSize: 20, mb: 5, mt: 2 }}
+            >
                 登録されているイベントはありません。
             </Typography>
         );
@@ -215,11 +251,23 @@ const Manage = () => {
     if (value == 0) {
         if (students.eventList.length !== 0) {
             component = (
-                <UserIndex users={students} account={user.id == 1 && user.name == "master" ? "master" : ""} type="student" setStudents={setStudents} setStaffs={setStaffs} />
+                <UserIndex
+                    users={students}
+                    account={
+                        user.id == 1 && user.name == "master" ? "master" : ""
+                    }
+                    type="student"
+                    setStudents={setStudents}
+                    setStaffs={setStaffs}
+                />
             );
         } else {
             component = (
-                <Typography align="center" component="div" sx={{ fontSize: 20 }}>
+                <Typography
+                    align="center"
+                    component="div"
+                    sx={{ fontSize: 20 }}
+                >
                     登録されている受講生はいません
                 </Typography>
             );
@@ -227,11 +275,23 @@ const Manage = () => {
     } else {
         if (staffs.eventList.length > 0) {
             component = (
-                <UserIndex users={staffs} account={user.id == 1 && user.name == "master" ? "master" : ""} type="staff" setStudents={setStudents} setStaffs={setStaffs} />
+                <UserIndex
+                    users={staffs}
+                    account={
+                        user.id == 1 && user.name == "master" ? "master" : ""
+                    }
+                    type="staff"
+                    setStudents={setStudents}
+                    setStaffs={setStaffs}
+                />
             );
         } else {
             component = (
-                <Typography align="center" component="div" sx={{ fontSize: 20 }}>
+                <Typography
+                    align="center"
+                    component="div"
+                    sx={{ fontSize: 20 }}
+                >
                     登録されているスタッフはいません
                 </Typography>
             );
@@ -249,7 +309,7 @@ const Manage = () => {
                     totalItemsCount: response.data.staffs.total,
                     currentPage: response.data.staffs.current_page,
                     pageRangeDisplayed: 10,
-                    lastPage: response.data.staffs.last_page,
+                    lastPage: response.data.staffs.last_page
                 });
                 setStudents({
                     eventList: response.data.students.data,
@@ -257,9 +317,10 @@ const Manage = () => {
                     totalItemsCount: response.data.students.total,
                     currentPage: response.data.students.current_page,
                     pageRangeDisplayed: 10,
-                    lastPage: response.data.students.last_page,
+                    lastPage: response.data.students.last_page
                 });
-            }).catch(error => {
+            })
+            .catch(error => {
                 console.log(error);
             });
     }, []);
@@ -278,39 +339,71 @@ const Manage = () => {
             />
 
             {/* イベント一覧 */}
-            <Typography component="div" sx={{ color: '#771AF8', fontWeight: 'bold', fontSize: 24 }}>
+            <Typography
+                component="div"
+                sx={{ color: "#771AF8", fontWeight: "bold", fontSize: 24 }}
+            >
                 イベント一覧
             </Typography>
 
-            <Typography align="right" component="div" sx={{ color: '#771AF8', fontSize: 20, textDecoration: 'underline', cursor: 'pointer' }} onClick={() => handleOpen("add_event")}>
+            <Typography
+                align="right"
+                component="div"
+                sx={{
+                    color: "#771AF8",
+                    fontSize: 20,
+                    textDecoration: "underline",
+                    cursor: "pointer"
+                }}
+                onClick={() => handleOpen("add_event")}
+            >
                 イベント追加
             </Typography>
 
             {eventComponent}
 
-
             {/* master限定機能 */}
             {master}
 
-
             {/* ユーザー一覧 */}
-            <Typography component="div" sx={{ color: '#771AF8', fontWeight: 'bold', fontSize: 24 }}>
+            <Typography
+                component="div"
+                sx={{ color: "#771AF8", fontWeight: "bold", fontSize: 24 }}
+            >
                 ユーザー一覧
             </Typography>
 
-            <Typography align="right" component="div" sx={{ color: '#771AF8', fontSize: 20, textDecoration: 'underline', cursor: 'pointer' }} onClick={() => handleOpen("user")}>
+            <Typography
+                align="right"
+                component="div"
+                sx={{
+                    color: "#771AF8",
+                    fontSize: 20,
+                    textDecoration: "underline",
+                    cursor: "pointer"
+                }}
+                onClick={() => handleOpen("user")}
+            >
                 ユーザー追加
             </Typography>
-            <Box sx={{ width: '100%', mt: 1.5 }}>
-                <Box sx={{ borderBottom: 1, borderColor: 'white', mb: 3 }}>
+            <Box sx={{ width: "100%", mt: 1.5 }}>
+                <Box sx={{ borderBottom: 1, borderColor: "white", mb: 3 }}>
                     <Tabs
                         value={value}
                         onChange={handleChange}
                         textColor="secondary"
                         indicatorColor="secondary"
                     >
-                        <Tab label="受講生" {...a11yProps(0)} sx={{ fontSize: 20, fontWeight: 'bold' }} />
-                        <Tab label="管理者" {...a11yProps(1)} sx={{ fontSize: 20, fontWeight: 'bold' }} />
+                        <Tab
+                            label="受講生"
+                            {...a11yProps(0)}
+                            sx={{ fontSize: 20, fontWeight: "bold" }}
+                        />
+                        <Tab
+                            label="管理者"
+                            {...a11yProps(1)}
+                            sx={{ fontSize: 20, fontWeight: "bold" }}
+                        />
                     </Tabs>
                 </Box>
                 {component}
