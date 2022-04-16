@@ -102,10 +102,10 @@ class College extends Model
         if ($online_time['exist']) {
             $message .= "開校時間は追ってメンターより連絡します:woman-bowing:";
         } else {
-            $message .= "*本日は、出勤しているメンターが少ないため、オンライン校舎は開校しておりません。*\n質問のある方は、<" + env("SlackChannelCurriculum") + "> または、<" + env("SlackChannelProject") + "> チャンネルにてご質問ください。";
+            $message .= "*本日は、出勤しているメンターが少ないため、オンライン校舎は開校しておりません。*\n質問のある方は、<#" . env('SlackChannelCurriculum') . "> または、<#" . env('SlackChannelProject') . "> チャンネルにてご質問ください。";
         }
-        
-        Slack::sendMessage($message, 'attendance');
+        dd($message);
+        // Slack::sendMessage($message, 'attendance');
     }
     
     /**
