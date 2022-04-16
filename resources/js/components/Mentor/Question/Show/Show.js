@@ -163,7 +163,7 @@ function Show() {
 
             <div style={{ marginLeft: "3%" }}>
                 <Breadcrumbs
-                    page={`mentor_question_show`}
+                    page={`mentor_question_show_${parameter.location}`}
                     topic={question.topic}
                     topic_title={topics[question.topic]}
                 />
