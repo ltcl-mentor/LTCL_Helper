@@ -23,6 +23,14 @@ class ReactController extends Controller
     /** 質問関連 */
 
     /**
+     * メンターが対応するべき質問の受け渡し
+     */
+    public function getQuestionsForMentor()
+    {
+        return Question::questionsForMentorPaginate();
+    }
+
+    /**
      * 質問検索結果の受け渡し
      * 「絞り込み」と「フリーワード」両方に対応
      */

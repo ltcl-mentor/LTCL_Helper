@@ -12,6 +12,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Grid from '@mui/material/Grid';
 import { CardActionArea } from '@mui/material';
+import { Link } from "react-router-dom";
 
 import Freeword from './search/freeword/freeword';
 import Condition from './search/condition/condition';
@@ -21,7 +22,7 @@ const PurpleButton = styled(Button)(({ theme }) => ({
     color: 'white',
     fontSize: 24,
     fontWeight: 'bold',
-    width: '50%', 
+    width: '50%',
     height: 60,
     boxShadow: 'none',
     backgroundColor: '#771AF8',
@@ -37,7 +38,7 @@ const GrayButton = styled(Button)(({ theme }) => ({
     color: '#ADA9A9',
     fontSize: 24,
     fontWeight: 'bold',
-    width: '50%', 
+    width: '50%',
     height: 60,
     boxShadow: 'none',
     backgroundColor: '#ECE9E9',
@@ -73,17 +74,17 @@ const QA = (props) => {
         // 成果物のトピック
         '認証機能', 'API', '画像処理', 'Heroku環境', 'デザイン', 'その他'
     ];
-    
+
     // タブ切り替え用
     const handleChange = (event, newValue) => {
         setIndexValue(newValue);
     };
-    
+
     // 個別質問ページ
     const toTopic = (topic_number) => {
         history.push(`/topic/${topic_number}`);
     };
-    
+
     let freewordButton;
     let conditionButton;
     let search;
@@ -96,7 +97,7 @@ const QA = (props) => {
         conditionButton = <PurpleButton onClick={() => setSearchValue(1)} variant="contained">絞り込み検索</PurpleButton>;
         search = <Condition />;
     }
-    
+
     let component;
     if (indexValue == 0) {
         component = (
@@ -147,7 +148,7 @@ const QA = (props) => {
             </Grid>
         );
     }
-    
+
     useEffect(() => {
         axios
             .get("/react/index")
@@ -163,32 +164,35 @@ const QA = (props) => {
     return (
         <React.Fragment>
             {user.is_admin == 'staff' &&
-                <Typography 
+                <Box textAlign="center">
+                <Typography
                     variant="h5"
-                    component="div"
+                    component={Link}
+                    to="/questions/mentor"
                     align="center"
                     sx={{
                         paddingTop: 3,
                         fontWeight: 'bold',
                     }}
                 >
-                    現在の質問解決率：<font color="purple">{ achievement }</font>%
+                    現在の質問解決率：<font color="purple" >{ achievement }</font>%
                 </Typography>
+                </Box>
             }
 
             {/* 検索部分 */}
             <Card variant="outlined" sx={{ width: '70%', m: '16px auto 0', p: 0 }}>
-        
+
                 {/* 検索タブ */}
                 <Stack direction="row">
                     {freewordButton}
                     {conditionButton}
                 </Stack>
-            
+
                 {/* 検索内容 */}
                 {search}
             </Card>
-            
+
             {/* 質問・記事一覧 */}
             <div className="index">
                 <Typography component="div" sx={{ color: '#771AF8', fontWeight: 'bold', fontSize: 24 }}>

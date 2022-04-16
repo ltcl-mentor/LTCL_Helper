@@ -37,6 +37,7 @@ import UserRegisterPublic from './Mentor/User/Register/Public/Public';
 import UserRegisterAdmin from './Mentor/User/Register/Admin/Admin';
 import EventIndex from './Mentor/Event/Index/Index';
 import EventRegister from './Mentor/Event/Create/Create';
+import MentorQuestions from './Mentor/Question/Index/questionsForMentor.js';
 
 export const LoginUser = createContext();
 
@@ -85,10 +86,10 @@ function Router() {
                 {/* 公開中の参考記事一覧表示 */}
 
                 <Route path="/public/documents/index" exact component={ PublicDocumentIndex }/>
-                
+
                 {/* 公開中の質問をカテゴリー毎に表示 */}
                 <Route path="/topic/:id" exact component={ PublicQuestionIndexIndex }/>
-                
+
                 {/* 公開中の質問一覧表示 */}
                 <Route
                     path="/public/questions/index"
@@ -125,10 +126,10 @@ function Router() {
             // 管理者ユーザがアクセスできるURL
             admin_links = (
                 <Switch>
-                
+
                     {/* 管理者ユーザマイページ表示 */}
                     <Route path="/Admin_my_page" exact component={AdminMyPage} />
-                    
+
                     {/* メンター管理画面表示 */}
                     <Route path="/mentor/top" exact component={MentorTop} />
 
@@ -165,6 +166,13 @@ function Router() {
                         path="/questions/index"
                         exact
                         component={QuestionIndex}
+                    />
+
+                    {/* 質問一覧画面表示 */}
+                    <Route
+                        path="/questions/mentor"
+                        exact
+                        component={MentorQuestions}
                     />
 
                     {/* メンターコメント待ちの質問一覧画面表示 */}
