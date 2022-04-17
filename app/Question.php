@@ -266,6 +266,21 @@ class Question extends Model
     }
 
     /**
+     * メンターが対応するべき質問の一覧を取得
+     */
+
+    public static function questionsForMentorPaginate()
+    {
+        $results = self::where('status', 0)
+            ->orWhere('status', 3)
+            ->orderBy('question', 'asc')
+            ->paginate(10);
+
+        return $results;
+    }
+
+
+    /**
      * 受講生がコメントに未返信の質問の件数取得
      */
     public static function replyCheck()
