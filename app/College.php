@@ -104,8 +104,8 @@ class College extends Model
         } else {
             $message .= "*本日は、出勤しているメンターが少ないため、オンライン校舎は開校しておりません。*\n質問のある方は、<#" . env('SlackChannelCurriculum') . "> または、<#" . env('SlackChannelProject') . "> チャンネルにてご質問ください。";
         }
-        dd($message);
-        // Slack::sendMessage($message, 'attendance');
+
+        Slack::sendMessage($message, 'attendance');
     }
     
     /**
