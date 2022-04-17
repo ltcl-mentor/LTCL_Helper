@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {useParams, useHistory, Link} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import axios from "axios";
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -27,7 +27,6 @@ function Index() {
         activePage: 1,
         itemsCountPerPage: 1,
         totalItemsCount: 1,
-        pageRangeDisplayed: 10,
         lastPage: 0,
     });
     const topics = [
@@ -41,10 +40,9 @@ function Index() {
         activePage: 1,
         itemsCountPerPage: 1,
         totalItemsCount: 1,
-        pageRangeDisplayed: 10,
         lastPage: 0,
     });
-    let val = 3;
+    let val = 0;
     if (id < 14) {
             val = 0;
         } else {
@@ -63,13 +61,11 @@ function Index() {
         axios
             .get(questionsUrl)
             .then(response => {
-                console.log(response.data);
                 setQuestions({
                         eventList: response.data.data,
                         itemsCountPerPage: response.data.per_page,
                         totalItemsCount: response.data.total,
                         currentPage: response.data.current_page,
-                        pageRangeDisplayed: 10,
                         lastPage: response.data.last_page,
                     });
             }).catch(error => {
@@ -85,7 +81,6 @@ function Index() {
                     itemsCountPerPage: response.data.per_page,
                     totalItemsCount: response.data.total,
                     currentPage: response.data.current_page,
-                    pageRangeDisplayed: 10,
                     lastPage: response.data.last_page,
                 });
             }).catch(error => {

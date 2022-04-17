@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {useParams, useHistory, Link} from 'react-router-dom';
+import React, {useContext} from 'react';
+import {Link} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import List from '@mui/material/List';
@@ -19,7 +19,6 @@ import MenuItem from "@material-ui/core/MenuItem";
  */
 function Questions(props) {
     const user = useContext(LoginUser);
-    const [currentPage, setCurrentPage] = useState(1);
     const status = props.status;
     const setStatus = props.setStatus;
     const questions = props.questions;
@@ -48,7 +47,6 @@ function Questions(props) {
                     itemsCountPerPage: response.data.per_page,
                     totalItemsCount: response.data.total,
                     currentPage: response.data.current_page,
-                    pageRangeDisplayed: 10,
                     lastPage: response.data.last_page,
                 });
             }).catch(error => {
@@ -65,13 +63,11 @@ function Questions(props) {
         axios
             .get(questionsUrl)
             .then(response => {
-                console.log(response.data);
                 props.setQuestions({
                     eventList: response.data.data,
                     itemsCountPerPage: response.data.per_page,
                     totalItemsCount: response.data.total,
                     currentPage: response.data.current_page,
-                    pageRangeDisplayed: 10,
                     lastPage: response.data.last_page,
                 });
             }).catch(error => {
@@ -139,6 +135,7 @@ function Questions(props) {
                 label="質問を絞り込む"
                 id="demo-simple-select"
                 select
+                defaultValue={""}
                 onChange={ (event) => handleStatus(event) }
                 style={{
                     width: "100%",
@@ -160,7 +157,7 @@ function Questions(props) {
         emptyMessage = ( <Typography align="center" variant="h6" component="div" >該当する質問がありません。</Typography> );
     } else {
         // 検索結果一覧情報を1ページ10件に分割
-        questionList = list.slice((currentPage - 1)*10, currentPage*10);
+        questionList = list.slice(0, 10);
 
         // ペジネーションの部分
         pagination = (

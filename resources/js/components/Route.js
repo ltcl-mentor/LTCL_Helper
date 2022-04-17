@@ -37,7 +37,7 @@ import UserRegisterPublic from './Mentor/User/Register/Public/Public';
 import UserRegisterAdmin from './Mentor/User/Register/Admin/Admin';
 import EventIndex from './Mentor/Event/Index/Index';
 import EventRegister from './Mentor/Event/Create/Create';
-import MentorQuestions from './Mentor/Question/Index/questionsForMentor.js';
+import MentorQuestions from './Public/Home/Q&A/questionsForMentor.js';
 
 export const LoginUser = createContext();
 

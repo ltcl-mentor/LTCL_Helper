@@ -11,12 +11,12 @@ import Grid from '@mui/material/Grid';
 // import TablePagination from '@mui/material/TablePagination';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import AddIcon from '@mui/icons-material/Add';
+//import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
 import Pagination from '@mui/material/Pagination';
 import Box from '@material-ui/core/Box';
 
-import BasicInformation from './Mypage/basicInformation.js'
+//import BasicInformation from './Mypage/basicInformation.js'
 import {LoginUser} from '../../Route.js';
 import Breadcrumbs from '../../Breadcrumbs';
 
@@ -38,7 +38,6 @@ const MyPage = (props) => {
         pageRangeDisplayed: 9,
         lastPage: 0,
     });
-    const [expanded, setExpanded] = useState(false);
     const [two_week_days, setTwoWeekDays] = useState();
     const [todayData, setTodayData] = useState('');
     const history = useHistory();
@@ -73,7 +72,6 @@ const MyPage = (props) => {
                     pageRangeDisplayed: 10,
                     lastPage: response.data.last_page,
                 });
-                console.log(response.data.data);
             }).catch(error => {
                 console.log(error);
             });
@@ -87,9 +85,9 @@ const MyPage = (props) => {
             if(questions.eventList[0]) {
             if((day <= questions.eventList[0].whenClicked.substr(0, 10)) && day >= questions.eventList[questions.eventList.length-1].whenClicked.substr(0, 10)) {
             return (
-                <Box sx={{marginBottom: 6}}>
+                <Box sx={{marginBottom: 6}} key={day}>
                     <Box>
-                            { todayData == day ?
+                            { todayData === day ?
                             <Typography sx={{ width: '33%', flexShrink: 0 , marginBottom: 2}} variant='h5'>今日（{day}）</Typography>:
                             <Typography sx={{ width: '33%', flexShrink: 0 , marginBottom: 2}} variant='h5'>{day}</Typography>
                             }
@@ -103,7 +101,7 @@ const MyPage = (props) => {
                                 if (question.whenClicked.substr( 0, 10 ) === day) {
                                 flag = false;
                                     return (
-                                                <TableRow hover role="checkbox" tabIndex={-1} key={`id-${question.id}:${question.created_at}`}>
+                                                <TableRow hover role="checkbox" tabIndex={-1} key={`id-${question.whenClicked}`}>
                                                     <TableCell align="center">
                                                         { question.is_resolved ?
                                                             <font color="green">解決済み</font>
