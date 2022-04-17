@@ -9,15 +9,13 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Paper from '@mui/material/Paper';
-import Input from '@mui/material/Input';
-import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@mui/material/Button';
 import Pagination from '@mui/material/Pagination';
 import InputBase from '@mui/material/InputBase';
 
 function Article(props) {
-    
+
     const [keyword, setKeyword] = useState('');
     const [beginner, setBeginner] = useState(false);
     const [amature, setAmature] = useState(false);
@@ -28,10 +26,9 @@ function Article(props) {
         currentPage: 1,
         itemsCountPerPage: 1,
         totalItemsCount: 1,
-        pageRangeDisplayed: 9,
         lastPage: 0,
     });
-    
+
     const handlePageClick = (event, index) => {
         // 検索結果の質問取得
         axios
@@ -42,20 +39,19 @@ function Article(props) {
                     itemsCountPerPage: response.data.per_page,
                     totalItemsCount: response.data.total,
                     currentPage: response.data.current_page,
-                    pageRangeDisplayed: 10,
                     lastPage: response.data.last_page,
                 });
             }).catch(error => {
                 console.log(error);
             });
     };
-    
+
     let documentsList;
     let pagination;
     // 関連質問がなかった場合
     if (props.documents.eventList.filter(v=>v).length === 0) {
         documentsList = (<div className="empty_message">関連する記事はありません。</div>);
-        
+
     // 関連質問があった場合
     } else {
         // ペジネーションの部分
@@ -70,7 +66,7 @@ function Article(props) {
         documentsList = documents.eventList.map((document) => {
             return (
                 <Grid item key={document.title} >
-                    <CardActionArea sx={{ width: "300px", height: "280px" }}>
+                    <Box sx={{ width: "300px", height: "280px" }}>
                         <a href={ document.link } target="_blank">
                             <Card sx={{ width: "300px", height: "280px"}}>
                                 <CardActionArea sx={{display:'flex', justifyContent: 'center'}}>
@@ -92,15 +88,15 @@ function Article(props) {
                                 </CardContent>
                             </Card>
                         </a>
-                    </CardActionArea>
+                    </Box>
                 </Grid>
             );
         });
     }
-    
+
     // 対象者の指定が変更された場合に実行
     useEffect(() => {
-        var keyword_documents = [];
+        let keyword_documents = [];
         // キーワードが未入力の場合
         if (keyword.trim().length === 0) {
             keyword_documents = props.documents.eventList;
@@ -109,8 +105,8 @@ function Article(props) {
                 doc.title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1 && keyword_documents.push(doc);
             });
         }
-        
-        var target_documents = [];
+
+        let target_documents = [];
         // 対象者のいづれかが選択されていた場合
         if (beginner || amature || master || all) {
             keyword_documents.map((doc) => {
@@ -136,42 +132,42 @@ function Article(props) {
         } else {
             setDocuments({...props.documents, eventList: keyword_documents});
         }
-        
+
     },[keyword, beginner, amature, master, all]);
-    
-    
-    
+
+
+
     // キーワード入力
     const handleKeyword = (event) => {
         // 入力に空白があれば"/"に置換
         setKeyword(event.target.value);
     };
-    
+
     // ボタンの表示切り替え
     const handleSelect = (whitch) => {
         switch (whitch) {
             case "beginner":
                 beginner ? setBeginner(false) : setBeginner(true);
                 break;
-            
+
             case "amature":
                 amature ? setAmature(false) : setAmature(true);
                 break;
-            
+
             case "master":
                 master ? setMaster(false) : setMaster(true);
                 break;
-            
+
             case "all":
                 all ? setAll(false) : setAll(true);
                 break;
-        } 
+        }
     };
 
-    
+
     return (
         <div>
-        
+
         <Grid container spacing={2} sx={{ flexGrow: 1, marginBottom: 3 , marginTop: 3}} justifyContent="center">
             <Grid container spacing={1} sx={{ mb: 7 }}>
                 <Grid item xs={8}>
@@ -182,7 +178,7 @@ function Article(props) {
                             display: "flex",
                             alignItems: "center",
                             width: "70%",
-                            ml: "auto", 
+                            ml: "auto",
                         }}
                     >
                         <InputBase
@@ -193,18 +189,18 @@ function Article(props) {
                             onKeyDown={ (event) => {if (event.key === 'Enter') event.preventDefault(); }}
                         />
                     </Paper>
-                </Grid> 
+                </Grid>
                 <Grid item xs={2}>
-                    <Button 
-                        variant="contained" 
-                        startIcon={<SearchIcon />} 
-                        sx={{ 
-                            backgroundColor: '#771AF8', 
-                            color: 'white', 
-                            height: '100%', 
+                    <Button
+                        variant="contained"
+                        startIcon={<SearchIcon />}
+                        sx={{
+                            backgroundColor: '#771AF8',
+                            color: 'white',
+                            height: '100%',
                             '&:hover': {
-                                backgroundColor: '#6633CC' 
-                            } 
+                                backgroundColor: '#6633CC'
+                            }
                         }}
                     >
                     </Button>
