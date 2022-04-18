@@ -68,9 +68,9 @@ const Bar = () => {
         >
             <AppBar position="static" color="default" sx={{ boxShadow: 'none', backgroundColor: 'white' }}>
                 <Toolbar>
-                    <Menu 
+                    {/*<Menu 
                         is_admin={ user.is_admin }
-                    />
+                    />*/}
                     
                     <Typography component="div" sx={{ flexGrow: 1 }}>
                         <Links sx={{ color: '#808080', fontSize: '25px', '&:hover': { color: '#771AF8' } }} href="/" underline="none">
