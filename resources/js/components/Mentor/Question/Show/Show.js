@@ -56,7 +56,7 @@ function Show() {
         "その他(成果物)"
     ];
     useEffect(() => {
-        if (question) {
+        if (typeof question.category != 'undefined' && typeof question.topic != 'undefined') {
             // この質問と同じカテゴリー、トピックの質問を取得
             axios
                 .get(
@@ -142,7 +142,7 @@ function Show() {
     };
 
     const backQuestionIndex = () => {
-        history.push("/questions/index");
+        history.push("/topic/" + question.topic);
     };
 
     const handleOpen = () => {
