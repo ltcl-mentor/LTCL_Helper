@@ -224,6 +224,7 @@ function Question(props) {
                     variant="h4"
                     component="div"
                     sx={{
+                        width: "70%",
                         marginTop: 4,
                         fontSize: 30,
                         fontWeight: "bold"

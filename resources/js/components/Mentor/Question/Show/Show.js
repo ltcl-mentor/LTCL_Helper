@@ -56,7 +56,10 @@ function Show() {
         "その他(成果物)"
     ];
     useEffect(() => {
-        if (typeof question.category != 'undefined' && typeof question.topic != 'undefined') {
+        if (
+            typeof question.category != "undefined" &&
+            typeof question.topic != "undefined"
+        ) {
             // この質問と同じカテゴリー、トピックの質問を取得
             axios
                 .get(
@@ -171,14 +174,12 @@ function Show() {
 
             <Box
                 sx={{
+                    mx: "5%",
                     display: "flex",
-                    width: "90%",
-                    margin: "4%",
-                    justifyContent: "center",
-                    position: "relative"
+                    justifyContent: "space-between"
                 }}
             >
-                <Box sx={{ position: "absolute" }}>
+                <Box sx={{ m: "0 auto", transform: "translate(50%)" }}>
                     <Publish
                         question_id={id}
                         question={question}
@@ -188,7 +189,7 @@ function Show() {
                         topic={topics[question.topic]}
                     />
                 </Box>
-                <Box sx={{ position: "absolute", right: "-2%" }}>
+                <Box>
                     <Link to={`/questions/` + id + `/edit`}>
                         <Button
                             variant="text"
