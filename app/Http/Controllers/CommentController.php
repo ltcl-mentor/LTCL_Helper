@@ -44,7 +44,7 @@ class CommentController extends Controller
         if($comment->comment_id === 0 && $comment->is_staff === true){
             $comment['is_mentor_commented'] = true;
             $question = Question::where('id', $comment->question_id)->first();
-            $user_name = User::where('id', $question->user_id)->first();
+            $user_name = User::where('id', $question->user_id)->first()->name;
         
         // メインコメントデータかつ受講生がコメントを入力した場合
         }elseif($comment->comment_id === 0 && $comment->is_staff === false){
