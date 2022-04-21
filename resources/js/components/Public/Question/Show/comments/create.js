@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import CreateIcon from "@material-ui/icons/Create";
@@ -44,6 +44,7 @@ const PostButton = styled(Button)(({ theme }) => ({
     }
 }));
 function Create(props) {
+    const location = useLocation();
     const history = useHistory();
     const [open, setOpen] = useState(false);
     const [clickCount, setClickCount] = useState(0);
@@ -87,7 +88,7 @@ function Create(props) {
                         setOpen(false);
                         props.setCommentChanging(false);
                         setClickCount(0);
-                        history.push("/questions/" + response.data.id, {
+                        history.push(location.pathname, {
                             comment: "post"
                         });
                     }

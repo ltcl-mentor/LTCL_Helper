@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import axios from "axios";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
  */
 function Comment(props) {
     const history = useHistory();
+    const location = useLocation();
 
     const deleteConfirm = () => {
         if (confirm("コメントが削除されます。\nよろしいですか？")) {
@@ -22,7 +23,7 @@ function Comment(props) {
                 .then(response => {
                     if (response.status === 200) {
                         props.setCommentChanging(false);
-                        history.push("/questions/" + response.data.id, {
+                        history.push(location.pathname, {
                             comment: "deleted"
                         });
                     }
