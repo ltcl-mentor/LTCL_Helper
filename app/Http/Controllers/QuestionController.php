@@ -131,7 +131,7 @@ class QuestionController extends Controller
      */
     public function resolved(Question $question)
     {
-        $question->fill(['is_resolved' => true])->save();
+        $question->fill(['is_resolved' => true, 'status' => 2])->save();
         return $question;
     }
 

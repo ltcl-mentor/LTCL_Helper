@@ -36,7 +36,7 @@ const SelectStatus = React.memo(props => {
 
     return (
         <>
-            <FormControl sx={{ width: 125 }}>
+            <FormControl sx={{ width: 120 }}>
                 <InputLabel>ステータスを選ぶ</InputLabel>
                 <Select
                     onChange={e => handleChangeStatus(e)}
