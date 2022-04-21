@@ -105,6 +105,7 @@ function Index() {
                 </Card>
             </Box>
 
+            <Box display='flex' justifyContent='center'>
             <Box sx={{ width: '95%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs TabIndicatorProps={{style: {backgroundColor: '#771AF8'}}} value={ value } onChange={ handleChange } aria-label="basic tabs example">
@@ -117,6 +118,7 @@ function Index() {
                 <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                     <Button  component={Link} to="/?page=qa">Q&Aに戻る</Button>
                 </Box>
+            </Box>
             </Box>
         </div>
     );
