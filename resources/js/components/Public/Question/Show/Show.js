@@ -64,7 +64,7 @@ function Show() {
         axios
             .post(`/questions/${id}/record`)
             .then(response => {
-                console.log('記録したよ')
+                console.log("記録したよ");
             })
             .catch(error => {
                 console.log(error);
