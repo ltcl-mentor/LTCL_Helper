@@ -297,7 +297,12 @@ function Question(props) {
             ) : (
                 // スマホで表示するコンポーネント
                 <Box sx={{ width: "90%", marginX: "5%" }}>
-                    <Box sx={{ mt: 2 }}>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column"
+                        }}
+                    >
                         <Box sx={{ display: "flex", alignItems: "center" }}>
                             <Avatar
                                 alt="Student"
