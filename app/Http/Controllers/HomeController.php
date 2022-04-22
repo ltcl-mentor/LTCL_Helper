@@ -12,11 +12,17 @@ use App\Info;
 use App\Event;
 use App\Comment;
 use Illuminate\Support\Facades\Auth;
+use DateTimeInterface;
+
 
 class HomeController extends Controller
 {
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
     /** 共通処理 */
-    
+
     /**
      * 質問閲覧履歴受け渡し
      */
@@ -24,7 +30,7 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $questions = $user->questions()->paginate(20);
-        
+
         foreach($questions as $question){
             $student_yet_comments = Comment::where('question_id', $question->id)->where('is_mentor_commented', true)->get();
 
@@ -32,12 +38,12 @@ class HomeController extends Controller
         }
         // アクセス履歴の情報を質問に付随させる
         foreach($questions as $question){
-            $question['whenClicked'] = $question->pivot->created_at;
+            $question['whenClicked'] = $this->serializeDate($question->pivot->created_at);
         }
-        
+
         return $questions;
     }
-    
+
     /**
      * トップ画面表示
      */
@@ -45,11 +51,11 @@ class HomeController extends Controller
     // {
     //     return view('home');
     // }
-    
-    
-    
+
+
+
     /** 管理者用処理 */
-    
+
     /**
      * お知らせ新規作成処理
      */
@@ -64,7 +70,7 @@ class HomeController extends Controller
         $info->fill($input)->save();
         return Info::getInfo();
     }
-    
+
     /**
      * お知らせ削除処理
      */
@@ -73,7 +79,7 @@ class HomeController extends Controller
         $info->delete();
         return Info::getInfo();
     }
-    
+
     /**
      * イベント追加処理
      */
@@ -83,7 +89,7 @@ class HomeController extends Controller
         $event->fill($input)->save();
         return Event::get();
     }
-    
+
     /**
      * イベント編集処理
      */
@@ -93,7 +99,7 @@ class HomeController extends Controller
         $event->save();
         return Event::get();
     }
-    
+
     /**
      * イベント削除処理
      */
@@ -101,7 +107,7 @@ class HomeController extends Controller
         $event->delete();
         return Event::get();
     }
-    
+
     /**
      * 管理画面表示
      */
