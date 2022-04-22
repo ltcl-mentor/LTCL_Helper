@@ -11,9 +11,11 @@ import Alert from "@mui/material/Alert";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Preview from "./preview";
 import CheckForm from "./checkForm";
+import useMedia from "use-media";
+import BreakingPoint from "../../../../BreakingPoint";
 
 // モーダルのCSS設定
-const style = {
+const styleForPc = {
     position: "absolute",
     top: "50%",
     left: "50%",
@@ -26,11 +28,25 @@ const style = {
     height: "90%",
     overflow: "scroll"
 };
+const styleForPhone = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "95%",
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+    height: "90%",
+    overflow: "scroll"
+};
 
 /**
  * 質問公開・非公開処理
  */
-function Publish(props) {
+const Publish = props => {
+    const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
     const history = useHistory();
     const [open, setOpen] = useState(false);
 
@@ -89,48 +105,94 @@ function Publish(props) {
     }
 
     return (
-        <div>
-            {publishBtn}
+        <>
+            {isWide ? (
+                <div>
+                    {publishBtn}
 
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={style}>
-                    <Button
-                        onClick={handleClose}
-                        startIcon={<CancelIcon />}
-                        sx={{
-                            color: "red",
-                            marginLeft: "95%",
-                            marginBottom: "5%"
-                        }}
-                    ></Button>
-                    <Alert severity="error">
-                        これは公開時のプレビューです。まだ公開処理は完了していません。
-                    </Alert>
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box sx={styleForPc}>
+                            <Button
+                                onClick={handleClose}
+                                startIcon={<CancelIcon />}
+                                sx={{
+                                    color: "red",
+                                    marginLeft: "95%",
+                                    marginBottom: "5%"
+                                }}
+                            ></Button>
+                            <Alert severity="error">
+                                これは公開時のプレビューです。まだ公開処理は完了していません。
+                            </Alert>
 
-                    <CheckForm
-                        question_id={props.question_id}
-                        setQuestion={props.setQuestion}
-                        handleClose={handleClose}
-                    />
+                            <CheckForm
+                                question_id={props.question_id}
+                                setQuestion={props.setQuestion}
+                                handleClose={handleClose}
+                            />
 
-                    <Box sx={{ border: "1px solid black" }}>
-                        <Preview
-                            question={props.question}
-                            images={props.images}
-                            documents={props.documents}
-                            category={props.category}
-                            topic={props.topic}
-                        />
-                    </Box>
-                </Box>
-            </Modal>
-        </div>
+                            <Box sx={{ border: "1px solid black" }}>
+                                <Preview
+                                    question={props.question}
+                                    images={props.images}
+                                    documents={props.documents}
+                                    category={props.category}
+                                    topic={props.topic}
+                                />
+                            </Box>
+                        </Box>
+                    </Modal>
+                </div>
+            ) : (
+                <div>
+                    {publishBtn}
+
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box sx={styleForPhone}>
+                            <Button
+                                onClick={handleClose}
+                                startIcon={<CancelIcon />}
+                                sx={{
+                                    color: "red",
+                                    marginLeft: "95%",
+                                    marginBottom: "5%"
+                                }}
+                            ></Button>
+                            <Alert severity="error">
+                                これは公開時のプレビューです。まだ公開処理は完了していません。
+                            </Alert>
+
+                            <CheckForm
+                                question_id={props.question_id}
+                                setQuestion={props.setQuestion}
+                                handleClose={handleClose}
+                            />
+
+                            <Box sx={{ border: "1px solid black" }}>
+                                <Preview
+                                    question={props.question}
+                                    images={props.images}
+                                    documents={props.documents}
+                                    category={props.category}
+                                    topic={props.topic}
+                                />
+                            </Box>
+                        </Box>
+                    </Modal>
+                </div>
+            )}
+        </>
     );
-}
+};
 
 export default Publish;
