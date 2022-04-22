@@ -13,6 +13,8 @@ import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
+import useMedia from 'use-media';
+import BreakingPoint from "../../../../BreakingPoint";
 
 /**
  * カリキュラムの質問一覧
@@ -28,6 +30,8 @@ function Questions(props) {
     } else {
         val = 1
     }
+
+    const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
 
     const handlePageClick = (event, index) => {
         let questionsUrl;
@@ -103,24 +107,39 @@ function Questions(props) {
         }
 
         return (
-            <div key={question.id}>
-
-                <Link to={{pathname: questionLink, location: 'question'}} /*target="_blank"*/>
-                    <ListItem button sx={{display: 'flex', textAlign: 'flex-start'}}>
-                        <ListItemText
-                            primary={
-                                <Box sx={{display: 'flex'}}>
-                                    {user.is_admin && check}
-                                    {user.is_admin && status}
-                                    <Typography　variant="body1" style={{ color: 'black' }} sx={{marginLeft: 2, marginTop: 0.7}}>{question.title}</Typography>
-                                </Box>
-                            }
-                        />
-                    </ListItem>
-                </Link>
-
-
-            </div>
+            <>{isWide ?
+                <div key={question.id}>
+                    <Link to={{pathname: questionLink, location: 'question'}} /*target="_blank"*/>
+                        <ListItem button sx={{display: 'flex', textAlign: 'flex-start'}}>
+                            <ListItemText
+                                primary={
+                                    <Box sx={{display: 'flex'}}>
+                                        {user.is_admin && check}
+                                        {user.is_admin && status}
+                                        <Typography　variant="body1" style={{ color: 'black' }} sx={{marginLeft: 2, marginTop: 0.7}}>{question.title}</Typography>
+                                    </Box>
+                                }
+                            />
+                        </ListItem>
+                    </Link>
+                </div>
+                :
+                <div key={question.id}>
+                    <Link to={{pathname: questionLink, location: 'question'}} /*target="_blank"*/>
+                        <ListItem button sx={{display: 'flex', textAlign: 'flex-start'}}>
+                            <ListItemText
+                                primary={
+                                    <Box>
+                                        {user.is_admin && check}
+                                        {user.is_admin && status}
+                                        <Typography　variant="h6" style={{ color: 'black' }} sx={{marginLeft: 2, marginTop: 0.7}}>{question.title}</Typography>
+                                    </Box>
+                                }
+                            />
+                        </ListItem>
+                    </Link>
+                </div>
+            }</>
         );
     });
 
@@ -130,25 +149,49 @@ function Questions(props) {
     let selector;
 
     if (user.is_admin) {
-        selector = (<FormControl  sx={{ width:'20%', marginLeft: 'auto' , marginTop: 2}}>
-            <TextField
-                label="質問を絞り込む"
-                id="demo-simple-select"
-                select
-                defaultValue={""}
-                onChange={ (event) => handleStatus(event) }
-                style={{
-                    width: "100%",
-                    paddingTop:2,
-                }}
-            >
-                <MenuItem value={ 4 } >全て表示</MenuItem>
-                <MenuItem value={ 0 } >未対応</MenuItem>
-                <MenuItem value={ 1 } >対応中</MenuItem>
-                <MenuItem value={ 2 } >解決済</MenuItem>
-                <MenuItem value={ 3 } >要対応</MenuItem>
-            </TextField>
-        </FormControl>)
+        selector = (<>
+            {isWide ?
+                <FormControl  sx={{ width: '20%', marginLeft: 'auto' , marginTop: 2}}>
+                <TextField
+                    label="質問を絞り込む"
+                    id="demo-simple-select"
+                    select
+                    defaultValue={""}
+                    onChange={ (event) => handleStatus(event) }
+                    style={{
+                        width: "100%",
+                        paddingTop:2,
+                    }}
+                >
+                    <MenuItem value={ 4 } >全て表示</MenuItem>
+                    <MenuItem value={ 0 } >未対応</MenuItem>
+                    <MenuItem value={ 1 } >対応中</MenuItem>
+                    <MenuItem value={ 2 } >解決済</MenuItem>
+                    <MenuItem value={ 3 } >要対応</MenuItem>
+                </TextField>
+                </FormControl>
+                :
+                <FormControl  sx={{ width:'60%',marginLeft: 2, marginTop: 2}}>
+                <TextField
+                    label="質問を絞り込む"
+                    id="demo-simple-select"
+                    select
+                    defaultValue={""}
+                    onChange={ (event) => handleStatus(event) }
+                    style={{
+                        width: "100%",
+                        paddingTop:2,
+                    }}
+                >
+                    <MenuItem value={ 4 } >全て表示</MenuItem>
+                    <MenuItem value={ 0 } >未対応</MenuItem>
+                    <MenuItem value={ 1 } >対応中</MenuItem>
+                    <MenuItem value={ 2 } >解決済</MenuItem>
+                    <MenuItem value={ 3 } >要対応</MenuItem>
+                </TextField>
+                </FormControl>
+            }
+        </>)
     }
 
     // filterでlistに存在する空要素を排除し,その上で配列内の要素が何個あるかを判定
@@ -170,9 +213,7 @@ function Questions(props) {
         );
     }
 
-
-
-    return (
+    const pc = (
         <Box>
             <Box sx={{display: 'flex'}}>
                 <List>
@@ -190,6 +231,32 @@ function Questions(props) {
             { emptyMessage }
         </Box>
     );
+
+    const smartPhone = (
+        <Box>
+
+            {selector}
+            <List>
+                { questionList }
+            </List>
+
+            <Grid container justifyContent="center" sx={{ marginTop: 1, marginBottom: 2 }}>
+                <Grid item>
+                    { pagination }
+                </Grid>
+            </Grid>
+
+            { emptyMessage }
+        </Box>
+    )
+
+
+
+    return (
+        <>
+        {isWide ? pc: smartPhone}
+        </>
+    )
 }
 
 export default Questions;
