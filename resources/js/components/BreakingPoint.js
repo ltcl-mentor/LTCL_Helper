@@ -1,2 +1,2 @@
-const BreakingPoint = 300;
+const BreakingPoint = 430;
 export default BreakingPoint;

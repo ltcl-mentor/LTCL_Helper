@@ -1,25 +1,26 @@
-import React, {useState, useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import axios from "axios";
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 
-import TextForm from '../../Create/Create/question-form/original-text-form/originalTextForm';
+import TextForm from "../../Create/Create/question-form/original-text-form/originalTextForm";
 
 /**
  * コメント編集
  */
 function Edit(props) {
     const history = useHistory();
+    const location = useLocation();
     const [clickCount, setClickCount] = useState(0);
-    const [comment, setComment] = useState('');
+    const [comment, setComment] = useState("");
     const [images, setImages] = useState([]);
-    
+
     useEffect(() => {
         setComment(props.comment);
     }, []);
-    
+
     // 更新処理
     const handleSubmit = () => {
         // 重複保存防止のために保存ボタンのクリック数をカウント
@@ -27,64 +28,64 @@ function Edit(props) {
         if (clickCount === 0) {
             props.setCommentChanging(true);
             setClickCount(1);
-            
+
             axios
-                .post(`/comments/${ props.comment_id }/update`, {
+                .post(`/comments/${props.comment_id}/update`, {
                     comment: comment,
-                    images: images,
+                    images: images
                 })
                 .then(response => {
                     if (response.status === 200) {
                         props.setCommentChanging(false);
-                        props.setEditId('');
+                        props.setEditId("");
                         setClickCount(0);
-                        history.push("/questions/" + response.data.id, {comment: 'updated'});
+                        history.push(location.pathname, {
+                            comment: "updated"
+                        });
                     }
-                }).catch(error => {
+                })
+                .catch(error => {
                     console.log(error);
                 });
         } else {
             return false;
         }
     };
-    
+
     return (
         <Box sx={{ marginBottom: 2 }}>
             <TextForm
-                text={ comment }
-                setText={ setComment }
-                images={ images }
-                setImages={ setImages }
+                text={comment}
+                setText={setComment}
+                images={images}
+                setImages={setImages}
             />
-            
-            <Grid container spacing={2} justifyContent="center" >
+
+            <Grid container spacing={2} justifyContent="center">
                 <Grid item>
                     <Button
                         variant="contained"
                         color="info"
-                        onClick={ () => props.setEditId('') }
+                        onClick={() => props.setEditId("")}
                     >
                         キャンセル
                     </Button>
                 </Grid>
-            
+
                 <Grid item>
-                    { comment.trim().length === 0 ?
-                        <Button
-                            variant="outlined"
-                            color="info"
-                        >
+                    {comment.trim().length === 0 ? (
+                        <Button variant="outlined" color="info">
                             更新
                         </Button>
-                    :
+                    ) : (
                         <Button
                             variant="contained"
                             color="info"
-                            onClick={ handleSubmit }
+                            onClick={handleSubmit}
                         >
                             更新
                         </Button>
-                    }
+                    )}
                 </Grid>
             </Grid>
         </Box>
