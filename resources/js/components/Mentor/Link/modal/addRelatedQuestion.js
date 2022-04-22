@@ -14,17 +14,30 @@ import ConfirmButton from "../../../Atom/Button/ConfirmButton";
 import CancelIcon from "@mui/icons-material/Cancel";
 import IconButton from "@mui/material/IconButton";
 import AlertMessage from "../../../Alert";
+import BreakingPoint from "../../../BreakingPoint";
+import useMedia from "use-media";
 
-const style = {
+const styleForPc = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "60%",
+    width: "70%",
     bgcolor: "background.paper",
-    py: 4,
-    px: 20,
-    m: 4
+    boxShadow: 24,
+    p: 4
+};
+
+const styleForPhone = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "95%",
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4
 };
 
 const styleSpan = {
@@ -35,6 +48,7 @@ const styleSpan = {
 };
 
 const addRelatedQuestion = React.memo(props => {
+    const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
     const history = useHistory();
     const [title, setTitle] = useState("");
     const [link, setLink] = useState("");
@@ -149,144 +163,283 @@ const addRelatedQuestion = React.memo(props => {
     };
 
     return (
-        <div>
-            <Modal open={props.open} onClose={props.handleOpen}>
-                <Box sx={style}>
-                    <IconButton
-                        variant="text"
-                        sx={{
-                            color: "red",
-                            position: "absolute",
-                            right: 5,
-                            top: 5
-                        }}
-                        onClick={props.handleOpen}
-                    >
-                        <CancelIcon />
-                    </IconButton>
+        <>
+            {isWide ? (
+                // 大画面用のコンポーネント
+                <Modal open={props.open} onClose={props.handleOpen}>
+                    <Box sx={styleForPc}>
+                        <IconButton
+                            variant="text"
+                            sx={{
+                                color: "red",
+                                position: "absolute",
+                                right: 5,
+                                top: 5
+                            }}
+                            onClick={props.handleOpen}
+                        >
+                            <CancelIcon />
+                        </IconButton>
 
-                    <Typography
-                        variant="h5"
-                        component="div"
-                        sx={{
-                            marginTop: 3,
-                            fontWeight: "bold",
-                            padding: 1,
-                            color: "#771AF8",
-                            margin: "0 auto",
-                            textAlign: "center"
-                        }}
-                    >
-                        関連記事の登録
-                    </Typography>
-                    <Box>
                         <Typography
+                            variant="h5"
+                            component="div"
                             sx={{
+                                marginTop: 3,
                                 fontWeight: "bold",
-                                fontSize: 20,
-                                mt: 4,
-                                color: "#707070",
-                                mb: 1
+                                padding: 1,
+                                color: "#771AF8",
+                                margin: "0 auto",
+                                textAlign: "center"
                             }}
                         >
-                            タイトル
+                            関連記事の登録
                         </Typography>
-                        <TextField
-                            error={textValidationError["title"]}
-                            helperText={textValidationErrorMessage["title"]}
-                            label="記事のタイトルを入力"
-                            variant="outlined"
-                            onChange={e => setTitle(e.target.value)}
-                            fullWidth
-                        />
-                        <Typography
-                            sx={{
-                                fontWeight: "bold",
-                                fontSize: 20,
-                                mt: 4,
-                                color: "#707070",
-                                mb: 1
-                            }}
-                        >
-                            記事URL
-                            <span style={styleSpan}>
-                                NotePMの外部共有URLのみ使用可能
-                            </span>
-                        </Typography>
-                        <TextField
-                            error={textValidationError["link"]}
-                            helperText={textValidationErrorMessage["link"]}
-                            label="記事のURLを入力"
-                            variant="outlined"
-                            fullWidth
-                            onChange={e => setLink(e.target.value)}
-                        />
-                        <Typography
-                            sx={{
-                                fontWeight: "bold",
-                                fontSize: 20,
-                                mt: 4,
-                                color: "#707070",
-                                mb: 1
-                            }}
-                        >
-                            対象者
-                            <span style={styleSpan}>複数選択可</span>
-                        </Typography>
-                    </Box>
-                    <Box>
-                        <FormControl error={textValidationError["target"]}>
-                            <FormGroup
+                        <Box>
+                            <Typography
                                 sx={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    ml: "15%"
+                                    fontWeight: "bold",
+                                    fontSize: 20,
+                                    mt: 4,
+                                    color: "#707070",
+                                    mb: 1
                                 }}
                             >
-                                <FormControlLabel
-                                    sx={{ px: 1 }}
-                                    control={<Checkbox />}
-                                    label="初級者"
-                                    checked={beginner}
-                                    onChange={handleChangeBeginner}
-                                />
-                                <FormControlLabel
-                                    control={<Checkbox />}
-                                    label="中級者"
-                                    sx={{ px: 1 }}
-                                    checked={amature}
-                                    onChange={handleChangeAmature}
-                                />
-                                <FormControlLabel
-                                    control={<Checkbox />}
-                                    label="上級者"
-                                    sx={{ px: 1 }}
-                                    checked={master}
-                                    onChange={handleChangeMaster}
-                                />
-                                <FormControlLabel
-                                    control={<Checkbox />}
-                                    label="全員必読"
-                                    sx={{ px: 1 }}
-                                    checked={all}
-                                    onChange={handleChangeAll}
-                                />
-                                {textValidationError.target ? (
-                                    <FormHelperText>
-                                        対象者を選択してください
-                                    </FormHelperText>
-                                ) : null}
-                            </FormGroup>
-                        </FormControl>
+                                タイトル
+                            </Typography>
+                            <TextField
+                                error={textValidationError["title"]}
+                                helperText={textValidationErrorMessage["title"]}
+                                label="記事のタイトルを入力"
+                                variant="outlined"
+                                onChange={e => setTitle(e.target.value)}
+                                fullWidth
+                            />
+                            <Typography
+                                sx={{
+                                    fontWeight: "bold",
+                                    fontSize: 20,
+                                    mt: 4,
+                                    color: "#707070",
+                                    mb: 1
+                                }}
+                            >
+                                記事URL
+                                <span style={styleSpan}>
+                                    NotePMの外部共有URLのみ使用可能
+                                </span>
+                            </Typography>
+                            <TextField
+                                error={textValidationError["link"]}
+                                helperText={textValidationErrorMessage["link"]}
+                                label="記事のURLを入力"
+                                variant="outlined"
+                                fullWidth
+                                onChange={e => setLink(e.target.value)}
+                            />
+                            <Typography
+                                sx={{
+                                    fontWeight: "bold",
+                                    fontSize: 20,
+                                    mt: 4,
+                                    color: "#707070",
+                                    mb: 1
+                                }}
+                            >
+                                対象者
+                                <span style={styleSpan}>複数選択可</span>
+                            </Typography>
+                        </Box>
+                        <Box>
+                            <FormControl error={textValidationError["target"]}>
+                                <FormGroup
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "row"
+                                    }}
+                                >
+                                    <FormControlLabel
+                                        sx={{ px: 1 }}
+                                        control={<Checkbox />}
+                                        label="初級者"
+                                        checked={beginner}
+                                        onChange={handleChangeBeginner}
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox />}
+                                        label="中級者"
+                                        sx={{ px: 1 }}
+                                        checked={amature}
+                                        onChange={handleChangeAmature}
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox />}
+                                        label="上級者"
+                                        sx={{ px: 1 }}
+                                        checked={master}
+                                        onChange={handleChangeMaster}
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox />}
+                                        label="全員必読"
+                                        sx={{ px: 1 }}
+                                        checked={all}
+                                        onChange={handleChangeAll}
+                                    />
+                                    {textValidationError.target ? (
+                                        <FormHelperText>
+                                            対象者を選択してください
+                                        </FormHelperText>
+                                    ) : null}
+                                </FormGroup>
+                            </FormControl>
+                        </Box>
+                        <Box sx={{ my: 5, textAlign: "center" }}>
+                            <ConfirmButton onClick={handleSubmit}>
+                                登録する
+                            </ConfirmButton>
+                        </Box>
                     </Box>
-                    <Box sx={{ my: 5, textAlign: "center" }}>
-                        <ConfirmButton onClick={handleSubmit}>
-                            登録する
-                        </ConfirmButton>
+                </Modal>
+            ) : (
+                // スマホ用のコンポーネント
+                <Modal open={props.open} onClose={props.handleOpen}>
+                    <Box sx={styleForPhone}>
+                        <IconButton
+                            variant="text"
+                            sx={{
+                                color: "red",
+                                position: "absolute",
+                                right: 5,
+                                top: 5
+                            }}
+                            onClick={props.handleOpen}
+                        >
+                            <CancelIcon />
+                        </IconButton>
+
+                        <Typography
+                            variant="h5"
+                            component="div"
+                            sx={{
+                                marginTop: 3,
+                                fontWeight: "bold",
+                                padding: 1,
+                                color: "#771AF8",
+                                margin: "0 auto",
+                                textAlign: "center"
+                            }}
+                        >
+                            関連記事の登録
+                        </Typography>
+                        <Box>
+                            <Typography
+                                sx={{
+                                    fontWeight: "bold",
+                                    fontSize: 20,
+                                    mt: 4,
+                                    color: "#707070",
+                                    mb: 1
+                                }}
+                            >
+                                タイトル
+                            </Typography>
+                            <TextField
+                                error={textValidationError["title"]}
+                                helperText={textValidationErrorMessage["title"]}
+                                label="記事のタイトルを入力"
+                                variant="outlined"
+                                onChange={e => setTitle(e.target.value)}
+                                fullWidth
+                            />
+                            <Typography
+                                sx={{
+                                    fontWeight: "bold",
+                                    fontSize: 20,
+                                    mt: 4,
+                                    color: "#707070",
+                                    mb: 1
+                                }}
+                            >
+                                記事URL
+                                <span style={styleSpan}>
+                                    NotePMの外部共有URLのみ使用可能
+                                </span>
+                            </Typography>
+                            <TextField
+                                error={textValidationError["link"]}
+                                helperText={textValidationErrorMessage["link"]}
+                                label="記事のURLを入力"
+                                variant="outlined"
+                                fullWidth
+                                onChange={e => setLink(e.target.value)}
+                            />
+                            <Typography
+                                sx={{
+                                    fontWeight: "bold",
+                                    fontSize: 20,
+                                    mt: 4,
+                                    color: "#707070",
+                                    mb: 1
+                                }}
+                            >
+                                対象者
+                                <span style={styleSpan}>複数選択可</span>
+                            </Typography>
+                        </Box>
+                        <Box>
+                            <FormControl error={textValidationError["target"]}>
+                                <FormGroup
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "row"
+                                    }}
+                                >
+                                    <FormControlLabel
+                                        sx={{ px: 1 }}
+                                        control={<Checkbox />}
+                                        label="初級者"
+                                        checked={beginner}
+                                        onChange={handleChangeBeginner}
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox />}
+                                        label="中級者"
+                                        sx={{ px: 1 }}
+                                        checked={amature}
+                                        onChange={handleChangeAmature}
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox />}
+                                        label="上級者"
+                                        sx={{ px: 1 }}
+                                        checked={master}
+                                        onChange={handleChangeMaster}
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox />}
+                                        label="全員必読"
+                                        sx={{ px: 1 }}
+                                        checked={all}
+                                        onChange={handleChangeAll}
+                                    />
+                                    {textValidationError.target ? (
+                                        <FormHelperText>
+                                            対象者を選択してください
+                                        </FormHelperText>
+                                    ) : null}
+                                </FormGroup>
+                            </FormControl>
+                        </Box>
+                        <Box sx={{ my: 5, textAlign: "center" }}>
+                            <ConfirmButton onClick={handleSubmit}>
+                                登録する
+                            </ConfirmButton>
+                        </Box>
                     </Box>
-                </Box>
-            </Modal>
-        </div>
+                </Modal>
+            )}
+        </>
     );
 });
 
