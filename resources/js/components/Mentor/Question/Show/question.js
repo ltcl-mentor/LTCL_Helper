@@ -5,6 +5,9 @@ import Avatar from "@material-ui/core/Avatar";
 import SelectStatus from "../../../Atom/Select/SelectStatus";
 import BreakingPoint from "../../../BreakingPoint";
 import useMedia from "use-media";
+import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
+
 /**
  * 質問表示
  */
@@ -299,6 +302,19 @@ function Question(props) {
                 <Box sx={{ width: "90%", marginX: "5%" }}>
                     <Box
                         sx={{
+                            textAlign: "center",
+                            mb: 6
+                        }}
+                    >
+                        <SelectStatus
+                            id={props.id}
+                            status={props.status}
+                            setStatus={props.setStatus}
+                            responseStatus={props.responseStatus}
+                        />
+                    </Box>
+                    <Box
+                        sx={{
                             display: "flex",
                             flexDirection: "column"
                         }}
@@ -317,20 +333,41 @@ function Question(props) {
                             </Typography>
                         </Box>
 
-                        <Typography variant="h7" component="div">
-                            {categories[props.category]}&nbsp; /&nbsp;
-                            {topics[props.topic]}
-                            &nbsp; /&nbsp;
-                            {props.curriculum_number}&nbsp;
-                        </Typography>
-                    </Box>
-                    <Box sx={{ m: 2 }}>
-                        <SelectStatus
-                            id={props.id}
-                            status={props.status}
-                            setStatus={props.setStatus}
-                            responseStatus={props.responseStatus}
-                        />
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                mt: 2
+                            }}
+                        >
+                            <Box>
+                                <Typography variant="h7" component="div">
+                                    {categories[props.category]}&nbsp; /&nbsp;
+                                    {topics[props.topic]}
+                                    &nbsp; /&nbsp;
+                                    {props.curriculum_number}&nbsp;
+                                </Typography>
+                            </Box>
+                            <Box>
+                                <Link to={`/questions/` + props.id + `/edit`}>
+                                    <Button
+                                        variant="text"
+                                        sx={{ color: "#771AF8", fontSize: 15 }}
+                                    >
+                                        編集
+                                    </Button>
+                                </Link>
+                                /
+                                <Button
+                                    variant="text"
+                                    sx={{ color: "#771AF8", fontSize: 15 }}
+                                    onClick={props.deleteConfirm}
+                                >
+                                    削除
+                                </Button>
+                            </Box>
+                        </Box>
                     </Box>
 
                     <Box sx={{ display: "fex", position: "relative" }}>

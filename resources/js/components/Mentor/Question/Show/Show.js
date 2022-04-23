@@ -306,41 +306,15 @@ function Show() {
                         />
                     </div>
 
-                    <Box
-                        sx={{
-                            mx: "5%",
-                            display: "flex",
-                            justifyContent: "space-between"
-                        }}
-                    >
-                        <Box sx={{ m: "0 auto", transform: "translate(50%)" }}>
-                            <Publish
-                                question_id={id}
-                                question={question}
-                                setQuestion={setQuestion}
-                                documents={documents}
-                                category={categories[question.category]}
-                                topic={topics[question.topic]}
-                            />
-                        </Box>
-                        <Box>
-                            <Link to={`/questions/` + id + `/edit`}>
-                                <Button
-                                    variant="text"
-                                    sx={{ color: "#771AF8", fontSize: 15 }}
-                                >
-                                    編集
-                                </Button>
-                            </Link>
-                            /
-                            <Button
-                                variant="text"
-                                sx={{ color: "#771AF8", fontSize: 15 }}
-                                onClick={deleteConfirm}
-                            >
-                                削除
-                            </Button>
-                        </Box>
+                    <Box sx={{ textAlign: "center", mb: 3 }}>
+                        <Publish
+                            question_id={id}
+                            question={question}
+                            setQuestion={setQuestion}
+                            documents={documents}
+                            category={categories[question.category]}
+                            topic={topics[question.topic]}
+                        />
                     </Box>
 
                     <Question
@@ -355,6 +329,7 @@ function Show() {
                         status={status}
                         setStatus={setStatus}
                         responseStatus={question["status"]}
+                        deleteConfirm={deleteConfirm}
                     />
                     <Comments
                         main_comments={question.main_comments}
