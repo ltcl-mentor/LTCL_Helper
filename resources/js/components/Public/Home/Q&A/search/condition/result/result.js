@@ -117,7 +117,7 @@ const Result = (props) => {
     }
     
     return (
-        <Card>
+        <Card sx={{ mb: 3 }}>
             <Typography
                 variant="h7"
                 component="div"
