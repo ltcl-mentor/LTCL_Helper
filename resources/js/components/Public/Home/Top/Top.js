@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import useMedia from 'use-media';
 import BreakingPoint from '../../../BreakingPoint';
@@ -11,6 +11,7 @@ import { LoginUser } from '../../../Route.js';
 import Information from './information/information';
 import Clendar from './calendar/calendar';
 import Location from './location';
+import Modals from "../modal";
 
 
 /**
@@ -18,17 +19,29 @@ import Location from './location';
  */
 const Top = (props) => {
     const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
+    const [open, setOpen] = useState(false);
+    const [type, setType] = useState("user");
     const [map_key, setMapKey] = useState();
     const [zoom_link, setZoomLink] = useState();
     const [events, setEvents] = useState([]);
-    const history = useHistory();
+    // const history = useHistory();
     
     // ログインユーザー情報取得
     const user = useContext(LoginUser);
     
     // お問い合わせページへ遷移
-    const contact = () => {
-        history.push('/contact');
+    // const contact = () => {
+    //     history.push('/contact');
+    // };
+    
+    const handleOpen = type => {
+        setOpen(true);
+        setType(type);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+        setType("user");
     };
     
     // 画面描画時に実行
@@ -55,7 +68,7 @@ const Top = (props) => {
                         LTCL Helper
                     </Typography>
                     <Typography 
-                        onClick={() => contact()}
+                        onClick={() => handleOpen('contact')}
                         component="div"
                         sx={{ 
                             color: 'black',
@@ -85,7 +98,7 @@ const Top = (props) => {
                     LTCL Helper
                 </Typography>
                 <Typography 
-                    onClick={() => contact()}
+                    onClick={() => handleOpen('contact')}
                     component="div"
                     sx={{ 
                         color: 'black',
@@ -110,6 +123,11 @@ const Top = (props) => {
     
     return (
         <React.Fragment>
+            <Modals
+                open={open}
+                type={type}
+                handleClose={handleClose}
+            />
         
             {/* 校舎情報 */}
             <Clendar 

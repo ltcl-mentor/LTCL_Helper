@@ -9,6 +9,7 @@ import AddEvent from './modal/addEvent';
 import Create from './Top/information/create';
 import ShowInfo from './modal/showInfo';
 import DeleteInfo from './modal/deleteInfo';
+import Contact from './modal/contact';
 
 // モーダルのcss
 const style = {
@@ -62,6 +63,11 @@ const Modals = (props) => {
         // イベント追加
         case "add_event":
             content = <AddEvent setEvents={props.setEvents} onClose={props.handleClose} />;
+            break;
+            
+        // お問い合わせ
+        case "contact":
+            content = <Contact onClose={props.handleClose} />;
             break;
     }
     
