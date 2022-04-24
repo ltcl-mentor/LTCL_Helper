@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import useMedia from 'use-media';
+import BreakingPoint from '../../../BreakingPoint';
 
 import Typography from "@material-ui/core/Typography";
 import Grid from "@mui/material/Grid";
@@ -25,6 +27,7 @@ const a11yProps = index => {
  */
 const Manage = () => {
     const history = useHistory();
+    const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
     const [open, setOpen] = useState(false);
     const [type, setType] = useState("user");
     const [event, setEvent] = useState([]);
@@ -136,12 +139,12 @@ const Manage = () => {
                         return (
                             <Grid
                                 item
-                                sx={{ width: "33%" }}
+                                sx={{ width: isWide ? "33%" : '100%' }}
                                 key={content.content}
                             >
                                 <Card
                                     sx={{
-                                        width: "90%",
+                                        width: "180px",
                                         m: "0 auto 16px",
                                         position: "relative",
                                         cursor: "pointer",
@@ -190,12 +193,12 @@ const Manage = () => {
                     return (
                         <Grid
                             item
-                            sx={{ width: "33%" }}
+                            sx={{ width: isWide ? "33%" : '100%' }}
                             key={`id${event.id}-${event.name}`}
                         >
                             <Card
                                 sx={{
-                                    width: "90%",
+                                    width: "180px",
                                     m: "0 auto 16px",
                                     position: "relative",
                                     cursor: "pointer",

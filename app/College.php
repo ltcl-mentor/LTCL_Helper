@@ -36,11 +36,15 @@ class College extends Model
             
             // オンライン校舎の開校時間中かどうか
             $times = explode("、", $college_datas['zoom']['message']);
+            if ($times[0] == "") {
+                $times[0] = "14:00~16:00";
+            }
+
             $openTimes = [];
             foreach($times as $time) {
                 array_push($openTimes, explode("~", $time));
             }
-            
+
             foreach ($openTimes as $openTime) {
                 $startDiff = strtotime($now) - strtotime($openTime[0]);
                 $endDiff = strtotime($now) - strtotime($openTime[1]);

@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Box from '@mui/material/Box';
@@ -29,6 +31,26 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: '#C299FF',
+        color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+        backgroundColor: '#EEEEEE',
+        fontSize: 14,
+    },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+    },
+    '&:last-child td, &:last-child th': {
+        border: 0,
+    },
+}));
 
 
 /**
@@ -92,34 +114,34 @@ const UserIndex = (props) => {
     if (props.type == "student") {
         tablehead = (
             <React.Fragment>
-                <TableCell align="center" sx={{ fontWeight: 'bold' }}>受講生ID</TableCell>
-                <TableCell align="center" sx={{ fontWeight: 'bold' }}>パスワード</TableCell>
+                <StyledTableCell align="center" sx={{ fontWeight: 'bold' }}>受講生ID</StyledTableCell>
+                <StyledTableCell align="center" sx={{ fontWeight: 'bold' }}>パスワード</StyledTableCell>
             </React.Fragment>
         );
         tablebody = (
             <React.Fragment>
                 {props.users.eventList.map((user, index) => {
                     return (
-                        <TableRow key={user.id} sx={{ backgroundColor: '#EEEEEE' }}>
-                            <TableCell align="center" component="th" scope="row">{ user.id }</TableCell>
-                            <TableCell align="center">{ user.student_name }</TableCell>
-                            <TableCell align="center">{ user.name }</TableCell>
-                            <TableCell align="center">
-                                <Button variant="text" onClick={ () => revealPass(index) }>
+                        <StyledTableRow key={user.id}>
+                            <StyledTableCell align="center" component="th" scope="row">{ user.id }</StyledTableCell>
+                            <StyledTableCell align="center">{ user.student_name }</StyledTableCell>
+                            <StyledTableCell align="center">{ user.name }</StyledTableCell>
+                            <StyledTableCell align="center">
+                                <Button variant="text" onClick={() => revealPass(index)}>
                                     { pass_number === index ? user.password : 'パスワード' }
                                 </Button>
-                            </TableCell>
+                            </StyledTableCell>
                             {props.account == "master" &&
                                 <React.Fragment>
-                                    <TableCell align="center">
+                                    <StyledTableCell align="center">
                                         { user.lock ? <Button variant="contained" onClick={() => unlockUser(user.user_id)}>ロック解除</Button> : '平常' }
-                                    </TableCell>
-                                    <TableCell align="center">
+                                    </StyledTableCell>
+                                    <StyledTableCell align="center">
                                         <Button variant="contained" color="error" onClick={() => {setDeleteuser(user.user_id), setOpen(true)}} startIcon={ <DeleteIcon /> }>削除する</Button>
-                                    </TableCell>
+                                    </StyledTableCell>
                                 </React.Fragment>
                             }
-                        </TableRow>
+                        </StyledTableRow>
                     );
                 })}
             </React.Fragment>
@@ -129,20 +151,20 @@ const UserIndex = (props) => {
             <React.Fragment>
                 {props.users.eventList.map(user => {
                     return (
-                        <TableRow key={user.id} sx={{ backgroundColor: '#EEEEEE' }}>
-                            <TableCell align="center" component="th" scope="row">{ user.id }</TableCell>
-                            <TableCell align="center">{ user.name }</TableCell>
+                        <StyledTableRow key={user.id}>
+                            <StyledTableCell align="center" component="th" scope="row">{ user.id }</StyledTableCell>
+                            <StyledTableCell align="center">{ user.name }</StyledTableCell>
                             {props.account == "master" &&
                                 <React.Fragment>
-                                    <TableCell align="center">
-                                        { user.lock ? <Button variant="contained" onClick={() => unlockUser(user.id)}>ロック解除</Button> : '平常' }
-                                    </TableCell>
-                                    <TableCell align="center">
-                                        <Button variant="contained" color="error" onClick={() => {setDeleteuser(user.id), setOpen(true)}} startIcon={ <DeleteIcon /> }>削除する</Button>
-                                    </TableCell>
+                                    <StyledTableCell align="center">
+                                        { user.lock ? <Button variant="contained" onClick={() => unlockUser(user.user_id)}>ロック解除</Button> : '平常' }
+                                    </StyledTableCell>
+                                    <StyledTableCell align="center">
+                                        <Button variant="contained" color="error" onClick={() => {setDeleteuser(user.user_id), setOpen(true)}} startIcon={ <DeleteIcon /> }>削除する</Button>
+                                    </StyledTableCell>
                                 </React.Fragment>
                             }
-                        </TableRow>
+                        </StyledTableRow>
                     );
                 })}
             </React.Fragment>
@@ -196,17 +218,17 @@ const UserIndex = (props) => {
 
     return (
         <React.Fragment>
-            <Paper sx={{ boxShadow: 'none', borderRadius: 0, marginBottom: 6, width: '70%', margin: '0 auto' }}>
-                <Table>
+            <TableContainer component={Paper} sx={{ width: '90%', margin: '0 auto' }}>
+                <Table sx={{ minWidth: 630 }} aria-label="customized table">
                     <TableHead>
-                        <TableRow sx={{ backgroundColor: '#C299FF', color: 'white' }}>
-                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>ID</TableCell>
-                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>名前</TableCell>
+                        <TableRow>
+                            <StyledTableCell align="center" sx={{ fontWeight: 'bold' }}>ID</StyledTableCell>
+                            <StyledTableCell align="center" sx={{ fontWeight: 'bold' }}>名前</StyledTableCell>
                             {tablehead}
                             {props.account == "master" &&
                                 <React.Fragment>
-                                    <TableCell align="center" sx={{ fontWeight: 'bold' }}>ステータス</TableCell>
-                                    <TableCell align="center" sx={{ fontWeight: 'bold' }}>削除</TableCell>
+                                    <StyledTableCell align="center" sx={{ fontWeight: 'bold' }}>ステータス</StyledTableCell>
+                                    <StyledTableCell align="center" sx={{ fontWeight: 'bold' }}>削除</StyledTableCell>
                                 </React.Fragment>
                             }
                         </TableRow>
@@ -215,10 +237,10 @@ const UserIndex = (props) => {
                         {tablebody}
                     </TableBody>
                 </Table>
-                <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 2}}>
-                    {pagination}
-                </Box>
-            </Paper>
+            </TableContainer>
+            <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 2}}>
+                {pagination}
+            </Box>
 
             {/* 削除モーダル */}
             <Modal
