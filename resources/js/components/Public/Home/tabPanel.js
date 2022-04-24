@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-import Top from './Top/top';
+import Top from './Top/Top';
 import QA from './Q&A/qa';
 import Manage from './Manage/manage';
 import { LoginUser } from '../../Route';
@@ -22,7 +22,7 @@ const a11yProps = (index) => {
 /**
  * タブパネル
  */
-const TabPanel = () => {
+const tabPanel = () => {
     const isMounted = useMountedState();
     const user = useContext(LoginUser);
     const history = useHistory();
@@ -67,7 +67,7 @@ const TabPanel = () => {
 
     return (
         <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'white', paddingLeft: 10 }}>
+            <Box sx={{ borderBottom: 1, borderColor: 'white', paddingLeft: '10%' }}>
                 <Tabs
                     value={value}
                     onChange={handleChange}
@@ -86,4 +86,4 @@ const TabPanel = () => {
     );
 };
 
-export default TabPanel;
+export default tabPanel;

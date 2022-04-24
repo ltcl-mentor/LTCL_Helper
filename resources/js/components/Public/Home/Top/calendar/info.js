@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import useMedia from 'use-media';
 
 import Typography from '@material-ui/core/Typography';
 import Table from '@mui/material/Table';
@@ -17,6 +18,7 @@ const styleA = {
  */
 const Info = (props) => {
     const [timeout, setTimeout] = useState(false);
+    const isWide = useMedia({ minWidth: '545px' });
     
     useEffect(() => {
         if (props.resError) {
@@ -28,7 +30,15 @@ const Info = (props) => {
     
     let zoom;
     if (props.exists.zoom) {
-        zoom = <a className={styleA} href={ props.zoom_link } target="_blank">zoomリンク</a>;
+        if (props.exists.ontime) {
+            zoom = <a className={styleA} href={ props.zoom_link } target="_blank">zoomリンク</a>;
+        } else {
+            if (isWide) {
+                zoom = <p>現在は開校時間ではありません</p>;
+            } else {
+                zoom = <p>現在は開校時間では<br/>ありません</p>;
+            }
+        }
     }
 
     let info;
@@ -48,7 +58,7 @@ const Info = (props) => {
         }
     } else {
         info = (
-            <Table sx={{ minWidth: 370, pb: 5 }} aria-label="simple table">
+            <Table sx={{ minWidth: 370, width: props.isWide ? '100%' : '80%', margin: !props.isWide && '0 auto', pb: 5 }} aria-label="simple table">
                 <TableBody>
                     <TableRow
                         key='time'

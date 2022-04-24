@@ -10,6 +10,7 @@ import Create from './Top/information/create';
 import ShowInfo from './modal/showInfo';
 import DeleteInfo from './modal/deleteInfo';
 
+// モーダルのcss
 const style = {
     position: 'absolute',
     top: '50%',
@@ -33,26 +34,32 @@ const style = {
 const Modals = (props) => {
     let content;
     switch (props.type) {
+        // お知らせ作成
         case "create_info":
             content = <Create onClose={props.handleClose} events={props.events} setDates={props.setDates} setInfos={props.setInfos} />;
             break;
             
+        // お知らせ詳細
         case "show_info":
             content = <ShowInfo onClose={props.handleClose} info={props.info} />;
             break;
-            
+           
+        // お知らせ削除 
         case "delete_info":
             content = <DeleteInfo onClose={props.handleClose} info={props.info} setDates={props.setDates} setInfos={props.setInfos} />;
             break;
-            
+           
+        // ユーザー作成 
         case "user":
             content = <UserRegister value={props.value} onClose={ props.handleClose } setStudents={props.setStudents} setStaffs={props.setStaffs} />;
             break;
-            
+        
+        // イベント詳細 
         case "show_event":
             content = <ShowEvent event={props.event} setEvents={props.setEvents} onClose={props.handleClose} />;
             break;
         
+        // イベント追加
         case "add_event":
             content = <AddEvent setEvents={props.setEvents} onClose={props.handleClose} />;
             break;

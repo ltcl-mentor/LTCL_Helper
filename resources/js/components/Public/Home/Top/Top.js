@@ -45,6 +45,7 @@ const Top = (props) => {
     
     return (
         <React.Fragment>
+        
             {/* 校舎情報 */}
             <Clendar 
                 zoom_link={ zoom_link }

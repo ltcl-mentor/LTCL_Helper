@@ -13,7 +13,7 @@ class College extends Model
      */
     public static function getCollegeData($year, $month, $date)
     {
-        $today = Carbon::today();
+        $now = Carbon::now();
         $college_datas = [];
         
         $datas = self::getCollegeApiData($year, $month);
@@ -33,11 +33,29 @@ class College extends Model
             $college_datas['zoom']['message'] = "本日オンライン質問部屋はありません。\n質問のある方はSlackにて出勤メンターへ連絡してください。";
         } elseif ($datas['values'][$date][9] == "あり") {
             $college_datas['zoom']['message'] = $datas['values'][$date][10];
+            
+            // オンライン校舎の開校時間中かどうか
+            $times = explode("、", $college_datas['zoom']['message']);
+            $openTimes = [];
+            foreach($times as $time) {
+                array_push($openTimes, explode("~", $time));
+            }
+            
+            foreach ($openTimes as $openTime) {
+                $startDiff = strtotime($now) - strtotime($openTime[0]);
+                $endDiff = strtotime($now) - strtotime($openTime[1]);
+                
+                if (!(($startDiff >= 0 && $endDiff >= 0) || ($startDiff <= 0 && $endDiff <= 0))) {
+                    $college_datas['zoom']['ontime'] = true;
+                    break;
+                }
+                $college_datas['zoom']['ontime'] = false;
+            }
         }
         
         // オンライン校舎のzoomリンクを掲載するかどうか
-        // 当日しか見えないようにする
-        if ($today->year == $year && $today->month == $month && $today->day == $date) {
+        // 当日の開校時間中しか見えないようにする
+        if ($now->year == $year && $now->month == $month && $now->day == $date) {
             // 出勤メンターが3人以上で校舎を開校するとき
             if ($college_datas['zoom']['exist'] = $datas['values'][$date][9] == "あり") {
                 $college_datas['zoom']['exist'] = true;
@@ -131,6 +149,9 @@ class College extends Model
                 if ($status == "online" && substr($times, 0, 1) == "*") {
                     $times = substr($times, 1);
                 }
+                
+                //「〜」を全て半角に統一
+                $times = str_replace("〜", "~", $times);
                 
                 $array[$i] = $i+1 . ". " . explode("　", $staff)[0] . " (" . $times . ")";
                 $i++;
