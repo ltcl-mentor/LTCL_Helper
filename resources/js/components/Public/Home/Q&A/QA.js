@@ -73,6 +73,7 @@ const QA = (props) => {
     const [indexValue, setIndexValue] = useState(0);
     const [curriculum, setCurriculum] = useState([]);
     const [project, setProject] = useState([]);
+    const [screen_width, setScreenWidth] = useState(window.innerWidth);
     const topics = [
         // カリキュラムのトピック
         'AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'データベース', 'Git&GitHub', 'マイグレーション', 'リレーション', '認証機能', 'API', 'その他',
@@ -89,6 +90,11 @@ const QA = (props) => {
     const toTopic = (topic_number) => {
         history.push(`/topic/${topic_number}`);
     };
+    
+    // windowの幅が変化した際に随時取得
+    window.addEventListener('resize', function() {
+        setScreenWidth(window.innerWidth);
+    });
 
     let freewordButton;
     let conditionButton;
@@ -102,6 +108,19 @@ const QA = (props) => {
         conditionButton = <PurpleButton onClick={() => setSearchValue(1)} variant="contained" sx={{ fontSize: !isWide && '16px' }}>絞り込み検索</PurpleButton>;
         search = <Condition isWide={isWide} />;
     }
+    
+    let width1;
+    let width2 = '33%';
+    if (screen_width >= 890) {
+        width1 = '20%';
+    } else if (screen_width >= 710) {
+        width1 = '25%';
+    } else if (screen_width >= 540) {
+        width1 = '33%';
+    } else {
+        width1 = '50%';
+        width2 = '50%';
+    }
 
     let component;
     if (indexValue == 0) {
@@ -109,9 +128,38 @@ const QA = (props) => {
             <Grid container>
                 {curriculum.map((topic, index) => {
                     return(
-                        <Grid item xs={2.4} sx={{ height: '150px' }} key={topic.topic}>
-                            <Card sx={{ width: '160px', height: '90%', m: 'auto', cursor: 'pointer', p: 0 }}>
-                                <CardActionArea onClick={() => toTopic(topic.topic)} sx={{ height: '100%' }}>
+                        <Grid item sx={{ width: width1 }} key={topic.topic}>
+                            <Card
+                                sx={{
+                                    width: '160px',
+                                    height: '90%',
+                                    m: "auto",
+                                    p: 0,
+                                    position: "relative",
+                                    cursor: "pointer",
+                                    "&:before": {
+                                        content: '""',
+                                        pt: "100%",
+                                        display: "block"
+                                    }
+                                }}
+                            >
+                                <CardActionArea 
+                                    onClick={() => toTopic(topic.topic)} 
+                                    sx={{
+                                        position: "absolute",
+                                        top: 0,
+                                        left: 0,
+                                        p: "10px",
+                                        m: 0,
+                                        width: "100%",
+                                        height: "100%",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        justifyContent: "center",
+                                        alignItems: "center"
+                                    }}
+                                >
                                     <Typography align="center" gutterBottom variant={index == 9 ? "h7" : "h6"} component="div" sx={{ mt: index==9 && '7px' }}>
                                         {topics[index]}
                                     </Typography>
@@ -133,9 +181,39 @@ const QA = (props) => {
             <Grid container sx={{ justifyContent: 'center' }}>
                 {project.map((topic, index) => {
                     return(
-                        <Grid item xs={(index == 1 || index == 4) ? 2.8 : 4} sx={{ height: '150px'}} key={topic.topic}>
-                            <Card className={`card-${index}`} sx={{ width: '160px', height: '90%', cursor: 'pointer', p: 0 }}>
-                                <CardActionArea onClick={() => toTopic(topic.topic)} sx={{ height: '100%' }}>
+                        <Grid item sx={{ width: width2 }} key={topic.topic}>
+                            <Card
+                                sx={{
+                                    width: '160px',
+                                    height: '90%',
+                                    ml: !(screen_width >=540 && index%3==2) && "auto",
+                                    mr: !(screen_width >=540 && index%3==0) && "auto",
+                                    p: 0,
+                                    position: "relative",
+                                    cursor: "pointer",
+                                    "&:before": {
+                                        content: '""',
+                                        pt: "100%",
+                                        display: "block"
+                                    }
+                                }}
+                            >
+                                <CardActionArea 
+                                    onClick={() => toTopic(topic.topic)} 
+                                    sx={{
+                                        position: "absolute",
+                                        top: 0,
+                                        left: 0,
+                                        p: "10px",
+                                        m: 0,
+                                        width: "100%",
+                                        height: "100%",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        justifyContent: "center",
+                                        alignItems: "center"
+                                    }}
+                                >
                                     <Typography align="center" gutterBottom variant="h6" component="div">
                                         {topics[index+14]}
                                     </Typography>
