@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import useMedia from 'use-media';
+import BreakingPoint from '../../../BreakingPoint';
 
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
@@ -27,6 +29,7 @@ const PurpleButton = styled(Button)(({ theme }) => ({
     boxShadow: 'none',
     backgroundColor: '#771AF8',
     borderRadius: '0',
+    lineHeight: '100%',
     '&:hover': {
         backgroundColor: '#6633CC',
         boxShadow: 'none',
@@ -43,6 +46,7 @@ const GrayButton = styled(Button)(({ theme }) => ({
     boxShadow: 'none',
     backgroundColor: '#ECE9E9',
     borderRadius: '0',
+    lineHeight: '100%',
     '&:hover': {
         backgroundColor: '#DDDDDD',
         boxShadow: 'none',
@@ -63,6 +67,7 @@ const a11yProps = (index) => {
 const QA = (props) => {
     const history = useHistory();
     const user = useContext(LoginUser);
+    const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
     const [achievement, setAchievment] = useState(0);
     const [searchValue, setSearchValue] = useState(0);
     const [indexValue, setIndexValue] = useState(0);
@@ -89,13 +94,13 @@ const QA = (props) => {
     let conditionButton;
     let search;
     if (searchValue == 0) {
-        freewordButton = <PurpleButton onClick={() => setSearchValue(0)} variant="contained">フリーワード検索</PurpleButton>;
-        conditionButton = <GrayButton onClick={() => setSearchValue(1)} variant="contained">絞り込み検索</GrayButton>;
+        freewordButton = <PurpleButton onClick={() => setSearchValue(0)} variant="contained" sx={{ fontSize: !isWide && '16px' }}>フリーワード検索</PurpleButton>;
+        conditionButton = <GrayButton onClick={() => setSearchValue(1)} variant="contained" sx={{ fontSize: !isWide && '16px' }}>絞り込み検索</GrayButton>;
         search = <Freeword />;
     } else {
-        freewordButton = <GrayButton onClick={() => setSearchValue(0)} variant="contained">フリーワード検索</GrayButton>;
-        conditionButton = <PurpleButton onClick={() => setSearchValue(1)} variant="contained">絞り込み検索</PurpleButton>;
-        search = <Condition />;
+        freewordButton = <GrayButton onClick={() => setSearchValue(0)} variant="contained" sx={{ fontSize: !isWide && '16px' }}>フリーワード検索</GrayButton>;
+        conditionButton = <PurpleButton onClick={() => setSearchValue(1)} variant="contained" sx={{ fontSize: !isWide && '16px' }}>絞り込み検索</PurpleButton>;
+        search = <Condition isWide={isWide} />;
     }
 
     let component;
@@ -171,8 +176,9 @@ const QA = (props) => {
                     to="/questions/mentor"
                     align="center"
                     sx={{
-                        paddingTop: 3,
+                        marginTop: 3,
                         fontWeight: 'bold',
+                        display: 'block'
                     }}
                 >
                     現在の質問解決率：<font color="purple" >{ achievement }</font>%
@@ -181,7 +187,7 @@ const QA = (props) => {
             }
 
             {/* 検索部分 */}
-            <Card variant="outlined" sx={{ width: '70%', m: '16px auto 0', p: 0 }}>
+            <Card variant="outlined" sx={{ width: '80%', m: '16px auto 0', p: 0 }}>
 
                 {/* 検索タブ */}
                 <Stack direction="row">

@@ -7,7 +7,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
 import Top from './Top/Top';
-import QA from './Q&A/qa';
+import QA from './Q&A/QA';
 import Manage from './Manage/manage';
 import { LoginUser } from '../../Route';
 

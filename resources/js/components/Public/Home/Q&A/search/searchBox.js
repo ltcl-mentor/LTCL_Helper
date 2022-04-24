@@ -20,16 +20,14 @@ const SearchBox = (props) => {
     };
     
     return (
-        <Grid container spacing={1} sx={{ mb: 7 }}>
-            <Grid item xs={8}>
+        <Grid container sx={{ width: '85%', margin: '0 auto 40px' }}>
+            <Grid item sx={{ flex: 1 }}>
                 <Paper
                     component="form"
                     sx={{
                         p: "4px",
-                        display: "flex",
+                        display: 'flex',
                         alignItems: "center",
-                        width: "70%",
-                        ml: "auto", 
                     }}
                 >
                     <InputBase
@@ -41,14 +39,16 @@ const SearchBox = (props) => {
                     />
                 </Paper>
             </Grid> 
-            <Grid item xs={2}>
+            <Grid item>
                 <Button 
                     variant="contained" 
                     startIcon={<SearchIcon />} 
                     sx={{ 
                         backgroundColor: '#771AF8', 
                         color: 'white', 
-                        height: '100%', 
+                        height: '100%',
+                        minWidth: '30px',
+                        width: '40px',
                         '&:hover': {
                             backgroundColor: '#6633CC' 
                         } 

@@ -24,8 +24,8 @@ const Selects = (props) => {
     });
     
     return (
-        <Box className="curriculum_number_box">
-            <FormControl  sx={{ width:'50%' }}>
+        <Box sx={{ width: '175px' }}>
+            <FormControl sx={{ width: '100%' }}>
                 <TextField
                     label="カリキュラム番号"
                     id="demo-simple-select"
@@ -33,8 +33,7 @@ const Selects = (props) => {
                     error={ props.curriculumNumberValidationError }
                     helperText={ props.curriculumNumberValidationMessage }
                     onChange={ (event) => handleCurriculumNumber(event) }
-                    style={{ 
-                        width: "70%",
+                    style={{
                         paddingTop:2,
                     }}
                 >
