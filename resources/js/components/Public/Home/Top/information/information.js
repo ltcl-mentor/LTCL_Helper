@@ -43,6 +43,55 @@ const Information = props => {
                 console.log(error);
             });
     }, []);
+    
+    let information;
+    if (props.isWide) {
+        information = (
+            <Grid
+                columns={16}
+                container
+                sx={{ width: "80%", ml: "auto", mr: "auto" }}
+            >
+                <Grid sx={{ width: '50%' }} item>
+                    <Infos
+                        is_admin={props.is_admin}
+                        dates={dates}
+                        infos={infos}
+                        setDates={setDates}
+                        setInfos={setInfos}
+                        isWide={props.isWide}
+                    />
+                </Grid>
+                <Grid sx={{ width: '50%' }} item>
+                    <Weather isWide={props.isWide} />
+                </Grid>
+            </Grid>
+        );
+    } else {
+        information = (
+            <div style={{ width: '90%', margin: '0 auto' }}>
+                <Infos
+                    is_admin={props.is_admin}
+                    dates={dates}
+                    infos={infos}
+                    setDates={setDates}
+                    setInfos={setInfos}
+                />
+                <Typography
+                    component="div"
+                    sx={{
+                        color: "#771AF8",
+                        fontWeight: "bold",
+                        fontSize: 24,
+                        pl: '6%'
+                    }}
+                >
+                    天気情報
+                </Typography>
+                <Weather isWide={props.isWide} />
+            </div>
+        );
+    }
 
     return (
         <div className="information">
@@ -55,50 +104,34 @@ const Information = props => {
                 setDates={setDates}
             />
 
-            <Grid
-                columns={16}
-                container
-                sx={{ width: "80%", ml: "auto", mr: "auto" }}
+            <Typography
+                component="div"
+                sx={{
+                    color: "#771AF8",
+                    fontWeight: "bold",
+                    fontSize: 24,
+                    pl: '10%'
+                }}
             >
-                <Grid xs={8} item>
-                    <Typography
-                        component="div"
+                お知らせ
+                {user.is_admin == "staff" && (
+                    <Button
                         sx={{
+                            verticalAlign: "top",
                             color: "#771AF8",
-                            fontWeight: "bold",
-                            fontSize: 24,
-                            pl: 2
+                            "&:hover": {
+                                backgroundColor: "white",
+                                textDecoration: "underline"
+                            }
                         }}
+                        onClick={() => handleOpen("create_info")}
                     >
-                        お知らせ
-                        {user.is_admin == "staff" && (
-                            <Button
-                                sx={{
-                                    verticalAlign: "top",
-                                    color: "#771AF8",
-                                    "&:hover": {
-                                        backgroundColor: "white",
-                                        textDecoration: "underline"
-                                    }
-                                }}
-                                onClick={() => handleOpen("create_info")}
-                            >
-                                お知らせを追加する
-                            </Button>
-                        )}
-                    </Typography>
-                    <Infos
-                        is_admin={props.is_admin}
-                        dates={dates}
-                        infos={infos}
-                        setDates={setDates}
-                        setInfos={setInfos}
-                    />
-                </Grid>
-                <Grid xs={8} item>
-                    <Weather />
-                </Grid>
-            </Grid>
+                        お知らせを追加する
+                    </Button>
+                )}
+            </Typography>
+            
+            {information}
         </div>
     );
 };

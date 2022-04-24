@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import useMedia from 'use-media';
-import BreakingPoint from '../../../../BreakingPoint';
 
 import { makeStyles } from "@material-ui/styles";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -26,7 +25,6 @@ const useStyles = makeStyles({
  */
 const Calendar = (props) => {
     const isWideCalender = useMedia({ minWidth: '940px' });
-    const isWideOther = useMedia({ minWidth: `${BreakingPoint}px` });
     const classes = useStyles();
     const [date, setDate] = useState(new Date());
     const [collegeInfo, setCollegeInfo] = useState([]);
@@ -85,11 +83,11 @@ const Calendar = (props) => {
     if (isWideCalender) {
         allInfo = (
             <Grid container columns={16} sx={{ width: '80%', ml: 'auto', mr: 'auto' }}>
-                <Grid item xs={8}>
+                <Grid item sx={{ width: '50%' }}>
                     { info }
                 </Grid>
                 {isWideCalender && 
-                    <Grid item xs={8}>
+                    <Grid item sx={{ width: '50%' }}>
                         <LocalizationProvider dateAdapter={ AdapterDateFns }>
                             <CalendarPicker className={classes.root} date={ date } onChange={ (newDate) => { setDate(newDate), setIsDateClicked(false) } } />
                         </LocalizationProvider>

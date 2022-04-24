@@ -17,7 +17,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
  * 
  * 天気表示
  */
-const Weather = () => {
+const Weather = (props) => {
     const [weather, setWeather] = useState([]);
     const weatherImages = {
         "くもり": "images/clouds.jpg",
@@ -42,23 +42,21 @@ const Weather = () => {
                 console.log(error);
             });
     }, []);
-    
+
     // アコーディオンの開閉
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
-    
+
     let weather_data;
     if (weather.current) {
         weather_data = (
             <div>
-                <Typography align="center" variant="h6" component="div" sx={{ marginTop: 1 }}>
-                    渋谷の天気情報
-                </Typography>
-                
-                <Typography align="center" variant="h6" component="div" sx={{ marginTop: 2 }}>
-                    現在の天気
-                </Typography>
+                {props.isWide && 
+                    <Typography align="center" variant="h6" component="div" sx={{ marginTop: 1 }}>
+                        渋谷の天気情報
+                    </Typography>
+                }
                 
                 <Grid container spacing={2} justifyContent="center" alignItems="center">
                     <Grid item sx={{ width: "200px" }}>
@@ -81,7 +79,7 @@ const Weather = () => {
                     </Grid>
                 </Grid>
                 
-                <Accordion expanded={ expanded === 1 } onChange={ handleChange(1) } sx={{ marginTop: 3 }}>
+                <Accordion expanded={ expanded === 1 } onChange={ handleChange(1) }>
                     <AccordionSummary
                         expandIcon={ <ExpandMoreIcon /> }
                         aria-controls="panel1bh-content"

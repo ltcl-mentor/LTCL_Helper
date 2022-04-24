@@ -34,7 +34,7 @@ const Infos = (props) => {
         list = (
             <List
                 sx={{
-                    width: '80%',
+                    width: props.isWide ? '80%' : '100%',
                     bgcolor: 'background.paper',
                     position: 'relative',
                     overflow: 'auto',
@@ -43,12 +43,12 @@ const Infos = (props) => {
                 }}
                 subheader={<li />}
             >
-                { props.dates.map((date) => (
+                { props.dates.map(date => (
                     <li key={ date }>
                         <ul style={styleUl}>
                             <ListSubheader sx={{ pl: 0, pt: 2, lineHeight: 2 }}>{ date }</ListSubheader>
-                            { props.infos[date].map((info) => (
-                                <ListItem key={`${date}-info`} sx={{ p: 0 }}>
+                            { props.infos[date].map((info, index) => (
+                                <ListItem key={`${date}-info-${index}`} sx={{ p: 0 }}>
                                     <ListItemText 
                                         color="primary" 
                                         onClick={() => {setShowOpen(true), setShowInfo(info)}} 
