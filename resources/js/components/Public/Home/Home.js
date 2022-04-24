@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import '../../../../../public/css/Public/top.css'
+import '../../../../../public/css/Public/top.css';
 
 import Typography from '@material-ui/core/Typography';
 
@@ -21,15 +21,9 @@ const style = {
  */
 const Home = () => {
     const parameter = useLocation();
-    // const [screen_width, setScreenWidth] = useState(window.innerWidth);
     
     // ログインユーザー情報取得
     const user = useContext(LoginUser);
-    
-    // // windowの幅が変化した際に随時取得
-    // window.addEventListener('resize', function() {
-    //     setScreenWidth(window.innerWidth);
-    // });
     
     return (
         <div className={style}>
