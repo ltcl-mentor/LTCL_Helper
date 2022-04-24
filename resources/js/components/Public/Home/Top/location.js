@@ -25,7 +25,7 @@ const Location = (props) => {
             <Typography sx={{ fontSize: 20 }}>〒150-0046</Typography>
             <Typography sx={{ fontSize: 20, mb: 2 }}>東京都渋谷区松濤1丁目29-1 4F</Typography>
             <Typography sx={{ fontSize: 20, fontWeight: 'bold' }}>校舎への入り方</Typography>
-            <Typography sx={{ fontSize: 20, mb: 2 }}>1階のファミリーマートに向かって右手にエレベータがあるので、そちらから入室してください。</Typography>
+            <Typography sx={{ fontSize: 20, pb: 2 }}>1階のファミリーマートに向かって右手にエレベータがあるので、そちらから入室してください。</Typography>
         </React.Fragment>
     );
 };

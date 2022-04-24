@@ -65,7 +65,7 @@ const Infos = (props) => {
         );
     } else {
         list = (
-            <Typography sx={{ pl: 2, pt: 1, fontSize: '20px' }}>
+            <Typography sx={{ pl: !props.isWide && '5%', pb: !props.isWide && 3, pt: 1, fontSize: '20px' }}>
                 お知らせはありません。
             </Typography>
         );
