@@ -46,6 +46,68 @@ const Top = (props) => {
             });
     }, []);
     
+    let footer;
+    if (isWide) {
+        footer = (
+            <Grid columns={16} container sx={{ width: '80%', ml: 'auto', mr: 'auto' }}>
+                <Grid sx={{ width: '50%' }} item>
+                    <Typography component="div" sx={{ color: 'white', fontWeight: 'bold', fontSize: 26 }}>
+                        LTCL Helper
+                    </Typography>
+                    <Typography 
+                        onClick={() => contact()}
+                        component="div"
+                        sx={{ 
+                            color: 'black',
+                            fontWeight: 'bold',
+                            fontSize: 20,
+                            pt: 3,
+                            cursor: "pointer",
+                            "&:hover": {
+                                color: '#771AF8',
+                            }
+                        }}
+                    >
+                        お問い合わせ
+                    </Typography>
+                </Grid>
+                <Grid sx={{ width: '50%' }} item>
+                    <Location
+                        map_key={ map_key }
+                    />
+                </Grid>
+            </Grid>
+        );
+    } else {
+        footer = (
+            <div style={{ width: '80%', margin: '0 auto' }}>
+                <Typography component="div" sx={{ color: 'white', fontWeight: 'bold', fontSize: 26 }}>
+                    LTCL Helper
+                </Typography>
+                <Typography 
+                    onClick={() => contact()}
+                    component="div"
+                    sx={{ 
+                        color: 'black',
+                        fontWeight: 'bold',
+                        fontSize: 20,
+                        pt: 2,
+                        pb: 2,
+                        cursor: "pointer",
+                        "&:hover": {
+                            color: '#771AF8',
+                        }
+                    }}
+                >
+                    お問い合わせ
+                </Typography>
+                <Location
+                    map_key={ map_key }
+                />
+            </div>
+        );
+    }
+    
     return (
         <React.Fragment>
         
@@ -63,35 +125,7 @@ const Top = (props) => {
             
             {/* お問い合わせと校舎住所 */}
             <div className="footer">
-                <Grid columns={16} container sx={{ width: '80%', ml: 'auto', mr: 'auto' }}>
-                    <Grid sx={{ width: '50%' }} item>
-                        <Typography component="div" sx={{ color: 'white', fontWeight: 'bold', fontSize: 26, pl: 2 }}>
-                            LTCL Helper
-                        </Typography>
-                        <Typography 
-                            onClick={() => contact()}
-                            component="div"
-                            sx={{ 
-                                color: 'black',
-                                fontWeight: 'bold',
-                                fontSize: 20,
-                                pl: 2,
-                                pt: 3,
-                                "&:hover": {
-                                    cursor: "pointer",
-                                    color: '#771AF8',
-                                }
-                            }}
-                        >
-                            お問い合わせ
-                        </Typography>
-                    </Grid>
-                    <Grid sx={{ width: '50%' }} item>
-                        <Location
-                            map_key={ map_key }
-                        />
-                    </Grid>
-                </Grid>
+                {footer}
             </div>
         </React.Fragment>
     );
