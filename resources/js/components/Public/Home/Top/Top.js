@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import useMedia from 'use-media';
+import BreakingPoint from '../../../BreakingPoint';
 
 import Grid from '@mui/material/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -15,6 +17,7 @@ import Location from './location';
  * top画面 
  */
 const Top = (props) => {
+    const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
     const [map_key, setMapKey] = useState();
     const [zoom_link, setZoomLink] = useState();
     const [events, setEvents] = useState([]);
@@ -55,12 +58,13 @@ const Top = (props) => {
             <Information
                 is_admin={ user.is_admin }
                 events={ events }
+                isWide={ isWide }
             />
             
             {/* お問い合わせと校舎住所 */}
             <div className="footer">
                 <Grid columns={16} container sx={{ width: '80%', ml: 'auto', mr: 'auto' }}>
-                    <Grid xs={8} item>
+                    <Grid sx={{ width: '50%' }} item>
                         <Typography component="div" sx={{ color: 'white', fontWeight: 'bold', fontSize: 26, pl: 2 }}>
                             LTCL Helper
                         </Typography>
@@ -82,7 +86,7 @@ const Top = (props) => {
                             お問い合わせ
                         </Typography>
                     </Grid>
-                    <Grid xs={8} item>
+                    <Grid sx={{ width: '50%' }} item>
                         <Location
                             map_key={ map_key }
                         />

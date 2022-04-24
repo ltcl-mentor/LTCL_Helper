@@ -45,13 +45,13 @@ const Info = (props) => {
     if (!(props.isDateClicked)) {
         if (timeout) {
             info = (
-                <Typography component="div" sx={{ pt: 2, pb: 5, fontSize: 18 }}>
+                <Typography component="div" sx={{ pt: 2, pb: 5, fontSize: 18, pl: '10%' }}>
                     データの読み込みに失敗しました。<br/>再度お試しいただくか、メンターに直接ご確認ください。
                 </Typography>
             );
         } else {
             info = (
-                <Typography component="div" sx={{ pt: 2, pb: 5, fontSize: 18, pl: 2 }}>
+                <Typography component="div" sx={{ pt: 2, pb: 5, fontSize: 18, pl: '10%' }}>
                     データの読み込み中です。
                 </Typography>
             );
