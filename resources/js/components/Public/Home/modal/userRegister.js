@@ -125,6 +125,81 @@ const UserRegister = (props) => {
             return false;
         }
     };
+    
+    let responsive;
+    if (props.isWide) {
+        responsive = (
+            <Table sx={{ width: '80%', m: '10px auto 0' }}>
+                <TableRow>
+                    <TableCell sx={{ borderBottom: 'white', width: '50%', fontWeight: 'bold', color: '#666666', fontSize: '18px', verticalAlign: 'bottom' }}>ユーザー名</TableCell>
+                    <TableCell sx={{ borderBottom: 'white', width: '50%' }}>
+                        <Typography component="div" sx={{ color: "red", mb: 1 }}>
+                            実名を登録しないでください！
+                        </Typography>
+                        <input id="name" type="text" className="form-control" name="name" required autoComplete="name" autoFocus/>
+                        {errorName.length > 0 &&
+                            <Typography component="div" sx={{ color: "red", fontSize: '14px' }}>
+                                {errorName}
+                            </Typography>
+                        }
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell sx={{ borderBottom: 'white', width: '180px', fontWeight: 'bold', color: '#666666', fontSize: '18px' }}>パスワード</TableCell>
+                    <TableCell sx={{ borderBottom: 'white' }}>
+                        <input id="password" type="password" className="form-control" name="password" required autoComplete="new-password"/>
+                        {errorPassword.length > 0 &&
+                            <Typography component="div" sx={{ color: "red", fontSize: '14px' }}>
+                                {errorPassword}
+                            </Typography>
+                        }
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell sx={{ borderBottom: 'white', width: '180px', fontWeight: 'bold', color: '#666666', fontSize: '18px' }}>パスワード(確認)</TableCell>
+                    <TableCell sx={{ borderBottom: 'white' }}>
+                        <input id="password-confirm" type="password" className="form-control" name="password_confirmation" required autoComplete="new-password"/>
+                        {errorConfirmPassword.length > 0 &&
+                            <Typography component="div" sx={{ color: "red", fontSize: '14px' }}>
+                                {errorConfirmPassword}
+                            </Typography>
+                        }
+                    </TableCell>
+                </TableRow>
+            </Table>
+        );
+    } else {
+        responsive = (
+            <React.Fragment>
+                <Typography align="center" component="div" sx={{ color: "red", mt: 2, mb: 1 }}>
+                    実名を登録しないでください！
+                </Typography>
+                <div style={{ width: '90%', margin: '0 auto' }}>
+                    <Typography align="left" sx={{ fontWeight: 'bold', color: '#666666', fontSize: '18px' }}>ユーザー名</Typography>
+                    <input id="name" type="text" className="form-control" name="name" required autoComplete="name" autoFocus/>
+                    {errorName.length > 0 &&
+                        <Typography component="div" sx={{ color: "red", fontSize: '14px' }}>
+                            {errorName}
+                        </Typography>
+                    }
+                    <Typography align="left" sx={{ fontWeight: 'bold', color: '#666666', fontSize: '18px', mt: 2 }}>パスワード</Typography>
+                    <input id="password" type="password" className="form-control" name="password" required autoComplete="new-password"/>
+                    {errorPassword.length > 0 &&
+                        <Typography component="div" sx={{ color: "red", fontSize: '14px' }}>
+                            {errorPassword}
+                        </Typography>
+                    }
+                    <Typography align="left" sx={{ fontWeight: 'bold', color: '#666666', fontSize: '18px', mt: 2 }}>パスワード(確認)</Typography>
+                    <input id="password-confirm" type="password" className="form-control" name="password_confirmation" required autoComplete="new-password"/>
+                    {errorConfirmPassword.length > 0 &&
+                        <Typography component="div" sx={{ color: "red", fontSize: '14px' }}>
+                            {errorConfirmPassword}
+                        </Typography>
+                    }
+                </div>
+            </React.Fragment>
+        );
+    }
 
     let component;
     if (props.value == 0) {
@@ -134,8 +209,8 @@ const UserRegister = (props) => {
                     受講生の登録
                 </Typography>
 
-                <Card sx={{ width: '80%', m: '40px auto', boxShadow: 'none', backgroundColor: "#ECE9E9" }}>
-                    <FormControl sx={{ width: '28%' }} size="small">
+                <Card sx={{ width: props.isWide ? '80%' : '90%', m: '40px auto', boxShadow: 'none', backgroundColor: "#ECE9E9" }}>
+                    <FormControl sx={{ width: props.isWide ? '28%' : '100%', display: !props.isWide && 'block' }} size="small">
                         <Grid container>
                             <Grid item sx={{ flexGrow: 3 }}>
                                 <InputLabel id="demo-select-small">年</InputLabel>
@@ -158,7 +233,7 @@ const UserRegister = (props) => {
                             </Grid>
                         </Grid>
                     </FormControl>
-                    <FormControl sx={{ width: '37%' }} size="small">
+                    <FormControl sx={{ width: props.isWide ? '37%' : '100%', display: !props.isWide && 'block' }} size="small">
                         <Grid container>
                             <Grid item sx={{ flexGrow: 3 }}>
                                 <InputLabel id="demo-select-small">月</InputLabel>
@@ -182,7 +257,7 @@ const UserRegister = (props) => {
                             </Grid>
                         </Grid>
                     </FormControl>
-                    <FormControl sx={{ width: '34%' }} size="small">
+                    <FormControl sx={{ width: props.isWide ? '34%' : '100%', display: !props.isWide && 'block' }} size="small">
                         <Grid container>
                             <Grid item sx={{ flexGrow: 3 }}>
                                 <InputLabel id="demo-select-small">名</InputLabel>
@@ -223,46 +298,7 @@ const UserRegister = (props) => {
                 <Typography align="center" component="div" sx={{ color: '#771AF8', fontSize: '20px', fontWeight: 'bold' }}>
                     管理者の登録
                 </Typography>
-
-                <Table sx={{ width: '80%', m: '10px auto 0' }}>
-                    <TableRow>
-                        <TableCell sx={{ borderBottom: 'white', width: '180px', fontWeight: 'bold', color: '#666666', fontSize: '18px', verticalAlign: 'bottom' }}>ユーザー名</TableCell>
-                        <TableCell sx={{ borderBottom: 'white' }}>
-                            <Typography component="div" sx={{ color: "red", mb: 1 }}>
-                                実名を登録しないでください！
-                            </Typography>
-                            <input id="name" type="text" className="form-control" name="name" required autoComplete="name" autoFocus/>
-                            {errorName.length > 0 &&
-                                <Typography component="div" sx={{ color: "red", fontSize: '14px' }}>
-                                    {errorName}
-                                </Typography>
-                            }
-                        </TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell sx={{ borderBottom: 'white', width: '180px', fontWeight: 'bold', color: '#666666', fontSize: '18px' }}>パスワード</TableCell>
-                        <TableCell sx={{ borderBottom: 'white' }}>
-                            <input id="password" type="password" className="form-control" name="password" required autoComplete="new-password"/>
-                            {errorPassword.length > 0 &&
-                                <Typography component="div" sx={{ color: "red", fontSize: '14px' }}>
-                                    {errorPassword}
-                                </Typography>
-                            }
-                        </TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell sx={{ borderBottom: 'white', width: '180px', fontWeight: 'bold', color: '#666666', fontSize: '18px' }}>パスワード(確認)</TableCell>
-                        <TableCell sx={{ borderBottom: 'white' }}>
-                            <input id="password-confirm" type="password" className="form-control" name="password_confirmation" required autoComplete="new-password"/>
-                            {errorConfirmPassword.length > 0 &&
-                                <Typography component="div" sx={{ color: "red", fontSize: '14px' }}>
-                                    {errorConfirmPassword}
-                                </Typography>
-                            }
-                        </TableCell>
-                    </TableRow>
-                </Table>
-
+                {responsive}
                 <Typography align="center" component="div" sx={{ marginTop: 4, marginBottom: 3 }}>
                     <Button
                         onClick={() => handleSubmitAdmin()}

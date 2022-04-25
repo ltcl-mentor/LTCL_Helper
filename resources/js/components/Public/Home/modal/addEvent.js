@@ -11,19 +11,6 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
 
-// モーダルのCSS設定
-const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "50%",
-    bgcolor: "white",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4
-};
-
 /**
  * イベント追加
  */
@@ -119,6 +106,64 @@ const AddEvent = props => {
                 console.log(error);
             });
     }, []);
+    
+    let eventName;
+    if (props.isWide) {
+        eventName = (
+            <Grid
+                container
+                sx={{ justifyContent: "space-between", height: "70px" }}
+            >
+                <Grid item sx={{ flexGrow: 1, height: "100%" }}>
+                    <Typography
+                        component="p"
+                        sx={{
+                            color: "#666666",
+                            fontSize: "20px",
+                            fontWeight: "bold",
+                            mt: "14px"
+                        }}
+                    >
+                        イベント名
+                    </Typography>
+                </Grid>
+                <Grid item sx={{ flexGrow: 5, height: "100%" }}>
+                    <TextField
+                        error={errorName}
+                        label="イベント名を入力"
+                        value={name}
+                        onChange={() => handleName(event)}
+                        helperText={errorNameMessage}
+                        style={{ width: "100%" }}
+                    />
+                </Grid>
+            </Grid>
+        );
+    } else {
+        eventName = (
+            <div style={{ marginBottom: '16px' }}>
+                <Typography
+                    component="p"
+                    sx={{
+                        color: "#666666",
+                        fontSize: "20px",
+                        fontWeight: "bold",
+                        mt: "14px"
+                    }}
+                >
+                    イベント名
+                </Typography>
+                <TextField
+                    error={errorName}
+                    label="イベント名を入力"
+                    value={name}
+                    onChange={() => handleName(event)}
+                    helperText={errorNameMessage}
+                    style={{ width: "100%" }}
+                />
+            </div>
+        );
+    }
 
     return (
         <React.Fragment>
@@ -137,34 +182,7 @@ const AddEvent = props => {
             </Typography>
 
             <Box sx={{ width: "80%", m: "50px auto 0" }}>
-                <Grid
-                    container
-                    sx={{ justifyContent: "space-between", height: "70px" }}
-                >
-                    <Grid item sx={{ flexGrow: 1, height: "100%" }}>
-                        <Typography
-                            component="p"
-                            sx={{
-                                color: "#666666",
-                                fontSize: "20px",
-                                fontWeight: "bold",
-                                mt: "14px"
-                            }}
-                        >
-                            イベント名
-                        </Typography>
-                    </Grid>
-                    <Grid item sx={{ flexGrow: 5, height: "100%" }}>
-                        <TextField
-                            error={errorName}
-                            label="イベント名を入力"
-                            value={name}
-                            onChange={() => handleName(event)}
-                            helperText={errorNameMessage}
-                            style={{ width: "100%" }}
-                        />
-                    </Grid>
-                </Grid>
+                {eventName}
 
                 <Typography
                     component="div"
@@ -236,7 +254,19 @@ const AddEvent = props => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
+                <Box 
+                    sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        width: props.isWide ? "50%" : '90%',
+                        bgcolor: "white",
+                        border: "2px solid #000",
+                        boxShadow: 24,
+                        p: 4
+                    }}
+                >
                     <Typography align="center" variant="h6" sx={{ mb: 3 }}>
                         以下のもので文字を囲ってください
                     </Typography>

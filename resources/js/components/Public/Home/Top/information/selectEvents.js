@@ -15,10 +15,6 @@ const MenuProps = {
         },
     },
 };
-const style = {
-    width: "50%",
-    marginTop: 1,
-};
 
 /**
  * お知らせのイベント選択
@@ -30,7 +26,7 @@ const SelectEvents = (props) => {
     };
 
     return (
-        <FormControl sx={style}>
+        <FormControl sx={{ width: props.isWide ? '50%' : '100%' }}>
             <InputLabel id="demo-multiple-name-label">イベント</InputLabel>
             <Select
                 labelId="demo-multiple-name-label"
