@@ -58,7 +58,7 @@ const Info = (props) => {
         }
     } else {
         info = (
-            <Table sx={{ minWidth: 370, width: props.isWide ? '100%' : '80%', margin: !props.isWide && '0 auto', pb: 5 }} aria-label="simple table">
+            <Table sx={{ width: props.isWide ? '100%' : '80%', margin: !props.isWide && '0 auto', pb: 5 }} aria-label="simple table">
                 <TableBody>
                     <TableRow
                         key='time'
