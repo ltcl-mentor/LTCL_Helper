@@ -12,20 +12,6 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 
-// モーダルのCSS設定
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '50%',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
-
-
 /**
  * イベント詳細
  */
@@ -256,7 +242,19 @@ const ShowEvent = (props) => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={ style }>
+                <Box
+                    sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        width: props.isWide ? "50%" : '90%',
+                        bgcolor: "white",
+                        border: "2px solid #000",
+                        boxShadow: 24,
+                        p: 4
+                    }}
+                >
                     <IconButton onClick={() => setDeleteOpen(false)} sx={{ color: 'red', ml: '95%' }}>
                         <HighlightOffIcon />
                     </IconButton>
@@ -278,7 +276,19 @@ const ShowEvent = (props) => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={ style }>
+                <Box 
+                    sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        width: props.isWide ? "50%" : '90%',
+                        bgcolor: "white",
+                        border: "2px solid #000",
+                        boxShadow: 24,
+                        p: 4
+                    }}
+                >
                     <Typography align="center" variant="h6" sx={{ mb: 3 }}>
                         以下のもので文字を囲ってください
                     </Typography>

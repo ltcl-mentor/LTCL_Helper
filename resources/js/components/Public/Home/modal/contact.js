@@ -11,20 +11,6 @@ import IconButton from "@mui/material/IconButton";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import Modal from '@mui/material/Modal';
 
-// モーダルのCSS設定
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '50%',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
-
-
 /**
  * お問い合わせ
  */
@@ -127,13 +113,13 @@ const Contact = (props) => {
                         error={ contact_category_validation_error }
                         helperText={ categoryValidationMessage }
                         onChange={ (event) => handleCategory(event) }
-                        sx={{width: "30%", marginLeft:"10%"}}
+                        sx={{ width: props.isWide ? "30%" : '100%', ml: props.isWide && '10%' }}
                     >
                         {categoryList.map((val, index) => <MenuItem value={val} key={index}>{val}</MenuItem>)}
                     </TextField>
                 </Box>
                 
-                <Box sx={{ textAlign: "center", marginTop: 4 }}>
+                <Box sx={{ textAlign: "center", mt: 4 }}>
                     <TextField
                         name="message"
                         label="お問合せ内容"
@@ -144,7 +130,7 @@ const Contact = (props) => {
                         value={ contact }
                         onChange={ (event) => handleContact(event) }
                         style={{ 
-                            width: "80%",
+                            width: props.isWide ? "80%" : '100%',
                             paddingTop:2,
                         }}
                     />
@@ -175,7 +161,19 @@ const Contact = (props) => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={ style }>
+                <Box 
+                    sx={{ 
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: props.isWide ? '50%' : '90%',
+                        bgcolor: 'background.paper',
+                        border: '2px solid #000',
+                        boxShadow: 24,
+                        p: 4,
+                    }}
+                >
                     <IconButton onClick={() => setConfirmOpen(false)} sx={{ color: 'red', ml: '95%' }}>
                         <HighlightOffIcon />
                     </IconButton>

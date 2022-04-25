@@ -50,9 +50,7 @@ const Create = props => {
         slackDate: false
     });
     const [slackValodationError, setSlackValidationError] = useState(false);
-    const [slackDateValodationError, setSlackDateValidationError] = useState(
-        false
-    );
+    const [slackDateValodationError, setSlackDateValidationError] = useState(false);
     const [checked, setChecked] = useState(false);
     const [eventInfo, setEventInfo] = useState([
         { id: "", name: "", template: "" }
@@ -348,32 +346,33 @@ const Create = props => {
                     setValidationMessage={setValidationMessage}
                     target={target}
                     setTarget={setTarget}
+                    isWide={props.isWide}
                 />
 
-                <Typography
-                    component="div"
-                    sx={{
-                        color: "#666666",
-                        fontSize: "20px",
-                        fontWeight: "bold",
-                        mt: 2
-                    }}
-                >
-                    公開日
+                <div style={{ marginTop: '16px' }}>
                     <Typography
-                        component="span"
-                        sx={{ pl: 1, color: "red", fontSize: "14px" }}
+                        component={props.isWide ? 'span' : 'div'}
+                        sx={{
+                            color: "#666666",
+                            fontSize: "20px",
+                            fontWeight: "bold",
+                        }}
+                    >
+                        公開日
+                    </Typography>
+                    <Typography
+                        component={props.isWide ? 'span' : 'div'}
+                        sx={{ pl: props.isWide && 1, color: "red", fontSize: "14px" }}
                     >
                         本日以前を選択したお知らせは表示されません。
                     </Typography>
-                </Typography>
-                {/*<input type="date" onChange={ handleDate }/>*/}
+                </div>
                 <TextField
                     label="公開日"
                     type="date"
                     value={date}
                     onChange={event => handleDate(event)}
-                    sx={{ width: "50%", mt: 1 }}
+                    sx={{ width: props.isWide ? '50%' : '100%', mt: 1 }}
                 />
 
                 <FormControlLabel
@@ -408,23 +407,32 @@ const Create = props => {
                         />
                         <Typography
                             component="div"
-                            sx={{ fontSize: "16px", mt: 2, color: "#666666" }}
+                            sx={{ fontSize: "16px", mt: 2, mb: 1, color: "#666666" }}
                         >
                             以下からテンプレートを選択できます。
                         </Typography>
-                        <div className="events">
+                        <Typography
+                            component="div"
+                            sx={{ display: props.isWide && 'flex' }}
+                        >
                             <SelectEvents
                                 event={eventInfo}
                                 setEvent={setEventInfo}
                                 events={events}
+                                isWide={props.isWide}
                             />
-                            <Button
-                                sx={{ mt: 2, ml: 2 }}
-                                onClick={() => sameMessage()}
+                            <Typography
+                                component="div"
+                                sx={{ width: props.isWide ? '50%' : '100%' }}
                             >
-                                お知らせ詳細と同じにする
-                            </Button>
-                        </div>
+                                <Button
+                                    sx={{ display: 'block', height: '100%', m: '0 auto' }}
+                                    onClick={() => sameMessage()}
+                                >
+                                    お知らせ詳細と同じにする
+                                </Button>
+                            </Typography>
+                        </Typography>
 
                         <Typography
                             component="div"
@@ -448,7 +456,7 @@ const Create = props => {
                             type="date"
                             value={slackDate}
                             onChange={event => handleSlackDate(event)}
-                            sx={{ width: "50%", mt: 1 }}
+                            sx={{ width: props.isWide ? '50%' : '100%', mt: 1 }}
                         />
                         <Typography sx={{ color: "red" }}>
                             {validationMessage.slackDate}
