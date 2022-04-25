@@ -36,22 +36,6 @@ const Breadcrumb = props => {
             link2 = <Typography color="text.primary">質問閲覧履歴</Typography>;
             break;
 
-        // case "freeword":
-        //     link1 = (
-        //         <Typography color="text.primary">
-        //             フリーワード検索
-        //         </Typography>
-        //     );
-        //     break;
-
-        // case "condition":
-        //     link1 = (
-        //         <Typography color="text.primary">
-        //             絞り込み検索
-        //         </Typography>
-        //     );
-        //     break;
-
         case "contact":
             link1 = <Typography color="text.primary">お問い合わせ</Typography>;
             break;
@@ -357,6 +341,9 @@ const Breadcrumb = props => {
             );
             link2 = <Typography color="text.primary">イベント作成</Typography>;
             break;
+            
+        case "not_found":
+            link1 = <Typography color="text.primary">ページが見つかりません</Typography>;
     }
 
     return (
