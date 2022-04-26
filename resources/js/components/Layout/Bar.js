@@ -1,5 +1,7 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
+import useMedia from 'use-media';
+import BreakingPoint from '../BreakingPoint';
 
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@mui/material/Button';
@@ -13,8 +15,6 @@ import { styled } from '@mui/material/styles';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 
 import User from './user-icon';
-import Menu from './side-menu/menu';
-
 import {LoginUser} from '../Route.js';
 
 const QuestionTooltip = styled(({ className, ...props }) => (
@@ -35,6 +35,7 @@ const QuestionTooltip = styled(({ className, ...props }) => (
  */
 const Bar = () => {
     const history = useHistory();
+    const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
     
     // ログインユーザー情報取得
     const user = useContext(LoginUser);
@@ -44,6 +45,7 @@ const Bar = () => {
         user_icon = (
             <User 
                 user={ user }
+                isWide={ isWide }
             />
         );
     } else {
@@ -68,42 +70,42 @@ const Bar = () => {
         >
             <AppBar position="static" color="default" sx={{ boxShadow: 'none', backgroundColor: 'white' }}>
                 <Toolbar>
-                    {/*<Menu 
-                        is_admin={ user.is_admin }
-                    />*/}
-                    
                     <Typography component="div" sx={{ flexGrow: 1 }}>
                         <Links sx={{ color: '#808080', fontSize: '25px', '&:hover': { color: '#771AF8' } }} href="/" underline="none">
-                            LTCL Helper
+                            <img src="images/helper_logo.png" width='165px' height='50px' style={{ marginTop: '5px' }} />
                         </Links>
                     </Typography>
                     
                     { user_icon }
-                    <Button 
-                        variant="contained"
-                        sx={{ 
-                            backgroundColor: '#771AF8',
-                            borderRadius: 0,
-                            padding: '6px 20px',
-                            boxShadow: 'none',
-                            '&:hover': { 
-                                backgroundColor: '#6633CC',
-                                boxShadow: 'none',
-                            }
-                        }}
-                        onClick={() => toSearch()}
-                    >
-                        検索する
-                    </Button>
-                    <QuestionTooltip
-                        title={
-                            <Typography color="inherit">質問する</Typography>
-                        }
-                    >
-                        <IconButton sx={{ '&:hover': { color: '#771AF8' } }} size="large" component={Link} to={'/public/questions/create'}>
-                            <AddIcon fontSize="inherit" />
-                        </IconButton>
-                    </QuestionTooltip>
+                    {isWide &&
+                        <React.Fragment>
+                            <Button 
+                                variant="contained"
+                                sx={{ 
+                                    backgroundColor: '#771AF8',
+                                    borderRadius: 0,
+                                    padding: '6px 20px',
+                                    boxShadow: 'none',
+                                    '&:hover': { 
+                                        backgroundColor: '#6633CC',
+                                        boxShadow: 'none',
+                                    }
+                                }}
+                                onClick={() => toSearch()}
+                            >
+                                検索する
+                            </Button>
+                            <QuestionTooltip
+                                title={
+                                    <Typography color="inherit">質問する</Typography>
+                                }
+                            >
+                                <IconButton sx={{ '&:hover': { color: '#771AF8' } }} size="large" component={Link} to={'/public/questions/create'}>
+                                    <AddIcon fontSize="inherit" />
+                                </IconButton>
+                            </QuestionTooltip>
+                        </React.Fragment>
+                    }
                 </Toolbar>
             </AppBar>
         </Box>

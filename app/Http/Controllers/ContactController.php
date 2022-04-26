@@ -16,15 +16,6 @@ class ContactController extends Controller
     {
         $user = User::getStudentName(Auth::user()->name);
         $message = $user . "さんから次のような問い合わせがありました。\n----------------\n" . $request['message'] . "\n----------------";
-        dd($message);
-        // Slack::sendMessage($message, "mentor");
+        Slack::sendMessage($message, "mentor");
     }
-    
-    /**
-     * お問い合わせ入力画面表示
-     */
-    // public function create()
-    // {
-    //     return view('Public.Contact.create');
-    // }
 }

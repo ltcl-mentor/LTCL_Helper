@@ -173,6 +173,10 @@ const DefaultForm = () => {
             validateKey.title = true;
             validateMessage.titleErrorMessage =
                 "質問タイトルを入力してください";
+        } else if (title.trim().length >= 51) {
+            validateKey.title = true;
+            validateMessage.titleErrorMessage =
+                "５０文字以内で記入してください";
         }
         if (remarks.trim().length === 0) {
             validateKey.search = true;

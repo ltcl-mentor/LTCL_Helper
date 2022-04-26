@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import TextField from '@material-ui/core/TextField';
 import Box from '@mui/material/Box';
@@ -16,7 +16,7 @@ const Keyword = (props) => {
     
     return (
         <Box sx={{ textAlign: "left", marginTop: 1, marginBottom: 3 }}>
-            <TextField id="standard-basic" label="キーワード" onChange={ (event) => handleKeyword(event) } sx={{ width: '450px' }} />
+            <TextField id="standard-basic" label="キーワード" onChange={ (event) => handleKeyword(event) } sx={{ width: '90%' }} />
         </Box>
     );
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import useMedia from 'use-media';
 
 import { makeStyles } from "@material-ui/styles";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -23,6 +24,7 @@ const useStyles = makeStyles({
  * 校舎情報(カレンダー)
  */
 const Calendar = (props) => {
+    const isWideCalender = useMedia({ minWidth: '940px' });
     const classes = useStyles();
     const [date, setDate] = useState(new Date());
     const [collegeInfo, setCollegeInfo] = useState([]);
@@ -43,6 +45,7 @@ const Calendar = (props) => {
                     setIsDateClicked(true);
                     const existInfo = {
                         zoom: response.data.zoom.exist,
+                        ontime: response.data.zoom.ontime,
                         collegeStaff: response.data.staff[0] ? true : false,
                         onlineStaff: response.data.online_staff[0] ? true : false,
                     };
@@ -63,6 +66,7 @@ const Calendar = (props) => {
                 resError={ resError }
                 zoom_link={ props.zoom_link }
                 exists={ exists }
+                isWide={isWideCalender}
             />
         );
         
@@ -73,24 +77,35 @@ const Calendar = (props) => {
                 もう一度日付を選択し直してください。
             </Typography>
         );
-        
+    }
+    
+    let allInfo;
+    if (isWideCalender) {
+        allInfo = (
+            <Grid container columns={16} sx={{ width: '80%', ml: 'auto', mr: 'auto' }}>
+                <Grid item sx={{ width: '50%' }}>
+                    { info }
+                </Grid>
+                {isWideCalender && 
+                    <Grid item sx={{ width: '50%' }}>
+                        <LocalizationProvider dateAdapter={ AdapterDateFns }>
+                            <CalendarPicker className={classes.root} date={ date } onChange={ (newDate) => { setDate(newDate), setIsDateClicked(false) } } />
+                        </LocalizationProvider>
+                    </Grid>
+                }
+            </Grid>
+        );
+    } else {
+        allInfo = info;
     }
     
     return (
         <div className="college_info">
-            <Grid container columns={16} sx={{ width: '80%', ml: 'auto', mr: 'auto' }}>
-                <Grid item xs={8}>
-                    <Typography component="div" sx={{ color: '#771AF8', fontWeight: 'bold', fontSize: 24, pl: 2 }}>
-                        { date.getMonth() + 1 }月{ date.getDate() }日の校舎情報
-                    </Typography>
-                    { info }
-                </Grid>
-                <Grid item xs={8}>
-                    <LocalizationProvider dateAdapter={ AdapterDateFns }>
-                        <CalendarPicker className={classes.root} date={ date } onChange={ (newDate) => { setDate(newDate), setIsDateClicked(false) } } />
-                    </LocalizationProvider>
-                </Grid>
-            </Grid>
+            <Typography component="div" sx={{ color: '#771AF8', fontWeight: 'bold', fontSize: 24, pl: '10%' }}>
+                { date.getMonth() + 1 }月{ date.getDate() }日の校舎情報
+            </Typography>
+            
+            {allInfo}
         </div>
     );
 };

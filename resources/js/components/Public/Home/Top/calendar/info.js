@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import useMedia from 'use-media';
 
 import Typography from '@material-ui/core/Typography';
 import Table from '@mui/material/Table';
@@ -17,6 +18,7 @@ const styleA = {
  */
 const Info = (props) => {
     const [timeout, setTimeout] = useState(false);
+    const isWide = useMedia({ minWidth: '545px' });
     
     useEffect(() => {
         if (props.resError) {
@@ -28,27 +30,35 @@ const Info = (props) => {
     
     let zoom;
     if (props.exists.zoom) {
-        zoom = <a className={styleA} href={ props.zoom_link } target="_blank">zoomリンク</a>;
+        if (props.exists.ontime) {
+            zoom = <a className={styleA} href={ props.zoom_link } target="_blank">zoomリンク</a>;
+        } else {
+            if (isWide) {
+                zoom = <p>現在は開校時間ではありません</p>;
+            } else {
+                zoom = <p>現在は開校時間では<br/>ありません</p>;
+            }
+        }
     }
 
     let info;
     if (!(props.isDateClicked)) {
         if (timeout) {
             info = (
-                <Typography component="div" sx={{ pt: 2, pb: 5, fontSize: 18 }}>
+                <Typography component="div" sx={{ pt: 2, pb: 5, fontSize: 18, pl: '10%' }}>
                     データの読み込みに失敗しました。<br/>再度お試しいただくか、メンターに直接ご確認ください。
                 </Typography>
             );
         } else {
             info = (
-                <Typography component="div" sx={{ pt: 2, pb: 5, fontSize: 18, pl: 2 }}>
+                <Typography component="div" sx={{ pt: 2, pb: 5, fontSize: 18, pl: '10%' }}>
                     データの読み込み中です。
                 </Typography>
             );
         }
     } else {
         info = (
-            <Table sx={{ minWidth: 370, pb: 5 }} aria-label="simple table">
+            <Table sx={{ width: props.isWide ? '100%' : '80%', margin: !props.isWide && '0 auto', pb: 5 }} aria-label="simple table">
                 <TableBody>
                     <TableRow
                         key='time'

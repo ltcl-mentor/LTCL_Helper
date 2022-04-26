@@ -34,10 +34,10 @@ const Form = (props) => {
                     backgroundColor: "#ECE9E9",
                 }}
             >
-                <Typography align="left" variant="h7" component="div" sx={{ width: '565px', m: '0 auto' }}>
+                <Typography align="left" variant="h7" component="div" sx={{ maxWidth: '565px', width: '80%', m: '0 auto' }}>
                     複数のワードを入力する際はスペース（半角・全角どちらでも可）で分けてください。<br/>
-                    OR検索：（複数のワード検索時）いずれかの検索ワードにヒットする検索結果を表示<br/>
-                    AND検索：（複数のワード検索時）すべての検索ワードにヒットする検索結果を表示
+                    <Typography sx={{ fontWeight: 'bold' }} component="span">OR検索</Typography>：（複数のワード検索時）いずれかの検索ワードにヒットする検索結果を表示<br/>
+                    <Typography sx={{ fontWeight: 'bold' }} component="span">AND検索</Typography>：（複数のワード検索時）すべての検索ワードにヒットする検索結果を表示
                 </Typography>
             </Card>
             
@@ -50,7 +50,7 @@ const Form = (props) => {
                 </FormControl>
             </div>
             
-            <SearchBox setFreeword={props.setFreeword} />
+            <SearchBox setFreeword={props.setFreeword} isWide={props.isWide} />
         </React.Fragment>
     );
 };

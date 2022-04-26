@@ -1,17 +1,21 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import axios from "axios";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import useMedia from "use-media";
+import BreakingPoint from "../../../../BreakingPoint";
 
 /**
  * コメント（個別）
  */
 function Comment(props) {
+    const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
     const history = useHistory();
+    const location = useLocation();
 
     const deleteConfirm = () => {
         if (confirm("コメントが削除されます。\nよろしいですか？")) {
@@ -22,7 +26,7 @@ function Comment(props) {
                 .then(response => {
                     if (response.status === 200) {
                         props.setCommentChanging(false);
-                        history.push("/questions/" + response.data.id, {
+                        history.push(location.pathname, {
                             comment: "deleted"
                         });
                     }
@@ -194,88 +198,152 @@ function Comment(props) {
     }
 
     return (
-        <React.Fragment>
-            <Box sx={{ display: "flex", flexDirection: "row" }}>
-                <Grid container spacing={2} justifyContent="left">
-                    <Grid item>
+        <>
+            {isWide ? (
+                // 大画面用のコンポーネント
+                <>
+                    <Box sx={{ display: "flex", flexDirection: "row" }}>
+                        <Grid container spacing={2} justifyContent="left">
+                            <Grid item>
+                                {props.is_staff ? (
+                                    <Avatar
+                                        alt="Mentor"
+                                        src="/images/images.jpg"
+                                        sx={{
+                                            marginTop: 3,
+                                            marginLeft: 3,
+                                            float: "left"
+                                        }}
+                                    />
+                                ) : (
+                                    <Avatar
+                                        alt="Student"
+                                        src="/images/pose_english_shrug_man.png"
+                                        sx={{
+                                            marginTop: 3,
+                                            marginLeft: 3
+                                        }}
+                                    />
+                                )}
+                            </Grid>
+
+                            <Grid item sx={{ marginTop: 4 }}>
+                                <Typography variant="h7" component="div">
+                                    {props.is_staff ? "メンター" : "受講生"}{" "}
+                                    &nbsp;
+                                    {props.created_at}
+                                </Typography>
+                            </Grid>
+                        </Grid>
+
+                        {(props.user_id === props.target_student ||
+                            props.is_admin === "staff") && (
+                            <Grid
+                                container
+                                justifyContent="right"
+                                alignItems="center"
+                                sx={{ marginTop: 1 }}
+                            >
+                                <Grid item>
+                                    <Button
+                                        variant="text"
+                                        color="secondary"
+                                        onClick={() =>
+                                            props.setEditId(props.comment_id)
+                                        }
+                                    >
+                                        編集
+                                    </Button>
+                                </Grid>
+
+                                <Grid item>/</Grid>
+
+                                <Grid item>
+                                    <Button
+                                        variant="text"
+                                        color="secondary"
+                                        onClick={deleteConfirm}
+                                    >
+                                        削除
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        )}
+                    </Box>
+                    <Typography
+                        variant="h6"
+                        component="div"
+                        sx={{
+                            paddingTop: 2,
+                            marginLeft: 4,
+                            marginBottom: 2,
+                            marginRight: 2,
+                            clear: "left"
+                        }}
+                    >
+                        {comment}
+                    </Typography>
+                </>
+            ) : (
+                // スマホ用のコンポーネント
+                <>
+                    <Box sx={{ display: "flex", flexDirection: "row" }}>
                         {props.is_staff ? (
                             <Avatar
                                 alt="Mentor"
                                 src="/images/images.jpg"
-                                sx={{
-                                    marginTop: 3,
-                                    marginLeft: 3,
-                                    float: "left"
-                                }}
+                                sx={{ mr: 1 }}
                             />
                         ) : (
                             <Avatar
                                 alt="Student"
                                 src="/images/pose_english_shrug_man.png"
-                                sx={{
-                                    marginTop: 3,
-                                    marginLeft: 3
-                                }}
+                                sx={{ mr: 1 }}
                             />
                         )}
-                    </Grid>
 
-                    <Grid item sx={{ marginTop: 4 }}>
                         <Typography variant="h7" component="div">
-                            {props.is_staff ? "メンター" : "受講生"} &nbsp;
+                            {props.is_staff ? "メンター" : "受講生"}
+                            &nbsp;
                             {props.created_at}
                         </Typography>
-                    </Grid>
-                </Grid>
 
-                {(props.user_id === props.target_student ||
-                    props.is_admin === "staff") && (
-                    <Grid
-                        container
-                        justifyContent="right"
-                        alignItems="center"
-                        sx={{ marginTop: 1 }}
+                        {(props.user_id === props.target_student ||
+                            props.is_admin === "staff") && (
+                            <Box sx={{ display: "flex", alignItems: "center" }}>
+                                <Button
+                                    variant="text"
+                                    color="secondary"
+                                    onClick={() =>
+                                        props.setEditId(props.comment_id)
+                                    }
+                                >
+                                    編集
+                                </Button>
+                                /
+                                <Button
+                                    variant="text"
+                                    color="secondary"
+                                    onClick={deleteConfirm}
+                                >
+                                    削除
+                                </Button>
+                            </Box>
+                        )}
+                    </Box>
+                    <Typography
+                        variant="h6"
+                        component="div"
+                        sx={{
+                            m: 2,
+                            fontSize: 15
+                        }}
                     >
-                        <Grid item>
-                            <Button
-                                variant="text"
-                                color="secondary"
-                                onClick={() =>
-                                    props.setEditId(props.comment_id)
-                                }
-                            >
-                                編集
-                            </Button>
-                        </Grid>
-
-                        <Grid item>/</Grid>
-
-                        <Grid item>
-                            <Button
-                                variant="text"
-                                color="secondary"
-                                onClick={deleteConfirm}
-                            >
-                                削除
-                            </Button>
-                        </Grid>
-                    </Grid>
-                )}
-            </Box>
-            <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                    paddingTop: 2,
-                    marginLeft: 4,
-                    marginBottom: 2,
-                    marginRight: 2,
-                    clear: "left"
-                }}
-            >
-                {comment}
-            </Typography>
-        </React.Fragment>
+                        {comment}
+                    </Typography>
+                </>
+            )}
+        </>
     );
 }
 

@@ -1,13 +1,12 @@
 import React from 'react';
+
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
-import TextField from '@mui/material/TextField';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -18,9 +17,6 @@ const MenuProps = {
             width: 250,
         },
     },
-};
-const style = {
-    width: "50%",
 };
 
 // 入学月が変わった場合の変更箇所
@@ -69,7 +65,7 @@ const SelectTarget = (props) => {
 
     return (
         <div>
-            <FormControl sx={style}>
+            <FormControl sx={{ width: props.isWide ? '50%' : '100%' }}>
                 <Select
                     select
                     error={ props.validationError.target }

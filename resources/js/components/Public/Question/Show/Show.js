@@ -13,11 +13,14 @@ import Question from "./question";
 import Comments from "./comments/comments";
 import Documents from "./documents";
 import RelatedQuestions from "./related-questions";
+import BreakingPoint from "../../../BreakingPoint";
+import useMedia from "use-media";
 
 /**
  * 質問詳細画面(公開)のメインコンポーネント
  */
 function Show() {
+    const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
     const history = useHistory();
     const { id } = useParams();
     const [screen_width, setScreenWidth] = useState(window.innerWidth);
@@ -162,97 +165,183 @@ function Show() {
     };
 
     return (
-        <div>
-            <Alert
-                type="question"
-                status={parameter.state && parameter.state.question}
-                info={parameter.state && parameter.state.number}
-            />
+        <>
+            {isWide ? (
+                // 大画面で表示するコンポーネント
+                <div>
+                    <Alert
+                        type="question"
+                        status={parameter.state && parameter.state.question}
+                        info={parameter.state && parameter.state.number}
+                    />
 
-            <div style={{ marginLeft: "3%" }}>
-                <Breadcrumbs
-                    page="public_question_show"
-                    topic={question["topic"]}
-                    topic_title={topics[question["topic"]]}
-                />
-            </div>
-            {question.length !== 0 &&
-                !question.is_resolved &&
-                (question.user_id === user.id || user.is_admin === "staff") && (
-                    <Typography
-                        component="div"
-                        align="center"
-                        sx={{ marginTop: 4, marginBottom: 3 }}
-                    >
-                        <Button
-                            variant="contained"
-                            color="success"
-                            onClick={handleResolved}
+                    <div style={{ marginLeft: "3%" }}>
+                        <Breadcrumbs
+                            page="public_question_show"
+                            topic={question["topic"]}
+                            topic_title={topics[question["topic"]]}
+                        />
+                    </div>
+                    {question.length !== 0 &&
+                        !question.is_resolved &&
+                        (question.user_id === user.id ||
+                            user.is_admin === "staff") && (
+                            <Typography
+                                component="div"
+                                align="center"
+                                sx={{ marginTop: 4, marginBottom: 3 }}
+                            >
+                                <Button
+                                    variant="contained"
+                                    color="success"
+                                    onClick={handleResolved}
+                                >
+                                    解決！！
+                                </Button>
+                            </Typography>
+                        )}
+
+                    <Box>
+                        <Question
+                            title={question.title}
+                            remarks={question.remarks}
+                            updated_at={question.updated_at}
+                            question={question.question}
+                            category={question.category}
+                            topic={question.topic}
+                            curriculum_number={question.curriculum_number}
+                        />
+
+                        <Comments
+                            main_comments={question.main_comments}
+                            sub_comments={question.sub_comments}
+                            question_id={id}
+                            setCommentChanging={setCommentChanging}
+                            user_id={user.id}
+                            is_admin={user.is_admin}
+                        />
+
+                        <Typography
+                            variant="h6"
+                            component="div"
+                            sx={{
+                                marginTop: 3,
+                                padding: 1,
+                                borderBottom: "1px solid gray",
+                                fontWeight: "bold",
+                                marginX: "5%"
+                            }}
                         >
-                            解決！！
+                            参考記事
+                        </Typography>
+                        <Documents documents={documents} />
+                    </Box>
+
+                    <RelatedQuestions related_questions={related_questions} />
+                    <Box style={{ textAlign: "center" }}>
+                        <Button
+                            variant="text"
+                            onClick={handleBackQuestionShow}
+                            sx={{
+                                margin: "3%",
+                                borderBottom: "1px solid #771af8",
+                                color: "#771af8",
+                                borderRadius: 0
+                            }}
+                        >
+                            {topics[question["topic"]]}質問一覧に戻る
                         </Button>
-                    </Typography>
-                )}
+                    </Box>
+                </div>
+            ) : (
+                // スマホで表示するコンポーネント
+                <div>
+                    <Alert
+                        type="question"
+                        status={parameter.state && parameter.state.question}
+                        info={parameter.state && parameter.state.number}
+                    />
 
-            {/* <Parameters
-                category={ question.category }
-                topic={ question.topic }
-                curriculum_number={ question.curriculum_number }
-                is_resolved={ question.is_resolved }
-            /> */}
+                    <div style={{ marginLeft: "3%" }}>
+                        <Breadcrumbs
+                            page="public_question_show"
+                            topic={question["topic"]}
+                            topic_title={topics[question["topic"]]}
+                        />
+                    </div>
+                    {question.length !== 0 &&
+                        !question.is_resolved &&
+                        (question.user_id === user.id ||
+                            user.is_admin === "staff") && (
+                            <Typography
+                                component="div"
+                                align="center"
+                                sx={{ marginTop: 4, marginBottom: 3 }}
+                            >
+                                <Button
+                                    variant="contained"
+                                    color="success"
+                                    onClick={handleResolved}
+                                >
+                                    解決！！
+                                </Button>
+                            </Typography>
+                        )}
 
-            <Box>
-                <Question
-                    title={question.title}
-                    remarks={question.remarks}
-                    updated_at={question.updated_at}
-                    question={question.question}
-                    category={question.category}
-                    topic={question.topic}
-                    curriculum_number={question.curriculum_number}
-                />
+                    <Box>
+                        <Question
+                            title={question.title}
+                            remarks={question.remarks}
+                            updated_at={question.updated_at}
+                            question={question.question}
+                            category={question.category}
+                            topic={question.topic}
+                            curriculum_number={question.curriculum_number}
+                        />
 
-                <Comments
-                    main_comments={question.main_comments}
-                    sub_comments={question.sub_comments}
-                    question_id={id}
-                    setCommentChanging={setCommentChanging}
-                    user_id={user.id}
-                    is_admin={user.is_admin}
-                />
+                        <Comments
+                            main_comments={question.main_comments}
+                            sub_comments={question.sub_comments}
+                            question_id={id}
+                            setCommentChanging={setCommentChanging}
+                            user_id={user.id}
+                            is_admin={user.is_admin}
+                        />
 
-                <Typography
-                    variant="h6"
-                    component="div"
-                    sx={{
-                        marginTop: 3,
-                        padding: 1,
-                        borderBottom: "1px solid gray",
-                        fontWeight: "bold",
-                        marginX: "5%"
-                    }}
-                >
-                    参考記事
-                </Typography>
-                <Documents documents={documents} />
-            </Box>
+                        <Typography
+                            variant="h6"
+                            component="div"
+                            sx={{
+                                marginTop: 3,
+                                padding: 1,
+                                borderBottom: "1px solid gray",
+                                fontWeight: "bold",
+                                marginX: "5%"
+                            }}
+                        >
+                            参考記事
+                        </Typography>
+                        <Documents documents={documents} />
+                    </Box>
 
-            <RelatedQuestions related_questions={related_questions} />
-            <Box style={{ textAlign: "center" }}>
-                <Button
-                    variant="text"
-                    onClick={handleBackQuestionShow}
-                    sx={{
-                        margin: "3%",
-                        borderBottom: "1px solid #771af8",
-                        color: "#771af8",
-                        borderRadius: 0
-                    }}
-                >
-                    {topics[question["topic"]]}質問一覧に戻る
-                </Button>
-            </Box>
-        </div>
+                    <RelatedQuestions related_questions={related_questions} />
+                    <Box style={{ textAlign: "center" }}>
+                        <Button
+                            variant="text"
+                            onClick={handleBackQuestionShow}
+                            sx={{
+                                margin: "3%",
+                                borderBottom: "1px solid #771af8",
+                                color: "#771af8",
+                                borderRadius: 0
+                            }}
+                        >
+                            {topics[question["topic"]]}質問一覧に戻る
+                        </Button>
+                    </Box>
+                </div>
+            )}
+        </>
     );
 }
 
