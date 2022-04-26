@@ -102,7 +102,7 @@ const QA = (props) => {
     if (searchValue == 0) {
         freewordButton = <PurpleButton onClick={() => setSearchValue(0)} variant="contained" sx={{ fontSize: !isWide && '16px' }}>フリーワード検索</PurpleButton>;
         conditionButton = <GrayButton onClick={() => setSearchValue(1)} variant="contained" sx={{ fontSize: !isWide && '16px' }}>絞り込み検索</GrayButton>;
-        search = <Freeword />;
+        search = <Freeword isWide={isWide} />;
     } else {
         freewordButton = <GrayButton onClick={() => setSearchValue(0)} variant="contained" sx={{ fontSize: !isWide && '16px' }}>フリーワード検索</GrayButton>;
         conditionButton = <PurpleButton onClick={() => setSearchValue(1)} variant="contained" sx={{ fontSize: !isWide && '16px' }}>絞り込み検索</PurpleButton>;

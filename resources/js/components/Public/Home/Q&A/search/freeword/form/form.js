@@ -50,7 +50,7 @@ const Form = (props) => {
                 </FormControl>
             </div>
             
-            <SearchBox setFreeword={props.setFreeword} />
+            <SearchBox setFreeword={props.setFreeword} isWide={props.isWide} />
         </React.Fragment>
     );
 };
