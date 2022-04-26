@@ -65,7 +65,7 @@ const Top = (props) => {
             <Grid columns={16} container sx={{ width: '80%', ml: 'auto', mr: 'auto' }}>
                 <Grid sx={{ width: '50%' }} item>
                     <Typography component="div" sx={{ color: 'white', fontWeight: 'bold', fontSize: 26 }}>
-                        LTCL Helper
+                        <img src="images/helper_logo.png" width='165px' height='45px' style={{ marginTop: '5px' }} />
                     </Typography>
                     <Typography 
                         onClick={() => handleOpen('contact')}
@@ -95,7 +95,7 @@ const Top = (props) => {
         footer = (
             <div style={{ width: '80%', margin: '0 auto' }}>
                 <Typography component="div" sx={{ color: 'white', fontWeight: 'bold', fontSize: 26 }}>
-                    LTCL Helper
+                    <img src="images/helper_logo.png" width='165px' height='45px' style={{ marginTop: '5px' }} />
                 </Typography>
                 <Typography 
                     onClick={() => handleOpen('contact')}

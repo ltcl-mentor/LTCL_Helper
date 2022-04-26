@@ -7,7 +7,7 @@ import Result from './result/result';
 /**
  * フリーワード検索
  */
-const Freeword = () => {
+const Freeword = (props) => {
     const [searchType, setSearchType] = useState('OR');
     const [freeword, setFreeword] = useState('');
     
@@ -17,6 +17,7 @@ const Freeword = () => {
                 searchType={ searchType }
                 setSearchType={ setSearchType }
                 setFreeword={ setFreeword }
+                isWide={props.isWide}
             />
             
             {/* 先頭が空白の時(/)に全データを持ってきてしまうため条件に追加 */}

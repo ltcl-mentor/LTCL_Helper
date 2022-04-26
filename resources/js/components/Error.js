@@ -19,10 +19,10 @@ const Error = () => {
                 </Typography>
                 <Typography align="center">
                     お探しのページは見つかりませんでした。<br/>
-                    以下のリンクからHOMEへお戻り下さい。
+                    以下のリンクからTopへお戻り下さい。
                 </Typography>
                 <Typography component="div" align="center" sx={{ pt: 2 }}>
-                    <Link to="/">HOMEに戻る</Link>
+                    <Link to="/">Topに戻る</Link>
                 </Typography>
             </Card>
         </div>
