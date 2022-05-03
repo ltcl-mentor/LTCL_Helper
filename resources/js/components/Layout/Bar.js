@@ -72,7 +72,7 @@ const Bar = () => {
                 <Toolbar>
                     <Typography component="div" sx={{ flexGrow: 1 }}>
                         <Links sx={{ color: '#808080', fontSize: '25px', '&:hover': { color: '#771AF8' } }} href="/" underline="none">
-                            LTCL Helper
+                            <img src="images/helper_logo.png" width='165px' height='50px' style={{ marginTop: '5px' }} />
                         </Links>
                     </Typography>
                     

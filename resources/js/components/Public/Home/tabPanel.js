@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import {useMountedState} from 'react-use';
+import { useMountedState } from 'react-use';
 
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
@@ -18,6 +18,15 @@ const a11yProps = (index) => {
     };
 };
 
+// タブのスタイル設定
+const styleTabWidth = { width: '100%' };
+const styleTabFontSize = { fontSize: 24 };
+const styleTabPosition = { 
+    borderBottom: 1,
+    borderColor:
+    'white',
+    pl: '10%'
+};
 
 /**
  * タブパネル
@@ -26,8 +35,8 @@ const tabPanel = () => {
     const isMounted = useMountedState();
     const user = useContext(LoginUser);
     const history = useHistory();
-    const search = useLocation().search.split('=')[1];
-    const [value, setValue] = useState(0);
+    const search = useLocation().search.split('=')[1]; // URLからコンポーネント判断
+    const [value, setValue] = useState(0);  // タブ切り替え時の状態保持
 
     let component;
     if (value == 0) {
@@ -49,6 +58,7 @@ const tabPanel = () => {
         }
     };
 
+    // クエリパラメータの値によるコンポーネントの切り替え
     useEffect(() => {
         if (isMounted()) {
             if (typeof search == 'undefined') {
@@ -66,18 +76,18 @@ const tabPanel = () => {
     }, [search]);
 
     return (
-        <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'white', paddingLeft: '10%' }}>
+        <Box sx={styleTabWidth}>
+            <Box sx={styleTabPosition}>
                 <Tabs
                     value={value}
                     onChange={handleChange}
                     textColor="secondary"
                     indicatorColor="secondary"
                 >
-                    <Tab label="Top" {...a11yProps(0)} sx={{ fontSize: 24 }} />
-                    <Tab label="Q&A" {...a11yProps(1)} sx={{ fontSize: 24 }} />
+                    <Tab label="Top" {...a11yProps(0)} sx={styleTabFontSize} />
+                    <Tab label="Q&A" {...a11yProps(1)} sx={styleTabFontSize} />
                     {user.is_admin == 'staff' &&
-                    <Tab label="管理" {...a11yProps(2)} sx={{ fontSize: 24 }} />
+                    <Tab label="管理" {...a11yProps(2)} sx={styleTabFontSize} />
                     }
                 </Tabs>
             </Box>

@@ -52,10 +52,11 @@ function Article(props) {
     };
 
     let documentsList;
+    let emptyMessage;
     let pagination;
     // 関連質問がなかった場合
     if (props.documents.eventList.filter(v=>v).length === 0) {
-        documentsList = (<div className="empty_message">関連する記事はありません。</div>);
+        emptyMessage = (<Box className="empty_message" display="flex" textAlign='center' justifyContent="center"><Typography>関連する記事はありません。</Typography></Box>);
 
     // 関連質問があった場合
     } else {
@@ -128,31 +129,30 @@ function Article(props) {
                 </>
             );
         });
-    }
 
-    let listNumber = documentsList.length;
-    let element = (
-        <Box key={document.title} spacing={2} sx={{ flexGrow: 1 }} justifyContent="center" display="flex" >
-            <Box sx={{ width: "300px", height: "280px", marginTop: 2 }}>
+        let listNumber = documentsList.length;
+        let element = (
+            <Box key={document.title} spacing={2} sx={{ flexGrow: 1 }} justifyContent="center" display="flex" >
+                <Box sx={{ width: "300px", height: "280px", marginTop: 2 }}>
+                </Box>
             </Box>
-        </Box>
-    )
-    //要素を左寄せにしたいので、条件に合わせて空の要素を挿入
-    if(is1200) {
-        let remainder = listNumber % 3;
-        if (remainder === 1) {
-            documentsList.push(element);
-            documentsList.push(element);
-        } else if (remainder === 2) {
-            documentsList.push(element);
-        }
-    } else if(is767) {
-        let remainder = listNumber % 2;
-        if(remainder) {
-            documentsList.push(element);
+        )
+        //要素を左寄せにしたいので、条件に合わせて空の要素を挿入
+        if(is1200) {
+            let remainder = listNumber % 3;
+            if (remainder === 1) {
+                documentsList.push(element);
+                documentsList.push(element);
+            } else if (remainder === 2) {
+                documentsList.push(element);
+            }
+        } else if(is767) {
+            let remainder = listNumber % 2;
+            if(remainder) {
+                documentsList.push(element);
+            }
         }
     }
-
 
 
     // 対象者の指定が変更された場合に実行
@@ -234,7 +234,7 @@ function Article(props) {
                 {
                     isWide ?
                         <>
-                        <Grid item xs={8}>
+                        <Grid item xs={9}>
                             <Paper
                                 component="form"
                                 sx={{ p: "4px", display: "flex", alignItems: "center", width: "70%", ml: "auto"}}
@@ -248,7 +248,7 @@ function Article(props) {
                                 />
                             </Paper>
                         </Grid>
-                        <Grid item xs={2}>
+                        <Grid item xs={3}>
                             <Button
                                 variant="contained"
                                 startIcon={<SearchIcon />}
@@ -327,6 +327,7 @@ function Article(props) {
             <Box display="flex" sx={{flexWrap: 'wrap'}}>
                 { documentsList }
             </Box>
+            {emptyMessage}
             <Grid container justifyContent="center" sx={{ marginTop: 1, marginBottom: 2 }}>
                 <Grid item>
                     { pagination }

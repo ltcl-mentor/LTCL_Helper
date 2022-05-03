@@ -1,17 +1,19 @@
-import React, { useState, useEffect, useContext } from 'react';
-// import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
 import useMedia from 'use-media';
 import BreakingPoint from '../../../BreakingPoint';
 
-import Grid from '@mui/material/Grid';
-import Typography from '@material-ui/core/Typography';
-
 import { LoginUser } from '../../../Route.js';
 import Information from './information/information';
 import Clendar from './calendar/calendar';
-import Location from './location';
+import ContentMobile from './footer/contentMobile';
+import ContentPC from './footer/contentPC';
 import Modals from "../modal";
+
+const styleFooter = {
+    backgroundColor: '#b39ddb',
+    paddingTop: '16px',
+};
 
 
 /**
@@ -19,26 +21,18 @@ import Modals from "../modal";
  */
 const Top = (props) => {
     const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
+    const user = useContext(LoginUser);
     const [open, setOpen] = useState(false);
     const [type, setType] = useState("user");
-    const [map_key, setMapKey] = useState();
-    const [zoom_link, setZoomLink] = useState();
+    const [mapKey, setMapKey] = useState();
+    const [zoomLink, setZoomLink] = useState();
     const [events, setEvents] = useState([]);
-    // const history = useHistory();
-    
-    // ログインユーザー情報取得
-    const user = useContext(LoginUser);
-    
-    // お問い合わせページへ遷移
-    // const contact = () => {
-    //     history.push('/contact');
-    // };
-    
-    const handleOpen = type => {
+  
+    // モーダル開閉
+    const handleOpen = useCallback(type => {
         setOpen(true);
         setType(type);
-    };
-
+    });
     const handleClose = () => {
         setOpen(false);
         setType("user");
@@ -59,66 +53,11 @@ const Top = (props) => {
             });
     }, []);
     
-    let footer;
+    let footerContent;
     if (isWide) {
-        footer = (
-            <Grid columns={16} container sx={{ width: '80%', ml: 'auto', mr: 'auto' }}>
-                <Grid sx={{ width: '50%' }} item>
-                    <Typography component="div" sx={{ color: 'white', fontWeight: 'bold', fontSize: 26 }}>
-                        LTCL Helper
-                    </Typography>
-                    <Typography 
-                        onClick={() => handleOpen('contact')}
-                        component="div"
-                        sx={{ 
-                            color: 'black',
-                            fontWeight: 'bold',
-                            fontSize: 20,
-                            pt: 3,
-                            cursor: "pointer",
-                            "&:hover": {
-                                color: '#771AF8',
-                            }
-                        }}
-                    >
-                        お問い合わせ
-                    </Typography>
-                </Grid>
-                <Grid sx={{ width: '50%' }} item>
-                    <Location
-                        map_key={ map_key }
-                    />
-                </Grid>
-            </Grid>
-        );
+        footerContent = <ContentPC mapKey={mapKey} handleOpen={handleOpen} />;
     } else {
-        footer = (
-            <div style={{ width: '80%', margin: '0 auto' }}>
-                <Typography component="div" sx={{ color: 'white', fontWeight: 'bold', fontSize: 26 }}>
-                    LTCL Helper
-                </Typography>
-                <Typography 
-                    onClick={() => handleOpen('contact')}
-                    component="div"
-                    sx={{ 
-                        color: 'black',
-                        fontWeight: 'bold',
-                        fontSize: 20,
-                        pt: 2,
-                        pb: 2,
-                        cursor: "pointer",
-                        "&:hover": {
-                            color: '#771AF8',
-                        }
-                    }}
-                >
-                    お問い合わせ
-                </Typography>
-                <Location
-                    map_key={ map_key }
-                />
-            </div>
-        );
+        footerContent = <ContentMobile mapKey={mapKey} handleOpen={handleOpen} />;
     }
     
     return (
@@ -131,19 +70,19 @@ const Top = (props) => {
         
             {/* 校舎情報 */}
             <Clendar 
-                zoom_link={ zoom_link }
+                zoomLink={ zoomLink }
             />
             
             {/* お知らせと天気 */}
             <Information
-                is_admin={ user.is_admin }
+                isAdmin={ user.is_admin }
                 events={ events }
                 isWide={ isWide }
             />
             
             {/* お問い合わせと校舎住所 */}
-            <div className="footer">
-                {footer}
+            <div style={styleFooter}>
+                {footerContent}
             </div>
         </React.Fragment>
     );
