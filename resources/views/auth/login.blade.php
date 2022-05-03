@@ -6,7 +6,7 @@
                     <div class="form-content" style="margin: 0 auto;">
                         <form method="POST" action="{{ route('login') }}" style="width: 50vw; margin-left: 25vw; height: 50vh; margin-top: 25vh;">
                             @csrf
-                            <h1 class="text-center font-weight-bold" style="font-size: 3.5vw; color: #771AF8;">Welcome</h1>
+                            <h1 class="text-center font-weight-bold" style="font-size: 2.8rem; color: #771AF8;">Welcome</h1>
                             <div class="form-group">
                                 <p class="font-weight-bold col-md-4" style="margin: 0 auto; color: #771AF8;">{{ __('ID') }}</p>
     
