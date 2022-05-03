@@ -70,7 +70,7 @@ const Top = (props) => {
         
             {/* 校舎情報 */}
             <Clendar 
-                zoom_link={ zoomLink }
+                zoomLink={ zoomLink }
             />
             
             {/* お知らせと天気 */}

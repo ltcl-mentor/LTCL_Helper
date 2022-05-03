@@ -11,6 +11,7 @@ import Grid from '@mui/material/Grid';
 
 import Info from './info';
 
+// 各パーツのスタイル設定
 const useStyles = makeStyles({
     root: {
         margin: 0,
@@ -18,12 +19,31 @@ const useStyles = makeStyles({
         justifyContent: 'space-evenly',
     },
 });
+const styleGridWidth = { width: '50%' };
+const styleHeading = {
+    color: '#771AF8',
+    fontWeight: 'bold',
+    fontSize: 24,
+    pl: '10%'
+};
+const styleWarningMessage = { 
+    pt: 2, 
+    fontSize: 20
+};
+const styleGridContent = { 
+    width: '80%',
+    margin: '0 auto'
+};
+const styleContent = {
+    backgroundColor: '#eee',
+    paddingTop: '16px',
+};
 
 
 /**
  * 校舎情報(カレンダー)
  */
-const Calendar = (props) => {
+const calendar = (props) => {
     const isWideCalender = useMedia({ minWidth: '940px' });
     const classes = useStyles();
     const [date, setDate] = useState(new Date());
@@ -36,7 +56,7 @@ const Calendar = (props) => {
     useEffect(() => {
         setResError(false);
         
-        if ( (date.getMonth() >= today.getMonth() - 1) && (date.getMonth() <= today.getMonth()) ) {
+        if ((date.getMonth() >= today.getMonth() - 1) && (date.getMonth() <= today.getMonth())) {
             // 指定された日付の校舎情報取得
             axios
                 .get(`/react/college/${ date.getFullYear() }/${ date.getMonth() + 1 }/${ date.getDate() }`)
@@ -58,41 +78,39 @@ const Calendar = (props) => {
     }, [date]);
     
     let info;
-    if ( (date.getMonth() >= today.getMonth() - 1) && (date.getMonth() <= today.getMonth()) ) {
+    if ((date.getMonth() >= today.getMonth() - 1) && (date.getMonth() <= today.getMonth())) {
         info = (
             <Info 
-                collegeInfo={ collegeInfo }
-                isDateClicked={ isDateClicked }
-                resError={ resError }
-                zoom_link={ props.zoom_link }
-                exists={ exists }
+                collegeInfo={collegeInfo}
+                isDateClicked={isDateClicked}
+                resError={resError}
+                zoomLink={props.zoomLink}
+                exists={exists}
                 isWide={isWideCalender}
             />
         );
-        
     } else {
         info = (
-            <Typography  component="div" sx={{ paddingTop: 2, fontSize: 20 }}>
+            <Typography  component="div" sx={styleWarningMessage}>
                 確認可能なのは先月、今月の情報のみです。<br />
                 もう一度日付を選択し直してください。
             </Typography>
         );
     }
     
+    // 940px以下ではカレンダーは表示しない
     let allInfo;
     if (isWideCalender) {
         allInfo = (
-            <Grid container columns={16} sx={{ width: '80%', ml: 'auto', mr: 'auto' }}>
-                <Grid item sx={{ width: '50%' }}>
+            <Grid container sx={styleGridContent}>
+                <Grid item sx={styleGridWidth}>
                     { info }
                 </Grid>
-                {isWideCalender && 
-                    <Grid item sx={{ width: '50%' }}>
-                        <LocalizationProvider dateAdapter={ AdapterDateFns }>
-                            <CalendarPicker className={classes.root} date={ date } onChange={ (newDate) => { setDate(newDate), setIsDateClicked(false) } } />
-                        </LocalizationProvider>
-                    </Grid>
-                }
+                <Grid item sx={styleGridWidth}>
+                    <LocalizationProvider dateAdapter={ AdapterDateFns }>
+                        <CalendarPicker className={classes.root} date={date} onChange={(newDate) => { setDate(newDate), setIsDateClicked(false)} } />
+                    </LocalizationProvider>
+                </Grid>
             </Grid>
         );
     } else {
@@ -100,8 +118,8 @@ const Calendar = (props) => {
     }
     
     return (
-        <div className="college_info">
-            <Typography component="div" sx={{ color: '#771AF8', fontWeight: 'bold', fontSize: 24, pl: '10%' }}>
+        <div style={styleContent}>
+            <Typography component="div" sx={styleHeading}>
                 { date.getMonth() + 1 }月{ date.getDate() }日の校舎情報
             </Typography>
             
@@ -110,4 +128,4 @@ const Calendar = (props) => {
     );
 };
 
-export default Calendar;
+export default calendar;

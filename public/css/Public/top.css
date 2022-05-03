@@ -1,29 +1,22 @@
+/* 全css共通 */
 body {
   background-color: white;
 }
 
-.college_info {
-  background-color: #eee;
-  padding-top: 16px;
+a, a:hover {
+  color: #771AF8;
 }
 
-.college_info div.css-1n2mv2k {
-  justify-content: space-evenly;
-}
-
-.college_info div.css-mvmu1r {
+/*.Top画面カレンダーレスポンシブ対応用 */
+div.css-mvmu1r {
   justify-content: space-evenly;
   margin: 10px 0;
 }
 
-.information span.MuiTypography-root.MuiTypography-body1.MuiListItemText-primary.css-10hburv-MuiTypography-root {
-  font-size: 20px;
-}
+/*.college_info div.css-1n2mv2k {*/
+/*  justify-content: space-evenly;*/
+/*}*/
 
-.footer {
-  background-color: #b39ddb;
-  padding-top: 16px;
-}
 
 span.MuiTabs-indicator.css-11yukd5-MuiTabs-indicator {
   background-color: #771AF8;
@@ -54,10 +47,6 @@ div.MuiFormControl-root.MuiTextField-root.css-1u3bzj6-MuiFormControl-root-MuiTex
 
 .card-1, .card-4 {
   margin: 0 auto;
-}
-
-a, a:hover {
-  color: #771AF8;
 }
 
 .mypage {
