@@ -21,6 +21,7 @@ const Modals = (props) => {
     
     let content;
     switch (props.type) {
+        
         // お知らせ作成
         case "create_info":
             content = <Create onClose={props.handleClose} events={props.events} setDates={props.setDates} setInfos={props.setInfos} isWide={isWide} />;

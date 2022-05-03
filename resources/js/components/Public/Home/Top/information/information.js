@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 
 import Modals from "../../modal";
 import Infos from "./infos";
-import Weather from "../weather";
+import Weather from "./weather";
 import { LoginUser } from "../../../../Route";
 
 /**
