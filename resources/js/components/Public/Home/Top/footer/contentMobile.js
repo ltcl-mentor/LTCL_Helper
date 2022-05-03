@@ -4,16 +4,16 @@ import Typography from "@material-ui/core/Typography";
 
 import Location from './location';
 
-const content = { 
+const styleContent = { 
     width: '80%',
     margin: '0 auto'
 };
-const logo = {
+const styleLogo = {
     width: '165px',
     height: '45px',
     marginTop: '5px'
 };
-const contact = {
+const styleContact = {
     color: 'black',
     fontWeight: 'bold',
     fontSize: 20,
@@ -28,14 +28,14 @@ const contact = {
  */
 const contentMobile = (props) => {
     return (
-       <div style={content}>
+       <div style={styleContent}>
             {/*.ロゴ */}
             <Typography component="div">
-                <img src="images/helper_logo.png" style={logo} />
+                <img src="images/helper_logo.png" style={styleLogo} />
             </Typography>
             
             {/*.お問い合せ */}
-            <Typography onClick={() => props.handleOpen('contact')} component="span" sx={contact}>
+            <Typography onClick={() => props.handleOpen('contact')} component="span" sx={styleContact}>
                 お問い合わせ
             </Typography>
             <Location

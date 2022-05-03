@@ -10,7 +10,7 @@ import ContentMobile from './footer/contentMobile';
 import ContentPC from './footer/contentPC';
 import Modals from "../modal";
 
-const footer = {
+const styleFooter = {
     backgroundColor: '#b39ddb',
     paddingTop: '16px',
 };
@@ -75,13 +75,13 @@ const Top = (props) => {
             
             {/* お知らせと天気 */}
             <Information
-                is_admin={ user.is_admin }
+                isAdmin={ user.is_admin }
                 events={ events }
                 isWide={ isWide }
             />
             
             {/* お問い合わせと校舎住所 */}
-            <div style={footer}>
+            <div style={styleFooter}>
                 {footerContent}
             </div>
         </React.Fragment>

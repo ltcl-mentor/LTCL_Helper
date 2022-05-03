@@ -15,7 +15,7 @@ const styleHome = {
     paddingLeft: 0,
 };
 
-const footerText = { 
+const styleFooterText = { 
     fontWeight: 'bold',
     fontSize: 20,
     pt: 1,
@@ -49,7 +49,7 @@ const Home = () => {
             {/* タブ */}
             <TabPanel is_admin={user.is_admin} />
             
-            <Typography component="div" align="center" sx={footerText}>
+            <Typography component="div" align="center" sx={styleFooterText}>
                 レバテックカレッジ
             </Typography>
         </div>

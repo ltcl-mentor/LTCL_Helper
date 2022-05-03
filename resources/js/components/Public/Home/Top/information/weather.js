@@ -13,11 +13,32 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+// 各パーツのスタイル設定
+const styleWeatherPosition = { width: '200px' };
+const styleHeading = { mt: 1 };
+const styleTableRow = { '&:last-child td, &:last-child th': { border: 0 } };
+const styleWeatherSize = {
+    height: '150px',
+    width: '150px'
+};
+const styleWeatherInfos = {
+    mb: 1,
+    fontSize: 20
+};
+const styleWeatherInfosPosition = { 
+    mt: 3, 
+    mb: 3 
+};
+const styleAccordionTable = {
+    width: "90%", 
+    ml: "5%"
+};
+
 /**
  * 
  * 天気表示
  */
-const Weather = (props) => {
+const weather = (props) => {
     const [weather, setWeather] = useState([]);
     const weatherImages = {
         "くもり": "images/clouds.jpg",
@@ -48,40 +69,40 @@ const Weather = (props) => {
         setExpanded(isExpanded ? panel : false);
     };
 
-    let weather_data;
+    let weatherData;
     if (weather.current) {
-        weather_data = (
+        weatherData = (
             <div>
                 {props.isWide && 
-                    <Typography align="center" variant="h6" component="div" sx={{ marginTop: 1 }}>
+                    <Typography align="center" variant="h6" component="div" sx={styleHeading}>
                         渋谷の天気情報
                     </Typography>
                 }
                 
-                <Grid container spacing={2} justifyContent="center" alignItems="center">
-                    <Grid item sx={{ width: "200px" }}>
-                        <img src={ weatherImages[weather.current.main] } height={150} width={150}/>
+                <Grid container justifyContent="center" alignItems="center">
+                    <Grid item sx={styleWeatherPosition}>
+                        <img src={ weatherImages[weather.current.main] } style={styleWeatherSize}/>
                     </Grid>
                     
-                    <Grid item sx={{ marginTop: 3, marginBottom: 3 }}>
-                        <Typography align="center" component="div" sx={{ marginBottom: 1, fontSize: 20 }}>
+                    <Grid item sx={styleWeatherInfosPosition}>
+                        <Typography align="center" component="div" sx={styleWeatherInfos}>
                             気温：{ weather.current.temp }℃
                         </Typography>
-                        <Typography align="center" component="div" sx={{ marginBottom: 1, fontSize: 20 }}>
+                        <Typography align="center" component="div" sx={styleWeatherInfos}>
                             平均気温：{ weather.today.temp_ave }℃
                         </Typography>
-                        <Typography align="center" component="div" sx={{ marginBottom: 1, fontSize: 20 }}>
+                        <Typography align="center" component="div" sx={styleWeatherInfos}>
                             最高気温：{ weather.today.temp_max }℃
                         </Typography>
-                        <Typography align="center" component="div" sx={{ marginBottom: 1, fontSize: 20 }}>
+                        <Typography align="center" component="div" sx={styleWeatherInfos}>
                             最低気温：{ weather.today.temp_min }℃
                         </Typography>
                     </Grid>
                 </Grid>
                 
-                <Accordion expanded={ expanded === 1 } onChange={ handleChange(1) }>
+                <Accordion expanded={expanded === 1} onChange={handleChange(1)}>
                     <AccordionSummary
-                        expandIcon={ <ExpandMoreIcon /> }
+                        expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1bh-content"
                         id="panel1bh-header"
                     >
@@ -90,7 +111,7 @@ const Weather = (props) => {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Table sx={{ width: "90%", marginLeft: "5%" }} size="small" aria-label="a dense table">
+                        <Table sx={styleAccordionTable} size="small" aria-label="a dense table">
                             <TableHead>
                                 <TableRow>
                                     <TableCell>時間</TableCell>
@@ -100,14 +121,14 @@ const Weather = (props) => {
                             </TableHead>
                             
                             <TableBody>
-                                { weather.hourly.map((hourly_data, index) => (
+                                {weather.hourly.map((hourlyData, index) => (
                                     <TableRow
-                                        key={ `${index}-${hourly_data.temp}` }
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        key={ `${index}-${hourlyData.temp}` }
+                                        sx={styleTableRow}
                                     >
-                                        <TableCell component="th" scope="row">{ hourly_data.time }</TableCell>
-                                        <TableCell align="right">{ hourly_data.temp }℃</TableCell>
-                                        <TableCell align="right">{ hourly_data.main }</TableCell>
+                                        <TableCell component="th" scope="row">{ hourlyData.time }</TableCell>
+                                        <TableCell align="right">{ hourlyData.temp }℃</TableCell>
+                                        <TableCell align="right">{ hourlyData.main }</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -120,9 +141,9 @@ const Weather = (props) => {
     
     return (
         <React.Fragment>
-            { weather_data }
+            { weatherData }
         </React.Fragment>
     );
-}
+};
 
-export default Weather;
+export default weather;

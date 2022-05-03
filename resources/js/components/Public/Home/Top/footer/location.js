@@ -14,12 +14,12 @@ const collegeLocation = {
 };
 
 // 各パーツのスタイル設定
-const address = { marginTop: '10px' };
-const title = {
+const styleAddress = { marginTop: '10px' };
+const styleTitle = {
     fontSize: 20,
     fontWeight: 'bold'
 };
-const body = {
+const styleBody = {
     fontSize: 18,
     pb: 2 
 };
@@ -47,11 +47,11 @@ const location = (props) => {
                     </GoogleMap>
                 </LoadScript>
             }
-            <div style={address}>
-                <Typography sx={title}>住所</Typography>
-                <Typography sx={body}>〒150-0046<br/>東京都渋谷区松濤1丁目29-1 4F</Typography>
-                <Typography sx={title}>校舎への入り方</Typography>
-                <Typography sx={body}>1階のファミリーマートに向かって右手にエレベータがあるので、そちらから入室してください。</Typography>
+            <div style={styleAddress}>
+                <Typography sx={styleTitle}>住所</Typography>
+                <Typography sx={styleBody}>〒150-0046<br/>東京都渋谷区松濤1丁目29-1 4F</Typography>
+                <Typography sx={styleTitle}>校舎への入り方</Typography>
+                <Typography sx={styleBody}>1階のファミリーマートに向かって右手にエレベータがあるので、そちらから入室してください。</Typography>
             </div>
         </React.Fragment>
     );

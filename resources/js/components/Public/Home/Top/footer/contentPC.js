@@ -6,17 +6,17 @@ import Typography from "@material-ui/core/Typography";
 import Location from './location';
 
 // 各パーツのスタイル設定
-const gridWidth = { width: '50%' };
-const content = { 
+const styleGridWidth = { width: '50%' };
+const styleContent = { 
     width: '80%',
     margin: '0 auto'
 };
-const logo = {
+const styleLogo = {
     width: '165px',
     height: '45px',
     marginTop: '5px'
 };
-const contact = {
+const styleContact = {
     color: 'black',
     fontWeight: 'bold',
     fontSize: 20,
@@ -31,19 +31,19 @@ const contact = {
  */
 const contentPC = (props) => {
     return (
-        <Grid container sx={content}>
-            <Grid sx={gridWidth} item>
+        <Grid container sx={styleContent}>
+            <Grid sx={styleGridWidth} item>
                 {/*.ロゴ */}
                 <Typography component="div">
-                    <img src="images/helper_logo.png" style={logo} />
+                    <img src="images/helper_logo.png" style={styleLogo} />
                 </Typography>
                 
                 {/*.お問い合せ */}
-                <Typography onClick={() => props.handleOpen('contact')} component="span" sx={contact}>
+                <Typography onClick={() => props.handleOpen('contact')} component="span" sx={styleContact}>
                     お問い合わせ
                 </Typography>
             </Grid>
-            <Grid sx={gridWidth} item>
+            <Grid sx={styleGridWidth} item>
                 <Location
                     mapKey={props.mapKey}
                 />

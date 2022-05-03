@@ -1,19 +1,39 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
-import Grid from "@mui/material/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@mui/material/Button";
 
 import Modals from "../../modal";
-import Infos from "./infos";
-import Weather from "./weather";
+import ContentMobile from './contentMobile';
+import ContentPC from './contentPC';
 import { LoginUser } from "../../../../Route";
+
+// 各パーツのスタイル設定
+const style = {
+    paddingTop: '16px',
+    paddingBottom: '16px'
+};
+const heading = {
+    color: "#771AF8",
+    fontWeight: "bold",
+    fontSize: 24,
+    pl: '10%'
+};
+const addButtonStyle = {
+    verticalAlign: "top",
+    color: "#771AF8",
+    "&:hover": {
+        backgroundColor: "white",
+        textDecoration: "underline"
+    }
+};
+
 
 /**
  * お知らせ
  */
-const Information = props => {
+const information = props => {
     const [open, setOpen] = useState(false);
     const [type, setType] = useState("user");
     const [dates, setDates] = useState([]);
@@ -21,11 +41,11 @@ const Information = props => {
     const [events, setEvents] = useState([]);
     const user = useContext(LoginUser);
 
+    // モーダル開閉
     const handleOpen = type => {
         setOpen(true);
         setType(type);
     };
-
     const handleClose = () => {
         setOpen(false);
         setType("user");
@@ -46,55 +66,22 @@ const Information = props => {
     
     let information;
     if (props.isWide) {
-        information = (
-            <Grid
-                columns={16}
-                container
-                sx={{ width: "80%", ml: "auto", mr: "auto" }}
-            >
-                <Grid sx={{ width: '50%' }} item>
-                    <Infos
-                        is_admin={props.is_admin}
-                        dates={dates}
-                        infos={infos}
-                        setDates={setDates}
-                        setInfos={setInfos}
-                        isWide={props.isWide}
-                    />
-                </Grid>
-                <Grid sx={{ width: '50%' }} item>
-                    <Weather isWide={props.isWide} />
-                </Grid>
-            </Grid>
-        );
+        information = <ContentPC isAdmin={props.isAdmin} dates={dates} setDates={setDates} infos={infos} setInfos={setInfos} />;
     } else {
-        information = (
-            <div style={{ width: '90%', margin: '0 auto' }}>
-                <Infos
-                    is_admin={props.is_admin}
-                    dates={dates}
-                    infos={infos}
-                    setDates={setDates}
-                    setInfos={setInfos}
-                />
-                <Typography
-                    component="div"
-                    sx={{
-                        color: "#771AF8",
-                        fontWeight: "bold",
-                        fontSize: 24,
-                        pl: '6%'
-                    }}
-                >
-                    天気情報
-                </Typography>
-                <Weather isWide={props.isWide} />
-            </div>
+        information = <ContentMobile isAdmin={props.isAdmin} dates={dates} setDates={setDates} infos={infos} setInfos={setInfos} />;
+    }
+    
+    let addButton;
+    if (user.is_admin == "staff") {
+        addButton = (
+            <Button sx={addButtonStyle} onClick={() => handleOpen("create_info")}>
+                お知らせを追加する
+            </Button>    
         );
     }
 
     return (
-        <div className="information">
+        <div style={style}>
             <Modals
                 open={open}
                 type={type}
@@ -104,31 +91,9 @@ const Information = props => {
                 setDates={setDates}
             />
 
-            <Typography
-                component="div"
-                sx={{
-                    color: "#771AF8",
-                    fontWeight: "bold",
-                    fontSize: 24,
-                    pl: '10%'
-                }}
-            >
+            <Typography component="div" sx={heading}>
                 お知らせ
-                {user.is_admin == "staff" && (
-                    <Button
-                        sx={{
-                            verticalAlign: "top",
-                            color: "#771AF8",
-                            "&:hover": {
-                                backgroundColor: "white",
-                                textDecoration: "underline"
-                            }
-                        }}
-                        onClick={() => handleOpen("create_info")}
-                    >
-                        お知らせを追加する
-                    </Button>
-                )}
+                {addButton}
             </Typography>
             
             {information}
@@ -136,4 +101,4 @@ const Information = props => {
     );
 };
 
-export default Information;
+export default information;
