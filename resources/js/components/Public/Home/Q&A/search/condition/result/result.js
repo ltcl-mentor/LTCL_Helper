@@ -12,11 +12,28 @@ import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
 import Grid from '@mui/material/Grid';
 
+// 各パーツの設定
+const styleEmpty = { pb: '20px' };
+const styleCard = { mb: 3 };
+const styleHeadingCategory = {
+    marginTop: 2,
+    marginLeft: 3,
+    marginBottom: 2,
+};
+const styleBox = { 
+    width: "90%", 
+    margin: "0 auto"
+};
+const stylePagination = { 
+    mt: 1,
+    mb: 2
+};
+
 
 /**
  * 絞り込み検索の検索結果表示
  */
-const Result = (props) => {
+const result = (props) => {
     const [questions, setQuestions] = useState({
         eventList: [],
         activePage: 1,
@@ -31,12 +48,11 @@ const Result = (props) => {
         // 検索結果の質問取得
         // 日本語の検索内容入力時に一度エンコードする
         // コントローラー側でデコード
-        const encodedFreeword = encodeURI(props.freeword);
+        // const encodedFreeword = encodeURI(props.freeword);
             
         axios
             .get(`/react/questions/search/paginate?category=${ props.category }&topic=${ props.topic }&curriculum_number=${ props.curriculum_number }&keyword=${ props.keyword }`)
             .then(response => {
-                // console.log(response.data);
                 setQuestions({
                         eventList: response.data.data,
                         itemsCountPerPage: response.data.per_page,
@@ -54,7 +70,7 @@ const Result = (props) => {
     const handlePageClick = (event, index) => {
             // 日本語の検索内容入力時に一度エンコードする
             // コントローラー側でデコード
-            const encodedFreeword = encodeURI(props.freeword);
+            // const encodedFreeword = encodeURI(props.freeword);
 
             // 検索結果の質問取得
             axios
@@ -100,7 +116,7 @@ const Result = (props) => {
 
     if (list.filter(v=>v).length === 0) {
         // 検索結果がない場合に出力するメッセージ
-        emptyMessage = ( <Typography align="center" variant="h6" sx={{ pb: '20px' }}>該当する質問がありません。</Typography> );
+        emptyMessage = <Typography align="center" variant="h6" sx={styleEmpty}>該当する質問がありません。</Typography>;
     } else {
         // 検索結果一覧情報を1ページ10件に分割
         questionList = list.slice((currentPage - 1)*10, currentPage*10);
@@ -111,40 +127,31 @@ const Result = (props) => {
                 count={ questions.lastPage }
                 page={ questions.currentPage }
                 onChange={ handlePageClick }
-                sx={{ display: "block" }}
+                display="block"
             />
         );
     }
     
     return (
-        <Card sx={{ mb: 3 }}>
-            <Typography
-                variant="h7"
-                component="div"
-                sx={{
-                    marginTop: 2,
-                    marginLeft: 3,
-                    marginBottom: 2,
-                }}
-            >
-                カテゴリー：<font color="green">{ props.categories[props.category] }</font>、トピック：<font color="blue">{ props.topics[props.topic] }</font>の検索結果{/*<font color="purple">{ list.filter(v=>v).length }</font>件*/}
+        <Card sx={styleCard}>
+            <Typography variant="h7" component="div" sx={styleHeadingCategory}>
+                カテゴリー：
+                <font color="green">{props.categories[props.category]}</font>
+                、トピック：
+                <font color="blue">{props.topics[props.topic]}</font>の検索結果
             </Typography>
             
-            <Box sx={{ width: "90%", margin: "0 auto" }}>
-                <List>
-                    { questionList }
-                </List>
+            <Box sx={styleBox}>
+                <List> {questionList}</List>
             </Box>
             
-            <Grid container justifyContent="center" sx={{ marginTop: 1, marginBottom: 2 }}>
-                <Grid item>
-                    { pagination }
-                </Grid>
+            <Grid container justifyContent="center" sx={stylePagination}>
+                <Grid item>{pagination}</Grid>
             </Grid>
             
-            { emptyMessage }
+            {emptyMessage}
         </Card>
     );
 };
 
-export default Result;
+export default result;

@@ -16,7 +16,7 @@ import Grid from '@mui/material/Grid';
 /**
  * フリーワード検索の検索結果表示
  */
-const Result = (props) => {
+const result = (props) => {
     const [questions, setQuestions] = useState({
         eventList: [],
         activePage: 1,
@@ -140,4 +140,4 @@ const Result = (props) => {
     );
 };
 
-export default Result;
+export default result;

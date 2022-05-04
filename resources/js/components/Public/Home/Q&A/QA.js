@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import useMedia from 'use-media';
@@ -12,46 +12,97 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Grid from '@mui/material/Grid';
-import { CardActionArea } from '@mui/material';
 import { Link } from "react-router-dom";
 
+import Curriculum from './index/curriculum';
+import Portfolio from './index/portfolio';
 import Freeword from './search/freeword/freeword';
 import Condition from './search/condition/condition';
+import PurpleButton from '../../../Atom/Button/PurpleButton';
 import { LoginUser } from '../../../Route';
 
-const PurpleButton = styled(Button)(({ theme }) => ({
-    color: 'white',
-    fontSize: 24,
-    fontWeight: 'bold',
-    width: '50%',
-    height: 60,
-    boxShadow: 'none',
-    backgroundColor: '#771AF8',
-    borderRadius: '0',
-    lineHeight: '100%',
-    '&:hover': {
-        backgroundColor: '#6633CC',
-        boxShadow: 'none',
-        color: 'white',
-    },
-}));
-
+// 各パーツのスタイル設定
 const GrayButton = styled(Button)(({ theme }) => ({
     color: '#ADA9A9',
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: 'bold',
     width: '50%',
     height: 60,
     boxShadow: 'none',
     backgroundColor: '#ECE9E9',
-    borderRadius: '0',
     lineHeight: '100%',
     '&:hover': {
         backgroundColor: '#DDDDDD',
         boxShadow: 'none',
     },
 }));
+const styleButtonHeight = {
+    height: 60,
+    lineHeight: '100%',
+    borderRadius: 0
+};
+const styleDiv = {
+    marginTop: 2,
+    marginBottom: 2
+};
+const styleCard = {
+    width: '160px',
+    height: '90%',
+    m: "auto",
+    p: 0,
+    position: "relative",
+    cursor: "pointer",
+    "&:before": {
+        content: '""',
+        pt: "100%",
+        display: "block"
+    }
+};
+const styleCardActionArea = {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    p: "10px",
+    m: 0,
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
+};
+const styleQuestionResolve = {
+    marginTop: 3,
+    fontWeight: 'bold',
+    display: 'block'
+};
+const styleQuestions = {
+    width: '80%',
+    m: '16px auto 0',
+    p: 0
+};
+const styleContent = {
+    width: '90%',
+    margin: '32px auto 0'
+};
+const styleHeading = {
+    color: '#771AF8',
+    fontWeight: 'bold',
+    fontSize: 24
+};
+const styleCards = {
+    width: '100%',
+    mt: 1.5
+};
+const styleBox = {
+    borderBottom: 1,
+    borderColor: 'white',
+    mb: 3
+};
+const styleTab = {
+    fontSize: 20,
+    fontWeight: 'bold'
+};
 
 const a11yProps = (index) => {
     return {
@@ -73,7 +124,7 @@ const QA = (props) => {
     const [indexValue, setIndexValue] = useState(0);
     const [curriculum, setCurriculum] = useState([]);
     const [project, setProject] = useState([]);
-    const [screen_width, setScreenWidth] = useState(window.innerWidth);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const topics = [
         // カリキュラムのトピック
         'AWS', 'HTML', 'CSS', 'JavaScript', 'サーバー', 'PHP', 'Laravel', 'データベース', 'Git&GitHub', 'マイグレーション', 'リレーション', '認証機能', 'API', 'その他',
@@ -87,148 +138,79 @@ const QA = (props) => {
     };
 
     // 個別質問ページ
-    const toTopic = (topic_number) => {
+    const toTopic = useCallback(topic_number => {
         history.push(`/topic/${topic_number}`);
-    };
+    });
     
     // windowの幅が変化した際に随時取得
     window.addEventListener('resize', function() {
         setScreenWidth(window.innerWidth);
     });
+    
+    // PC版の時にはボタンの文字サイズを大きくする
+    let styleButton;
+    if (isWide) {
+        styleButton = [styleButtonHeight, { fontSize: 24 }];
+    } else {
+        styleButton = styleButtonHeight;
+    }
 
+    // 検索ボタン
     let freewordButton;
     let conditionButton;
     let search;
     if (searchValue == 0) {
-        freewordButton = <PurpleButton onClick={() => setSearchValue(0)} variant="contained" sx={{ fontSize: !isWide && '16px' }}>フリーワード検索</PurpleButton>;
-        conditionButton = <GrayButton onClick={() => setSearchValue(1)} variant="contained" sx={{ fontSize: !isWide && '16px' }}>絞り込み検索</GrayButton>;
+        freewordButton = <PurpleButton onClick={() => setSearchValue(0)} variant="contained" sx={styleButton}>フリーワード検索</PurpleButton>;
+        conditionButton = <GrayButton onClick={() => setSearchValue(1)} variant="contained" sx={styleButton}>絞り込み検索</GrayButton>;
         search = <Freeword isWide={isWide} />;
     } else {
-        freewordButton = <GrayButton onClick={() => setSearchValue(0)} variant="contained" sx={{ fontSize: !isWide && '16px' }}>フリーワード検索</GrayButton>;
-        conditionButton = <PurpleButton onClick={() => setSearchValue(1)} variant="contained" sx={{ fontSize: !isWide && '16px' }}>絞り込み検索</PurpleButton>;
+        freewordButton = <GrayButton onClick={() => setSearchValue(0)} variant="contained" sx={styleButton}>フリーワード検索</GrayButton>;
+        conditionButton = <PurpleButton onClick={() => setSearchValue(1)} variant="contained" sx={styleButton}>絞り込み検索</PurpleButton>;
         search = <Condition isWide={isWide} />;
-    }
-    
-    let width1;
-    let width2 = '33%';
-    if (screen_width >= 890) {
-        width1 = '20%';
-    } else if (screen_width >= 710) {
-        width1 = '25%';
-    } else if (screen_width >= 540) {
-        width1 = '33%';
-    } else {
-        width1 = '50%';
-        width2 = '50%';
     }
 
     let component;
     if (indexValue == 0) {
         component = (
-            <Grid container>
-                {curriculum.map((topic, index) => {
-                    return(
-                        <Grid item sx={{ width: width1 }} key={topic.topic}>
-                            <Card
-                                sx={{
-                                    width: '160px',
-                                    height: '90%',
-                                    m: "auto",
-                                    p: 0,
-                                    position: "relative",
-                                    cursor: "pointer",
-                                    "&:before": {
-                                        content: '""',
-                                        pt: "100%",
-                                        display: "block"
-                                    }
-                                }}
-                            >
-                                <CardActionArea 
-                                    onClick={() => toTopic(topic.topic)} 
-                                    sx={{
-                                        position: "absolute",
-                                        top: 0,
-                                        left: 0,
-                                        p: "10px",
-                                        m: 0,
-                                        width: "100%",
-                                        height: "100%",
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "center",
-                                        alignItems: "center"
-                                    }}
-                                >
-                                    <Typography align="center" gutterBottom variant={index == 9 ? "h7" : "h6"} component="div" sx={{ mt: index==9 && '7px' }}>
-                                        {topics[index]}
-                                    </Typography>
-                                    <Typography component="div" align="center" variant="h7" sx={{ mt: 2 }}>
-                                        質問 {topic.questions}件
-                                    </Typography>
-                                    <Typography component="div" align="center" variant="h7" sx={{ mb: 2 }}>
-                                        記事 {topic.documents}件
-                                    </Typography>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                    );
-                })}
-            </Grid>
+            <Curriculum
+                curriculum={curriculum}
+                screenWidth={screenWidth}
+                topics={topics}
+                toTopic={toTopic}
+                styleDiv={styleDiv}
+                styleCard={styleCard}
+                styleCardActionArea={styleCardActionArea}
+            />
         );
     } else {
         component = (
-            <Grid container sx={{ justifyContent: 'center' }}>
-                {project.map((topic, index) => {
-                    return(
-                        <Grid item sx={{ width: width2 }} key={topic.topic}>
-                            <Card
-                                sx={{
-                                    width: '160px',
-                                    height: '90%',
-                                    ml: !(screen_width >=540 && index%3==2) && "auto",
-                                    mr: !(screen_width >=540 && index%3==0) && "auto",
-                                    p: 0,
-                                    position: "relative",
-                                    cursor: "pointer",
-                                    "&:before": {
-                                        content: '""',
-                                        pt: "100%",
-                                        display: "block"
-                                    }
-                                }}
-                            >
-                                <CardActionArea 
-                                    onClick={() => toTopic(topic.topic)} 
-                                    sx={{
-                                        position: "absolute",
-                                        top: 0,
-                                        left: 0,
-                                        p: "10px",
-                                        m: 0,
-                                        width: "100%",
-                                        height: "100%",
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "center",
-                                        alignItems: "center"
-                                    }}
-                                >
-                                    <Typography align="center" gutterBottom variant="h6" component="div">
-                                        {topics[index+14]}
-                                    </Typography>
-                                    <Typography component="div" align="center" variant="h7" sx={{ mt: 2 }}>
-                                        質問 {topic.questions}件
-                                    </Typography>
-                                    <Typography component="div" align="center" variant="h7" sx={{ mb: 2 }}>
-                                        記事 {topic.documents}件
-                                    </Typography>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                    );
-                })}
-            </Grid>
+            <Portfolio
+                project={project}
+                screenWidth={screenWidth}
+                topics={topics}
+                toTopic={toTopic}
+                styleDiv={styleDiv}
+                styleCard={styleCard}
+                styleCardActionArea={styleCardActionArea}
+            />
+        );
+    }
+    
+    // 質問解決率（メンターのみ）
+    let admin;
+    if (user.is_admin == 'staff') {
+        admin = (
+            <Box textAlign="center">
+                <Typography
+                    variant="h5"
+                    component={Link}
+                    to="/questions/mentor"
+                    align="center"
+                    sx={styleQuestionResolve}
+                >
+                    現在の質問解決率：<font color="purple" >{achievement}</font>%
+                </Typography>
+            </Box>
         );
     }
 
@@ -246,26 +228,10 @@ const QA = (props) => {
 
     return (
         <React.Fragment>
-            {user.is_admin == 'staff' &&
-                <Box textAlign="center">
-                <Typography
-                    variant="h5"
-                    component={Link}
-                    to="/questions/mentor"
-                    align="center"
-                    sx={{
-                        marginTop: 3,
-                        fontWeight: 'bold',
-                        display: 'block'
-                    }}
-                >
-                    現在の質問解決率：<font color="purple" >{ achievement }</font>%
-                </Typography>
-                </Box>
-            }
+            {admin}
 
             {/* 検索部分 */}
-            <Card variant="outlined" sx={{ width: '80%', m: '16px auto 0', p: 0 }}>
+            <Card variant="outlined" sx={styleQuestions}>
 
                 {/* 検索タブ */}
                 <Stack direction="row">
@@ -278,20 +244,20 @@ const QA = (props) => {
             </Card>
 
             {/* 質問・記事一覧 */}
-            <div className="index">
-                <Typography component="div" sx={{ color: '#771AF8', fontWeight: 'bold', fontSize: 24 }}>
+            <div style={styleContent}>
+                <Typography component="div" sx={styleHeading}>
                     質問・記事一覧
                 </Typography>
-                <Box sx={{ width: '100%', mt: 1.5 }}>
-                    <Box sx={{ borderBottom: 1, borderColor: 'white', mb: 3 }}>
+                <Box sx={styleCards}>
+                    <Box sx={styleBox}>
                         <Tabs
                             value={indexValue}
                             onChange={handleChange}
                             textColor="secondary"
                             indicatorColor="secondary"
                         >
-                            <Tab label="カリキュラム" {...a11yProps(0)} sx={{ fontSize: 20, fontWeight: 'bold' }} />
-                            <Tab label="成果物" {...a11yProps(1)} sx={{ fontSize: 20, fontWeight: 'bold' }} />
+                            <Tab label="カリキュラム" {...a11yProps(0)} sx={styleTab} />
+                            <Tab label="成果物" {...a11yProps(1)} sx={styleTab} />
                         </Tabs>
                     </Box>
                     {component}

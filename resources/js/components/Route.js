@@ -17,31 +17,30 @@ import PublicQuestionCreate from './Public/Question/Create/Create/Create';
 import PublicQuestionShow from './Public/Question/Show/Show';
 import Condition from './Public/Search/Condition/Condition';
 import Freeword from './Public/Search/Freeword/Freeword';
-// import Contact from './Public/Contact/Contact';
-import MentorTop from './Mentor/Top';
-import DocumentIndex from './Mentor/Document/Index/Index';
-import DocumentShow from './Mentor/Document/Show/Show';
-import DocumentCreate from './Mentor/Document/Create/Create';
-import DocumentEdit from './Mentor/Document/Edit/Edit';
-import QuestionIndex from './Mentor/Question/Index/Index/Index';
-import QuestionMentorYetCommentIndex from './Mentor/Question/Index/yet-comment-index/FromMentor';
-import QuestionStudentYetCommentIndex from './Mentor/Question/Index/yet-comment-index/FromStudent';
-import QuestionShow from './Mentor/Question/Show/Show';
-import QuestionEdit from './Mentor/Question/Edit/Edit';
-import LinkFromQuestionIndex from './Mentor/Link/fromQuestion/Index/Index';
-import LinkFromQuestionShow from './Mentor/Link/fromQuestion/Show/Show';
-import LinkFromDocumentIndex from './Mentor/Link/fromDocument/Index/Index';
-import LinkFromDocumentShow from './Mentor/Link/fromDocument/Show/Show';
-import UserIndex from './Mentor/User/Index/Index';
-import UserRegisterPublic from './Mentor/User/Register/Public/Public';
-import UserRegisterAdmin from './Mentor/User/Register/Admin/Admin';
-import EventIndex from './Mentor/Event/Index/Index';
-import EventRegister from './Mentor/Event/Create/Create';
-import MentorQuestions from './Public/Home/Q&A/questionsForMentor.js';
+// import MentorTop from './Mentor/Top';
+// import DocumentIndex from './Mentor/Document/Index/Index';
+// import DocumentShow from './Mentor/Document/Show/Show';
+// import DocumentCreate from './Mentor/Document/Create/Create';
+// import DocumentEdit from './Mentor/Document/Edit/Edit';
+// import QuestionIndex from './Mentor/Question/Index/Index/Index';
+// import QuestionMentorYetCommentIndex from './Mentor/Question/Index/yet-comment-index/FromMentor';
+// import QuestionStudentYetCommentIndex from './Mentor/Question/Index/yet-comment-index/FromStudent';
+// import QuestionShow from './Mentor/Question/Show/Show';
+// import QuestionEdit from './Mentor/Question/Edit/Edit';
+// import LinkFromQuestionIndex from './Mentor/Link/fromQuestion/Index/Index';
+// import LinkFromQuestionShow from './Mentor/Link/fromQuestion/Show/Show';
+// import LinkFromDocumentIndex from './Mentor/Link/fromDocument/Index/Index';
+// import LinkFromDocumentShow from './Mentor/Link/fromDocument/Show/Show';
+// import UserIndex from './Mentor/User/Index/Index';
+// import UserRegisterPublic from './Mentor/User/Register/Public/Public';
+// import UserRegisterAdmin from './Mentor/User/Register/Admin/Admin';
+// import EventIndex from './Mentor/Event/Index/Index';
+// import EventRegister from './Mentor/Event/Create/Create';
+// import MentorQuestions from './Public/Home/Q&A/questionsForMentor.js';
 
 export const LoginUser = createContext();
 
-function Router() {
+const Router = () => {
     const [user, setUser] = useState([]);
 
     useEffect(() => {
@@ -137,11 +136,7 @@ function Router() {
                     { user.length !== 0 &&
                         <Route path="/search/freeword" exact component={Freeword} />
                     }
-
-                    {/* お問い合わせ画面表示 */}
-                    {/* user.length !== 0 &&
-                        <Route path="/contact" exact component={Contact} />
-                    */}
+                    
                     
                     {/*=======================================================================================*/}
                     {/*管理者ユーザがアクセスできるURL*/}
@@ -152,181 +147,181 @@ function Router() {
                     }
                     
                     {/* メンター管理画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route path="/mentor/top" exact component={MentorTop} />
-                    }
+                    */}
 
                     {/* 記事一覧画面表示示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/documents/index"
                             exact
                             component={DocumentIndex}
                         />
-                    }
+                    */}
 
                     {/* 記事新規作成画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/documents/create"
                             exact
                             component={DocumentCreate}
                         />
-                    }
+                    */}
 
                     {/* 記事編集画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/documents/:id/edit"
                             exact
                             component={DocumentEdit}
                         />
-                    }
+                    */}
 
                     {/* 記事詳細画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/documents/:id"
                             exact
                             component={DocumentShow}
                         />
-                    }
+                    */}
 
                     {/* 質問一覧画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/questions/index"
                             exact
                             component={QuestionIndex}
                         />
-                    }
+                    */}
 
                     {/* 質問一覧画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/questions/mentor"
                             exact
                             component={MentorQuestions}
                         />
-                    }
+                    */}
 
                     {/* メンターコメント待ちの質問一覧画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/questions/index/mentor_yet_comment"
                             exact
                             component={QuestionMentorYetCommentIndex}
                         />
-                    }
+                    */}
 
                     {/* 受講生コメント待ちの質問一覧画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/questions/index/student_yet_comment"
                             exact
                             component={QuestionStudentYetCommentIndex}
                         />
-                    }
+                    */}
 
                     {/* 質問編集画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/questions/:id/edit"
                             exact
                             component={QuestionEdit}
                         />
-                    }
+                    */}
 
                     {/* 質問詳細画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/questions/:id"
                             exact
                             component={QuestionShow}
                         />
-                    }
+                    */}
 
                     {/* 紐付け（単体質問と複数記事）一覧画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/links/question/index"
                             exact
                             component={LinkFromQuestionIndex}
                         />
-                    }
+                    */}
 
                     {/* 紐付け（単体質問と複数記事）登録画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/links/question/:id"
                             exact
                             component={LinkFromQuestionShow}
                         />
-                    }
+                    */}
 
                     {/* 紐付け（単体記事と複数質問）一覧画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/links/document/index"
                             exact
                             component={LinkFromDocumentIndex}
                         />
-                    }
+                    */}
 
                     {/* 紐付け（単体記事と複数質問）登録画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/links/document/:id"
                             exact
                             component={LinkFromDocumentShow}
                         />
-                    }
+                    */}
 
                     {/* ユーザ一覧画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route path="/users/index" exact component={UserIndex} />
-                    }
+                    */}
 
                     {/* 受講生登録画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/users/register/public"
                             exact
                             component={UserRegisterPublic}
                         />
-                    }
+                    */}
 
                     {/* 管理者登録画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/users/register/admin"
                             exact
                             component={UserRegisterAdmin}
                         />
-                    }
+                    */}
 
                     {/* イベント一覧画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route path="/events/index" exact component={EventIndex} />
-                    }
+                    */}
 
                     {/* イベント登録画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/events/register"
                             exact
                             component={EventRegister}
                         />
-                    }
+                    */}
 
                     {/* イベント編集画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/events/register/:id"
                             exact
                             component={EventRegister}
                         />
-                    }
+                    */}
                     
                     {/*404アクセスエラー*/}
                     <Route path="/" component={AccessError}/>
@@ -335,7 +330,7 @@ function Router() {
             </LoginUser.Provider>
         </BrowserRouter>
     );
-}
+};
 
 export default Router;
 

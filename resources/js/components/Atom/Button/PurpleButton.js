@@ -7,7 +7,7 @@ const PurpleButton = styled(Button)(({ theme }) => ({
     width: "50%",
     boxShadow: "none",
     backgroundColor: "#771AF8",
-    border: "1px solid black",
+    border: "1px solid #771AF8",
     fontWeight: "bold",
     "&:hover": {
         backgroundColor: "#6633CC",
