@@ -12,6 +12,17 @@ import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
 import Grid from '@mui/material/Grid';
 
+// 各パーツのスタイル設定
+const styleCard = {
+    margin: "16px auto",
+    width: '90%',
+    padding: 0
+};
+const styleGrid = {
+    mt: 1,
+    mb: 2
+};
+
 
 /**
  * フリーワード検索の検索結果表示
@@ -64,7 +75,6 @@ const result = (props) => {
             axios
                 .get(`/react/questions/search/paginate?searchType=${ props.searchType }&freeword=${ encodedFreeword }&page=${index}`)
                 .then(response => {
-                    // console.log(response.data);
                     setQuestions({
                         eventList: response.data.data,
                         itemsCountPerPage: response.data.per_page,
@@ -80,16 +90,14 @@ const result = (props) => {
     };
     
     // 検索結果の質問一覧情報
-    const list = questions.eventList.map((question) => {
+    const list = questions.eventList.map(question => {
         return (
             <div>
                 <Divider light />
 
                 <Link to={ `/public/questions/` + question.id } target="_blank">
                     <ListItem button>
-                        <ListItemText
-                            primary={ question.title }
-                        />
+                        <ListItemText primary={question.title} />
                     </ListItem>
                 </Link>
 
@@ -116,26 +124,22 @@ const result = (props) => {
                 count={ questions.lastPage }
                 page={ questions.currentPage }
                 onChange={ handlePageClick }
-                sx={{ display: "block" }}
+                display="block"
             />
         );
     }
     
     return (
-        <Card sx={{ margin: "16px auto", width: '90%', padding: 0 }}>
+        <Card sx={styleCard}>
             <Box>
-                <List>
-                    { questionList }
-                </List>
+                <List>{questionList}</List>
             </Box>
 
-            <Grid container justifyContent="center" sx={{ marginTop: 1, marginBottom: 2 }}>
-                <Grid item>
-                    { pagination }
-                </Grid>
+            <Grid container justifyContent="center" sx={styleGrid}>
+                <Grid item>{pagination}</Grid>
             </Grid>
 
-            { emptyMessage }
+            {emptyMessage}
         </Card>
     );
 };
