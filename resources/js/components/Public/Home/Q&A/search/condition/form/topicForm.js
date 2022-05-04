@@ -1,31 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
+
 /**
  * トピックの選択肢
  */
-const Topic = (props) => {
-    // const [topic, setTopic] = useState(0);
-    
-    // 画面描画時に実行
-    // useEffect(() => {
-    //     if (props.IsCanceling)  props.setIsCanceling(false);
-    // }, []);
+const topicForm = (props) => {
     
     // カテゴリーが変更されたら実行
     useEffect(() => {
         props.category === 0 ? props.setTopic(0) : props.setTopic(14);
     }, [props.category]);
-    
-    // useEffect(() => {
-    //     if (props.isCanceling) {
-    //         setTopic(0);
-    //         props.setIsCanceling(false);
-    //     }
-    // }, [props.isCanceling]);
     
     // 選択されたトピック情報を取得
     const handleTopic = (event) => {
@@ -79,4 +67,4 @@ const Topic = (props) => {
     );
 };
 
-export default Topic;
+export default topicForm;
