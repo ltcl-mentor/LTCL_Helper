@@ -8,7 +8,7 @@ import Tab from '@mui/material/Tab';
 
 import Top from './Top/Top';
 import QA from './Q&A/QA';
-import Manage from './Manage/manage';
+import Manage from './Manage/Manage';
 import { LoginUser } from '../../Route';
 
 const a11yProps = (index) => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
@@ -11,6 +11,9 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
+
+import DeleteConfirmModal from '../modal/deleteConfirm';
+
 
 /**
  * イベント詳細
@@ -97,7 +100,7 @@ const ShowEvent = (props) => {
     };
     
     // 削除実行
-    const deleted = () =>{
+    const deleted = useCallback(() =>{
         axios
             .post('/events/' + props.event.id + '/delete')
             .then(response => {
@@ -112,7 +115,7 @@ const ShowEvent = (props) => {
             }).catch(error => {
                 console.log(error);
             });
-    };
+    });
     
     useEffect(() => {
         axios
@@ -163,6 +166,8 @@ const ShowEvent = (props) => {
     
     return (
         <React.Fragment>
+            <DeleteConfirmModal open={deleteOpen} setOpen={setDeleteOpen} delete={deleted} />
+        
             <IconButton onClick={() => props.onClose()} sx={{ color: 'red', ml: '95%' }}>
                 <HighlightOffIcon />
             </IconButton>
@@ -235,40 +240,6 @@ const ShowEvent = (props) => {
             <Typography align="center" component="div" sx={{ marginTop: 4, marginBottom: 3 }}>
                 {button}
             </Typography>
-            
-            {/* 削除モーダル */}
-            <Modal
-                open={deleteOpen}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box
-                    sx={{
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        width: props.isWide ? "50%" : '90%',
-                        bgcolor: "white",
-                        border: "2px solid #000",
-                        boxShadow: 24,
-                        p: 4
-                    }}
-                >
-                    <IconButton onClick={() => setDeleteOpen(false)} sx={{ color: 'red', ml: '95%' }}>
-                        <HighlightOffIcon />
-                    </IconButton>
-                    <Typography align="center" sx={{ color: "red", fontSize: '30px', fontWeight: 'bold' }}>
-                        WARNING！
-                    </Typography>
-                    <Typography align="center" sx={{ color: "red", fontSize: '20px', fontWeight: 'bold', mt: '10px' }}>
-                        削除すると元に戻せません。<br/>本当に削除しますか？
-                    </Typography>
-                    <Typography align="center" sx={{ mt: '20px' }}>
-                        <Button size="large" color="error" variant="contained" onClick={() => deleted()}>削除</Button>
-                    </Typography>
-                </Box>
-            </Modal>
             
             {/* slack文法詳細のモーダル */}
             <Modal
