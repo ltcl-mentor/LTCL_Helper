@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
@@ -13,25 +13,23 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import IconButton from '@mui/material/IconButton';
 import Pagination from "@mui/material/Pagination";
 
-// モーダルのCSS設定
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '50%',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+import DeleteConfirmModal from '../modal/deleteConfirm';
 
+// 各パーツのスタイル設定
+const styleBoldFont = { fontWeight: 'bold' };
+const styleTableMinWidth = { minWidth: 630 };
+const styleTable = {
+    width: '90%',
+    margin: '0 auto'
+};
+const stylePagination = {
+    display: 'flex', 
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 2
+};
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: '#C299FF',
@@ -42,7 +40,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
         fontSize: 14,
     },
 }));
-
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
         backgroundColor: theme.palette.action.hover,
@@ -72,14 +69,27 @@ const UserIndex = (props) => {
     };
 
     // ユーザー削除
-    // 後でconfirmを変えたい
-    const deleteUser = () => {
+    const deleteUser = useCallback(() => {
         axios
             .post(`/users/${deleteuser}/delete`)
             .then(response => {
                 if (response.status === 200) {
-                    props.setStaffs(response.data.staffs);
-                    props.setStudents(response.data.students);
+                    props.setStudents({
+                        eventList: response.data.students.data,
+                        itemsCountPerPage: response.data.students.per_page,
+                        totalItemsCount: response.data.students.total,
+                        currentPage: response.data.students.current_page,
+                        pageRangeDisplayed: 10,
+                        lastPage: response.data.students.last_page,
+                    });
+                    props.setStaffs({
+                        eventList: response.data.staffs.data,
+                        itemsCountPerPage: response.data.staffs.per_page,
+                        totalItemsCount: response.data.staffs.total,
+                        currentPage: response.data.staffs.current_page,
+                        pageRangeDisplayed: 10,
+                        lastPage: response.data.staffs.last_page,
+                    });
                     setDeleteuser('');
                     setOpen(false);
                     history.push("/?page=manage", {type: "user", status: 'deleted', info: deleteuser });
@@ -87,7 +97,7 @@ const UserIndex = (props) => {
             }).catch(error => {
                 console.log(error);
             });
-    };
+    });
 
     // ユーザーロック解除実行
     const unlockUser = (id) => {
@@ -96,8 +106,22 @@ const UserIndex = (props) => {
                 .post(`/users/${ id }/unlock`)
                 .then(response => {
                     if (response.status === 200) {
-                        props.setStaffs(response.data.staffs);
-                        props.setStudents(response.data.students);
+                        props.setStudents({
+                            eventList: response.data.students.data,
+                            itemsCountPerPage: response.data.students.per_page,
+                            totalItemsCount: response.data.students.total,
+                            currentPage: response.data.students.current_page,
+                            pageRangeDisplayed: 10,
+                            lastPage: response.data.students.last_page,
+                        });
+                        props.setStaffs({
+                            eventList: response.data.staffs.data,
+                            itemsCountPerPage: response.data.staffs.per_page,
+                            totalItemsCount: response.data.staffs.total,
+                            currentPage: response.data.staffs.current_page,
+                            pageRangeDisplayed: 10,
+                            lastPage: response.data.staffs.last_page,
+                        });
                         history.push("/?page=manage", {type: "user", status: 'unlock', info: id });
                     }
                 }).catch(error => {
@@ -114,8 +138,8 @@ const UserIndex = (props) => {
     if (props.type == "student") {
         tablehead = (
             <React.Fragment>
-                <StyledTableCell align="center" sx={{ fontWeight: 'bold' }}>受講生ID</StyledTableCell>
-                <StyledTableCell align="center" sx={{ fontWeight: 'bold' }}>パスワード</StyledTableCell>
+                <StyledTableCell align="center" sx={styleBoldFont}>受講生ID</StyledTableCell>
+                <StyledTableCell align="center" sx={styleBoldFont}>パスワード</StyledTableCell>
             </React.Fragment>
         );
         tablebody = (
@@ -171,6 +195,7 @@ const UserIndex = (props) => {
         );
     }
 
+    // 管理者側ペジネーションのクリック管理
     const handlePageClick = (event, index) => {
         axios
             .get(`/react/mentor?page=${index}`)
@@ -188,6 +213,7 @@ const UserIndex = (props) => {
         });
     };
 
+    // 受講生側ペジネーションのクリック管理
     const handlePageClickStudent = (event, index) => {
         axios
             .get(`/react/mentor?page=${index}`)
@@ -205,8 +231,8 @@ const UserIndex = (props) => {
         });
     };
 
+    // ペジネーション部分
     let pagination;
-
     pagination = (
         <Pagination
             count={ props.users.lastPage }
@@ -218,17 +244,19 @@ const UserIndex = (props) => {
 
     return (
         <React.Fragment>
-            <TableContainer component={Paper} sx={{ width: '90%', margin: '0 auto' }}>
-                <Table sx={{ minWidth: 630 }} aria-label="customized table">
+            <DeleteConfirmModal open={open} setOpen={setOpen} delete={deleteUser} />
+        
+            <TableContainer component={Paper} sx={styleTable}>
+                <Table sx={styleTableMinWidth} aria-label="customized table">
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell align="center" sx={{ fontWeight: 'bold' }}>ID</StyledTableCell>
-                            <StyledTableCell align="center" sx={{ fontWeight: 'bold' }}>名前</StyledTableCell>
+                            <StyledTableCell align="center" sx={styleBoldFont}>ID</StyledTableCell>
+                            <StyledTableCell align="center" sx={styleBoldFont}>名前</StyledTableCell>
                             {tablehead}
                             {props.account == "master" &&
                                 <React.Fragment>
-                                    <StyledTableCell align="center" sx={{ fontWeight: 'bold' }}>ステータス</StyledTableCell>
-                                    <StyledTableCell align="center" sx={{ fontWeight: 'bold' }}>削除</StyledTableCell>
+                                    <StyledTableCell align="center" sx={styleBoldFont}>ステータス</StyledTableCell>
+                                    <StyledTableCell align="center" sx={styleBoldFont}>削除</StyledTableCell>
                                 </React.Fragment>
                             }
                         </TableRow>
@@ -238,31 +266,9 @@ const UserIndex = (props) => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 2}}>
+            <Box sx={stylePagination}>
                 {pagination}
             </Box>
-
-            {/* 削除モーダル */}
-            <Modal
-                open={open}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={ style }>
-                    <IconButton onClick={() => setOpen(false)} sx={{ color: 'red', ml: '95%' }}>
-                        <HighlightOffIcon />
-                    </IconButton>
-                    <Typography align="center" sx={{ color: "red", fontSize: '30px', fontWeight: 'bold' }}>
-                        WARNING！
-                    </Typography>
-                    <Typography align="center" sx={{ color: "red", fontSize: '20px', fontWeight: 'bold', mt: '10px' }}>
-                        削除すると元に戻せません。<br/>本当に削除しますか？
-                    </Typography>
-                    <Typography align="center" sx={{ mt: '20px' }}>
-                        <Button size="large" color="error" variant="contained" onClick={() => deleteUser()}>削除</Button>
-                    </Typography>
-                </Box>
-            </Modal>
         </React.Fragment>
     );
 };

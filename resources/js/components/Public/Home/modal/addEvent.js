@@ -1,20 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import IconButton from "@mui/material/IconButton";
-import Grid from "@mui/material/Grid";
+
+import SlackGrammar from './slackGrammar';
+import ContentPC from './responsive/addEventPC';
+import ContentMobile from './responsive/addEventMobile';
+import { CloseModal, SubmitButton, styleHeading } from '../modal';
+
+// 各パーツのスタイル設定
+const styleContent = { 
+    width: "80%", 
+    m: "50px auto 0"
+};
+const styleSlackTemplate = {
+    marginTop: "10px",
+    paddingTop: 2,
+    width: "100%"
+};
+export const styleTextField = { width: '100%' };
+export const styleSubHeading = {
+    color: "#666666",
+    fontSize: "20px",
+    fontWeight: "bold",
+    mt: "14px"
+};
+
 
 /**
  * イベント追加
  */
-const AddEvent = props => {
+const addEvent = props => {
     const history = useHistory();
     const [link, setLink] = useState("");
     const [name, setName] = useState("");
@@ -29,7 +48,7 @@ const AddEvent = props => {
     const handleClose = () => setOpen(false);
 
     // 名前を入力
-    const handleName = event => {
+    const handleName = useCallback(event => {
         if (event.target.value.length == 0) {
             setErrorName(true);
             setErrorNameMessage("イベント名を入力してください");
@@ -38,7 +57,7 @@ const AddEvent = props => {
             setErrorNameMessage("");
         }
         setName(event.target.value);
-    };
+    });
 
     // slackテンプレート入力
     const handleTemplate = event => {
@@ -53,7 +72,7 @@ const AddEvent = props => {
     };
 
     // イベント保存
-    const store = () => {
+    const store = useCallback(() => {
         let validationKey = false;
         // バリデーションチェック
         // 名前が入力されていない時
@@ -94,7 +113,7 @@ const AddEvent = props => {
             .catch(error => {
                 console.log(error);
             });
-    };
+    });
 
     useEffect(() => {
         axios
@@ -110,88 +129,35 @@ const AddEvent = props => {
     let eventName;
     if (props.isWide) {
         eventName = (
-            <Grid
-                container
-                sx={{ justifyContent: "space-between", height: "70px" }}
-            >
-                <Grid item sx={{ flexGrow: 1, height: "100%" }}>
-                    <Typography
-                        component="p"
-                        sx={{
-                            color: "#666666",
-                            fontSize: "20px",
-                            fontWeight: "bold",
-                            mt: "14px"
-                        }}
-                    >
-                        イベント名
-                    </Typography>
-                </Grid>
-                <Grid item sx={{ flexGrow: 5, height: "100%" }}>
-                    <TextField
-                        error={errorName}
-                        label="イベント名を入力"
-                        value={name}
-                        onChange={() => handleName(event)}
-                        helperText={errorNameMessage}
-                        style={{ width: "100%" }}
-                    />
-                </Grid>
-            </Grid>
+            <ContentPC 
+                value={name}
+                onChange={handleName}
+                error={errorName}
+                helperText={errorNameMessage}
+            />
         );
     } else {
         eventName = (
-            <div style={{ marginBottom: '16px' }}>
-                <Typography
-                    component="p"
-                    sx={{
-                        color: "#666666",
-                        fontSize: "20px",
-                        fontWeight: "bold",
-                        mt: "14px"
-                    }}
-                >
-                    イベント名
-                </Typography>
-                <TextField
-                    error={errorName}
-                    label="イベント名を入力"
-                    value={name}
-                    onChange={() => handleName(event)}
-                    helperText={errorNameMessage}
-                    style={{ width: "100%" }}
-                />
-            </div>
+            <ContentMobile 
+                value={name}
+                onChange={handleName}
+                error={errorName}
+                helperText={errorNameMessage}
+            />
         );
     }
 
     return (
         <React.Fragment>
-            <IconButton
-                onClick={() => props.onClose()}
-                sx={{ color: "red", ml: "95%" }}
-            >
-                <HighlightOffIcon />
-            </IconButton>
-            <Typography
-                align="center"
-                component="div"
-                sx={{ color: "#771AF8", fontSize: "24px", fontWeight: "bold" }}
-            >
+            <CloseModal onClose={props.onClose} />
+            <Typography align="center" component="div" sx={styleHeading}>
                 イベントの追加
             </Typography>
 
-            <Box sx={{ width: "80%", m: "50px auto 0" }}>
+            <Box sx={styleContent}>
                 {eventName}
 
-                <Typography
-                    component="div"
-                    sx={{
-                        color: "#666666",
-                        fontSize: "20px",
-                        fontWeight: "bold"
-                    }}
-                >
+                <Typography component="div" sx={styleSubHeading}>
                     Slack通知メッセージ
                 </Typography>
                 <TextField
@@ -203,104 +169,15 @@ const AddEvent = props => {
                     multiline
                     value={template}
                     onChange={event => handleTemplate(event)}
-                    style={{
-                        marginTop: "10px",
-                        paddingTop: 2,
-                        width: "100%"
-                    }}
+                    style={styleSlackTemplate}
                 />
-                <div>
-                    <a
-                        href={link}
-                        target="_blank"
-                        style={{ textDecoration: "underline", m: 0 }}
-                    >
-                        slackのリアクションはこちらのサイトの通りに記載してください。
-                    </a>
-                    <p
-                        onClick={() => handleOpen()}
-                        style={{ cursor: "pointer" }}
-                    >
-                        slack文法
-                    </p>
-                </div>
+                
+                <SlackGrammar link={link} open={open} handleOpen={handleOpen} handleClose={handleClose} isWide={props.isWide} />
             </Box>
 
-            <Typography
-                align="center"
-                component="div"
-                sx={{ marginTop: 4, marginBottom: 3 }}
-            >
-                <Button
-                    onClick={() => store()}
-                    variant="outlined"
-                    sx={{
-                        color: "#771AF8",
-                        border: "1px solid #771AF8",
-                        "&:hover": {
-                            color: "white",
-                            backgroundColor: "#771AF8",
-                            border: "1px solid #771AF8"
-                        }
-                    }}
-                >
-                    登録する
-                </Button>
-            </Typography>
-
-            {/* slack文法詳細のモーダル */}
-            <Modal
-                open={open}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box 
-                    sx={{
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        width: props.isWide ? "50%" : '90%',
-                        bgcolor: "white",
-                        border: "2px solid #000",
-                        boxShadow: 24,
-                        p: 4
-                    }}
-                >
-                    <Typography align="center" variant="h6" sx={{ mb: 3 }}>
-                        以下のもので文字を囲ってください
-                    </Typography>
-                    <Typography>
-                        * ： 太字
-                        <br />
-                        ` ： インラインコードブロック
-                        <br />
-                        ``` ： コードブロック
-                        <br />
-                    </Typography>
-
-                    <Typography align="center" sx={{ paddingTop: 2 }}>
-                        <Button
-                            size="small"
-                            variant="outlined"
-                            onClick={() => handleClose()}
-                            sx={{
-                                color: "#771AF8",
-                                border: "1px solid #771AF8",
-                                "&:hover": {
-                                    border: "1px solid #771AF8",
-                                    backgroundColor: "#771AF8",
-                                    color: "white"
-                                }
-                            }}
-                        >
-                            戻る
-                        </Button>
-                    </Typography>
-                </Box>
-            </Modal>
+            <SubmitButton text="登録する" handleSubmit={store} />
         </React.Fragment>
     );
 };
 
-export default AddEvent;
+export default addEvent;

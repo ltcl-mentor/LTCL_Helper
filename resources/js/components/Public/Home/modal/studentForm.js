@@ -1,21 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@material-ui/core/Typography';
+
+import { SubmitButton } from '../modal';
+
+// 各パーツのスタイル設定
+const styleMargin = { marginTop: 3 };
+const styleContent = { 
+    width: "70%",
+    ml: "15%"
+};
+const styleErrorMessage = { 
+    color: "red", 
+    fontSize: '14px'
+};
 
 
 /**
  * 受講生情報入力フォーム
  */
-const Forms = (props) => {
+const studentForm = (props) => {
     const history = useHistory();
     const [clickCount, setClickCount] = useState(0);
     const [error, setError] = useState('');
 
-    const handleSubmitStudents = () => {
+    const handleSubmitStudents = useCallback(() => {
         setError('');
         let names = [];
         for (formCount=1; formCount<=props.number; formCount++) {
@@ -65,65 +77,52 @@ const Forms = (props) => {
             return false;
         }
 
-    };
+    });
 
     let formCount;
     let forms = [];
     for (formCount = 1; formCount <= props.number; formCount++) {
         forms.push(
-            <Box sx={{ marginTop: 3 }} key={formCount}>
+            <Box sx={styleMargin} key={formCount}>
                 <div className="form-group row">
                     <label htmlFor="name" className="col-md-4 col-form-label text-md-right">受講生{ formCount }</label>
                     <div className="col-md-6">
-                        <input id={ `name` + formCount } type="text" placeholder="受講生IDを入力" className="form-control" name={ `name` + formCount } required autoComplete="name"/>
+                        <input 
+                            id={ `name` + formCount } 
+                            type="text" 
+                            placeholder="受講生IDを入力" 
+                            className="form-control" 
+                            name={ `name` + formCount } 
+                            required 
+                            autoComplete="name"
+                        />
                     </div>
                 </div>
             </Box>
         );
     }
+    
+    let errorMessage;
+    if (error.length > 0) {
+        errorMessage = (
+            <Typography align="center" component="div" sx={styleErrorMessage}>
+                {error}
+            </Typography>    
+        );
+    }
 
     return (
-        <Box sx={{ width: "70%", marginLeft: "15%" }}>
+        <Box sx={styleContent}>
             {(props.number && props.password.length === 8) &&
                 <React.Fragment>
-                    { forms }
-
-                    {error.length > 0 &&
-                        <Typography align="center" component="div" sx={{ color: "red", fontSize: '14px' }}>
-                            {error}
-                        </Typography>
-                    }
-
-                    <Typography
-                        align="center"
-                        component="div"
-                        sx={{
-                            marginTop: 4,
-                            marginBottom: 3,
-                        }}
-                    >
-                        <Typography align="center" component="div" sx={{ marginTop: 4, marginBottom: 3 }}>
-                            <Button
-                                onClick={() => handleSubmitStudents()}
-                                variant="outlined"
-                                sx={{
-                                    color: '#771AF8',
-                                    border: '1px solid #771AF8',
-                                    '&:hover': {
-                                        color: 'white',
-                                        backgroundColor: '#771AF8',
-                                        border: '1px solid #771AF8',
-                                    }
-                                }}
-                            >
-                                登録する
-                            </Button>
-                        </Typography>
-                    </Typography>
+                    {forms}
+                    {errorMessage}
+                    
+                    <SubmitButton text="登録する" handleSubmit={handleSubmitStudents} />
                 </React.Fragment>
             }
         </Box>
     );
 };
 
-export default Forms;
+export default studentForm;

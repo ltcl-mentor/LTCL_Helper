@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
@@ -6,16 +6,49 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
+
+import DeleteConfirmModal from './deleteConfirm';
+import SlackGrammar from './slackGrammar';
+import { CloseModal, SubmitButton, styleHeading } from '../modal';
+
+// 各パーツのスタイル設定
+const styleContent = { 
+    width: "80%", 
+    m: "50px auto 0"
+};
+const styleTextField = {
+    marginTop: 20,
+    marginBottom: 20,
+    paddingTop: 2,
+    width: '100%',
+};
+const styleSubHeading = {
+    color: '#666666', 
+    fontSize: '20px', 
+    fontWeight: 'bold'
+};
+const styleButtonLink = {
+    textDecoration: 'underline',
+    width: '25px',
+    p: 0,
+    fontSize: '18px',
+    '&:hover': {
+        textDecoration: 'underline'
+    }
+};
+const styleSlackTemplate = {
+    marginTop: '10px',
+    paddingTop: 2,
+    width: '100%',
+};
+
 
 /**
  * イベント詳細
  */
-const ShowEvent = (props) => {
+const showEvent = (props) => {
     const history = useHistory();
     const [link, setLink] = useState('');
     const [name, setName] = useState(props.event.name);
@@ -57,7 +90,7 @@ const ShowEvent = (props) => {
     };
     
     // イベント編集
-    const update = () => {
+    const update = useCallback(() => {
         let validationKey = false;
         // バリデーションチェック
         // 名前が入力されていない時
@@ -94,10 +127,10 @@ const ShowEvent = (props) => {
             }).catch(error => {
                 console.log(error);
             });
-    };
+    });
     
     // 削除実行
-    const deleted = () =>{
+    const deleted = useCallback(() =>{
         axios
             .post('/events/' + props.event.id + '/delete')
             .then(response => {
@@ -112,7 +145,7 @@ const ShowEvent = (props) => {
             }).catch(error => {
                 console.log(error);
             });
-    };
+    });
     
     useEffect(() => {
         axios
@@ -126,80 +159,67 @@ const ShowEvent = (props) => {
     
     let nameField;
     let button;
-    if (state == "edit") {
-        nameField = (
-            <TextField
-                error={errorName}
-                label="イベント名"
-                value={name}
-                onChange={() => handleName(event)}
-                helperText={errorNameMessage}
-                style={{
-                    marginTop: 20,
-                    marginBottom: 20,
-                    paddingTop: 2,
-                    width: '100%',
-                }}
-            />
-        );
-        button = (
-            <Button
-                onClick={() => update()}
-                variant="outlined"
-                sx={{ 
-                    color: '#771AF8',
-                    border: '1px solid #771AF8',
-                    '&:hover': { 
-                        color: 'white', 
-                        backgroundColor: '#771AF8',
-                        border: '1px solid #771AF8',
-                    }
-                }}
-            >
-                登録する
-            </Button>    
-        );
+    let changeButton;
+    switch (state) {
+        case "edit":
+            nameField = (
+                <TextField
+                    error={errorName}
+                    label="イベント名"
+                    value={name}
+                    onChange={() => handleName(event)}
+                    helperText={errorNameMessage}
+                    style={styleTextField}
+                />
+            );
+            button = <SubmitButton text="登録する" handleSubmit={update} />;
+            changeButton = (
+                <Button 
+                    onClick={() => {setReadOnly(true), setState("normal"), setName(props.event.name), setTemplate(props.event.template)}} 
+                    variant="text" 
+                    sx={[styleButtonLink, { color: "#771AF8" }]}
+                >
+                    戻る
+                </Button>
+            );
+            break;
+            
+        case "normal":
+            changeButton = (
+                <Button 
+                    onClick={() => {setReadOnly(false), setState("edit")}} 
+                    variant="text" 
+                    sx={[styleButtonLink, { color: "#771AF8" }]}
+                >
+                    編集
+                </Button>
+            );
+            break;
     }
     
     return (
         <React.Fragment>
-            <IconButton onClick={() => props.onClose()} sx={{ color: 'red', ml: '95%' }}>
-                <HighlightOffIcon />
-            </IconButton>
-            <Typography align="center" component="div" sx={{ color: '#771AF8', fontSize: '24px', fontWeight: 'bold' }}>
+            <DeleteConfirmModal open={deleteOpen} setOpen={setDeleteOpen} delete={deleted} />
+        
+            <CloseModal onClose={props.onClose} />
+            <Typography align="center" component="div" sx={styleHeading}>
                 {props.event.name}
             </Typography>
             
-            <Box sx={{ width: "80%", m: '50px auto 0' }}>
-                <Grid container sx={{ justifyContent: 'space-between' }}>
+            <Box sx={styleContent}>
+                <Grid container justifyContent="space-between">
                     <Grid item>
-                        <Typography component="div" sx={{ color: '#666666', fontSize: '20px', fontWeight: 'bold' }}>
+                        <Typography component="div" sx={styleSubHeading}>
                             Slack通知メッセージ
                         </Typography>
                     </Grid>
                     <Grid item>
                         <Stack direction="row">
-                            {state == "normal" ? 
-                                <Button 
-                                    onClick={() => {setReadOnly(false), setState("edit")}} 
-                                    variant="text" 
-                                    sx={{ color: "#771AF8", textDecoration: 'underline', width: '25px', p: 0, fontSize: '18px', '&:hover': {textDecoration: 'underline'} }}
-                                >
-                                    編集
-                                </Button>
-                            :
-                                <Button 
-                                    onClick={() => {setReadOnly(true), setState("normal"), setName(props.event.name), setTemplate(props.event.template)}} 
-                                    variant="text" 
-                                    sx={{ color: "#771AF8", textDecoration: 'underline', width: '25px', p: 0, fontSize: '18px', '&:hover': {textDecoration: 'underline'} }}
-                                >
-                                    戻る
-                                </Button>
-                            }
+                            {changeButton}
                             <Button 
                                 onClick={() => setDeleteOpen(true)}
                                 variant="text" 
-                                sx={{ color: "red", textDecoration: 'underline', width: '25px', p: 0, fontSize: '18px' , '&:hover': {textDecoration: 'underline'}}}
+                                sx={[styleButtonLink, { color: "red" }]}
                             >
                                 削除
                             </Button>
@@ -217,109 +237,16 @@ const ShowEvent = (props) => {
                     multiline
                     value={template}
                     onChange={(event) => handleTemplate(event)}
-                    InputProps={{
-                        readOnly: readOnly,
-                    }}
-                    style={{
-                        marginTop: '10px',
-                        paddingTop: 2,
-                        width: '100%',
-                    }}
+                    InputProps={{ readOnly: readOnly }}
+                    style={styleSlackTemplate}
                 />
-                <div>
-                    <a href={link} target="_blank" style={{ textDecoration: 'underline', m: 0 }}>slackのリアクションはこちらのサイトの通りに記載してください。</a>
-                    <p onClick={() => handleOpen()} style={{ cursor: 'pointer' }}>slack文法</p>
-                </div>
+                
+                <SlackGrammar link={link} open={open} handleOpen={handleOpen} handleClose={handleClose} isWide={props.isWide} />
             </Box>
                     
-            <Typography align="center" component="div" sx={{ marginTop: 4, marginBottom: 3 }}>
-                {button}
-            </Typography>
-            
-            {/* 削除モーダル */}
-            <Modal
-                open={deleteOpen}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box
-                    sx={{
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        width: props.isWide ? "50%" : '90%',
-                        bgcolor: "white",
-                        border: "2px solid #000",
-                        boxShadow: 24,
-                        p: 4
-                    }}
-                >
-                    <IconButton onClick={() => setDeleteOpen(false)} sx={{ color: 'red', ml: '95%' }}>
-                        <HighlightOffIcon />
-                    </IconButton>
-                    <Typography align="center" sx={{ color: "red", fontSize: '30px', fontWeight: 'bold' }}>
-                        WARNING！
-                    </Typography>
-                    <Typography align="center" sx={{ color: "red", fontSize: '20px', fontWeight: 'bold', mt: '10px' }}>
-                        削除すると元に戻せません。<br/>本当に削除しますか？
-                    </Typography>
-                    <Typography align="center" sx={{ mt: '20px' }}>
-                        <Button size="large" color="error" variant="contained" onClick={() => deleted()}>削除</Button>
-                    </Typography>
-                </Box>
-            </Modal>
-            
-            {/* slack文法詳細のモーダル */}
-            <Modal
-                open={open}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box 
-                    sx={{
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        width: props.isWide ? "50%" : '90%',
-                        bgcolor: "white",
-                        border: "2px solid #000",
-                        boxShadow: 24,
-                        p: 4
-                    }}
-                >
-                    <Typography align="center" variant="h6" sx={{ mb: 3 }}>
-                        以下のもので文字を囲ってください
-                    </Typography>
-                    <Typography>
-                        * ： 太字<br/>
-                        ` ： インラインコードブロック<br/>
-                        ``` ： コードブロック<br/>
-                    </Typography>
-                    
-                    <Typography align="center" sx={{ paddingTop:2 }}>
-                        <Button 
-                            size="small"
-                            variant="outlined"
-                            onClick={() => handleClose()}
-                            sx={{ 
-                                color: '#771AF8',
-                                border: '1px solid #771AF8',
-                                '&:hover': {
-                                    border: '1px solid #771AF8',
-                                    backgroundColor: '#771AF8',
-                                    color: 'white'
-                                }
-                            }}
-                        >
-                            戻る
-                        </Button>
-                    </Typography>
-                </Box>
-            </Modal>
+            {button}
         </React.Fragment>
     );
 };
 
-export default ShowEvent;
+export default showEvent;

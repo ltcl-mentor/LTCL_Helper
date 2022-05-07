@@ -2,75 +2,67 @@ import React, { useState, useContext } from "react";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import IconButton from "@mui/material/IconButton";
 
 import { LoginUser } from "../../../Route";
+import { CloseModal, styleHeading } from '../modal';
+
+// 各パーツのスタイル設定
+const styleWordBreak = { wordBreak: "break-word" };
+const styleContent = {
+    width: "85%",
+    m: "30px auto 0"
+};
+const styleTarget = {
+    fontSize: "16px",
+    color: "gray",
+    mt: 2,
+    wordBreak: "break-word"
+};
+const styleBody = {
+    fontSize: "16px",
+    color: "gray",
+    mt: 2
+};
+
 
 /**
  * イベント詳細
  */
-const ShowInfo = props => {
+const showInfo = props => {
     const slack = props.info.slackDate !== null ? props.info.slackDate : "無";
     const is_admin = useContext(LoginUser).is_admin;
-    console.log(props.info.body);
     const [body, setBody] = useState(props.info.body);
+    
+    let admin;
+    if (is_admin == "staff") {
+        admin = (
+            <Typography align="right" variant="h6" sx={[styleBody, styleWordBreak]}>
+                Slack 通知：{slack}
+            </Typography>
+        );
+    }
 
     return (
         <React.Fragment>
-            <IconButton
-                onClick={() => props.onClose()}
-                sx={{ color: "red", ml: "95%" }}
-            >
-                <HighlightOffIcon />
-            </IconButton>
-            <Typography
-                align="center"
-                component="div"
-                sx={{ color: "#771AF8", fontSize: "24px", fontWeight: "bold" }}
-            >
+            <CloseModal onClose={props.onClose} />
+            <Typography align="center" component="div" sx={[styleHeading, styleWordBreak]}>
                 {props.info.information}
             </Typography>
 
-            <Box sx={{ width: "85%", m: "30px auto 0" }}>
-                <Typography
-                    align="left"
-                    sx={{
-                        fontSize: "16px",
-                        color: "gray",
-                        mt: 2,
-                        wordBreak: "break-word"
-                    }}
-                >
+            <Box sx={styleContent}>
+                <Typography align="left" sx={styleTarget}>
                     {props.info.targets}
                 </Typography>
-                <Typography
-                    align="left"
-                    variant="h6"
-                    sx={{ wordBreak: "break-word" }}
-                >
+                <Typography align="left" variant="h6" sx={styleWordBreak}>
                     {body
                         .split("\n")
                         .map(t => (t !== "" ? <div>{t}</div> : <br />))}
                 </Typography>
 
-                {is_admin == "staff" && (
-                    <Typography
-                        align="right"
-                        variant="h6"
-                        sx={{
-                            fontSize: "16px",
-                            wordBreak: "break-word",
-                            color: "gray",
-                            mt: 2
-                        }}
-                    >
-                        Slack 通知：{slack}
-                    </Typography>
-                )}
+                {admin}
             </Box>
         </React.Fragment>
     );
 };
 
-export default ShowInfo;
+export default showInfo;

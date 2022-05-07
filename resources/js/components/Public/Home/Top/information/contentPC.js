@@ -9,7 +9,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import Weather from './weather';
-import Modals from '../../modal';
+import { Modals } from '../../modal';
 
 // 各パーツのスタイル設定
 const styleGridWidth = { width: '50%' };
@@ -43,13 +43,10 @@ const styleNonInfo = {
  * PC版お知らせ
  */
 const contentPC = (props) => {
-    const [deleteOpen, setDeleteOpen] = useState(false);
     const [showOpen, setShowOpen] = useState(false);
-    const [deleteInfo, setDeleteInfo] = useState('');
     const [showInfo, setShowInfo] = useState([]);
     
     // モーダル開閉
-    const handleDeleteClose = () => setDeleteOpen(false);
     const handleShowClose = () => setShowOpen(false);
     
     let list;
@@ -71,7 +68,7 @@ const contentPC = (props) => {
                                         sx={styleCursor}
                                         primary={info.information.length > 15 ? info.information.substring(0,15) + "..." : info.information}
                                     />
-                                    { props.isAdmin ? <DeleteIcon sx={styleCursor} onClick={() => {setDeleteOpen(true), setDeleteInfo(info.id)}}/> : ''}
+                                    { props.isAdmin ? <DeleteIcon sx={styleCursor} onClick={() => {props.setDeleteOpen(true), props.setDeleteInfo(info.id)}}/> : ''}
                                 </ListItem>
                             ))}
                         </ul>
@@ -97,12 +94,10 @@ const contentPC = (props) => {
             />
             
             <Modals 
-                open={deleteOpen} 
-                type={"delete_info"} 
-                handleClose={handleDeleteClose}
-                info={deleteInfo}
-                setDates={props.setDates}
-                setInfos={props.setInfos}
+                open={props.deleteOpen} 
+                type={"delete_info"}
+                setOpen={props.setDeleteOpen}
+                delete={props.handleDelete}
             />
             
             <Grid container sx={styleContent}>

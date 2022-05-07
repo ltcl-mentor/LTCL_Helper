@@ -10,13 +10,13 @@ import AdminMyPage from './Public/User/AdminMypage';
 import MyQuestion from './Public/User/QuestionShow';
 import History from './Public/History/History';
 import Home from './Public/Home/Home';
-import PublicDocumentIndex from './Public/Document/Index/Index';
-import PublicQuestionIndex from './Public/Question/Index/Index';
+// import PublicDocumentIndex from './Public/Document/Index/Index';
+// import PublicQuestionIndex from './Public/Question/Index/Index';
 import PublicQuestionIndexIndex from './Public/Question/Index/Index/Index';
 import PublicQuestionCreate from './Public/Question/Create/Create/Create';
 import PublicQuestionShow from './Public/Question/Show/Show';
-import Condition from './Public/Search/Condition/Condition';
-import Freeword from './Public/Search/Freeword/Freeword';
+// import Condition from './Public/Search/Condition/Condition';
+// import Freeword from './Public/Search/Freeword/Freeword';
 // import MentorTop from './Mentor/Top';
 // import DocumentIndex from './Mentor/Document/Index/Index';
 // import DocumentShow from './Mentor/Document/Show/Show';
@@ -25,7 +25,7 @@ import Freeword from './Public/Search/Freeword/Freeword';
 // import QuestionIndex from './Mentor/Question/Index/Index/Index';
 // import QuestionMentorYetCommentIndex from './Mentor/Question/Index/yet-comment-index/FromMentor';
 // import QuestionStudentYetCommentIndex from './Mentor/Question/Index/yet-comment-index/FromStudent';
-// import QuestionShow from './Mentor/Question/Show/Show';
+import QuestionShow from './Mentor/Question/Show/Show';
 // import QuestionEdit from './Mentor/Question/Edit/Edit';
 // import LinkFromQuestionIndex from './Mentor/Link/fromQuestion/Index/Index';
 // import LinkFromQuestionShow from './Mentor/Link/fromQuestion/Show/Show';
@@ -36,7 +36,7 @@ import Freeword from './Public/Search/Freeword/Freeword';
 // import UserRegisterAdmin from './Mentor/User/Register/Admin/Admin';
 // import EventIndex from './Mentor/Event/Index/Index';
 // import EventRegister from './Mentor/Event/Create/Create';
-// import MentorQuestions from './Public/Home/Q&A/questionsForMentor.js';
+import MentorQuestions from './Public/Home/Q&A/questionsForMentor.js';
 
 export const LoginUser = createContext();
 
@@ -91,9 +91,9 @@ const Router = () => {
                     }
 
                     {/* 公開中の参考記事一覧表示 */}
-                    { user.length !== 0 &&
+                    {/* user.length !== 0 &&
                         <Route path="/public/documents/index" exact component={ PublicDocumentIndex }/>
-                    }
+                    */}
 
                     {/* 公開中の質問をカテゴリー毎に表示 */}
                     { user.length !== 0 &&
@@ -101,13 +101,13 @@ const Router = () => {
                     }
 
                     {/* 公開中の質問一覧表示 */}
-                    { user.length !== 0 &&
+                    {/* user.length !== 0 &&
                         <Route
                             path="/public/questions/index"
                             exact
                             component={PublicQuestionIndex}
                         />
-                    }
+                    */}
 
                     {/* 受講生の質問投稿画面表示 */}
                     { user.length !== 0 &&
@@ -128,14 +128,14 @@ const Router = () => {
                     }
 
                     {/* 絞り込み検索画面表示 */}
-                    { user.length !== 0 &&
+                    {/* user.length !== 0 &&
                         <Route path="/search/condition" exact component={Condition} />
-                    }
+                    */}
 
                     {/* フリーワード検索画面表示 */}
-                    { user.length !== 0 &&
+                    {/* user.length !== 0 &&
                         <Route path="/search/freeword" exact component={Freeword} />
-                    }
+                    */}
                     
                     
                     {/*=======================================================================================*/}
@@ -197,13 +197,13 @@ const Router = () => {
                     */}
 
                     {/* 質問一覧画面表示 */}
-                    {/* (user.length !== 0 && user.is_admin === "staff") &&
+                    { (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/questions/mentor"
                             exact
                             component={MentorQuestions}
                         />
-                    */}
+                    }
 
                     {/* メンターコメント待ちの質問一覧画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
@@ -233,13 +233,13 @@ const Router = () => {
                     */}
 
                     {/* 質問詳細画面表示 */}
-                    {/* (user.length !== 0 && user.is_admin === "staff") &&
+                    { (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
                             path="/questions/:id"
                             exact
                             component={QuestionShow}
                         />
-                    */}
+                    }
 
                     {/* 紐付け（単体質問と複数記事）一覧画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&

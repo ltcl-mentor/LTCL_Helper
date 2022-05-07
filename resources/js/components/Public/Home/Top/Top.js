@@ -8,7 +8,7 @@ import Information from './information/information';
 import Clendar from './calendar/calendar';
 import ContentMobile from './footer/contentMobile';
 import ContentPC from './footer/contentPC';
-import Modals from "../modal";
+import { Modals } from "../modal";
 
 const styleFooter = {
     backgroundColor: '#b39ddb',

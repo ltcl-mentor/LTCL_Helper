@@ -10,13 +10,87 @@ import ShowEvent from './modal/showEvent';
 import AddEvent from './modal/addEvent';
 import Create from './Top/information/create/create';
 import ShowInfo from './modal/showInfo';
-import DeleteInfo from './modal/deleteInfo';
+import DeleteInfo from './modal/deleteConfirm';
 import Contact from './modal/contact';
+import Button from '@mui/material/Button';
+import Typography from '@material-ui/core/Typography';
+import IconButton from "@mui/material/IconButton";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+
+// モーダルCSS
+const styleCloseButton = {
+    color: "red",
+    ml: "95%"
+};
+const styleSubmitButtonPosition = {
+    marginTop: 4,
+    marginBottom: 3
+};
+const styleSubmitButtonDesign = {
+    color: '#771AF8',
+    border: '1px solid #771AF8',
+    '&:hover': {
+        color: 'white',
+        backgroundColor: '#771AF8',
+        border: '1px solid #771AF8',
+    }
+};
+export const style = { 
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    borderRadius: '4px',
+    p: 3,
+    maxHeight: '80%',
+    overflowY: 'scroll',
+    '&:focus': {
+        border: 'none'
+    }
+};
+export const styleHeading = {
+    color: "#771AF8",
+    fontSize: "24px",
+    fontWeight: "bold"
+};
+export const styleWarningTitle = {
+    color: "red",
+    fontSize: '30px',
+    fontWeight: 'bold'
+};
+export const styleWarningBody = { 
+    color: "red", 
+    fontSize: '20px', 
+    fontWeight: 'bold', 
+    mt: '10px'
+};
+
+
+export const CloseModal = (props) => {
+    return (
+        <IconButton onClick={() => props.onClose()} sx={styleCloseButton}>
+            <HighlightOffIcon />
+        </IconButton>    
+    );
+};
+
+export const SubmitButton = (props) => {
+    return (
+        <Typography align="center" component="div" sx={styleSubmitButtonPosition}>
+            <Button onClick={() => props.handleSubmit()} variant="outlined" sx={styleSubmitButtonDesign}>
+                {props.text}
+            </Button>
+        </Typography>    
+    );
+};
+
+
 
 /**
  * モーダル
  */
-const Modals = (props) => {
+export const Modals = (props) => {
     const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
     
     let content;
@@ -34,7 +108,7 @@ const Modals = (props) => {
            
         // お知らせ削除 
         case "delete_info":
-            content = <DeleteInfo onClose={props.handleClose} info={props.info} setDates={props.setDates} setInfos={props.setInfos} />;
+            content = <DeleteInfo open={props.open} setOpen={props.setOpen} delete={props.delete} />;
             break;
            
         // ユーザー作成 
@@ -58,33 +132,22 @@ const Modals = (props) => {
             break;
     }
     
+    let width;
+    if (isWide) {
+        width = { width: '70%' };
+    } else {
+        width = { width: '100%' };
+    }
+    
     return (
         <Modal
-            open={ props.open }
+            open={props.open}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Box 
-                sx={{ 
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    bgcolor: 'background.paper',
-                    borderRadius: '4px',
-                    p: 3,
-                    maxHeight: '80%',
-                    overflow: 'scroll',
-                    width: isWide ? '70%' : '100%',
-                    '&:focus': {
-                        border: 'none'
-                    }
-                }}
-            >
+            <Box sx={[style, width]}>
                 {content}
             </Box>
         </Modal>
     );
 };
-
-export default Modals;
