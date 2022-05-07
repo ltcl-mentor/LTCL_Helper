@@ -13,7 +13,7 @@ import Tab from "@mui/material/Tab";
 
 import { LoginUser } from "../../../Route";
 import UserIndex from "./userIndex";
-import Modals from "../modal";
+import { Modals } from "../modal";
 
 // 各パーツのスタイル設定
 const styleNonMember = { fontSize: 20 };
@@ -226,12 +226,12 @@ const Manage = () => {
     let eventComponent;
     if (events.length > 0) {
         eventComponent = (
-            <Grid container sx={styleCard}>
+            <Grid container sx={styleGrid}>
                 {events.map((event, index) => {
                     return (
                         <Grid item sx={width} key={`id${event.id}-${event.name}`}>
                             <Card sx={styleCard} onClick={() => {handleOpen("show_event"), setEvent(event);}}>
-                                <Typography align="center" variant="h5" component="div"  sx={styleCardText}>
+                                <Typography align="center" variant="h5" component="div" sx={styleCardText}>
                                     {event.name}
                                 </Typography>
                             </Card>

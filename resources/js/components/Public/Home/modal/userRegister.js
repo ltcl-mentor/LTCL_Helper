@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 import Typography from '@material-ui/core/Typography';
-import Button from '@mui/material/Button';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import IconButton from '@mui/material/IconButton';
 import Grid from '@mui/material/Grid';
-import Table from '@mui/material/Table';
-import TableCell from '@mui/material/TableCell';
-import TableRow from '@mui/material/TableRow';
 import Card from '@material-ui/core/Card';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -17,12 +11,33 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 import Forms from './studentForm';
+import ContentPC from './responsive/userRegisterPC';
+import ContentMobile from './responsive/userRegisterMobile';
+import { CloseModal, SubmitButton, styleHeading } from '../modal';
+
+// 各パーツのスタイル設定
+const styleGridForm = { flexGrow: 3 };
+const styleGridText = { flexGrow: 1 };
+const styleSelect = { 
+    width: '90%', 
+    backgroundColor: 'white'
+};
+const styleText = { 
+    height: '20px', 
+    mt: '8px' 
+};
+const styleCard = {
+    m: '40px auto', 
+    boxShadow: 'none', 
+    backgroundColor: "#ECE9E9",
+    width: '90%'
+};
 
 
 /**
  * 管理者登録
  */
-const UserRegister = (props) => {
+const userRegister = (props) => {
     const history = useHistory();
     const [clickCount, setClickCount] = useState(0);
     const [errorName, setErrorName] = useState('');
@@ -48,7 +63,7 @@ const UserRegister = (props) => {
         setNumber(event.target.value);
     };
 
-    const handleSubmitAdmin = () => {
+    const handleSubmitAdmin = useCallback(() => {
         setErrorName('');
         setErrorPassword('');
         setErrorConfirmPassword('');
@@ -124,124 +139,83 @@ const UserRegister = (props) => {
         } else {
             return false;
         }
-    };
+    });
     
     let responsive;
     if (props.isWide) {
         responsive = (
-            <Table sx={{ width: '80%', m: '10px auto 0' }}>
-                <TableRow>
-                    <TableCell sx={{ borderBottom: 'white', width: '50%', fontWeight: 'bold', color: '#666666', fontSize: '18px', verticalAlign: 'bottom' }}>ユーザー名</TableCell>
-                    <TableCell sx={{ borderBottom: 'white', width: '50%' }}>
-                        <Typography component="div" sx={{ color: "red", mb: 1 }}>
-                            実名を登録しないでください！
-                        </Typography>
-                        <input id="name" type="text" className="form-control" name="name" required autoComplete="name" autoFocus/>
-                        {errorName.length > 0 &&
-                            <Typography component="div" sx={{ color: "red", fontSize: '14px' }}>
-                                {errorName}
-                            </Typography>
-                        }
-                    </TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell sx={{ borderBottom: 'white', width: '180px', fontWeight: 'bold', color: '#666666', fontSize: '18px' }}>パスワード</TableCell>
-                    <TableCell sx={{ borderBottom: 'white' }}>
-                        <input id="password" type="password" className="form-control" name="password" required autoComplete="new-password"/>
-                        {errorPassword.length > 0 &&
-                            <Typography component="div" sx={{ color: "red", fontSize: '14px' }}>
-                                {errorPassword}
-                            </Typography>
-                        }
-                    </TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell sx={{ borderBottom: 'white', width: '180px', fontWeight: 'bold', color: '#666666', fontSize: '18px' }}>パスワード(確認)</TableCell>
-                    <TableCell sx={{ borderBottom: 'white' }}>
-                        <input id="password-confirm" type="password" className="form-control" name="password_confirmation" required autoComplete="new-password"/>
-                        {errorConfirmPassword.length > 0 &&
-                            <Typography component="div" sx={{ color: "red", fontSize: '14px' }}>
-                                {errorConfirmPassword}
-                            </Typography>
-                        }
-                    </TableCell>
-                </TableRow>
-            </Table>
+            <ContentPC 
+                errorName={errorName}
+                errorPassword={errorPassword}
+                errorConfirmPassword={errorConfirmPassword}
+            />
         );
     } else {
         responsive = (
-            <React.Fragment>
-                <Typography align="center" component="div" sx={{ color: "red", mt: 2, mb: 1 }}>
-                    実名を登録しないでください！
-                </Typography>
-                <div style={{ width: '90%', margin: '0 auto' }}>
-                    <Typography align="left" sx={{ fontWeight: 'bold', color: '#666666', fontSize: '18px' }}>ユーザー名</Typography>
-                    <input id="name" type="text" className="form-control" name="name" required autoComplete="name" autoFocus/>
-                    {errorName.length > 0 &&
-                        <Typography component="div" sx={{ color: "red", fontSize: '14px' }}>
-                            {errorName}
-                        </Typography>
-                    }
-                    <Typography align="left" sx={{ fontWeight: 'bold', color: '#666666', fontSize: '18px', mt: 2 }}>パスワード</Typography>
-                    <input id="password" type="password" className="form-control" name="password" required autoComplete="new-password"/>
-                    {errorPassword.length > 0 &&
-                        <Typography component="div" sx={{ color: "red", fontSize: '14px' }}>
-                            {errorPassword}
-                        </Typography>
-                    }
-                    <Typography align="left" sx={{ fontWeight: 'bold', color: '#666666', fontSize: '18px', mt: 2 }}>パスワード(確認)</Typography>
-                    <input id="password-confirm" type="password" className="form-control" name="password_confirmation" required autoComplete="new-password"/>
-                    {errorConfirmPassword.length > 0 &&
-                        <Typography component="div" sx={{ color: "red", fontSize: '14px' }}>
-                            {errorConfirmPassword}
-                        </Typography>
-                    }
-                </div>
-            </React.Fragment>
+            <ContentMobile 
+                errorName={errorName}
+                errorPassword={errorPassword}
+                errorConfirmPassword={errorConfirmPassword}
+            />
         );
+    }
+    
+    let display;
+    let form1;
+    let form2;
+    let form3;
+    if (props.isWide) {
+        form1 = { width: '28%' };
+        form2 = { width: '37%' };
+        form3 = { width: '34%' };
+    } else {
+        display = { display: 'block' };
+        form1 = { width: '100%' };
+        form2 = { width: '100%' };
+        form3 = { width: '100%' };
     }
 
     let component;
     if (props.value == 0) {
         component = (
             <React.Fragment>
-                <Typography align="center" component="div" sx={{ color: '#771AF8', fontSize: '20px', fontWeight: 'bold' }}>
+                <Typography align="center" component="div" sx={styleHeading}>
                     受講生の登録
                 </Typography>
 
-                <Card sx={{ width: props.isWide ? '80%' : '90%', m: '40px auto', boxShadow: 'none', backgroundColor: "#ECE9E9" }}>
-                    <FormControl sx={{ width: props.isWide ? '28%' : '100%', display: !props.isWide && 'block' }} size="small">
+                <Card sx={styleCard}>
+                    <FormControl sx={[display, form1]} size="small">
                         <Grid container>
-                            <Grid item sx={{ flexGrow: 3 }}>
+                            <Grid item sx={styleGridForm}>
                                 <InputLabel id="demo-select-small">年</InputLabel>
                                 <Select
                                     labelId="demo-select-small"
                                     value={year}
                                     label="年"
                                     onChange={(event) => handleYear(event)}
-                                    sx={{ width: '90%', backgroundColor: 'white' }}
+                                    sx={styleSelect}
                                 >
                                     <MenuItem value={thisYear-1}>{thisYear-1}</MenuItem>
                                     <MenuItem value={thisYear}>{thisYear}</MenuItem>
                                     <MenuItem value={thisYear+1}>{thisYear+1}</MenuItem>
                                 </Select>
                             </Grid>
-                            <Grid item sx={{ flexGrow: 1 }}>
-                                <Typography component="div" sx={{ height: '20px', mt: '8px' }}>
+                            <Grid item sx={styleGridText}>
+                                <Typography component="div" sx={styleText}>
                                     年
                                 </Typography>
                             </Grid>
                         </Grid>
                     </FormControl>
-                    <FormControl sx={{ width: props.isWide ? '37%' : '100%', display: !props.isWide && 'block' }} size="small">
+                    <FormControl sx={[display, form2]} size="small">
                         <Grid container>
-                            <Grid item sx={{ flexGrow: 3 }}>
+                            <Grid item sx={styleGridForm}>
                                 <InputLabel id="demo-select-small">月</InputLabel>
                                 <Select
                                     value={month}
                                     label="月"
                                     onChange={(event) => handleMonth(event)}
-                                    sx={{ width: '90%', backgroundColor: 'white' }}
+                                    sx={styleSelect}
                                 >
                                     {months.map(mon => {
                                         return (
@@ -250,22 +224,22 @@ const UserRegister = (props) => {
                                     })}
                                 </Select>
                             </Grid>
-                            <Grid item sx={{ flexGrow: 1 }}>
-                                <Typography component="div" sx={{ height: '20px', mt: '8px' }}>
+                            <Grid item sx={styleGridText}>
+                                <Typography component="div" sx={styleText}>
                                     月の入学者を
                                 </Typography>
                             </Grid>
                         </Grid>
                     </FormControl>
-                    <FormControl sx={{ width: props.isWide ? '34%' : '100%', display: !props.isWide && 'block' }} size="small">
+                    <FormControl sx={[display, form3]} size="small">
                         <Grid container>
-                            <Grid item sx={{ flexGrow: 3 }}>
+                            <Grid item sx={styleGridForm}>
                                 <InputLabel id="demo-select-small">名</InputLabel>
                                 <Select
                                     value={number}
                                     label="名"
                                     onChange={(event) => handleNumber(event)}
-                                    sx={{ width: '90%', backgroundColor: 'white' }}
+                                    sx={styleSelect}
                                 >
                                     {months.map(mon => {
                                         return (
@@ -274,8 +248,8 @@ const UserRegister = (props) => {
                                     })}
                                 </Select>
                             </Grid>
-                            <Grid item sx={{ flexGrow: 1 }}>
-                                <Typography component="div" sx={{ height: '20px', mt: '8px' }}>
+                            <Grid item sx={styleGridText}>
+                                <Typography component="div" sx={styleText}>
                                     名登録する
                                 </Typography>
                             </Grid>
@@ -295,39 +269,21 @@ const UserRegister = (props) => {
     } else {
         component = (
             <React.Fragment>
-                <Typography align="center" component="div" sx={{ color: '#771AF8', fontSize: '20px', fontWeight: 'bold' }}>
+                <Typography align="center" component="div" sx={styleHeading}>
                     管理者の登録
                 </Typography>
                 {responsive}
-                <Typography align="center" component="div" sx={{ marginTop: 4, marginBottom: 3 }}>
-                    <Button
-                        onClick={() => handleSubmitAdmin()}
-                        variant="outlined"
-                        sx={{
-                            color: '#771AF8',
-                            border: '1px solid #771AF8',
-                            '&:hover': {
-                                color: 'white',
-                                backgroundColor: '#771AF8',
-                                border: '1px solid #771AF8',
-                            }
-                        }}
-                    >
-                        登録する
-                    </Button>
-                </Typography>
+                <SubmitButton text="登録する" handleSubmit={handleSubmitAdmin} />
             </React.Fragment>
         );
     }
 
     return (
         <React.Fragment>
-            <IconButton onClick={() => props.onClose()} sx={{ color: 'red', ml: '95%' }}>
-                <HighlightOffIcon />
-            </IconButton>
+            <CloseModal onClose={props.onClose} />
             {component}
         </React.Fragment>
     );
 };
 
-export default UserRegister;
+export default userRegister;
