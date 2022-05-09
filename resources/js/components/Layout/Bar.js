@@ -114,7 +114,7 @@ const Bar = () => {
     }
 
     return (
-        <Box sx={[styleContent, styleFlexGrow]}>
+        <Box sx={{ ...styleContent, ...styleFlexGrow }}>
             <AppBar position="static" color="default" sx={styleAppBar}>
                 <Toolbar>
                     <Typography component="div" sx={styleFlexGrow}>

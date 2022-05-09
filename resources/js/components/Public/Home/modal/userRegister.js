@@ -1,102 +1,104 @@
-import React, { useState, useCallback } from 'react';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useCallback } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
-import Typography from '@material-ui/core/Typography';
-import Grid from '@mui/material/Grid';
-import Card from '@material-ui/core/Card';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import Typography from "@material-ui/core/Typography";
+import Grid from "@mui/material/Grid";
+import Card from "@material-ui/core/Card";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
-import Forms from './studentForm';
-import ContentPC from './responsive/userRegisterPC';
-import ContentMobile from './responsive/userRegisterMobile';
-import { CloseModal, SubmitButton, styleHeading } from '../modal';
+import Forms from "./studentForm";
+import ContentPC from "./responsive/userRegisterPC";
+import ContentMobile from "./responsive/userRegisterMobile";
+import { CloseModal, SubmitButton, styleHeading } from "../modal";
 
 // 各パーツのスタイル設定
 const styleGridForm = { flexGrow: 3 };
 const styleGridText = { flexGrow: 1 };
-const styleSelect = { 
-    width: '90%', 
-    backgroundColor: 'white'
+const styleSelect = {
+    width: "90%",
+    backgroundColor: "white"
 };
-const styleText = { 
-    height: '20px', 
-    mt: '8px' 
+const styleText = {
+    height: "20px",
+    mt: "8px"
 };
 const styleCard = {
-    m: '40px auto', 
-    boxShadow: 'none', 
+    m: "40px auto",
+    boxShadow: "none",
     backgroundColor: "#ECE9E9",
-    width: '90%'
+    width: "90%"
 };
-
 
 /**
  * 管理者登録
  */
-const userRegister = (props) => {
+const userRegister = props => {
     const history = useHistory();
     const [clickCount, setClickCount] = useState(0);
-    const [errorName, setErrorName] = useState('');
-    const [errorPassword, setErrorPassword] = useState('');
-    const [errorConfirmPassword, setErrorConfirmPassword] = useState('');
-    const [year, setYear] = useState('');
-    const [month, setMonth] = useState('');
-    const [number, setNumber] = useState('');
+    const [errorName, setErrorName] = useState("");
+    const [errorPassword, setErrorPassword] = useState("");
+    const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
+    const [year, setYear] = useState("");
+    const [month, setMonth] = useState("");
+    const [number, setNumber] = useState("");
     const today = new Date();
     const thisYear = today.getFullYear();
     const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     let error;
 
-    const handleYear = (event) => {
+    const handleYear = event => {
         setYear(event.target.value);
     };
 
-    const handleMonth = (event) => {
+    const handleMonth = event => {
         setMonth(event.target.value);
     };
 
-    const handleNumber = (event) => {
+    const handleNumber = event => {
         setNumber(event.target.value);
     };
 
     const handleSubmitAdmin = useCallback(() => {
-        setErrorName('');
-        setErrorPassword('');
-        setErrorConfirmPassword('');
+        setErrorName("");
+        setErrorPassword("");
+        setErrorConfirmPassword("");
 
         if (clickCount === 0) {
             setClickCount(1);
-            const name = document.getElementById('name').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('password-confirm').value;
+            const name = document.getElementById("name").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("password-confirm")
+                .value;
             error = 0;
 
             // バリデーション
             // パスワード不一致
             if (password !== confirmPassword) {
-                setErrorPassword('パスワードが一致しません。');
+                setErrorPassword("パスワードが一致しません。");
                 error++;
             }
 
             // 名前が空欄
             if (name.length == 0) {
-                setErrorName('名前を入力してください。');
+                setErrorName("名前を入力してください。");
                 error++;
             }
 
             // パスワードが空欄
             if (password.length < 8) {
-                setErrorPassword('パスワードは8文字以上を入力してください。');
+                setErrorPassword("パスワードは8文字以上を入力してください。");
                 error++;
             }
 
             // 確認用パスワードが空欄
             if (confirmPassword.length < 8) {
-                setErrorConfirmPassword('パスワード(確認)は8文字以上を入力してください。');
+                setErrorConfirmPassword(
+                    "パスワード(確認)は8文字以上を入力してください。"
+                );
                 error++;
             }
 
@@ -118,7 +120,7 @@ const userRegister = (props) => {
                             totalItemsCount: response.data.students.total,
                             currentPage: response.data.students.current_page,
                             pageRangeDisplayed: 10,
-                            lastPage: response.data.students.last_page,
+                            lastPage: response.data.students.last_page
                         });
                         props.setStaffs({
                             eventList: response.data.staffs.data,
@@ -126,13 +128,17 @@ const userRegister = (props) => {
                             totalItemsCount: response.data.staffs.total,
                             currentPage: response.data.staffs.current_page,
                             pageRangeDisplayed: 10,
-                            lastPage: response.data.staffs.last_page,
+                            lastPage: response.data.staffs.last_page
                         });
                         setClickCount(0);
                         props.onClose();
-                        history.push("/?page=manage", {type: "user", status: 'admin_created'});
+                        history.push("/?page=manage", {
+                            type: "user",
+                            status: "admin_created"
+                        });
                     }
-                }).catch(error => {
+                })
+                .catch(error => {
                     console.log(error);
                     setClickCount(0);
                 });
@@ -140,11 +146,11 @@ const userRegister = (props) => {
             return false;
         }
     });
-    
+
     let responsive;
     if (props.isWide) {
         responsive = (
-            <ContentPC 
+            <ContentPC
                 errorName={errorName}
                 errorPassword={errorPassword}
                 errorConfirmPassword={errorConfirmPassword}
@@ -152,27 +158,27 @@ const userRegister = (props) => {
         );
     } else {
         responsive = (
-            <ContentMobile 
+            <ContentMobile
                 errorName={errorName}
                 errorPassword={errorPassword}
                 errorConfirmPassword={errorConfirmPassword}
             />
         );
     }
-    
+
     let display;
     let form1;
     let form2;
     let form3;
     if (props.isWide) {
-        form1 = { width: '28%' };
-        form2 = { width: '37%' };
-        form3 = { width: '34%' };
+        form1 = { width: "28%" };
+        form2 = { width: "37%" };
+        form3 = { width: "34%" };
     } else {
-        display = { display: 'block' };
-        form1 = { width: '100%' };
-        form2 = { width: '100%' };
-        form3 = { width: '100%' };
+        display = { display: "block" };
+        form1 = { width: "100%" };
+        form2 = { width: "100%" };
+        form3 = { width: "100%" };
     }
 
     let component;
@@ -184,20 +190,28 @@ const userRegister = (props) => {
                 </Typography>
 
                 <Card sx={styleCard}>
-                    <FormControl sx={[display, form1]} size="small">
+                    <FormControl sx={{ ...display, ...form1 }} size="small">
                         <Grid container>
                             <Grid item sx={styleGridForm}>
-                                <InputLabel id="demo-select-small">年</InputLabel>
+                                <InputLabel id="demo-select-small">
+                                    年
+                                </InputLabel>
                                 <Select
                                     labelId="demo-select-small"
                                     value={year}
                                     label="年"
-                                    onChange={(event) => handleYear(event)}
+                                    onChange={event => handleYear(event)}
                                     sx={styleSelect}
                                 >
-                                    <MenuItem value={thisYear-1}>{thisYear-1}</MenuItem>
-                                    <MenuItem value={thisYear}>{thisYear}</MenuItem>
-                                    <MenuItem value={thisYear+1}>{thisYear+1}</MenuItem>
+                                    <MenuItem value={thisYear - 1}>
+                                        {thisYear - 1}
+                                    </MenuItem>
+                                    <MenuItem value={thisYear}>
+                                        {thisYear}
+                                    </MenuItem>
+                                    <MenuItem value={thisYear + 1}>
+                                        {thisYear + 1}
+                                    </MenuItem>
                                 </Select>
                             </Grid>
                             <Grid item sx={styleGridText}>
@@ -207,19 +221,23 @@ const userRegister = (props) => {
                             </Grid>
                         </Grid>
                     </FormControl>
-                    <FormControl sx={[display, form2]} size="small">
+                    <FormControl sx={{ ...display, ...form2 }} size="small">
                         <Grid container>
                             <Grid item sx={styleGridForm}>
-                                <InputLabel id="demo-select-small">月</InputLabel>
+                                <InputLabel id="demo-select-small">
+                                    月
+                                </InputLabel>
                                 <Select
                                     value={month}
                                     label="月"
-                                    onChange={(event) => handleMonth(event)}
+                                    onChange={event => handleMonth(event)}
                                     sx={styleSelect}
                                 >
                                     {months.map(mon => {
                                         return (
-                                            <MenuItem key={mon} value={mon}>{mon}</MenuItem>
+                                            <MenuItem key={mon} value={mon}>
+                                                {mon}
+                                            </MenuItem>
                                         );
                                     })}
                                 </Select>
@@ -231,19 +249,23 @@ const userRegister = (props) => {
                             </Grid>
                         </Grid>
                     </FormControl>
-                    <FormControl sx={[display, form3]} size="small">
+                    <FormControl sx={{ ...display, ...form3 }} size="small">
                         <Grid container>
                             <Grid item sx={styleGridForm}>
-                                <InputLabel id="demo-select-small">名</InputLabel>
+                                <InputLabel id="demo-select-small">
+                                    名
+                                </InputLabel>
                                 <Select
                                     value={number}
                                     label="名"
-                                    onChange={(event) => handleNumber(event)}
+                                    onChange={event => handleNumber(event)}
                                     sx={styleSelect}
                                 >
                                     {months.map(mon => {
                                         return (
-                                            <MenuItem key={mon} value={mon}>{mon}</MenuItem>
+                                            <MenuItem key={mon} value={mon}>
+                                                {mon}
+                                            </MenuItem>
                                         );
                                     })}
                                 </Select>
@@ -258,9 +280,9 @@ const userRegister = (props) => {
                 </Card>
 
                 <Forms
-                    password={'ltcl' + year%100 + ('0' + month).slice(-2)}
+                    password={"ltcl" + (year % 100) + ("0" + month).slice(-2)}
                     number={number}
-                    onClose={ props.onClose }
+                    onClose={props.onClose}
                     setStudents={props.setStudents}
                     setStaffs={props.setStaffs}
                 />
@@ -273,7 +295,10 @@ const userRegister = (props) => {
                     管理者の登録
                 </Typography>
                 {responsive}
-                <SubmitButton text="登録する" handleSubmit={handleSubmitAdmin} />
+                <SubmitButton
+                    text="登録する"
+                    handleSubmit={handleSubmitAdmin}
+                />
             </React.Fragment>
         );
     }

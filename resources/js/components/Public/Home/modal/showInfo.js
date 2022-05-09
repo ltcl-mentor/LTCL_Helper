@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import { LoginUser } from "../../../Route";
-import { CloseModal, styleHeading } from '../modal';
+import { CloseModal, styleHeading } from "../modal";
 
 // 各パーツのスタイル設定
 const styleWordBreak = { wordBreak: "break-word" };
@@ -24,7 +24,6 @@ const styleBody = {
     mt: 2
 };
 
-
 /**
  * イベント詳細
  */
@@ -32,11 +31,15 @@ const showInfo = props => {
     const slack = props.info.slackDate !== null ? props.info.slackDate : "無";
     const is_admin = useContext(LoginUser).is_admin;
     const [body, setBody] = useState(props.info.body);
-    
+
     let admin;
     if (is_admin == "staff") {
         admin = (
-            <Typography align="right" variant="h6" sx={[styleBody, styleWordBreak]}>
+            <Typography
+                align="right"
+                variant="h6"
+                sx={[styleBody, styleWordBreak]}
+            >
                 Slack 通知：{slack}
             </Typography>
         );
@@ -45,7 +48,11 @@ const showInfo = props => {
     return (
         <React.Fragment>
             <CloseModal onClose={props.onClose} />
-            <Typography align="center" component="div" sx={[styleHeading, styleWordBreak]}>
+            <Typography
+                align="center"
+                component="div"
+                sx={{ ...styleHeading, ...styleWordBreak }}
+            >
                 {props.info.information}
             </Typography>
 
@@ -54,9 +61,16 @@ const showInfo = props => {
                     {props.info.targets}
                 </Typography>
                 <Typography align="left" variant="h6" sx={styleWordBreak}>
-                    {body
-                        .split("\n")
-                        .map(t => (t !== "" ? <div>{t}</div> : <br />))}
+                    {typeof body === "string" &&
+                        body
+                            .split("\n")
+                            .map((t, index) =>
+                                t !== "" ? (
+                                    <div key={`${index}-${t}`}>{t}</div>
+                                ) : (
+                                    <br key={`${index}-${t}`} />
+                                )
+                            )}
                 </Typography>
 
                 {admin}
