@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import useMedia from 'use-media';
-import BreakingPoint from '../../../BreakingPoint';
+import useMedia from "use-media";
+import BreakingPoint from "../../../BreakingPoint";
 
 import Typography from "@material-ui/core/Typography";
 import Grid from "@mui/material/Grid";
@@ -18,10 +18,10 @@ import { Modals } from "../modal";
 // 各パーツのスタイル設定
 const styleNonMember = { fontSize: 20 };
 const styleContent = {
-    width: '90%',
-    margin: '30px auto'
+    width: "90%",
+    margin: "30px auto"
 };
-const styleUserContent = { 
+const styleUserContent = {
     width: "100%",
     mt: 1.5
 };
@@ -73,9 +73,9 @@ const styleCardText = {
     justifyContent: "center",
     alignItems: "center"
 };
-const styleNonEvent = { 
-    fontSize: 20, 
-    mb: 5, 
+const styleNonEvent = {
+    fontSize: 20,
+    mb: 5,
     mt: 2
 };
 
@@ -188,12 +188,12 @@ const Manage = () => {
                 });
         }
     };
-    
+
     let width;
     if (isWide) {
-        width = { width: '33%' };
+        width = { width: "33%" };
     } else {
-        width = { width: '100%' };
+        width = { width: "100%" };
     }
 
     // masterアカウント限定機能一覧
@@ -206,11 +206,16 @@ const Manage = () => {
                 </Typography>
 
                 <Grid container sx={styleGrid}>
-                    {contents.map((content, index) => {
+                    {contents.map(content => {
                         return (
                             <Grid item sx={width} key={content.content}>
                                 <Card sx={styleCard} onClick={content.onClick}>
-                                    <Typography align="center" variant="h5" component="div" sx={styleCardText}>
+                                    <Typography
+                                        align="center"
+                                        variant="h5"
+                                        component="div"
+                                        sx={styleCardText}
+                                    >
                                         {content.content}
                                     </Typography>
                                 </Card>
@@ -227,11 +232,25 @@ const Manage = () => {
     if (events.length > 0) {
         eventComponent = (
             <Grid container sx={styleGrid}>
-                {events.map((event, index) => {
+                {events.map(event => {
                     return (
-                        <Grid item sx={width} key={`id${event.id}-${event.name}`}>
-                            <Card sx={styleCard} onClick={() => {handleOpen("show_event"), setEvent(event);}}>
-                                <Typography align="center" variant="h5" component="div" sx={styleCardText}>
+                        <Grid
+                            item
+                            sx={width}
+                            key={`id${event.id}-${event.name}`}
+                        >
+                            <Card
+                                sx={styleCard}
+                                onClick={() => {
+                                    handleOpen("show_event"), setEvent(event);
+                                }}
+                            >
+                                <Typography
+                                    align="center"
+                                    variant="h5"
+                                    component="div"
+                                    sx={styleCardText}
+                                >
                                     {event.name}
                                 </Typography>
                             </Card>
@@ -337,7 +356,12 @@ const Manage = () => {
                 イベント一覧
             </Typography>
 
-            <Typography align="right" component="div" sx={styleLink} onClick={() => handleOpen("add_event")}>
+            <Typography
+                align="right"
+                component="div"
+                sx={styleLink}
+                onClick={() => handleOpen("add_event")}
+            >
                 イベント追加
             </Typography>
 
@@ -351,10 +375,15 @@ const Manage = () => {
                 ユーザー一覧
             </Typography>
 
-            <Typography align="right" component="div" sx={styleLink} onClick={() => handleOpen("user")}>
+            <Typography
+                align="right"
+                component="div"
+                sx={styleLink}
+                onClick={() => handleOpen("user")}
+            >
                 ユーザー追加
             </Typography>
-            
+
             <Box sx={styleUserContent}>
                 <Box sx={styleTab}>
                     <Tabs
@@ -363,8 +392,16 @@ const Manage = () => {
                         textColor="secondary"
                         indicatorColor="secondary"
                     >
-                        <Tab label="受講生" {...a11yProps(0)} sx={styleTabText} />
-                        <Tab label="管理者" {...a11yProps(1)} sx={styleTabText} />
+                        <Tab
+                            label="受講生"
+                            {...a11yProps(0)}
+                            sx={styleTabText}
+                        />
+                        <Tab
+                            label="管理者"
+                            {...a11yProps(1)}
+                            sx={styleTabText}
+                        />
                     </Tabs>
                 </Box>
                 {component}
