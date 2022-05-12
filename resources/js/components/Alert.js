@@ -68,14 +68,6 @@ function AlertMessage(props) {
                     message = <AlertTitle>関連記事を設定しました。</AlertTitle>;
                     break;
 
-                // case "attached":
-                //     message = (
-                //         <AlertTitle>
-                //             関連記事を{props.info}件設定しました。
-                //         </AlertTitle>
-                //     );
-                //     break;
-
                 case "detached":
                     message = (
                         <AlertTitle>
@@ -97,9 +89,6 @@ function AlertMessage(props) {
 
         case "link_from_document":
             switch (props.status) {
-                // case "attached":
-                //     message = <AlertTitle>関連質問を{ props.info }件設定しました。</AlertTitle>;
-                //     break;
                 case "attached":
                     message = (
                         <AlertTitle>
