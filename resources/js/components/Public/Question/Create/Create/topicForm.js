@@ -184,12 +184,7 @@ const TopicForm = props => {
         );
     }
 
-    return (
-        <div>
-            {/* <p>変更前：{topics[props.old_topic]}</p> */}
-            {topic}
-        </div>
-    );
+    return <div>{topic}</div>;
 };
 
 export default TopicForm;

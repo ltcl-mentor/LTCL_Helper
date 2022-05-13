@@ -67,19 +67,6 @@ function QuestionShow() {
             });
     }, []);
 
-    // useEffect(() => {
-    //     if (!(comment_changing)) {
-    //         // 個別質問を取得
-    //         axios
-    //             .get(`/react/question/checked/${ id }`)
-    //             .then(response => {
-    //                 setQuestion(response.data);
-    //             }).catch(error => {
-    //                 console.log(error);
-    //             });
-    //     }
-    // }, [comment_changing, question_changing]);
-
     useEffect(() => {
         if (question) {
             // この質問と同じカテゴリー、トピックの質問を取得

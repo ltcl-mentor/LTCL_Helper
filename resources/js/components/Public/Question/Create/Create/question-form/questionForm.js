@@ -25,16 +25,6 @@ function QuestionForm(props) {
 
     return (
         <React.Fragment>
-            {/* <Typography
-                variant="h5"
-                component="div"
-                sx={{
-                    marginTop: 4,
-                    marginLeft: 2,
-                }}
-            >
-                4. 質問内容を入力
-            </Typography> */}
             <Typography
                 sx={{
                     fontWeight: "bold",

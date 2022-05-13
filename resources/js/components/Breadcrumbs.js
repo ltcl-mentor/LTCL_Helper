@@ -67,19 +67,6 @@ const Breadcrumb = props => {
             link3 = <Typography color="text.primary">質問詳細</Typography>;
             break;
 
-        // case "public_question_show":
-        //     link1 = (
-        //         <Link underline="hover" to="/public/questions/index">
-        //             質問一覧
-        //         </Link>
-        //     );
-        //     link2 = (
-        //         <Typography color="text.primary">
-        //             質問詳細
-        //         </Typography>
-        //     );
-        //     break;
-
         case "public_question_show":
             link1 = (
                 <Link underline="hover" to="/public/questions/index">
@@ -341,9 +328,13 @@ const Breadcrumb = props => {
             );
             link2 = <Typography color="text.primary">イベント作成</Typography>;
             break;
-            
+
         case "not_found":
-            link1 = <Typography color="text.primary">ページが見つかりません</Typography>;
+            link1 = (
+                <Typography color="text.primary">
+                    ページが見つかりません
+                </Typography>
+            );
     }
 
     return (

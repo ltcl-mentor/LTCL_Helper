@@ -157,9 +157,7 @@ function Show() {
             return false;
         }
     };
-    // const handleBackQuestionShow = () => {
-    //     history.push(`/topic/${question.topic}`);
-    // };
+
     const handleBackQuestionShow = () => {
         history.push(`/topic/${question["topic"]}`);
     };

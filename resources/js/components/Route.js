@@ -1,20 +1,20 @@
 import React, { useState, useEffect, createContext } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Bar from './Layout/Bar';
-import AccessError from './Error';
-import MyPage from './Public/User/MyPage';
-import AdminMyPage from './Public/User/AdminMypage';
-import MyQuestion from './Public/User/QuestionShow';
-import History from './Public/History/History';
-import Home from './Public/Home/Home';
+import Bar from "./Layout/Bar";
+import AccessError from "./Error";
+import MyPage from "./Public/User/MyPage";
+import AdminMyPage from "./Public/User/AdminMypage";
+import MyQuestion from "./Public/User/QuestionShow";
+import History from "./Public/History/History";
+import Home from "./Public/Home/Home";
 // import PublicDocumentIndex from './Public/Document/Index/Index';
 // import PublicQuestionIndex from './Public/Question/Index/Index';
-import PublicQuestionIndexIndex from './Public/Question/Index/Index/Index';
-import PublicQuestionCreate from './Public/Question/Create/Create/Create';
-import PublicQuestionShow from './Public/Question/Show/Show';
+import PublicQuestionIndexIndex from "./Public/Question/Index/Index/Index";
+import PublicQuestionCreate from "./Public/Question/Create/Create/Create";
+import PublicQuestionShow from "./Public/Question/Show/Show";
 // import Condition from './Public/Search/Condition/Condition';
 // import Freeword from './Public/Search/Freeword/Freeword';
 // import MentorTop from './Mentor/Top';
@@ -25,7 +25,7 @@ import PublicQuestionShow from './Public/Question/Show/Show';
 // import QuestionIndex from './Mentor/Question/Index/Index/Index';
 // import QuestionMentorYetCommentIndex from './Mentor/Question/Index/yet-comment-index/FromMentor';
 // import QuestionStudentYetCommentIndex from './Mentor/Question/Index/yet-comment-index/FromStudent';
-import QuestionShow from './Mentor/Question/Show/Show';
+import QuestionShow from "./Mentor/Question/Show/Show";
 // import QuestionEdit from './Mentor/Question/Edit/Edit';
 // import LinkFromQuestionIndex from './Mentor/Link/fromQuestion/Index/Index';
 // import LinkFromQuestionShow from './Mentor/Link/fromQuestion/Show/Show';
@@ -36,7 +36,7 @@ import QuestionShow from './Mentor/Question/Show/Show';
 // import UserRegisterAdmin from './Mentor/User/Register/Admin/Admin';
 // import EventIndex from './Mentor/Event/Index/Index';
 // import EventRegister from './Mentor/Event/Create/Create';
-import MentorQuestions from './Public/Home/Q&A/questionsForMentor.js';
+import MentorQuestions from "./Public/Home/Q&A/questionsForMentor.js";
 
 export const LoginUser = createContext();
 
@@ -58,37 +58,36 @@ const Router = () => {
     return (
         <BrowserRouter>
             <LoginUser.Provider value={user}>
-                
                 {/*アプリケーションバー*/}
                 <Bar />
-                
+
                 {/*ルーティング*/}
                 <Switch>
                     {/*一般ユーザがアクセスできるURL*/}
-                    
+
                     {/* トップ画面表示 */}
-                    { user.length !== 0 &&
+                    {user.length !== 0 && (
                         <Route key="home" path="/" exact component={Home} />
-                    }
+                    )}
 
                     {/* ユーザマイページ表示 */}
-                    { user.length !== 0 &&
+                    {user.length !== 0 && (
                         <Route path="/my_page" exact component={MyPage} />
-                    }
+                    )}
 
                     {/* ユーザマイページ質問詳細表示 */}
-                    { user.length !== 0 &&
+                    {user.length !== 0 && (
                         <Route
                             path="/my_page/questions/:id"
                             exact
                             component={MyQuestion}
                         />
-                    }
+                    )}
 
                     {/* 質問履歴画面表示 */}
-                    { user.length !== 0 &&
+                    {user.length !== 0 && (
                         <Route path="/history" exact component={History} />
-                    }
+                    )}
 
                     {/* 公開中の参考記事一覧表示 */}
                     {/* user.length !== 0 &&
@@ -96,9 +95,13 @@ const Router = () => {
                     */}
 
                     {/* 公開中の質問をカテゴリー毎に表示 */}
-                    { user.length !== 0 &&
-                        <Route path="/topic/:id" exact component={ PublicQuestionIndexIndex }/>
-                    }
+                    {user.length !== 0 && (
+                        <Route
+                            path="/topic/:id"
+                            exact
+                            component={PublicQuestionIndexIndex}
+                        />
+                    )}
 
                     {/* 公開中の質問一覧表示 */}
                     {/* user.length !== 0 &&
@@ -110,22 +113,22 @@ const Router = () => {
                     */}
 
                     {/* 受講生の質問投稿画面表示 */}
-                    { user.length !== 0 &&
+                    {user.length !== 0 && (
                         <Route
                             path="/public/questions/create"
                             exact
                             component={PublicQuestionCreate}
                         />
-                    }
+                    )}
 
                     {/* 質問詳細画面表示 */}
-                    { user.length !== 0 &&
+                    {user.length !== 0 && (
                         <Route
                             path="/public/questions/:id"
                             exact
                             component={PublicQuestionShow}
                         />
-                    }
+                    )}
 
                     {/* 絞り込み検索画面表示 */}
                     {/* user.length !== 0 &&
@@ -136,16 +139,19 @@ const Router = () => {
                     {/* user.length !== 0 &&
                         <Route path="/search/freeword" exact component={Freeword} />
                     */}
-                    
-                    
+
                     {/*=======================================================================================*/}
                     {/*管理者ユーザがアクセスできるURL*/}
 
                     {/* 管理者ユーザマイページ表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
-                        <Route path="/Admin_my_page" exact component={AdminMyPage} />
-                    }
-                    
+                    {user.length !== 0 && user.is_admin === "staff" && (
+                        <Route
+                            path="/Admin_my_page"
+                            exact
+                            component={AdminMyPage}
+                        />
+                    )}
+
                     {/* メンター管理画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route path="/mentor/top" exact component={MentorTop} />
@@ -197,13 +203,13 @@ const Router = () => {
                     */}
 
                     {/* 質問一覧画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {user.length !== 0 && user.is_admin === "staff" && (
                         <Route
                             path="/questions/mentor"
                             exact
                             component={MentorQuestions}
                         />
-                    }
+                    )}
 
                     {/* メンターコメント待ちの質問一覧画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
@@ -233,13 +239,13 @@ const Router = () => {
                     */}
 
                     {/* 質問詳細画面表示 */}
-                    { (user.length !== 0 && user.is_admin === "staff") &&
+                    {user.length !== 0 && user.is_admin === "staff" && (
                         <Route
                             path="/questions/:id"
                             exact
                             component={QuestionShow}
                         />
-                    }
+                    )}
 
                     {/* 紐付け（単体質問と複数記事）一覧画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
@@ -322,10 +328,9 @@ const Router = () => {
                             component={EventRegister}
                         />
                     */}
-                    
+
                     {/*404アクセスエラー*/}
-                    <Route path="/" component={AccessError}/>
-                    
+                    <Route path="/" component={AccessError} />
                 </Switch>
             </LoginUser.Provider>
         </BrowserRouter>

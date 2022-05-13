@@ -45,12 +45,6 @@ function Preview(props) {
                 <Typography color="text.primary">質問詳細</Typography>
             </Breadcrumbs>
 
-            {/* <Parameters
-                category={ props.question.category }
-                topic={ props.question.topic }
-                curriculum_number={ props.question.curriculum_number }
-            /> */}
-
             <Box>
                 <Question
                     title={props.question.title}
