@@ -1,21 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams, useLocation, useHistory } from "react-router-dom";
-import Typography from "@material-ui/core/Typography";
-import Button from "@mui/material/Button";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import Box from "@mui/material/Box";
-import Alert from "../../../Alert";
-import Breadcrumbs from "../../../Breadcrumbs";
-import Publish from "./Publish/publish";
-import Parameters from "./parameters";
-import Question from "./question";
-import Comments from "../../../Public/Question/Show/comments/comments";
-import Documents from "../../../Public/Question/Show/documents";
-import RelatedQuestions from "../../../Public/Question/Show/related-questions";
-import SelectStatus from "../../../Atom/Select/SelectStatus";
-import AddRelatedQuestion from "../../Link/modal/addRelatedQuestion";
+import { useParams, useLocation, useHistory } from "react-router-dom";
 import BreakingPoint from "../../../BreakingPoint";
 import useMedia from "use-media";
 import ShowContentPc from "./responsive/showContentPc";
@@ -35,31 +20,6 @@ function Show() {
     const [documents, setDocuments] = useState([]);
     const [comment_changing, setCommentChanging] = useState(false);
     const [open, setOpen] = useState(false);
-    const categories = ["カリキュラム", "成果物"];
-    const topics = [
-        // カリキュラム
-        "AWS",
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "サーバー",
-        "PHP",
-        "Laravel",
-        "DB",
-        "Git&GitHub",
-        "マイグレーション",
-        "リレーション",
-        "認証・認可機能(カリキュラム)",
-        "API(カリキュラム)",
-        "その他(カリキュラム)",
-        // 成果物
-        "認証・認可機能(成果物)",
-        "API(成果物)",
-        "画像処理",
-        "Heroku環境",
-        "デザイン",
-        "その他(成果物)"
-    ];
 
     useEffect(() => {
         if (
