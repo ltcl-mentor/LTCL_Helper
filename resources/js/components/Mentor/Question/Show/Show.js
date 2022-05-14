@@ -1,23 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams, useLocation, useHistory } from "react-router-dom";
-import Typography from "@material-ui/core/Typography";
-import Button from "@mui/material/Button";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import Box from "@mui/material/Box";
-import Alert from "../../../Alert";
-import Breadcrumbs from "../../../Breadcrumbs";
-import Publish from "./Publish/publish";
-import Parameters from "./parameters";
-import Question from "./question";
-import Comments from "../../../Public/Question/Show/comments/comments";
-import Documents from "../../../Public/Question/Show/documents";
-import RelatedQuestions from "../../../Public/Question/Show/related-questions";
-import SelectStatus from "../../../Atom/Select/SelectStatus";
-import AddRelatedQuestion from "../../Link/modal/addRelatedQuestion";
+import { useParams, useLocation, useHistory } from "react-router-dom";
 import BreakingPoint from "../../../BreakingPoint";
 import useMedia from "use-media";
+import ShowContentPc from "./responsive/showContentPc";
+import ShowContentMobile from "./responsive/showContentMobile";
+
 /**
  * 質問詳細(管理画面)のメインコンポーネント
  */
@@ -32,31 +20,7 @@ function Show() {
     const [documents, setDocuments] = useState([]);
     const [comment_changing, setCommentChanging] = useState(false);
     const [open, setOpen] = useState(false);
-    const categories = ["カリキュラム", "成果物"];
-    const topics = [
-        // カリキュラム
-        "AWS",
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "サーバー",
-        "PHP",
-        "Laravel",
-        "DB",
-        "Git&GitHub",
-        "マイグレーション",
-        "リレーション",
-        "認証・認可機能(カリキュラム)",
-        "API(カリキュラム)",
-        "その他(カリキュラム)",
-        // 成果物
-        "認証・認可機能(成果物)",
-        "API(成果物)",
-        "画像処理",
-        "Heroku環境",
-        "デザイン",
-        "その他(成果物)"
-    ];
+
     useEffect(() => {
         if (
             typeof question.category != "undefined" &&
@@ -158,257 +122,38 @@ function Show() {
         <>
             {isWide ? (
                 // 大画面で表示するコンポーネント
-                <div>
-                    <div style={{ marginLeft: "3%" }}>
-                        <Breadcrumbs
-                            page={`mentor_question_show_${parameter.location}`}
-                            topic={question.topic}
-                            topic_title={topics[question.topic]}
-                        />
-                    </div>
-
-                    <Box
-                        sx={{
-                            mx: "5%",
-                            display: "flex",
-                            justifyContent: "space-between"
-                        }}
-                    >
-                        <Box sx={{ m: "0 auto", transform: "translate(50%)" }}>
-                            <Publish
-                                question_id={id}
-                                question={question}
-                                setQuestion={setQuestion}
-                                documents={documents}
-                                category={categories[question.category]}
-                                topic={topics[question.topic]}
-                            />
-                        </Box>
-                        <Box>
-                            <Link to={`/questions/` + id + `/edit`}>
-                                <Button
-                                    variant="text"
-                                    sx={{ color: "#771AF8", fontSize: 20 }}
-                                >
-                                    編集
-                                </Button>
-                            </Link>
-                            /
-                            <Button
-                                variant="text"
-                                sx={{ color: "#771AF8", fontSize: 20 }}
-                                onClick={deleteConfirm}
-                            >
-                                削除
-                            </Button>
-                        </Box>
-                    </Box>
-
-                    <Question
-                        title={question.title}
-                        remarks={question.remarks}
-                        updated_at={question.updated_at}
-                        question={question.question}
-                        category={question.category}
-                        topic={question.topic}
-                        curriculum_number={question.curriculum_number}
-                        id={id}
-                        status={status}
-                        setStatus={setStatus}
-                        responseStatus={question["status"]}
-                    />
-                    <Comments
-                        main_comments={question.main_comments}
-                        sub_comments={question.sub_comments}
-                        question_id={id}
-                        setCommentChanging={setCommentChanging}
-                        user_id={0}
-                        is_admin="staff"
-                    />
-                    <AddRelatedQuestion
-                        open={open}
-                        handleOpen={handleOpen}
-                        question_id={id}
-                    />
-
-                    <Box>
-                        <Typography
-                            align="right"
-                            sx={{
-                                marginRight: "5%"
-                            }}
-                        >
-                            <Button
-                                sx={{
-                                    color: "#771AF8",
-                                    textDecoration: "underline",
-                                    marginBottom: "-5%",
-                                    fontSize: 18,
-                                    fontWeight: "bold"
-                                }}
-                                onClick={handleOpen}
-                            >
-                                記事登録
-                            </Button>
-                        </Typography>
-                        <Typography
-                            variant="h6"
-                            component="div"
-                            sx={{
-                                borderBottom: "1px solid gray",
-                                fontWeight: "bold",
-                                padding: 1,
-                                marginX: "5%"
-                            }}
-                        >
-                            参考記事
-                        </Typography>
-                    </Box>
-                    <Box
-                        sx={{
-                            marginTop: 3,
-                            padding: 1
-                        }}
-                    >
-                        <Documents documents={documents} />
-                    </Box>
-                    <RelatedQuestions related_questions={related_questions} />
-                    <div
-                        style={{
-                            textAlign: "center",
-                            marginTop: "3%",
-                            marginBottom: "5%"
-                        }}
-                    >
-                        <Button
-                            variant="text"
-                            onClick={backQuestionIndex}
-                            sx={{
-                                color: "#771AF8",
-                                textDecoration: "underline",
-                                marginBottom: "-5%",
-                                fontSize: 18,
-                                fontWeight: "bold"
-                            }}
-                        >
-                            質問一覧に戻る
-                        </Button>
-                    </div>
-                </div>
+                <ShowContentPc
+                    location={parameter.location}
+                    question={question}
+                    id={id}
+                    setQuestion={setQuestion}
+                    documents={documents}
+                    deleteConfirm={deleteConfirm}
+                    status={status}
+                    setStatus={setStatus}
+                    setCommentChanging={setCommentChanging}
+                    open={open}
+                    handleOpen={handleOpen}
+                    related_questions={related_questions}
+                    backQuestionIndex={backQuestionIndex}
+                />
             ) : (
                 // スマホで表示するコンポーネント
-                <div>
-                    <div style={{ marginLeft: "3%" }}>
-                        <Breadcrumbs
-                            page={`mentor_question_show_${parameter.location}`}
-                            topic={question.topic}
-                            topic_title={topics[question.topic]}
-                        />
-                    </div>
-
-                    <Box sx={{ textAlign: "center", mb: 3 }}>
-                        <Publish
-                            question_id={id}
-                            question={question}
-                            setQuestion={setQuestion}
-                            documents={documents}
-                            category={categories[question.category]}
-                            topic={topics[question.topic]}
-                        />
-                    </Box>
-
-                    <Question
-                        title={question.title}
-                        remarks={question.remarks}
-                        updated_at={question.updated_at}
-                        question={question.question}
-                        category={question.category}
-                        topic={question.topic}
-                        curriculum_number={question.curriculum_number}
-                        id={id}
-                        status={status}
-                        setStatus={setStatus}
-                        responseStatus={question["status"]}
-                        deleteConfirm={deleteConfirm}
-                    />
-                    <Comments
-                        main_comments={question.main_comments}
-                        sub_comments={question.sub_comments}
-                        question_id={id}
-                        setCommentChanging={setCommentChanging}
-                        user_id={0}
-                        is_admin="staff"
-                    />
-                    <AddRelatedQuestion
-                        open={open}
-                        handleOpen={handleOpen}
-                        question_id={id}
-                    />
-
-                    <Box>
-                        <Typography
-                            align="right"
-                            sx={{
-                                marginRight: "5%"
-                            }}
-                        >
-                            <Button
-                                sx={{
-                                    color: "#771AF8",
-                                    textDecoration: "underline",
-                                    marginBottom: "-5%",
-                                    fontSize: 18,
-                                    fontWeight: "bold"
-                                }}
-                                onClick={handleOpen}
-                            >
-                                記事登録
-                            </Button>
-                        </Typography>
-                        <Typography
-                            variant="h6"
-                            component="div"
-                            sx={{
-                                borderBottom: "1px solid gray",
-                                fontWeight: "bold",
-                                padding: 1,
-                                marginX: "5%"
-                            }}
-                        >
-                            参考記事
-                        </Typography>
-                    </Box>
-                    <Box
-                        sx={{
-                            marginTop: 3,
-                            padding: 1
-                        }}
-                    >
-                        <Documents documents={documents} />
-                    </Box>
-                    <RelatedQuestions related_questions={related_questions} />
-                    <div
-                        style={{
-                            textAlign: "center",
-                            marginTop: "3%",
-                            marginBottom: "5%"
-                        }}
-                    >
-                        <Button
-                            variant="text"
-                            onClick={backQuestionIndex}
-                            sx={{
-                                color: "#771AF8",
-                                textDecoration: "underline",
-                                marginBottom: "-5%",
-                                fontSize: 18,
-                                fontWeight: "bold"
-                            }}
-                        >
-                            質問一覧に戻る
-                        </Button>
-                    </div>
-                </div>
+                <ShowContentMobile
+                    location={parameter.location}
+                    question={question}
+                    id={id}
+                    setQuestion={setQuestion}
+                    documents={documents}
+                    deleteConfirm={deleteConfirm}
+                    status={status}
+                    setStatus={setStatus}
+                    setCommentChanging={setCommentChanging}
+                    open={open}
+                    handleOpen={handleOpen}
+                    related_questions={related_questions}
+                    backQuestionIndex={backQuestionIndex}
+                />
             )}
         </>
     );

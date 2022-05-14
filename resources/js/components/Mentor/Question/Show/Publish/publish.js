@@ -1,46 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
 import Typography from "@material-ui/core/Typography";
 import Button from "@mui/material/Button";
 import PublicIcon from "@material-ui/icons/Public";
 import PublicOffIcon from "@material-ui/icons/PublicOff";
-import Alert from "@mui/material/Alert";
-import CancelIcon from "@mui/icons-material/Cancel";
-import Preview from "./preview";
-import CheckForm from "./checkForm";
 import useMedia from "use-media";
 import BreakingPoint from "../../../../BreakingPoint";
-
-// モーダルのCSS設定
-const styleForPc = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "70%",
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-    height: "90%",
-    overflow: "scroll"
-};
-const styleForPhone = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "95%",
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-    height: "90%",
-    overflow: "scroll"
-};
+import PublishContentPc from "./responsive/publishContentPc";
+import PublishContentMobile from "./responsive/publishContentMobile";
 
 /**
  * 質問公開・非公開処理
@@ -110,85 +78,33 @@ const Publish = props => {
                 <div>
                     {publishBtn}
 
-                    <Modal
+                    <PublishContentPc
                         open={open}
-                        onClose={handleClose}
-                        aria-labelledby="modal-modal-title"
-                        aria-describedby="modal-modal-description"
-                    >
-                        <Box sx={styleForPc}>
-                            <Button
-                                onClick={handleClose}
-                                startIcon={<CancelIcon />}
-                                sx={{
-                                    color: "red",
-                                    marginLeft: "95%",
-                                    marginBottom: "5%"
-                                }}
-                            ></Button>
-                            <Alert severity="error">
-                                これは公開時のプレビューです。まだ公開処理は完了していません。
-                            </Alert>
-
-                            <CheckForm
-                                question_id={props.question_id}
-                                setQuestion={props.setQuestion}
-                                handleClose={handleClose}
-                            />
-
-                            <Box sx={{ border: "1px solid black" }}>
-                                <Preview
-                                    question={props.question}
-                                    images={props.images}
-                                    documents={props.documents}
-                                    category={props.category}
-                                    topic={props.topic}
-                                />
-                            </Box>
-                        </Box>
-                    </Modal>
+                        handleClose={handleClose}
+                        question_id={props.question_id}
+                        setQuestion={props.setQuestion}
+                        question={props.question}
+                        images={props.images}
+                        documents={props.documents}
+                        category={props.category}
+                        topic={props.topic}
+                    />
                 </div>
             ) : (
                 <div>
                     {publishBtn}
 
-                    <Modal
+                    <PublishContentMobile
                         open={open}
-                        onClose={handleClose}
-                        aria-labelledby="modal-modal-title"
-                        aria-describedby="modal-modal-description"
-                    >
-                        <Box sx={styleForPhone}>
-                            <Button
-                                onClick={handleClose}
-                                startIcon={<CancelIcon />}
-                                sx={{
-                                    color: "red",
-                                    marginLeft: "95%",
-                                    marginBottom: "5%"
-                                }}
-                            ></Button>
-                            <Alert severity="error">
-                                これは公開時のプレビューです。まだ公開処理は完了していません。
-                            </Alert>
-
-                            <CheckForm
-                                question_id={props.question_id}
-                                setQuestion={props.setQuestion}
-                                handleClose={handleClose}
-                            />
-
-                            <Box sx={{ border: "1px solid black" }}>
-                                <Preview
-                                    question={props.question}
-                                    images={props.images}
-                                    documents={props.documents}
-                                    category={props.category}
-                                    topic={props.topic}
-                                />
-                            </Box>
-                        </Box>
-                    </Modal>
+                        handleClose={handleClose}
+                        question_id={props.question_id}
+                        setQuestion={props.setQuestion}
+                        question={props.question}
+                        images={props.images}
+                        documents={props.documents}
+                        category={props.category}
+                        topic={props.topic}
+                    />
                 </div>
             )}
         </>
