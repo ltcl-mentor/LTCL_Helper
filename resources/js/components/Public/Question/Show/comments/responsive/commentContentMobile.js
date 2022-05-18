@@ -1,15 +1,15 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { styleMobileComment } from "../../../../../Atom/Typography/TypographyStyle";
+import { styleCommentsBox } from "../../../../../Atom/Box/BoxStyle";
 
 const commentContentMobile = props => {
     return (
         <Box>
-            <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <Box sx={styleCommentsBox}>
                 {props.is_staff ? (
                     <Avatar
                         alt="Mentor"

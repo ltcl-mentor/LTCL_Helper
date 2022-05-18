@@ -9,6 +9,7 @@ import {
     styleEditTitle
 } from "../../../../Atom/Typography/TypographyStyle";
 import { styleReturnTopButton } from "../../../../Atom/Button/ButtonStyle";
+import { styleBackTopBox, stylePostBox } from "../../../../Atom/Box/BoxStyle";
 
 /**
  * 質問登録前の確認フォーム
@@ -179,18 +180,12 @@ const QuestionConfirm = props => {
                 images={props.images}
             />
 
-            <Box sx={{ textAlign: "center", marginTop: 50 }}>
+            <Box sx={stylePostBox}>
                 <ConfirmButton onClick={props.handleSubmit}>
                     投稿する
                 </ConfirmButton>
             </Box>
-            <Box
-                sx={{
-                    textAlign: "center",
-                    marginTop: 5,
-                    marginBottom: 30
-                }}
-            >
+            <Box sx={styleBackTopBox}>
                 <Button
                     variant="text"
                     onClick={props.handleConfirmPage}

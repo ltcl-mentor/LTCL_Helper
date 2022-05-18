@@ -117,3 +117,11 @@ export const styleReview = {
     padding: "5%",
     wordWrap: "break-word"
 };
+
+//　質問投稿画面の注意書き
+export const styleSpan = {
+    fontWeight: "normal",
+    color: "#771AF8",
+    marginLeft: "20px",
+    fontSize: 18
+};

@@ -7,6 +7,11 @@ import {
     styleMobileQuestionTitle,
     styleMobileTitle
 } from "../../../../Atom/Typography/TypographyStyle";
+import {
+    styleAvatarBox,
+    styleParentQuestionBox,
+    styleQuestionTitleBox
+} from "../../../../Atom/Box/BoxStyle";
 
 const questionContentMobile = props => {
     const categories = ["カリキュラム", "成果物"];
@@ -36,14 +41,9 @@ const questionContentMobile = props => {
     ];
 
     return (
-        <Box sx={{ width: "90%", marginX: "5%" }}>
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "column"
-                }}
-            >
-                <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={styleParentQuestionBox}>
+            <Box>
+                <Box sx={styleAvatarBox}>
                     <Avatar
                         alt="Student"
                         src="/images/pose_english_shrug_man.png"
@@ -64,7 +64,8 @@ const questionContentMobile = props => {
                     {props.curriculum_number}&nbsp;
                 </Typography>
             </Box>
-            <Box sx={{ display: "fex", position: "relative" }}>
+
+            <Box sx={styleQuestionTitleBox}>
                 <Typography
                     variant="h4"
                     component="div"

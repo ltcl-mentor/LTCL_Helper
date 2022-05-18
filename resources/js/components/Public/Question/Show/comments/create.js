@@ -4,9 +4,7 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 import CreateIcon from "@material-ui/icons/Create";
 import Box from "@mui/material/Box";
-import Card from "@material-ui/core/Card";
 import Grid from "@mui/material/Grid";
-import { styled } from "@mui/material/styles";
 
 import TextForm from "../../Create/Create/question-form/original-text-form/originalTextForm";
 import { CommentButton, PostButton } from "../../../../Atom/Button/ButtonStyle";

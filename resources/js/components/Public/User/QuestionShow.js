@@ -13,6 +13,7 @@ import Question from "../Question/Show/question";
 import Comments from "../Question/Show/comments/comments";
 import Documents from "../Question/Show/documents";
 import RelatedQuestions from "../Question/Show/related-questions";
+import { styleReturnIndividualButton } from "../../Atom/Button/ButtonStyle";
 
 /**
  * 質問詳細画面(マイページ)のメインコンポーネント
@@ -217,12 +218,7 @@ function QuestionShow() {
                 <Button
                     variant="text"
                     onClick={handleBackQuestionShow}
-                    sx={{
-                        margin: "3%",
-                        borderBottom: "1px solid #771af8",
-                        color: "#771af8",
-                        borderRadius: 0
-                    }}
+                    sx={styleReturnIndividualButton}
                 >
                     マイページに戻る
                 </Button>

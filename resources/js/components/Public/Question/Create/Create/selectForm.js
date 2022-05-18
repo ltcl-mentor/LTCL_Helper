@@ -20,6 +20,7 @@ import {
     styleEditTitle
 } from "../../../../Atom/Typography/TypographyStyle";
 import { styleReturnTopButton } from "../../../../Atom/Button/ButtonStyle";
+import { styleBackTopBox } from "../../../../Atom/Box/BoxStyle";
 
 const styleSpan = {
     fontWeight: "normal",
@@ -334,13 +335,7 @@ const DefaultForm = () => {
                             確認する
                         </ConfirmButton>
                     </Box>
-                    <Box
-                        sx={{
-                            textAlign: "center",
-                            marginTop: 5,
-                            marginBottom: 30
-                        }}
-                    >
+                    <Box sx={styleBackTopBox}>
                         <Button
                             variant="text"
                             onClick={handleBackTopPage}

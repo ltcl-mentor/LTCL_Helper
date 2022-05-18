@@ -5,11 +5,12 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { styleComment } from "../../../../../Atom/Typography/TypographyStyle";
+import { styleCommentsBox } from "../../../../../Atom/Box/BoxStyle";
 
 const commentContentPc = props => {
     return (
         <Box>
-            <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <Box sx={styleCommentsBox}>
                 <Grid container spacing={2} justifyContent="left">
                     <Grid item>
                         {props.is_staff ? (

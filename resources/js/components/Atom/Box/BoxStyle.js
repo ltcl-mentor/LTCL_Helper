@@ -125,3 +125,19 @@ export const styleCurriculumNumberBox = {
 export const stylePreviewOutlineBox = {
     border: "1px solid black"
 };
+
+// コメント群用のボックス
+export const styleCommentsBox = {
+    display: "flex",
+    flexDirection: "row"
+};
+
+// Topに戻るボタン用のボックス
+export const styleBackTopBox = {
+    textAlign: "center",
+    marginTop: 5,
+    marginBottom: 30
+};
+
+// 質問投稿ボタン用のボックス
+export const stylePostBox = { textAlign: "center", marginTop: 3 };

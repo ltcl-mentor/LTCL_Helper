@@ -6,18 +6,14 @@ import TextField from "@mui/material/TextField";
 import TextForm from "./original-text-form/originalTextForm";
 import {
     styleCategoryTitle,
-    styleEditSubTitle
+    styleEditSubTitle,
+    styleSpan
 } from "../../../../../Atom/Typography/TypographyStyle";
 
 /**
  * 質問タイトル、調べたこと、内容入力フォーム
  */
-const styleSpan = {
-    fontWeight: "normal",
-    color: "#771AF8",
-    marginLeft: "20px",
-    fontSize: 18
-};
+
 function QuestionForm(props) {
     const handleTitle = event => {
         props.setTitle(event.target.value);
@@ -39,7 +35,7 @@ function QuestionForm(props) {
                 </Typography>
             )}
 
-            <Box sx={{ width: "100%", marginBottom: 5 }}>
+            <Box>
                 <TextField
                     placeholder="例：CSSファイルが反映されません。"
                     label="質問タイトル（50字以内）"
@@ -61,7 +57,7 @@ function QuestionForm(props) {
             <Typography sx={styleEditSubTitle}>
                 調べたこと（参考にしたサイトURLなども記載）
             </Typography>
-            <Box sx={{ width: "100%", marginBottom: 5 }}>
+            <Box>
                 <TextField
                     placeholder="例：以下のサイトでCSSの呼び出し方を確認しました。\nhttp://~"
                     label="調べたこと（参考にしたサイトURLなども記載）"

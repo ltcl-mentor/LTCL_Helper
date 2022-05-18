@@ -8,6 +8,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import "../../../../../../public/css/Search/show.css";
+import { styleDocumentsBox } from "../../../Atom/Box/BoxStyle";
 
 /**
  * 関連記事の一覧
@@ -98,7 +99,7 @@ function Document(props) {
     }
 
     return (
-        <Box sx={{ marginTop: 2, marginBottom: 3 }}>
+        <Box sx={styleDocumentsBox}>
             <Grid
                 container
                 spacing={2}
