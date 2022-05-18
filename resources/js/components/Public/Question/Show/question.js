@@ -4,6 +4,7 @@ import BreakingPoint from "../../../BreakingPoint";
 import useMedia from "use-media";
 import QuestionContentPc from "./responsive/questionContentPc";
 import QuestionContentMobile from "./responsive/questionContentMobile";
+import CodeblockTypography from "../../../Atom/Typography/CodeblockTypography";
 
 /**
  * 質問表示
@@ -11,31 +12,6 @@ import QuestionContentMobile from "./responsive/questionContentMobile";
 function Question(props) {
     const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
 
-    const categories = ["カリキュラム", "成果物"];
-    const topics = [
-        // カリキュラムのトピック
-        "AWS",
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "サーバー",
-        "PHP",
-        "Laravel",
-        "データベース",
-        "Git&GitHub",
-        "マイグレーション",
-        "リレーション",
-        "認証・認可機能(カリキュラム)",
-        "API(カリキュラム)",
-        "その他(カリキュラム)",
-        // 成果物のトピック
-        "認証・認可機能(成果物)",
-        "API(成果物)",
-        "画像処理",
-        "Heroku環境",
-        "デザイン",
-        "その他(成果物)"
-    ];
     let question = [];
     if (props.question) {
         // 最後の文が認識されないのを防止する
@@ -133,21 +109,12 @@ function Question(props) {
                                 // コードブロック
                             } else {
                                 return (
-                                    <Typography
+                                    <CodeblockTypography
                                         key={block_number}
                                         component="div"
-                                        sx={{
-                                            width: "90%",
-                                            marginLeft: "5%",
-                                            marginTop: 1,
-                                            marginBottom: 1,
-                                            padding: 2,
-                                            backgroundColor: "#DDDDDD",
-                                            borderRadius: "3px"
-                                        }}
                                     >
                                         {block}
-                                    </Typography>
+                                    </CodeblockTypography>
                                 );
                             }
                         })

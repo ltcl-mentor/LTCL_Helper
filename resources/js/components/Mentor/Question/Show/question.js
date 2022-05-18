@@ -135,21 +135,12 @@ function Question(props) {
                                 // コードブロック
                             } else {
                                 return (
-                                    <Typography
+                                    <CodeblockTypography
                                         key={block_number}
                                         component="div"
-                                        sx={{
-                                            width: "90%",
-                                            marginLeft: "5%",
-                                            marginTop: 1,
-                                            marginBottom: 1,
-                                            padding: 2,
-                                            backgroundColor: "#DDDDDD",
-                                            borderRadius: "3px"
-                                        }}
                                     >
                                         {block}
-                                    </Typography>
+                                    </CodeblockTypography>
                                 );
                             }
                         })
