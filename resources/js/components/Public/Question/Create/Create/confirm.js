@@ -4,6 +4,10 @@ import Button from "@material-ui/core/Button";
 import Parameters from "../../Show/parameters";
 import ConfirmButton from "../../../../Atom/Button/ConfirmButton";
 import Box from "@material-ui/core/Box";
+import {
+    styleCodeblock,
+    styleEditTitle
+} from "../../../../Atom/Typography/TypographyStyle";
 
 /**
  * 質問登録前の確認フォーム
@@ -110,15 +114,7 @@ const QuestionConfirm = props => {
                                     <Typography
                                         key={block_number}
                                         component="div"
-                                        sx={{
-                                            width: "90%",
-                                            marginLeft: "5%",
-                                            marginTop: 1,
-                                            marginBottom: 1,
-                                            padding: 2,
-                                            backgroundColor: "#DDDDDD",
-                                            borderRadius: "3px"
-                                        }}
+                                        sx={styleCodeblock}
                                     >
                                         {block}
                                     </Typography>
@@ -169,17 +165,7 @@ const QuestionConfirm = props => {
 
     return (
         <Box>
-            <Typography
-                variant="h5"
-                component="div"
-                sx={{
-                    marginTop: 4,
-                    marginBottom: 5,
-                    fontSize: 30,
-                    color: "#771af8",
-                    fontWeight: "bold"
-                }}
-            >
+            <Typography variant="h5" component="div" sx={styleEditTitle}>
                 確認画面
             </Typography>
             <Parameters

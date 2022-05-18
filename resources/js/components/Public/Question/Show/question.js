@@ -4,6 +4,7 @@ import BreakingPoint from "../../../BreakingPoint";
 import useMedia from "use-media";
 import QuestionContentPc from "./responsive/questionContentPc";
 import QuestionContentMobile from "./responsive/questionContentMobile";
+import { styleCodeblock } from "../../../Atom/Typography/TypographyStyle";
 
 /**
  * 質問表示
@@ -111,15 +112,7 @@ function Question(props) {
                                     <Typography
                                         key={block_number}
                                         component="div"
-                                        sx={{
-                                            width: "90%",
-                                            marginLeft: "5%",
-                                            marginTop: 1,
-                                            marginBottom: 1,
-                                            padding: 2,
-                                            backgroundColor: "#DDDDDD",
-                                            borderRadius: "3px"
-                                        }}
+                                        sx={styleCodeblock}
                                     >
                                         {block}
                                     </Typography>

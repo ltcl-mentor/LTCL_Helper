@@ -4,6 +4,10 @@ import Box from "@mui/material/Box";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import TextField from "@mui/material/TextField";
 import TextForm from "./original-text-form/originalTextForm";
+import {
+    styleCategoryTitle,
+    styleEditSubTitle
+} from "../../../../../Atom/Typography/TypographyStyle";
 
 /**
  * 質問タイトル、調べたこと、内容入力フォーム
@@ -25,14 +29,7 @@ function QuestionForm(props) {
 
     return (
         <React.Fragment>
-            <Typography
-                sx={{
-                    fontWeight: "bold",
-                    fontSize: 20,
-                    marginTop: 6,
-                    marginBottom: 2
-                }}
-            >
+            <Typography sx={styleEditSubTitle}>
                 質問タイトル
                 <span style={styleSpan}>50字以内で記入してください。</span>
             </Typography>
@@ -61,14 +58,7 @@ function QuestionForm(props) {
                     }}
                 />
             </Box>
-            <Typography
-                sx={{
-                    fontWeight: "bold",
-                    fontSize: 20,
-                    marginTop: 6,
-                    marginBottom: 2
-                }}
-            >
+            <Typography sx={styleEditSubTitle}>
                 調べたこと（参考にしたサイトURLなども記載）
             </Typography>
             <Box sx={{ width: "100%", marginBottom: 5 }}>
@@ -88,24 +78,8 @@ function QuestionForm(props) {
                         paddingTop: 2
                     }}
                 />
-
-                <Box sx={{ display: "flex" }}>
-                    <Typography
-                        variant="h7"
-                        component="div"
-                        sx={{
-                            marginTop: 4,
-                            marginLeft: 4
-                        }}
-                    ></Typography>
-                </Box>
             </Box>
-            <Typography
-                sx={{
-                    fontWeight: "bold",
-                    fontSize: 20
-                }}
-            >
+            <Typography sx={styleCategoryTitle}>
                 具体的な内容（試したことなど）
             </Typography>
             <TextForm

@@ -75,17 +75,7 @@ const commentContentPc = props => {
                     </Grid>
                 )}
             </Box>
-            <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                    paddingTop: 2,
-                    marginLeft: 4,
-                    marginBottom: 2,
-                    marginRight: 2,
-                    clear: "left"
-                }}
-            >
+            <Typography variant="h6" component="div" sx={styleComment}>
                 {props.comment}
             </Typography>
         </Box>

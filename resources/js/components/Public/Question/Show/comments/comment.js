@@ -1,15 +1,13 @@
 import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import axios from "axios";
-import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import useMedia from "use-media";
 import BreakingPoint from "../../../../BreakingPoint";
 import CommentContentPc from "./responsive/commentContentPc";
 import CommentContentMobile from "./responsive/commentContentMobile";
+import { styleCodeblock } from "../../../../Atom/Typography/TypographyStyle";
 
 /**
  * コメント（個別）
@@ -142,15 +140,7 @@ function Comment(props) {
                                     <Typography
                                         key={block_number}
                                         component="div"
-                                        sx={{
-                                            width: "90%",
-                                            marginLeft: "5%",
-                                            marginTop: 1,
-                                            marginBottom: 1,
-                                            padding: 2,
-                                            backgroundColor: "#DDDDDD",
-                                            borderRadius: "3px"
-                                        }}
+                                        sx={styleCodeblock}
                                     >
                                         {block}
                                     </Typography>

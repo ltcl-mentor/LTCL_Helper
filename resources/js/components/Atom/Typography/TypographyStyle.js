@@ -14,7 +14,7 @@ export const styleArticleRegistration = {
     marginRight: "5%"
 };
 
-// 関連質問のスタイル
+// 参考記事のスタイル
 export const styleReferenceArticle = {
     marginTop: 3,
     borderBottom: "1px solid gray",
@@ -31,7 +31,7 @@ export const stylePcQuestionTitle = {
     fontWeight: "bold"
 };
 
-// PC用小タイトルのスタイル
+// PC用質問項目タイトルのスタイル
 export const stylePcTitle = {
     marginTop: 3,
     borderBottom: "1px solid gray",
@@ -72,6 +72,7 @@ export const styleMobileQuestionRemarks = {
 // 公開非公開ボタンのスタイル
 export const styleReleaseButton = { marginTop: 1, marginBottom: 1 };
 
+// 質問記入用のスタイル
 export const styleEditTitle = {
     marginTop: 4,
     marginBottom: 10,
@@ -80,13 +81,39 @@ export const styleEditTitle = {
     fontWeight: "bold"
 };
 
+// カテゴリータイトルのスタイル
 export const styleCategoryTitle = {
     fontWeight: "bold",
     fontSize: 20
 };
 
+// 質問の編集画面サブタイトルのスタイル
 export const styleEditSubTitle = {
     fontWeight: "bold",
     fontSize: 20,
-    mt: 6
+    mt: 6,
+    marginBottom: 2
+};
+
+// コメントのスタイル
+export const styleComment = {
+    paddingTop: 2,
+    marginLeft: 4,
+    marginBottom: 2,
+    marginRight: 2,
+    clear: "left"
+};
+
+// モバイル用コメントのスタイル
+export const styleMobileComment = {
+    m: 2,
+    fontSize: 15
+};
+
+// 質問のレビュー用スタイル
+export const styleReview = {
+    width: "100%",
+    minHeight: "350px",
+    padding: "5%",
+    wordWrap: "break-word"
 };

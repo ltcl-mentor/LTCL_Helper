@@ -2,6 +2,11 @@ import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import {
+    stylePcQuestionRemarks,
+    stylePcQuestionTitle,
+    stylePcTitle
+} from "../../../../Atom/Typography/TypographyStyle";
 
 const questionContentPc = props => {
     const categories = ["カリキュラム", "成果物"];
@@ -59,64 +64,30 @@ const questionContentPc = props => {
                 </Typography>
             </Box>
 
-            <Typography
-                variant="h4"
-                component="div"
-                sx={{
-                    marginTop: 4,
-                    fontSize: 30,
-                    fontWeight: "bold"
-                }}
-            >
+            <Typography variant="h4" component="div" sx={stylePcQuestionTitle}>
                 {props.title}
             </Typography>
 
-            <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                    marginTop: 3,
-                    borderBottom: "1px solid gray",
-                    fontWeight: "bold",
-                    padding: 1
-                }}
-            >
+            <Typography variant="h6" component="div" sx={stylePcTitle}>
                 調べたこと
             </Typography>
 
             <Typography
                 variant="h5"
                 component="div"
-                sx={{
-                    marginTop: 1,
-                    padding: 2,
-                    marginBottom: 2
-                }}
+                sx={stylePcQuestionRemarks}
             >
                 {props.remarks}
             </Typography>
 
-            <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                    marginTop: 4,
-                    borderBottom: "1px solid gray",
-                    fontWeight: "bold",
-                    padding: 1
-                }}
-            >
+            <Typography variant="h6" component="div" sx={stylePcTitle}>
                 試したこと、分からないこと
             </Typography>
 
             <Typography
                 variant="h5"
                 component="div"
-                sx={{
-                    marginTop: 1,
-                    padding: 2,
-                    marginBottom: 2
-                }}
+                sx={stylePcQuestionRemarks}
             >
                 {props.question}
             </Typography>

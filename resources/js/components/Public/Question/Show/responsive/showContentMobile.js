@@ -10,6 +10,7 @@ import Comments from "../comments/comments";
 import Documents from "../documents";
 import RelatedQuestions from "../related-questions";
 import ShowBreadcrumbBox from "../../../../Atom/Box/ShowBreadcrumbBox";
+import { styleReferenceArticle } from "../../../../Atom/Typography/TypographyStyle";
 
 const showContentMobile = props => {
     const topics = [
@@ -56,11 +57,7 @@ const showContentMobile = props => {
                 !props.question.is_resolved &&
                 (props.question.user_id === props.user.id ||
                     props.user.is_admin === "staff") && (
-                    <Typography
-                        component="div"
-                        align="center"
-                        sx={{ marginTop: 4, marginBottom: 3 }}
-                    >
+                    <Typography component="div" align="center">
                         <Button
                             variant="contained"
                             color="success"
@@ -94,13 +91,7 @@ const showContentMobile = props => {
                 <Typography
                     variant="h6"
                     component="div"
-                    sx={{
-                        marginTop: 3,
-                        padding: 1,
-                        borderBottom: "1px solid gray",
-                        fontWeight: "bold",
-                        marginX: "5%"
-                    }}
+                    sx={styleReferenceArticle}
                 >
                     参考記事
                 </Typography>

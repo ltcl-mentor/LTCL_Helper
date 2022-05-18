@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Typography from "@material-ui/core/Typography";
 import Box from "@mui/material/Box";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import ToggleButton from "@mui/material/ToggleButton";
 import CodeIcon from "@mui/icons-material/Code";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import TextField from "@mui/material/TextField";
 
 import Picture from "./picture";

@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import { styleMobileComment } from "../../../../../Atom/Typography/TypographyStyle";
 
 const commentContentMobile = props => {
     return (
@@ -50,14 +51,7 @@ const commentContentMobile = props => {
                     </Box>
                 )}
             </Box>
-            <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                    m: 2,
-                    fontSize: 15
-                }}
-            >
+            <Typography variant="h6" component="div" sx={styleMobileComment}>
                 {props.comment}
             </Typography>
         </Box>
