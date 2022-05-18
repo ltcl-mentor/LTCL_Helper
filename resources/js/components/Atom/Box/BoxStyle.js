@@ -120,3 +120,8 @@ export const styleCurriculumNumberBox = {
     textAlign: "left",
     marginTop: 1
 };
+
+// プレビューの外枠用ボックス
+export const stylePreviewOutlineBox = {
+    border: "1px solid black"
+};
