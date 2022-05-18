@@ -5,6 +5,11 @@ import Avatar from "@material-ui/core/Avatar";
 import SelectStatus from "../../../../Atom/Select/SelectStatus";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
+import {
+    styleMobileQuestionRemarks,
+    styleMobileQuestionTitle,
+    styleMobileTitle
+} from "../../../../Atom/Typography/TypographyStyle";
 
 const questionContentMobile = props => {
     const categories = ["カリキュラム", "成果物"];
@@ -109,61 +114,29 @@ const questionContentMobile = props => {
                 <Typography
                     variant="h4"
                     component="div"
-                    sx={{
-                        marginTop: 4,
-                        fontSize: 20,
-                        fontWeight: "bold"
-                    }}
+                    sx={styleMobileQuestionTitle}
                 >
                     {props.title}
                 </Typography>
             </Box>
 
-            <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                    marginTop: 3,
-                    borderBottom: "1px solid gray",
-                    fontWeight: "bold",
-                    padding: 1,
-                    fontSize: 15
-                }}
-            >
+            <Typography variant="h6" component="div" sx={styleMobileTitle}>
                 調べたこと
             </Typography>
             <Typography
                 variant="h5"
                 component="div"
-                sx={{
-                    fontSize: 15,
-                    padding: 1,
-                    marginBottom: 2
-                }}
+                sx={styleMobileQuestionRemarks}
             >
                 {props.remarks}
             </Typography>
-            <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                    marginTop: 4,
-                    borderBottom: "1px solid gray",
-                    fontWeight: "bold",
-                    padding: 1,
-                    fontSize: 15
-                }}
-            >
+            <Typography variant="h6" component="div" sx={styleMobileTitle}>
                 試したこと、分からないこと
             </Typography>
             <Typography
                 variant="h5"
                 component="div"
-                sx={{
-                    padding: 1,
-                    marginBottom: 2,
-                    fontSize: 15
-                }}
+                sx={styleMobileQuestionRemarks}
             >
                 {props.question}
             </Typography>

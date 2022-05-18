@@ -10,6 +10,7 @@ import Documents from "../../../../Public/Question/Show/documents";
 import RelatedQuestions from "../../../../Public/Question/Show/related-questions";
 import Question from "../question";
 import Comments from "../../../../Public/Question/Show/comments/comments";
+import { styleReferenceArticle } from "../../../../Atom/Typography/TypographyStyle";
 
 /**
  * 質問詳細(公開)のプレビュー
@@ -64,13 +65,7 @@ function Preview(props) {
                 <Typography
                     variant="h6"
                     component="div"
-                    sx={{
-                        marginTop: 3,
-                        padding: 1,
-                        borderBottom: "1px solid gray",
-                        fontWeight: "bold",
-                        marginX: "5%"
-                    }}
+                    sx={styleReferenceArticle}
                 >
                     参考記事
                 </Typography>

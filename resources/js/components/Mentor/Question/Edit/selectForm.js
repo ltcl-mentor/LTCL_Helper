@@ -13,6 +13,11 @@ import PurpleButton from "../../../Atom/Button/PurpleButton";
 import WhiteButton from "../../../Atom/Button/WhiteButton";
 import TopicForm from "./topicForm";
 import Box from "@mui/material/Box";
+import {
+    styleCategoryTitle,
+    styleEditSubTitle,
+    styleEditTitle
+} from "../../../Atom/Typography/TypographyStyle";
 
 const styleSpan = {
     fontWeight: "normal",
@@ -225,17 +230,7 @@ const selectForm = () => {
     return (
         <Box>
             <Breadcrumbs page="mentor_question_edit" id={id} />
-            <Typography
-                variant="h5"
-                component="div"
-                sx={{
-                    marginTop: 4,
-                    marginBottom: 10,
-                    fontSize: 30,
-                    color: "#771af8",
-                    fontWeight: "bold"
-                }}
-            >
+            <Typography variant="h5" component="div" sx={styleEditTitle}>
                 質問編集画面
             </Typography>
             {showConfirm ? (
@@ -259,12 +254,7 @@ const selectForm = () => {
                         }}
                     >
                         <Grid item xs={7}>
-                            <Typography
-                                sx={{
-                                    fontWeight: "bold",
-                                    fontSize: 20
-                                }}
-                            >
+                            <Typography sx={styleCategoryTitle}>
                                 カテゴリー
                                 <span style={styleSpan}>
                                     どちらか1つを選択してください
@@ -283,13 +273,7 @@ const selectForm = () => {
                         {curriculum}
                         {project}
                     </Stack>
-                    <Typography
-                        sx={{
-                            fontWeight: "bold",
-                            fontSize: 20,
-                            mt: 6
-                        }}
-                    >
+                    <Typography sx={styleEditSubTitle}>
                         トピック
                         <span style={styleSpan}>
                             以下の選択肢から1つを選択してください
@@ -302,13 +286,7 @@ const selectForm = () => {
                         setCurriculumNumber={setCurriculumNumber}
                         topics={topics}
                     />
-                    <Typography
-                        sx={{
-                            fontWeight: "bold",
-                            fontSize: 20,
-                            mt: 4
-                        }}
-                    >
+                    <Typography sx={styleEditSubTitle}>
                         カリキュラム番号
                         <span style={styleSpan}>
                             以下の選択肢から1つを選択してください

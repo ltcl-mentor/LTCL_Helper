@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Link, useParams, useLocation, useHistory } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Button from "@mui/material/Button";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 import Box from "@mui/material/Box";
 import Breadcrumbs from "../../../../Breadcrumbs";
 import Publish from "../Publish/publish";
@@ -14,6 +11,10 @@ import Documents from "../../../../Public/Question/Show/documents";
 import RelatedQuestions from "../../../../Public/Question/Show/related-questions";
 import Question from "../question";
 import ShowBreadcrumbBox from "../../../../Atom/Box/ShowBreadcrumbBox";
+import {
+    styleArticleRegistration,
+    styleReferenceArticle
+} from "../../../../Atom/Typography/TypographyStyle";
 
 const showContentPc = props => {
     const categories = ["カリキュラム", "成果物"];
@@ -117,12 +118,7 @@ const showContentPc = props => {
             />
 
             <Box>
-                <Typography
-                    align="right"
-                    sx={{
-                        marginRight: "5%"
-                    }}
-                >
+                <Typography align="right" sx={styleArticleRegistration}>
                     <Button
                         sx={{
                             color: "#771AF8",
@@ -139,12 +135,7 @@ const showContentPc = props => {
                 <Typography
                     variant="h6"
                     component="div"
-                    sx={{
-                        borderBottom: "1px solid gray",
-                        fontWeight: "bold",
-                        padding: 1,
-                        marginX: "5%"
-                    }}
+                    sx={styleReferenceArticle}
                 >
                     参考記事
                 </Typography>

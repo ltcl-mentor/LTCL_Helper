@@ -14,6 +14,10 @@ import Documents from "../../../../Public/Question/Show/documents";
 import RelatedQuestions from "../../../../Public/Question/Show/related-questions";
 import Question from "../question";
 import ShowBreadcrumbBox from "../../../../Atom/Box/ShowBreadcrumbBox";
+import {
+    styleArticleRegistration,
+    styleReferenceArticle
+} from "../../../../Atom/Typography/TypographyStyle";
 
 const showContentMobile = props => {
     const categories = ["カリキュラム", "成果物"];
@@ -92,12 +96,7 @@ const showContentMobile = props => {
                 />
 
                 <Box>
-                    <Typography
-                        align="right"
-                        sx={{
-                            marginRight: "5%"
-                        }}
-                    >
+                    <Typography align="right" sx={styleArticleRegistration}>
                         <Button
                             sx={{
                                 color: "#771AF8",
@@ -114,12 +113,7 @@ const showContentMobile = props => {
                     <Typography
                         variant="h6"
                         component="div"
-                        sx={{
-                            borderBottom: "1px solid gray",
-                            fontWeight: "bold",
-                            padding: 1,
-                            marginX: "5%"
-                        }}
+                        sx={styleReferenceArticle}
                     >
                         参考記事
                     </Typography>

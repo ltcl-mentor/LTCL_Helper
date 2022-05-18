@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import ConfirmButton from "../../../../Atom/Button/ConfirmButton";
+import { styleReleaseButton } from "../../../../Atom/Typography/TypographyStyle";
 
 /**
  * 質問公開のためのチェックフォーム
@@ -62,11 +63,7 @@ function CheckForm(props) {
     let btn;
     if (check1 && check2 && check3) {
         btn = (
-            <Typography
-                component="div"
-                align="center"
-                sx={{ marginTop: 1, marginBottom: 1 }}
-            >
+            <Typography component="div" align="center" sx={styleReleaseButton}>
                 <ConfirmButton type="submit" onClick={handlePublish}>
                     公開する
                 </ConfirmButton>
@@ -74,11 +71,7 @@ function CheckForm(props) {
         );
     } else {
         btn = (
-            <Typography
-                component="div"
-                align="center"
-                sx={{ marginTop: 1, marginBottom: 1 }}
-            >
+            <Typography component="div" align="center" sx={styleReleaseButton}>
                 <ConfirmButton>公開する</ConfirmButton>
             </Typography>
         );
