@@ -15,6 +15,7 @@ import Documents from "./documents";
 import RelatedQuestions from "./related-questions";
 import BreakingPoint from "../../../BreakingPoint";
 import useMedia from "use-media";
+import ShowBreadcrumbBox from "../../../Atom/Box/ShowBreadcrumbBox";
 
 /**
  * 質問詳細画面(公開)のメインコンポーネント
@@ -173,13 +174,13 @@ function Show() {
                         info={parameter.state && parameter.state.number}
                     />
 
-                    <div style={{ marginLeft: "3%" }}>
+                    <ShowBreadcrumbBox>
                         <Breadcrumbs
                             page="public_question_show"
                             topic={question["topic"]}
                             topic_title={topics[question["topic"]]}
                         />
-                    </div>
+                    </ShowBreadcrumbBox>
                     {question.length !== 0 &&
                         !question.is_resolved &&
                         (question.user_id === user.id ||

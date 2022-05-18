@@ -13,6 +13,7 @@ import ConfirmButton from "../../../../Atom/Button/ConfirmButton";
 import TopicForm from "./topicForm";
 import Breadcrumb from "../../../../Breadcrumbs";
 import Box from "@material-ui/core/Box";
+import BreadcrumbBox from "../../../../Atom/Box/BreadcrumbBox";
 
 const styleSpan = {
     fontWeight: "normal",
@@ -236,9 +237,9 @@ const DefaultForm = () => {
                 />
             ) : (
                 <Box>
-                    <Box sx={{ marginLeft: "-3%" }}>
+                    <BreadcrumbBox>
                         <Breadcrumb page="public_question_create" />
-                    </Box>
+                    </BreadcrumbBox>
                     <Typography
                         variant="h5"
                         component="div"

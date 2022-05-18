@@ -13,6 +13,7 @@ import AddRelatedQuestion from "../../../Link/modal/addRelatedQuestion";
 import Documents from "../../../../Public/Question/Show/documents";
 import RelatedQuestions from "../../../../Public/Question/Show/related-questions";
 import Question from "../question";
+import ShowBreadcrumbBox from "../../../../Atom/Box/ShowBreadcrumbBox";
 
 const showContentPc = props => {
     const categories = ["カリキュラム", "成果物"];
@@ -43,13 +44,13 @@ const showContentPc = props => {
 
     return (
         <div>
-            <div style={{ marginLeft: "3%" }}>
+            <ShowBreadcrumbBox>
                 <Breadcrumbs
                     page={`mentor_question_show_${props.location}`}
                     topic={props.question.topic}
                     topic_title={topics[props.question.topic]}
                 />
-            </div>
+            </ShowBreadcrumbBox>
 
             <Box
                 sx={{
