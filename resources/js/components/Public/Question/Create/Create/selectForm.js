@@ -12,6 +12,8 @@ import WhiteButton from "../../../../Atom/Button/WhiteButton";
 import ConfirmButton from "../../../../Atom/Button/ConfirmButton";
 import TopicForm from "./topicForm";
 import Breadcrumb from "../../../../Breadcrumbs";
+import Box from "@material-ui/core/Box";
+import BreadcrumbBox from "../../../../Atom/Box/BreadcrumbBox";
 
 const styleSpan = {
     fontWeight: "normal",
@@ -220,7 +222,7 @@ const DefaultForm = () => {
     }, [category, topic, curriculum_number, keyword]);
 
     return (
-        <div>
+        <Box>
             {showConfirm ? (
                 <QuestionConfirm
                     category={category}
@@ -234,10 +236,10 @@ const DefaultForm = () => {
                     handleSubmit={handleSubmit}
                 />
             ) : (
-                <div className="condition">
-                    <div style={{ marginLeft: "-3%" }}>
+                <Box>
+                    <BreadcrumbBox>
                         <Breadcrumb page="public_question_create" />
-                    </div>
+                    </BreadcrumbBox>
                     <Typography
                         variant="h5"
                         component="div"
@@ -340,17 +342,17 @@ const DefaultForm = () => {
                         images={images}
                         setImages={setImages}
                     />
-                    <div
-                        style={{
+                    <Box
+                        sx={{
                             textAlign: "center"
                         }}
                     >
                         <ConfirmButton onClick={handleConfirmPage}>
                             確認する
                         </ConfirmButton>
-                    </div>
-                    <div
-                        style={{
+                    </Box>
+                    <Box
+                        sx={{
                             textAlign: "center",
                             marginTop: 5,
                             marginBottom: 30
@@ -368,10 +370,10 @@ const DefaultForm = () => {
                         >
                             Topに戻る
                         </Button>
-                    </div>
-                </div>
+                    </Box>
+                </Box>
             )}
-        </div>
+        </Box>
     );
 };
 

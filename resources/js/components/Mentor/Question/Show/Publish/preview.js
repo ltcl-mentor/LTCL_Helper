@@ -33,7 +33,7 @@ function Preview(props) {
     }, []);
 
     return (
-        <div>
+        <Box>
             <Breadcrumbs
                 aria-label="breadcrumb"
                 sx={{ marginLeft: "3%", marginY: 4 }}
@@ -84,7 +84,7 @@ function Preview(props) {
             </Box>
 
             <RelatedQuestions related_questions={related_questions} />
-        </div>
+        </Box>
     );
 }
 

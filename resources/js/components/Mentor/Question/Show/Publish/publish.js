@@ -9,6 +9,7 @@ import useMedia from "use-media";
 import BreakingPoint from "../../../../BreakingPoint";
 import PublishContentPc from "./responsive/publishContentPc";
 import PublishContentMobile from "./responsive/publishContentMobile";
+import Box from "@mui/material/Box";
 
 /**
  * 質問公開・非公開処理
@@ -75,7 +76,7 @@ const Publish = props => {
     return (
         <>
             {isWide ? (
-                <div>
+                <Box>
                     {publishBtn}
 
                     <PublishContentPc
@@ -89,9 +90,9 @@ const Publish = props => {
                         category={props.category}
                         topic={props.topic}
                     />
-                </div>
+                </Box>
             ) : (
-                <div>
+                <Box>
                     {publishBtn}
 
                     <PublishContentMobile
@@ -105,7 +106,7 @@ const Publish = props => {
                         category={props.category}
                         topic={props.topic}
                     />
-                </div>
+                </Box>
             )}
         </>
     );

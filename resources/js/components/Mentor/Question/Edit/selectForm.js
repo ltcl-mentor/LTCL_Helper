@@ -12,6 +12,7 @@ import ConfirmButton from "../../../Atom/Button/ConfirmButton";
 import PurpleButton from "../../../Atom/Button/PurpleButton";
 import WhiteButton from "../../../Atom/Button/WhiteButton";
 import TopicForm from "./topicForm";
+import Box from "@mui/material/Box";
 
 const styleSpan = {
     fontWeight: "normal",
@@ -222,7 +223,7 @@ const selectForm = () => {
     };
 
     return (
-        <div>
+        <Box>
             <Breadcrumbs page="mentor_question_edit" id={id} />
             <Typography
                 variant="h5"
@@ -250,7 +251,7 @@ const selectForm = () => {
                     handleSubmit={handleSubmit}
                 />
             ) : (
-                <div>
+                <Box>
                     <Grid
                         container
                         sx={{
@@ -340,17 +341,17 @@ const selectForm = () => {
                         images={images}
                         setImages={setImages}
                     />
-                    <div
-                        style={{
+                    <Box
+                        sx={{
                             textAlign: "center"
                         }}
                     >
                         <ConfirmButton onClick={handleConfirmPage}>
                             確認する
                         </ConfirmButton>
-                    </div>
-                    <div
-                        style={{
+                    </Box>
+                    <Box
+                        sx={{
                             textAlign: "center",
                             marginTop: 5,
                             marginBottom: 30
@@ -368,10 +369,10 @@ const selectForm = () => {
                         >
                             メンターTopに戻る
                         </Button>
-                    </div>
-                </div>
+                    </Box>
+                </Box>
             )}
-        </div>
+        </Box>
     );
 };
 

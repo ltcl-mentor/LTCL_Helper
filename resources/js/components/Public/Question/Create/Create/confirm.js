@@ -3,6 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Parameters from "../../Show/parameters";
 import ConfirmButton from "../../../../Atom/Button/ConfirmButton";
+import Box from "@material-ui/core/Box";
 
 /**
  * 質問登録前の確認フォーム
@@ -167,7 +168,7 @@ const QuestionConfirm = props => {
     }
 
     return (
-        <div calssName="container">
+        <Box>
             <Typography
                 variant="h5"
                 component="div"
@@ -191,13 +192,13 @@ const QuestionConfirm = props => {
                 images={props.images}
             />
 
-            <div style={{ textAlign: "center", marginTop: 50 }}>
+            <Box sx={{ textAlign: "center", marginTop: 50 }}>
                 <ConfirmButton onClick={props.handleSubmit}>
                     投稿する
                 </ConfirmButton>
-            </div>
-            <div
-                style={{
+            </Box>
+            <Box
+                sx={{
                     textAlign: "center",
                     marginTop: 5,
                     marginBottom: 30
@@ -206,7 +207,7 @@ const QuestionConfirm = props => {
                 <Button
                     variant="text"
                     onClick={props.handleConfirmPage}
-                    style={{
+                    sx={{
                         color: "black",
                         minWidth: 150,
                         maxWidth: 200,
@@ -215,8 +216,8 @@ const QuestionConfirm = props => {
                 >
                     入力画面に戻る
                 </Button>
-            </div>
-        </div>
+            </Box>
+        </Box>
     );
 };
 

@@ -85,7 +85,7 @@ function CheckForm(props) {
     }
 
     return (
-        <div className="checkForm">
+        <Box>
             <Box
                 sx={{
                     width: "95%",
@@ -112,7 +112,7 @@ function CheckForm(props) {
 
                 {btn}
             </Box>
-        </div>
+        </Box>
     );
 }
 

@@ -205,7 +205,7 @@ function TextForm(props) {
     }
 
     return (
-        <div>
+        <Box>
             <Box sx={{ marginTop: 2 }}>
                 <Tabs
                     value={value}
@@ -224,7 +224,7 @@ function TextForm(props) {
 
                 <Box sx={{ marginTop: 2, marginBottom: 5 }}>{tab_content}</Box>
             </Box>
-        </div>
+        </Box>
     );
 }
 
