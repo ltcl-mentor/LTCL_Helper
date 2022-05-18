@@ -26,7 +26,7 @@ import PublicQuestionShow from "./Public/Question/Show/Show";
 // import QuestionMentorYetCommentIndex from './Mentor/Question/Index/yet-comment-index/FromMentor';
 // import QuestionStudentYetCommentIndex from './Mentor/Question/Index/yet-comment-index/FromStudent';
 import QuestionShow from "./Mentor/Question/Show/Show";
-// import QuestionEdit from './Mentor/Question/Edit/Edit';
+import QuestionEdit from "./Mentor/Question/Edit/Edit";
 // import LinkFromQuestionIndex from './Mentor/Link/fromQuestion/Index/Index';
 // import LinkFromQuestionShow from './Mentor/Link/fromQuestion/Show/Show';
 // import LinkFromDocumentIndex from './Mentor/Link/fromDocument/Index/Index';
@@ -64,17 +64,14 @@ const Router = () => {
                 {/*ルーティング*/}
                 <Switch>
                     {/*一般ユーザがアクセスできるURL*/}
-
                     {/* トップ画面表示 */}
                     {user.length !== 0 && (
                         <Route key="home" path="/" exact component={Home} />
                     )}
-
                     {/* ユーザマイページ表示 */}
                     {user.length !== 0 && (
                         <Route path="/my_page" exact component={MyPage} />
                     )}
-
                     {/* ユーザマイページ質問詳細表示 */}
                     {user.length !== 0 && (
                         <Route
@@ -83,17 +80,14 @@ const Router = () => {
                             component={MyQuestion}
                         />
                     )}
-
                     {/* 質問履歴画面表示 */}
                     {user.length !== 0 && (
                         <Route path="/history" exact component={History} />
                     )}
-
                     {/* 公開中の参考記事一覧表示 */}
                     {/* user.length !== 0 &&
                         <Route path="/public/documents/index" exact component={ PublicDocumentIndex }/>
                     */}
-
                     {/* 公開中の質問をカテゴリー毎に表示 */}
                     {user.length !== 0 && (
                         <Route
@@ -102,7 +96,6 @@ const Router = () => {
                             component={PublicQuestionIndexIndex}
                         />
                     )}
-
                     {/* 公開中の質問一覧表示 */}
                     {/* user.length !== 0 &&
                         <Route
@@ -111,7 +104,6 @@ const Router = () => {
                             component={PublicQuestionIndex}
                         />
                     */}
-
                     {/* 受講生の質問投稿画面表示 */}
                     {user.length !== 0 && (
                         <Route
@@ -120,7 +112,6 @@ const Router = () => {
                             component={PublicQuestionCreate}
                         />
                     )}
-
                     {/* 質問詳細画面表示 */}
                     {user.length !== 0 && (
                         <Route
@@ -129,20 +120,16 @@ const Router = () => {
                             component={PublicQuestionShow}
                         />
                     )}
-
                     {/* 絞り込み検索画面表示 */}
                     {/* user.length !== 0 &&
                         <Route path="/search/condition" exact component={Condition} />
                     */}
-
                     {/* フリーワード検索画面表示 */}
                     {/* user.length !== 0 &&
                         <Route path="/search/freeword" exact component={Freeword} />
                     */}
-
                     {/*=======================================================================================*/}
                     {/*管理者ユーザがアクセスできるURL*/}
-
                     {/* 管理者ユーザマイページ表示 */}
                     {user.length !== 0 && user.is_admin === "staff" && (
                         <Route
@@ -151,12 +138,10 @@ const Router = () => {
                             component={AdminMyPage}
                         />
                     )}
-
                     {/* メンター管理画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route path="/mentor/top" exact component={MentorTop} />
                     */}
-
                     {/* 記事一覧画面表示示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
@@ -165,7 +150,6 @@ const Router = () => {
                             component={DocumentIndex}
                         />
                     */}
-
                     {/* 記事新規作成画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
@@ -174,7 +158,6 @@ const Router = () => {
                             component={DocumentCreate}
                         />
                     */}
-
                     {/* 記事編集画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
@@ -183,7 +166,6 @@ const Router = () => {
                             component={DocumentEdit}
                         />
                     */}
-
                     {/* 記事詳細画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
@@ -192,7 +174,6 @@ const Router = () => {
                             component={DocumentShow}
                         />
                     */}
-
                     {/* 質問一覧画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
@@ -201,7 +182,6 @@ const Router = () => {
                             component={QuestionIndex}
                         />
                     */}
-
                     {/* 質問一覧画面表示 */}
                     {user.length !== 0 && user.is_admin === "staff" && (
                         <Route
@@ -210,7 +190,6 @@ const Router = () => {
                             component={MentorQuestions}
                         />
                     )}
-
                     {/* メンターコメント待ちの質問一覧画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
@@ -219,7 +198,6 @@ const Router = () => {
                             component={QuestionMentorYetCommentIndex}
                         />
                     */}
-
                     {/* 受講生コメント待ちの質問一覧画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
@@ -228,16 +206,13 @@ const Router = () => {
                             component={QuestionStudentYetCommentIndex}
                         />
                     */}
-
                     {/* 質問編集画面表示 */}
-                    {/* (user.length !== 0 && user.is_admin === "staff") &&
-                        <Route
-                            path="/questions/:id/edit"
-                            exact
-                            component={QuestionEdit}
-                        />
-                    */}
-
+                    {user.length !== 0 && user.is_admin === "staff"} &&
+                    <Route
+                        path="/questions/:id/edit"
+                        exact
+                        component={QuestionEdit}
+                    />
                     {/* 質問詳細画面表示 */}
                     {user.length !== 0 && user.is_admin === "staff" && (
                         <Route
@@ -246,7 +221,6 @@ const Router = () => {
                             component={QuestionShow}
                         />
                     )}
-
                     {/* 紐付け（単体質問と複数記事）一覧画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
@@ -255,7 +229,6 @@ const Router = () => {
                             component={LinkFromQuestionIndex}
                         />
                     */}
-
                     {/* 紐付け（単体質問と複数記事）登録画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
@@ -264,7 +237,6 @@ const Router = () => {
                             component={LinkFromQuestionShow}
                         />
                     */}
-
                     {/* 紐付け（単体記事と複数質問）一覧画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
@@ -273,7 +245,6 @@ const Router = () => {
                             component={LinkFromDocumentIndex}
                         />
                     */}
-
                     {/* 紐付け（単体記事と複数質問）登録画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
@@ -282,12 +253,10 @@ const Router = () => {
                             component={LinkFromDocumentShow}
                         />
                     */}
-
                     {/* ユーザ一覧画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route path="/users/index" exact component={UserIndex} />
                     */}
-
                     {/* 受講生登録画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
@@ -296,7 +265,6 @@ const Router = () => {
                             component={UserRegisterPublic}
                         />
                     */}
-
                     {/* 管理者登録画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
@@ -305,12 +273,10 @@ const Router = () => {
                             component={UserRegisterAdmin}
                         />
                     */}
-
                     {/* イベント一覧画面表示 */}
-                    {/* (user.length !== 0 && user.is_admin === "staff") &&
+                    {/* (user.length !== 0 && user.is_adfmin === "staff") &&
                         <Route path="/events/index" exact component={EventIndex} />
                     */}
-
                     {/* イベント登録画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
@@ -319,7 +285,6 @@ const Router = () => {
                             component={EventRegister}
                         />
                     */}
-
                     {/* イベント編集画面表示 */}
                     {/* (user.length !== 0 && user.is_admin === "staff") &&
                         <Route
@@ -328,7 +293,6 @@ const Router = () => {
                             component={EventRegister}
                         />
                     */}
-
                     {/*404アクセスエラー*/}
                     <Route path="/" component={AccessError} />
                 </Switch>
