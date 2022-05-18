@@ -8,6 +8,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import useMedia from "use-media";
 import BreakingPoint from "../../../../BreakingPoint";
+import CommentContentPc from "./responsive/commentContentPc";
+import CommentContentMobile from "./responsive/commentContentMobile";
 
 /**
  * コメント（個別）
@@ -198,152 +200,35 @@ function Comment(props) {
     }
 
     return (
-        <>
+        <Box>
             {isWide ? (
                 // 大画面用のコンポーネント
-                <>
-                    <Box sx={{ display: "flex", flexDirection: "row" }}>
-                        <Grid container spacing={2} justifyContent="left">
-                            <Grid item>
-                                {props.is_staff ? (
-                                    <Avatar
-                                        alt="Mentor"
-                                        src="/images/images.jpg"
-                                        sx={{
-                                            marginTop: 3,
-                                            marginLeft: 3,
-                                            float: "left"
-                                        }}
-                                    />
-                                ) : (
-                                    <Avatar
-                                        alt="Student"
-                                        src="/images/pose_english_shrug_man.png"
-                                        sx={{
-                                            marginTop: 3,
-                                            marginLeft: 3
-                                        }}
-                                    />
-                                )}
-                            </Grid>
-
-                            <Grid item sx={{ marginTop: 4 }}>
-                                <Typography variant="h7" component="div">
-                                    {props.is_staff ? "メンター" : "受講生"}{" "}
-                                    &nbsp;
-                                    {props.created_at}
-                                </Typography>
-                            </Grid>
-                        </Grid>
-
-                        {(props.user_id === props.target_student ||
-                            props.is_admin === "staff") && (
-                            <Grid
-                                container
-                                justifyContent="right"
-                                alignItems="center"
-                                sx={{ marginTop: 1 }}
-                            >
-                                <Grid item>
-                                    <Button
-                                        variant="text"
-                                        color="secondary"
-                                        onClick={() =>
-                                            props.setEditId(props.comment_id)
-                                        }
-                                    >
-                                        編集
-                                    </Button>
-                                </Grid>
-
-                                <Grid item>/</Grid>
-
-                                <Grid item>
-                                    <Button
-                                        variant="text"
-                                        color="secondary"
-                                        onClick={deleteConfirm}
-                                    >
-                                        削除
-                                    </Button>
-                                </Grid>
-                            </Grid>
-                        )}
-                    </Box>
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                            paddingTop: 2,
-                            marginLeft: 4,
-                            marginBottom: 2,
-                            marginRight: 2,
-                            clear: "left"
-                        }}
-                    >
-                        {comment}
-                    </Typography>
-                </>
+                <CommentContentPc
+                    is_staff={props.is_staff}
+                    created_at={props.created_at}
+                    user_id={props.user_id}
+                    target_student={props.target_student}
+                    is_admin={props.is_admin}
+                    setEditId={props.setEditId}
+                    comment_id={props.comment_id}
+                    deleteConfirm={deleteConfirm}
+                    comment={comment}
+                />
             ) : (
                 // スマホ用のコンポーネント
-                <>
-                    <Box sx={{ display: "flex", flexDirection: "row" }}>
-                        {props.is_staff ? (
-                            <Avatar
-                                alt="Mentor"
-                                src="/images/images.jpg"
-                                sx={{ mr: 1 }}
-                            />
-                        ) : (
-                            <Avatar
-                                alt="Student"
-                                src="/images/pose_english_shrug_man.png"
-                                sx={{ mr: 1 }}
-                            />
-                        )}
-
-                        <Typography variant="h7" component="div">
-                            {props.is_staff ? "メンター" : "受講生"}
-                            &nbsp;
-                            {props.created_at}
-                        </Typography>
-
-                        {(props.user_id === props.target_student ||
-                            props.is_admin === "staff") && (
-                            <Box sx={{ display: "flex", alignItems: "center" }}>
-                                <Button
-                                    variant="text"
-                                    color="secondary"
-                                    onClick={() =>
-                                        props.setEditId(props.comment_id)
-                                    }
-                                >
-                                    編集
-                                </Button>
-                                /
-                                <Button
-                                    variant="text"
-                                    color="secondary"
-                                    onClick={deleteConfirm}
-                                >
-                                    削除
-                                </Button>
-                            </Box>
-                        )}
-                    </Box>
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                            m: 2,
-                            fontSize: 15
-                        }}
-                    >
-                        {comment}
-                    </Typography>
-                </>
+                <CommentContentMobile
+                    is_staff={props.is_staff}
+                    created_at={props.created_at}
+                    user_id={props.user_id}
+                    target_student={props.target_student}
+                    is_admin={props.is_admin}
+                    setEditId={props.setEditId}
+                    comment_id={props.comment_id}
+                    deleteConfirm={deleteConfirm}
+                    comment={comment}
+                />
             )}
-        </>
+        </Box>
     );
 }
 
