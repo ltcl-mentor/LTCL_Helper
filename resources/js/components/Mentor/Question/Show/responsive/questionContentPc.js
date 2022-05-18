@@ -8,6 +8,13 @@ import {
     stylePcTitle,
     stylePcQuestionRemarks
 } from "../../../../Atom/Typography/TypographyStyle";
+import {
+    styleAvatarBox,
+    styleParentQuestionBox,
+    styleQuestionInfoBox,
+    styleQuestionTitleBox,
+    styleSelectStatusBox
+} from "../../../../Atom/Box/BoxStyle";
 
 const questionContentPc = props => {
     const categories = ["カリキュラム", "成果物"];
@@ -37,15 +44,9 @@ const questionContentPc = props => {
     ];
 
     return (
-        <Box sx={{ width: "90%", marginX: "5%" }}>
-            <Box
-                sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between"
-                }}
-            >
-                <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={styleParentQuestionBox}>
+            <Box sx={styleQuestionInfoBox}>
+                <Box sx={styleAvatarBox}>
                     <Avatar
                         alt="Student"
                         src="/images/pose_english_shrug_man.png"
@@ -65,7 +66,7 @@ const questionContentPc = props => {
                 </Typography>
             </Box>
 
-            <Box sx={{ display: "fex", position: "relative" }}>
+            <Box sx={styleQuestionTitleBox}>
                 <Typography
                     variant="h4"
                     component="div"
@@ -73,7 +74,7 @@ const questionContentPc = props => {
                 >
                     {props.title}
                 </Typography>
-                <Box sx={{ position: "absolute", right: 0, margin: 2 }}>
+                <Box sx={styleSelectStatusBox}>
                     <SelectStatus
                         id={props.id}
                         status={props.status}

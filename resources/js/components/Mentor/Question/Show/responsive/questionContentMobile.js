@@ -10,6 +10,13 @@ import {
     styleMobileQuestionTitle,
     styleMobileTitle
 } from "../../../../Atom/Typography/TypographyStyle";
+import {
+    styleAvatarBox,
+    styleMobileButtonGroupBox,
+    styleMobileSelectStatusBox,
+    styleParentQuestionBox,
+    styleQuestionTitleBox
+} from "../../../../Atom/Box/BoxStyle";
 
 const questionContentMobile = props => {
     const categories = ["カリキュラム", "成果物"];
@@ -39,13 +46,8 @@ const questionContentMobile = props => {
     ];
 
     return (
-        <Box sx={{ width: "90%", marginX: "5%" }}>
-            <Box
-                sx={{
-                    textAlign: "center",
-                    mb: 6
-                }}
-            >
+        <Box sx={styleParentQuestionBox}>
+            <Box sx={styleMobileSelectStatusBox}>
                 <SelectStatus
                     id={props.id}
                     status={props.status}
@@ -53,13 +55,8 @@ const questionContentMobile = props => {
                     responseStatus={props.responseStatus}
                 />
             </Box>
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "column"
-                }}
-            >
-                <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box>
+                <Box sx={styleAvatarBox}>
                     <Avatar
                         alt="Student"
                         src="/images/pose_english_shrug_man.png"
@@ -73,14 +70,7 @@ const questionContentMobile = props => {
                     </Typography>
                 </Box>
 
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        mt: 2
-                    }}
-                >
+                <Box sx={styleMobileButtonGroupBox}>
                     <Box>
                         <Typography variant="h7" component="div">
                             {categories[props.category]}&nbsp; /&nbsp;
@@ -110,7 +100,7 @@ const questionContentMobile = props => {
                 </Box>
             </Box>
 
-            <Box sx={{ display: "fex", position: "relative" }}>
+            <Box sx={styleQuestionTitleBox}>
                 <Typography
                     variant="h4"
                     component="div"

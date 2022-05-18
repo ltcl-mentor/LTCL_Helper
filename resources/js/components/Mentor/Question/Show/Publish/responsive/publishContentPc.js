@@ -6,20 +6,7 @@ import Alert from "@mui/material/Alert";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Preview from "../preview";
 import CheckForm from "../checkForm";
-
-const styleForPc = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "70%",
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-    height: "90%",
-    overflow: "scroll"
-};
+import { stylePcPreviewModalBox } from "../../../../../Atom/Box/BoxStyle";
 
 const publishContentPc = props => {
     return (
@@ -30,7 +17,7 @@ const publishContentPc = props => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={styleForPc}>
+                <Box sx={stylePcPreviewModalBox}>
                     <Button
                         onClick={props.handleClose}
                         startIcon={<CancelIcon />}

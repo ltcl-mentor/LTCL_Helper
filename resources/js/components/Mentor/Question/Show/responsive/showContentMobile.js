@@ -18,6 +18,11 @@ import {
     styleArticleRegistration,
     styleReferenceArticle
 } from "../../../../Atom/Typography/TypographyStyle";
+import {
+    styleDocumentsBox,
+    styleMobilePublishBox,
+    styleReturnQuestionBox
+} from "../../../../Atom/Box/BoxStyle";
 
 const showContentMobile = props => {
     const categories = ["カリキュラム", "成果物"];
@@ -56,7 +61,7 @@ const showContentMobile = props => {
                     />
                 </ShowBreadcrumbBox>
 
-                <Box sx={{ textAlign: "center", mb: 3 }}>
+                <Box sx={styleMobilePublishBox}>
                     <Publish
                         question_id={props.id}
                         question={props.question}
@@ -118,22 +123,11 @@ const showContentMobile = props => {
                         参考記事
                     </Typography>
                 </Box>
-                <Box
-                    sx={{
-                        marginTop: 3,
-                        padding: 1
-                    }}
-                >
+                <Box sx={styleDocumentsBox}>
                     <Documents documents={props.documents} />
                 </Box>
                 <RelatedQuestions related_questions={props.related_questions} />
-                <Box
-                    sx={{
-                        textAlign: "center",
-                        marginTop: "3%",
-                        marginBottom: "5%"
-                    }}
-                >
+                <Box sx={styleReturnQuestionBox}>
                     <Button
                         variant="text"
                         onClick={props.backQuestionIndex}

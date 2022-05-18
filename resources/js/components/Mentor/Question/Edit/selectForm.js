@@ -18,6 +18,7 @@ import {
     styleEditSubTitle,
     styleEditTitle
 } from "../../../Atom/Typography/TypographyStyle";
+import { styleReturnQuestionBox } from "../../../Atom/Box/BoxStyle";
 
 const styleSpan = {
     fontWeight: "normal",
@@ -328,13 +329,7 @@ const selectForm = () => {
                             確認する
                         </ConfirmButton>
                     </Box>
-                    <Box
-                        sx={{
-                            textAlign: "center",
-                            marginTop: 5,
-                            marginBottom: 30
-                        }}
-                    >
+                    <Box sx={styleReturnQuestionBox}>
                         <Button
                             variant="text"
                             onClick={handleBackTopPage}
