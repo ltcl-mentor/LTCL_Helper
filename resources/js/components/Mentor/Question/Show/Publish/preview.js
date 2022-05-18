@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-
-import Parameters from "../../../../Public/Question/Show/parameters";
 import Documents from "../../../../Public/Question/Show/documents";
 import RelatedQuestions from "../../../../Public/Question/Show/related-questions";
 import Question from "../question";

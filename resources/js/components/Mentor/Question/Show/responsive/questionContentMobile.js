@@ -17,6 +17,7 @@ import {
     styleParentQuestionBox,
     styleQuestionTitleBox
 } from "../../../../Atom/Box/BoxStyle";
+import { styleMobileEditDelete } from "../../../../Atom/Button/ButtonStyle";
 
 const questionContentMobile = props => {
     const categories = ["カリキュラム", "成果物"];
@@ -81,17 +82,14 @@ const questionContentMobile = props => {
                     </Box>
                     <Box>
                         <Link to={`/questions/` + props.id + `/edit`}>
-                            <Button
-                                variant="text"
-                                sx={{ color: "#771AF8", fontSize: 15 }}
-                            >
+                            <Button variant="text" sx={styleMobileEditDelete}>
                                 編集
                             </Button>
                         </Link>
                         /
                         <Button
                             variant="text"
-                            sx={{ color: "#771AF8", fontSize: 15 }}
+                            sx={styleMobileEditDelete}
                             onClick={props.deleteConfirm}
                         >
                             削除

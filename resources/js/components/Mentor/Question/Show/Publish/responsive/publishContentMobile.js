@@ -6,7 +6,10 @@ import Alert from "@mui/material/Alert";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Preview from "../preview";
 import CheckForm from "../checkForm";
-import { styleMobilePreviewModalBox } from "../../../../../Atom/Box/BoxStyle";
+import {
+    styleMobilePreviewModalBox,
+    stylePreviewOutlineBox
+} from "../../../../../Atom/Box/BoxStyle";
 
 const publishContentMobile = props => {
     return (
@@ -37,7 +40,7 @@ const publishContentMobile = props => {
                         handleClose={props.handleClose}
                     />
 
-                    <Box sx={{ border: "1px solid black" }}>
+                    <Box sx={stylePreviewOutlineBox}>
                         <Preview
                             question={props.question}
                             images={props.images}

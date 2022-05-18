@@ -21,6 +21,11 @@ import {
     styleDocumentsBox,
     styleReturnQuestionBox
 } from "../../../../Atom/Box/BoxStyle";
+import {
+    styleArticleRegistrationButton,
+    styleEditDelete,
+    styleReturnQuestionButton
+} from "../../../../Atom/Button/ButtonStyle";
 
 const showContentPc = props => {
     const categories = ["カリキュラム", "成果物"];
@@ -72,17 +77,14 @@ const showContentPc = props => {
                 </Box>
                 <Box>
                     <Link to={`/questions/` + props.id + `/edit`}>
-                        <Button
-                            variant="text"
-                            sx={{ color: "#771AF8", fontSize: 20 }}
-                        >
+                        <Button variant="text" sx={styleEditDelete}>
                             編集
                         </Button>
                     </Link>
                     /
                     <Button
                         variant="text"
-                        sx={{ color: "#771AF8", fontSize: 20 }}
+                        sx={styleEditDelete}
                         onClick={props.deleteConfirm}
                     >
                         削除
@@ -120,13 +122,7 @@ const showContentPc = props => {
             <Box>
                 <Typography align="right" sx={styleArticleRegistration}>
                     <Button
-                        sx={{
-                            color: "#771AF8",
-                            textDecoration: "underline",
-                            marginBottom: "-5%",
-                            fontSize: 18,
-                            fontWeight: "bold"
-                        }}
+                        sx={styleArticleRegistrationButton}
                         onClick={props.handleOpen}
                     >
                         記事登録
@@ -148,13 +144,7 @@ const showContentPc = props => {
                 <Button
                     variant="text"
                     onClick={props.backQuestionIndex}
-                    sx={{
-                        color: "#771AF8",
-                        textDecoration: "underline",
-                        marginBottom: "-5%",
-                        fontSize: 18,
-                        fontWeight: "bold"
-                    }}
+                    sx={styleReturnQuestionButton}
                 >
                     質問一覧に戻る
                 </Button>

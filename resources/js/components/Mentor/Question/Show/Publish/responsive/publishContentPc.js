@@ -6,7 +6,11 @@ import Alert from "@mui/material/Alert";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Preview from "../preview";
 import CheckForm from "../checkForm";
-import { stylePcPreviewModalBox } from "../../../../../Atom/Box/BoxStyle";
+import {
+    stylePcPreviewModalBox,
+    stylePreviewOutlineBox
+} from "../../../../../Atom/Box/BoxStyle";
+import { styleCloseModalButton } from "../../../../../Atom/Button/ButtonStyle";
 
 const publishContentPc = props => {
     return (
@@ -21,11 +25,7 @@ const publishContentPc = props => {
                     <Button
                         onClick={props.handleClose}
                         startIcon={<CancelIcon />}
-                        sx={{
-                            color: "red",
-                            marginLeft: "95%",
-                            marginBottom: "5%"
-                        }}
+                        sx={styleCloseModalButton}
                     ></Button>
                     <Alert severity="error">
                         これは公開時のプレビューです。まだ公開処理は完了していません。
@@ -37,7 +37,7 @@ const publishContentPc = props => {
                         handleClose={props.handleClose}
                     />
 
-                    <Box sx={{ border: "1px solid black" }}>
+                    <Box sx={stylePreviewOutlineBox}>
                         <Preview
                             question={props.question}
                             images={props.images}

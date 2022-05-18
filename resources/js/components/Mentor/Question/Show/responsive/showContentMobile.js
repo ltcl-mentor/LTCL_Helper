@@ -23,6 +23,10 @@ import {
     styleMobilePublishBox,
     styleReturnQuestionBox
 } from "../../../../Atom/Box/BoxStyle";
+import {
+    styleArticleRegistrationButton,
+    styleReturnQuestionButton
+} from "../../../../Atom/Button/ButtonStyle";
 
 const showContentMobile = props => {
     const categories = ["カリキュラム", "成果物"];
@@ -103,13 +107,7 @@ const showContentMobile = props => {
                 <Box>
                     <Typography align="right" sx={styleArticleRegistration}>
                         <Button
-                            sx={{
-                                color: "#771AF8",
-                                textDecoration: "underline",
-                                marginBottom: "-5%",
-                                fontSize: 18,
-                                fontWeight: "bold"
-                            }}
+                            sx={styleArticleRegistrationButton}
                             onClick={props.handleOpen}
                         >
                             記事登録
@@ -131,13 +129,7 @@ const showContentMobile = props => {
                     <Button
                         variant="text"
                         onClick={props.backQuestionIndex}
-                        sx={{
-                            color: "#771AF8",
-                            textDecoration: "underline",
-                            marginBottom: "-5%",
-                            fontSize: 18,
-                            fontWeight: "bold"
-                        }}
+                        sx={styleReturnQuestionButton}
                     >
                         質問一覧に戻る
                     </Button>
