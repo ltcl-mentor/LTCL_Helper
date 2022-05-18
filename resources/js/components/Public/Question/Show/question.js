@@ -5,6 +5,8 @@ import Grid from "@mui/material/Grid";
 import Box from "@material-ui/core/Box";
 import BreakingPoint from "../../../BreakingPoint";
 import useMedia from "use-media";
+import QuestionContentPc from "./responsive/questionContentPc";
+import QuestionContentMobile from "./responsive/questionContentMobile";
 
 /**
  * 質問表示
@@ -198,190 +200,26 @@ function Question(props) {
         <>
             {isWide ? (
                 // 大画面で表示するコンポーネント
-                <Box sx={{ width: "90%", marginX: "5%" }}>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-between"
-                        }}
-                    >
-                        <Box sx={{ display: "flex", alignItems: "center" }}>
-                            <Avatar
-                                alt="Student"
-                                src="/images/pose_english_shrug_man.png"
-                                sx={{ marginRight: 2 }}
-                            />
-
-                            <Typography variant="h7" component="div">
-                                受講生 &nbsp; {props.updated_at}
-                            </Typography>
-                        </Box>
-
-                        <Typography variant="h7" component="div">
-                            {categories[props.category]}&nbsp; /&nbsp;
-                            {topics[props.topic]}
-                            &nbsp; /&nbsp;
-                            {props.curriculum_number}&nbsp;
-                        </Typography>
-                    </Box>
-
-                    <Typography
-                        variant="h4"
-                        component="div"
-                        sx={{
-                            marginTop: 4,
-                            fontSize: 30,
-                            fontWeight: "bold"
-                        }}
-                    >
-                        {props.title}
-                    </Typography>
-
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                            marginTop: 3,
-                            borderBottom: "1px solid gray",
-                            fontWeight: "bold",
-                            padding: 1
-                        }}
-                    >
-                        調べたこと
-                    </Typography>
-
-                    <Typography
-                        variant="h5"
-                        component="div"
-                        sx={{
-                            marginTop: 1,
-                            padding: 2,
-                            marginBottom: 2
-                        }}
-                    >
-                        {props.remarks}
-                    </Typography>
-
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                            marginTop: 4,
-                            borderBottom: "1px solid gray",
-                            fontWeight: "bold",
-                            padding: 1
-                        }}
-                    >
-                        試したこと、分からないこと
-                    </Typography>
-
-                    <Typography
-                        variant="h5"
-                        component="div"
-                        sx={{
-                            marginTop: 1,
-                            padding: 2,
-                            marginBottom: 2
-                        }}
-                    >
-                        {question}
-                    </Typography>
-                </Box>
+                <QuestionContentPc
+                    updated_at={props.updated_at}
+                    category={props.category}
+                    topic={props.topic}
+                    curriculum_number={props.curriculum_number}
+                    title={props.title}
+                    remarks={props.remarks}
+                    question={question}
+                />
             ) : (
                 // スマホで表示するコンポーネント
-                <Box sx={{ width: "90%", marginX: "5%" }}>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column"
-                        }}
-                    >
-                        <Box sx={{ display: "flex", alignItems: "center" }}>
-                            <Avatar
-                                alt="Student"
-                                src="/images/pose_english_shrug_man.png"
-                                sx={{
-                                    marginRight: 2
-                                }}
-                            />
-
-                            <Typography variant="h7" component="div">
-                                受講生 &nbsp; {props.updated_at}
-                            </Typography>
-                        </Box>
-
-                        <Typography variant="h7" component="div">
-                            {categories[props.category]}&nbsp; /&nbsp;
-                            {topics[props.topic]}
-                            &nbsp; /&nbsp;
-                            {props.curriculum_number}&nbsp;
-                        </Typography>
-                    </Box>
-                    <Box sx={{ display: "fex", position: "relative" }}>
-                        <Typography
-                            variant="h4"
-                            component="div"
-                            sx={{
-                                marginTop: 4,
-                                fontSize: 20,
-                                fontWeight: "bold"
-                            }}
-                        >
-                            {props.title}
-                        </Typography>
-                    </Box>
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                            marginTop: 3,
-                            borderBottom: "1px solid gray",
-                            fontWeight: "bold",
-                            padding: 1,
-                            fontSize: 15
-                        }}
-                    >
-                        調べたこと
-                    </Typography>
-
-                    <Typography
-                        variant="h5"
-                        component="div"
-                        sx={{
-                            fontSize: 15,
-                            padding: 1,
-                            marginBottom: 2
-                        }}
-                    >
-                        {props.remarks}
-                    </Typography>
-
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                            marginTop: 4,
-                            borderBottom: "1px solid gray",
-                            fontWeight: "bold",
-                            padding: 1
-                        }}
-                    >
-                        試したこと、分からないこと
-                    </Typography>
-
-                    <Typography
-                        variant="h5"
-                        component="div"
-                        sx={{
-                            padding: 1,
-                            marginBottom: 2,
-                            fontSize: 15
-                        }}
-                    >
-                        {question}
-                    </Typography>
-                </Box>
+                <QuestionContentMobile
+                    updated_at={props.updated_at}
+                    category={props.category}
+                    topic={props.topic}
+                    curriculum_number={props.curriculum_number}
+                    title={props.title}
+                    remarks={props.remarks}
+                    question={question}
+                />
             )}
         </>
     );
