@@ -103,12 +103,7 @@ const showContentMobile = props => {
                 <Button
                     variant="text"
                     onClick={props.handleBackQuestionShow}
-                    sx={{
-                        margin: "3%",
-                        borderBottom: "1px solid #771af8",
-                        color: "#771af8",
-                        borderRadius: 0
-                    }}
+                    sx={styleReferenceArticle}
                 >
                     {topics[props.question["topic"]]}質問一覧に戻る
                 </Button>

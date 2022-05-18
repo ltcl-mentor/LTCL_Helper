@@ -8,6 +8,7 @@ import {
     styleCodeblock,
     styleEditTitle
 } from "../../../../Atom/Typography/TypographyStyle";
+import { styleReturnTopButton } from "../../../../Atom/Button/ButtonStyle";
 
 /**
  * 質問登録前の確認フォーム
@@ -193,12 +194,7 @@ const QuestionConfirm = props => {
                 <Button
                     variant="text"
                     onClick={props.handleConfirmPage}
-                    sx={{
-                        color: "black",
-                        minWidth: 150,
-                        maxWidth: 200,
-                        marginBottom: 5
-                    }}
+                    sx={styleReturnTopButton}
                 >
                     入力画面に戻る
                 </Button>

@@ -19,6 +19,7 @@ import {
     styleEditSubTitle,
     styleEditTitle
 } from "../../../../Atom/Typography/TypographyStyle";
+import { styleReturnTopButton } from "../../../../Atom/Button/ButtonStyle";
 
 const styleSpan = {
     fontWeight: "normal",
@@ -343,12 +344,7 @@ const DefaultForm = () => {
                         <Button
                             variant="text"
                             onClick={handleBackTopPage}
-                            style={{
-                                color: "black",
-                                minWidth: 150,
-                                maxWidth: 200,
-                                marginBottom: 5
-                            }}
+                            style={styleReturnTopButton}
                         >
                             Topに戻る
                         </Button>

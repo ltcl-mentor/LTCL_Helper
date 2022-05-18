@@ -9,40 +9,12 @@ import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 
 import TextForm from "../../Create/Create/question-form/original-text-form/originalTextForm";
+import { CommentButton, PostButton } from "../../../../Atom/Button/ButtonStyle";
 
 /**
  * コメント新規作成
  */
 
-const CommentButton = styled(Button)(({ theme }) => ({
-    variant: "outlined",
-    color: "#771af8",
-    border: "2px solid #771af8",
-    fontWeight: "bold",
-    minWidth: 150,
-    maxWidth: 200,
-    marginBottom: 5,
-    fontSize: 15,
-    "&:hover": {
-        backgroundColor: "#771AF8",
-        color: "white"
-    }
-}));
-
-const PostButton = styled(Button)(({ theme }) => ({
-    variant: "outlined",
-    color: "#771af8",
-    border: "2px solid #771af8",
-    fontWeight: "bold",
-    minWidth: 100,
-    maxWidth: 150,
-    marginBottom: 5,
-    fontSize: 15,
-    "&:hover": {
-        backgroundColor: "#771AF8",
-        color: "white"
-    }
-}));
 function Create(props) {
     const location = useLocation();
     const history = useHistory();
@@ -112,14 +84,18 @@ function Create(props) {
 
             <Grid container spacing={2} justifyContent="center">
                 <Grid item>
-                    <PostButton onClick={handleClose}>キャンセル</PostButton>
+                    <Button sx={PostButton} onClick={handleClose}>
+                        キャンセル
+                    </Button>
                 </Grid>
 
                 <Grid item>
                     {comment.trim().length === 0 ? (
-                        <PostButton>投稿</PostButton>
+                        <Button sx={PostButton}>投稿</Button>
                     ) : (
-                        <PostButton onClick={handleSubmit}>投稿</PostButton>
+                        <Button sx={PostButton} onClick={handleSubmit}>
+                            投稿
+                        </Button>
                     )}
                 </Grid>
             </Grid>
@@ -140,12 +116,13 @@ function Create(props) {
             ) : (
                 <Box sx={{ textAlign: "center", marginBottom: 2 }}>
                     {props.type === "create" ? (
-                        <CommentButton
+                        <Button
+                            sx={CommentButton}
                             startIcon={<CreateIcon />}
                             onClick={handleOpen}
                         >
                             新規にコメントを追加
-                        </CommentButton>
+                        </Button>
                     ) : null}
                 </Box>
             )}

@@ -11,6 +11,7 @@ import Documents from "../documents";
 import RelatedQuestions from "../related-questions";
 import ShowBreadcrumbBox from "../../../../Atom/Box/ShowBreadcrumbBox";
 import { styleReferenceArticle } from "../../../../Atom/Typography/TypographyStyle";
+import { styleReturnIndividualButton } from "../../../../Atom/Button/ButtonStyle";
 
 const showContentPc = props => {
     const topics = [
@@ -102,12 +103,7 @@ const showContentPc = props => {
                 <Button
                     variant="text"
                     onClick={props.handleBackQuestionShow}
-                    sx={{
-                        margin: "3%",
-                        borderBottom: "1px solid #771af8",
-                        color: "#771af8",
-                        borderRadius: 0
-                    }}
+                    sx={styleReturnIndividualButton}
                 >
                     {topics[props.question["topic"]]}質問一覧に戻る
                 </Button>
