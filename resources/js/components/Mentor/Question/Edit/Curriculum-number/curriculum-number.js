@@ -46,7 +46,7 @@ function CurriculumNumber(props) {
     }, [props.category, props.topic]);
 
     return (
-        <div>
+        <Box>
             <Box sx={{ textAlign: "left", marginTop: 1 }}>
                 <Selects
                     topic={props.topic}
@@ -63,7 +63,7 @@ function CurriculumNumber(props) {
                     items={curriculum_numbers}
                 />
             </Box>
-        </div>
+        </Box>
     );
 }
 

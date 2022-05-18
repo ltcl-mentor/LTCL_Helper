@@ -42,8 +42,8 @@ const showContentMobile = props => {
         "その他(成果物)"
     ];
     return (
-        <div>
-            <div>
+        <Box>
+            <Box>
                 <ShowBreadcrumbBox>
                     <Breadcrumbs
                         page={`mentor_question_show_${props.location}`}
@@ -133,8 +133,8 @@ const showContentMobile = props => {
                     <Documents documents={props.documents} />
                 </Box>
                 <RelatedQuestions related_questions={props.related_questions} />
-                <div
-                    style={{
+                <Box
+                    sx={{
                         textAlign: "center",
                         marginTop: "3%",
                         marginBottom: "5%"
@@ -153,9 +153,9 @@ const showContentMobile = props => {
                     >
                         質問一覧に戻る
                     </Button>
-                </div>
-            </div>
-        </div>
+                </Box>
+            </Box>
+        </Box>
     );
 };
 

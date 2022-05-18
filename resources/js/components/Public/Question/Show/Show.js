@@ -167,7 +167,7 @@ function Show() {
         <>
             {isWide ? (
                 // 大画面で表示するコンポーネント
-                <div>
+                <Box>
                     <Alert
                         type="question"
                         status={parameter.state && parameter.state.question}
@@ -251,23 +251,23 @@ function Show() {
                             {topics[question["topic"]]}質問一覧に戻る
                         </Button>
                     </Box>
-                </div>
+                </Box>
             ) : (
                 // スマホで表示するコンポーネント
-                <div>
+                <Box>
                     <Alert
                         type="question"
                         status={parameter.state && parameter.state.question}
                         info={parameter.state && parameter.state.number}
                     />
 
-                    <div style={{ marginLeft: "3%" }}>
+                    <ShowBreadcrumbBox>
                         <Breadcrumbs
                             page="public_question_show"
                             topic={question["topic"]}
                             topic_title={topics[question["topic"]]}
                         />
-                    </div>
+                    </ShowBreadcrumbBox>
                     {question.length !== 0 &&
                         !question.is_resolved &&
                         (question.user_id === user.id ||
@@ -338,7 +338,7 @@ function Show() {
                             {topics[question["topic"]]}質問一覧に戻る
                         </Button>
                     </Box>
-                </div>
+                </Box>
             )}
         </>
     );
