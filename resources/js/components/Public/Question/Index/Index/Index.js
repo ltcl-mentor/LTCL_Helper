@@ -10,14 +10,19 @@ import Button from '@mui/material/Button';
 
 import '../../../../../../../public/css/Public/question_index.css';
 import Breadcrumbs from '../../../../Breadcrumbs';
-import Questions from './questions';
-import Article from './article';
+import QuestionsPC from './responsive/questionsPC';
+import QuestionsMobile from './responsive/questionsMobile';
+import ArticlePC from './responsive/articlePC';
+import ArticleMobile from './responsive/articleMobile';
 import {LoginUser} from "../../../../Route";
+import useMedia from "use-media";
+import BreakingPoint from "../../../../BreakingPoint";
 
 /**
  * 質問一覧(公開)のメインコンポーネント
  */
 function Index() {
+    const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
     const user = useContext(LoginUser);
     const { id } = useParams();
     const [value, setValue] = React.useState(0);
@@ -114,7 +119,15 @@ function Index() {
                     </Tabs>
                 </Box>
 
-                { value === 0 ? <Questions questions={ questions } setQuestions={ setQuestions } category={ id } status={status} setStatus={setStatus}/> : <Article category={ id } documents={ documents } setDocuments={ setDocuments }/> }
+                { value === 0 && isWide ?
+                    <QuestionsPC questions={ questions } setQuestions={ setQuestions } category={ id } status={status} setStatus={setStatus}/>
+                    : value === 0 ?
+                    <QuestionsMobile questions={ questions } setQuestions={ setQuestions } category={ id } status={status} setStatus={setStatus}/>
+                    : value === 1 && isWide ?
+                    <ArticlePC category={ id } documents={ documents } setDocuments={ setDocuments }/>
+                    :
+                    <ArticleMobile category={ id } documents={ documents } setDocuments={ setDocuments }/>
+                }
                 <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                     <Button  component={Link} to="/?page=qa">Q&Aに戻る</Button>
                 </Box>
