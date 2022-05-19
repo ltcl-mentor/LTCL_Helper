@@ -4,16 +4,16 @@ import Box from "@mui/material/Box";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import TextField from "@mui/material/TextField";
 import TextForm from "./original-text-form/originalTextForm";
+import {
+    styleCategoryTitle,
+    styleEditSubTitle,
+    styleSpan
+} from "../../../../../Atom/Typography/TypographyStyle";
 
 /**
  * 質問タイトル、調べたこと、内容入力フォーム
  */
-const styleSpan = {
-    fontWeight: "normal",
-    color: "#771AF8",
-    marginLeft: "20px",
-    fontSize: 18
-};
+
 function QuestionForm(props) {
     const handleTitle = event => {
         props.setTitle(event.target.value);
@@ -25,14 +25,7 @@ function QuestionForm(props) {
 
     return (
         <React.Fragment>
-            <Typography
-                sx={{
-                    fontWeight: "bold",
-                    fontSize: 20,
-                    marginTop: 6,
-                    marginBottom: 2
-                }}
-            >
+            <Typography sx={styleEditSubTitle}>
                 質問タイトル
                 <span style={styleSpan}>50字以内で記入してください。</span>
             </Typography>
@@ -42,7 +35,7 @@ function QuestionForm(props) {
                 </Typography>
             )}
 
-            <Box sx={{ width: "100%", marginBottom: 5 }}>
+            <Box>
                 <TextField
                     placeholder="例：CSSファイルが反映されません。"
                     label="質問タイトル（50字以内）"
@@ -61,17 +54,10 @@ function QuestionForm(props) {
                     }}
                 />
             </Box>
-            <Typography
-                sx={{
-                    fontWeight: "bold",
-                    fontSize: 20,
-                    marginTop: 6,
-                    marginBottom: 2
-                }}
-            >
+            <Typography sx={styleEditSubTitle}>
                 調べたこと（参考にしたサイトURLなども記載）
             </Typography>
-            <Box sx={{ width: "100%", marginBottom: 5 }}>
+            <Box>
                 <TextField
                     placeholder="例：以下のサイトでCSSの呼び出し方を確認しました。\nhttp://~"
                     label="調べたこと（参考にしたサイトURLなども記載）"
@@ -88,24 +74,8 @@ function QuestionForm(props) {
                         paddingTop: 2
                     }}
                 />
-
-                <Box sx={{ display: "flex" }}>
-                    <Typography
-                        variant="h7"
-                        component="div"
-                        sx={{
-                            marginTop: 4,
-                            marginLeft: 4
-                        }}
-                    ></Typography>
-                </Box>
             </Box>
-            <Typography
-                sx={{
-                    fontWeight: "bold",
-                    fontSize: 20
-                }}
-            >
+            <Typography sx={styleCategoryTitle}>
                 具体的な内容（試したことなど）
             </Typography>
             <TextForm

@@ -5,6 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import Typography from "@material-ui/core/Typography";
+import { styleReferenceArticle } from "../../../Atom/Typography/TypographyStyle";
 
 /**
  * 関連質問
@@ -39,17 +40,7 @@ function Questions(props) {
 
     return (
         <>
-            <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                    marginTop: 3,
-                    padding: 1,
-                    borderBottom: "1px solid gray",
-                    fontWeight: "bold",
-                    marginX: "5%"
-                }}
-            >
+            <Typography variant="h6" component="div" sx={styleReferenceArticle}>
                 関連質問
             </Typography>
             <List

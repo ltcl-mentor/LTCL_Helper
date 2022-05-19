@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-
-import Parameters from "../../../../Public/Question/Show/parameters";
 import Documents from "../../../../Public/Question/Show/documents";
 import RelatedQuestions from "../../../../Public/Question/Show/related-questions";
 import Question from "../question";
 import Comments from "../../../../Public/Question/Show/comments/comments";
+import { styleReferenceArticle } from "../../../../Atom/Typography/TypographyStyle";
 
 /**
  * 質問詳細(公開)のプレビュー
@@ -64,13 +62,7 @@ function Preview(props) {
                 <Typography
                     variant="h6"
                     component="div"
-                    sx={{
-                        marginTop: 3,
-                        padding: 1,
-                        borderBottom: "1px solid gray",
-                        fontWeight: "bold",
-                        marginX: "5%"
-                    }}
+                    sx={styleReferenceArticle}
                 >
                     参考記事
                 </Typography>

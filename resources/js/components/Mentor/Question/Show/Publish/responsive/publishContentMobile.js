@@ -6,20 +6,10 @@ import Alert from "@mui/material/Alert";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Preview from "../preview";
 import CheckForm from "../checkForm";
-
-const styleForPhone = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "95%",
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-    height: "90%",
-    overflow: "scroll"
-};
+import {
+    styleMobilePreviewModalBox,
+    stylePreviewOutlineBox
+} from "../../../../../Atom/Box/BoxStyle";
 
 const publishContentMobile = props => {
     return (
@@ -30,7 +20,7 @@ const publishContentMobile = props => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={styleForPhone}>
+                <Box sx={styleMobilePreviewModalBox}>
                     <Button
                         onClick={props.handleClose}
                         startIcon={<CancelIcon />}
@@ -50,7 +40,7 @@ const publishContentMobile = props => {
                         handleClose={props.handleClose}
                     />
 
-                    <Box sx={{ border: "1px solid black" }}>
+                    <Box sx={stylePreviewOutlineBox}>
                         <Preview
                             question={props.question}
                             images={props.images}

@@ -4,6 +4,12 @@ import Button from "@material-ui/core/Button";
 import Parameters from "../../Show/parameters";
 import ConfirmButton from "../../../../Atom/Button/ConfirmButton";
 import Box from "@material-ui/core/Box";
+import {
+    styleCodeblock,
+    styleEditTitle
+} from "../../../../Atom/Typography/TypographyStyle";
+import { styleReturnTopButton } from "../../../../Atom/Button/ButtonStyle";
+import { styleBackTopBox, stylePostBox } from "../../../../Atom/Box/BoxStyle";
 
 /**
  * 質問登録前の確認フォーム
@@ -110,15 +116,7 @@ const QuestionConfirm = props => {
                                     <Typography
                                         key={block_number}
                                         component="div"
-                                        sx={{
-                                            width: "90%",
-                                            marginLeft: "5%",
-                                            marginTop: 1,
-                                            marginBottom: 1,
-                                            padding: 2,
-                                            backgroundColor: "#DDDDDD",
-                                            borderRadius: "3px"
-                                        }}
+                                        sx={styleCodeblock}
                                     >
                                         {block}
                                     </Typography>
@@ -169,17 +167,7 @@ const QuestionConfirm = props => {
 
     return (
         <Box>
-            <Typography
-                variant="h5"
-                component="div"
-                sx={{
-                    marginTop: 4,
-                    marginBottom: 5,
-                    fontSize: 30,
-                    color: "#771af8",
-                    fontWeight: "bold"
-                }}
-            >
+            <Typography variant="h5" component="div" sx={styleEditTitle}>
                 確認画面
             </Typography>
             <Parameters
@@ -192,27 +180,16 @@ const QuestionConfirm = props => {
                 images={props.images}
             />
 
-            <Box sx={{ textAlign: "center", marginTop: 50 }}>
+            <Box sx={stylePostBox}>
                 <ConfirmButton onClick={props.handleSubmit}>
                     投稿する
                 </ConfirmButton>
             </Box>
-            <Box
-                sx={{
-                    textAlign: "center",
-                    marginTop: 5,
-                    marginBottom: 30
-                }}
-            >
+            <Box sx={styleBackTopBox}>
                 <Button
                     variant="text"
                     onClick={props.handleConfirmPage}
-                    sx={{
-                        color: "black",
-                        minWidth: 150,
-                        maxWidth: 200,
-                        marginBottom: 5
-                    }}
+                    sx={styleReturnTopButton}
                 >
                     入力画面に戻る
                 </Button>

@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Link, useParams, useLocation, useHistory } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Button from "@mui/material/Button";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 import Box from "@mui/material/Box";
 import Breadcrumbs from "../../../../Breadcrumbs";
 import Publish from "../Publish/publish";
@@ -14,6 +11,21 @@ import Documents from "../../../../Public/Question/Show/documents";
 import RelatedQuestions from "../../../../Public/Question/Show/related-questions";
 import Question from "../question";
 import ShowBreadcrumbBox from "../../../../Atom/Box/ShowBreadcrumbBox";
+import {
+    styleArticleRegistration,
+    styleReferenceArticle
+} from "../../../../Atom/Typography/TypographyStyle";
+import {
+    styleButtonGroupBox,
+    stylePublishBox,
+    styleDocumentsBox,
+    styleReturnQuestionBox
+} from "../../../../Atom/Box/BoxStyle";
+import {
+    styleArticleRegistrationButton,
+    styleEditDelete,
+    styleReturnQuestionButton
+} from "../../../../Atom/Button/ButtonStyle";
 
 const showContentPc = props => {
     const categories = ["カリキュラム", "成果物"];
@@ -52,14 +64,8 @@ const showContentPc = props => {
                 />
             </ShowBreadcrumbBox>
 
-            <Box
-                sx={{
-                    mx: "5%",
-                    display: "flex",
-                    justifyContent: "space-between"
-                }}
-            >
-                <Box sx={{ m: "0 auto", transform: "translate(50%)" }}>
+            <Box sx={styleButtonGroupBox}>
+                <Box sx={stylePublishBox}>
                     <Publish
                         question_id={props.id}
                         question={props.question}
@@ -71,17 +77,14 @@ const showContentPc = props => {
                 </Box>
                 <Box>
                     <Link to={`/questions/` + props.id + `/edit`}>
-                        <Button
-                            variant="text"
-                            sx={{ color: "#771AF8", fontSize: 20 }}
-                        >
+                        <Button variant="text" sx={styleEditDelete}>
                             編集
                         </Button>
                     </Link>
                     /
                     <Button
                         variant="text"
-                        sx={{ color: "#771AF8", fontSize: 20 }}
+                        sx={styleEditDelete}
                         onClick={props.deleteConfirm}
                     >
                         削除
@@ -117,20 +120,9 @@ const showContentPc = props => {
             />
 
             <Box>
-                <Typography
-                    align="right"
-                    sx={{
-                        marginRight: "5%"
-                    }}
-                >
+                <Typography align="right" sx={styleArticleRegistration}>
                     <Button
-                        sx={{
-                            color: "#771AF8",
-                            textDecoration: "underline",
-                            marginBottom: "-5%",
-                            fontSize: 18,
-                            fontWeight: "bold"
-                        }}
+                        sx={styleArticleRegistrationButton}
                         onClick={props.handleOpen}
                     >
                         記事登録
@@ -139,42 +131,20 @@ const showContentPc = props => {
                 <Typography
                     variant="h6"
                     component="div"
-                    sx={{
-                        borderBottom: "1px solid gray",
-                        fontWeight: "bold",
-                        padding: 1,
-                        marginX: "5%"
-                    }}
+                    sx={styleReferenceArticle}
                 >
                     参考記事
                 </Typography>
             </Box>
-            <Box
-                sx={{
-                    marginTop: 3,
-                    padding: 1
-                }}
-            >
+            <Box sx={styleDocumentsBox}>
                 <Documents documents={props.documents} />
             </Box>
             <RelatedQuestions related_questions={props.related_questions} />
-            <Box
-                sx={{
-                    textAlign: "center",
-                    marginTop: "3%",
-                    marginBottom: "5%"
-                }}
-            >
+            <Box sx={styleReturnQuestionBox}>
                 <Button
                     variant="text"
                     onClick={props.backQuestionIndex}
-                    sx={{
-                        color: "#771AF8",
-                        textDecoration: "underline",
-                        marginBottom: "-5%",
-                        fontSize: 18,
-                        fontWeight: "bold"
-                    }}
+                    sx={styleReturnQuestionButton}
                 >
                     質問一覧に戻る
                 </Button>

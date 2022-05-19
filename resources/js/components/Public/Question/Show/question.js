@@ -4,7 +4,7 @@ import BreakingPoint from "../../../BreakingPoint";
 import useMedia from "use-media";
 import QuestionContentPc from "./responsive/questionContentPc";
 import QuestionContentMobile from "./responsive/questionContentMobile";
-import CodeblockTypography from "../../../Atom/Typography/CodeblockTypography";
+import { styleCodeblock } from "../../../Atom/Typography/TypographyStyle";
 
 /**
  * 質問表示
@@ -109,12 +109,13 @@ function Question(props) {
                                 // コードブロック
                             } else {
                                 return (
-                                    <CodeblockTypography
+                                    <Typography
                                         key={block_number}
                                         component="div"
+                                        sx={styleCodeblock}
                                     >
                                         {block}
-                                    </CodeblockTypography>
+                                    </Typography>
                                 );
                             }
                         })

@@ -14,6 +14,19 @@ import Documents from "../../../../Public/Question/Show/documents";
 import RelatedQuestions from "../../../../Public/Question/Show/related-questions";
 import Question from "../question";
 import ShowBreadcrumbBox from "../../../../Atom/Box/ShowBreadcrumbBox";
+import {
+    styleArticleRegistration,
+    styleReferenceArticle
+} from "../../../../Atom/Typography/TypographyStyle";
+import {
+    styleDocumentsBox,
+    styleMobilePublishBox,
+    styleReturnQuestionBox
+} from "../../../../Atom/Box/BoxStyle";
+import {
+    styleArticleRegistrationButton,
+    styleReturnQuestionButton
+} from "../../../../Atom/Button/ButtonStyle";
 
 const showContentMobile = props => {
     const categories = ["カリキュラム", "成果物"];
@@ -52,7 +65,7 @@ const showContentMobile = props => {
                     />
                 </ShowBreadcrumbBox>
 
-                <Box sx={{ textAlign: "center", mb: 3 }}>
+                <Box sx={styleMobilePublishBox}>
                     <Publish
                         question_id={props.id}
                         question={props.question}
@@ -92,20 +105,9 @@ const showContentMobile = props => {
                 />
 
                 <Box>
-                    <Typography
-                        align="right"
-                        sx={{
-                            marginRight: "5%"
-                        }}
-                    >
+                    <Typography align="right" sx={styleArticleRegistration}>
                         <Button
-                            sx={{
-                                color: "#771AF8",
-                                textDecoration: "underline",
-                                marginBottom: "-5%",
-                                fontSize: 18,
-                                fontWeight: "bold"
-                            }}
+                            sx={styleArticleRegistrationButton}
                             onClick={props.handleOpen}
                         >
                             記事登録
@@ -114,42 +116,20 @@ const showContentMobile = props => {
                     <Typography
                         variant="h6"
                         component="div"
-                        sx={{
-                            borderBottom: "1px solid gray",
-                            fontWeight: "bold",
-                            padding: 1,
-                            marginX: "5%"
-                        }}
+                        sx={styleReferenceArticle}
                     >
                         参考記事
                     </Typography>
                 </Box>
-                <Box
-                    sx={{
-                        marginTop: 3,
-                        padding: 1
-                    }}
-                >
+                <Box sx={styleDocumentsBox}>
                     <Documents documents={props.documents} />
                 </Box>
                 <RelatedQuestions related_questions={props.related_questions} />
-                <Box
-                    sx={{
-                        textAlign: "center",
-                        marginTop: "3%",
-                        marginBottom: "5%"
-                    }}
-                >
+                <Box sx={styleReturnQuestionBox}>
                     <Button
                         variant="text"
                         onClick={props.backQuestionIndex}
-                        sx={{
-                            color: "#771AF8",
-                            textDecoration: "underline",
-                            marginBottom: "-5%",
-                            fontSize: 18,
-                            fontWeight: "bold"
-                        }}
+                        sx={styleReturnQuestionButton}
                     >
                         質問一覧に戻る
                     </Button>

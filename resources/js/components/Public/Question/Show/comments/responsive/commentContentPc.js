@@ -4,11 +4,13 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import { styleComment } from "../../../../../Atom/Typography/TypographyStyle";
+import { styleCommentsBox } from "../../../../../Atom/Box/BoxStyle";
 
 const commentContentPc = props => {
     return (
         <Box>
-            <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <Box sx={styleCommentsBox}>
                 <Grid container spacing={2} justifyContent="left">
                     <Grid item>
                         {props.is_staff ? (
@@ -75,17 +77,7 @@ const commentContentPc = props => {
                     </Grid>
                 )}
             </Box>
-            <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                    paddingTop: 2,
-                    marginLeft: 4,
-                    marginBottom: 2,
-                    marginRight: 2,
-                    clear: "left"
-                }}
-            >
+            <Typography variant="h6" component="div" sx={styleComment}>
                 {props.comment}
             </Typography>
         </Box>

@@ -14,6 +14,13 @@ import TopicForm from "./topicForm";
 import Breadcrumb from "../../../../Breadcrumbs";
 import Box from "@material-ui/core/Box";
 import BreadcrumbBox from "../../../../Atom/Box/BreadcrumbBox";
+import {
+    styleCategoryTitle,
+    styleEditSubTitle,
+    styleEditTitle
+} from "../../../../Atom/Typography/TypographyStyle";
+import { styleReturnTopButton } from "../../../../Atom/Button/ButtonStyle";
+import { styleBackTopBox } from "../../../../Atom/Box/BoxStyle";
 
 const styleSpan = {
     fontWeight: "normal",
@@ -243,13 +250,7 @@ const DefaultForm = () => {
                     <Typography
                         variant="h5"
                         component="div"
-                        sx={{
-                            marginTop: 4,
-                            marginBottom: 10,
-                            fontSize: 30,
-                            color: "#771af8",
-                            fontWeight: "bold"
-                        }}
+                        sx={styleEditTitle}
                     >
                         質問投稿画面
                     </Typography>
@@ -261,12 +262,7 @@ const DefaultForm = () => {
                         }}
                     >
                         <Grid item xs={7}>
-                            <Typography
-                                sx={{
-                                    fontWeight: "bold",
-                                    fontSize: 20
-                                }}
-                            >
+                            <Typography sx={styleCategoryTitle}>
                                 カテゴリー
                                 <span style={styleSpan}>
                                     どちらか1つを選択してください
@@ -286,13 +282,7 @@ const DefaultForm = () => {
                         {project}
                     </Stack>
                     {/* トピック */}
-                    <Typography
-                        sx={{
-                            fontWeight: "bold",
-                            fontSize: 20,
-                            mt: 6
-                        }}
-                    >
+                    <Typography sx={styleEditSubTitle}>
                         トピック
                         <span style={styleSpan}>
                             以下の選択肢から1つを選択してください
@@ -306,13 +296,7 @@ const DefaultForm = () => {
                         topics={topics}
                     />
                     {/* カリキュラム番号 */}
-                    <Typography
-                        sx={{
-                            fontWeight: "bold",
-                            fontSize: 20,
-                            mt: 4
-                        }}
-                    >
+                    <Typography sx={styleEditSubTitle}>
                         カリキュラム番号
                         <span style={styleSpan}>
                             以下の選択肢から1つを選択してください
@@ -351,22 +335,11 @@ const DefaultForm = () => {
                             確認する
                         </ConfirmButton>
                     </Box>
-                    <Box
-                        sx={{
-                            textAlign: "center",
-                            marginTop: 5,
-                            marginBottom: 30
-                        }}
-                    >
+                    <Box sx={styleBackTopBox}>
                         <Button
                             variant="text"
                             onClick={handleBackTopPage}
-                            style={{
-                                color: "black",
-                                minWidth: 150,
-                                maxWidth: 200,
-                                marginBottom: 5
-                            }}
+                            style={styleReturnTopButton}
                         >
                             Topに戻る
                         </Button>

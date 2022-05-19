@@ -5,6 +5,19 @@ import Avatar from "@material-ui/core/Avatar";
 import SelectStatus from "../../../../Atom/Select/SelectStatus";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
+import {
+    styleMobileQuestionRemarks,
+    styleMobileQuestionTitle,
+    styleMobileTitle
+} from "../../../../Atom/Typography/TypographyStyle";
+import {
+    styleAvatarBox,
+    styleMobileButtonGroupBox,
+    styleMobileSelectStatusBox,
+    styleParentQuestionBox,
+    styleQuestionTitleBox
+} from "../../../../Atom/Box/BoxStyle";
+import { styleMobileEditDelete } from "../../../../Atom/Button/ButtonStyle";
 
 const questionContentMobile = props => {
     const categories = ["カリキュラム", "成果物"];
@@ -34,13 +47,8 @@ const questionContentMobile = props => {
     ];
 
     return (
-        <Box sx={{ width: "90%", marginX: "5%" }}>
-            <Box
-                sx={{
-                    textAlign: "center",
-                    mb: 6
-                }}
-            >
+        <Box sx={styleParentQuestionBox}>
+            <Box sx={styleMobileSelectStatusBox}>
                 <SelectStatus
                     id={props.id}
                     status={props.status}
@@ -48,13 +56,8 @@ const questionContentMobile = props => {
                     responseStatus={props.responseStatus}
                 />
             </Box>
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "column"
-                }}
-            >
-                <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box>
+                <Box sx={styleAvatarBox}>
                     <Avatar
                         alt="Student"
                         src="/images/pose_english_shrug_man.png"
@@ -68,14 +71,7 @@ const questionContentMobile = props => {
                     </Typography>
                 </Box>
 
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        mt: 2
-                    }}
-                >
+                <Box sx={styleMobileButtonGroupBox}>
                     <Box>
                         <Typography variant="h7" component="div">
                             {categories[props.category]}&nbsp; /&nbsp;
@@ -86,17 +82,14 @@ const questionContentMobile = props => {
                     </Box>
                     <Box>
                         <Link to={`/questions/` + props.id + `/edit`}>
-                            <Button
-                                variant="text"
-                                sx={{ color: "#771AF8", fontSize: 15 }}
-                            >
+                            <Button variant="text" sx={styleMobileEditDelete}>
                                 編集
                             </Button>
                         </Link>
                         /
                         <Button
                             variant="text"
-                            sx={{ color: "#771AF8", fontSize: 15 }}
+                            sx={styleMobileEditDelete}
                             onClick={props.deleteConfirm}
                         >
                             削除
@@ -105,65 +98,33 @@ const questionContentMobile = props => {
                 </Box>
             </Box>
 
-            <Box sx={{ display: "fex", position: "relative" }}>
+            <Box sx={styleQuestionTitleBox}>
                 <Typography
                     variant="h4"
                     component="div"
-                    sx={{
-                        marginTop: 4,
-                        fontSize: 20,
-                        fontWeight: "bold"
-                    }}
+                    sx={styleMobileQuestionTitle}
                 >
                     {props.title}
                 </Typography>
             </Box>
 
-            <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                    marginTop: 3,
-                    borderBottom: "1px solid gray",
-                    fontWeight: "bold",
-                    padding: 1,
-                    fontSize: 15
-                }}
-            >
+            <Typography variant="h6" component="div" sx={styleMobileTitle}>
                 調べたこと
             </Typography>
             <Typography
                 variant="h5"
                 component="div"
-                sx={{
-                    fontSize: 15,
-                    padding: 1,
-                    marginBottom: 2
-                }}
+                sx={styleMobileQuestionRemarks}
             >
                 {props.remarks}
             </Typography>
-            <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                    marginTop: 4,
-                    borderBottom: "1px solid gray",
-                    fontWeight: "bold",
-                    padding: 1,
-                    fontSize: 15
-                }}
-            >
+            <Typography variant="h6" component="div" sx={styleMobileTitle}>
                 試したこと、分からないこと
             </Typography>
             <Typography
                 variant="h5"
                 component="div"
-                sx={{
-                    padding: 1,
-                    marginBottom: 2,
-                    fontSize: 15
-                }}
+                sx={styleMobileQuestionRemarks}
             >
                 {props.question}
             </Typography>

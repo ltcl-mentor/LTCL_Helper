@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Selects from "./select";
 import Box from "@mui/material/Box";
+import { styleCurriculumNumberBox } from "../../../../Atom/Box/BoxStyle";
 
 /**
  * カリキュラム番号フォーム
@@ -47,7 +48,7 @@ function CurriculumNumber(props) {
 
     return (
         <Box>
-            <Box sx={{ textAlign: "left", marginTop: 1 }}>
+            <Box sx={styleCurriculumNumberBox}>
                 <Selects
                     topic={props.topic}
                     setCurriculumNumber={props.setCurriculumNumber}

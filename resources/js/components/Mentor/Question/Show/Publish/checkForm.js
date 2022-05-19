@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import Button from "@mui/material/Button";
 import Typography from "@material-ui/core/Typography";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import ConfirmButton from "../../../../Atom/Button/ConfirmButton";
+import { styleReleaseButton } from "../../../../Atom/Typography/TypographyStyle";
+import { styleCheckBoxGroupBox } from "../../../../Atom/Box/BoxStyle";
 
 /**
  * 質問公開のためのチェックフォーム
@@ -62,11 +63,7 @@ function CheckForm(props) {
     let btn;
     if (check1 && check2 && check3) {
         btn = (
-            <Typography
-                component="div"
-                align="center"
-                sx={{ marginTop: 1, marginBottom: 1 }}
-            >
+            <Typography component="div" align="center" sx={styleReleaseButton}>
                 <ConfirmButton type="submit" onClick={handlePublish}>
                     公開する
                 </ConfirmButton>
@@ -74,11 +71,7 @@ function CheckForm(props) {
         );
     } else {
         btn = (
-            <Typography
-                component="div"
-                align="center"
-                sx={{ marginTop: 1, marginBottom: 1 }}
-            >
+            <Typography component="div" align="center" sx={styleReleaseButton}>
                 <ConfirmButton>公開する</ConfirmButton>
             </Typography>
         );
@@ -86,15 +79,7 @@ function CheckForm(props) {
 
     return (
         <Box>
-            <Box
-                sx={{
-                    width: "95%",
-                    marginLeft: "3%",
-                    marginTop: 2,
-                    display: "flex",
-                    flexDirection: "column"
-                }}
-            >
+            <Box sx={styleCheckBoxGroupBox}>
                 <h5>以下の確認事項を確認してチェックを入れてください。</h5>
 
                 <FormControlLabel
