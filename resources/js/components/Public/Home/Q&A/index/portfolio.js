@@ -21,19 +21,9 @@ const portfolio = (props) => {
     return (
         <Grid container sx={styleGrid}>
             {props.project.map((topic, index) => {
-                let marginLeft;
-                let marginRight;
-                if (props.screenWidth >= 540) {
-                    if (index%3==2) {
-                        marginLeft = { marginLeft: 'auto' };
-                    } else if (index%3==0) {
-                        marginRight = { marginRight: 'auto' };
-                    }
-                }
-            
                 return(
                     <Grid item sx={width} key={topic.topic}>
-                        <Card sx={[props.styleCard, marginLeft, marginRight]}>
+                        <Card sx={props.styleCard}>
                             <CardActionArea onClick={() => props.toTopic(topic.topic)} sx={props.styleCardActionArea}>
                                 <Typography align="center" gutterBottom variant="h6" component="div">
                                     {props.topics[index+14]}
