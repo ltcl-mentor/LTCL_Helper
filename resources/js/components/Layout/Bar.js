@@ -120,7 +120,7 @@ const Bar = () => {
                     <Typography component="div" sx={styleFlexGrow}>
                         <Links sx={styleLogoLink} href="/" underline="none">
                             <img
-                                src="images/helper_logo.png"
+                                src={`images/helper_logo.png?ver=${new Date().getTime()}`}
                                 style={styleLogoImage}
                             />
                         </Links>
