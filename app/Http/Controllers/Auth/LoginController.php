@@ -27,7 +27,7 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
-    
+
     // 入力値の属性名をnameに変更
     public function username()
     {
@@ -50,19 +50,19 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    
+
     // ログイン処理
     public function login(Request $request)
     {
         // ロック中のユーザがログインしようとした際は弾く
         if(User::where('name', $request->name)->exists()){
             $user = User::firstWhere('name', $request->name);
-            
+
             if($user->lock){
                 return redirect("/lockout");
             }
         }
-        
+
         $this->validateLogin($request);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
@@ -86,12 +86,12 @@ class LoginController extends Controller
 
         return $this->sendFailedLoginResponse($request);
     }
-    
+
     public function decayMinutes()
     {
         return property_exists($this, 'decayMinutes') ? $this->decayMinutes : 60;
     }
-    
+
     /**
      * ロックアウト処理
      * 6回連続でログインに失敗したユーザをロック
@@ -100,11 +100,11 @@ class LoginController extends Controller
     {
         $user = User::firstWhere('name', $request->name);
         $user_name = $user->name;
-        
+
         // 受講生の場合、スプレッドシートから取ってきた名前を通知
         $users = User::getStudentsApiData()["values"];
         array_splice($users, 0, 2);
-        
+
         if ($user->is_admin == null) {
             foreach($users as $student) {
                 if ($student[7] == $user_name) {
@@ -113,27 +113,27 @@ class LoginController extends Controller
                 }
             }
         }
-        
+
         // 入力されたnameに該当するユーザデータが存在した場合にロック
         if($user !== null){
             // 該当ユーザのロックを有効化
             $user->lock = true;
             $user->save();
-            
+
             // 受講生のデータだった場合は受講生テーブルにも反映
             if(Student::where('user_id', $user->id)->exists()){
                 $student = Student::firstWhere('user_id', $user->id);
                 $student->lock = true;
                 $student->save();
             }
-            
+
             $message = "ユーザがロックされました。\n該当ユーザ：" . $user_name . "さん";
             Slack::sendMessage($message, "mentor");
-            
+
             $this->clearLoginAttempts($request);
-            
+
             return redirect("/lockout");
-            
+
         // 該当ユーザが存在しない場合は1時間入力不可にする
         }else{
             $seconds = $this->limiter()->availableIn(
@@ -148,7 +148,7 @@ class LoginController extends Controller
             ])->status(Response::HTTP_TOO_MANY_REQUESTS);
         }
     }
-    
+
     /**
      * ロックアウト時の画面表示
      */
