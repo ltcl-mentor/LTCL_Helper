@@ -1,9 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
+use App\Models\User;
 
 
 class Student extends Model
@@ -11,7 +11,7 @@ class Student extends Model
     protected $fillable = [
         'name', 'password', 'user_id'
     ];
-    
+
     public function user()
     {
         return $this->belongsTo('App\User');

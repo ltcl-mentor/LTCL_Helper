@@ -1,14 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Question;
+use App\Models\Question;
 
 class Comment extends Model
 {
     protected $fillable=['comment', 'question_id', 'is_staff', 'comment_id', 'user_id', 'is_mentor_commented'];
-    
+
     // ローカルで真偽値がきちんと出力されず0か1になってしまうので矯正
     // public function correctBoolean()
     // {
@@ -18,32 +18,32 @@ class Comment extends Model
     //         $this->is_staff = false;
     //     }
     // }
-    
+
     /**
      * リレーション
      */
     public function images() {
         return $this->hasMany('App\Image');
     }
-    
+
     public function question() {
         return $this->belongsTo('App\Question');
     }
-    
+
     public function user() {
         return $this->belongsTo('App\User');
     }
-    
+
     // public function comment() {
     //     return $this->belongsTo('App\Comment');
     // }
-     
+
     public function getQestionTitle()
     {
         $question = Question::find($this->question_id);
         return $question->title;
     }
-    
+
     /**
      * 個別質問へのコメント付加処理
      */
@@ -51,7 +51,7 @@ class Comment extends Model
     {
         // 1. メインコメント処理
         $main_comments = self::where('question_id', $question->id)->where('comment_id', 0)->orderBy('created_at', 'asc')->get();
-            
+
         if($main_comments){
             $sub_comments = [];
             foreach($main_comments as $key => $main_comment){
@@ -64,10 +64,10 @@ class Comment extends Model
                         $target_student = $main_comment->user_id;
                     }
                 }
-                
+
                 // 2. リプライコメント処理
                 $comments = Comment::where('comment_id', $main_comment->id)->orderBy('created_at', 'asc')->get();
-                
+
                 foreach($comments as $comment){
                     // メインコメントのからコメントやり取りの主体となる受講生の特定ができていない場合
                     if(!($target_student)){
@@ -77,15 +77,15 @@ class Comment extends Model
                         }
                     }
                 }
-                
+
                 $sub_comments[$main_comment->id] = $comments;
                 $main_comment->target_student = $target_student;
             }
         }
-        
+
         $question['main_comments'] = $main_comments;
         $question['sub_comments'] = $sub_comments;
-        
+
         return $question;
     }
 }

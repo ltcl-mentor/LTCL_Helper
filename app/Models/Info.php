@@ -1,15 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Slack;
+use App\Models\Slack;
 use Carbon\Carbon;
 
 class Info extends Model
 {
     protected $fillable = ['information', 'body', 'slack', 'targets', 'date', 'slackDate'];
-    
+
     /**
      * イベント通知
      * 毎日13時にslackに通知
@@ -27,11 +27,11 @@ class Info extends Model
 
             Slack::sendMessage($message, 'student');
         }
-        
+
         // 本日以前のイベントは削除
         self::where('date', '<', $today)->delete();
     }
-    
+
     public static function getInfo() {
         // infosテーブルの本日以降の日付を取得（重複はなし）
         $infos['dates'] = self::groupBy('date')->orderBy('date', 'desc')->where('date', '>=', Carbon::now()->format('Y-m-d'))->pluck('date');
@@ -40,7 +40,7 @@ class Info extends Model
         foreach($infos['dates'] as $date){
             $infos['infos'][$date] = self::where('date', $date)->select('id', 'information', 'targets', 'body', 'slackDate')->get();
         }
-        
+
         return $infos;
     }
 }

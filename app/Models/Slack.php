@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +12,7 @@ class Slack extends Model
     public static function sendMessage($message, $target)
     {
         $client = new \GuzzleHttp\Client();
-        
+
         if ($target === "mentor") {
             $url = env('Slack_URL');
         } elseif ($target === "student") {
@@ -20,7 +20,7 @@ class Slack extends Model
         } elseif ($target === "attendance") {
             $url = env('Slack_Mentor_Attendance_URL');
         }
-        
+
         $response = $client->request(
             'POST',
             $url,

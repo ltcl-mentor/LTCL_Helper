@@ -1,20 +1,22 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Question;
-use App\User;
-use App\Student;
+use Laravel\Sanctum\HasApiTokens;
+use App\Models\Question;
+use App\Models\User;
+use App\Models\Student;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -55,17 +57,17 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Student');
     }
-    
+
     public function documents()
     {
         return $this->hasMany('App\Document');
     }
-    
+
     public function images()
     {
         return $this->hasMany('App\Image');
     }
-    
+
     public function comments() {
         return $this->hasMany('App\Comment');
     }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Document;
-use App\Image;
-use App\Comment;
-use App\Export;
-use App\Question;
+use App\Models\Document;
+use App\Models\Image;
+use App\Models\Comment;
+use App\Models\Export;
+use App\Models\Question;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
