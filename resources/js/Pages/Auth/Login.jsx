@@ -1,94 +1,83 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Button from '@/Components/Atom/Default/Button';
 import Checkbox from '@/Components/Atom/Default/Checkbox';
-import Guest from '@/Layouts/Guest';
 import Input from '@/Components/Atom/Default/Input';
 import Label from '@/Components/Atom/Default/Label';
 import ValidationErrors from '@/Components/Atom/Default/ValidationErrors';
-import { Head, Link, useForm } from '@inertiajs/inertia-react';
+import { useForm } from '@inertiajs/inertia-react';
 
-export default function Login({ status, canResetPassword }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        email: '',
+// ログイン画面
+const Login = ({ status }) => {
+    const { data, setData, post, processing, errors } = useForm({
+        name: '',
         password: '',
         remember: '',
     });
 
-    useEffect(() => {
-        return () => {
-            reset('password');
-        };
-    }, []);
-
+    // ログイン状態保持チェックボックス
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
     };
 
+    // ログイン処理
     const submit = (e) => {
         e.preventDefault();
-
         post(route('login'));
     };
 
     return (
-        <Guest>
-            <Head title="Log in" />
-
+        <>
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
             <ValidationErrors errors={errors} />
 
-            <form onSubmit={submit}>
-                <div>
-                    <Label forInput="email" value="Email" />
+            <div className="w-screen h-screen bg-[url('/images/login_image.png')]">
+                <form className="w-52 absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4" onSubmit={submit}>
+                    <h1 className='text-4xl text-purple-700 text-center'>Welcome</h1>
 
-                    <Input
-                        type="text"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        isFocused={true}
-                        handleChange={onHandleChange}
-                    />
-                </div>
+                    {/* ID */}
+                    <div>
+                        <Label className="text-purple-700 font-bold" forInput="name" value="ID" />
+                        <Input
+                            type="text"
+                            name="name"
+                            value={data.name}
+                            className="mt-1 block w-full"
+                            autoComplete="username"
+                            isFocused={true}
+                            handleChange={onHandleChange}
+                        />
+                    </div>
 
-                <div className="mt-4">
-                    <Label forInput="password" value="Password" />
+                    {/* パスワード */}
+                    <div className="mt-4">
+                        <Label className="text-purple-700 font-bold" forInput="password" value="Pass" />
+                        <Input
+                            type="password"
+                            name="password"
+                            value={data.password}
+                            className="mt-1 block w-full"
+                            autoComplete="current-password"
+                            handleChange={onHandleChange}
+                        />
+                    </div>
 
-                    <Input
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="current-password"
-                        handleChange={onHandleChange}
-                    />
-                </div>
+                    <div className="mt-4">
+                        <label className="flex items-center">
+                            <Checkbox name="remember" value={data.remember} handleChange={onHandleChange} />
+                            <span className="ml-2 text-sm text-purple-700 font-bold">ログイン状態を保持</span>
+                        </label>
+                    </div>
 
-                <div className="block mt-4">
-                    <label className="flex items-center">
-                        <Checkbox name="remember" value={data.remember} handleChange={onHandleChange} />
-
-                        <span className="ml-2 text-sm text-gray-600">Remember me</span>
-                    </label>
-                </div>
-
-                <div className="flex items-center justify-end mt-4">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900"
-                        >
-                            Forgot your password?
-                        </Link>
-                    )}
-
-                    <Button className="ml-4" processing={processing}>
-                        Log in
-                    </Button>
-                </div>
-            </form>
-        </Guest>
+                    <div className="mt-4">
+                        <Button className="justify-center w-full bg-purple-700 font-bold" processing={processing}>
+                            Login
+                        </Button>
+                    </div>
+                </form>
+            </div>
+        </>
     );
-}
+};
+
+export default Login;

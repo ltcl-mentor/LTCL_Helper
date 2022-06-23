@@ -28,9 +28,9 @@ require __DIR__.'/auth.php';
 //     ]);
 // })->middleware(['auth']);
 
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 // フロントエンドのルーティング
@@ -49,6 +49,9 @@ Route::get('/lockout', function () {
  * を確認してください
  */
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/', function () {
+        return Inertia::render('Public/Home/Home');
+    })->name('home');
 
     /**
      * ログイン済みユーザーのみアクセス可能
