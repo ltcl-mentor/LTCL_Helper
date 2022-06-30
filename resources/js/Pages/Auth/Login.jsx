@@ -29,8 +29,6 @@ const Login = ({ status }) => {
         <>
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
-            <ValidationErrors errors={errors} />
-
             <div className="w-screen h-screen bg-[url('/images/login_image.png')]">
                 <form className="w-52 absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4" onSubmit={submit}>
                     <h1 className='text-4xl text-purple-700 text-center'>Welcome</h1>
@@ -70,10 +68,12 @@ const Login = ({ status }) => {
                     </div>
 
                     <div className="mt-4">
-                        <Button className="justify-center w-full bg-purple-700 font-bold" processing={processing}>
+                        <Button className="justify-center w-full bg-purple-800 font-bold" processing={processing}>
                             Login
                         </Button>
                     </div>
+
+                    <ValidationErrors errors={errors} />
                 </form>
             </div>
         </>

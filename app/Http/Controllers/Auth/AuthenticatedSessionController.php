@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\User;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -21,13 +22,13 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Handle an incoming authentication request.
-     *
-     * @param  \App\Http\Requests\Auth\LoginRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * ログイン処理
      */
     public function store(LoginRequest $request)
     {
+        $locking = $this->locking($request['name']);
+        if ($locking) return $locking;
+
         $request->authenticate();
 
         $request->session()->regenerate();
@@ -36,10 +37,7 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Destroy an authenticated session.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * ログアウト処理
      */
     public function destroy(Request $request)
     {
@@ -50,5 +48,14 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    /**
+     * ロック中ユーザーをはじく
+     */
+    public function locking(String $user_name)
+    {
+        $user = User::firstWhere('name', $user_name);
+        if ($user && $user->lock) return redirect()->route('lockout');
     }
 }

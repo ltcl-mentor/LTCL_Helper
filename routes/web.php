@@ -38,6 +38,10 @@ Route::get('/lockout', function () {
     return Inertia::render('Common/Lockout');
 })->name('lockout');
 
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/', function () { return Inertia::render('Public/Home/Home'); })->name('home'); // ホーム画面
+});
+
 
 // 元のルーティング
 // ユーザーロックアウト画面
@@ -49,9 +53,6 @@ Route::get('/lockout', function () {
  * を確認してください
  */
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/', function () {
-        return Inertia::render('Public/Home/Home');
-    })->name('home');
 
     /**
      * ログイン済みユーザーのみアクセス可能

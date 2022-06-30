@@ -3319,22 +3319,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
-
 function ValidationErrors(_ref) {
   var errors = _ref.errors;
-  return Object.keys(errors).length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    className: "mb-4",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      className: "font-medium text-red-600",
-      children: "Whoops! Something went wrong."
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("ul", {
-      className: "mt-3 list-disc list-inside text-sm text-red-600",
+  return Object.keys(errors).length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("ul", {
+      className: "mt-3 list-none text-sm text-red-600 font-bold",
       children: Object.keys(errors).map(function (key, index) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
           children: errors[key]
         }, index);
       })
-    })]
+    })
   });
 }
 
@@ -3584,8 +3579,6 @@ var Login = function Login(_ref) {
     children: [status && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
       className: "mb-4 font-medium text-sm text-green-600",
       children: status
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Atom_Default_ValidationErrors__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      errors: errors
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
       className: "w-screen h-screen bg-[url('/images/login_image.png')]",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("form", {
@@ -3638,10 +3631,12 @@ var Login = function Login(_ref) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
           className: "mt-4",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Atom_Default_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
-            className: "justify-center w-full bg-purple-700 font-bold",
+            className: "justify-center w-full bg-purple-800 font-bold",
             processing: processing,
             children: "Login"
           })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Atom_Default_ValidationErrors__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          errors: errors
         })]
       })
     })]
