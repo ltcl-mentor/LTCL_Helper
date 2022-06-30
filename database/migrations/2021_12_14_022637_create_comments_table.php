@@ -10,18 +10,15 @@ class CreateCommentsTable extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->text('comment');
-            $table->UnsignedBigInteger('question_id');
+            $table->foreignId('question_id')->constrained();
             $table->UnsignedBigInteger('comment_id');
-            $table->UnsignedBigInteger('user_id');
+            $table->foreignId('user_id')->constrained();
             $table->boolean('is_staff');
             $table->boolean('is_mentor_commented')->nullable(); // メンターが返信したかどうか
             $table->timestamps();
             $table->softDeletes();
-            
-            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

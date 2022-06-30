@@ -10,14 +10,10 @@ class CreateDocumentQuestionTable extends Migration
     public function up()
     {
         Schema::create('document_question', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('document_id');
-            $table->unsignedBigInteger('question_id');
-            $table->timestamp('updated_at')->useCurrent();
-            $table->timestamp('created_at')->useCurrent();
-              
-            $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade');
-            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
+            $table->id();
+            $table->foreignId('document_id')->constrained();
+            $table->foreignId('question_id')->constrained();
+            $table->timestamps();
         });
     }
 

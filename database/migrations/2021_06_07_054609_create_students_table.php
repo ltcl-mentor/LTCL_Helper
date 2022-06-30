@@ -10,14 +10,12 @@ class CreateStudentsTable extends Migration
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('name');
             $table->string('password');
-            $table->UnsignedBigInteger('user_id');
+            $table->foreignId('user_id')->constrained();
             $table->boolean('lock')->default(false);
             $table->timestamps();
-            
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

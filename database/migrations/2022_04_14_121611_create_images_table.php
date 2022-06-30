@@ -10,16 +10,12 @@ class CreateImagesTable extends Migration
     public function up()
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('image_path');
-            $table->unsignedBigInteger('question_id')->default(0);
-            $table->unsignedBigInteger('comment_id')->default(0);
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('question_id')->default(0)->constrained();
+            $table->foreignId('comment_id')->default(0)->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
-            
-            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
-            $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

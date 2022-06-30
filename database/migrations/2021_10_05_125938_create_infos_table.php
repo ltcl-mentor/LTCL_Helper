@@ -10,7 +10,7 @@ class CreateInfosTable extends Migration
     public function up()
     {
         Schema::create('infos', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('information', 250);
             $table->string('date', 20);
             $table->text('body')->nullable();

@@ -14,13 +14,10 @@ class CreateQuestionUserTable extends Migration
     public function up()
     {
         Schema::create('question_user', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('question_id');
-            $table->unsignedBigInteger('user_id');
+            $table->id();
+            $table->foreignId('question_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
-            
-            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

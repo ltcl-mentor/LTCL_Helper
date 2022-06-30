@@ -10,7 +10,7 @@ class CreateQuestionsTable extends Migration
     public function up()
     {
         Schema::create('questions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->UnsignedTinyInteger('category'); // カリキュラムか成果物か
             $table->UnsignedTinyInteger('topic');    // 質問のトピック
             $table->string('curriculum_number', 5);
@@ -19,12 +19,10 @@ class CreateQuestionsTable extends Migration
             $table->longtext('question');
             $table->boolean('is_resolved');          // 解決済みかどうか
             $table->boolean('check');                // 公開非公開
-            $table->UnsignedBigInteger('user_id');
+            $table->foreignId('user_id')->constrained();
             $table->unsignedInteger("status");       // 質問のステータス（メンターの質問引き継ぎ用）
             $table->timestamps();
             $table->softDeletes();
-            
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

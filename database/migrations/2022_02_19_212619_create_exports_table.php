@@ -10,7 +10,7 @@ class CreateExportsTable extends Migration
     public function up()
     {
         Schema::create('exports', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->Integer('export_size');
             $table->timestamps();
         });

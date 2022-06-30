@@ -10,19 +10,17 @@ class CreateDocumentsTable extends Migration
     public function up()
     {
         Schema::create('documents', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->text('title');
             $table->text('link');
             $table->boolean('beginner');
             $table->boolean('amature');
             $table->boolean('master');
             $table->boolean('all');
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('user_id')->constrained();
             $table->UnsignedTinyInteger('category')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
