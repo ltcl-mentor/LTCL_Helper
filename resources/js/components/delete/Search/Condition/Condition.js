@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import Grid from '@mui/material/Grid';
 
-import Breadcrumbs from '../../../Breadcrumbs';
+import Breadcrumbs from '../../../Common/Breadcrumbs';
 import Category from './Search/Forms/categoryForm';
 import Topic from './Search/Forms/topicForm';
 import Addition from './Search/Forms/additionalForms/additionalForms';
@@ -36,24 +36,24 @@ function Condition() {
     const [activeStep, setActiveStep] = useState(0);
     const steps = [
         'カテゴリーを選択する',
-        'トピックを選択する', 
+        'トピックを選択する',
         'さらに絞り込む（任意）',
     ];
     const [topicIsCanceling, setTopicIsCanceling] = useState(false);
     const [addtionalFormsIsCanceling, setAdditionalFormsIsCanceling] = useState(false);
-    
+
     // ステッパーを次に進める
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
-    
+
     // ステッパーを前に戻す
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
         // 一旦検索結果を隠すためにfalseに変更
         setIsSearchButtonClicked(false);
     };
-    
+
     // ステッパーをリセット
     const handleReset = () => {
         setActiveStep(0);
@@ -62,18 +62,18 @@ function Condition() {
         setCurriculumNumber('');
         setKeyword('');
     };
-    
+
     // ステッパーの内容
     const getStepContent = (step) => {
         switch (step) {
             case 0:
                 return (
                     <div>
-                        <Category 
+                        <Category
                             category={ category }
                             setCategory={ setCategory }
                         />
-                        
+
                         { category !== '' && (
                             <Button
                                 variant="contained"
@@ -85,11 +85,11 @@ function Condition() {
                         )}
                     </div>
                 );
-                
+
             case 1:
                 return (
                     <div>
-                        <Topic 
+                        <Topic
                             category={ category }
                             topic={ topic }
                             setTopic={ setTopic }
@@ -97,7 +97,7 @@ function Condition() {
                             isCanceling={ topicIsCanceling }
                             setIsCanceling={ setTopicIsCanceling }
                         />
-                        
+
                         <Grid container spacing={2}>
                             <Grid item>
                                 <Button
@@ -108,7 +108,7 @@ function Condition() {
                                     Back
                                 </Button>
                             </Grid>
-                        
+
                             <Grid item>
                                 { topic !== '' && (
                                     <Button
@@ -123,13 +123,13 @@ function Condition() {
                         </Grid>
                     </div>
                 );
-                
+
             case 2:
                 return (
                     <div>
                         <p>※条件の追加が不要な場合はNextを押してください</p>
-                        
-                        <Addition 
+
+                        <Addition
                             category={ category }
                             topic={ topic }
                             setCurriculumNumber={ setCurriculumNumber }
@@ -137,7 +137,7 @@ function Condition() {
                             isCanceling={ addtionalFormsIsCanceling }
                             setIsCanceling={ setAdditionalFormsIsCanceling }
                         />
-                        
+
                         <Grid container spacing={2}>
                             <Grid item>
                                 <Button
@@ -148,7 +148,7 @@ function Condition() {
                                     Back
                                 </Button>
                             </Grid>
-                        
+
                             <Grid item>
                                 <Button
                                     variant="contained"
@@ -161,16 +161,16 @@ function Condition() {
                         </Grid>
                     </div>
                 );
-                
+
             default:
                 return 'Unknown step';
         }
     };
-    
+
     return (
         <div className="container">
             <Breadcrumbs page="condition"/>
-            
+
             <Box>
                 <Card>
                     <Grid container spacing={5} justifyContent="center">
@@ -184,7 +184,7 @@ function Condition() {
                                 keyword={ keyword }
                             />
                         </Grid>
-                        
+
                         <Grid item sx={{ marginBottom: 4, marginTop: 4 }}>
                             <Box sx={{ width: "400px", maxWidth: "400px" }}>
                                 <Stepper activeStep={ activeStep }  orientation="vertical">
@@ -197,7 +197,7 @@ function Condition() {
                                         </Step>
                                     ))}
                                 </Stepper>
-                                
+
                                 { activeStep === steps.length && (
                                     <React.Fragment>
                                         <Box sx={{ marginTop: 4 }}>
@@ -211,7 +211,7 @@ function Condition() {
                                                         Back
                                                     </Button>
                                                 </Grid>
-                                            
+
                                                 <Grid item>
                                                     <Button
                                                         variant="contained"
@@ -237,7 +237,7 @@ function Condition() {
                     </Grid>
                 </Card>
             </Box>
-                
+
             <Result
                 isSearchButtonClicked={ isSearchButtonClicked }
                 category={ category }
@@ -247,7 +247,7 @@ function Condition() {
                 curriculum_number={ curriculum_number }
                 keyword={ keyword }
             />
-            
+
         </div>
     );
 }

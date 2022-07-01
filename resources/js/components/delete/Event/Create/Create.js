@@ -9,7 +9,7 @@ import Card from '@material-ui/core/Card';
 import Modal from '@mui/material/Modal';
 import '../../../../../../public/css/Search/show.css';
 
-import Breadcrumbs from '../../../Breadcrumbs';
+import Breadcrumbs from '../../../Common/Breadcrumbs';
 
 // モーダルのCSS設定
 const style = {
@@ -25,7 +25,7 @@ const style = {
 };
 
 /**
- * イベント作成、編集のメインコンポーネント 
+ * イベント作成、編集のメインコンポーネント
  */
 function Create() {
     const { id } = useParams();
@@ -38,9 +38,9 @@ function Create() {
     const [errorTemplate, setErrorTemplate] = useState(false);
     const [errorTemplateMessage, setErrorTemplateMessage] = useState('');
     const [open, setOpen] = useState(false);
-    
+
     const handleOpen = () => setOpen(true);
-    
+
     const handleClose = () => setOpen(false);
 
     const handleName = (event) => {
@@ -53,7 +53,7 @@ function Create() {
         }
         setName(event.target.value);
     };
-    
+
     const handleTemplate = (event) => {
         if (event.target.value.trim().length == 0) {
             setErrorTemplate(true);
@@ -64,7 +64,7 @@ function Create() {
         }
         setTemplate(event.target.value);
     };
-    
+
     useEffect(() => {
         axios
             .get(`/react/reaction`)
@@ -73,7 +73,7 @@ function Create() {
             }).catch(error => {
                 console.log(error);
             });
-            
+
         // 編集の時は個別のイベントデータを取得
         if (id !== undefined) {
             axios
@@ -86,7 +86,7 @@ function Create() {
                 });
         }
     }, []);
-    
+
     const submit = () => {
         let validationKey = false;
         // バリデーションチェック
@@ -96,7 +96,7 @@ function Create() {
             setErrorName(true);
             setErrorNameMessage('イベント名を入力してください');
         }
-        
+
         // 通知テンプレートを設定していない時
         if (template.trim().length === 0) {
             validationKey = true;
@@ -104,11 +104,11 @@ function Create() {
             console.log('error')
             setErrorTemplateMessage('テンプレートを入力してください');
         }
-        
+
         if (validationKey) {
             return false
         }
-        
+
         if (id === undefined) { // 新規作成の場合
             axios
                 .post("/events/store", {
@@ -145,13 +145,13 @@ function Create() {
     return (
         <div className="container">
             <Breadcrumbs page="mentor_event_create" />
-            
+
             <Box sx={{ width: "90%", marginLeft: "5%" }}>
                 <Card sx={{ marginBottom: 2, paddingTop: 3 }}>
                     <Typography align="center" sx={{ paddingTop:2 }} variant="h4">
                         イベントの追加
                     </Typography>
-                    
+
                     <TextField
                         error={errorName}
                         label="イベント名"
@@ -159,14 +159,14 @@ function Create() {
                         onChange={() => handleName(event)}
                         helperText={errorNameMessage}
                         fullwidth="true"
-                        style={{ 
+                        style={{
                             width: "80%",
                             marginTop: 20,
                             marginLeft: "10%",
                             paddingTop:2,
                         }}
                     />
-                    
+
                     <TextField
                         label="Slack通知テンプレート"
                         error={errorTemplate}
@@ -176,7 +176,7 @@ function Create() {
                         multiline
                         value={template}
                         onChange={(event) => handleTemplate(event)}
-                        style={{ 
+                        style={{
                             width: "80%",
                             marginTop: 20,
                             marginLeft: "10%",
@@ -187,13 +187,13 @@ function Create() {
                         <a href={link} target="_blank">slackのリアクションはこちらのサイトの通りに記載してください。</a>
                         <p onClick={() => handleOpen()}>slack文法</p>
                     </div>
-                    
+
                     <Typography align="center" sx={{ paddingTop:2 }}>
                         <Button variant="contained" onClick={ submit }>保存</Button>
                     </Typography>
                 </Card>
             </Box>
-            
+
             {/* slack文法詳細のモーダル */}
             <Modal
                 open={open}
@@ -210,7 +210,7 @@ function Create() {
                         ` ： インラインコードブロック<br/>
                         ``` ： コードブロック<br/>
                     </Typography>
-                    
+
                     <Typography align="center" sx={{ paddingTop:2 }}>
                         <Button variant="outlined" onClick={() => handleClose()}>戻る</Button>
                     </Typography>

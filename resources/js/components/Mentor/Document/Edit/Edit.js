@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 
-import Breadcrumbs from '../../../Breadcrumbs';
+import Breadcrumbs from '../../../Common/Breadcrumbs';
 import Target from '../Create/target';
 import Title from '../Create/title';
 import URL from '../Create/link';
@@ -29,7 +29,7 @@ function Edit() {
         master: false,
         all: false,
      });
-    
+
     // 該当記事取得
     useEffect(() => {
         // 該当記事取得
@@ -48,25 +48,25 @@ function Edit() {
                 console.log(error);
             });
     }, []);
-    
+
     const handleSubmit = () => {
         // タイトルのバリデーション
         if ( !(title.trim().length !== 0 && title.trim().length <= 50) ) {
             setTitleValidationError(true);
             return false;
         }
-        
+
         // URLのバリデーション
         if ( !(link.trim().length !== 0) ) {
             setLinkValidationError(true);
         }
-        
+
         // フォーム送信と重複保存の防止
         if (clickCount === 0) {
-            
+
         console.log(targets);
             setClickCount(1);
-            
+
             axios
                 .post(`/documents/${ id }/update`, {
                     targets: targets,
@@ -85,30 +85,30 @@ function Edit() {
             return false;
         }
     };
-    
+
     return (
         <div className="container">
             <Breadcrumbs page="mentor_document_edit" id={ id }/>
-            
+
             <Box sx={{ width: "70%", marginLeft: "15%" }}>
                 <Card sx={{ marginBottom: 2 }}>
                     <Target
                         targets={ targets }
                         setTargets={ setTargets }
                     />
-                    
-                    <Title 
+
+                    <Title
                         title={ title }
                         setTitle={ setTitle }
                         title_validation_error={ title_validation_error }
                     />
-                    
+
                     <URL
                         link={ link }
                         setLink={ setLink }
                         link_validation_error={ link_validation_error }
                     />
-                    
+
                     <Typography
                         align="center"
                         component="div"

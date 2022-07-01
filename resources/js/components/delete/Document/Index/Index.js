@@ -7,7 +7,7 @@ import Input from '@mui/material/Input';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 
-import Breadcrumbs from '../../../Breadcrumbs';
+import Breadcrumbs from '../../../Common/Breadcrumbs';
 import Documents from '../../Question/Show/documents';
 
 /**
@@ -15,13 +15,13 @@ import Documents from '../../Question/Show/documents';
  */
 function Index() {
     const [default_documents , setDefaultDocuments] = useState([]);
-    const [documents , setDocuments] = useState([]); 
+    const [documents , setDocuments] = useState([]);
     const [keyword, setKeyword] = useState('');
     const [beginner, setBeginner] = useState(false);
     const [amature, setAmature] = useState(false);
     const [master, setMaster] = useState(false);
     const [all ,setAll] = useState(false);
-    
+
     // 画面描画時に実行
     useEffect(() => {
         // 参考記事全権取得
@@ -34,7 +34,7 @@ function Index() {
                 console.log(error);
             });
     }, []);
-    
+
     // 対象者の指定が変更された場合に実行
     useEffect(() => {
         var keyword_documents = [];
@@ -46,7 +46,7 @@ function Index() {
                 doc.title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1 && keyword_documents.push(doc);
             });
         }
-        
+
         var target_documents = [];
         // 対象者のいづれかが選択されていた場合
         if (beginner || amature || master || all) {
@@ -73,40 +73,40 @@ function Index() {
         } else {
             setDocuments(keyword_documents);
         }
-        
+
     },[keyword, beginner, amature, master, all]);
-    
+
     // キーワード入力
     const handleKeyword = (event) => {
         // 入力に空白があれば"/"に置換
         setKeyword(event.target.value);
     };
-    
+
     // ボタンの表示切り替え
     const handleSelect = (whitch) => {
         switch (whitch) {
             case "beginner":
                 beginner ? setBeginner(false) : setBeginner(true);
                 break;
-            
+
             case "amature":
                 amature ? setAmature(false) : setAmature(true);
                 break;
-            
+
             case "master":
                 master ? setMaster(false) : setMaster(true);
                 break;
-            
+
             case "all":
                 all ? setAll(false) : setAll(true);
                 break;
-        } 
+        }
     };
-    
+
     return (
         <div className="container">
             <Breadcrumbs page="public_document_index"/>
-            
+
             <Grid container spacing={2} sx={{ flexGrow: 1, marginBottom: 3 }} justifyContent="center">
                 <Grid item sx={{ width: "100%" }}>
                     <Paper
@@ -170,8 +170,8 @@ function Index() {
                     </Button>
                 </Grid>
             </Grid>
-            
-            <Documents 
+
+            <Documents
                 documents={ documents }
             />
         </div>
@@ -179,4 +179,3 @@ function Index() {
 }
 
 export default Index;
-

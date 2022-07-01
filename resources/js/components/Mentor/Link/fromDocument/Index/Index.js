@@ -3,7 +3,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 
-import Breadcrumbs from '../../../../Breadcrumbs';
+import Breadcrumbs from '../../../../Common/Breadcrumbs';
 import Documents from './documents';
 
 function Index() {
@@ -12,11 +12,11 @@ function Index() {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    
+
     return (
         <div className="container">
             <Breadcrumbs page="mentor_link_document_index"/>
-            
+
             <Box sx={{ width: '95%', marginTop: 3 }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={ value } onChange={ handleChange } aria-label="basic tabs example">

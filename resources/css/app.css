@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    h1 {
+        @apply text-5xl leading-none;
+    }
+    h2 {
+        @apply text-4xl leading-snug;
+    }
+    h3 {
+        @apply text-2xl leading-none;
+    }
+    h4 {
+        @apply text-base leading-normal;
+    }
+    a {
+        @apply text-purple;
+    }
+}

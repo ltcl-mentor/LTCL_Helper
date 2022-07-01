@@ -6,7 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 import Alert from '../../../Alert';
-import Breadcrumbs from '../../../Breadcrumbs';
+import Breadcrumbs from '../../../Common/Breadcrumbs';
 import Students from './students';
 import Admins from './admins';
 
@@ -21,7 +21,7 @@ function Index() {
     const [delete_user_id, setDeleteUserId] = useState();
     const [unlock_user_id, setUnlockUserId] = useState();
     const [value, setValue] = React.useState(0);
-    
+
     // 画面描画時に実行
     useEffect(() => {
         // 管理者一覧取得
@@ -32,7 +32,7 @@ function Index() {
             }).catch(error => {
                 console.log(error);
             });
-            
+
         // 受講生一覧取得
         axios
             .get(`/react/all/students`)
@@ -41,12 +41,12 @@ function Index() {
             }).catch(error => {
                 console.log(error);
             });
-            
+
         if (parameter.state && parameter.state.value) {
             setValue(parameter.state.value);
         }
     }, []);
-    
+
     // 削除実行
     useEffect(() => {
         if (delete_user_id) {
@@ -68,7 +68,7 @@ function Index() {
             }
         }
     }, [delete_user_id]);
-    
+
     // ユーザロック解除実行
     useEffect(() => {
         if (unlock_user_id) {
@@ -89,11 +89,11 @@ function Index() {
             }
         }
     }, [unlock_user_id]);
-    
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    
+
     return (
         <div className="container">
             <Alert
@@ -101,24 +101,24 @@ function Index() {
                 status={ parameter.state && parameter.state.user }
                 info={ parameter.state && parameter.state.number }
             />
-            
+
             <Breadcrumbs page="mentor_user_index"/>
-            
+
             <Box sx={{ marginTop: 3, borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={ value } onChange={ handleChange } aria-label="basic tabs example">
                     <Tab label="受講生一覧" />
                     <Tab label="管理者一覧" />
                 </Tabs>
             </Box>
-            
+
             <Box sx={{ marginTop: 3 }}>
-                { value === 0 ? 
+                { value === 0 ?
                     <Students
                         students={ students }
                         setDeleteUserId={ setDeleteUserId }
                         setUnlockUserId={ setUnlockUserId }
                     />
-                : 
+                :
                     <Admins
                         staffs={ staffs }
                         setDeleteUserId={ setDeleteUserId }

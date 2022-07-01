@@ -3,7 +3,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 
-import Breadcrumbs from '../../../../Breadcrumbs';
+import Breadcrumbs from '../../../../Common/Breadcrumbs';
 import Questions from './questions';
 
 /**
@@ -35,18 +35,18 @@ function Index() {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    
+
     let tab_content;
     if (value === 0) {
         tab_content = ( <Questions topics={ curriculumTopics } /> );
     } else if (value === 1 ) {
         tab_content = ( <Questions topics={ portfolioTopics } /> );
     }
-    
+
     return (
         <div className="container">
             <Breadcrumbs page="mentor_link_question_index"/>
-            
+
             <Box sx={{ width: '95%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={ value } onChange={ handleChange } aria-label="basic tabs example">

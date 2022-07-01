@@ -11,7 +11,7 @@ import PurpleButton from "../../../../Atom/Button/PurpleButton";
 import WhiteButton from "../../../../Atom/Button/WhiteButton";
 import ConfirmButton from "../../../../Atom/Button/ConfirmButton";
 import TopicForm from "./topicForm";
-import Breadcrumb from "../../../../Breadcrumbs";
+import Breadcrumb from "../../../../Common/Breadcrumbs";
 import Box from "@material-ui/core/Box";
 import BreadcrumbBox from "../../../../Atom/Box/BreadcrumbBox";
 import {

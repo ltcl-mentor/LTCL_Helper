@@ -12,7 +12,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 
 import Alert from '../../../Alert';
-import Breadcrumbs from '../../../Breadcrumbs';
+import Breadcrumbs from '../../../Common/Breadcrumbs';
 
 // モーダルのCSS設定
 const style = {
@@ -30,7 +30,7 @@ const style = {
 };
 
 /**
- * イベント一覧のメインコンポーネント 
+ * イベント一覧のメインコンポーネント
  */
 function Index() {
     const history = useHistory();
@@ -40,12 +40,12 @@ function Index() {
     const [open, setOpen] = useState(false);
     const [deleteId, setDeleteId] = useState();
     const [deleteEvent, setDeleteEvent] = useState();
-    
+
     // モーダル開閉
     const handleOpen = () => setOpen(true);
-    
+
     const handleClose = () => setOpen(false);
-    
+
     // 削除実行対象特定
     const handleDeleteTarget = (id, event) => {
         setDeleteId(id);
@@ -55,7 +55,7 @@ function Index() {
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
-    
+
     useEffect(() => {
         axios
             .get(`/react/events`)
@@ -65,7 +65,7 @@ function Index() {
                 console.log(error);
             });
     }, []);
-    
+
     // 削除実行
     const handleDelete = () =>{
         axios
@@ -83,12 +83,12 @@ function Index() {
     return (
         <div className="container">
             <Breadcrumbs page="mentor_event_index" />
-            
+
             <Alert
                 type={ parameter.state && parameter.state.type }
                 status={ parameter.state && parameter.state.status }
             />
-            
+
             {events.map((event, index) => {
                 return (
                     <Accordion key={event.template} expanded={expanded === `panel${index+1}`} onChange={handleChange(`panel${index+1}`)}>
@@ -105,9 +105,9 @@ function Index() {
                             <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                                 slackメッセージ
                                 <Button size="large" component={Link} to={"/events/register/" + event.id}>編集</Button>
-                                <Button 
-                                    color="error" 
-                                    size="large" 
+                                <Button
+                                    color="error"
+                                    size="large"
                                     onClick={() => {handleOpen(), handleDeleteTarget(event.id, event.name)}} >削除</Button>
                             </Typography>
                             <Typography>
@@ -117,7 +117,7 @@ function Index() {
                     </Accordion>
                 );
             })}
-            
+
             {/* イベント削除のモーダル */}
             <Modal
                 open={ open }
@@ -129,11 +129,11 @@ function Index() {
                     <Typography align="center" sx={{ paddingTop:2 } } variant="h5">
                         { deleteEvent }
                     </Typography>
-                    
+
                     <Typography align="center" sx={{ paddingTop:2 }}>
                         このイベントを削除します。よろしいですか？
                     </Typography>
-                    
+
                     <Typography align="center" sx={{ paddingTop:2 }}>
                         <Button color="error" variant="contained" onClick={ handleDelete } sx={{ mr: 1 }}>削除</Button>
                         <Button variant="outlined" onClick={() => handleClose()} sx={{ ml: 1 }}>戻る</Button>

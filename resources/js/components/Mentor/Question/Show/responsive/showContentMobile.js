@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Box from "@mui/material/Box";
-import Breadcrumbs from "../../../../Breadcrumbs";
+import Breadcrumbs from "../../../../Common/Breadcrumbs";
 import Publish from "../Publish/publish";
 import Comments from "../../../../Public/Question/Show/comments/comments";
 import AddRelatedQuestion from "../../../Link/modal/addRelatedQuestion";

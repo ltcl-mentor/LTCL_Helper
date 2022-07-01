@@ -3,16 +3,6 @@ import React, { useState } from "react";
 import MenuItem from '@/components/Common/menuItem';
 import Button from "@mui/material/Button";
 import Menu from "@material-ui/core/Menu";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import SearchIcon from "@mui/icons-material/Search";
-import AddIcon from "@mui/icons-material/Add";
-import HistoryIcon from "@mui/icons-material/History";
-import LogoutIcon from "@mui/icons-material/Logout";
-
-// 各パーツのスタイル設定
-const styleMargin = { display: 'inline-block' };
-const style = { color: "#771AF8" };
 
 /**
  * ユーザアイコン
@@ -24,8 +14,8 @@ const userIcon = ({ user, isWide }) => {
     if (!isWide) {
         responsive = (
             <React.Fragment>
-                <MenuItem menu="search" setAnchorEl={setAnchorEl} />
-                <MenuItem menu="question" setAnchorEl={setAnchorEl} />
+                <MenuItem menu="search" />
+                <MenuItem menu="question" />
             </React.Fragment>
         );
     }
@@ -34,7 +24,7 @@ const userIcon = ({ user, isWide }) => {
     if (user.is_admin) {
         menuItem = (
             <div>
-                <MenuItem menu="myPage" />
+                <MenuItem menu="admin-myPage" />
                 {responsive}
                 <MenuItem menu="logout" />
             </div>
@@ -58,7 +48,6 @@ const userIcon = ({ user, isWide }) => {
                 aria-haspopup="true"
                 onClick={e => setAnchorEl(e.currentTarget)}
                 color="inherit"
-                sx={styleMargin}
             >
                 <span className="text-xl align-middle">{user.name}</span>
             </Button>

@@ -13,7 +13,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
 import Alert from '../../../Alert';
-import Breadcrumbs from '../../../Breadcrumbs';
+import Breadcrumbs from '../../../Common/Breadcrumbs';
 
 /**
  * 関連記事一覧(管理画面)のメインコンポーネント
@@ -23,7 +23,7 @@ function Document() {
     const [documents, setDocuments] = useState([]);
     const [staffs, setStaffs] = useState([]);
     const [expanded, setExpanded] = React.useState(false);
-    
+
     // 画面描画時に実行
     useEffect(() => {
         // 記事一覧取得
@@ -34,7 +34,7 @@ function Document() {
             }).catch(error => {
                 console.log(error);
             });
-        
+
         // 管理者一覧取得
         axios
             .get("/react/all/staffs")
@@ -42,14 +42,14 @@ function Document() {
                 setStaffs(response.data);
             }).catch(error => {
                 console.log(error);
-            }); 
-        
+            });
+
     }, []);
-    
+
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
-    
+
     const document = staffs.map((staff) => {
         return (
             <Accordion expanded={ expanded === staff.id } onChange={ handleChange(staff.id) } sx={{ marginBottom: 3 }} key={staff.name}>
@@ -89,7 +89,7 @@ function Document() {
             </Accordion>
         );
     });
-    
+
     return (
         <div className="container">
             <Alert
@@ -97,9 +97,9 @@ function Document() {
                 status={ parameter.state && parameter.state.document }
                 info={ parameter.state && parameter.state.number }
             />
-            
+
             <Breadcrumbs page="mentor_document_index"/>
-            
+
             <Box sx={{ marginTop: 3 }}>
                 { document }
             </Box>

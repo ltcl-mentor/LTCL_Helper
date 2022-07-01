@@ -17,7 +17,7 @@ import EventIcon from '@mui/icons-material/Event';
 
 import {LoginUser} from '../Route.js';
 import Alert from '../Alert';
-import Breadcrumbs from '../Breadcrumbs';
+import Breadcrumbs from '../Common/Breadcrumbs';
 
 /**
  * 管理画面のメインコンポーネント
@@ -26,7 +26,7 @@ function Top() {
     const history = useHistory();
     const parameter = useLocation();
     const [counts, setCounts] = useState([]);
-    
+
     // 画面描画時に実行
     useEffect(() => {
         // コメント待ちの質問のデータ数を取得
@@ -38,7 +38,7 @@ function Top() {
                 console.log(error);
             });
     }, []);
-    
+
     const backupQuestion = () => {
         if (window.confirm('質問のバックアップを復元しますか？')) {
             axios
@@ -51,7 +51,7 @@ function Top() {
                 });
         }
     };
-    
+
     const backupStudent = () => {
         if (window.confirm('受講生を一括登録しますか？')) {
             axios
@@ -64,19 +64,19 @@ function Top() {
                 });
         }
     };
-    
+
     // ログインユーザー情報取得
     const user = useContext(LoginUser);
-    
+
     return (
         <div className="container">
             <Breadcrumbs page="mentor_top"/>
-            
+
             <Alert
                 type={ parameter.state && parameter.state.type }
                 status={ parameter.state && parameter.state.status }
             />
-            
+
             <Card>
                 <Box sx={{ margin: 2, marginBottom: 3, marginLeft: 2 }}>
                     <Typography
@@ -90,14 +90,14 @@ function Top() {
                     >
                         質問
                     </Typography>
-                    
+
                     <Grid container spacing={2} sx={{ flexGrow: 1, marginLeft: 2 }} >
                         <Grid item >
                             <Link to="/questions/index">
                                 <Button variant="contained" color="info" startIcon={ <ListIcon /> }>一覧</Button>
                             </Link>
                         </Grid>
-                        
+
                         <Grid item >
                             <Link to="/questions/index/mentor_yet_comment">
                                 <Badge badgeContent={ counts.mentor } color="error">
@@ -105,7 +105,7 @@ function Top() {
                                 </Badge>
                             </Link>
                         </Grid>
-                        
+
                         <Grid item >
                             <Link to="/questions/index/student_yet_comment">
                                 <Badge badgeContent={ counts.student } color="error">
@@ -115,7 +115,7 @@ function Top() {
                         </Grid>
                     </Grid>
                 </Box>
-                
+
                 <Box sx={{ margin: 2, marginBottom: 3, marginLeft: 2 }}>
                     <Typography
                         variant="h4"
@@ -128,14 +128,14 @@ function Top() {
                     >
                         関連記事
                     </Typography>
-                    
+
                     <Grid container spacing={2} sx={{ flexGrow: 1, marginLeft: 2  }} >
                         <Grid item >
                             <Link to="/documents/index">
                                 <Button variant="contained" color="success" startIcon={ <ListIcon /> }>一覧</Button>
                             </Link>
                         </Grid>
-                        
+
                         <Grid item >
                             <Link to="/documents/create">
                                 <Button variant="contained" color="success" startIcon={ <CreateIcon /> }>新規登録</Button>
@@ -143,7 +143,7 @@ function Top() {
                         </Grid>
                     </Grid>
                 </Box>
-                
+
                 <Box sx={{ margin: 2, marginBottom: 3, marginLeft: 2 }}>
                     <Typography
                         variant="h4"
@@ -156,14 +156,14 @@ function Top() {
                     >
                         記事と質問の紐付け
                     </Typography>
-                    
+
                     <Grid container spacing={2} sx={{ flexGrow: 1, marginLeft: 2  }} >
                         <Grid item >
                             <Link to="/links/question/index">
                                 <Button variant="contained" color="secondary" startIcon={ <QuestionAnswerIcon /> }>質問から紐付け</Button>
                             </Link>
                         </Grid>
-                        
+
                         <Grid item >
                             <Link to="/links/document/index">
                                 <Button variant="contained" color="secondary" startIcon={ <DescriptionIcon /> }>記事から紐付け</Button>
@@ -171,7 +171,7 @@ function Top() {
                         </Grid>
                     </Grid>
                 </Box>
-                
+
                 <Box sx={{ margin: 2, marginBottom: 3, marginLeft: 2 }}>
                     <Typography
                         variant="h4"
@@ -184,20 +184,20 @@ function Top() {
                     >
                         ユーザー名簿
                     </Typography>
-                    
+
                     <Grid container spacing={2} sx={{ flexGrow: 1, marginLeft: 2 }} >
                         <Grid item >
                             <Link to="/users/index">
                                 <Button variant="contained" color="error" startIcon={ <ListIcon /> }>一覧</Button>
                             </Link>
                         </Grid>
-                        
+
                         <Grid item >
                             <Link to="/users/register/admin">
                                 <Button variant="contained" color="error" startIcon={ <PersonAddIcon /> }>管理者の登録</Button>
                             </Link>
                         </Grid>
-                        
+
                         <Grid item >
                             <Link to="/users/register/public">
                                 <Button variant="contained" color="error" startIcon={ <PersonAddAltIcon /> }>受講生の登録</Button>
@@ -205,7 +205,7 @@ function Top() {
                         </Grid>
                     </Grid>
                 </Box>
-                
+
                 <Box sx={{ margin: 2, marginBottom: 3, marginLeft: 2 }}>
                     <Typography
                         variant="h4"
@@ -218,14 +218,14 @@ function Top() {
                     >
                         イベント
                     </Typography>
-                    
+
                     <Grid container spacing={2} sx={{ flexGrow: 1, marginLeft: 2 }} >
                         <Grid item >
                             <Link to="/events/index">
                                 <Button variant="contained" color="warning" startIcon={ <ListIcon /> }>一覧</Button>
                             </Link>
                         </Grid>
-                        
+
                         <Grid item >
                             <Link to="/events/register">
                                 <Button variant="contained" color="warning" startIcon={ <EventIcon /> }>イベントの追加</Button>
@@ -233,7 +233,7 @@ function Top() {
                         </Grid>
                     </Grid>
                 </Box>
-                
+
                 { (user.name === "master" && user.id === 1) &&
                     <Box sx={{ margin: 2, marginBottom: 3, marginLeft: 2 }}>
                         <Typography
@@ -247,18 +247,18 @@ function Top() {
                         >
                             質問データ出力
                         </Typography>
-                        
+
                         <Grid container spacing={2} sx={{ flexGrow: 1, marginLeft: 2 }} >
                             <Grid item >
                                 <a href="/questions/export">
                                     <Button variant="contained" color="warning" startIcon={ <ListIcon /> }>直近の質問をCSV出力</Button>
                                 </a>
                             </Grid>
-                            
+
                             <Grid item >
                                 <Button onClick={() => backupQuestion()} variant="contained" color="warning" startIcon={ <ListIcon /> }>質問一括登録</Button>
                             </Grid>
-                            
+
                             <Grid item >
                                 <Button onClick={() => backupStudent()} variant="contained" color="warning" startIcon={ <ListIcon /> }>受講生一括登録</Button>
                             </Grid>

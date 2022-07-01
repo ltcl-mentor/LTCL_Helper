@@ -15,7 +15,7 @@ import Pagination from "@mui/material/Pagination";
 import Box from "@material-ui/core/Box";
 
 import { LoginUser } from "../../Route.js";
-import Breadcrumbs from "../../Breadcrumbs";
+import Breadcrumbs from "../../Common/Breadcrumbs";
 
 const style = {
     fontWeight: "normal",

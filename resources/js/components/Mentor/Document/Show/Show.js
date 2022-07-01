@@ -7,7 +7,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@mui/material/Button';
 
 import Alert from '../../../Alert';
-import Breadcrumbs from '../../../Breadcrumbs';
+import Breadcrumbs from '../../../Common/Breadcrumbs';
 import Parameters from './parameters';
 import Questions from './questions';
 
@@ -19,7 +19,7 @@ function Document() {
     const { id } = useParams();
     const history = useHistory();
     const [doc, setDoc] = useState([]);
-    
+
     // 画面描画時に実行
     useEffect(() => {
         // 該当記事取得
@@ -31,7 +31,7 @@ function Document() {
                 console.log(error);
             });
     }, []);
-    
+
     const deleteConfirm = () => {
         if (confirm('データが削除されます。\nよろしいですか？')) {
             axios
@@ -48,7 +48,7 @@ function Document() {
             return false;
         }
     };
-    
+
     return (
         <div className="container">
             <Alert
@@ -56,20 +56,20 @@ function Document() {
                 status={ parameter.state && parameter.state.document }
                 info={ parameter.state && parameter.state.number }
             />
-            
+
             <Breadcrumbs page="mentor_document_show"/>
-            
+
             <Typography align="center" variant="h6" component="div" sx={{ marginTop: 4 }}>
                 <Link to={`/documents/` + id + `/edit`} className="editBtn">
                     <Button variant="contained" color="info" startIcon={ <EditIcon /> }>編集する</Button>
                 </Link>
             </Typography>
-            
+
             <Typography align="center" variant="h6" component="div" sx={{ marginTop: 1, marginBottom: 2 }}>
                 <Button variant="contained" color="error" onClick={ deleteConfirm } startIcon={ <DeleteIcon /> }>削除する</Button>
             </Typography>
-            
-            <Parameters 
+
+            <Parameters
                 title={ doc.title }
                 targets={ [
                     doc.beginner ? "初心者" : false,
@@ -80,7 +80,7 @@ function Document() {
                 link={ doc.link }
                 author={ doc.author }
             />
-            
+
             <div>
                 <Typography
                     variant="h4"
@@ -93,13 +93,13 @@ function Document() {
                 >
                     関連質問
                 </Typography>
-                
+
                 <Typography component="div" align="center" sx={{ marginTop: 1, marginBottom: 2}} >
                     <Link to={ `/links/document/` + id }>
                         <Button variant="contained" color="info" startIcon={ <EditIcon /> }>編集する</Button>
                     </Link>
                 </Typography>
-                
+
                 <Questions id={ id }/>
             </div>
         </div>

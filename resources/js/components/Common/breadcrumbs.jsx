@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link } from '@inertiajs/inertia-react';
 
 import Typography from "@material-ui/core/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
@@ -7,12 +7,13 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 /**
  * 各ページのパンくずリスト
  */
-const Breadcrumb = props => {
+const breadcrumb = ({ page }) => {
     let link1;
     let link2;
     let link3;
     let link4;
-    switch (props.page) {
+    switch (page) {
+
         /* 公開部分 */
         case "my_page":
             link1 = <Typography color="text.primary">マイページ</Typography>;
@@ -79,6 +80,7 @@ const Breadcrumb = props => {
         case "public_document_index":
             link1 = <Typography color="text.primary">関連記事一覧</Typography>;
             break;
+
 
         /* 管理ページ */
         // トップ
@@ -329,7 +331,8 @@ const Breadcrumb = props => {
             link2 = <Typography color="text.primary">イベント作成</Typography>;
             break;
 
-        case "not_found":
+
+        case "notFound":
             link1 = (
                 <Typography color="text.primary">
                     ページが見つかりません
@@ -338,23 +341,15 @@ const Breadcrumb = props => {
     }
 
     return (
-        <Breadcrumbs
-            aria-label="breadcrumb"
-            sx={{ marginBottom: 4, fontSize: "20px" }}
-        >
-            <Link underline="hover" to="/">
-                Top
-            </Link>
+        <Breadcrumbs sx={{ marginBottom: 4, fontSize: "20px" }}>
+            <Link href={route('home')}>Top</Link>
 
             {link1}
-
             {link2}
-
             {link3}
-
             {link4}
         </Breadcrumbs>
     );
 };
 
-export default Breadcrumb;
+export default breadcrumb;

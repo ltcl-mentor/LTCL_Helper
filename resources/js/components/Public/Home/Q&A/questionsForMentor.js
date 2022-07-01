@@ -13,7 +13,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Pagination from "@mui/material/Pagination";
 
-import Breadcrumbs from "../../../Breadcrumbs";
+import Breadcrumbs from "../../../Common/Breadcrumbs";
 
 // 各パーツのスタイル設定
 const styleListItemText = { display: "flex" };

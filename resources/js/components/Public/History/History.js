@@ -12,7 +12,7 @@ import Box from "@material-ui/core/Box";
 import Pagination from "@mui/material/Pagination";
 import Grid from "@mui/material/Grid";
 
-import Breadcrumbs from "../../Breadcrumbs";
+import Breadcrumbs from "../../Common/Breadcrumbs";
 import "../../../../../public/css/Public/history.css";
 
 /**

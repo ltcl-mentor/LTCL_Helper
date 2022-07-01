@@ -14,7 +14,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@mui/material/TextField';
 
 
-import Breadcrumbs from '../../Breadcrumbs';
+import Breadcrumbs from '../../Common/Breadcrumbs';
 
 
 /**
@@ -29,7 +29,7 @@ function Contact() {
     const [contact_category_validation_error, setContactCategoryValidationError] = useState(false);
     const [validationMessage, setValidationMessage] = useState('');
     const [categoryValidationMessage, setCategoryValidationMessage] = useState('');
-    
+
     // お問い合わせ送信
     const handleSubmit = () => {
         // 問い合わせのバリデーション
@@ -37,7 +37,7 @@ function Contact() {
             if (clickCount === 0) {
                 if (window.confirm('お問合せを送信します。よろしいですか？')) {
                     setClickCount(1);
-                    
+
                     axios
                         .post("/contact", {
                             message: category + contact,
@@ -60,7 +60,7 @@ function Contact() {
                 setContactValidationError(true);
                 setValidationMessage('お問合せ内容を入力してください')
             }
-            
+
             //カテゴリーのバリデーション
             if (category.trim().length === 0) {
                 setContactCategoryValidationError(true);
@@ -68,7 +68,7 @@ function Contact() {
             }
         }
     };
-    
+
     // お問い合わせ入力
     const handleContact = (event) => {
         if (event.target.value.length === 0) {
@@ -80,7 +80,7 @@ function Contact() {
         }
         setContact(event.target.value);
     };
-    
+
     // お問合せカテゴリーの変更
     const handleCategory = (event) => {
         if (event.target.value.length === 0) {
@@ -92,14 +92,14 @@ function Contact() {
         }
         setCategory('カテゴリー：' + event.target.value + '\n');
     };
-    
+
     const categoryList = ["バグ修正依頼", "就活相談", "その他"];
-    
-    
+
+
     return (
         <div className="container">
             <Breadcrumbs page="contact"/>
-            
+
             <Box sx={{ width: "70%", marginLeft: "15%" }}>
                 <Card sx={{ marginBottom: 2 }}>
                     <Typography
@@ -126,7 +126,7 @@ function Contact() {
                             {categoryList.map((val, index) => <MenuItem value={val} key={index}>{val}</MenuItem>)}
                         </TextField>
                     </Box>
-                    
+
                     <Box sx={{ textAlign: "center", marginTop: 4 }}>
                         <TextField
                             name="message"
@@ -137,13 +137,13 @@ function Contact() {
                             rows={8}
                             value={ contact }
                             onChange={ (event) => handleContact(event) }
-                            style={{ 
+                            style={{
                                 width: "80%",
                                 paddingTop:2,
                             }}
                         />
                     </Box>
-                    
+
                     <Typography
                         align="center"
                         component="div"

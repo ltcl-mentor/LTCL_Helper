@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
 import Grid from '@mui/material/Grid';
 
-import Breadcrumbs from '../../../../Breadcrumbs';
+import Breadcrumbs from '../../../../Common/Breadcrumbs';
 import Forms from './forms';
 
 /**
@@ -17,22 +17,22 @@ function Public() {
     const handleYear = (event) => {
         setYear(event.target.value);
     };
-    
+
     const handleMonth = (event) => {
         setMonth(event.target.value);
     };
-    
+
     const handleNumber = (event) => {
         setNumber(event.target.value);
     };
-    
+
     var today = new Date();
     let thisYear = today.getFullYear();
-    
+
     return (
         <div className="container">
             <Breadcrumbs page="mentor_public_create"/>
-            
+
             <Box sx={{ width: "70%", marginLeft: "15%" }}>
                 <Card sx={{ marginBottom: 2 }}>
                     <Grid container spacing={2} justifyContent="center" sx={{ paddingTop: 2, paddingBottom: 2 }}>
@@ -45,7 +45,7 @@ function Public() {
                             </select>
                             年
                         </Grid>
-                        
+
                         <Grid item>
                             <select onChange={ (event) => handleMonth(event) } required>
                                 <option value="">選択してください。</option>
@@ -64,7 +64,7 @@ function Public() {
                             </select>
                             月の入学者を
                         </Grid>
-                        
+
                         <Grid item>
                             <select onChange={ (event) => handleNumber(event) } required>
                                 <option value="">選択してください。</option>
@@ -93,7 +93,7 @@ function Public() {
                         </Grid>
                     </Grid>
                 </Card>
-                
+
                 <Forms
                     password={ 'ltcl' + year%100 + ( '0' + month ).slice(-2) }
                     number={ number }

@@ -1,5 +1,5 @@
 import React from 'react';
-import Authenticated from '@/Layouts/Authenticated';
+import Authenticated from '@/components/delete/Layouts/Authenticated';
 import { Head } from '@inertiajs/inertia-react';
 
 export default function Dashboard(props) {

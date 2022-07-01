@@ -37,7 +37,7 @@ Route::get('/dashboard', function () {
 // フロントエンドのルーティング
 Route::get('/lockout', function () {
     return Inertia::render('Common/Lockout');
-})->name('lockout');
+})->name('lockout'); // ロックアウト画面
 
 Route::group(['middleware' => ['auth']], function () {
     /**

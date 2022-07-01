@@ -9,7 +9,7 @@ import Card from '@material-ui/core/Card';
 import Button from '@mui/material/Button';
 
 import '../../../../../../../public/css/Public/question_index.css';
-import Breadcrumbs from '../../../../Breadcrumbs';
+import Breadcrumbs from '../../../../Common/Breadcrumbs';
 import QuestionsPC from './responsive/questionsPC';
 import QuestionsMobile from './responsive/questionsMobile';
 import ArticlePC from './responsive/articlePC';

@@ -6,7 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 
 import Alert from '../../../../Alert';
-import Breadcrumbs from '../../../../Breadcrumbs';
+import Breadcrumbs from '../../../../Common/Breadcrumbs';
 import Curriculum from './curriculum';
 import Portfolio from './portfolio';
 
@@ -18,7 +18,7 @@ function Index() {
     const [value, setValue] = useState(0);
     const [curriculum_questions, setCurriculumQuestions] = useState([]);
     const [portfolio_questions, setPortfolioQuestions] = useState([]);
-    
+
     // 画面描画時に実行
     useEffect(() => {
         // カリキュラム関連の質問取得
@@ -29,7 +29,7 @@ function Index() {
             }).catch(error => {
                 console.log(error);
             });
-        
+
         // 成果物関連の質問取得
         axios
             .get("/react/questions/portfolio")
@@ -39,11 +39,11 @@ function Index() {
                 console.log(error);
             });
     }, []);
-    
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    
+
     return (
         <div className="container">
             <Alert
@@ -51,9 +51,9 @@ function Index() {
                 status={ parameter.state && parameter.state.question }
                 info={ parameter.state && parameter.state.number }
             />
-            
+
             <Breadcrumbs page="mentor_question_index"/>
-            
+
             <Box sx={{ width: '95%', marginTop: 3 }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={ value } onChange={ handleChange } aria-label="basic tabs example">
@@ -61,7 +61,7 @@ function Index() {
                         <Tab label="成果物" />
                     </Tabs>
                 </Box>
-                
+
                 { value === 0 ? <Curriculum questions={ curriculum_questions }/> : <Portfolio questions={ portfolio_questions }/> }
             </Box>
         </div>

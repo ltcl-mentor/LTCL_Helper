@@ -17,7 +17,7 @@ import Box from "@material-ui/core/Box";
 
 import BasicInformation from "./Mypage/basicInformation.js";
 import { LoginUser } from "../../Route.js";
-import Breadcrumbs from "../../Breadcrumbs";
+import Breadcrumbs from "../../Common/Breadcrumbs";
 
 const style = {
     fontWeight: "normal",
