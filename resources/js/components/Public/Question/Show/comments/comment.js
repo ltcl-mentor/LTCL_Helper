@@ -4,7 +4,7 @@ import axios from "axios";
 import Typography from "@material-ui/core/Typography";
 import Box from "@mui/material/Box";
 import useMedia from "use-media";
-import BreakingPoint from "../../../../BreakingPoint";
+import BreakingPoint from "../../../../../Styles/BreakingPoint";
 import CommentContentPc from "./responsive/commentContentPc";
 import CommentContentMobile from "./responsive/commentContentMobile";
 import { styleCodeblock } from "../../../../Atom/Typography/TypographyStyle";

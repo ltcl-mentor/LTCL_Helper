@@ -1,14 +1,13 @@
 import React from 'react';
-import Authenticated from '@/Layouts/Authenticated';
+import Header from '@/Layouts/Header';
 
 // ホーム画面
-export default function Home(props) {
+const Home = ({ auth }) => {
     return (
-        <Authenticated
-            auth={props.auth}
-            errors={props.errors}
-        >
+        <Header auth={auth}>
             <h1>Hello world!</h1>
-        </Authenticated>
+        </Header>
     );
 }
+
+export default Home;

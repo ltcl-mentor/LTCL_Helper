@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useCallback } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import useMedia from "use-media";
-import BreakingPoint from "../../../BreakingPoint";
+import BreakingPoint from "../../../../Styles/BreakingPoint";
 
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";

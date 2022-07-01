@@ -16,7 +16,7 @@ import ArticlePC from './responsive/articlePC';
 import ArticleMobile from './responsive/articleMobile';
 import {LoginUser} from "../../../../Route";
 import useMedia from "use-media";
-import BreakingPoint from "../../../../BreakingPoint";
+import BreakingPoint from "../../../../../Styles/BreakingPoint";
 
 /**
  * 質問一覧(公開)のメインコンポーネント

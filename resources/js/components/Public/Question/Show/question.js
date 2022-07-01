@@ -1,6 +1,6 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
-import BreakingPoint from "../../../BreakingPoint";
+import BreakingPoint from "../../../../Styles/BreakingPoint";
 import useMedia from "use-media";
 import QuestionContentPc from "./responsive/questionContentPc";
 import QuestionContentMobile from "./responsive/questionContentMobile";

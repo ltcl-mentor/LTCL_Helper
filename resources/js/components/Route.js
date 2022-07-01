@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import axios from "axios";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Bar from "./Layout/Bar";
+import Bar from "./delete/Common/Bar";
 import AccessError from "./Error";
 import MyPage from "./Public/User/MyPage";
 import AdminMyPage from "./Public/User/AdminMypage";

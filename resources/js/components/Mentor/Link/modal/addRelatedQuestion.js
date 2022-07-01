@@ -14,7 +14,7 @@ import ConfirmButton from "../../../Atom/Button/ConfirmButton";
 import CancelIcon from "@mui/icons-material/Cancel";
 import IconButton from "@mui/material/IconButton";
 import AlertMessage from "../../../Alert";
-import BreakingPoint from "../../../BreakingPoint";
+import BreakingPoint from "../../../../Styles/BreakingPoint";
 import useMedia from "use-media";
 
 const styleForPc = {

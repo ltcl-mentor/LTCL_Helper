@@ -16,7 +16,7 @@ class StudentsTableSeeder extends Seeder
     {
         DB::table('students')->insert([
             'name' => 'test-user',
-            'password' => ENV('seederPassword'),
+            'password' => ENV('seederStudentPassword'),
             'user_id' => '2',
         ]);
     }

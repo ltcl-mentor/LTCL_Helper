@@ -1,6 +1,6 @@
 import React from "react";
 import useMedia from "use-media";
-import BreakingPoint from "../../BreakingPoint";
+import BreakingPoint from "../../../Styles/BreakingPoint";
 
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";

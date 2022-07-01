@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useLocation, useHistory } from "react-router-dom";
-import BreakingPoint from "../../../BreakingPoint";
+import BreakingPoint from "../../../../Styles/BreakingPoint";
 import useMedia from "use-media";
 import ShowContentPc from "./responsive/showContentPc";
 import ShowContentMobile from "./responsive/showContentMobile";

@@ -1,5 +1,5 @@
 import React from "react";
-import BreakingPoint from "../../../BreakingPoint";
+import BreakingPoint from "../../../../Styles/BreakingPoint";
 import useMedia from "use-media";
 import QuestionContentMobile from "./responsive/questionContentMobile";
 import QuestionContentPc from "./responsive/questionContentPc";

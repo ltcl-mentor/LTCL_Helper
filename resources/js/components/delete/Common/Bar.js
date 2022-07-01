@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useHistory, Link } from "react-router-dom";
 import useMedia from "use-media";
-import BreakingPoint from "../BreakingPoint";
+import BreakingPoint from "../../../Styles/BreakingPoint";
 
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@mui/material/Button";
@@ -14,8 +14,8 @@ import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 
-import User from "./userIcon";
-import { LoginUser } from "../Route.js";
+import User from "../../Common/userIcon";
+import { LoginUser } from "../../Route.js";
 
 // 各パーツのスタイル設定
 const styleFlexGrow = { flexGrow: 1 };

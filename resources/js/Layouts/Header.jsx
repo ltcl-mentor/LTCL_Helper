@@ -1,32 +1,43 @@
 import React, { useState } from 'react';
-import ApplicationLogo from '@/components/Default/ApplicationLogo';
+import { useMedia } from 'use-media';
 import Dropdown from '@/components/Default/Dropdown';
-import NavLink from '@/components/delete/Atom/Default/NavLink';
 import ResponsiveNavLink from '@/components/Default/ResponsiveNavLink';
+import Button from '@/components/Default/Button';
+import QuestionButton from '@/components/Common/questionButton';
+import User from '@/components/Common/userIcon';
+import BreakingPoint from '@/Styles/BreakingPoint';
 import { Link } from '@inertiajs/inertia-react';
+import ApplicationLogo from '@/components/Default/ApplicationLogo';
 
-export default function Authenticated({ auth, header, children }) {
-    const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+const Header = ({ auth, children }) => {
+    const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
+
+    let responsive;
+    if (isWide) {
+        responsive = (
+            <React.Fragment>
+                <Button className="w-24 justify-center h-9">
+                    <Link href={route('search')}>検索する</Link>
+                </Button>
+                <QuestionButton />
+            </React.Fragment>
+        );
+    }
+
 
     return (
-        <div className="min-h-screen bg-gray-100">
-            <nav className="bg-white border-b border-gray-100">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen">
+            <nav className="bg-white">
+                <div className="mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
-                        <div className="flex">
-                            <div className="shrink-0 flex items-center">
-                                <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto text-gray-500" />
-                                </Link>
-                            </div>
+                        <ApplicationLogo />
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
-                                </NavLink>
-                            </div>
+                        <div className="flex justify-center items-center">
+                            <User user={auth.user} isWide={isWide} />
+                            {responsive}
                         </div>
 
+{/*
                         <div className="hidden sm:flex sm:items-center sm:ml-6">
                             <div className="ml-3 relative">
                                 <Dropdown>
@@ -106,18 +117,14 @@ export default function Authenticated({ auth, header, children }) {
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
                                 Log Out
                             </ResponsiveNavLink>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </nav>
-
-            {header && (
-                <header className="bg-white shadow">
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
-                </header>
-            )}
 
             <main>{children}</main>
         </div>
     );
 }
+
+export default Header;

@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import PublicIcon from "@material-ui/icons/Public";
 import PublicOffIcon from "@material-ui/icons/PublicOff";
 import useMedia from "use-media";
-import BreakingPoint from "../../../../BreakingPoint";
+import BreakingPoint from "../../../../../Styles/BreakingPoint";
 import PublishContentPc from "./responsive/publishContentPc";
 import PublishContentMobile from "./responsive/publishContentMobile";
 import Box from "@mui/material/Box";
