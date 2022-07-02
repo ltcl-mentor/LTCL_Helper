@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Header from '@/Layouts/Header';
-import TabPanel from '@/components/Public/Home/tabPanel';
+import TabPanel from '@/Components/Public/Home/tabPanel';
 
 /**
  * ホーム画面
@@ -9,7 +9,7 @@ import TabPanel from '@/components/Public/Home/tabPanel';
 const Home = ({ auth }) => {
     return (
         <Header auth={auth}>
-            <TabPanel auth={auth}/>
+            {/* <TabPanel auth={auth}/> */}
         </Header>
     );
 }

@@ -1,5 +1,6 @@
+
 import React from 'react';
-import Button from '@/components/Default/Button';
+import Button from '@/Components/Default/Button';
 import Guest from '@/Layouts/Guest';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
 

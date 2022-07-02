@@ -76,9 +76,7 @@ const tabPanel = ({ auth }) => {
     }, [search]);
 
     return (
-        <BoxStyled
-            width="500px"
-            sx={styleTabWidth}>
+        <Box sx={styleTabWidth}>
             <Box sx={styleTabPosition}>
                 <Tabs
                     value={value}
@@ -94,12 +92,8 @@ const tabPanel = ({ auth }) => {
                 </Tabs>
             </Box>
             {component}
-        </BoxStyled>
+        </Box>
     );
 };
 
 export default tabPanel;
-
-const BoxStyled = styled.div(Box)`
-    width: ${props => `clamp(200px, ${props.width}, 700px)`}
-`;

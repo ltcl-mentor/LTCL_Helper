@@ -3,10 +3,10 @@ import { useMedia } from 'use-media';
 import { Link } from '@inertiajs/inertia-react';
 
 import BreakingPoint from '@/Styles/BreakingPoint';
-import ApplicationLogo from '@/components/Default/ApplicationLogo';
-import Button from '@/components/Default/Button';
-import QuestionButton from '@/components/Common/questionButton';
-import User from '@/components/Common/userIcon';
+import ApplicationLogo from '@/Components/Default/ApplicationLogo';
+import Button from '@/Components/Default/Button';
+import QuestionButton from '@/Components/Common/questionButton';
+import User from '@/Components/Common/userIcon';
 
 /**
  * ヘッダー

@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from '@inertiajs/inertia-react';
 
+/**
+ * ロックアウト画面
+ */
 const Lockout = () => {
     return (
         <>
