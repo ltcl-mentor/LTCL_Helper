@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from '@inertiajs/inertia-react';
 
-export default function Lockout() {
+const Lockout = () => {
     return (
         <>
             <div>
@@ -12,3 +12,5 @@ export default function Lockout() {
         </>
     );
 }
+
+export default Lockout;

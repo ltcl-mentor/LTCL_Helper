@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 
-import Breadcrumbs from './Common/Breadcrumbs';
+import Breadcrumbs from '../Common/Breadcrumbs';
 
 /**
  * Routejsに記述されていないURLにアクセスがあった場合に表示

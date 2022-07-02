@@ -1,11 +1,15 @@
 import React from 'react';
-import Header from '@/Layouts/Header';
 
-// ホーム画面
+import Header from '@/Layouts/Header';
+import TabPanel from '@/components/Public/Home/tabPanel';
+
+/**
+ * ホーム画面
+ */
 const Home = ({ auth }) => {
     return (
         <Header auth={auth}>
-            <h1>Hello world!</h1>
+            <TabPanel auth={auth}/>
         </Header>
     );
 }

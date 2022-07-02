@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { useMountedState } from 'react-use';
+import { Inertia } from '@inertiajs/inertia';
 
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
@@ -9,7 +9,6 @@ import Tab from '@mui/material/Tab';
 import Top from './Top/Top';
 import QA from './Q&A/QA';
 import Manage from './Manage/Manage';
-import { LoginUser } from '../../Route';
 
 const a11yProps = (index) => {
     return {
@@ -21,7 +20,7 @@ const a11yProps = (index) => {
 // タブのスタイル設定
 const styleTabWidth = { width: '100%' };
 const styleTabFontSize = { fontSize: 24 };
-const styleTabPosition = { 
+const styleTabPosition = {
     borderBottom: 1,
     borderColor:
     'white',
@@ -31,30 +30,31 @@ const styleTabPosition = {
 /**
  * タブパネル
  */
-const tabPanel = () => {
+const tabPanel = ({ auth }) => {
     const isMounted = useMountedState();
-    const user = useContext(LoginUser);
-    const history = useHistory();
-    const search = useLocation().search.split('=')[1]; // URLからコンポーネント判断
+    const search = window.location.search.split('=')[1]; // URLからコンポーネント判断
     const [value, setValue] = useState(0);  // タブ切り替え時の状態保持
 
     let component;
     if (value == 0) {
-        component = <Top />;
+        component = "a";
+        // component = <Top />;
     } else if (value == 1) {
-        component = <QA />;
+        component = "b";
+        // component = <QA />;
     } else if (value == 2) {
-        component = <Manage />;
+        component = "c";
+        // component = <Manage />;
     }
 
     // タブ切り替え用
     const handleChange = (event, newValue) => {
         if (newValue == 0) {
-            history.push('/?page=top');
+            Inertia.get('/?page=top');
         } else if (newValue == 1) {
-            history.push('/?page=qa');
+            Inertia.get('/?page=qa');
         } else if (newValue == 2) {
-            history.push('/?page=manage');
+            Inertia.get('/?page=manage');
         }
     };
 
@@ -76,7 +76,9 @@ const tabPanel = () => {
     }, [search]);
 
     return (
-        <Box sx={styleTabWidth}>
+        <BoxStyled
+            width="500px"
+            sx={styleTabWidth}>
             <Box sx={styleTabPosition}>
                 <Tabs
                     value={value}
@@ -86,14 +88,18 @@ const tabPanel = () => {
                 >
                     <Tab label="Top" {...a11yProps(0)} sx={styleTabFontSize} />
                     <Tab label="Q&A" {...a11yProps(1)} sx={styleTabFontSize} />
-                    {user.is_admin == 'staff' &&
-                    <Tab label="管理" {...a11yProps(2)} sx={styleTabFontSize} />
+                    {auth.user.is_admin == 'staff' &&
+                        <Tab label="管理" {...a11yProps(2)} sx={styleTabFontSize} />
                     }
                 </Tabs>
             </Box>
             {component}
-        </Box>
+        </BoxStyled>
     );
 };
 
 export default tabPanel;
+
+const BoxStyled = styled.div(Box)`
+    width: ${props => `clamp(200px, ${props.width}, 700px)`}
+`;
