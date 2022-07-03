@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLogin } from '@/Logics/Login';
+import { useLogin } from '@/Logics/Auth/Login';
 import { BackImage, MiddleContent, Welcome } from '@/Styles/Auth/Login';
 import Button from '@/Components/Default/Button';
 import Input from '@/Components/Auth/Input';

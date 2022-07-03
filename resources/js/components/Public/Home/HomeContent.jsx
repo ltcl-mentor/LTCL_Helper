@@ -1,9 +1,9 @@
 import React from 'react';
 import { Footer, StyledDiv } from '@/Styles/Public/Home/HomeContent';
+import TabPanel from './tabPanel';
 // import { useLocation } from 'react-router-dom';
 // import '../../../../../public/css/Public/top.css';
 // import Alert from '../../Alert';
-import TabPanel from './tabPanel';
 
 /**
  * トップ画面の親コンポーネント
