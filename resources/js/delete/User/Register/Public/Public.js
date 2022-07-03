@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
 import Grid from '@mui/material/Grid';
 
-import Breadcrumbs from '../../../../Common/Breadcrumbs';
+import Breadcrumbs from '../../../../Components/Common/Breadcrumbs';
 import Forms from './forms';
 
 /**

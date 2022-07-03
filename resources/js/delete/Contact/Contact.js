@@ -14,7 +14,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@mui/material/TextField';
 
 
-import Breadcrumbs from '../../Common/Breadcrumbs';
+import Breadcrumbs from '../../Components/Common/Breadcrumbs';
 
 
 /**

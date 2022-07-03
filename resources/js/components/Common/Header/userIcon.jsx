@@ -10,7 +10,7 @@ import { useIconContent } from "@/Logics/Common/Header/userIcon";
  */
 const userIcon = ({ user, isWide }) => {
     const [anchorEl, setAnchorEl] = useState(null);
-    const { responsive, menuItem } = useIconContent(isWide, user);
+    const { responsive, menuItem } = useIconContent({ isWide, user });
 
     return (
         <div>

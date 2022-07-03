@@ -7,7 +7,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import SearchIcon from "@mui/icons-material/Search";
 
 // menuItemのロジック
-export const useMenuItem = ({ menu }) => {
+export const useMenuItem = (menu) => {
     let menuDetail = { onClick: '', icon: '', text: '' };
     switch (menu) {
         case "myPage": // マイページ

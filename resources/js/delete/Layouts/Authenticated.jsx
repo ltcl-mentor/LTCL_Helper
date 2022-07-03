@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ApplicationLogo from '@/Components/Common/Header/applicationLogo';
 import Dropdown from '@/Components/Default/Dropdown';
-import NavLink from '@/Components/delete/Atom/Default/NavLink';
+import NavLink from '@/delete/Atom/Default/NavLink';
 import ResponsiveNavLink from '@/Components/Default/ResponsiveNavLink';
 import { Link } from '@inertiajs/inertia-react';
 

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import Breadcrumbs from '../../../Common/Breadcrumbs';
+import Breadcrumbs from '../../../Components/Common/Breadcrumbs';
 import Form from './form';
 import Result from './Result/result';
 

@@ -15,9 +15,9 @@ import Card from '@material-ui/core/Card';
 import Badge from '@mui/material/Badge';
 import EventIcon from '@mui/icons-material/Event';
 
-import {LoginUser} from '../Route.js';
-import Alert from '../Alert';
-import Breadcrumbs from '../Common/Breadcrumbs';
+import {LoginUser} from '../Components/Route.js';
+import Alert from '../Components/Alert';
+import Breadcrumbs from '../Components/Common/Breadcrumbs';
 
 /**
  * 管理画面のメインコンポーネント

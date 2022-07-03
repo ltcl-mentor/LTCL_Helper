@@ -27,6 +27,7 @@ const HomeContent = ({ auth }) => {
 
             {/* タブ */}
             <TabPanel auth={auth} />
+
             <Footer>レバテックカレッジ</Footer>
         </StyledDiv>
     );

@@ -11,8 +11,8 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 
-import Alert from '../../../Alert';
-import Breadcrumbs from '../../../Common/Breadcrumbs';
+import Alert from '../../../Components/Alert';
+import Breadcrumbs from '../../../Components/Common/Breadcrumbs';
 
 // モーダルのCSS設定
 const style = {
