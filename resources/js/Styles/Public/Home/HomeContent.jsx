@@ -2,8 +2,10 @@ import styled from 'styled-components';
 import Typography from '@mui/material/Typography';
 
 export const Footer = styled(Typography)`
-    font-weight: bold;
-    font-size: 20px;
+    &&& {
+        font-weight: bold;
+        font-size: 20px;
+    }
     padding-top: 4px;
     padding-bottom: 4px;
     text-align: center;

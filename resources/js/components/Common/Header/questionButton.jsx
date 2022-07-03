@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from '@inertiajs/inertia-react';
-
 import Typography from "@material-ui/core/Typography";
 import AddIcon from "@mui/icons-material/Add";
 import IconButton from "@mui/material/IconButton";

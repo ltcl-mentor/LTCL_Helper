@@ -1,12 +1,11 @@
 import React from 'react';
 import { useMedia } from 'use-media';
 import { Link } from '@inertiajs/inertia-react';
-
+import ApplicationLogo from '@/Components/Common/Header/applicationLogo';
+import QuestionButton from '@/Components/Common/Header/questionButton';
+import User from '@/Components/Common/Header/userIcon';
 import BreakingPoint from '@/Styles/BreakingPoint';
-import ApplicationLogo from '@/Components/Default/ApplicationLogo';
-import Button from '@/Components/Default/Button';
-import QuestionButton from '@/Components/Common/questionButton';
-import User from '@/Components/Common/userIcon';
+import { HeaderContent, HeaderPosition, HeaderRight, StyledSearchButton } from '@/Styles/Common/Header';
 
 /**
  * ヘッダー
@@ -18,30 +17,27 @@ const Header = ({ auth, children }) => {
     if (isWide) {
         responsive = (
             <React.Fragment>
-                <Button className="w-24 justify-center h-9">
+                <StyledSearchButton>
                     <Link className='text-white' href={route('search')}>検索する</Link>
-                </Button>
+                </StyledSearchButton>
                 <QuestionButton />
             </React.Fragment>
         );
     }
 
-
     return (
         <div className="min-h-screen">
             <nav className="bg-white">
-                <div className="mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between h-16">
+                <HeaderPosition>
+                    <HeaderContent>
                         <ApplicationLogo />
-
-                        <div className="flex justify-center items-center">
+                        <HeaderRight>
                             <User user={auth.user} isWide={isWide} />
                             {responsive}
-                        </div>
-                    </div>
-                </div>
+                        </HeaderRight>
+                    </HeaderContent>
+                </HeaderPosition>
             </nav>
-
             <main>{children}</main>
         </div>
     );

@@ -18,6 +18,8 @@ export const StyledTabs = styled(Tabs)`
 `
 
 export const StyledTab = styled(Tab)`
-    &&& { color: #771AF8; }
-    font-size: 24px;
+    &&& {
+        color: #771AF8;
+        font-size: 24px;
+    }
 `

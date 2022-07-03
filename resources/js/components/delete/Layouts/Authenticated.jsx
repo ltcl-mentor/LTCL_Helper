@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ApplicationLogo from '@/Components/Default/ApplicationLogo';
+import ApplicationLogo from '@/Components/Common/Header/applicationLogo';
 import Dropdown from '@/Components/Default/Dropdown';
 import NavLink from '@/Components/delete/Atom/Default/NavLink';
 import ResponsiveNavLink from '@/Components/Default/ResponsiveNavLink';

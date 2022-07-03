@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Header from '@/Layouts/Header';
+import Header from '@/Components/Common/Header/Header';
 import HomeContent from '@/Components/Public/Home/HomeContent';
 
 /**

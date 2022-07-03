@@ -1,18 +1,13 @@
 import React from "react";
 import { Inertia } from "@inertiajs/inertia";
-
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddIcon from "@mui/icons-material/Add";
 import HistoryIcon from "@mui/icons-material/History";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import LogoutIcon from "@mui/icons-material/Logout";
-import MenuItem from '@mui/material/MenuItem';
 import SearchIcon from "@mui/icons-material/Search";
 
-/**
- * ユーザーメニュー
- */
-const menuItem = ({ menu }) => {
+// menuItemのロジック
+export const useMenuItem = ({ menu }) => {
     let menuDetail = { onClick: '', icon: '', text: '' };
     switch (menu) {
         case "myPage": // マイページ
@@ -47,14 +42,5 @@ const menuItem = ({ menu }) => {
             break;
     }
 
-    return (
-        <MenuItem onClick={menuDetail.onClick}>
-            <ListItemIcon>
-                {menuDetail.icon}
-            </ListItemIcon>
-            {menuDetail.text}
-        </MenuItem>
-    );
+    return menuDetail;
 };
-
-export default menuItem;

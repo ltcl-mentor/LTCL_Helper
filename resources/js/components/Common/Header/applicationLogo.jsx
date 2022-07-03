@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link } from '@inertiajs/inertia-react';
+import { LogoImage } from '@/Styles/Common/Header';
 
-const ApplicationLogo = () => {
+const applicationLogo = () => {
     return (
         <div className="flex">
             <div className="shrink-0 flex items-center">
                 <Link href={route('home')}>
-                    <img src="/images/helper_logo.png" className="w-40 h-12" />
+                    <LogoImage src="/images/helper_logo.png" />
                 </Link>
             </div>
         </div>
     );
 }
 
-export default ApplicationLogo;
+export default applicationLogo;

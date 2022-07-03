@@ -1,44 +1,16 @@
 import React, { useState } from "react";
-
-import MenuItem from '@/Components/Common/menuItem';
+import MenuItem from '@/Components/Common/Header/menuItem';
 import Button from "@mui/material/Button";
 import Menu from "@material-ui/core/Menu";
+import { Username } from "@/Styles/Common/Header";
+import { useIconContent } from "@/Logics/Common/Header/userIcon";
 
 /**
  * ユーザアイコン
  */
 const userIcon = ({ user, isWide }) => {
     const [anchorEl, setAnchorEl] = useState(null);
-
-    let responsive;
-    if (!isWide) {
-        responsive = (
-            <React.Fragment>
-                <MenuItem menu="search" />
-                <MenuItem menu="question" />
-            </React.Fragment>
-        );
-    }
-
-    let menuItem;
-    if (user.is_admin) {
-        menuItem = (
-            <div>
-                <MenuItem menu="admin-myPage" />
-                {responsive}
-                <MenuItem menu="logout" />
-            </div>
-        );
-    } else {
-        menuItem = (
-            <div>
-                <MenuItem menu="myPage" />
-                <MenuItem menu="history" />
-                {responsive}
-                <MenuItem menu="logout" />
-            </div>
-        );
-    }
+    const { responsive, menuItem } = useIconContent(isWide, user);
 
     return (
         <div>
@@ -49,7 +21,7 @@ const userIcon = ({ user, isWide }) => {
                 onClick={e => setAnchorEl(e.currentTarget)}
                 color="inherit"
             >
-                <span className="text-xl align-middle">{user.name}</span>
+                <Username>{user.name}</Username>
             </Button>
 
             <Menu
@@ -67,7 +39,11 @@ const userIcon = ({ user, isWide }) => {
                 open={Boolean(anchorEl)}
                 onClose={() => setAnchorEl(null)}
             >
-                {menuItem}
+                <div>
+                    {responsive}
+                    {menuItem}
+                    <MenuItem menu="logout" />
+                </div>
             </Menu>
         </div>
     );

@@ -14,7 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 
-import User from "../../Common/userIcon";
+import User from "../../Common/Header/userIcon";
 import { LoginUser } from "../../Route.js";
 
 // 各パーツのスタイル設定
