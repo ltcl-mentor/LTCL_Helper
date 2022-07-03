@@ -228,4 +228,6 @@ return [
 
     ],
 
+    'googleMap' => env('GoogleMapsKey'),
+    'zoom' => env('ZoomLinksNote'),
 ];

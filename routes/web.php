@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RouteController;
+use App\Http\Controllers\HomeController;
 use Inertia\Inertia;
 
 /*
@@ -71,11 +72,13 @@ Route::group(['middleware' => ['auth']], function () {
 // Route::get('/lockout', 'Auth\LoginController@lockout');
 
 /**
- * コメントアウトしているルーティングはReact Routerに移行したので
- * resources/js/components/Route.js
- * を確認してください
+ * バックエンドのルーティング
  */
 Route::group(['middleware' => ['auth']], function () {
+    /**
+     * ホーム画面
+     */
+    Route::get('/api/home', [HomeController::class, 'getHomeData'])->name('getData.home'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
 
     // /**
     //  * ログイン済みユーザーのみアクセス可能
@@ -108,7 +111,6 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::get('react/weather', 'ReactController@getWeather'); // 今日の天気のデータ受け渡し
     // Route::get('react/college/{year}/{month}/{date}', 'ReactController@getCollegeData'); // 校舎に関するデータ受け渡し
     // Route::get('react/infos', 'ReactController@getInfos'); // お知らせのデータ受け渡し
-    // Route::get('react/home', 'ReactController@getHomeData'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
     // Route::get('react/index', 'ReactController@getQuestionArticle'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
 
 

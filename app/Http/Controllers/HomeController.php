@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Question;
-use App\Document;
-use App\User;
-use App\Image;
-use App\History;
-use App\Info;
-use App\Event;
-use App\Comment;
+use App\Models\Question;
+use App\Models\Document;
+use App\Models\User;
+use App\Models\Image;
+use App\Models\History;
+use App\Models\Info;
+use App\Models\Event;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use DateTimeInterface;
 
@@ -21,7 +21,15 @@ class HomeController extends Controller
     {
         return $date->format('Y-m-d H:i:s');
     }
-    /** 共通処理 */
+    /** 共通 */
+    /**
+     * Google Map APIのAPIキーの受け渡し
+     */
+    public function getHomeData()
+    {
+        $events = Event::all();
+        return ["key" => config('app.googleMap'), "zoom" => config('app.zoom'), "events" => $events];
+    }
 
     /**
      * 質問閲覧履歴受け渡し
@@ -43,16 +51,6 @@ class HomeController extends Controller
 
         return $questions;
     }
-
-    /**
-     * トップ画面表示
-     */
-    // public function home()
-    // {
-    //     return view('home');
-    // }
-
-
 
     /** 管理者用処理 */
 

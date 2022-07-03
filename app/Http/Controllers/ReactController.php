@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Question;
-use App\Document;
-use App\User;
-use App\Student;
-use App\Image;
-use App\Info;
-use App\Weather;
-use App\College;
-use App\Comment;
-use App\Event;
+use App\Models\Question;
+use App\Models\Document;
+use App\Models\User;
+use App\Models\Student;
+use App\Models\Image;
+use App\Models\Info;
+use App\Models\Weather;
+use App\Models\College;
+use App\Models\Comment;
+use App\Models\Event;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -362,16 +362,6 @@ class ReactController extends Controller
     public function getReaction()
     {
         return env('slackEmoji');
-    }
-
-
-    /**
-     * Google Map APIのAPIキーの受け渡し
-     */
-    public function getHomeData()
-    {
-        $events = Event::get();
-        return ["key" => env('GoogleMapsKey'), "zoom" => env('ZoomLinksNote'), "events" => $events];
     }
 
     /**

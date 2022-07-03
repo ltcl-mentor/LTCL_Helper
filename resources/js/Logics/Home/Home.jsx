@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useMountedState } from 'react-use';
 import { Inertia } from '@inertiajs/inertia';
+import Top from '@/Components/Public/Home/Top/Top';
 
 // タブパネルの関数
-export const useChangeTab = () => {
+export const useChangeTab = (user) => {
     let search = window.location.search.split('=')[1]; // URLからコンポーネント判断
     search = typeof search === "undefined" ? "top" : search;
     const isMounted = useMountedState(); // マウントを検知
@@ -11,7 +12,7 @@ export const useChangeTab = () => {
 
     let component;
     switch (value) {
-        case 0: component = "top"; break;
+        case 0: component = <Top user={user} />; break;
         case 1: component = "QA"; break;
         case 2: component = "manage"; break;
     }

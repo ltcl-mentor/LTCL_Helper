@@ -13,7 +13,7 @@ const a11yProps = (index) => {
  * タブパネル
  */
 const tabPanel = ({ auth }) => {
-    const [{ value, component }, handleChange] = useChangeTab();
+    const [{ value, component }, handleChange] = useChangeTab(auth.user);
 
     return (
         <StyledBox>
