@@ -8,39 +8,14 @@ import SearchIcon from "@mui/icons-material/Search";
 
 // menuItemのロジック
 export const useMenuItem = (menu) => {
-    let menuDetail = { onClick: '', icon: '', text: '' };
-    switch (menu) {
-        case "myPage": // マイページ
-            menuDetail.onClick = () => Inertia.get('/my_page');
-            menuDetail.icon = <AccountCircleIcon />;
-            menuDetail.text = "マイページ";
-            break;
-        case "admin-myPage": // 管理者マイページ
-            menuDetail.onClick = () => Inertia.get('/Admin_my_page');
-            menuDetail.icon = <AccountCircleIcon />;
-            menuDetail.text = "マイページ";
-            break;
-        case "history": // 質問閲覧履歴
-            menuDetail.onClick = () => Inertia.get('history');
-            menuDetail.icon = <HistoryIcon />;
-            menuDetail.text = "質問閲覧履歴";
-            break;
-        case "search": // 検索画面
-            menuDetail.onClick = () => Inertia.get('search');
-            menuDetail.icon = <SearchIcon />;
-            menuDetail.text = "検索する";
-            break;
-        case "question": // 質問投稿画面
-            menuDetail.onClick = () => Inertia.get('question.create');
-            menuDetail.icon = <AddIcon />
-            menuDetail.text = "質問する";
-            break;
-        case "logout": // ログアウト
-            menuDetail.onClick = () => Inertia.post('logout');
-            menuDetail.icon = <LogoutIcon />
-            menuDetail.text = "ログアウト";
-            break;
-    }
+    const operation = {
+        "myPage": { onClick: () => Inertia.get('/my_page'), icon: <AccountCircleIcon />, text: "マイページ" },
+        "admin-myPage": { onClick: () => Inertia.get('/Admin_my_page'), icon: <AccountCircleIcon />, text: "マイページ" },
+        "history": { onClick: () => Inertia.get('history'), icon: <HistoryIcon />, text: "質問閲覧履歴" },
+        "search" : { onClick: () => Inertia.get('search'), icon: <SearchIcon />, text: "検索する" },
+        "question": { onClick: () => Inertia.get('question.create'), icon: <AddIcon />, text: "質問する" },
+        "logout": { onClick: () => Inertia.post('logout'), icon: <LogoutIcon />, text: "ログアウト" },
+    };
 
-    return menuDetail;
+    return operation[menu];
 };
