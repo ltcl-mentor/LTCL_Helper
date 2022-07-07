@@ -1,7 +1,7 @@
 import React from 'react';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import { Calendar, GridParent, GridChildLeft, GridChildRight } from '@/Styles/Public/Home/Top/calendar';
+import { Calendar, GridParent, GridChildLeft, GridChildRight } from '@/Styles/Public/Home/Top/Calendar/calendar';
 
 
 /**

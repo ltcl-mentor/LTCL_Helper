@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useMedia from 'use-media';
 import Info from '@/Components/Public/Home/Top/Calendar/info';
 import ContentPC from '@/Components/Public/Home/Top/Calendar/contentPC';
-import { WarningMessage } from '@/Styles/Public/Home/Top/calendar';
+import { WarningMessage } from '@/Styles/Public/Home/Top/Calendar/calendar';
 import { useGetInfo } from './getInfo';
 
 // calendarのロジック

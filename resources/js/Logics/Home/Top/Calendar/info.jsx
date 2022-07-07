@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { WarningMessage } from '@/Styles/Public/Home/Top/info';
+import { WarningMessage } from '@/Styles/Public/Home/Top/Calendar/info';
 import InfoTable from '@/Components/Public/Home/Top/Calendar/infoTable';
 
 // infoのロジック

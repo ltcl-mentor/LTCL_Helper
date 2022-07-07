@@ -309,16 +309,6 @@ class ReactController extends Controller
         return Weather::getWeatherData();
     }
 
-
-    /**
-     * 記録されているお知らせの受け渡し
-     */
-    public function getInfos()
-    {
-        $infos = Info::getInfo();
-        return ["infos" => $infos, "events" => Event::get()];
-    }
-
     /**
      * 全イベントの受け渡し
      */

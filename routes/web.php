@@ -17,25 +17,15 @@ use Inertia\Inertia;
 |
 */
 
-// auth関連のルーティング
+/**
+ * auth関連のルーティング
+ */
 require __DIR__.'/auth.php';
 
-// welcomeとダッシュボード
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// })->middleware(['auth']);
 
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-
-// フロントエンドのルーティング
+/**
+ * フロントエンドのルーティング
+ */
 Route::get('/lockout', function () {
     return Inertia::render('Common/Lockout');
 })->name('lockout'); // ロックアウト画面
@@ -67,10 +57,6 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 
-// 元のルーティング
-// ユーザーロックアウト画面
-// Route::get('/lockout', 'Auth\LoginController@lockout');
-
 /**
  * バックエンドのルーティング
  */
@@ -80,6 +66,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
      */
     Route::get('/home', [HomeController::class, 'getHomeData'])->name('getData.home'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
     Route::get('/college/{year}/{month}/{date}', [HomeController::class, 'getCollegeData'])->name('getData.college'); // 校舎に関するデータ受け渡し
+    Route::get('/infos', [HomeController::class, 'getInfos'])->name('getData.information'); // お知らせとイベントのデータ受け渡し
 
     // /**
     //  * ログイン済みユーザーのみアクセス可能
@@ -110,20 +97,18 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     // Route::get('react/documents/related/paginate/{category}', 'ReactController@getRelatedDocumentsPaginate'); // カテゴリーに紐づいている記事の受け渡し
     // Route::get('react/user', 'ReactController@getUser'); // ログインユーザー受け渡し
     // Route::get('react/weather', 'ReactController@getWeather'); // 今日の天気のデータ受け渡し
-    // Route::get('react/infos', 'ReactController@getInfos'); // お知らせのデータ受け渡し
     // Route::get('react/index', 'ReactController@getQuestionArticle'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
 
 
-    // /**
-    //  *  管理者権限を持っているユーザーのみがアクセス可能
-    //  */
-    // Route::group(['middleware' => ['administrator']], function () {
-
-    //     /**
-    //      *  トップ画面
-    //      */
-    //     Route::post('/informations/store', 'HomeController@storeInfo'); // お知らせの登録
-    //     Route::post('/informations/{info}/delete', 'HomeController@deleteInfo'); // お知らせの削除
+    /**
+     *  管理者権限を持っているユーザーのみがアクセス可能
+     */
+    Route::group(['middleware' => ['administrator']], function () {
+        /**
+         *  ホーム画面
+         */
+        // Route::post('/informations/store', 'HomeController@storeInfo'); // お知らせの登録
+        Route::post('/informations/{info}/delete', [HomeController::class, 'deleteInfo'])->name('delete.info'); // お知らせの削除
 
     //     /**
     //      * 参考記事
@@ -188,5 +173,5 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     //     Route::get('react/event/{event}', 'ReactController@getOneEvent'); // イベントの受け渡し
     //     Route::get('react/reaction', 'ReactController@getReaction'); // slackのリアクション参考サイトのURL受け渡し
     //     Route::get('react/id', 'ReactController@getUserId'); // ログインユーザーid受け渡し
-    // });
+    });
 });

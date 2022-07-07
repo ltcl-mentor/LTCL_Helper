@@ -1,5 +1,5 @@
 import React from "react";
-import Information from "./information/information";
+import Information from "./Information/information";
 import Calendar from "./Calendar/calendar";
 import { Modals } from "../modal";
 import { useGetHomeData } from "@/Logics/Home/Top/Top";
@@ -12,8 +12,8 @@ const styleFooter = {
 /**
  * top画面
  */
-const Top = (user) => {
-    const [{ zoomLink, events, isWide, footerContent, open, type }, handleClose] = useGetHomeData();
+const Top = ({ user }) => {
+    const [{ zoomLink, isWide, footerContent, open, type }, handleClose] = useGetHomeData();
 
     return (
         <React.Fragment>
@@ -23,11 +23,7 @@ const Top = (user) => {
             <Calendar zoomLink={zoomLink} />
 
             {/* お知らせと天気 */}
-            {/* <Information
-                isAdmin={user.is_admin}
-                events={events}
-                isWide={isWide}
-            /> */}
+            <Information isAdmin={user.is_admin} isWide={isWide} />
 
             {/* お問い合わせと校舎住所 */}
             {/* <div style={styleFooter}>{footerContent}</div> */}

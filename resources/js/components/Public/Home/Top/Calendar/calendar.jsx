@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledDiv, Heading } from '@/Styles/Public/Home/Top/calendar';
+import { StyledDiv, Heading } from '@/Styles/Public/Home/Top/Calendar/calendar';
 import { useGetCollege } from '@/Logics/Home/Top/Calendar/calendar';
 
 /**

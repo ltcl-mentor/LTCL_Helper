@@ -46,12 +46,7 @@ class College extends Model
             }
         }
 
-        $exist_info = [
-            "collegeStaff" => $college_datas['staff'][0] ? true : false,
-            "onlineStaff" => $college_datas['online_staff'][0] ? true : false,
-        ];
-
-        return ["collegeInfo" => $college_datas, "existInfo" => $exist_info];
+        return ["collegeInfo" => $college_datas];
     }
 
     /**

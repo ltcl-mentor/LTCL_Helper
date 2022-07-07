@@ -22,14 +22,14 @@ class HomeController extends Controller
     {
         return $date->format('Y-m-d H:i:s');
     }
+
     /** 共通 */
     /**
      * Google Map APIのAPIキーの受け渡し
      */
     public function getHomeData()
     {
-        $events = Event::all();
-        return ["key" => config('app.googleMap'), "zoom" => config('app.zoom'), "events" => $events];
+        return ["key" => config('app.googleMap'), "zoom" => config('app.zoom')];
     }
 
     /**
@@ -38,6 +38,15 @@ class HomeController extends Controller
     public function getCollegeData($year, $month, $date)
     {
         return College::getCollegeData($year, $month, $date);
+    }
+
+    /**
+     * 記録されているお知らせとイベントの受け渡し
+     */
+    public function getInfos()
+    {
+        $infos = Info::getInfo();
+        return ["infos" => $infos, "events" => Event::all()];
     }
 
     /**
@@ -62,7 +71,6 @@ class HomeController extends Controller
     }
 
     /** 管理者用処理 */
-
     /**
      * お知らせ新規作成処理
      */

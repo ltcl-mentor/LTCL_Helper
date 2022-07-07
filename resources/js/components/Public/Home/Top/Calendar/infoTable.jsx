@@ -1,7 +1,7 @@
 import React from 'react';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
-import { StyleLink, StyleTable, TableData, TableHead } from '@/Styles/Public/Home/Top/info';
+import { StyleLink, StyleTable, TableData, TableHead } from '@/Styles/Public/Home/Top/Calendar/info';
 
 /**
  * 校舎情報テーブル

@@ -12,8 +12,7 @@ export const useGetHomeData = () => {
     const [type, setType] = useState("user");
     const [mapKey, setMapKey] = useState();
     const [zoomLink, setZoomLink] = useState();
-    const [events, setEvents] = useState([]);
-    useGetInfo({ setMapKey, setZoomLink, setEvents });
+    useGetInfo({ setMapKey, setZoomLink });
 
     // モーダル開閉
     const handleOpen = useCallback(type => {
@@ -29,5 +28,5 @@ export const useGetHomeData = () => {
         <ContentPC mapKey={mapKey} handleOpen={handleOpen} /> :
         <ContentMobile mapKey={mapKey} handleOpen={handleOpen} />
 
-    return [{ zoomLink, events, isWide, footerContent, open, type }, handleClose];
+    return [{ zoomLink, isWide, footerContent, open, type }, handleClose];
 };

@@ -9,7 +9,7 @@ import MyPage from "./Public/User/MyPage";
 import AdminMyPage from "./Public/User/AdminMypage";
 import MyQuestion from "./Public/User/QuestionShow";
 import History from "./Public/History/History";
-import Home from "./Public/Home/HomeContent";
+import Home from "./Public/Home/Home";
 import PublicQuestionIndexIndex from "./Public/Question/Index/Index/Index";
 import PublicQuestionCreate from "./Public/Question/Create/Create/Create";
 import PublicQuestionShow from "./Public/Question/Show/Show";

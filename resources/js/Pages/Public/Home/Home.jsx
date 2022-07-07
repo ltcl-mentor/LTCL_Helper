@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Header from '@/Components/Common/Header/Header';
-import HomeContent from '@/Components/Public/Home/HomeContent';
+import HomeContent from '@/Components/Public/Home/Home';
 
 /**
  * ホーム画面
