@@ -11,6 +11,7 @@ use App\Models\History;
 use App\Models\Info;
 use App\Models\Event;
 use App\Models\Comment;
+use App\Models\College;
 use Illuminate\Support\Facades\Auth;
 use DateTimeInterface;
 
@@ -29,6 +30,14 @@ class HomeController extends Controller
     {
         $events = Event::all();
         return ["key" => config('app.googleMap'), "zoom" => config('app.zoom'), "events" => $events];
+    }
+
+    /**
+     * URLで指定された日付の校舎情報受け渡し
+     */
+    public function getCollegeData($year, $month, $date)
+    {
+        return College::getCollegeData($year, $month, $date);
     }
 
     /**

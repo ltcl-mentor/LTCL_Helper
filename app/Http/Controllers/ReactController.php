@@ -311,15 +311,6 @@ class ReactController extends Controller
 
 
     /**
-     * URLで指定された日付の校舎情報受け渡し
-     */
-    public function getCollegeData($year, $month, $date)
-    {
-        return College::getCollegeData($year, $month, $date);
-    }
-
-
-    /**
      * 記録されているお知らせの受け渡し
      */
     public function getInfos()

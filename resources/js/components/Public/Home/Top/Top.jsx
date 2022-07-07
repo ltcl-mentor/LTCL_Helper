@@ -1,6 +1,6 @@
 import React from "react";
-import Information from "./Information/information";
-import Clendar from "./Calendar/calendar";
+import Information from "./information/information";
+import Calendar from "./Calendar/calendar";
 import { Modals } from "../modal";
 import { useGetHomeData } from "@/Logics/Home/Top/Top";
 
@@ -20,7 +20,7 @@ const Top = (user) => {
             <Modals open={open} type={type} handleClose={handleClose} />
 
             {/* 校舎情報 */}
-            {/* <Clendar zoomLink={zoomLink} /> */}
+            <Calendar zoomLink={zoomLink} />
 
             {/* お知らせと天気 */}
             {/* <Information

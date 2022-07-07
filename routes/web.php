@@ -74,11 +74,12 @@ Route::group(['middleware' => ['auth']], function () {
 /**
  * バックエンドのルーティング
  */
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     /**
      * ホーム画面
      */
-    Route::get('/api/home', [HomeController::class, 'getHomeData'])->name('getData.home'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
+    Route::get('/home', [HomeController::class, 'getHomeData'])->name('getData.home'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
+    Route::get('/college/{year}/{month}/{date}', [HomeController::class, 'getCollegeData'])->name('getData.college'); // 校舎に関するデータ受け渡し
 
     // /**
     //  * ログイン済みユーザーのみアクセス可能
@@ -109,7 +110,6 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::get('react/documents/related/paginate/{category}', 'ReactController@getRelatedDocumentsPaginate'); // カテゴリーに紐づいている記事の受け渡し
     // Route::get('react/user', 'ReactController@getUser'); // ログインユーザー受け渡し
     // Route::get('react/weather', 'ReactController@getWeather'); // 今日の天気のデータ受け渡し
-    // Route::get('react/college/{year}/{month}/{date}', 'ReactController@getCollegeData'); // 校舎に関するデータ受け渡し
     // Route::get('react/infos', 'ReactController@getInfos'); // お知らせのデータ受け渡し
     // Route::get('react/index', 'ReactController@getQuestionArticle'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
 

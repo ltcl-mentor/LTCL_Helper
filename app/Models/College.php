@@ -44,34 +44,14 @@ class College extends Model
             foreach($times as $time) {
                 array_push($openTimes, explode("~", $time));
             }
-
-            foreach ($openTimes as $openTime) {
-                $startDiff = strtotime($now) - strtotime($openTime[0]);
-                $endDiff = strtotime($now) - strtotime($openTime[1]);
-
-                if (!(($startDiff >= 0 && $endDiff >= 0) || ($startDiff <= 0 && $endDiff <= 0))) {
-                    $college_datas['zoom']['ontime'] = true;
-                    break;
-                }
-                $college_datas['zoom']['ontime'] = false;
-            }
         }
 
-        // オンライン校舎のzoomリンクを掲載するかどうか
-        // 当日の開校時間中しか見えないようにする
-        if ($now->year == $year && $now->month == $month && $now->day == $date) {
-            // 出勤メンターが3人以上で校舎を開校するとき
-            if ($college_datas['zoom']['exist'] = $datas['values'][$date][9] == "あり") {
-                $college_datas['zoom']['exist'] = true;
-            } else {
-                $college_datas['zoom']['exist'] = false;
-            }
-        } else {
-            $college_datas['zoom']['exist'] = false;
-            $college_datas['zoom']['message'] = "zoomリンクは当日しか\n見れません。";
-        }
+        $exist_info = [
+            "collegeStaff" => $college_datas['staff'][0] ? true : false,
+            "onlineStaff" => $college_datas['online_staff'][0] ? true : false,
+        ];
 
-        return $college_datas;
+        return ["collegeInfo" => $college_datas, "existInfo" => $exist_info];
     }
 
     /**
