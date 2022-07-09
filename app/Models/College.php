@@ -29,21 +29,10 @@ class College extends Model
         $college_datas['online_staff'] = self::inputStaff("online", 7, $date, $datas);
 
         // オンライン校舎の代入
-        if ($datas['values'][$date][9] == "なし") {
+        if ($datas['values'][$date][9] == 0) {
             $college_datas['zoom']['message'] = "本日オンライン質問部屋はありません。\n質問のある方はSlackにて出勤メンターへ連絡してください。";
-        } elseif ($datas['values'][$date][9] == "あり") {
+        } else {
             $college_datas['zoom']['message'] = $datas['values'][$date][10];
-
-            // オンライン校舎の開校時間中かどうか
-            $times = explode("、", $college_datas['zoom']['message']);
-            if ($times[0] == "") {
-                $times[0] = "14:00~16:00";
-            }
-
-            $openTimes = [];
-            foreach($times as $time) {
-                array_push($openTimes, explode("~", $time));
-            }
         }
 
         return ["collegeInfo" => $college_datas];
@@ -74,35 +63,35 @@ class College extends Model
     {
         $date = Carbon::today();
         $message = "";
+        $college_info = Self::getCollegeData($date->year, $date->month, $date->day+1)["collegeInfo"];
 
         // 出勤メンター(校舎)
-        if (Self::getCollegeData($date->year, $date->month, $date->day)["staff"][0]) {
+        if ($college_info["staff"][0]) {
             $message .= "*■本日の出勤メンター（校舎）*\n";
-            $staffs = Self::getCollegeData($date->year, $date->month, $date->day)["staff"];
+            $staffs = $college_info["staff"];
             foreach($staffs as $staff) {
                 $message .= $staff . "\n";
             }
         }
 
         // 出勤メンター(オンライン)
-        if (Self::getCollegeData($date->year, $date->month, $date->day)["online_staff"][0]) {
+        if ($college_info["online_staff"][0]) {
             $message .= "\n*■本日の出勤メンター（オンライン）*\n";
-            $online_staffs = Self::getCollegeData($date->year, $date->month, $date->day)["online_staff"];
+            $online_staffs = $college_info["online_staff"];
             foreach($online_staffs as $staff) {
                 $message .= $staff . "\n";
             }
         }
 
-        // オンライン校舎
         $message .= "\n*■本日のオンライン校舎（質問部屋）*\n";
-        $online_time = Self::getCollegeData($date->year, $date->month, $date->day)["zoom"];
-        if ($online_time['exist']) {
-            $message .= "開校時間は追ってメンターより連絡します:woman-bowing:";
+        $online_time = $college_info["zoom"];
+        if (intval(substr($online_time['message'], 0, 1)) != 0) {
+            $message .= "開校時間は `" . $online_time["message"] . "` です。\n時間が変更になる場合は追ってメンターより連絡します:woman-bowing:";
         } else {
-            $message .= "*本日は、出勤しているメンターが少ないため、オンライン校舎は開校しておりません。*\n質問のある方は、<#" . env('SlackChannelCurriculum') . "> または、<#" . env('SlackChannelProject') . "> チャンネルにてご質問ください。";
+            $message .= "*本日は、出勤しているメンターが少ないため、オンライン校舎は開校しておりません。*\n質問のある方は、<#" . config('app.slackCurriculum') . "> または、<#" . config('slackProject') . "> チャンネルにてご質問ください。";
         }
 
-        Slack::sendMessage($message, 'attendance');
+        Slack::sendMessage($message, 'mentor');
     }
 
     /**
@@ -117,7 +106,7 @@ class College extends Model
             // メンターと出勤時間を出力
             $i=0;
             foreach($staffs as $staff) {
-                for ($j=14; $j < 34; $j++) { // メンター数が変動した場合修正。Max20人想定
+                for ($j=14; $j < 44; $j++) { // メンター数が変動した場合修正。Max20人想定
                     if ($staff == $datas['values'][0][$j]) {
                         $times = implode(',', explode("\n", $datas['values'][$date][$j]));
                         break;

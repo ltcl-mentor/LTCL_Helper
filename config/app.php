@@ -227,7 +227,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-
+    'slackCurriculum' => env('SlackChannelCurriculum'),
+    'slackProject' => env('SlackChannelProject'),
     'googleMap' => env('GoogleMapsKey'),
     'zoom' => env('ZoomLinksNote'),
 ];

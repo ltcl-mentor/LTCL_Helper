@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Question;
+use App\Models\Question;
 
 class ReportCommand extends Command
 {

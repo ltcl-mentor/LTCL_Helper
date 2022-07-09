@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\College;
+use App\Models\College;
 
 class InformCommand extends Command
 {
