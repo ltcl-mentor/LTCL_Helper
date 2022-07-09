@@ -43,8 +43,8 @@ export const Date = styled(ListSubheader)`
 `
 
 export const NoInfo = styled.div`
-    padding-left: ${props => props.isWide && "5%"};
-    padding-bottom: ${props => props.isWide && "12px"};
+    padding-left: 5%;
+    padding-bottom: 12px;
     padding-top: 4px;
     font-size: 20px;
 `

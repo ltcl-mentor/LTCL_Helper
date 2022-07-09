@@ -12,6 +12,7 @@ use App\Models\Info;
 use App\Models\Event;
 use App\Models\Comment;
 use App\Models\College;
+use App\Models\Weather;
 use Illuminate\Support\Facades\Auth;
 use DateTimeInterface;
 
@@ -47,6 +48,14 @@ class HomeController extends Controller
     {
         $infos = Info::getInfo();
         return ["infos" => $infos, "events" => Event::all()];
+    }
+
+    /**
+     * 今日の天気のデータ受け渡し
+     */
+    public function getWeather()
+    {
+        return Weather::getWeatherData();
     }
 
     /**

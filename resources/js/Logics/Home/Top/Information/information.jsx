@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import axios from "axios";
 import Content from '@/Components/Public/Home/Top/Information/content';
 import { AddInfoButton } from "@/Styles/Public/Home/Top/Information/information";
-import { useGetInfo } from "./getInfo";
+import { useGetInformation } from "./getInfo";
 
 // informationのロジック
 export const useInformation = ({ isAdmin, isWide }) => {
@@ -13,7 +13,7 @@ export const useInformation = ({ isAdmin, isWide }) => {
     const [events, setEvents] = useState([]);
     const [deleteInfo, setDeleteInfo] = useState('');
     const [deleteOpen, setDeleteOpen] = useState(false);
-    useGetInfo({ setInfos, setDates, setEvents });
+    useGetInformation({ setInfos, setDates, setEvents });
 
     // モーダル開閉
     const handleOpen = type => {

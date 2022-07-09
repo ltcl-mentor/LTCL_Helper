@@ -302,22 +302,6 @@ class ReactController extends Controller
     /** home画面関連 */
 
     /**
-     * 今日の天気のデータ受け渡し
-     */
-    public function getWeather()
-    {
-        return Weather::getWeatherData();
-    }
-
-    /**
-     * 全イベントの受け渡し
-     */
-    // public function getAllEvents()
-    // {
-    //     return Event::get();
-    // }
-
-    /**
      * 管理画面へイベント、受講生、スタッフ情報を受け渡す
      */
     public function getAllMentorInfo()
