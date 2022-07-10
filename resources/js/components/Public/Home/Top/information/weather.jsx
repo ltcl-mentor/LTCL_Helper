@@ -1,7 +1,7 @@
 import React  from 'react';
 import { Heading } from '@/Styles/Public/Home/Top/Information/weather';
-import Temperature from './temperature';
-import HourlyWeather from './hourlyWeather';
+import Temperature from './weather/temperature';
+import HourlyWeather from './weather/hourlyWeather';
 import { useWeather } from '@/Logics/Home/Top/Information/weather';
 
 /**

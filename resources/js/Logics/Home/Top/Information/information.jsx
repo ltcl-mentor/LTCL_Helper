@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import axios from "axios";
-import Content from '@/Components/Public/Home/Top/Information/content';
+import Content from '@/Components/Public/Home/Top/Information/information/content';
 import { AddInfoButton } from "@/Styles/Public/Home/Top/Information/information";
 import { useGetInformation } from "./getInfo";
 

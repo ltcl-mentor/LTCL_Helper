@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
-import ContentPC from '@/Components/Public/Home/Top/Information/responsive/contentPC';
-import ContentMobile from "@/Components/Public/Home/Top/Information/responsive/contentMobile";
-import InfoList from "@/Components/Public/Home/Top/Information/infoList";
+import ContentPC from '@/Components/Public/Home/Top/Information/information/responsive/contentPC';
+import ContentMobile from "@/Components/Public/Home/Top/Information/information/responsive/contentMobile";
+import InfoList from "@/Components/Public/Home/Top/Information/information/infoList";
 import { NoInfo } from "@/Styles/Public/Home/Top/Information/content";
 
 // contentのロジック

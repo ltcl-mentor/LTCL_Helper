@@ -1,5 +1,5 @@
 import React from "react";
-import { Modals } from "../../modal";
+import { Modals } from "../../../modal";
 import { useInfoContent } from "@/Logics/Home/Top/Information/content";
 
 /**

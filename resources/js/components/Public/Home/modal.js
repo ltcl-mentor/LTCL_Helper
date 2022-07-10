@@ -8,7 +8,7 @@ import Modal from "@mui/material/Modal";
 import UserRegister from "./modal/userRegister";
 import ShowEvent from "./modal/showEvent";
 import AddEvent from "./modal/addEvent";
-import Create from "./Top/Information/create/create";
+import Create from "./Top/Information/information/create/create";
 import ShowInfo from "./modal/showInfo";
 import DeleteInfo from "./modal/deleteConfirm";
 import Contact from "./modal/contact";

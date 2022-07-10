@@ -1,5 +1,5 @@
 import React from "react";
-import Weather from "../weather";
+import Weather from "../../weather";
 import { Heading, GridContent } from "@/Styles/Public/Home/Top/Information/content";
 
 /**

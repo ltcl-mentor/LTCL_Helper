@@ -11,7 +11,7 @@ import TextField from "@mui/material/TextField";
 
 import SelectEvents from "./selectEvents";
 import SelectTarget from "./selectTarget";
-import { CloseModal, SubmitButton, styleHeading } from "../../../modal";
+import { CloseModal, SubmitButton, styleHeading } from "../../../../modal";
 
 // 各パーツのスタイル設定
 const stylePadding = { paddingTop: 2 };
