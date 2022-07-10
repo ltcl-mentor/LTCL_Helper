@@ -7,7 +7,7 @@ import { Calendar, GridParent, GridChildLeft, GridChildRight } from '@/Styles/Pu
 /**
  * 校舎情報のPC版
  */
-const contentPC = ({ info, date, setDate, setIsDateClicked }) => {
+const contentPC = ({ info, date, handleDate }) => {
     return (
         <GridParent container>
             <GridChildLeft item>
@@ -15,7 +15,7 @@ const contentPC = ({ info, date, setDate, setIsDateClicked }) => {
             </GridChildLeft>
             <GridChildRight item>
                 <LocalizationProvider dateAdapter={ AdapterDateFns }>
-                    <Calendar date={date} onChange={(newDate) => { setDate(newDate), setIsDateClicked(false)} } />
+                    <Calendar date={date} onChange={(newDate) => handleDate(newDate)} />
                 </LocalizationProvider>
             </GridChildRight>
         </GridParent>

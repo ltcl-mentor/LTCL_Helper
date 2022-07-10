@@ -16,9 +16,14 @@ export const useGetInformation = ({ setInfos, setDates, setEvents }) => {
 // 天気情報取得
 export const useGetWeather = ({ setWeather }) => {
     useEffect(() => {
+        let unmounted = false;
         (async() => {
-            const res = await axios.get(`/api/weather`);
-            setWeather(res.data);
+            const res = await axios.get(route('getData.weather'));
+            if(!unmounted) {
+                setWeather(res.data);
+            }
         })();
+
+        return () => { unmounted = true; };
     }, []);
 };

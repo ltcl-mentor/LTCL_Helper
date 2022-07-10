@@ -3,7 +3,7 @@ import { useMedia } from 'use-media';
 import { Link } from '@inertiajs/inertia-react';
 import ApplicationLogo from '@/Components/Common/Header/applicationLogo';
 import QuestionButton from '@/Components/Common/Header/questionButton';
-import User from '@/Components/Common/Header/userIcon';
+import UserIcon from '@/Components/Common/Header/userIcon';
 import BreakingPoint from '@/Styles/BreakingPoint';
 import { HeaderContent, HeaderPosition, HeaderRight, StyledSearchButton } from '@/Styles/Common/Header';
 
@@ -13,18 +13,6 @@ import { HeaderContent, HeaderPosition, HeaderRight, StyledSearchButton } from '
 const Header = ({ auth, children }) => {
     const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
 
-    let responsive;
-    if (isWide) {
-        responsive = (
-            <React.Fragment>
-                <StyledSearchButton>
-                    <Link className='text-white' href={route('search')}>検索する</Link>
-                </StyledSearchButton>
-                <QuestionButton />
-            </React.Fragment>
-        );
-    }
-
     return (
         <div className="min-h-screen">
             <nav className="bg-white">
@@ -32,8 +20,15 @@ const Header = ({ auth, children }) => {
                     <HeaderContent>
                         <ApplicationLogo />
                         <HeaderRight>
-                            <User user={auth.user} isWide={isWide} />
-                            {responsive}
+                            <UserIcon user={auth.user} isWide={isWide} />
+                            {isWide &&
+                            <React.Fragment>
+                                <StyledSearchButton>
+                                    <Link className='text-white' href={route('search')}>検索する</Link>
+                                </StyledSearchButton>
+                                <QuestionButton />
+                            </React.Fragment>
+                            }
                         </HeaderRight>
                     </HeaderContent>
                 </HeaderPosition>

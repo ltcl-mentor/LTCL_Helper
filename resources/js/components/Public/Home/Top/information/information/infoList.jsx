@@ -1,10 +1,13 @@
 import React from "react";
+import useMedia from "use-media";
 import { Date, StyleList, StyleListItem, StyleUl, StyleDeleteIcon, StyleListItemText } from "@/Styles/Public/Home/Top/Information/content";
+import BreakingPoint from "@/Styles/BreakingPoint";
 
 /**
  * お知らせ一覧
  */
-const infoList = ({ isAdmin, dates, infos, setDeleteInfo, setDeleteOpen, isWide, setShowInfo, setShowOpen }) => {
+const infoList = ({ isAdmin, dates, infos, selectDelete, showInformation }) => {
+    const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
     const infoLength = isWide ? 15 : 30;
 
     return (
@@ -17,7 +20,7 @@ const infoList = ({ isAdmin, dates, infos, setDeleteInfo, setDeleteOpen, isWide,
                             <StyleListItem key={`${date}-info-${index}`}>
                                 <StyleListItemText
                                     color="primary"
-                                    onClick={() => {setShowOpen(true), setShowInfo(info);}}
+                                    onClick={() => showInformation(info)}
                                     primary={
                                         info.information.length > infoLength ?
                                             info.information.substring(0, infoLength) + "..." :
@@ -25,7 +28,7 @@ const infoList = ({ isAdmin, dates, infos, setDeleteInfo, setDeleteOpen, isWide,
                                     }
                                 />
                                 {isAdmin &&
-                                    <StyleDeleteIcon onClick={() => {setDeleteOpen(true), setDeleteInfo(info.id);}} />
+                                    <StyleDeleteIcon onClick={() => selectDelete(info.id)} />
                                 }
                             </StyleListItem>
                         ))}

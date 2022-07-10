@@ -10,7 +10,7 @@ const contentMobile = ({ list }) => {
         <GridContent>
             {list}
             <Heading>天気情報</Heading>
-            <Weather isWide={false} />
+            <Weather />
         </GridContent>
     );
 };

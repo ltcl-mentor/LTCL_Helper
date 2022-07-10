@@ -1,4 +1,5 @@
 import React from 'react';
+import useMedia from 'use-media';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import { StyleLink, StyleTable, TableData, TableHead } from '@/Styles/Public/Home/Top/Calendar/info';
@@ -6,7 +7,8 @@ import { StyleLink, StyleTable, TableData, TableHead } from '@/Styles/Public/Hom
 /**
  * 校舎情報テーブル
  */
-const infoTable = ({ collegeInfo, zoomLink, isWide }) => {
+const infoTable = ({ collegeInfo, zoomLink }) => {
+    const isWide = useMedia({ minWidth: '940px' });
     return (
         <StyleTable isWide={isWide}>
             <TableBody>

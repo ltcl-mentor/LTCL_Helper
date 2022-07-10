@@ -1,25 +1,21 @@
 import React, { useState, useCallback } from "react";
 import axios from "axios";
-import Content from '@/Components/Public/Home/Top/Information/information/content';
-import { AddInfoButton } from "@/Styles/Public/Home/Top/Information/information";
 import { useGetInformation } from "./getInfo";
 
 // informationのロジック
-export const useInformation = ({ isAdmin, isWide }) => {
+export const useInformation = ({ deleteInfo }) => {
     const [open, setOpen] = useState(false);
     const [type, setType] = useState("user");
+    const [events, setEvents] = useState([]);
     const [dates, setDates] = useState([]);
     const [infos, setInfos] = useState([]);
-    const [events, setEvents] = useState([]);
-    const [deleteInfo, setDeleteInfo] = useState('');
-    const [deleteOpen, setDeleteOpen] = useState(false);
     useGetInformation({ setInfos, setDates, setEvents });
 
     // モーダル開閉
-    const handleOpen = type => {
+    const handleOpen = useCallback((type) => {
         setOpen(true);
         setType(type);
-    };
+    });
     const handleClose = useCallback(() => {
         setOpen(false);
         setType("user");
@@ -29,29 +25,12 @@ export const useInformation = ({ isAdmin, isWide }) => {
     const handleDelete = useCallback(() =>{
         (async() => {
             const res = await axios.post(route('delete.info', {'info': deleteInfo}));
-            setInfos(response.data.infos);
-            setDates(response.data.dates);
+            setInfos(res.data.infos);
+            setDates(res.data.dates);
             setDeleteOpen(false);
             setType("user");
         })();
     });
 
-    const information =
-        <Content
-            isAdmin={isAdmin}
-            dates={dates}
-            infos={infos}
-            handleDelete={handleDelete}
-            setDeleteInfo={setDeleteInfo}
-            deleteOpen={deleteOpen}
-            setDeleteOpen={setDeleteOpen}
-            isWide={isWide}
-        />;
-
-    const addButton = isAdmin == "staff" &&
-        <AddInfoButton onClick={() => handleOpen("create_info")}>
-            お知らせを追加する
-        </AddInfoButton>
-
-    return [{ information, addButton, open, type, events, setInfos, setDates }, handleClose];
+    return [{ open, type, events, dates, infos, setInfos, setDates }, { handleOpen, handleClose, handleDelete }];
 };

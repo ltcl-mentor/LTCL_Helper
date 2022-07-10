@@ -66,7 +66,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     Route::get('/home', [HomeController::class, 'getHomeData'])->name('getData.home'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
     Route::get('/college/{year}/{month}/{date}', [HomeController::class, 'getCollegeData'])->name('getData.college'); // 校舎に関するデータ受け渡し
     Route::get('/infos', [HomeController::class, 'getInfos'])->name('getData.information'); // お知らせとイベントのデータ受け渡し
-    Route::get('/weather', [HomeController::class, 'getWeather']); // 今日の天気のデータ受け渡し
+    Route::get('/weather', [HomeController::class, 'getWeather'])->name('getData.weather'); // 今日の天気のデータ受け渡し
 
     // /**
     //  * ログイン済みユーザーのみアクセス可能

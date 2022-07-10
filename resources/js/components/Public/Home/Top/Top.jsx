@@ -1,8 +1,12 @@
 import React from "react";
-import Information from "./Information/information";
-import Calendar from "./Calendar/calendar";
-import { Modals } from "../modal";
+import useMedia from "use-media";
 import { useGetHomeData } from "@/Logics/Home/Top/Top";
+import Calendar from "./Calendar/calendar";
+import ContentMobile from "./Footer/contentMobile";
+import ContentPC from  "./Footer/contentPC";
+import Information from "./Information/information";
+import { Modals } from "../modal";
+import BreakingPoint from "@/Styles/BreakingPoint";
 
 const styleFooter = {
     backgroundColor: "#b39ddb",
@@ -13,7 +17,12 @@ const styleFooter = {
  * top画面
  */
 const Top = ({ user }) => {
-    const [{ zoomLink, isWide, footerContent, open, type }, handleClose] = useGetHomeData();
+    const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
+    const [{ zoomLink, open, type, mapKey }, {handleOpen, handleClose }] = useGetHomeData();
+    const footerContent = isWide ?
+        <ContentPC mapKey={mapKey} handleOpen={handleOpen} />
+    :
+        <ContentMobile mapKey={mapKey} handleOpen={handleOpen} />
 
     return (
         <React.Fragment>
