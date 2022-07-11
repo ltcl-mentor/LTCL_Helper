@@ -68,6 +68,8 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     Route::get('/infos', [HomeController::class, 'getInfos'])->name('getData.information'); // お知らせとイベントのデータ受け渡し
     Route::get('/weather', [HomeController::class, 'getWeather'])->name('getData.weather'); // 今日の天気のデータ受け渡し
 
+    Route::post('/contact', [HomeController::class, 'sendContactMessage'])->name('contact'); // お問い合わせ内容送信処理
+
     // /**
     //  * ログイン済みユーザーのみアクセス可能
     //  */
@@ -79,7 +81,6 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     // Route::post('/comments/store', 'CommentController@store'); // 質問へのコメント保存処理
     // Route::post('/comments/{comment}/update', 'CommentController@update'); // 質問へのコメント更新処理
     // Route::post('/comments/{comment}/delete', 'CommentController@delete'); // 質問へのコメント削除処理
-    // Route::post('/contact', 'ContactController@sendContactMessage'); // お問い合わせ内容送信処理
 
 
     // /**

@@ -11,7 +11,7 @@ import AddEvent from "./modal/addEvent";
 import Create from "./Top/Information/information/create/create";
 import ShowInfo from "./Top/Information/information/showInfo";
 import DeleteInfo from "./modal/deleteConfirm";
-import Contact from "./modal/contact";
+import Contact from "./Top/Footer/contact";
 import Button from "@mui/material/Button";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@mui/material/IconButton";
@@ -107,7 +107,13 @@ export const Modals = props => {
 
         // お知らせ詳細
         case "show_info":
-            content = <ShowInfo onClose={props.handleClose} info={props.info} isAdmin={props.isAdmin} />;
+            content = (
+                <ShowInfo
+                    onClose={props.handleClose}
+                    info={props.info}
+                    isAdmin={props.isAdmin}
+                />
+            );
             break;
 
         // お知らせ削除
@@ -159,7 +165,7 @@ export const Modals = props => {
 
         // お問い合わせ
         case "contact":
-            content = <Contact onClose={props.handleClose} isWide={isWide} />;
+            content = <Contact onClose={props.handleClose} />;
             break;
     }
 

@@ -79,6 +79,16 @@ class HomeController extends Controller
         return $questions;
     }
 
+    /**
+     * お問い合わせ送信処理
+     */
+    public function sendContactMessage(Request $request)
+    {
+        $user = User::getStudentName(Auth::user()->name);
+        $message = $user . "さんから次のような問い合わせがありました。\n----------------\n" . $request['message'] . "\n----------------";
+        Slack::sendMessage($message, "mentor");
+    }
+
     /** 管理者用処理 */
     /**
      * お知らせ新規作成処理
@@ -123,12 +133,4 @@ class HomeController extends Controller
         $event->delete();
         return Event::get();
     }
-
-    /**
-     * 管理画面表示
-     */
-    // public function mentorTop()
-    // {
-    //     return view('Mentor.mentor');
-    // }
 }
