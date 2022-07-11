@@ -7,7 +7,7 @@ import { Heading, GridContent } from "@/Styles/Public/Home/Top/Information/conte
  */
 const contentMobile = ({ list }) => {
     return (
-        <GridContent>
+        <GridContent scroll="scroll">
             {list}
             <Heading>天気情報</Heading>
             <Weather />

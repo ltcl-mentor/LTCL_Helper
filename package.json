@@ -52,6 +52,7 @@
         "react-tabs": "^3.2.2",
         "react-use": "^17.3.2",
         "styled-components": "^5.3.5",
+        "styled-media-query": "^2.1.2",
         "use-media": "^1.4.0"
     }
 }

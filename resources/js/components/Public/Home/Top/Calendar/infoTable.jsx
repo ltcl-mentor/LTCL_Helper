@@ -10,7 +10,7 @@ import { StyleLink, StyleTable, TableData, TableHead } from '@/Styles/Public/Hom
 const infoTable = ({ collegeInfo, zoomLink }) => {
     const isWide = useMedia({ minWidth: '940px' });
     return (
-        <StyleTable isWide={isWide}>
+        <StyleTable>
             <TableBody>
                 <TableRow key='time'>
                     <TableHead>開校時間</TableHead>

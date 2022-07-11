@@ -83,15 +83,9 @@ class HomeController extends Controller
     /**
      * お知らせ新規作成処理
      */
-    public function storeInfo(Info $info, Request $request)
+    public function storeInfo(Request $request)
     {
-        $input['information'] = $request['info'];
-        $input['body'] = $request['body'];
-        $input['targets'] = implode("/", $request['target']);
-        $input['slack'] = $request['slack'];
-        $input['date'] = $request['date'];
-        $input['slackDate'] = $request['slackDate'];
-        $info->fill($input)->save();
+        Info::store($request);
         return Info::getInfo();
     }
 

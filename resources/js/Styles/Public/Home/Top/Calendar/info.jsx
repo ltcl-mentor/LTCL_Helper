@@ -1,6 +1,9 @@
 import styled from 'styled-components';
+import { generateMedia } from "styled-media-query";
 import Table from '@mui/material/Table';
 import TableCell from '@mui/material/TableCell';
+
+const customMedia = generateMedia({ mobile: `940px`, });
 
 export const TableHead = styled(TableCell)`
     &&& {
@@ -25,7 +28,14 @@ export const WarningMessage = styled.div`
 `
 
 export const StyleTable = styled(Table)`
-    &&& {width: ${props => props.isWide ? "100%" : "80%"}; }
     margin: 0 auto;
     padding-bottom: 20px;
+    &&& {
+        ${customMedia.lessThan("mobile")`
+            width: 80%;
+        `};
+        ${customMedia.greaterThan("mobile")`
+            width: 100%;
+        `};
+    }
 `

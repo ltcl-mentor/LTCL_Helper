@@ -32,6 +32,9 @@ class Info extends Model
         self::where('date', '<', $today)->delete();
     }
 
+    /**
+     * イベント取得
+     */
     public static function getInfo() {
         // infosテーブルの本日以降の日付を取得（重複はなし）
         $infos['dates'] = self::groupBy('date')->orderBy('date', 'desc')->where('date', '>=', Carbon::now()->format('Y-m-d'))->pluck('date');
@@ -42,5 +45,19 @@ class Info extends Model
         }
 
         return $infos;
+    }
+
+    /**
+     * イベント保存
+     */
+    public static function store($request) {
+        self::create([
+            'information' => $request['title'],
+            'body' => $request['body'],
+            'targets' => implode("/", $request['target']),
+            'date' => $request['date'],
+            'slack' => $request['slackBody'],
+            'slackDate' => $request['slackDate'],
+        ]);
     }
 }

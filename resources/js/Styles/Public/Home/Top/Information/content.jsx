@@ -1,13 +1,18 @@
 import styled from 'styled-components';
+import { generateMedia } from "styled-media-query";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from '@mui/material/ListItem';
 import ListSubheader from "@mui/material/ListSubheader";
 import ListItemText from "@mui/material/ListItemText";
 import DeleteIcon from '@mui/icons-material/Delete';
+import BreakingPoint from "@/Styles/BreakingPoint";
+
+const customMedia = generateMedia({ mobile: `${BreakingPoint}px`, });
 
 export const GridItem = styled(Grid)`
     width: 50%;
+    overflow-y: ${(props) => props.scroll};
 `
 
 export const StyleUl = styled.ul`
@@ -19,12 +24,19 @@ export const StyleListItem = styled(ListItem)`
 `
 
 export const GridContent = styled(Grid)`
-    &&& {width: ${props => props.isWide ? "80%" : "90%"}; }
     margin: 0 auto;
+    overflow-y: ${(props) => props.scroll};
+    &&& {
+        ${customMedia.lessThan("mobile")`
+            width: 90%;
+        `};
+        ${customMedia.greaterThan("mobile")`
+            width: 80%;
+        `};
+    }
 `
 
 export const StyleList = styled(List)`
-    width: ${props => props.isWide ? "80%" : "100%"};
     background-color: white;
     position: relative;
     over-flow: auto;
@@ -32,6 +44,13 @@ export const StyleList = styled(List)`
     &:ul {
         padding: 0
     }
+    ${customMedia.lessThan("mobile")`
+        width: 100%;
+        overflow-y: scroll;
+    `};
+    ${customMedia.greaterThan("mobile")`
+        width: 80%;
+    `};
 `
 
 export const Date = styled(ListSubheader)`

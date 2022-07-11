@@ -106,7 +106,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
         /**
          *  ホーム画面
          */
-        // Route::post('/informations/store', 'HomeController@storeInfo'); // お知らせの登録
+        Route::post('/informations/store', [HomeController::class, 'storeInfo'])->name("store.info"); // お知らせの登録
         Route::post('/informations/{info}/delete', [HomeController::class, 'deleteInfo'])->name('delete.info'); // お知らせの削除
 
     //     /**

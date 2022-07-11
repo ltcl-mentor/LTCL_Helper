@@ -847,6 +847,9 @@ select {
 .block {
   display: block;
 }
+.inline {
+  display: inline;
+}
 .flex {
   display: flex;
 }
@@ -964,6 +967,9 @@ select {
 }
 .flex-col {
   flex-direction: column;
+}
+.flex-wrap {
+  flex-wrap: wrap;
 }
 .items-start {
   align-items: flex-start;

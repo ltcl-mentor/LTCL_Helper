@@ -103,13 +103,7 @@ export const Modals = props => {
         // お知らせ作成
         case "create_info":
             content = (
-                <Create
-                    onClose={props.handleClose}
-                    events={props.events}
-                    setDates={props.setDates}
-                    setInfos={props.setInfos}
-                    isWide={isWide}
-                />
+                <Create onClose={props.handleClose} events={props.events} />
             );
             break;
 

@@ -11,7 +11,7 @@ const infoList = ({ isAdmin, dates, infos, selectDelete, showInformation }) => {
     const infoLength = isWide ? 15 : 30;
 
     return (
-        <StyleList isWide={isWide} subheader={<li />}>
+        <StyleList subheader={<li />}>
             {dates.map(date => (
                 <li key={date}>
                     <StyleUl>
