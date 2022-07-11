@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
 import axios from "axios";
+import { Inertia } from "@inertiajs/inertia";
 import { useGetInformation } from "./getInfo";
 
 // informationのロジック
@@ -24,11 +25,8 @@ export const useInformation = ({ deleteInfo }) => {
     // 削除実行
     const handleDelete = useCallback(() =>{
         (async() => {
-            const res = await axios.post(route('delete.info', {'info': deleteInfo}));
-            setInfos(res.data.infos);
-            setDates(res.data.dates);
-            setDeleteOpen(false);
-            setType("user");
+            await axios.post(route('delete.info', {'info': deleteInfo}));
+            Inertia.get(route('home'));
         })();
     });
 

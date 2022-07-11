@@ -9,7 +9,7 @@ export const useInfoContent = ({ setDeleteInfo, setDeleteOpen }) => {
     const handleShowClose = useCallback(() => setShowOpen(false));
 
     // お知らせ削除選択
-    const handleDelete = useCallback(id => {
+    const selectDelete = useCallback(id => {
         setDeleteOpen(true);
         setDeleteInfo(id);
     });
@@ -20,5 +20,5 @@ export const useInfoContent = ({ setDeleteInfo, setDeleteOpen }) => {
         setShowInfo(info);
     });
 
-    return [{ showInfo, showOpen }, { handleDelete, handleShowClose, showInformation }];
+    return [{ showInfo, showOpen }, { selectDelete, handleShowClose, showInformation }];
 };

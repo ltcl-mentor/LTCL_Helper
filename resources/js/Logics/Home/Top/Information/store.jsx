@@ -75,7 +75,7 @@ export const store = ({ input, checked, setValidation }) => {
         }
 
         await axios.post(route('store.info'), input);
-        Inertia.get(route('home'), { type: "info", status: "created" });
+        Inertia.get(route('home'));
     });
 
     return submit;

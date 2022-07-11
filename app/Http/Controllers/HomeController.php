@@ -86,7 +86,6 @@ class HomeController extends Controller
     public function storeInfo(Request $request)
     {
         Info::store($request);
-        return Info::getInfo();
     }
 
     /**
@@ -95,7 +94,6 @@ class HomeController extends Controller
     public function deleteInfo(Info $info)
     {
         $info->delete();
-        return Info::getInfo();
     }
 
     /**
