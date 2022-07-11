@@ -32,5 +32,5 @@ export const useInformation = ({ deleteInfo }) => {
         })();
     });
 
-    return [{ open, type, events, dates, infos, setInfos, setDates }, { handleOpen, handleClose, handleDelete }];
+    return [{ open, type, events, dates, infos }, { handleOpen, handleClose, handleDelete }];
 };

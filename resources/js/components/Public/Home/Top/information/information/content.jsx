@@ -38,6 +38,7 @@ const content = ({ isAdmin, dates, infos, handleDelete, setDeleteInfo }) => {
                 type={"show_info"}
                 handleClose={handleShowClose}
                 info={showInfo}
+                isAdmin={isAdmin}
             />
 
             <Modals

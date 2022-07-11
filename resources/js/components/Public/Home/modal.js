@@ -9,7 +9,7 @@ import UserRegister from "./modal/userRegister";
 import ShowEvent from "./modal/showEvent";
 import AddEvent from "./modal/addEvent";
 import Create from "./Top/Information/information/create/create";
-import ShowInfo from "./modal/showInfo";
+import ShowInfo from "./Top/Information/information/showInfo";
 import DeleteInfo from "./modal/deleteConfirm";
 import Contact from "./modal/contact";
 import Button from "@mui/material/Button";
@@ -102,16 +102,12 @@ export const Modals = props => {
     switch (props.type) {
         // お知らせ作成
         case "create_info":
-            content = (
-                <Create onClose={props.handleClose} events={props.events} />
-            );
+            content = <Create onClose={props.handleClose} events={props.events} />;
             break;
 
         // お知らせ詳細
         case "show_info":
-            content = (
-                <ShowInfo onClose={props.handleClose} info={props.info} />
-            );
+            content = <ShowInfo onClose={props.handleClose} info={props.info} isAdmin={props.isAdmin} />;
             break;
 
         // お知らせ削除

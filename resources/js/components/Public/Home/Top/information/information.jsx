@@ -9,7 +9,7 @@ import { AddInfoButton, Heading, StyleDiv } from "@/Styles/Public/Home/Top/Infor
  */
 const information = ({ isAdmin }) => {
     const [deleteInfo, setDeleteInfo] = useState('');
-    const [{ open, type, events, dates, infos, setInfos, setDates }, { handleOpen, handleClose, handleDelete }] = useInformation({ deleteInfo });
+    const [{ open, type, events, dates, infos }, { handleOpen, handleClose, handleDelete }] = useInformation({ deleteInfo });
 
     const information =
         <Content
@@ -32,8 +32,6 @@ const information = ({ isAdmin }) => {
                 type={type}
                 handleClose={handleClose}
                 events={events}
-                setInfos={setInfos}
-                setDates={setDates}
             />
 
             <Heading>
