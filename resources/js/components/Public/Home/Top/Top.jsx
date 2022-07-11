@@ -6,19 +6,15 @@ import ContentMobile from "./Footer/contentMobile";
 import ContentPC from  "./Footer/contentPC";
 import Information from "./Information/information";
 import { Modals } from "../modal";
+import { FooterContent } from "@/Styles/Public/Home/HomeContent";
 import BreakingPoint from "@/Styles/BreakingPoint";
-
-const styleFooter = {
-    backgroundColor: "#b39ddb",
-    paddingTop: "16px"
-};
 
 /**
  * top画面
  */
 const Top = ({ user }) => {
     const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
-    const [{ zoomLink, open, type, mapKey }, {handleOpen, handleClose }] = useGetHomeData();
+    const [{ zoomLink, open, type, mapKey }, { handleOpen, handleClose }] = useGetHomeData();
     const footerContent = isWide ?
         <ContentPC mapKey={mapKey} handleOpen={handleOpen} />
     :
@@ -35,7 +31,7 @@ const Top = ({ user }) => {
             <Information isAdmin={user.is_admin} isWide={isWide} />
 
             {/* お問い合わせと校舎住所 */}
-            {/* <div style={styleFooter}>{footerContent}</div> */}
+            <FooterContent>{footerContent}</FooterContent>
         </React.Fragment>
     );
 };

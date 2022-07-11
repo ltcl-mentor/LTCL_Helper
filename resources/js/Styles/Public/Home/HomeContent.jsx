@@ -16,3 +16,8 @@ export const StyledDiv = styled.div`
     padding-right: 0;
     padding-left: 0;
 `
+
+export const FooterContent = styled.div`
+    background-color: #b39ddb;
+    padding-top: 16px;
+`
