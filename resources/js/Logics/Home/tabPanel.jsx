@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useMountedState } from 'react-use';
 import { Inertia } from '@inertiajs/inertia';
 import Top from '@/Components/Public/Home/Top/Top';
 
@@ -7,7 +6,6 @@ import Top from '@/Components/Public/Home/Top/Top';
 export const useChangeTab = (user) => {
     let search = window.location.search.split('=')[1]; // URLからコンポーネント判断
     search = typeof search === "undefined" ? "top" : search;
-    const isMounted = useMountedState(); // マウントを検知
     const [value, setValue] = useState(0);  // タブ切り替え時の状態保持
 
     let component;
@@ -28,13 +26,17 @@ export const useChangeTab = (user) => {
 
     // クエリパラメータの値によるコンポーネントの切り替え（タブを押された時以外）
     useEffect(() => {
-        if (!isMounted()) return; // マウントされていなければ処理停止
+        let unmounted = false;
 
-        switch (search) {
-            case "top": setValue(0); break;
-            case "qa": setValue(1); break;
-            case "manage": setValue(2); break;
+        if(!unmounted) {
+            switch (search) {
+                case "top": setValue(0); break;
+                case "qa": setValue(1); break;
+                case "manage": setValue(2); break;
+            }
         }
+
+        return () => { unmounted = true; };
     }, [search]);
 
     return [{ value, component }, handleChange];
