@@ -1,5 +1,4 @@
 import React from 'react';
-import useMedia from 'use-media';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import { StyleLink, StyleTable, TableData, TableHead } from '@/Styles/Public/Home/Top/Calendar/info';
@@ -8,7 +7,6 @@ import { StyleLink, StyleTable, TableData, TableHead } from '@/Styles/Public/Hom
  * 校舎情報テーブル
  */
 const infoTable = ({ collegeInfo, zoomLink }) => {
-    const isWide = useMedia({ minWidth: '940px' });
     return (
         <StyleTable>
             <TableBody>
@@ -17,7 +15,7 @@ const infoTable = ({ collegeInfo, zoomLink }) => {
                     <TableData>{ collegeInfo.start } 〜 { collegeInfo.close }</TableData>
                 </TableRow>
 
-                {collegeInfo.staff[0] &&
+                {collegeInfo.staff[0] !== false &&
                     <TableRow key='college'>
                         <TableHead>出勤メンター<br/>(校舎)</TableHead>
                         <TableData>
@@ -28,7 +26,7 @@ const infoTable = ({ collegeInfo, zoomLink }) => {
                     </TableRow>
                 }
 
-                {collegeInfo.online_staff[0] &&
+                {collegeInfo.online_staff[0] !== false &&
                     <TableRow key='online_college'>
                         <TableHead>出勤メンター<br/>(オンライン)</TableHead>
                         <TableData>
@@ -39,12 +37,14 @@ const infoTable = ({ collegeInfo, zoomLink }) => {
                     </TableRow>
                 }
 
-                <TableRow key='zoom'>
-                    <TableHead>オンライン<br/>質問部屋</TableHead>
-                    <TableData>
-                        <div>{collegeInfo.zoom.message}</div>
-                    </TableData>
-                </TableRow>
+                {collegeInfo.zoom.message.length !== 0 &&
+                    <TableRow key='zoom'>
+                        <TableHead>オンライン<br/>質問部屋</TableHead>
+                        <TableData>
+                            <div>{collegeInfo.zoom.message}</div>
+                        </TableData>
+                    </TableRow>
+                }
 
                 <TableRow key='profile'>
                     <TableHead>メンター<br/>プロフィール</TableHead>
