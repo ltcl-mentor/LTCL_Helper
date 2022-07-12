@@ -27,11 +27,9 @@ export const GridContent = styled(Grid)`
     margin: 0 auto;
     overflow-y: ${(props) => props.scroll};
     &&& {
+        width: 80%;
         ${customMedia.lessThan("mobile")`
             width: 90%;
-        `};
-        ${customMedia.greaterThan("mobile")`
-            width: 80%;
         `};
     }
 `
@@ -41,15 +39,13 @@ export const StyleList = styled(List)`
     position: relative;
     over-flow: auto;
     height: 300px;
+    width: 80%;
     &:ul {
         padding: 0
     }
     ${customMedia.lessThan("mobile")`
         width: 100%;
         overflow-y: scroll;
-    `};
-    ${customMedia.greaterThan("mobile")`
-        width: 80%;
     `};
 `
 

@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
 import Alert from "../../../../Alert";
-import Breadcrumbs from "../../../../Common/Breadcrumbs";
+import Breadcrumbs from "../../../../Shared/Breadcrumbs";
 import Question from "../question";
 import Comments from "../comments/comments";
 import Documents from "../documents";

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Breadcrumbs from "../../../Common/Breadcrumbs";
+import Breadcrumbs from "../../../Shared/Breadcrumbs";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import CurriculumNumber from "./Curriculum-number/curriculum-number";

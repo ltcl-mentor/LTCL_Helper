@@ -67,6 +67,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     Route::get('/college/{year}/{month}/{date}', [HomeController::class, 'getCollegeData'])->name('getData.college'); // 校舎に関するデータ受け渡し
     Route::get('/infos', [HomeController::class, 'getInfos'])->name('getData.information'); // お知らせとイベントのデータ受け渡し
     Route::get('/weather', [HomeController::class, 'getWeather'])->name('getData.weather'); // 今日の天気のデータ受け渡し
+    Route::get('/questions/articles', [HomeController::class, 'getQuestionArticle'])->name('getData.question_article'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
 
     Route::post('/contact', [HomeController::class, 'sendContactMessage'])->name('contact'); // お問い合わせ内容送信処理
 
@@ -97,7 +98,6 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     // Route::get('react/documents/related/{question}', 'ReactController@getRelatedDocuments'); // 質問に紐づいている記事の受け渡し
     // Route::get('react/documents/related/paginate/{category}', 'ReactController@getRelatedDocumentsPaginate'); // カテゴリーに紐づいている記事の受け渡し
     // Route::get('react/user', 'ReactController@getUser'); // ログインユーザー受け渡し
-    // Route::get('react/index', 'ReactController@getQuestionArticle'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
 
 
     /**

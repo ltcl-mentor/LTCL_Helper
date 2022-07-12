@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useHistory } from "react-router-dom";
 import Alert from "../../Alert";
-import Breadcrumbs from "../../Common/Breadcrumbs";
+import Breadcrumbs from "../../Shared/Breadcrumbs";
 import Parameters from "../Question/Show/parameters";
 import Question from "../Question/Show/question";
 import Comments from "../Question/Show/comments/comments";

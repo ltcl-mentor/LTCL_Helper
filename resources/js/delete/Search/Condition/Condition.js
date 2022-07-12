@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import Grid from '@mui/material/Grid';
 
-import Breadcrumbs from '../../../Components/Common/Breadcrumbs';
+import Breadcrumbs from '../../../Components/Shared/Breadcrumbs';
 import Category from './Search/Forms/categoryForm';
 import Topic from './Search/Forms/topicForm';
 import Addition from './Search/Forms/additionalForms/additionalForms';

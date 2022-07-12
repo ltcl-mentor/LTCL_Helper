@@ -13,7 +13,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
 import Alert from '../../../Alert';
-import Breadcrumbs from '../../../Common/Breadcrumbs';
+import Breadcrumbs from '../../../Shared/Breadcrumbs';
 
 /**
  * 関連記事一覧(管理画面)のメインコンポーネント

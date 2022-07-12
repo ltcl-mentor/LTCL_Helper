@@ -3,7 +3,7 @@ import {useLocation, useParams, useHistory} from 'react-router-dom';
 import axios from "axios";
 
 import Alert from '../../../../Alert';
-import Breadcrumbs from '../../../../Common/Breadcrumbs';
+import Breadcrumbs from '../../../../Shared/Breadcrumbs';
 import Parameters from './parameters';
 import Links from './links';
 

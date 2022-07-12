@@ -7,7 +7,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@mui/material/Button';
 
 import Alert from '../../../Alert';
-import Breadcrumbs from '../../../Common/Breadcrumbs';
+import Breadcrumbs from '../../../Shared/Breadcrumbs';
 import Parameters from './parameters';
 import Questions from './questions';
 

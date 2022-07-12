@@ -46,8 +46,7 @@ class HomeController extends Controller
      */
     public function getInfos()
     {
-        $infos = Info::getInfo();
-        return ["infos" => $infos, "events" => Event::all()];
+        return ["infos" => Info::getInfo(), "events" => Event::all()];
     }
 
     /**
@@ -56,6 +55,40 @@ class HomeController extends Controller
     public function getWeather()
     {
         return Weather::getWeatherData();
+    }
+
+    /**
+     * 各トピックの質問数と関連記事数を取得
+     */
+    public function getQuestionArticle()
+    {
+        $achievement = Question::getAchievement();
+        $curriculum_questions = [];
+        $project_questions = [];
+        $questions = array_count_values(Question::where('check', 1)->pluck('topic')->all());
+        $documents = array_count_values(Document::pluck('category')->all());
+
+        // 質問、関連記事カウント
+        for ($i=0; $i <= 19; $i++) {
+            $question_count = 0;
+            $document_count = 0;
+
+            if (array_key_exists($i, $questions)) {
+                $question_count = $questions[$i];
+            }
+
+            if (array_key_exists($i, $documents)) {
+                $document_count = $documents[$i];
+            }
+
+            if ($i <= 13) {  // カリキュラム
+                array_push($curriculum_questions, ['topic' => $i, 'questions' => $question_count, 'documents' => $document_count]);
+            } else {         // 成果物
+                array_push($project_questions, ['topic' => $i, 'questions' => $question_count, 'documents' => $document_count]);
+            }
+        }
+
+        return ['curriculum' => $curriculum_questions, "project" => $project_questions, 'achievement' => $achievement];
     }
 
     /**

@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 
-import Breadcrumbs from '../../../Common/Breadcrumbs';
+import Breadcrumbs from '../../../Shared/Breadcrumbs';
 import Target from '../Create/target';
 import Title from '../Create/title';
 import URL from '../Create/link';

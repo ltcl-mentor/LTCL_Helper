@@ -7,7 +7,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import Card from '@material-ui/core/Card';
 import Box from '@mui/material/Box';
 
-import Breadcrumbs from '../../../../Components/Common/Breadcrumbs';
+import Breadcrumbs from '../../../../Components/Shared/Breadcrumbs';
 
 function Admin() {
     const history = useHistory();

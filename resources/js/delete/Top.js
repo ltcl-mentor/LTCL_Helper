@@ -17,7 +17,7 @@ import EventIcon from '@mui/icons-material/Event';
 
 import {LoginUser} from '../Components/Route.js';
 import Alert from '../Components/Alert';
-import Breadcrumbs from '../Components/Common/Breadcrumbs';
+import Breadcrumbs from '../Components/Shared/Breadcrumbs';
 
 /**
  * 管理画面のメインコンポーネント

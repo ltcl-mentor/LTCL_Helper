@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import Breadcrumbs from "../../../../Common/Breadcrumbs";
+import Breadcrumbs from "../../../../Shared/Breadcrumbs";
 import Publish from "../Publish/publish";
 import Comments from "../../../../Public/Question/Show/comments/comments";
 import AddRelatedQuestion from "../../../Link/modal/addRelatedQuestion";

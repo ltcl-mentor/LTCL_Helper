@@ -9,7 +9,7 @@ import Card from '@material-ui/core/Card';
 import Modal from '@mui/material/Modal';
 import '../../../../../../public/css/Search/show.css';
 
-import Breadcrumbs from '../../../Components/Common/Breadcrumbs';
+import Breadcrumbs from '../../../Components/Shared/Breadcrumbs';
 
 // モーダルのCSS設定
 const style = {

@@ -7,7 +7,7 @@ import Input from '@mui/material/Input';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 
-import Breadcrumbs from '../../../Components/Common/Breadcrumbs';
+import Breadcrumbs from '../../../Components/Shared/Breadcrumbs';
 import Documents from '../../Question/Show/documents';
 
 /**

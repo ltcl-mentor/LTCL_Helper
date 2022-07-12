@@ -6,7 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 
 import Alert from '../../../../Alert';
-import Breadcrumbs from '../../../../Common/Breadcrumbs';
+import Breadcrumbs from '../../../../Shared/Breadcrumbs';
 import Curriculum from '../Index/curriculum';
 import Portfolio from '../Index/portfolio';
 

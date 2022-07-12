@@ -959,6 +959,9 @@ select {
 .cursor-default {
   cursor: default;
 }
+.resize {
+  resize: both;
+}
 .list-none {
   list-style-type: none;
 }

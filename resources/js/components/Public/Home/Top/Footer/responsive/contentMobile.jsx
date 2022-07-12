@@ -1,6 +1,6 @@
 import React from "react";
 import Location from "../location";
-import { LogoImage } from '@/Styles/Common/Header';
+import { LogoImage } from '@/Styles/Shared/Header';
 import { StyleDiv, Contact } from '@/Styles/Public/Home/Top/Footer/content';
 
 /**

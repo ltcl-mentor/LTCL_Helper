@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Inertia } from '@inertiajs/inertia';
 import Top from '@/Components/Public/Home/Top/Top';
+import QA from '@/Components/Public/Home/QA/QA';
 
 // タブパネルの関数
 export const useChangeTab = (user) => {
@@ -11,7 +12,7 @@ export const useChangeTab = (user) => {
     let component;
     switch (value) {
         case 0: component = <Top user={user} />; break;
-        case 1: component = "QA"; break;
+        case 1: component = <QA user={user} />; break;
         case 2: component = "manage"; break;
     }
 

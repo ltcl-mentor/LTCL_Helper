@@ -6,7 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 import Alert from '../../../Components/Alert';
-import Breadcrumbs from '../../../Components/Common/Breadcrumbs';
+import Breadcrumbs from '../../../Components/Shared/Breadcrumbs';
 import Students from './students';
 import Admins from './admins';
 
