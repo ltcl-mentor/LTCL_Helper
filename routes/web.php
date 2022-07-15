@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\QuestionController;
 use Inertia\Inertia;
 
 /*
@@ -40,6 +41,7 @@ Route::group(['middleware' => ['auth']], function () {
      * 質問関連
      */
     Route::get('/public/questions/create', [RouteController::class, 'questionCreate'])->name('question.create'); // 質問投稿画面
+    Route::get('/public/questions/{question}', [RouteController::class, 'showQuestion'])->name('question.show'); // 質問詳細画面
 
     /**
      * その他
@@ -68,6 +70,8 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     Route::get('/infos', [HomeController::class, 'getInfos'])->name('getData.information'); // お知らせとイベントのデータ受け渡し
     Route::get('/weather', [HomeController::class, 'getWeather'])->name('getData.weather'); // 今日の天気のデータ受け渡し
     Route::get('/questions/articles', [HomeController::class, 'getQuestionArticle'])->name('getData.question_article'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
+    Route::get('/questions/search', [QuestionController::class, 'getSearchQuestions']); // 質問検索結果の受け渡し
+    Route::get('/questions/search/paginate', [QuestionController::class, 'getSearchQuestionsPaginate']); // 質問検索結果の受け渡しのペジネーション
 
     Route::post('/contact', [HomeController::class, 'sendContactMessage'])->name('contact'); // お問い合わせ内容送信処理
 
@@ -91,8 +95,6 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     // Route::get('react/question/mypage/{question}', 'ReactController@getMyQuestion'); // 公開中の個別質問データの受け渡し
     // Route::get('react/question/checked/{question}', 'ReactController@getCheckedQuestion'); // 公開中の個別質問データの受け渡し
     // Route::get('react/questions/checked', 'ReactController@getCheckedQuestions'); // 公開中の質問受け渡し
-    // Route::get('react/questions/search', 'ReactController@getSearchQuestions'); // 質問検索結果の受け渡し
-    // Route::get('react/questions/search/paginate', 'ReactController@getSearchQuestionsPaginate'); // 質問検索結果の受け渡しのペじネーション
     // Route::get('react/questions/mine', 'ReactController@getMyQuestions'); // ログインユーザの質問一覧受け渡し
     // Route::get('react/documents/all', 'ReactController@getAllDocuments'); // 全記事受け渡し
     // Route::get('react/documents/related/{question}', 'ReactController@getRelatedDocuments'); // 質問に紐づいている記事の受け渡し

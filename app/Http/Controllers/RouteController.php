@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Question;
 
 
 class RouteController extends Controller
@@ -34,6 +35,11 @@ class RouteController extends Controller
     }
 
     public function myPageAdmin()
+    {
+        return Inertia::render('Public/Home/Home');
+    }
+
+    public function showQuestion(Question $question)
     {
         return Inertia::render('Public/Home/Home');
     }

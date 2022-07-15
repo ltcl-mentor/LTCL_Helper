@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\QuestionRequest;
-use App\Question;
-use App\Document;
-use App\User;
-use App\Image;
-use App\History;
-use App\Slack;
-use App\Export;
+use App\Models\Question;
+use App\Models\Document;
+use App\Models\User;
+use App\Models\Image;
+use App\Models\History;
+use App\Models\Slack;
+use App\Models\Export;
 use Storage;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -18,6 +18,38 @@ use Validator;
 class QuestionController extends Controller
 {
     /** 共通処理 */
+    /**
+     * 質問検索結果の受け渡し
+     * 「絞り込み」と「フリーワード」両方に対応
+     */
+    public function getSearchQuestions(Request $request)
+    {
+        return Question::conditionSearch(
+            // 絞り込み検索用
+            $request->category, $request->topic, $request->curriculum_number, $request->keyword,
+            // フリーワード検索用
+            $request->searchType, urldecode($request->freeword)
+        );
+    }
+
+    /**
+     * 質問検索結果の受け渡し
+     * 「絞り込み」と「フリーワード」両方に対応
+     * ペジネーションで受け渡す
+     */
+    public function getSearchQuestionsPaginate(Request $request)
+    {
+        return Question::conditionSearchPaginate(
+            // 絞り込み検索用
+            $request->category, $request->topic, $request->curriculum_number, $request->keyword,
+            // フリーワード検索用
+            $request->searchType, urldecode($request->freeword),
+            //管理者か確認
+            $request->admin,
+            //ステータスを取得
+            $request->status
+        );
+    }
 
     /**
      * 質問詳細画面表示時に閲覧を記録
@@ -397,36 +429,4 @@ class QuestionController extends Controller
         Question::bulkRegistration();
         return;
     }
-
-    /**
-     * 初期画面表示
-     */
-    // public function index(Question $question)
-    // {
-    //     return view('Mentor.Question.index');
-    // }
-
-    /**
-     * 新規作成画面表示
-     */
-    // public function create()
-    // {
-    //     return view('Mentor.Question.create');
-    // }
-
-    /**
-     * 詳細画面表示
-     */
-    // public function show(Question $question, User $user)
-    // {
-    //     return view('Mentor.Question.show')->with(['question_id' => $question->id]);
-    // }
-
-    /**
-     * 編集画面表示
-     */
-    // public function edit(Question $question)
-    // {
-    //     return view('Mentor.Question.edit')->with(['question_id' => $question->id]);
-    // }
 }

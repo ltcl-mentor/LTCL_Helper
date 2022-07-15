@@ -31,11 +31,9 @@ export const StyleTable = styled(Table)`
     margin: 0 auto;
     padding-bottom: 20px;
     &&& {
+        width: 100%;
         ${customMedia.lessThan("mobile")`
             width: 80%;
-        `};
-        ${customMedia.greaterThan("mobile")`
-            width: 100%;
         `};
     }
 `

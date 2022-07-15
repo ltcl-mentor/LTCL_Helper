@@ -1,13 +1,7 @@
 import React from 'react';
 import { useChangeTab } from '@/Logics/Home/tabPanel';
+import { a11yProps } from "@/Components/Shared/a11yProps";
 import { StyledBox, StyledTab, StyledTabArea, StyledTabs } from '@/Styles/Public/Home/tabPanel';
-
-const a11yProps = (index) => {
-    return {
-        id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
-    };
-};
 
 /**
  * タブパネル

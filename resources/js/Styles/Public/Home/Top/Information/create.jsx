@@ -52,12 +52,9 @@ export const StyleTextField = styled(TextField)`
 
 export const StyleResponsiveTextField = styled(TextField)`
     margin-top: 16px;
-
+    width: 50%;
     ${customMedia.lessThan("mobile")`
         width: 100%;
-    `};
-    ${customMedia.greaterThan("mobile")`
-        width: 50%;
     `};
 `
 
@@ -81,11 +78,9 @@ export const AutoInputButton = styled(Button)`
     margin: 0 auto;
 `
 export const StyleDiv = styled.div`
+    width: 50%;
     ${customMedia.lessThan("mobile")`
         width: 100%;
-    `};
-    ${customMedia.greaterThan("mobile")`
-        width: 50%;
     `};
 `
 
@@ -102,10 +97,8 @@ export const StyleChip = styled(Box)`
 `
 
 export const StyleFormControl = styled(FormControl)`
+    width: 50%;
     ${customMedia.lessThan("mobile")`
     width: 100%;
-    `};
-    ${customMedia.greaterThan("mobile")`
-    width: 50%;
     `};
 `

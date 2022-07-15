@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-import CurriculumNumber from "../../../Home/QA/search/condition/form/curriculumNumber";
+import CurriculumNumber from "../../../Home/QA/Search/condition/form/curriculumNumber";
 import QuestionForm from "./question-form/questionForm";
 import QuestionConfirm from "./confirm";
 import PurpleButton from "../../../../Atom/Button/PurpleButton";

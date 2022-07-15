@@ -31,39 +31,6 @@ class ReactController extends Controller
     }
 
     /**
-     * 質問検索結果の受け渡し
-     * 「絞り込み」と「フリーワード」両方に対応
-     */
-    public function getSearchQuestions(Request $request)
-    {
-        return Question::conditionSearch(
-            // 絞り込み検索用
-            $request->category, $request->topic, $request->curriculum_number, $request->keyword,
-            // フリーワード検索用
-            $request->searchType, urldecode($request->freeword)
-        );
-    }
-
-    /**
-     * 質問検索結果の受け渡し
-     * 「絞り込み」と「フリーワード」両方に対応
-     * ペジネーションで受け渡す
-     */
-    public function getSearchQuestionsPaginate(Request $request)
-    {
-        return Question::conditionSearchPaginate(
-            // 絞り込み検索用
-            $request->category, $request->topic, $request->curriculum_number, $request->keyword,
-            // フリーワード検索用
-            $request->searchType, urldecode($request->freeword),
-            //管理者か確認
-            $request->admin,
-            //ステータスを取得
-            $request->status
-        );
-    }
-
-    /**
      * 全質問受け渡し
      */
     public function getAllQuestions()

@@ -17,24 +17,20 @@ export const StyleTextBox = styled(Box)`
 `
 
 export const Category = styled(TextField)`
-    ${customMedia.lessThan("mobile")`
-        width: 100%;
-    `};
-    ${customMedia.greaterThan("mobile")`
-        &&& {
-            width: 30%;
-            margin-left: 10%;
-        }
-    `};
+    &&& {
+        width: 30%;
+        margin-left: 10%;
+        ${customMedia.lessThan("mobile")`
+            width: 100%;
+        `};
+    }
 `
 
 export const StyleTextField = styled(TextField)`
     padding-top: 8px;
+    width: 80%;
     ${customMedia.lessThan("mobile")`
         width: 100%;
-    `};
-    ${customMedia.greaterThan("mobile")`
-        width: 80%;
     `};
 `
 
