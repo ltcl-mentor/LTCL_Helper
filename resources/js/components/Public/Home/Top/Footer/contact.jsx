@@ -1,5 +1,5 @@
 import React from "react";
-import { useContact } from "@/Logics/Home/Top/Footer/contact";
+import { useContact } from "@/Logics/Public/Home/Top/Footer/contact";
 import Typography from "@mui/material/Typography";
 import ContactForm from "./contact/contactForm";
 import ConfirmModal from "./contact/confirmModal";

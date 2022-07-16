@@ -1,5 +1,5 @@
 import React from 'react';
-import { useChangeTab } from '@/Logics/Home/tabPanel';
+import { useChangeTab } from '@/Logics/Public/Home/tabPanel';
 import { a11yProps } from "@/Components/Shared/a11yProps";
 import { StyledBox, StyledTab, StyledTabArea, StyledTabs } from '@/Styles/Public/Home/tabPanel';
 

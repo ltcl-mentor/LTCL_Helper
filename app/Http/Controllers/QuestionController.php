@@ -429,4 +429,12 @@ class QuestionController extends Controller
         Question::bulkRegistration();
         return;
     }
+
+    /**
+     * メンターが対応するべき質問の受け渡し
+     */
+    public function getQuestionsForMentor()
+    {
+        return Question::questionsForMentorPaginate();
+    }
 }

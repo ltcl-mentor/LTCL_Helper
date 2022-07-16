@@ -1,6 +1,6 @@
 import React from "react";
-import { useCreateInfo } from "@/Logics/Home/Top/Information/create";
-import { store } from "@/Logics/Home/Top/Information/store";
+import { useCreateInfo } from "@/Logics/Public/Home/Top/Information/create";
+import { store } from "@/Logics/Public/Home/Top/Information/store";
 import Typography from "@mui/material/Typography";
 import SlackForm from "./slackForm";
 import PublicForm from "./publicForm";

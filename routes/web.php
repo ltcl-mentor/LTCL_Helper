@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth']], function () {
      */
     Route::group(['middleware' => ['administrator']], function () {
         Route::get('/Admin_my_page', [RouteController::class, 'myPageAdmin']); // 管理者マイページ
+        Route::get('/questions/mentor', [RouteController::class, 'questionMentor'])->name('question.mentor');
     });
 });
 
@@ -109,6 +110,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
         /**
          *  ホーム画面
          */
+        Route::get('/questions/mentor', [QuestionController::class, 'getQuestionsForMentor']); // 対応が必要な質問の受け渡し
         Route::post('/informations/store', [HomeController::class, 'storeInfo'])->name("store.info"); // お知らせの登録
         Route::post('/informations/{info}/delete', [HomeController::class, 'deleteInfo'])->name('delete.info'); // お知らせの削除
 
@@ -160,7 +162,6 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     //      * Reactでのデータ受け渡し（全て非同期）
     //      */
     //     Route::get('react/all/questions', 'ReactController@getAllQuestions'); // 全質問受け渡し
-    //     Route::get('react/questions/mentor', 'ReactController@getQuestionsForMentor'); // 対応が必要な質問の受け渡し
     //     Route::get('react/question/{question}', 'ReactController@getQuestion'); // 個別質問データの受け渡し
     //     Route::get('react/questions/counts', 'ReactController@getQuestionYetCounts'); // 未解決でメンターまたは受講生のコメント入力待ちの件数受け渡し
     //     Route::get('react/questions/curriculum', 'ReactController@getCurriculumQuestions'); // カリキュラム範囲の質問受け渡し

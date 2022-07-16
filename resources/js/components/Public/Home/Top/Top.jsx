@@ -1,6 +1,6 @@
 import React from "react";
 import useMedia from "use-media";
-import { useGetHomeData } from "@/Logics/Home/Top/Top";
+import { useGetHomeData } from "@/Logics/Public/Home/Top/Top";
 import Calendar from "./Calendar/calendar";
 import ContentMobile from "./Footer/responsive/contentMobile";
 import ContentPC from  "./Footer/responsive/contentPC";

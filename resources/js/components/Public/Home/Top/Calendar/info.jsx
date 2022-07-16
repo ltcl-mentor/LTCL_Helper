@@ -1,5 +1,5 @@
 import React from 'react';
-import { useShowInfo } from '@/Logics/Home/Top/Calendar/info';
+import { useShowInfo } from '@/Logics/Public/Home/Top/Calendar/info';
 import InfoTable from '@/Components/Public/Home/Top/Calendar/infoTable';
 import { WarningMessage } from '@/Styles/Public/Home/Top/Calendar/info';
 

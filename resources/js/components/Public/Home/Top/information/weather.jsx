@@ -1,6 +1,6 @@
 import React  from 'react';
 import useMedia from "use-media";
-import { useWeather } from '@/Logics/Home/Top/Information/weather';
+import { useWeather } from '@/Logics/Public/Home/Top/Information/weather';
 import Temperature from './weather/temperature';
 import HourlyWeather from './weather/hourlyWeather';
 import { Heading } from '@/Styles/Public/Home/Top/Information/weather';

@@ -15,7 +15,7 @@ import PublicQuestionCreate from "./Public/Question/Create/Create/Create";
 import PublicQuestionShow from "./Public/Question/Show/Show";
 import QuestionShow from "./Mentor/Question/Show/Show";
 import QuestionEdit from "./Mentor/Question/Edit/Edit";
-import MentorQuestions from "./Public/Home/QA/questionsForMentor.js";
+import MentorQuestions from "../Pages/Public/Home/QA/ForMentor.jsx";
 
 export const LoginUser = createContext();
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useMedia from "use-media";
-import { useInfoContent } from "@/Logics/Home/Top/Information/content";
+import { useInfoContent } from "@/Logics/Public/Home/Top/Information/content";
 import ContentPC from '@/Components/Public/Home/Top/Information/information/responsive/contentPC';
 import ContentMobile from "@/Components/Public/Home/Top/Information/information/responsive/contentMobile";
 import InfoList from "@/Components/Public/Home/Top/Information/information/infoList";

@@ -6,7 +6,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import Result from './result/result';
 import SearchBox from './searchBox/searchBox';
 import { Bold, Explain, ExplainText, RadioButtons } from '@/Styles/Public/Home/QA/Search/freeword/freeword';
-import { useFreeword } from '@/Logics/Home/QA/Search/freeword/freeword';
+import { useFreeword } from '@/Logics/Public/Home/QA/Search/freeword/freeword';
 
 /**
  * フリーワード検索

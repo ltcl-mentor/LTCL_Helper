@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from '@inertiajs/inertia-react';
-import { useQA } from "@/Logics/Home/QA/QA";
+import { useQA } from "@/Logics/Public/Home/QA/QA";
 import SearchArea from "./Search/searchArea";
 import IndexQuestionArticle from "./Index/indexQuestionArticle";
 import { Achievment } from "@/Styles/Public/Home/QA/QA";
@@ -15,7 +15,7 @@ const QA = ({ user }) => {
         <React.Fragment>
             {user.is_admin == "staff" &&
                 <Achievment>
-                    <Link href={route('home')}>
+                    <Link href={route('question.mentor')}>
                         現在の質問解決率：<font color="purple">{achievement}</font>%
                     </Link>
                 </Achievment>

@@ -1,6 +1,6 @@
 import React from 'react';
 import useMedia from 'use-media';
-import { useGetCollege } from '@/Logics/Home/Top/Calendar/calendar';
+import { useGetCollege } from '@/Logics/Public/Home/Top/Calendar/calendar';
 import ContentPC from '@/Components/Public/Home/Top/Calendar/contentPC';
 import Info from '@/Components/Public/Home/Top/Calendar/info';
 import { StyledDiv, Heading, WarningMessage } from '@/Styles/Public/Home/Top/Calendar/calendar';

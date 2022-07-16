@@ -5,7 +5,7 @@ import { CategoryMobile, KeywordMobile } from "./form/contentMobile";
 import Result from "./result/result";
 import { StyleDiv } from "@/Styles/Public/Home/QA/Search/condition/condition";
 import BreakingPoint from "@/Styles/BreakingPoint";
-import { useCondition } from "@/Logics/Home/QA/Search/condition/condition";
+import { useCondition } from "@/Logics/Public/Home/QA/Search/condition/condition";
 import Select from "./select";
 
 /**

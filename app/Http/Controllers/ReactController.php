@@ -23,14 +23,6 @@ class ReactController extends Controller
     /** 質問関連 */
 
     /**
-     * メンターが対応するべき質問の受け渡し
-     */
-    public function getQuestionsForMentor()
-    {
-        return Question::questionsForMentorPaginate();
-    }
-
-    /**
      * 全質問受け渡し
      */
     public function getAllQuestions()

@@ -1,5 +1,5 @@
 import React from "react";
-import { useQA } from "@/Logics/Home/QA/QA";
+import { useQA } from "@/Logics/Public/Home/QA/QA";
 import { a11yProps } from "@/Components/Shared/a11yProps";
 import IndexContent from "./indexContent";
 import { Heading, StyleDiv, StyleTabArea, StyleTabs, StyleTab } from "@/Styles/Public/Home/QA/Index/indexQuestionArticle";

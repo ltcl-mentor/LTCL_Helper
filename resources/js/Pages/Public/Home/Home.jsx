@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Header from '@/Components/Shared/Header/Header';
 import HomeContent from '@/Components/Public/Home/Home';
 

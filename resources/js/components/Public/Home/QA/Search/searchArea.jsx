@@ -10,7 +10,7 @@ import { StyleCard } from "@/Styles/Public/Home/QA/Search/searchArea";
  * 検索エリア
  */
 const searchArea = () => {
-    const [searchValue, setSearchValue] = useState(1);
+    const [searchValue, setSearchValue] = useState(0);
 
     const search = searchValue == 0 ? <Freeword /> : <Condition />;
 

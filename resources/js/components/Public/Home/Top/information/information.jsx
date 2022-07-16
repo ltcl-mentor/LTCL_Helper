@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useInformation } from "@/Logics/Home/Top/Information/information";
+import { useInformation } from "@/Logics/Public/Home/Top/Information/information";
 import Content from './information/content';
 import { Modals } from "../../modal";
 import { AddInfoButton, Heading, StyleDiv } from "@/Styles/Public/Home/Top/Information/information";

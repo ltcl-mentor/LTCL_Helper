@@ -43,4 +43,9 @@ class RouteController extends Controller
     {
         return Inertia::render('Public/Home/Home');
     }
+
+    public function questionMentor()
+    {
+        return Inertia::render('Public/Home/QA/ForMentor');
+    }
 }
