@@ -1,5 +1,5 @@
 import React from "react";
-import { useMentorQuestion } from "@/Logics/Mentor/ForMentorContent";
+import { useMentorQuestion } from "@/Logics/Mentor/Home/QA/ForMentorContent";
 import Tabs from "@mui/material/Tabs";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";

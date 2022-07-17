@@ -55,7 +55,7 @@ class Handler extends ExceptionHandler
         {
             if ($exception->getStatusCode() == 404)
             {
-                return Inertia::render('Common/Error');
+                return Inertia::render('Shared/Error');
             }
         }
         return parent::render($request, $exception);

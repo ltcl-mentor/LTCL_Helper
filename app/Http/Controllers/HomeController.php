@@ -124,6 +124,18 @@ class HomeController extends Controller
 
     /** 管理者用処理 */
     /**
+     * 管理画面へイベント、受講生、スタッフ情報を受け渡す
+     */
+    public function getAllMentorInfo()
+    {
+        $events = Event::get();
+        $staffs = User::where('is_admin','staff')->paginate(10);
+        $students = User::getAllStudentsName();
+
+        return compact('events', 'staffs', 'students');
+    }
+
+    /**
      * お知らせ新規作成処理
      */
     public function storeInfo(Request $request)

@@ -396,9 +396,7 @@ class Question extends Model
 
         foreach($questions as $question) {
             // 質問がなければ追加処理をストップ
-            if (!isset($question[5])) {
-                break;
-            }
+            if (!isset($question[5])) break;
 
             // questionsテーブルに挿入したいデータがあるかチェック
             $question_exist = Question::where([

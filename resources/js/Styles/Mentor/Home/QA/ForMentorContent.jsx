@@ -70,6 +70,7 @@ export const StyleCard = styled(Card)`
 export const Pagination = styled(Box)`
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 8px;
     margin-bottom: 16px:
 `

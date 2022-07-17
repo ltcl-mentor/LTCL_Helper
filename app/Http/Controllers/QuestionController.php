@@ -11,9 +11,11 @@ use App\Models\Image;
 use App\Models\History;
 use App\Models\Slack;
 use App\Models\Export;
-use Storage;
 use Illuminate\Support\Facades\Auth;
+use Storage;
 use Validator;
+use Redirect;
+use Inertia\Inertia;
 
 class QuestionController extends Controller
 {
@@ -179,24 +181,6 @@ class QuestionController extends Controller
     }
 
     /**
-     * 公開中の質問一覧表示
-     */
-    // public function publicIndex()
-    // {
-    //     return view('Public.Question.index');
-    // }
-
-
-    /**
-     * 受講生用質問作成画面表示
-     */
-    // public function publicCreate()
-    // {
-    //     return view('Public.Question.create');
-    // }
-
-
-    /**
      * 受講生用質問保存実行
      */
     // public function publicStore(QuestionRequest $request, Question $question)
@@ -342,7 +326,8 @@ class QuestionController extends Controller
         $yet_exported_question_count = $question_count - $exported_question_count;
 
         if ($yet_exported_question_count == 0) {
-            return redirect('/?page=manage');
+            // return redirect('/?page=manage');
+            return Redirect::route('home', ['page' => 'manage']);
         }
 
         $headers = [ //ヘッダー情報
@@ -421,13 +406,13 @@ class QuestionController extends Controller
 
         };
 
-        //実行
-        return response()->stream($callback, 200, $headers);
+        // //実行
+        response()->stream($callback, 200, $headers);
+        return Redirect::route('home', ['page' => 'manage']);
     }
 
     public static function backup() {
         Question::bulkRegistration();
-        return;
     }
 
     /**

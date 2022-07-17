@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\UserController;
 use Inertia\Inertia;
 
 /*
@@ -110,9 +111,21 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
         /**
          *  ホーム画面
          */
+        Route::get('/mentor', [HomeController::class, 'getAllMentorInfo'])->name('getData.manage'); // イベントの受け渡し
         Route::get('/questions/mentor', [QuestionController::class, 'getQuestionsForMentor']); // 対応が必要な質問の受け渡し
         Route::post('/informations/store', [HomeController::class, 'storeInfo'])->name("store.info"); // お知らせの登録
         Route::post('/informations/{info}/delete', [HomeController::class, 'deleteInfo'])->name('delete.info'); // お知らせの削除
+
+        /**
+         * 質問
+         */
+        Route::get('/questions/export', [QuestionController::class, 'questionsExport'])->name('export'); // csv出力
+        Route::post('/questions/backup', [QuestionController::class, 'backup'])->name("backup.question"); // 質問一括登録（バックアップ復元用）
+
+        /**
+         * ユーザー
+         */
+        Route::post('/users/backup', [UserController::class, 'backup'])->name('backup.user'); // 受講生一括登録（バックアップ復元用）
 
     //     /**
     //      * 参考記事
@@ -134,8 +147,6 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     //     /**
     //      * 質問
     //      */
-    //     Route::get('/questions/export', 'QuestionController@questionsExport');
-    //     Route::post('/questions/backup', 'QuestionController@backup'); // 質問一括登録（バックアップ復元用）
     //     Route::post('/questions/{question}/check', 'QuestionController@check'); // 承認実行
     //     Route::post('/questions/{question}/uncheck', 'QuestionController@uncheck'); // 承認解除実行
     //     Route::post('/questions/{question}/update', 'QuestionController@update'); // 編集実行
