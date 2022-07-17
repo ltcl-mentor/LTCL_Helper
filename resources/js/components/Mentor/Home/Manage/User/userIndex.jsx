@@ -39,7 +39,7 @@ const userIndex = ({ value, isMaster, setStudents, setStaffs, handleOpen, handle
         <React.Fragment>
             <Heading>ユーザー一覧</Heading>
             <AddLink onClick={() => handleOpen("user")}>
-                イベント追加
+                ユーザー追加
             </AddLink>
             <Users>
                 <StyleTabArea>
