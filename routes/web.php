@@ -128,6 +128,8 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
          * イベント
          */
         Route::post('/events/store', [EventController::class, 'store'])->name('store.event'); // イベントの新規作成実行
+        Route::post('/events/{event}/update', [EventController::class, 'update']); // イベントの編集
+        Route::post('/events/{event}/delete', [EventController::class, 'delete']); // イベントの編集
 
         /**
          * ユーザー
@@ -168,12 +170,6 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     //     Route::post('/users/admin/register', 'Auth\RegisterController@register'); // 管理者の新規作成実行
     //     Route::post('/users/{user}/delete', 'UserController@delete'); // 削除実行
     //     Route::post('/users/{user}/unlock', 'UserController@unlock'); // ユーザロック解除実行
-
-    //     /**
-    //      * イベント
-    //      */
-    //     Route::post('/events/{event}/update', 'HomeController@updateEvent'); // イベントの編集
-    //     Route::post('/events/{event}/delete', 'HomeController@deleteEvent'); // イベントの編集
 
     //     /**
     //      * Reactでのデータ受け渡し（全て非同期）

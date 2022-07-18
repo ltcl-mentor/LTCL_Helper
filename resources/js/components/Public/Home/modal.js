@@ -4,11 +4,11 @@ import BreakingPoint from "../../../Styles/BreakingPoint";
 import Modal from "@mui/material/Modal";
 import { Content } from "@/Styles/Shared/Modal/modal";
 import UserRegister from "./modal/userRegister";
-import ShowEvent from "./modal/showEvent";
-import AddEvent from "../../Mentor/Home/Manage/Event/addEvent";
+import ShowEvent from "../../Mentor/Home/Manage/Event/Modal/showEvent/showEvent";
+import AddEvent from "../../Mentor/Home/Manage/Event/Modal/addEvent/addEvent";
 import Create from "./Top/Information/information/create/create";
 import ShowInfo from "./Top/Information/information/showInfo";
-import DeleteInfo from "./modal/deleteConfirm";
+import DeleteInfo from "../../Shared/Modal/deleteConfirm";
 import Contact from "./Top/Footer/contact";
 
 /**
@@ -41,7 +41,7 @@ export const Modals = props => {
                 <DeleteInfo
                     open={props.open}
                     setOpen={props.setOpen}
-                    delete={props.delete}
+                    deleted={props.delete}
                 />
             );
             break;
@@ -61,14 +61,7 @@ export const Modals = props => {
 
         // イベント詳細
         case "show_event":
-            content = (
-                <ShowEvent
-                    event={props.event}
-                    setEvents={props.setEvents}
-                    onClose={props.handleClose}
-                    isWide={isWide}
-                />
-            );
+            content = <ShowEvent event={props.event} onClose={props.handleClose} />
             break;
 
         // イベント追加

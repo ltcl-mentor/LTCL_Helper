@@ -23,7 +23,7 @@ const masterIndex = ({ backupQuestion, backupStudent }) => {
             <StyleGrid container>
                 {contents.map(content => {
                     return (
-                        <GridItem item key={content.content}>
+                        <GridItem grow="1" item key={content.content}>
                             <StyleCard onClick={content.onClick}>
                                 <CardText>
                                     {content.content}

@@ -1,6 +1,6 @@
 import React from 'react';
 import Paginate from "@mui/material/Pagination";
-import DeleteConfirmModal from '@/Components/Public/Home/modal/deleteConfirm';
+import DeleteConfirm from '@/Components/Shared/Modal/deleteConfirm';
 import StudentTableBody from './table/studentTableBody';
 import StaffTableBody from './table/staffTableBody';
 import TableBody from '@mui/material/TableBody';
@@ -34,7 +34,7 @@ const userTable = ({ users, account, type, setStudents, setStaffs }) => {
 
     return (
         <React.Fragment>
-            <DeleteConfirmModal open={open} setOpen={setOpen} delete={deleteUser} />
+            <DeleteConfirm open={open} setOpen={setOpen} deleted={deleteUser} />
 
             <TableArea>
                 <StyleTable>

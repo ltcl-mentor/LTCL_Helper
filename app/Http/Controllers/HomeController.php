@@ -152,34 +152,6 @@ class HomeController extends Controller
     }
 
     /**
-     * イベント追加処理
-     */
-    public function storeEvent(Request $request, Event $event) {
-        $input['name'] = $request['name'];
-        $input['template'] = $request['template'];
-        $event->fill($input)->save();
-        return Event::get();
-    }
-
-    /**
-     * イベント編集処理
-     */
-    public function updateEvent(Request $request, Event $event) {
-        $event->name = $request['name'];
-        $event->template = $request['template'];
-        $event->save();
-        return Event::get();
-    }
-
-    /**
-     * イベント削除処理
-     */
-    public function deleteEvent(Event $event) {
-        $event->delete();
-        return Event::get();
-    }
-
-    /**
      * slackリアクションの参考サイトの受け渡し
      */
     public function reaction()

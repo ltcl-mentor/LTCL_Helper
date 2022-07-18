@@ -37,10 +37,10 @@ export const StyleGrid = styled(Grid)`
 
 export const GridItem = styled(Grid)`
     width: 33%;
+    flex-grow: ${(props) => props.grow && props.grow};
     ${customMedia.lessThan("mobile")`
         width: 100%;
     `};
-
     ${customMedia.between("mobile", "tablet")`
         width: 50%;
     `};

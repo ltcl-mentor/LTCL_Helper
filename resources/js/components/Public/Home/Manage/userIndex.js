@@ -15,7 +15,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Box from '@mui/material/Box';
 import Pagination from "@mui/material/Pagination";
 
-import DeleteConfirmModal from '../modal/deleteConfirm';
+import DeleteConfirm from '../../../Shared/Modal/deleteConfirm';
 
 // 各パーツのスタイル設定
 const styleBoldFont = { fontWeight: 'bold' };
@@ -25,7 +25,7 @@ const styleTable = {
     margin: '0 auto'
 };
 const stylePagination = {
-    display: 'flex', 
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 2
@@ -244,8 +244,8 @@ const UserIndex = (props) => {
 
     return (
         <React.Fragment>
-            <DeleteConfirmModal open={open} setOpen={setOpen} delete={deleteUser} />
-        
+            <DeleteConfirm open={open} setOpen={setOpen} deleted={deleteUser} />
+
             <TableContainer component={Paper} sx={styleTable}>
                 <Table sx={styleTableMinWidth} aria-label="customized table">
                     <TableHead>

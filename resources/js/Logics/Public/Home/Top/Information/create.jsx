@@ -58,7 +58,6 @@ export const useCreateInfo = () => {
         setInput({ ...input, [name]: value });
     });
 
-
     // 公開日付、slack通知日の選択
     const handleDate = useCallback((event) => {
         const value = event.target.value;
