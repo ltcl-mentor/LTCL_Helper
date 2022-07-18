@@ -37,5 +37,5 @@ export const StyleTable = styled(Table)`
 `
 
 export const TableHeadCell = styled(StyledTableCell)`
-    font-weight: bold;
+    &&& { font-weight: bold; }
 `
