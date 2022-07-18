@@ -32,16 +32,17 @@ export const AddLink = styled.div`
 export const StyleGrid = styled(Grid)`
     &&& { width: 65%; }
     margin: 30px auto;
+    display: flex;
 `
 
 export const GridItem = styled(Grid)`
-    flex-grow: 1;
     width: 33%;
-    ${customMedia.between("mobile", "tablet")`
-        width: 50%;
-    `};
     ${customMedia.lessThan("mobile")`
         width: 100%;
+    `};
+
+    ${customMedia.between("mobile", "tablet")`
+        width: 50%;
     `};
 `
 

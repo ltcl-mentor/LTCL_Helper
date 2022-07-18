@@ -6,7 +6,7 @@ import { StyleGrid, GridItem, StyleCard, CardText, NoExist, Heading, AddLink } f
  */
 const eventsIndex = ({ events, clickEvent, handleOpen }) => {
     const eventComponent = events.length > 0 ?
-        <StyleGrid>
+        <StyleGrid container>
             {events.map(event => {
                 return (
                     <GridItem item key={`id${event.id}-${event.name}`}>
