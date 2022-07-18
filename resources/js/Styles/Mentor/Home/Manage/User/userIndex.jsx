@@ -1,11 +1,11 @@
-import style from 'styled-components';
-import { styled } from '@mui/material/styles';
+import styled from 'styled-components';
+import { styled as style } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableRow from '@mui/material/TableRow';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 
-export const StyledTableCell = styled(TableCell)(({ theme }) => ({
+export const StyledTableCell = style(TableCell)(({ theme }) => ({
     textAlign: "center",
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: '#C299FF',
@@ -16,7 +16,7 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
         fontSize: 14,
     },
 }));
-export const StyledTableRow = styled(TableRow)(({ theme }) => ({
+export const StyledTableRow = style(TableRow)(({ theme }) => ({
     textAlign: "center",
     '&:nth-of-type(odd)': {
         backgroundColor: theme.palette.action.hover,
@@ -26,13 +26,13 @@ export const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-
-export const TableArea = style(Paper)`
+export const TableArea = styled(Paper)`
     width: 90%;
     margin: 0 auto;
+    overflow-x: scroll;
 `
 
-export const StyleTable = style(Table)`
+export const StyleTable = styled(Table)`
     min-width: 630px;
 `
 

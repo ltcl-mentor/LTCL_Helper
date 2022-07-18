@@ -7,10 +7,10 @@ import Modal from "@mui/material/Modal";
 
 import {
     CloseModal,
-    style,
     styleWarningTitle,
     styleWarningBody
 } from "../modal";
+import { Content } from "@/Styles/Shared/Modal/modal";
 
 // モーダルのスタイル設定
 const styleMargin = { mt: "20px" };
@@ -27,7 +27,7 @@ const deleteConfirm = props => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Box sx={{ ...style, ...width }}>
+            <Content>
                 <CloseModal onClose={() => props.setOpen(false)} />
                 <Typography align="center" sx={styleWarningTitle}>
                     WARNING！
@@ -47,7 +47,7 @@ const deleteConfirm = props => {
                         削除
                     </Button>
                 </Typography>
-            </Box>
+            </Content>
         </Modal>
     );
 };

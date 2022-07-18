@@ -178,4 +178,12 @@ class HomeController extends Controller
         $event->delete();
         return Event::get();
     }
+
+    /**
+     * slackリアクションの参考サイトの受け渡し
+     */
+    public function reaction()
+    {
+        return config('app.reaction');
+    }
 }

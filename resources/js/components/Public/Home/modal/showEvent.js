@@ -10,12 +10,12 @@ import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 
 import DeleteConfirmModal from './deleteConfirm';
-import SlackGrammar from './slackGrammar';
+import SlackGrammar from '../../../Shared/Modal/slackGrammar';
 import { CloseModal, SubmitButton, styleHeading } from '../modal';
 
 // 各パーツのスタイル設定
-const styleContent = { 
-    width: "80%", 
+const styleContent = {
+    width: "80%",
     m: "50px auto 0"
 };
 const styleTextField = {
@@ -25,8 +25,8 @@ const styleTextField = {
     width: '100%',
 };
 const styleSubHeading = {
-    color: '#666666', 
-    fontSize: '20px', 
+    color: '#666666',
+    fontSize: '20px',
     fontWeight: 'bold'
 };
 const styleButtonLink = {
@@ -61,7 +61,7 @@ const showEvent = (props) => {
     const [readOnly, setReadOnly] = useState(true);
     const [state, setState] = useState('normal');
     const [deleteOpen, setDeleteOpen] = useState(false);
-    
+
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -76,7 +76,7 @@ const showEvent = (props) => {
         }
         setName(event.target.value);
     };
-    
+
     // slackテンプレート入力
     const handleTemplate = (event) => {
         if (event.target.value.trim().length == 0) {
@@ -88,7 +88,7 @@ const showEvent = (props) => {
         }
         setTemplate(event.target.value);
     };
-    
+
     // イベント編集
     const update = useCallback(() => {
         let validationKey = false;
@@ -99,18 +99,18 @@ const showEvent = (props) => {
             setErrorName(true);
             setErrorNameMessage('イベント名を入力してください');
         }
-        
+
         // 通知テンプレートを設定していない時
         if (template.trim().length === 0) {
             validationKey = true;
             setErrorTemplate(true);
             setErrorTemplateMessage('テンプレートを入力してください');
         }
-        
+
         if (validationKey) {
             return false;
         }
-        
+
         axios
             .post("/events/" + props.event.id + "/update", {
                 name: name,
@@ -128,7 +128,7 @@ const showEvent = (props) => {
                 console.log(error);
             });
     });
-    
+
     // 削除実行
     const deleted = useCallback(() =>{
         axios
@@ -146,7 +146,7 @@ const showEvent = (props) => {
                 console.log(error);
             });
     });
-    
+
     useEffect(() => {
         axios
             .get(`/react/reaction`)
@@ -156,7 +156,7 @@ const showEvent = (props) => {
                 console.log(error);
             });
     }, []);
-    
+
     let nameField;
     let button;
     let changeButton;
@@ -174,21 +174,21 @@ const showEvent = (props) => {
             );
             button = <SubmitButton text="登録する" handleSubmit={update} />;
             changeButton = (
-                <Button 
-                    onClick={() => {setReadOnly(true), setState("normal"), setName(props.event.name), setTemplate(props.event.template)}} 
-                    variant="text" 
+                <Button
+                    onClick={() => {setReadOnly(true), setState("normal"), setName(props.event.name), setTemplate(props.event.template)}}
+                    variant="text"
                     sx={[styleButtonLink, { color: "#771AF8" }]}
                 >
                     戻る
                 </Button>
             );
             break;
-            
+
         case "normal":
             changeButton = (
-                <Button 
-                    onClick={() => {setReadOnly(false), setState("edit")}} 
-                    variant="text" 
+                <Button
+                    onClick={() => {setReadOnly(false), setState("edit")}}
+                    variant="text"
                     sx={[styleButtonLink, { color: "#771AF8" }]}
                 >
                     編集
@@ -196,16 +196,16 @@ const showEvent = (props) => {
             );
             break;
     }
-    
+
     return (
         <React.Fragment>
             <DeleteConfirmModal open={deleteOpen} setOpen={setDeleteOpen} delete={deleted} />
-        
+
             <CloseModal onClose={props.onClose} />
             <Typography align="center" component="div" sx={styleHeading}>
                 {props.event.name}
             </Typography>
-            
+
             <Box sx={styleContent}>
                 <Grid container justifyContent="space-between">
                     <Grid item>
@@ -216,9 +216,9 @@ const showEvent = (props) => {
                     <Grid item>
                         <Stack direction="row">
                             {changeButton}
-                            <Button 
+                            <Button
                                 onClick={() => setDeleteOpen(true)}
-                                variant="text" 
+                                variant="text"
                                 sx={[styleButtonLink, { color: "red" }]}
                             >
                                 削除
@@ -226,7 +226,7 @@ const showEvent = (props) => {
                         </Stack>
                     </Grid>
                 </Grid>
-                
+
                 {nameField}
                 <TextField
                     label="Slack通知テンプレート"
@@ -240,10 +240,10 @@ const showEvent = (props) => {
                     InputProps={{ readOnly: readOnly }}
                     style={styleSlackTemplate}
                 />
-                
+
                 <SlackGrammar link={link} open={open} handleOpen={handleOpen} handleClose={handleClose} isWide={props.isWide} />
             </Box>
-                    
+
             {button}
         </React.Fragment>
     );

@@ -6,6 +6,7 @@ use App\Http\Controllers\RouteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EventController;
 use Inertia\Inertia;
 
 /*
@@ -113,6 +114,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
          */
         Route::get('/mentor', [HomeController::class, 'getAllMentorInfo'])->name('getData.manage'); // イベントの受け渡し
         Route::get('/questions/mentor', [QuestionController::class, 'getQuestionsForMentor']); // 対応が必要な質問の受け渡し
+        Route::get('/reaction', [HomeController::class, 'reaction'])->name('getData.reaction'); // slackのリアクション参考サイトのURL受け渡し
         Route::post('/informations/store', [HomeController::class, 'storeInfo'])->name("store.info"); // お知らせの登録
         Route::post('/informations/{info}/delete', [HomeController::class, 'deleteInfo'])->name('delete.info'); // お知らせの削除
 
@@ -121,6 +123,11 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
          */
         Route::get('/questions/export', [QuestionController::class, 'questionsExport'])->name('export'); // csv出力
         Route::post('/questions/backup', [QuestionController::class, 'backup'])->name("backup.question"); // 質問一括登録（バックアップ復元用）
+
+        /**
+         * イベント
+         */
+        Route::post('/events/store', [EventController::class, 'store'])->name('store.event'); // イベントの新規作成実行
 
         /**
          * ユーザー
@@ -165,7 +172,6 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     //     /**
     //      * イベント
     //      */
-    //     Route::post('/events/store', 'HomeController@storeEvent'); // イベントの新規作成実行
     //     Route::post('/events/{event}/update', 'HomeController@updateEvent'); // イベントの編集
     //     Route::post('/events/{event}/delete', 'HomeController@deleteEvent'); // イベントの編集
 
@@ -185,7 +191,6 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     //     Route::get('react/related/questions/{document}', 'ReactController@getRelatedQuestions'); // 記事に紐づいている質問の受け渡し（URLが紛らわしい
     //     Route::get('react/mentor', 'ReactController@getAllMentorInfo'); // イベントの受け渡し
     //     Route::get('react/event/{event}', 'ReactController@getOneEvent'); // イベントの受け渡し
-    //     Route::get('react/reaction', 'ReactController@getReaction'); // slackのリアクション参考サイトのURL受け渡し
     //     Route::get('react/id', 'ReactController@getUserId'); // ログインユーザーid受け渡し
     });
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '@inertiajs/inertia-react';
-import { LogoImage } from '@/Styles/Shared/Header';
+import { LogoImage } from '@/Styles/Shared/Header/Header';
 
 const applicationLogo = () => {
     return (

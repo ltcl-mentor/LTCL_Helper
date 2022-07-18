@@ -5,7 +5,7 @@ import ApplicationLogo from '@/Components/Shared/Header/applicationLogo';
 import QuestionButton from '@/Components/Shared/Header/questionButton';
 import UserIcon from '@/Components/Shared/Header/userIcon';
 import BreakingPoint from '@/Styles/BreakingPoint';
-import { HeaderContent, HeaderPosition, HeaderRight, StyledSearchButton } from '@/Styles/Shared/Header';
+import { HeaderContent, HeaderPosition, HeaderRight, StyledSearchButton } from '@/Styles/Shared/Header/Header';
 
 /**
  * ヘッダー

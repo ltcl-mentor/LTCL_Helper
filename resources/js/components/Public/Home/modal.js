@@ -1,13 +1,11 @@
 import React from "react";
 import useMedia from "use-media";
 import BreakingPoint from "../../../Styles/BreakingPoint";
-
-import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-
+import { Content } from "@/Styles/Shared/Modal/modal";
 import UserRegister from "./modal/userRegister";
 import ShowEvent from "./modal/showEvent";
-import AddEvent from "./modal/addEvent";
+import AddEvent from "../../Mentor/Home/Manage/Event/addEvent";
 import Create from "./Top/Information/information/create/create";
 import ShowInfo from "./Top/Information/information/showInfo";
 import DeleteInfo from "./modal/deleteConfirm";
@@ -35,20 +33,7 @@ const styleSubmitButtonDesign = {
         border: "1px solid #771AF8"
     }
 };
-export let style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    backgroundColor: "white",
-    borderRadius: "4px",
-    p: 3,
-    maxHeight: "80%",
-    overflowY: "scroll",
-    "&:focus": {
-        border: "none"
-    }
-};
+
 export const styleHeading = {
     color: "#771AF8",
     fontSize: "24px",
@@ -154,13 +139,7 @@ export const Modals = props => {
 
         // イベント追加
         case "add_event":
-            content = (
-                <AddEvent
-                    setEvents={props.setEvents}
-                    onClose={props.handleClose}
-                    isWide={isWide}
-                />
-            );
+            content = <AddEvent onClose={props.handleClose} />;
             break;
 
         // お問い合わせ
@@ -169,19 +148,9 @@ export const Modals = props => {
             break;
     }
 
-    if (isWide) {
-        style = { ...style, width: "70%" };
-    } else {
-        style = { ...style, width: "100%" };
-    }
-
     return (
-        <Modal
-            open={props.open}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-        >
-            <Box sx={style}>{content}</Box>
+        <Modal open={props.open}>
+            <Content>{content}</Content>
         </Modal>
     );
 };

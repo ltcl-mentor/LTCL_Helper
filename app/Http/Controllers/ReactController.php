@@ -215,29 +215,6 @@ class ReactController extends Controller
         return $document->paginate(9);
     }
 
-
-
-    /** ユーザ関連 */
-
-    /**
-     * 全管理者受け渡し
-     */
-    // public function getAllStaffs()
-    // {
-    //     return User::where('is_admin','staff')->get();
-    // }
-
-    /**
-     * 全受講生受け渡し
-     */
-    // public function getAllStudents()
-    // {
-    //     $students = User::getAllStudentsName();
-    //     return $students;
-    // }
-
-
-
     /** ログインユーザー情報 */
 
     /**
@@ -255,8 +232,6 @@ class ReactController extends Controller
     {
         return User::getUser();
     }
-
-
 
     /** home画面関連 */
 
@@ -278,14 +253,6 @@ class ReactController extends Controller
     public function getOneEvent(Event $event)
     {
         return $event;
-    }
-
-    /**
-     * slackリアクションの参考サイトの受け渡し
-     */
-    public function getReaction()
-    {
-        return env('slackEmoji');
     }
 
 }

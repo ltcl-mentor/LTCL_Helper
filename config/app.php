@@ -231,4 +231,5 @@ return [
     'slackProject' => env('SlackChannelProject'),
     'googleMap' => env('GoogleMapsKey'),
     'zoom' => env('ZoomLinksNote'),
+    'reaction' => env('slackEmoji'),
 ];

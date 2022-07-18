@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "@mui/material/Button";
-import { Username } from "@/Styles/Shared/Header";
+import { Username } from "@/Styles/Shared/Header/Header";
 
 /**
  * userIconのユーザー名
