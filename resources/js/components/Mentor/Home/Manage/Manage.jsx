@@ -12,7 +12,7 @@ import { useManage } from "@/Logics/Mentor/Home/Manage/Manage";
 const Manage = ({ user }) => {
     const isMaster = user.id == 1 && user.name == "master" && user.is_admin == "staff";
     const [
-        { open, type, event, value, events, setStaffs, setStudents, setEvents },
+        { open, type, event, value, events, setStaffs, setStudents },
         { handleOpen, handleClose, clickEvent, backupQuestion, backupStudent, handleChange }
     ] = useManage();
 
@@ -21,12 +21,9 @@ const Manage = ({ user }) => {
             <Modals
                 open={open}
                 type={type}
-                handleClose={handleClose}
-                setStaffs={setStaffs}
-                setStudents={setStudents}
                 event={event}
                 value={value}
-                setEvents={setEvents}
+                handleClose={handleClose}
             />
 
             {/* イベント一覧 */}

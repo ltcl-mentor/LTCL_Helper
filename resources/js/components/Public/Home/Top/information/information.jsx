@@ -30,8 +30,8 @@ const information = ({ isAdmin }) => {
             <Modals
                 open={open}
                 type={type}
-                handleClose={handleClose}
                 events={events}
+                handleClose={handleClose}
             />
 
             <Heading>

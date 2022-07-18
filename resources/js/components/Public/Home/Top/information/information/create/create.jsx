@@ -1,11 +1,11 @@
 import React from "react";
 import { useCreateInfo } from "@/Logics/Public/Home/Top/Information/create";
 import { store } from "@/Logics/Public/Home/Top/Information/store";
-import Typography from "@mui/material/Typography";
 import SlackForm from "./slackForm";
 import PublicForm from "./publicForm";
-import { CloseModal, SubmitButton, styleHeading } from "../../../../modal";
 import { StyleBox } from "@/Styles/Public/Home/Top/Information/create";
+import { CloseButton, SubmitButton } from "@/Components/Shared/Modal/sharedPart";
+import { ModalHeading } from "@/Styles/Shared/Modal/modal";
 
 /**
  * お知らせの追加
@@ -16,11 +16,8 @@ const create = ({ events, onClose }) => {
 
     return (
         <React.Fragment>
-            <CloseModal onClose={onClose} />
-            <Typography align="center" component="div" sx={styleHeading}>
-                お知らせの追加
-            </Typography>
-
+            <CloseButton onClose={onClose} />
+            <ModalHeading>お知らせの追加</ModalHeading>
             <StyleBox>
                 <PublicForm
                     input={input}
@@ -44,7 +41,6 @@ const create = ({ events, onClose }) => {
                         handleDate={handleDate}
                     />
                 }
-
                 <SubmitButton text="登録する" handleSubmit={submit} />
             </StyleBox>
         </React.Fragment>

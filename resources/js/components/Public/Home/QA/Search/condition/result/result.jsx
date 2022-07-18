@@ -4,7 +4,7 @@ import QuestionsList from '../../questionsList';
 import PaginationPart from '@/Components/Shared/paginationPart';
 import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
-import { topics, categories } from '@/Components/shared';
+import { topics, categories } from '@/Components/Shared/shared';
 import { PaginationArea } from '@/Styles/Public/Home/QA/Search/freeword/freeword';
 import { ResultArea, ResultHeading, ResultQuestion } from '@/Styles/Public/Home/QA/Search/condition/condition';
 

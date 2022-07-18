@@ -11,7 +11,8 @@ import Grid from '@mui/material/Grid';
 
 import DeleteConfirmModal from './deleteConfirm';
 import SlackGrammar from '../../../Shared/Modal/slackGrammar';
-import { CloseModal, SubmitButton, styleHeading } from '../modal';
+import { CloseButton, SubmitButton } from '@/Components/Shared/Modal/sharedPart';
+import { ModalHeading } from '@/Styles/Shared/Modal/modal';
 
 // 各パーツのスタイル設定
 const styleContent = {
@@ -201,10 +202,8 @@ const showEvent = (props) => {
         <React.Fragment>
             <DeleteConfirmModal open={deleteOpen} setOpen={setDeleteOpen} delete={deleted} />
 
-            <CloseModal onClose={props.onClose} />
-            <Typography align="center" component="div" sx={styleHeading}>
-                {props.event.name}
-            </Typography>
+            <CloseButton onClose={props.onClose} />
+            <ModalHeading>{props.event.name}</ModalHeading>
 
             <Box sx={styleContent}>
                 <Grid container justifyContent="space-between">

@@ -73,7 +73,7 @@ export const useManage = () => {
     });
 
     return [
-        { open, type, event, value, students, staffs, events, setStaffs, setStudents, setEvents },
+        { open, type, event, value, students, staffs, events, setStaffs, setStudents },
         { handleOpen, handleClose, clickEvent, backupQuestion, backupStudent, handleChange }
     ];
 };

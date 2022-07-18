@@ -5,16 +5,16 @@ import { useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@material-ui/core/Typography';
 
-import { SubmitButton } from '../modal';
+import { SubmitButton } from '@/Components/Shared/Modal/sharedPart'
 
 // 各パーツのスタイル設定
 const styleMargin = { marginTop: 3 };
-const styleContent = { 
+const styleContent = {
     width: "70%",
     ml: "15%"
 };
-const styleErrorMessage = { 
-    color: "red", 
+const styleErrorMessage = {
+    color: "red",
     fontSize: '14px'
 };
 
@@ -87,13 +87,13 @@ const studentForm = (props) => {
                 <div className="form-group row">
                     <label htmlFor="name" className="col-md-4 col-form-label text-md-right">受講生{ formCount }</label>
                     <div className="col-md-6">
-                        <input 
-                            id={ `name` + formCount } 
-                            type="text" 
-                            placeholder="受講生IDを入力" 
-                            className="form-control" 
-                            name={ `name` + formCount } 
-                            required 
+                        <input
+                            id={ `name` + formCount }
+                            type="text"
+                            placeholder="受講生IDを入力"
+                            className="form-control"
+                            name={ `name` + formCount }
+                            required
                             autoComplete="name"
                         />
                     </div>
@@ -101,13 +101,13 @@ const studentForm = (props) => {
             </Box>
         );
     }
-    
+
     let errorMessage;
     if (error.length > 0) {
         errorMessage = (
             <Typography align="center" component="div" sx={styleErrorMessage}>
                 {error}
-            </Typography>    
+            </Typography>
         );
     }
 
@@ -117,7 +117,7 @@ const studentForm = (props) => {
                 <React.Fragment>
                     {forms}
                     {errorMessage}
-                    
+
                     <SubmitButton text="登録する" handleSubmit={handleSubmitStudents} />
                 </React.Fragment>
             }

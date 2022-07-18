@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { curriculumNumbers } from "@/Components/shared";
+import { curriculumNumbers } from "@/Components/Shared/shared";
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import { BoxWidth, CurriculumInput, MaxFormControl } from "@/Styles/Public/Home/QA/Search/condition/form/form";

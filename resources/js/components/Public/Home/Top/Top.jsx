@@ -22,13 +22,17 @@ const Top = ({ user }) => {
 
     return (
         <React.Fragment>
-            <Modals open={open} type={type} handleClose={handleClose} />
+            <Modals
+                open={open}
+                type={type}
+                handleClose={handleClose}
+            />
 
             {/* 校舎情報 */}
             <Calendar zoomLink={zoomLink} />
 
             {/* お知らせと天気 */}
-            <Information isAdmin={user.is_admin} isWide={isWide} />
+            <Information isAdmin={user.is_admin} />
 
             {/* お問い合わせと校舎住所 */}
             <FooterContent>{footerContent}</FooterContent>

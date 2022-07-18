@@ -1,10 +1,10 @@
 import React from "react";
 import { useContact } from "@/Logics/Public/Home/Top/Footer/contact";
-import Typography from "@mui/material/Typography";
 import ContactForm from "./contact/contactForm";
 import ConfirmModal from "./contact/confirmModal";
-import { CloseModal, SubmitButton, styleHeading } from "../../modal";
+import { CloseButton, SubmitButton } from "@/Components/Shared/Modal/sharedPart";
 import { StyleBox } from "@/Styles/Public/Home/Top/Footer/contact";
+import { ModalHeading } from "@/Styles/Shared/Modal/modal";
 
 /**
  * お問い合わせ
@@ -14,10 +14,8 @@ const contact = ({ onClose }) => {
 
     return (
         <React.Fragment>
-            <CloseModal onClose={onClose} />
-            <Typography align="center" component="div" sx={styleHeading}>
-                お問い合せ
-            </Typography>
+            <CloseButton onClose={onClose} />
+            <ModalHeading>お問い合せ</ModalHeading>
             <StyleBox>
                 <ContactForm
                     input={input}

@@ -13,7 +13,9 @@ import Select from "@mui/material/Select";
 import Forms from "./studentForm";
 import ContentPC from "./responsive/userRegisterPC";
 import ContentMobile from "./responsive/userRegisterMobile";
-import { CloseModal, SubmitButton, styleHeading } from "../modal";
+import { styleHeading } from "../modal";
+import { CloseButton, SubmitButton } from "@/Components/Shared/Modal/sharedPart";
+import { ModalHeading } from "@/Styles/Shared/Modal/modal";
 
 // 各パーツのスタイル設定
 const styleGridForm = { flexGrow: 3 };
@@ -185,9 +187,7 @@ const userRegister = props => {
     if (props.value == 0) {
         component = (
             <React.Fragment>
-                <Typography align="center" component="div" sx={styleHeading}>
-                    受講生の登録
-                </Typography>
+                <ModalHeading>受講生の登録</ModalHeading>
 
                 <Card sx={styleCard}>
                     <FormControl sx={{ ...display, ...form1 }} size="small">
@@ -291,9 +291,7 @@ const userRegister = props => {
     } else {
         component = (
             <React.Fragment>
-                <Typography align="center" component="div" sx={styleHeading}>
-                    管理者の登録
-                </Typography>
+                <ModalHeading>管理者の登録</ModalHeading>
                 {responsive}
                 <SubmitButton
                     text="登録する"
@@ -305,7 +303,7 @@ const userRegister = props => {
 
     return (
         <React.Fragment>
-            <CloseModal onClose={props.onClose} />
+            <CloseButton onClose={props.onClose} />
             {component}
         </React.Fragment>
     );

@@ -12,6 +12,7 @@ export const ModalHeading = styled.div`
     font-size: 24px;
     font-weight: bold;
     text-align: center;
+    word-break: break-word;
 `
 
 export const ModalSubHeading = styled.div`

@@ -1,10 +1,7 @@
 import React from "react";
-import Typography from "@mui/material/Typography";
-import { CloseModal, styleHeading } from "../../../modal";
+import { CloseButton } from "@/Components/Shared/Modal/sharedPart";
 import { Black, Gray, StyleBox } from "@/Styles/Public/Home/Top/Information/information";
-
-// 各パーツのスタイル設定
-const styleWordBreak = { wordBreak: "break-word" };
+import { ModalHeading } from "@/Styles/Shared/Modal/modal";
 
 /**
  * イベント詳細
@@ -15,15 +12,8 @@ const showInfo = ({ onClose, info, isAdmin }) => {
 
     return (
         <React.Fragment>
-            <CloseModal onClose={onClose} />
-            <Typography
-                align="center"
-                component="div"
-                sx={{ ...styleHeading, ...styleWordBreak }}
-            >
-                {info.information}
-            </Typography>
-
+            <CloseButton onClose={onClose} />
+            <ModalHeading>{info.information}</ModalHeading>
             <StyleBox>
                 <Gray align="left" break={true}>{info.targets}</Gray>
                 <Black align="left" break={true}>

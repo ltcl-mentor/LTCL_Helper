@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQA } from "@/Logics/Public/Home/QA/QA";
-import { topics } from '@/Components/shared';
+import { topics } from '@/Components/Shared/shared';
 import { ActionArea, GridItem, StyleGrid, TopicBody, TopicCard, TopicContent, TopicTitle } from '@/Styles/Public/Home/QA/Index/indexContent';
 
 /**
