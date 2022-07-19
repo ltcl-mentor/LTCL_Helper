@@ -8,6 +8,7 @@ use App\Models\Image;
 use App\Models\Comment;
 use App\Models\Export;
 use App\Models\Question;
+use App\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,21 +27,21 @@ class Question extends Model
      */
     public function documents()
     {
-        return $this->belongsToMany('App\Document');
+        return $this->belongsToMany(Document::class);
     }
 
     public function users()
     {
-        return $this->belongsToMany('App\User')->withTimestamps();
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
 
     public function images()
     {
-        return $this->hasMany('App\Image');
+        return $this->hasMany(Image::class);
     }
 
     public function comments() {
-        return $this->hasMany('App\Comment');
+        return $this->hasMany(Comment::class);
     }
 
     /**

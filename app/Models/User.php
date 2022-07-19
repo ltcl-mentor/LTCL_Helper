@@ -10,6 +10,8 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Models\Question;
 use App\Models\User;
 use App\Models\Student;
+use App\Models\Document;
+use App\Models\Image;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -55,21 +57,21 @@ class User extends Authenticatable
 
     public function student()
     {
-        return $this->hasOne('App\Student');
+        return $this->hasOne(Student::class);
     }
 
     public function documents()
     {
-        return $this->hasMany('App\Document');
+        return $this->hasMany(Document::class);
     }
 
     public function images()
     {
-        return $this->hasMany('App\Image');
+        return $this->hasMany(Image::class);
     }
 
     public function comments() {
-        return $this->hasMany('App\Comment');
+        return $this->hasMany(Comment::class);
     }
 
     /**

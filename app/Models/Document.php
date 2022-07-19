@@ -18,21 +18,21 @@ class Document extends Model
      */
     public function questions()
     {
-        return $this->belongsToMany('App\Question');
+        return $this->belongsToMany(Question::class);
     }
 
     public function user() {
-        return $this->belongsTo('App\User')->withTimestamps();
+        return $this->belongsTo(User::class)->withTimestamps();
     }
 
     /**
      * 関連記事一覧をペジネーションで取得する
      */
-     public function getDocumentPagenate($keyword) {
-         if($keyword) {
-             $results = self::where('title', 'like', '%'.$keyword.'%');
-         }
-     }
+    public function getDocumentPagenate($keyword) {
+        if($keyword) {
+            $results = self::where('title', 'like', '%'.$keyword.'%');
+        }
+    }
 
     /**
      * 実行対象の記事データに関連する質問の全ID取得
@@ -94,32 +94,4 @@ class Document extends Model
 
         return $this;
     }
-
-    /**
-     * ローカルで真偽値がきちんと出力されず0か1になってしまうので矯正して全件取得
-     */
-    // public static function getCorrectBooleanDocuments()
-    // {
-    //     $documents = self::get();
-
-    //     foreach($documents as $document){
-    //         $document->beginner === 1 ? $document->beginner = true : $document->beginner = false;
-    //         $document->amature === 1 ? $document->amature = true : $document->amature = false;
-    //         $document->master === 1 ? $document->master = true : $document->master = false;
-    //         $document->all === 1 ? $document->all = true : $document->all = false;
-    //     }
-
-    //     return $documents;
-    // }
-
-    /**
-     *
-     */
-    // public function correctBoolean()
-    // {
-    //     $this->beginner === 1 ? $this->beginner = true : $this->beginner = false;
-    //     $this->amature === 1 ? $this->amature = true : $this->amature = false;
-    //     $this->master === 1 ? $this->master = true : $this->master = false;
-    //     $this->all === 1 ? $this->all = true : $this->all = false;
-    // }
 }

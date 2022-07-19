@@ -4,39 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Question;
+use App\Models\Image;
+use App\Models\User;
 
 class Comment extends Model
 {
     protected $fillable=['comment', 'question_id', 'is_staff', 'comment_id', 'user_id', 'is_mentor_commented'];
 
-    // ローカルで真偽値がきちんと出力されず0か1になってしまうので矯正
-    // public function correctBoolean()
-    // {
-    //     if($this->is_staff === 1){
-    //         $this->is_staff = true;
-    //     }else if($this->is_staff === 0){
-    //         $this->is_staff = false;
-    //     }
-    // }
-
     /**
      * リレーション
      */
     public function images() {
-        return $this->hasMany('App\Image');
+        return $this->hasMany(Image::class);
     }
 
     public function question() {
-        return $this->belongsTo('App\Question');
+        return $this->belongsTo(Question::class);
     }
 
     public function user() {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
-
-    // public function comment() {
-    //     return $this->belongsTo('App\Comment');
-    // }
 
     public function getQestionTitle()
     {

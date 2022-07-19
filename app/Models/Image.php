@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Question;
+use App\Models\Comment;
+use App\Models\User;
 use Storage;
 
 class Image extends Model
@@ -14,15 +17,15 @@ class Image extends Model
      * リレーション関係
      */
     public function question() {
-        return $this->belongsTo('App\Question');
+        return $this->belongsTo(Question::class);
     }
 
     public function comment() {
-        return $this->belongsTo('App\Comment');
+        return $this->belongsTo(Comment::class);
     }
 
     public function user() {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
     /**
