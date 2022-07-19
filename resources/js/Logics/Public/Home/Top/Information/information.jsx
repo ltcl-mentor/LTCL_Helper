@@ -25,7 +25,7 @@ export const useInformation = ({ deleteInfo }) => {
     // 削除実行
     const handleDelete = useCallback(() =>{
         (async() => {
-            await axios.post(route('delete.info', {'info': deleteInfo}));
+            await axios.post(route('delete.info', { info: deleteInfo }));
             Inertia.get(route('home'));
         })();
     });

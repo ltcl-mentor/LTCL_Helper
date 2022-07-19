@@ -21,7 +21,7 @@ export const update = ({ event, input, validate, setValidate }) => {
 
         if (validationKey) return false;
 
-        await axios.post("/api/events/" + event.id + "/update", input);
+        await axios.post(route('update.event', { event: event.id }), input);
         Inertia.get(route('home', { page: 'manage' }));
     });
 

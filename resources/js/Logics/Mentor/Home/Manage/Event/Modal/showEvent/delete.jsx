@@ -5,7 +5,7 @@ import { Inertia } from '@inertiajs/inertia';
 // 削除実行
 export const del = ({ event }) => {
     const deleted = useCallback(async () =>{
-        await axios.post('/api/events/' + event.id + '/delete');
+        await axios.post(route('delete.event', event.id));
         Inertia.get(route('home', { page: 'manage' }));
     });
 

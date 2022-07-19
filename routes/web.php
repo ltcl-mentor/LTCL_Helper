@@ -127,8 +127,8 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
          * イベント
          */
         Route::post('/events/store', [EventController::class, 'store'])->name('store.event'); // イベントの新規作成実行
-        Route::post('/events/{event}/update', [EventController::class, 'update']); // イベントの編集
-        Route::post('/events/{event}/delete', [EventController::class, 'delete']); // イベントの編集
+        Route::post('/events/{event}/update', [EventController::class, 'update'])->name('update.event'); // イベントの編集
+        Route::post('/events/{event}/delete', [EventController::class, 'delete'])->name('delete.event'); // イベントの編集
 
         /**
          * ユーザー

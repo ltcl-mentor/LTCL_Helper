@@ -8,7 +8,7 @@ export const useGetInfo = ({ date, today, setIsDateClicked, setCollegeInfo, setR
         setResError(false)
         if ((date.getMonth() >= today.getMonth() - 1) && (date.getMonth() <= today.getMonth())) {
             (async() => {
-                const res = await axios.get(`/api/college/${ date.getFullYear() }/${ date.getMonth() + 1 }/${ date.getDate() }`);
+                const res = await axios.get(route('getData.college', { year: date.getFullYear(), month:  date.getMonth()+1, date: date.getDate() }));
                 if(!unmounted) {
                     setCollegeInfo(res.data.collegeInfo);
                     setIsDateClicked(true);
