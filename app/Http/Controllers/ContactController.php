@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Slack;
-use App\User;
+use App\Models\Slack;
+use App\Models\User;
 
 class ContactController extends Controller
 {
