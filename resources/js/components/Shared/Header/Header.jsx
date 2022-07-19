@@ -24,7 +24,7 @@ const Header = ({ auth, children }) => {
                             {isWide &&
                             <React.Fragment>
                                 <StyledSearchButton>
-                                    <Link className='text-white' href={route('search')}>検索する</Link>
+                                    <Link className='text-white' href={route('home', { page: 'qa' })}>検索する</Link>
                                 </StyledSearchButton>
                                 <QuestionButton />
                             </React.Fragment>

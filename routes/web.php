@@ -37,7 +37,6 @@ Route::group(['middleware' => ['auth']], function () {
      * ホーム関連
      */
     Route::get('/', [RouteController::class, 'home'])->name('home'); // ホーム画面
-    Route::get('/?page=qa', [RouteController::class, 'search'])->name('search'); // 検索画面
 
     /**
      * 質問関連
