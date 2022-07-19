@@ -1,6 +1,4 @@
 import React from "react";
-import useMedia from "use-media";
-import BreakingPoint from "../../../Styles/BreakingPoint";
 import Modal from "@mui/material/Modal";
 import { Content } from "@/Styles/Shared/Modal/modal";
 import UserRegister from "../../Mentor/Home/Manage/User/userRegister/userRegister";
@@ -14,24 +12,22 @@ import Contact from "./Top/Footer/contact";
 /**
  * モーダル
  */
-export const Modals = props => {
-    const isWide = useMedia({ minWidth: `${BreakingPoint}px` });
-
+export const Modals = ({ open, type, handleClose, events, info, isAdmin, setOpen, deleted, value, event }) => {
     let content;
-    switch (props.type) {
+    switch (type) {
 
         // お知らせ作成
         case "create_info":
-            content = <Create onClose={props.handleClose} events={props.events} />;
+            content = <Create onClose={handleClose} events={events} />;
             break;
 
         // お知らせ詳細
         case "show_info":
             content = (
                 <ShowInfo
-                    onClose={props.handleClose}
-                    info={props.info}
-                    isAdmin={props.isAdmin}
+                    onClose={handleClose}
+                    info={info}
+                    isAdmin={isAdmin}
                 />
             );
             break;
@@ -40,36 +36,36 @@ export const Modals = props => {
         case "delete_info":
             content = (
                 <DeleteInfo
-                    open={props.open}
-                    setOpen={props.setOpen}
-                    deleted={props.delete}
+                    open={open}
+                    setOpen={setOpen}
+                    deleted={deleted}
                 />
             );
             break;
 
         // ユーザー作成
         case "user":
-            content = <UserRegister value={props.value} onClose={props.handleClose} />
+            content = <UserRegister value={value} onClose={handleClose} />
             break;
 
         // イベント詳細
         case "show_event":
-            content = <ShowEvent event={props.event} onClose={props.handleClose} />
+            content = <ShowEvent event={event} onClose={handleClose} />
             break;
 
         // イベント追加
         case "add_event":
-            content = <AddEvent onClose={props.handleClose} />;
+            content = <AddEvent onClose={handleClose} />;
             break;
 
         // お問い合わせ
         case "contact":
-            content = <Contact onClose={props.handleClose} />;
+            content = <Contact onClose={handleClose} />;
             break;
     }
 
     return (
-        <Modal open={props.open}>
+        <Modal open={open}>
             <Content>{content}</Content>
         </Modal>
     );

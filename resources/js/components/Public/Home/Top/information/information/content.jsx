@@ -45,7 +45,7 @@ const content = ({ isAdmin, dates, infos, handleDelete, setDeleteInfo }) => {
                 open={deleteOpen}
                 type={"delete_info"}
                 setOpen={setDeleteOpen}
-                delete={handleDelete}
+                deleted={handleDelete}
             />
 
             {responsive}
