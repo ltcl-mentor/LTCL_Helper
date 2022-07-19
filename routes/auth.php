@@ -8,7 +8,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 // use App\Http\Controllers\Auth\EmailVerificationPromptController;
 // use App\Http\Controllers\Auth\NewPasswordController;
 // use App\Http\Controllers\Auth\PasswordResetLinkController;
-// use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 // use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +54,14 @@ Route::middleware('auth')->group(function () {
     //             ->name('password.confirm');
 
     // Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
+
+    // Route::post('register', [RegisteredUserController::class, 'store'])->name('register');
+
+    // 管理者の新規作成実行
+    Route::post('/users/admin/register', [RegisteredUserController::class, 'adminStore'])->name('register');
+
+    // 受講生の新規作成実行
+    Route::post('/users/public/register', [RegisteredUserController::class, 'studentStore'])->name('student.register');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');

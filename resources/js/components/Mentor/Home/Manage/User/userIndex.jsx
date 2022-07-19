@@ -1,6 +1,6 @@
 import React from "react";
 import { a11yProps } from "@/Components/Shared/a11yProps";
-import UserTable from "./userTable";
+import UserTable from "./table/userTable";
 import { StyleTabs, StyleTab, StyleTabArea } from "@/Styles/Public/Home/QA/Index/indexQuestionArticle";
 import { Heading, AddLink, NoExist, Users } from "@/Styles/Mentor/Home/Manage/Manage";
 import { useManage } from "@/Logics/Mentor/Home/Manage/Manage";

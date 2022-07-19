@@ -20,7 +20,7 @@ const studentTableBody = ({ users, unlockUser, account, handleOpen, revealPass, 
 
                 return (
                     <StyledTableRow key={user.id}>
-                        <StyledTableCell>{user.id}</StyledTableCell>
+                        <StyledTableCell>{user.user_id}</StyledTableCell>
                         <StyledTableCell>{user.student_name}</StyledTableCell>
                         <StyledTableCell>{user.name}</StyledTableCell>
                         <StyledTableCell>

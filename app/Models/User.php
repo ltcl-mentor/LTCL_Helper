@@ -50,7 +50,7 @@ class User extends Authenticatable
      */
     public function questions()
     {
-        return $this->belongsToMany('App\Question')->withPivot(['created_at'])->orderBy('pivot_created_at', 'desc');
+        return $this->belongsToMany(Question::class)->withPivot(['created_at'])->orderBy('pivot_created_at', 'desc');
     }
 
     public function student()
@@ -104,20 +104,20 @@ class User extends Authenticatable
     /**
      * 削除対象のユーザに関連するstudentsテーブルのデータとquestion_userテーブル（質問閲覧履歴）データを削除
      */
-    public static function userDelete($data)
+    public static function userDelete($user)
     {
-        Student::where('user_id', $data->id)->delete();
+        Student::where('user_id', $user->id)->delete();
 
-        $data->questions()->detach();
+        $user->questions()->detach();
 
-        $related_questions = Question::where('user_id', $data->id)->get();
+        $related_questions = Question::where('user_id', $user->id)->get();
 
         foreach($related_questions as $related_question){
             $related_question['user_id'] = 0;
             $related_question->save();
         }
 
-        $data->delete();
+        $user->delete();
     }
 
     /**

@@ -29,7 +29,7 @@ require __DIR__.'/auth.php';
  * フロントエンドのルーティング
  */
 Route::get('/lockout', function () {
-    return Inertia::render('Common/Lockout');
+    return Inertia::render('Shared/Lockout');
 })->name('lockout'); // ロックアウト画面
 
 Route::group(['middleware' => ['auth']], function () {
@@ -135,6 +135,8 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
          * ユーザー
          */
         Route::post('/users/backup', [UserController::class, 'backup'])->name('backup.user'); // 受講生一括登録（バックアップ復元用）
+        Route::post('/users/{user}/delete', [UserController::class, 'delete'])->name('delete.user'); // 削除実行
+        Route::post('/users/{user}/unlock', [UserController::class, 'unlock'])->name('unlock.user'); // ユーザロック解除実行
 
     //     /**
     //      * 参考記事
@@ -167,9 +169,8 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     //      */
     //     Route::post('/users/backup', 'UserController@backup'); // 受講生一括登録（バックアップ復元用）
     //     Route::post('/users/public/register', 'Auth\RegisterController@publicRegister'); // 受講生の新規作成実行
-    //     Route::post('/users/admin/register', 'Auth\RegisterController@register'); // 管理者の新規作成実行
-    //     Route::post('/users/{user}/delete', 'UserController@delete'); // 削除実行
-    //     Route::post('/users/{user}/unlock', 'UserController@unlock'); // ユーザロック解除実行
+    //
+
 
     //     /**
     //      * Reactでのデータ受け渡し（全て非同期）

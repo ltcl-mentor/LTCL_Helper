@@ -13,7 +13,7 @@ const staffTableBody = ({ users, unlockUser, account, handleOpen }) => {
                 const lockButton = !user.lock ? '平常' :
                     <Button
                         variant="contained"
-                        onClick={() => unlockUser(user.user_id)}
+                        onClick={() => unlockUser(user.id)}
                     >
                         ロック解除
                     </Button>
@@ -29,7 +29,7 @@ const staffTableBody = ({ users, unlockUser, account, handleOpen }) => {
                                     <Button
                                         variant="contained"
                                         color="error"
-                                        onClick={() => handleOpen(user.user_id)}
+                                        onClick={() => handleOpen(user.id)}
                                         startIcon={ <DeleteIcon /> }
                                     >
                                         削除する

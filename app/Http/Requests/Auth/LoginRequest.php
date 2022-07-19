@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\Student;
 use App\Models\Slack;
 
+
 class LoginRequest extends FormRequest
 {
     /**
@@ -76,13 +77,13 @@ class LoginRequest extends FormRequest
         $this->sendLockoutResponse($this->input('name'));
 
         // 試行回数が増えるまでの残り秒数を返す
-        $seconds = RateLimiter::availableIn($this->throttleKey());
-        throw ValidationException::withMessages([
-            'name' => trans('auth.throttle', [
-                'seconds' => $seconds,
-                'minutes' => ceil($seconds / 60),
-            ]),
-        ]);
+        // $seconds = RateLimiter::availableIn($this->throttleKey());
+        // throw ValidationException::withMessages([
+        //     'name' => trans('auth.throttle', [
+        //         'seconds' => $seconds,
+        //         'minutes' => ceil($seconds / 60),
+        //     ]),
+        // ]);
     }
 
     /**
@@ -140,8 +141,6 @@ class LoginRequest extends FormRequest
 
             // 認証情報をクリア
             RateLimiter::clear($this->throttleKey());
-
-            return redirect()->route('lockout');
 
         // 該当ユーザが存在しない場合は1時間入力不可にする
         } else {

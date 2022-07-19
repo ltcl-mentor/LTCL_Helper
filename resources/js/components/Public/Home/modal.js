@@ -3,7 +3,7 @@ import useMedia from "use-media";
 import BreakingPoint from "../../../Styles/BreakingPoint";
 import Modal from "@mui/material/Modal";
 import { Content } from "@/Styles/Shared/Modal/modal";
-import UserRegister from "./modal/userRegister";
+import UserRegister from "../../Mentor/Home/Manage/User/userRegister/userRegister";
 import ShowEvent from "../../Mentor/Home/Manage/Event/Modal/showEvent/showEvent";
 import AddEvent from "../../Mentor/Home/Manage/Event/Modal/addEvent/addEvent";
 import Create from "./Top/Information/information/create/create";
@@ -19,6 +19,7 @@ export const Modals = props => {
 
     let content;
     switch (props.type) {
+
         // お知らせ作成
         case "create_info":
             content = <Create onClose={props.handleClose} events={props.events} />;
@@ -48,15 +49,7 @@ export const Modals = props => {
 
         // ユーザー作成
         case "user":
-            content = (
-                <UserRegister
-                    value={props.value}
-                    onClose={props.handleClose}
-                    setStudents={props.setStudents}
-                    setStaffs={props.setStaffs}
-                    isWide={isWide}
-                />
-            );
+            content = <UserRegister value={props.value} onClose={props.handleClose} />
             break;
 
         // イベント詳細
