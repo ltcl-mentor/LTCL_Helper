@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import QuestionsList from "@/Components/Mentor/Home/QA/questionsList";
+import QuestionsList from "@/Components/Public/Question/Index/Index/question/questionsList";
 import PaginationPart from "@/Components/Shared/paginationPart";
 
 // ForMentorContentのロジック
-export const useMentorQuestion = () => {
+export const useMentorQuestion = ({ user }) => {
     const [questions, setQuestions] = useState({
         eventList: [],
         currentPage: 1,
@@ -13,7 +13,7 @@ export const useMentorQuestion = () => {
         lastPage: 0
     });
 
-    const list = QuestionsList({ questions });
+    const list = QuestionsList({ questions, user });
 
     const getMentorQuestions = async(index = 1) => {
         const res = await axios.get(`/api/questions/mentor?page=${index}`);

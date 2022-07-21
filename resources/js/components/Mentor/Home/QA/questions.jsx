@@ -8,8 +8,8 @@ import { Questions, Pagination, StyleTab, TabArea } from "@/Styles/Mentor/Home/Q
 /**
  * 質問一覧
  */
-const questions = () => {
-    const { emptyMessage, questionList, pagination } = useMentorQuestion();
+const questions = ({ user }) => {
+    const { emptyMessage, questionList, pagination } = useMentorQuestion({ user });
     return (
         <Questions>
             <TabArea>

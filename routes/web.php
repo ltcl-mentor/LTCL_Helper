@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\DocumentController;
 use Inertia\Inertia;
 
 /*
@@ -41,6 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
     /**
      * 質問関連
      */
+    Route::get('/topic/{topic}', [RouteController::class, 'questionIndex'])->name('question.index'); // 質問一覧画面
     Route::get('/public/questions/create', [RouteController::class, 'questionCreate'])->name('question.create'); // 質問投稿画面
     Route::get('/public/questions/{question}', [RouteController::class, 'showQuestion'])->name('question.show'); // 質問詳細画面
 
@@ -55,7 +57,8 @@ Route::group(['middleware' => ['auth']], function () {
      */
     Route::group(['middleware' => ['administrator']], function () {
         Route::get('/Admin_my_page', [RouteController::class, 'myPageAdmin']); // 管理者マイページ
-        Route::get('/questions/mentor', [RouteController::class, 'questionMentor'])->name('question.mentor');
+        Route::get('/questions/mentor', [RouteController::class, 'questionMentor'])->name('question.mentor'); // 対応待ち質問一覧
+        Route::get('/questions/{question}', [RouteController::class, 'questionMentorShow'])->name('question.show.mentor'); // 質問詳細
     });
 });
 
@@ -65,6 +68,12 @@ Route::group(['middleware' => ['auth']], function () {
  */
 Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     /**
+     * 共通
+     */
+    Route::get('/questions/search', [QuestionController::class, 'getSearchQuestions'])->name('getData.question'); // 質問検索結果の受け渡し
+    Route::get('/questions/search/paginate', [QuestionController::class, 'getSearchQuestionsPaginate'])->name('getData.question.paginate'); // 質問検索結果の受け渡しのペジネーション
+
+    /**
      * ホーム画面
      */
     Route::get('/home', [HomeController::class, 'getHomeData'])->name('getData.home'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
@@ -72,10 +81,12 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     Route::get('/infos', [HomeController::class, 'getInfos'])->name('getData.information'); // お知らせとイベントのデータ受け渡し
     Route::get('/weather', [HomeController::class, 'getWeather'])->name('getData.weather'); // 今日の天気のデータ受け渡し
     Route::get('/questions/articles', [HomeController::class, 'getQuestionArticle'])->name('getData.question_article'); // Google Map APIのAPIキーとzoomリンク一覧ページへのurl受け渡し
-    Route::get('/questions/search', [QuestionController::class, 'getSearchQuestions']); // 質問検索結果の受け渡し
-    Route::get('/questions/search/paginate', [QuestionController::class, 'getSearchQuestionsPaginate']); // 質問検索結果の受け渡しのペジネーション
-
     Route::post('/contact', [HomeController::class, 'sendContactMessage'])->name('contact'); // お問い合わせ内容送信処理
+
+    /**
+     * 記事
+     */
+    Route::get('/documents/related/paginate/{category}', [DocumentController::class, 'getRelatedDocumentsPaginate'])->name('getData.document'); // カテゴリーに紐づいている記事の受け渡し
 
     // /**
     //  * ログイン済みユーザーのみアクセス可能
@@ -100,7 +111,6 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function () {
     // Route::get('react/questions/mine', 'ReactController@getMyQuestions'); // ログインユーザの質問一覧受け渡し
     // Route::get('react/documents/all', 'ReactController@getAllDocuments'); // 全記事受け渡し
     // Route::get('react/documents/related/{question}', 'ReactController@getRelatedDocuments'); // 質問に紐づいている記事の受け渡し
-    // Route::get('react/documents/related/paginate/{category}', 'ReactController@getRelatedDocumentsPaginate'); // カテゴリーに紐づいている記事の受け渡し
     // Route::get('react/user', 'ReactController@getUser'); // ログインユーザー受け渡し
 
 

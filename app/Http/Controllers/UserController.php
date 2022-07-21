@@ -44,7 +44,7 @@ class UserController extends Controller
         }
 
         $message = "ユーザのロックが解除されました。\n該当ユーザ：" . $user->name;
-        Slack::sendMessage($message);
+        // Slack::sendMessage($message);
     }
 
     public static function backup() {

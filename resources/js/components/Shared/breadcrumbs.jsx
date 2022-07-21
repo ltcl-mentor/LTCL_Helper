@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from '@inertiajs/inertia-react';
-
-import Typography from "@material-ui/core/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Typography from "@mui/material/Typography";
 
 /**
  * 各ページのパンくずリスト
  */
-const breadcrumb = ({ page }) => {
+const breadcrumb = ({ page, topic, topic_title }) => {
     let link1;
     let link2;
     let link3;
@@ -20,20 +19,12 @@ const breadcrumb = ({ page }) => {
             break;
 
         case "my_page_question":
-            link1 = (
-                <Link underline="hover" to="/my_page">
-                    マイページ
-                </Link>
-            );
+            link1 = <Link underline="hover" href="/my_page">マイページ</Link>;
             link2 = <Typography color="text.primary">質問詳細</Typography>;
             break;
 
         case "history":
-            link1 = (
-                <Link underline="hover" to="/my_page">
-                    マイページ
-                </Link>
-            );
+            link1 = <Link underline="hover" href="/my_page">マイページ</Link>
             link2 = <Typography color="text.primary">質問閲覧履歴</Typography>;
             break;
 
@@ -42,11 +33,7 @@ const breadcrumb = ({ page }) => {
             break;
 
         case "public_question_index":
-            link1 = (
-                <Link underline="hover" to="/?page=qa">
-                    Q&A
-                </Link>
-            );
+            link1 = <Link underline="hover" href={route('home', { page: 'qa' })}>Q&A</Link>;
             link2 = <Typography color="text.primary">質問一覧</Typography>;
             break;
 
@@ -55,27 +42,18 @@ const breadcrumb = ({ page }) => {
             break;
 
         case "public_question_show":
-            link1 = (
-                <Link underline="hover" to="/?page=qa">
-                    Q&A
-                </Link>
-            );
-            link2 = (
-                <Link underline="hover" to={`/topic/${props.topic}`}>
-                    {props.topic_title}
-                </Link>
-            );
+            link1 = <Link underline="hover" href={route('home', { page: 'qa' })}>Q&A</Link>
+            link2 = <Link underline="hover" href={route('question.index', { topic: topic })}>{topic_title}</Link>;
             link3 = <Typography color="text.primary">質問詳細</Typography>;
             break;
 
-        case "public_question_show":
-            link1 = (
-                <Link underline="hover" to="/public/questions/index">
-                    質問一覧
-                </Link>
-            );
-            link2 = <Typography color="text.primary">質問詳細</Typography>;
-            break;
+        // case "public_question_show":
+        //     link1 = <Link underline="hover" to="/public/questions/index">
+        //             質問一覧
+        //         </Link>
+        //     );
+        //     link2 = <Typography color="text.primary">質問詳細</Typography>;
+        //     break;
 
         case "public_document_index":
             link1 = <Typography color="text.primary">関連記事一覧</Typography>;
@@ -84,266 +62,242 @@ const breadcrumb = ({ page }) => {
 
         /* 管理ページ */
         // トップ
-        case "mentor_top":
-            link1 = (
-                <Typography color="text.primary">メンタートップ</Typography>
-            );
-            break;
+        // case "mentor_top":
+        //     link1 = (
+        //         <Typography color="text.primary">メンタートップ</Typography>
+        //     );
+        //     break;
 
         // 質問
-        case "mentor_question_index":
-            link1 = (
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-            );
-            link2 = <Typography color="text.primary">質問一覧</Typography>;
-            break;
+        // case "mentor_question_index":
+        //     link1 = (
+        //         <Link underline="hover" to="/mentor/top">
+        //             メンタートップ
+        //         </Link>
+        //     );
+        //     link2 = <Typography color="text.primary">質問一覧</Typography>;
+        //     break;
 
-        case "mentor_question_show":
-            link1 = (
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-            );
-            link2 = (
-                <Link underline="hover" to="/questions/index">
-                    質問一覧
-                </Link>
-            );
-            link3 = <Typography color="text.primary">質問詳細</Typography>;
-            break;
+        // case "mentor_question_show":
+        //     link1 = (
+        //         <Link underline="hover" to="/mentor/top">
+        //             メンタートップ
+        //         </Link>
+        //     );
+        //     link2 = (
+        //         <Link underline="hover" to="/questions/index">
+        //             質問一覧
+        //         </Link>
+        //     );
+        //     link3 = <Typography color="text.primary">質問詳細</Typography>;
+        //     break;
 
         case "mentor_question_show_mypage":
-            link1 = (
-                <Link underline="hover" to="/admin_my_page">
-                    マイページ
-                </Link>
-            );
+            link1 = <Link underline="hover" href="/admin_my_page">マイページ</Link>
             link2 = <Typography color="text.primary">質問詳細</Typography>;
             break;
 
         case "mentor_question_show_question":
-            link1 = (
-                <Link underline="hover" to="/?page=qa">
-                    Q&A
-                </Link>
-            );
-            link2 = (
-                <Link underline="hover" to={`/topic/${props.topic}`}>
-                    {props.topic_title}
-                </Link>
-            );
+            link1 = <Link underline="hover" href={route('home', { page: 'qa' })}>Q&A</Link>
+            link2 = <Link underline="hover" href={route('question.index', { topic: topic })}>{topic_title}</Link>;
             link3 = <Typography color="text.primary">質問詳細</Typography>;
             break;
 
         case "mentor_question_show_mentor":
-            link1 = (
-                <Link underline="hover" to="/?page=qa">
-                    Q&A
-                </Link>
-            );
-            link2 = (
-                <Link underline="hover" to={`/questions/mentor`}>
-                    質問一覧
-                </Link>
-            );
+            link1 = <Link underline="hover" href={route('home', { page: 'qa' })}>Q&A</Link>
+            link2 = <Link underline="hover" href={route('question.mentor')}>質問一覧</Link>
             link3 = <Typography color="text.primary">質問詳細</Typography>;
             break;
 
-        case "mentor_question_edit":
-            link1 = (
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-            );
-            link2 = (
-                <Link underline="hover" to="/questions/index">
-                    質問一覧
-                </Link>
-            );
-            link3 = (
-                <Link underline="hover" to={`/questions/` + props.id}>
-                    質問詳細
-                </Link>
-            );
-            link4 = <Typography color="text.primary">質問編集</Typography>;
-            break;
+        // case "mentor_question_edit":
+        //     link1 = (
+        //         <Link underline="hover" to="/mentor/top">
+        //             メンタートップ
+        //         </Link>
+        //     );
+        //     link2 = (
+        //         <Link underline="hover" to="/questions/index">
+        //             質問一覧
+        //         </Link>
+        //     );
+        //     link3 = (
+        //         <Link underline="hover" to={`/questions/` + props.id}>
+        //             質問詳細
+        //         </Link>
+        //     );
+        //     link4 = <Typography color="text.primary">質問編集</Typography>;
+        //     break;
 
         // 記事
-        case "mentor_document_index":
-            link1 = (
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-            );
-            link2 = <Typography color="text.primary">記事一覧</Typography>;
-            break;
+        // case "mentor_document_index":
+        //     link1 = (
+        //         <Link underline="hover" to="/mentor/top">
+        //             メンタートップ
+        //         </Link>
+        //     );
+        //     link2 = <Typography color="text.primary">記事一覧</Typography>;
+        //     break;
 
-        case "mentor_document_show":
-            link1 = (
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-            );
-            link2 = (
-                <Link underline="hover" to="/documents/index">
-                    記事一覧
-                </Link>
-            );
-            link3 = <Typography color="text.primary">記事詳細</Typography>;
-            break;
+        // case "mentor_document_show":
+        //     link1 = (
+        //         <Link underline="hover" to="/mentor/top">
+        //             メンタートップ
+        //         </Link>
+        //     );
+        //     link2 = (
+        //         <Link underline="hover" to="/documents/index">
+        //             記事一覧
+        //         </Link>
+        //     );
+        //     link3 = <Typography color="text.primary">記事詳細</Typography>;
+        //     break;
 
-        case "mentor_document_create":
-            link1 = (
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-            );
-            link2 = <Typography color="text.primary">記事投稿</Typography>;
-            break;
+        // case "mentor_document_create":
+        //     link1 = (
+        //         <Link underline="hover" to="/mentor/top">
+        //             メンタートップ
+        //         </Link>
+        //     );
+        //     link2 = <Typography color="text.primary">記事投稿</Typography>;
+        //     break;
 
-        case "mentor_document_edit":
-            link1 = (
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-            );
-            link2 = (
-                <Link underline="hover" to="/documents/index">
-                    記事一覧
-                </Link>
-            );
-            link3 = (
-                <Link underline="hover" to={`/documents/` + props.id}>
-                    記事詳細
-                </Link>
-            );
-            link4 = <Typography color="text.primary">記事編集</Typography>;
-            break;
+        // case "mentor_document_edit":
+        //     link1 = (
+        //         <Link underline="hover" to="/mentor/top">
+        //             メンタートップ
+        //         </Link>
+        //     );
+        //     link2 = (
+        //         <Link underline="hover" to="/documents/index">
+        //             記事一覧
+        //         </Link>
+        //     );
+        //     link3 = (
+        //         <Link underline="hover" to={`/documents/` + props.id}>
+        //             記事詳細
+        //         </Link>
+        //     );
+        //     link4 = <Typography color="text.primary">記事編集</Typography>;
+        //     break;
 
-        // 紐付け
-        case "mentor_link_question_index":
-            link1 = (
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-            );
-            link2 = (
-                <Typography color="text.primary">
-                    質問から紐付け（一覧）
-                </Typography>
-            );
-            break;
+        // // 紐付け
+        // case "mentor_link_question_index":
+        //     link1 = (
+        //         <Link underline="hover" to="/mentor/top">
+        //             メンタートップ
+        //         </Link>
+        //     );
+        //     link2 = (
+        //         <Typography color="text.primary">
+        //             質問から紐付け（一覧）
+        //         </Typography>
+        //     );
+        //     break;
 
-        case "mentor_link_question_show":
-            link1 = (
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-            );
-            link2 = (
-                <Link underline="hover" to="/links/question/index">
-                    質問から紐付け（一覧）
-                </Link>
-            );
-            link3 = (
-                <Typography color="text.primary">
-                    質問から紐付け（詳細）
-                </Typography>
-            );
-            break;
+        // case "mentor_link_question_show":
+        //     link1 = (
+        //         <Link underline="hover" to="/mentor/top">
+        //             メンタートップ
+        //         </Link>
+        //     );
+        //     link2 = (
+        //         <Link underline="hover" to="/links/question/index">
+        //             質問から紐付け（一覧）
+        //         </Link>
+        //     );
+        //     link3 = (
+        //         <Typography color="text.primary">
+        //             質問から紐付け（詳細）
+        //         </Typography>
+        //     );
+        //     break;
 
-        case "mentor_link_document_index":
-            link1 = (
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-            );
-            link2 = (
-                <Typography color="text.primary">
-                    記事から紐付け（一覧）
-                </Typography>
-            );
-            break;
+        // case "mentor_link_document_index":
+        //     link1 = (
+        //         <Link underline="hover" to="/mentor/top">
+        //             メンタートップ
+        //         </Link>
+        //     );
+        //     link2 = (
+        //         <Typography color="text.primary">
+        //             記事から紐付け（一覧）
+        //         </Typography>
+        //     );
+        //     break;
 
-        case "mentor_link_document_show":
-            link1 = (
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-            );
-            link2 = (
-                <Link underline="hover" to="/links/document/index">
-                    記事から紐付け（一覧）
-                </Link>
-            );
-            link3 = (
-                <Typography color="text.primary">
-                    記事から紐付け（詳細）
-                </Typography>
-            );
-            break;
+        // case "mentor_link_document_show":
+        //     link1 = (
+        //         <Link underline="hover" to="/mentor/top">
+        //             メンタートップ
+        //         </Link>
+        //     );
+        //     link2 = (
+        //         <Link underline="hover" to="/links/document/index">
+        //             記事から紐付け（一覧）
+        //         </Link>
+        //     );
+        //     link3 = (
+        //         <Typography color="text.primary">
+        //             記事から紐付け（詳細）
+        //         </Typography>
+        //     );
+        //     break;
 
-        // ユーザ
-        case "mentor_user_index":
-            link1 = (
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-            );
-            link2 = <Typography color="text.primary">ユーザ名簿</Typography>;
-            break;
+        // // ユーザ
+        // case "mentor_user_index":
+        //     link1 = (
+        //         <Link underline="hover" to="/mentor/top">
+        //             メンタートップ
+        //         </Link>
+        //     );
+        //     link2 = <Typography color="text.primary">ユーザ名簿</Typography>;
+        //     break;
 
-        case "mentor_admin_create":
-            link1 = (
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-            );
-            link2 = <Typography color="text.primary">管理者の登録</Typography>;
-            break;
+        // case "mentor_admin_create":
+        //     link1 = (
+        //         <Link underline="hover" to="/mentor/top">
+        //             メンタートップ
+        //         </Link>
+        //     );
+        //     link2 = <Typography color="text.primary">管理者の登録</Typography>;
+        //     break;
 
-        case "mentor_public_create":
-            link1 = (
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-            );
-            link2 = <Typography color="text.primary">受講生の登録</Typography>;
-            break;
+        // case "mentor_public_create":
+        //     link1 = (
+        //         <Link underline="hover" to="/mentor/top">
+        //             メンタートップ
+        //         </Link>
+        //     );
+        //     link2 = <Typography color="text.primary">受講生の登録</Typography>;
+        //     break;
 
-        case "mentor_event_index":
-            link1 = (
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-            );
-            link2 = <Typography color="text.primary">イベント一覧</Typography>;
-            break;
+        // case "mentor_event_index":
+        //     link1 = (
+        //         <Link underline="hover" to="/mentor/top">
+        //             メンタートップ
+        //         </Link>
+        //     );
+        //     link2 = <Typography color="text.primary">イベント一覧</Typography>;
+        //     break;
 
-        case "mentor_event_create":
-            link1 = (
-                <Link underline="hover" to="/mentor/top">
-                    メンタートップ
-                </Link>
-            );
-            link2 = <Typography color="text.primary">イベント作成</Typography>;
-            break;
+        // case "mentor_event_create":
+        //     link1 = (
+        //         <Link underline="hover" to="/mentor/top">
+        //             メンタートップ
+        //         </Link>
+        //     );
+        //     link2 = <Typography color="text.primary">イベント作成</Typography>;
+        //     break;
 
 
         case "notFound":
-            link1 = (
-                <Typography color="text.primary">
-                    ページが見つかりません
-                </Typography>
-            );
+            link1 = <Typography color="text.primary">ページが見つかりません</Typography>
+            break;
     }
 
     return (
         <Breadcrumbs sx={{ marginBottom: 4, fontSize: "20px" }}>
             <Link href={route('home')}>Top</Link>
-
             {link1}
             {link2}
             {link3}

@@ -11,7 +11,7 @@ const contentPC = ({ handleFreeword }) => {
     return (
         <StyleGrid container>
             <GridItem item>
-                <ContentMobile handleFreeword={handleFreeword} />
+                <ContentMobile handle={handleFreeword} />
             </GridItem>
             <Grid item>
                 <SearchButton variant="contained">

@@ -46,6 +46,16 @@ class RouteController extends Controller
 
     public function questionMentor()
     {
-        return Inertia::render('Public/Home/QA/ForMentor');
+        return Inertia::render('Mentor/Home/QA/ForMentor');
+    }
+
+    public function questionIndex($topic)
+    {
+        return Inertia::render('Public/Question/Index/Index/Index', ['id' => $topic]);
+    }
+
+    public function questionMentorShow(Question $question)
+    {
+        return Inertia::render('Public/Home/Home');
     }
 }

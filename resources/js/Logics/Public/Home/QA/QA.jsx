@@ -1,10 +1,9 @@
 import React, { useState, useCallback } from "react";
-import { useHistory } from "react-router-dom";
+import { Inertia } from "@inertiajs/inertia";
 import { useGetInfo } from "./getInfo";
 
 // QAのロジック
 export const useQA = () => {
-    const history = useHistory();
     const [achievement, setAchievment] = useState(0);
     const [indexValue, setIndexValue] = useState(0);
     const [index, setIndex] = useState({ curriculum: [], project: [] });
@@ -16,8 +15,8 @@ export const useQA = () => {
     });
 
     // 個別質問ページ
-    const toTopic = useCallback(topic_number => {
-        history.push(`/topic/${topic_number}`);
+    const toTopic = useCallback(topic => {
+        Inertia.get(route('question.index', { id: topic }));
     });
 
     return [{ achievement, indexValue, index }, { handleChange, toTopic }];

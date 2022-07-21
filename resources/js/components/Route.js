@@ -4,7 +4,7 @@ import axios from "axios";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Bar from "../delete/Common/Bar";
-import AccessError from "../delete/Error";
+// import AccessError from "../delete/Error";
 import MyPage from "./Public/User/MyPage";
 import AdminMyPage from "./Public/User/AdminMypage";
 import MyQuestion from "./Public/User/QuestionShow";
@@ -15,7 +15,7 @@ import PublicQuestionCreate from "./Public/Question/Create/Create/Create";
 import PublicQuestionShow from "./Public/Question/Show/Show";
 import QuestionShow from "./Mentor/Question/Show/Show";
 import QuestionEdit from "./Mentor/Question/Edit/Edit";
-import MentorQuestions from "../Pages/Public/Home/QA/ForMentor.jsx";
+import MentorQuestions from "../Pages/Mentor/Home/QA/ForMentor.jsx";
 
 export const LoginUser = createContext();
 
@@ -44,9 +44,9 @@ const Router = () => {
                 <Switch>
                     {/*一般ユーザがアクセスできるURL*/}
                     {/* トップ画面表示 */}
-                    {user.length !== 0 && (
+                    {/* {user.length !== 0 && (
                         <Route key="home" path="/" exact component={Home} />
-                    )}
+                    )} */}
                     {/* ユーザマイページ表示 */}
                     {user.length !== 0 && (
                         <Route path="/my_page" exact component={MyPage} />
@@ -99,13 +99,13 @@ const Router = () => {
                         />
                     )}
                     {/* 質問一覧画面表示 */}
-                    {user.length !== 0 && user.is_admin === "staff" && (
+                    {/* {user.length !== 0 && user.is_admin === "staff" && (
                         <Route
                             path="/questions/mentor"
                             exact
                             component={MentorQuestions}
                         />
-                    )}
+                    )} */}
                     {/* 質問編集画面表示 */}
                     {user.length !== 0 && user.is_admin === "staff" && (
                         <Route
@@ -123,7 +123,7 @@ const Router = () => {
                         />
                     )}
                     {/*404アクセスエラー*/}
-                    <Route path="/" component={AccessError} />
+                    {/* <Route path="/" component={AccessError} /> */}
                 </Switch>
             </LoginUser.Provider>
         </BrowserRouter>

@@ -10,7 +10,7 @@ const backQA = () => {
     return (
         <Box display="flex" justifyContent="center">
             <Button>
-                <Link to={route('home', { page: 'qa' })}>
+                <Link href={route('home', { page: 'qa' })}>
                     Q&Aに戻る
                 </Link>
             </Button>

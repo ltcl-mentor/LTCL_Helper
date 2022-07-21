@@ -12,16 +12,13 @@ use Illuminate\Support\Facades\Auth;
 class DocumentController extends Controller
 {
     /** 共通処理 */
-
     /**
-     * 公開中の参考記事一覧表示
+     * topicごとの全記事受け渡し
      */
-    // public function publicIndex()
-    // {
-    //     return view('Public.Document.index');
-    // }
-
-
+    public function getRelatedDocumentsPaginate($category)
+    {
+        return Document::where('category', $category)->paginate(9);
+    }
 
     /** 管理者用処理 */
 

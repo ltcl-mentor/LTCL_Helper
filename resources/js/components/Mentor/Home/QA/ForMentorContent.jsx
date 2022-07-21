@@ -8,13 +8,13 @@ import { StyleDiv } from "@/Styles/Mentor/Home/QA/ForMentorContent";
 /**
  * 質問一覧(メンター用)ページ
  */
-const ForMentorContent = () => {
+const ForMentorContent = ({ auth }) => {
     return (
         <StyleDiv>
             <Breadcrumbs page="public_question_index" />
 
             <Card />
-            <Questions />
+            <Questions user={auth.user} />
             <BackQA />
         </StyleDiv>
     );
